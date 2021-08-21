@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.score.ScoringSystem;
+import com.deco2800.game.components.score.ScoringSystem;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
@@ -19,10 +19,11 @@ public class PlayerStatsDisplay extends UIComponent {
   private Label healthLabel;
 
   //Import the scoring system
-  private ScoringSystem scoringSystem = new ScoringSystem();
+  private final ScoringSystem scoringSystem = new ScoringSystem();
 
   /**
    * Creates reusable ui styles and adds actors to the stage.
+   * And starts the timer.
    */
   @Override
   public void create() {
@@ -66,13 +67,15 @@ public class PlayerStatsDisplay extends UIComponent {
 
   /**
    * Updates the player's health on the ui.
+   * And check if the player is dead. If dead, then timer stops.
    * @param health player health
    */
   public void updatePlayerHealthUI(int health) {
     CharSequence text = String.format("Health: %d", health);
     healthLabel.setText(text);
+    //when player is dead the timer stops.
     if (health <= 0) {
-      scoringSystem.clock.cancel();
+      ScoringSystem.stopTimerTask();
     }
   }
 
@@ -82,4 +85,5 @@ public class PlayerStatsDisplay extends UIComponent {
     heartImage.remove();
     healthLabel.remove();
   }
+
 }
