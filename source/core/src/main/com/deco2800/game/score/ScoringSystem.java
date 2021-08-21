@@ -1,5 +1,8 @@
 package com.deco2800.game.score;
 
+import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.entities.Entity;
+
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,7 +25,10 @@ public class ScoringSystem {
     private Calendar calender;
 
     //Help us to count the time.
-    private Timer clock = new Timer();
+    public Timer clock = new Timer();
+
+    //Use Entity class to find health value.
+    //Entity entity = new Entity();
 
     /**
      * create a TimerTask for the schedule method
@@ -42,8 +48,8 @@ public class ScoringSystem {
                     minutes = 0;
                     hours++;
                 }
-                System.out.println(seconds);
-                System.out.println(minutes);
+                System.out.println(seconds + "seconds");
+                System.out.println(minutes + "minutes");
             }
         };
     }
@@ -54,5 +60,10 @@ public class ScoringSystem {
         TimerTask task = clockPrepare();
         //delay:1000 means this timer starts after 1sec, period:1000 simply means plus 1 second.
         clock.scheduleAtFixedRate(task, 1000, 1000);
+    }
+
+    public long calculateFinalScore() {
+        //At this moment, the seconds is the final score;
+        return scoreSeconds;
     }
 }

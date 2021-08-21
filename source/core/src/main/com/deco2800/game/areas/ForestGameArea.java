@@ -9,7 +9,6 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
-import com.deco2800.game.score.ScoringSystem;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
@@ -56,9 +55,6 @@ public class ForestGameArea extends GameArea {
     this.terrainFactory = terrainFactory;
   }
 
-  //Import the scoring system
-  private ScoringSystem scoringSystem = new ScoringSystem();
-
   /** Create the game area, including terrain, static entities (trees), dynamic entities (player) */
   @Override
   public void create() {
@@ -73,9 +69,6 @@ public class ForestGameArea extends GameArea {
     spawnGhostKing();
 
     playMusic();
-
-    // Once the map is created, clock starts.
-    scoringSystem.startGameClock();
   }
 
   private void displayUI() {

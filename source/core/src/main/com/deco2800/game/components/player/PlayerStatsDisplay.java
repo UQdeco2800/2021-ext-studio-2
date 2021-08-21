@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.score.ScoringSystem;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
@@ -17,6 +18,9 @@ public class PlayerStatsDisplay extends UIComponent {
   private Image heartImage;
   private Label healthLabel;
 
+  //Import the scoring system
+  private ScoringSystem scoringSystem = new ScoringSystem();
+
   /**
    * Creates reusable ui styles and adds actors to the stage.
    */
@@ -26,6 +30,9 @@ public class PlayerStatsDisplay extends UIComponent {
     addActors();
 
     entity.getEvents().addListener("updateHealth", this::updatePlayerHealthUI);
+
+    // Once the player is created, clock starts.
+    scoringSystem.startGameClock();
   }
 
   /**
@@ -64,6 +71,9 @@ public class PlayerStatsDisplay extends UIComponent {
   public void updatePlayerHealthUI(int health) {
     CharSequence text = String.format("Health: %d", health);
     healthLabel.setText(text);
+    if (health <= 0) {
+      scoringSystem.clock.cancel();
+    }
   }
 
   @Override
