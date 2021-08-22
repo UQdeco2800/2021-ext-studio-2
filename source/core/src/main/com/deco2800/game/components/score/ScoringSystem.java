@@ -1,6 +1,5 @@
 package com.deco2800.game.components.score;
 
-import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,9 +37,6 @@ public class ScoringSystem {
         }
     };
     //I think we don't need a scoringSystem constructor.
-    //public ScoringSystem(Timer clock) {
-    //    this.clock = clock;
-    // }
 
     /**
      * Record the gaming time in seconds.*/
@@ -91,7 +87,7 @@ public class ScoringSystem {
      * Return the total time in seconds
      * @return long seconds
      */
-    public static long calculateFinalScore() {
+    public static long getScore() {
         //At this moment, the seconds is the final score;
         return scoreSeconds;
     }
@@ -100,15 +96,15 @@ public class ScoringSystem {
      * Return the current seconds of the timer.
      * @return long
      */
-    public int getSeconds() {
+    public static int getSeconds() {
         return seconds;
     }
 
-    public int getMinutes() {
+    public static int getMinutes() {
         return minutes;
     }
 
-    public int getHours() {
+    public static int getHours() {
         return hours;
     }
 }
