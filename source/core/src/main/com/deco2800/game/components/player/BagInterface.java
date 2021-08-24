@@ -3,7 +3,7 @@ package com.deco2800.game.components.player;
 import com.deco2800.game.entities.*;
 
 /**
- * 背包接口
+ * 背包
  */
 public interface BagInterface {
 
