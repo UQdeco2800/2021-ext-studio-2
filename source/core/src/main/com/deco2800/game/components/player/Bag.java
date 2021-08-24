@@ -10,7 +10,7 @@ import java.util.List;
 public class Bag implements BagInterface {
 
     /**
-     * 物品
+     * 所有物品
      */
     private List<Entity> entities;
 
