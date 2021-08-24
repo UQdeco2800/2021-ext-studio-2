@@ -9,6 +9,9 @@ import java.util.List;
 
 public class Bag implements BagInterface {
 
+    /**
+     * 物品
+     */
     private List<Entity> entities;
 
     protected class BagIterator implements ComponentIterator<Entity> {

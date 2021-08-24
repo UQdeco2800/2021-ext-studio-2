@@ -10,7 +10,7 @@ public interface BagInterface {
     static final int CAPACITY = 10;
 
     /**
-     * 产生背包迭代器
+     * 背包迭代器
      *
      * @return 背包迭代器，用于访问背包中每个项
      */
