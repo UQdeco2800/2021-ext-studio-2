@@ -34,6 +34,7 @@ public class Entity {
   private final IntMap<Component> components;
   private final EventHandler eventHandler;
   private boolean enabled = true;
+  private boolean disappear = false;
   private boolean created = false;
   private Vector2 position = Vector2.Zero.cpy();
   private Vector2 scale = new Vector2(1, 1);
@@ -57,6 +58,15 @@ public class Entity {
     logger.debug("Setting enabled={} on entity {}", enabled, this);
     this.enabled = enabled;
   }
+
+
+  /**
+   * Disappear an entity.
+   */
+  public void setDisappear() {
+    this.disappear = true;
+  }
+
 
   /**
    * Get the entity's game position.
@@ -259,6 +269,9 @@ public class Entity {
    */
   public void update() {
     if (!enabled) {
+      return;
+    }
+    if (disappear) {
       this.remove();
       return;
     }
