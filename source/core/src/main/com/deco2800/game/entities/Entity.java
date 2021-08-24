@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.IntMap;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
 import com.deco2800.game.events.EventHandler;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -207,6 +208,20 @@ public class Entity {
     ServiceLocator.getEntityService().unregister(this);
   }
 
+  /** Let the obstacles disappear after playing the animation for one second. */
+  public void remove() {
+    if (this.getComponent(AnimationRenderComponent.class).getAnimationPlayTime()>1f) {
+      for (Component component : createdComponents) {
+        if (component.getClass().equals(AnimationRenderComponent.class)) {
+          ((AnimationRenderComponent) component).stopAnimation();
+        } else {
+          component.dispose();
+        }
+      }
+      ServiceLocator.getEntityService().unregister(this);
+    }
+  }
+
   /**
    * Create the entity and start running. This is called when the entity is registered in the world,
    * and should not be called manually.
@@ -244,6 +259,7 @@ public class Entity {
    */
   public void update() {
     if (!enabled) {
+      this.remove();
       return;
     }
     for (Component component : createdComponents) {
