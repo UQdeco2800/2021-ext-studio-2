@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.IntMap;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
 import com.deco2800.game.events.EventHandler;
-import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +33,6 @@ public class Entity {
   private final IntMap<Component> components;
   private final EventHandler eventHandler;
   private boolean enabled = true;
-  private boolean disappear = false;
   private boolean created = false;
   private Vector2 position = Vector2.Zero.cpy();
   private Vector2 scale = new Vector2(1, 1);
@@ -58,15 +56,6 @@ public class Entity {
     logger.debug("Setting enabled={} on entity {}", enabled, this);
     this.enabled = enabled;
   }
-
-
-  /**
-   * Disappear an entity.
-   */
-  public void setDisappear() {
-    this.disappear = true;
-  }
-
 
   /**
    * Get the entity's game position.
@@ -218,20 +207,6 @@ public class Entity {
     ServiceLocator.getEntityService().unregister(this);
   }
 
-  /** Let the obstacles disappear after playing the animation for one second. */
-  public void remove() {
-    if (this.getComponent(AnimationRenderComponent.class).getAnimationPlayTime()>1f) {
-      for (Component component : createdComponents) {
-        if (component.getClass().equals(AnimationRenderComponent.class)) {
-          ((AnimationRenderComponent) component).stopAnimation();
-        } else {
-          component.dispose();
-        }
-      }
-      ServiceLocator.getEntityService().unregister(this);
-    }
-  }
-
   /**
    * Create the entity and start running. This is called when the entity is registered in the world,
    * and should not be called manually.
@@ -269,10 +244,6 @@ public class Entity {
    */
   public void update() {
     if (!enabled) {
-      return;
-    }
-    if (disappear) {
-      this.remove();
       return;
     }
     for (Component component : createdComponents) {
