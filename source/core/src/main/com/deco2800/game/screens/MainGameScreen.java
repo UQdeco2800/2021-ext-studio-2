@@ -146,7 +146,10 @@ public class MainGameScreen extends ScreenAdapter {
         .addComponent(new MainGameExitDisplay())
         .addComponent(new Terminal())
         .addComponent(inputComponent)
+
+            // Score display
             .addComponent(new ScoreDisplay())
+
         .addComponent(new TerminalDisplay());
 
     ServiceLocator.getEntityService().register(ui);

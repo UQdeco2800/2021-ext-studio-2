@@ -19,9 +19,12 @@ public class ScoreDisplay extends UIComponent {
     Table table;
     private Label scoreLabel;
 
-    //Import the scoring system (potentially bad code)
-    private final ScoringSystem scoringSystem = new ScoringSystemV1();
+    // Import the scoring system (potentially bad code)
+    // Not needed anymore remove in next commit
+
+
     private GameTime gameTime = new GameTime();
+    private ScoringSystemV1 scoringSystem = new ScoringSystemV1();
 
     /**
      * Creates reusable ui styles and adds actors to the stage.
@@ -33,11 +36,6 @@ public class ScoreDisplay extends UIComponent {
         addActors();
 
         entity.getEvents().addListener("updateScore", this::updatePlayerScoreUI);
-
-        // bad code, will replace in future
-//        updatePlayerScoreUI();
-        // Once the player is created, clock starts.
-        //    scoringSystem.startGameClock();
     }
 
     /**
@@ -52,7 +50,7 @@ public class ScoreDisplay extends UIComponent {
         table.padTop(45f).padLeft(5f);
 
         // Score text
-        int score = scoringSystem.getScore();
+        int score = 0;
         CharSequence scoreText = String.format("Score: %d", score);
         scoreLabel = new Label(scoreText, skin, "large");
 
@@ -62,13 +60,13 @@ public class ScoreDisplay extends UIComponent {
 
     @Override
     public void draw(SpriteBatch batch) {
-        // draw is handled by the stage
+        // Designs of the Scoreboard will go here
     }
 
     @Override
     public void update() {
         super.update();
-        entity.getEvents().trigger("updateScore", (int) this.gameTime.getTime() / 1000);
+        entity.getEvents().trigger("updateScore", scoringSystem.getScore((int) gameTime.getTime() / 1000));
     }
 
     /**

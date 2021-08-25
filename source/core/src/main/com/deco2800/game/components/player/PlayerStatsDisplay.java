@@ -18,10 +18,6 @@ public class PlayerStatsDisplay extends UIComponent {
     Table table;
     private Image heartImage;
     private Label healthLabel;
-    private Label scoreLabel;
-
-    //Import the scoring system (potentially bad code)
-    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
 
     /**
      * Creates reusable ui styles and adds actors to the stage.
@@ -33,10 +29,6 @@ public class PlayerStatsDisplay extends UIComponent {
         addActors();
 
         entity.getEvents().addListener("updateHealth", this::updatePlayerHealthUI);
-        entity.getEvents().addListener("updateHealth", this::updatePlayerScoreUI);
-
-        // Once the player is created, clock starts.
-        scoringSystem.startGameClock();
     }
 
     /**
@@ -59,14 +51,8 @@ public class PlayerStatsDisplay extends UIComponent {
         CharSequence healthText = String.format("Health: %d", health);
         healthLabel = new Label(healthText, skin, "large");
 
-        // Score text
-        int score = scoringSystem.getScore();
-        CharSequence scoreText = String.format("Score: %d", score);
-        scoreLabel = new Label(scoreText, skin, "large");
-
         table.add(heartImage).size(heartSideLength).pad(5);
         table.add(healthLabel);
-        table.add(scoreLabel);
         stage.addActor(table);
     }
 
@@ -89,14 +75,6 @@ public class PlayerStatsDisplay extends UIComponent {
         if (health <= 0) {
             ScoringSystemV1.stopTimerTask();
         }
-    }
-
-    /**
-     * Updates the player's score on the ui.
-     */
-    public void updatePlayerScoreUI(int score) {
-        CharSequence text = String.format("Score: %d", scoringSystem.getScore());
-        scoreLabel.setText(text);
     }
 
     @Override
