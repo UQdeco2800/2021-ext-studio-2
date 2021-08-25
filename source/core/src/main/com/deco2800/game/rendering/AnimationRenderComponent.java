@@ -165,6 +165,14 @@ public class AnimationRenderComponent extends RenderComponent {
     return currentAnimation != null && currentAnimation.isAnimationFinished(animationPlayTime);
   }
 
+  /**
+   * Get the playing time of the animation
+   * @return float The time the animation has been played (seconds).
+   */
+  public float getAnimationPlayTime() {
+    return this.animationPlayTime;
+  }
+
   @Override
   protected void draw(SpriteBatch batch) {
     if (currentAnimation == null) {
@@ -182,4 +190,5 @@ public class AnimationRenderComponent extends RenderComponent {
     atlas.dispose();
     super.dispose();
   }
+
 }
