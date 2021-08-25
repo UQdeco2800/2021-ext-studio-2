@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.score.ScoringSystem;
 import com.deco2800.game.components.score.ScoringSystemV1;
+import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
@@ -16,12 +17,11 @@ import com.deco2800.game.ui.UIComponent;
  */
 public class ScoreDisplay extends UIComponent {
     Table table;
-    private Image heartImage;
-    private Label healthLabel;
     private Label scoreLabel;
 
     //Import the scoring system (potentially bad code)
     private final ScoringSystem scoringSystem = new ScoringSystemV1();
+    private GameTime gameTime = new GameTime();
 
     /**
      * Creates reusable ui styles and adds actors to the stage.
@@ -47,26 +47,15 @@ public class ScoreDisplay extends UIComponent {
      */
     private void addActors() {
         table = new Table();
-        table.top().left();
+        table.bottom().right();
         table.setFillParent(true);
         table.padTop(45f).padLeft(5f);
-
-        // Heart image
-        float heartSideLength = 30f;
-        heartImage = new Image(ServiceLocator.getResourceService().getAsset("images/heart.png", Texture.class));
-
-        // Health text
-        int health = entity.getComponent(CombatStatsComponent.class).getHealth();
-        CharSequence healthText = String.format("Health: %d", health);
-        healthLabel = new Label(healthText, skin, "large");
 
         // Score text
         int score = scoringSystem.getScore();
         CharSequence scoreText = String.format("Score: %d", score);
         scoreLabel = new Label(scoreText, skin, "large");
 
-        table.add(heartImage).size(heartSideLength).pad(5);
-        table.add(healthLabel);
         table.add(scoreLabel);
         stage.addActor(table);
     }
@@ -74,6 +63,12 @@ public class ScoreDisplay extends UIComponent {
     @Override
     public void draw(SpriteBatch batch) {
         // draw is handled by the stage
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        entity.getEvents().trigger("updateScore", (int) this.gameTime.getTime() / 1000);
     }
 
     /**
@@ -87,8 +82,7 @@ public class ScoreDisplay extends UIComponent {
     @Override
     public void dispose() {
         super.dispose();
-        heartImage.remove();
-        healthLabel.remove();
+        scoreLabel.remove();
     }
 
 }

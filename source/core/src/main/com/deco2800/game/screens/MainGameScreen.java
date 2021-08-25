@@ -7,6 +7,7 @@ import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.maingame.MainGameActions;
+import com.deco2800.game.components.score.ScoreDisplay;
 import com.deco2800.game.components.score.ScoringSystem;
 import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.entities.Entity;
@@ -145,7 +146,7 @@ public class MainGameScreen extends ScreenAdapter {
         .addComponent(new MainGameExitDisplay())
         .addComponent(new Terminal())
         .addComponent(inputComponent)
-//            .addComponent(new ScoreDisplay())
+            .addComponent(new ScoreDisplay())
         .addComponent(new TerminalDisplay());
 
     ServiceLocator.getEntityService().register(ui);
