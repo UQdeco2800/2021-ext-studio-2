@@ -48,6 +48,7 @@ public class ForestGameArea extends GameArea {
   private static final String[] forestSounds = {"sounds/Impact4.ogg"};
   private static final String backgroundMusic = "sounds/BGM_03_mp3.mp3";
   private static final String[] jumpSounds = {"sounds/jump.ogg"};
+  private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
   private static final String[] forestMusic = {backgroundMusic};
 
   private final TerrainFactory terrainFactory;
@@ -162,6 +163,7 @@ public class ForestGameArea extends GameArea {
     resourceService.loadTextureAtlases(forestTextureAtlases);
     resourceService.loadSounds(forestSounds);
     resourceService.loadSounds(jumpSounds);
+    resourceService.loadSounds(turnSounds);
     resourceService.loadMusic(forestMusic);
 
     while (!resourceService.loadForMillis(10)) {
@@ -177,6 +179,7 @@ public class ForestGameArea extends GameArea {
     resourceService.unloadAssets(forestTextureAtlases);
     resourceService.unloadAssets(forestSounds);
     resourceService.loadSounds(jumpSounds);
+    resourceService.loadSounds(turnSounds);
     resourceService.unloadAssets(forestMusic);
   }
 

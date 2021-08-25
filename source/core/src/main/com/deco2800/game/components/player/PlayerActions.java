@@ -4,7 +4,9 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
@@ -23,6 +25,8 @@ public class PlayerActions extends Component {
     physicsComponent = entity.getComponent(PhysicsComponent.class);
     entity.getEvents().addListener("walk", this::walk);
     entity.getEvents().addListener("walkStop", this::stopWalking);
+    entity.getEvents().addListener("walkRight", this::walkRight);
+    entity.getEvents().addListener("walkLeft", this::walkLeft);
     entity.getEvents().addListener("attack", this::attack);
     entity.getEvents().addListener("jump", this::jump);
   }
@@ -63,12 +67,52 @@ public class PlayerActions extends Component {
   }
 
   /**
+   * Updates the player sprite to turn right
+   */
+  boolean walkLeft;
+  void walkRight() {
+    if(walkLeft) {
+      walkLeft = false;
+      Sound turnSound = ServiceLocator.getResourceService().getAsset("sounds/turnDirection.ogg", Sound.class);
+      turnSound.play();
+
+     /* TextureRenderComponent playerTexture = entity.getComponent(TextureRenderComponent.class);
+      playerTexture.dispose();
+      Entity player = entity;
+      player.addComponent(new TextureRenderComponent("images/mpc_right_view.png"));*/
+
+    }
+  }
+
+  /**
+   * Updates the player sprite to turn left
+   */
+
+  void walkLeft() {
+    if(!walkLeft){
+      walkLeft = true;
+      Sound turnSound = ServiceLocator.getResourceService().getAsset("sounds/turnDirection.ogg", Sound.class);
+      turnSound.play();
+
+      /*TextureRenderComponent playerTexture = entity.getComponent(TextureRenderComponent.class);
+      playerTexture.dispose();
+      Entity player = entity;
+      player.addComponent(new TextureRenderComponent("images/mpc_left_view.png"));*/
+
+    }
+  }
+
+  /**
    * Makes the player attack.
    */
   void attack() {
     Sound attackSound = ServiceLocator.getResourceService().getAsset("sounds/Impact4.ogg", Sound.class);
     attackSound.play();
   }
+
+  /**
+   * Makes the player jump
+   */
 
   void jump() {
     Sound jumpSound = ServiceLocator.getResourceService().getAsset("sounds/jump.ogg", Sound.class);

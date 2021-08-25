@@ -33,6 +33,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
       case Keys.A:
         walkDirection.add(Vector2Utils.LEFT);
         triggerWalkEvent();
+        entity.getEvents().trigger(("walkLeft"));
         return true;
       case Keys.S:
         walkDirection.add(Vector2Utils.DOWN);
@@ -41,6 +42,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
       case Keys.D:
         walkDirection.add(Vector2Utils.RIGHT);
         triggerWalkEvent();
+        entity.getEvents().trigger(("walkRight"));
         return true;
       case Keys.SPACE:
         entity.getEvents().trigger("attack");
