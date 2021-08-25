@@ -1,4 +1,4 @@
-package com.deco2800.game.components.player;
+package com.deco2800.game.components.score;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,14 +14,14 @@ import com.deco2800.game.ui.UIComponent;
 /**
  * A ui component for displaying player stats, e.g. health.
  */
-public class PlayerStatsDisplay extends UIComponent {
+public class ScoreDisplay extends UIComponent {
     Table table;
     private Image heartImage;
     private Label healthLabel;
     private Label scoreLabel;
 
     //Import the scoring system (potentially bad code)
-    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
+    private final ScoringSystem scoringSystem = new ScoringSystemV1();
 
     /**
      * Creates reusable ui styles and adds actors to the stage.
@@ -32,11 +32,12 @@ public class PlayerStatsDisplay extends UIComponent {
         super.create();
         addActors();
 
-        entity.getEvents().addListener("updateHealth", this::updatePlayerHealthUI);
-        entity.getEvents().addListener("updateHealth", this::updatePlayerScoreUI);
+        entity.getEvents().addListener("updateScore", this::updatePlayerScoreUI);
 
+        // bad code, will replace in future
+//        updatePlayerScoreUI();
         // Once the player is created, clock starts.
-        scoringSystem.startGameClock();
+        //    scoringSystem.startGameClock();
     }
 
     /**
@@ -76,26 +77,10 @@ public class PlayerStatsDisplay extends UIComponent {
     }
 
     /**
-     * Updates the player's health on the ui.
-     * And check if the player is dead. If dead, then timer stops.
-     *
-     * @param health player health
-     */
-    public void updatePlayerHealthUI(int health) {
-        CharSequence text = String.format("Health: %d", health);
-        healthLabel.setText(text);
-
-        //when player is dead the timer stops.
-        if (health <= 0) {
-            ScoringSystemV1.stopTimerTask();
-        }
-    }
-
-    /**
      * Updates the player's score on the ui.
      */
     public void updatePlayerScoreUI(int score) {
-        CharSequence text = String.format("Score: %d", scoringSystem.getScore());
+        CharSequence text = String.format("Score: %d", score);
         scoreLabel.setText(text);
     }
 
