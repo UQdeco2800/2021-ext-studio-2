@@ -42,7 +42,7 @@ public class ForestGameArea extends GameArea {
     "images/iso_grass_3.png",
     "images/mpc_front_stroke.png",
     "images/mpc_left_view.png",
-    "images/mpc_right_view.png"
+    "images/mpc_right_view.png",
     "images/road.png",
     "images/water.png"
   };
