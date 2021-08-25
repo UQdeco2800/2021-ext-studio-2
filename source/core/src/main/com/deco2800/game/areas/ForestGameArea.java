@@ -40,6 +40,9 @@ public class ForestGameArea extends GameArea {
     "images/iso_grass_1.png",
     "images/iso_grass_2.png",
     "images/iso_grass_3.png",
+    "images/mpc_front_stroke.png",
+    "images/mpc_left_view.png",
+    "images/mpc_right_view.png",
     "images/road.png",
     "images/water.png"
   };
@@ -47,6 +50,8 @@ public class ForestGameArea extends GameArea {
     "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas", "images/airport.atlas"
   };
   private static final String[] forestSounds = {"sounds/Impact4.ogg"};
+  private static final String[] jumpSounds = {"sounds/jump.ogg"};
+  private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
   private static final String backgroundMusic = "sounds/neverGonna.mp3";
   private static final String[] forestMusic = {backgroundMusic};
 
@@ -163,6 +168,8 @@ public class ForestGameArea extends GameArea {
     resourceService.loadTextures(forestTextures);
     resourceService.loadTextureAtlases(forestTextureAtlases);
     resourceService.loadSounds(forestSounds);
+    resourceService.loadSounds(jumpSounds);
+    resourceService.loadSounds(turnSounds);
     resourceService.loadMusic(forestMusic);
 
     while (!resourceService.loadForMillis(10)) {
@@ -177,6 +184,8 @@ public class ForestGameArea extends GameArea {
     resourceService.unloadAssets(forestTextures);
     resourceService.unloadAssets(forestTextureAtlases);
     resourceService.unloadAssets(forestSounds);
+    resourceService.loadSounds(jumpSounds);
+    resourceService.loadSounds(turnSounds);
     resourceService.unloadAssets(forestMusic);
   }
 
