@@ -59,7 +59,7 @@ public class GdxGame extends Game {
     getScreen().dispose();
   }
 
-  /**4
+  /**
    * Create a new screen of the provided type.
    * @param screenType screen type
    * @return new screen

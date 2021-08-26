@@ -19,7 +19,7 @@ public class ScoringSystemV1 {
     public GameTime gameTime;
 
     //scoreSeconds is just seconds
-    private static long scoreSeconds = 0;
+    private static int scoreSeconds = 0;
 
     //Help us to count the time.
     private static Timer clock = new Timer();
@@ -41,8 +41,6 @@ public class ScoringSystemV1 {
                 minutes = 0;
                 hours++;
             }
-            System.out.println(seconds + "seconds");
-            System.out.println(minutes + "minutes");
         }
     };
     //I think we don't need a scoringSystem constructor.
@@ -72,13 +70,10 @@ public class ScoringSystemV1 {
                 }
 
 //                new Entity().getEvents().trigger("updateScore", scoreSeconds);
-
-                System.out.println(seconds + "seconds");
-                System.out.println(minutes + "minutes");
             }
         };
         //delay:0 means this timer starts as soon as the game starts, period:1000 simply means plus 1 second.
-        clock.scheduleAtFixedRate(task, 0, 1000);
+        clock.scheduleAtFixedRate(task, 1000, 1000);
     }
 
     /**
@@ -96,27 +91,38 @@ public class ScoringSystemV1 {
     }
 
     /**
-     * Return the total time in seconds
-     * @return long seconds
+     * Return the total score
+     * @return int scores
      */
     public int getScore(int... args) {
         //At this moment, the seconds is the final score;
 //        return scoreSeconds;
-        return (args[0])*(10);
+        return (args[0]);
+    }
+    /**
+     * Return the current seconds of the timer.
+     * @return int
+     */
+    public int getScoreSeconds() {
+        return scoreSeconds;
     }
 
     /**
      * Return the current seconds of the timer.
-     * @return long
+     * @return int
      */
-    public static int getSeconds() {
+    public int getSeconds() {
         return seconds;
     }
-
-    public static int getMinutes() {
+    /**
+     * Return the current minutes of the timer.
+     * @return int
+     */
+    public int getMinutes() {
         return minutes;
     }
 
+    //hour may too long for this game. But keep it anyway.
     public static int getHours() {
         return hours;
     }

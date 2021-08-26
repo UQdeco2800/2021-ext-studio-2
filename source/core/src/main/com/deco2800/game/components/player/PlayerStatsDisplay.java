@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.score.ScoringSystem;
 import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
@@ -18,6 +17,8 @@ public class PlayerStatsDisplay extends UIComponent {
     Table table;
     private Image heartImage;
     private Label healthLabel;
+    // import here for implementing the clock
+    ScoringSystemV1 clock = new ScoringSystemV1();
 
     /**
      * Creates reusable ui styles and adds actors to the stage.
@@ -29,6 +30,7 @@ public class PlayerStatsDisplay extends UIComponent {
         addActors();
 
         entity.getEvents().addListener("updateHealth", this::updatePlayerHealthUI);
+        clock.startGameClock();
     }
 
     /**

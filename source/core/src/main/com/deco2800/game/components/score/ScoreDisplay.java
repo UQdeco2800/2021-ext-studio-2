@@ -13,7 +13,7 @@ import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
 /**
- * A ui component for displaying player stats, e.g. health.
+ * A ui component for displaying player score
  */
 public class ScoreDisplay extends UIComponent {
     Table table;
@@ -23,8 +23,8 @@ public class ScoreDisplay extends UIComponent {
     // Not needed anymore remove in next commit
 
 
-    private GameTime gameTime = new GameTime();
-    private ScoringSystemV1 scoringSystem = new ScoringSystemV1();
+    private final GameTime gameTime = new GameTime();
+    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
 
     /**
      * Creates reusable ui styles and adds actors to the stage.
@@ -66,7 +66,8 @@ public class ScoreDisplay extends UIComponent {
     @Override
     public void update() {
         super.update();
-        entity.getEvents().trigger("updateScore", scoringSystem.getScore((int) gameTime.getTime() / 1000));
+        entity.getEvents().trigger("updateScore",
+                scoringSystem.getScore(scoringSystem.getScoreSeconds()));
     }
 
     /**

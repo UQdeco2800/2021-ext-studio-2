@@ -10,6 +10,7 @@ import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.score.ScoreDisplay;
 import com.deco2800.game.components.score.ScoringSystem;
 import com.deco2800.game.components.score.ScoringSystemV1;
+import com.deco2800.game.components.score.TimerDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -76,8 +77,8 @@ public class MainGameScreen extends ScreenAdapter {
   @Override
   public void render(float delta) {
 
-    // test code
-    new Entity().getEvents().trigger("updateScore");
+    //new Entity().getEvents().trigger("updateScore");
+    //new Entity().getEvents().trigger("updateTime");
 
     physicsEngine.update();
     ServiceLocator.getEntityService().update();
@@ -146,10 +147,9 @@ public class MainGameScreen extends ScreenAdapter {
         .addComponent(new MainGameExitDisplay())
         .addComponent(new Terminal())
         .addComponent(inputComponent)
-
-            // Score display
+            //display the score and the time -- team 9
             .addComponent(new ScoreDisplay())
-
+            .addComponent(new TimerDisplay())
         .addComponent(new TerminalDisplay());
 
     ServiceLocator.getEntityService().register(ui);
