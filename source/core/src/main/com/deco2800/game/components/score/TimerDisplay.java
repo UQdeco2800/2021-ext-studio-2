@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.ui.UIComponent;
 
+import java.text.DecimalFormat;
+
 /**
  * A ui component for displaying player time. This is a similar class of ScoreDisplay
  */
@@ -15,6 +17,8 @@ public class TimerDisplay extends UIComponent {
     private Label timeLabel;
     private final GameTime gameTime = new GameTime();
     private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
+
+    DecimalFormat formatter = new DecimalFormat("00");
 
     /**
      * Creates reusable ui styles and adds actors to the stage.
@@ -41,7 +45,9 @@ public class TimerDisplay extends UIComponent {
         // Score text
         int minute = 0;
         int second = 0;
-        CharSequence TimerText = minute + " : " + second;
+        String minuteFormatted = formatter.format(minute);
+        String secondFormatted = formatter.format(second);
+        CharSequence TimerText = minuteFormatted + " : " + secondFormatted;
         timeLabel = new Label(TimerText, skin, "large");
 
         table.add(timeLabel);
@@ -64,7 +70,9 @@ public class TimerDisplay extends UIComponent {
      * Updates the player's gaming time on the ui.
      */
     public void updatePlayerTimerUI(int minute, int second) {
-        CharSequence text = minute + " : " + second;
+        String minuteFormatted = formatter.format(minute);
+        String secondFormatted = formatter.format(second);
+        CharSequence text = minuteFormatted + " : " + secondFormatted;
         timeLabel.setText(text);
     }
 
