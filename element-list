@@ -11,6 +11,7 @@ com.deco2800.game.components.mainmenu
 com.deco2800.game.components.npc
 com.deco2800.game.components.Obstacle
 com.deco2800.game.components.player
+com.deco2800.game.components.score
 com.deco2800.game.components.settingsmenu
 com.deco2800.game.components.tasks
 com.deco2800.game.concurrency
