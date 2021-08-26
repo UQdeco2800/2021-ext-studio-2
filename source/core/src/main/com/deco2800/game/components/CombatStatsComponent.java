@@ -1,5 +1,7 @@
 package com.deco2800.game.components;
 
+import com.deco2800.game.components.score.ScoringSystem;
+import com.deco2800.game.services.GameTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,6 +54,8 @@ public class CombatStatsComponent extends Component {
       entity.getEvents().trigger("updateHealth", this.health);
     }
   }
+
+
 
   /**
    * Adds to the player's health. The amount added can be negative.
