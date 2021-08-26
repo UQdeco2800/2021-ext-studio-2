@@ -19,7 +19,9 @@ import com.deco2800.game.services.ServiceLocator;
 
 /** Factory for creating game terrains. */
 public class TerrainFactory {
-  private static final GridPoint2 MAP_SIZE = new GridPoint2(30, 30);
+
+  private static final GridPoint2 MAP_SIZE = new GridPoint2(15, 3);
+
 
   private final OrthographicCamera camera;
   private final TerrainOrientation orientation;
@@ -57,7 +59,9 @@ public class TerrainFactory {
       case FOREST_DEMO:
         TextureRegion orthoRoad =
             new TextureRegion(resourceService.getAsset("images/road.png", Texture.class));
-        return createForestDemoTerrain(0.5f, orthoRoad);
+
+        return createForestDemoTerrain(1, orthoRoad);
+
       default:
         return null;
     }
