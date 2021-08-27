@@ -43,7 +43,7 @@ public class ObstacleFactory {
 
 		AITaskComponent aiComponent =
 				new AITaskComponent()
-						.addTask(new ObstacleDisapperTask(target, 10, 3f));
+						.addTask(new ObstacleDisapperTask(target, 10, 1.7f));
 
 		AnimationRenderComponent animator =
 				new AnimationRenderComponent(
@@ -71,7 +71,7 @@ public class ObstacleFactory {
 		//tree.scaleHeight(1f);
 //    tree.setScale(4,2);
 
-		PhysicsUtils.setScaledCollider(obstacle, 1f, 0.7f);
+		PhysicsUtils.setScaledCollider(obstacle, 1f, 0.2f);
 //打开动画
 //    animator.startAnimation("enemy2");
 
