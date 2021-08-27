@@ -25,6 +25,7 @@ public class ObstacleAnimationController extends Component {
 	 * obstacle (let it disappear).
 	 */
 	void obstacleDisappear() {
+		animator.getEntity().setRemoveTexture();
 		animator.startAnimation("enemy2");
 		animator.getEntity().setDisappear();
 	}
