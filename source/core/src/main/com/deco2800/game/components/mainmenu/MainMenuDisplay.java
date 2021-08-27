@@ -38,6 +38,7 @@ public class MainMenuDisplay extends UIComponent {
     TextButton loadBtn = new TextButton("Load", skin);
     TextButton settingsBtn = new TextButton("Settings", skin);
     TextButton exitBtn = new TextButton("Exit", skin);
+    TextButton gameOverBtn = new TextButton("Game Over", skin);
 
     // Triggers an event when the button is pressed
     startBtn.addListener(
@@ -77,6 +78,14 @@ public class MainMenuDisplay extends UIComponent {
           }
         });
 
+    gameOverBtn.addListener(new ChangeListener() {
+        @Override
+        public void changed(ChangeEvent event, Actor actor) {
+            logger.debug("Game Over button clicked");
+            entity.getEvents().trigger("gameOver");
+        }
+    });
+
     table.add(title);
     table.row();
     table.add(startBtn).padTop(30f);
@@ -86,6 +95,8 @@ public class MainMenuDisplay extends UIComponent {
     table.add(settingsBtn).padTop(15f);
     table.row();
     table.add(exitBtn).padTop(15f);
+    table.row();
+    table.add(gameOverBtn).padTop(15f);
 
     stage.addActor(table);
   }
