@@ -15,8 +15,11 @@ import com.deco2800.game.ui.UIComponent;
  */
 public class PlayerStatsDisplay extends UIComponent {
     Table table;
+    Table consumeTable;
     private Image heartImage;
     private Label healthLabel;
+    private Image foodImage;
+    private Image waterImage;
     // import here for implementing the clock
     //ScoringSystemV1 clock = new ScoringSystemV1();
 
@@ -40,22 +43,37 @@ public class PlayerStatsDisplay extends UIComponent {
      */
     private void addActors() {
         table = new Table();
+        consumeTable = new Table();
         table.top().left();
+        consumeTable.top().right();
         table.setFillParent(true);
+        consumeTable.setFillParent(true);
         table.padTop(45f).padLeft(5f);
+        consumeTable.padTop(45f).padRight(5f);
+
+
 
         // Heart image
         float heartSideLength = 30f;
+        float waterSideLength = 30f;
+        float foodSideLength = 30f;
         heartImage = new Image(ServiceLocator.getResourceService().getAsset("images/heart.png", Texture.class));
+        waterImage = new Image(ServiceLocator.getResourceService().getAsset("images/water.png", Texture.class));
+        foodImage = new Image(ServiceLocator.getResourceService().getAsset("images/food.png", Texture.class));
+
 
         // Health text
         int health = entity.getComponent(CombatStatsComponent.class).getHealth();
         CharSequence healthText = String.format("Health: %d", health);
         healthLabel = new Label(healthText, skin, "large");
 
+
         table.add(heartImage).size(heartSideLength).pad(5);
         table.add(healthLabel);
+        consumeTable.add(waterImage).size(waterSideLength).pad(30);
+        consumeTable.add(foodImage).size(foodSideLength).pad(45);
         stage.addActor(table);
+        stage.addActor(consumeTable);
     }
 
     @Override
