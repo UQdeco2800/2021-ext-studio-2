@@ -24,7 +24,7 @@ import java.util.ArrayList;
  */
 public class ForestGameArea extends GameArea {
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
-    private static final int NUM_OBSTACLES = 6;
+    private static final int NUM_OBSTACLES = 5; // Cannot be greater than 20 (range of loading map)
     private static final int NUM_GHOSTS = 2;
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(0, 10);
     private static final float WALL_WIDTH = 0.1f;
@@ -82,8 +82,8 @@ public class ForestGameArea extends GameArea {
         player = spawnPlayer();
         spawnObstacles();
 
-        spawnGhosts();
-        spawnGhostKing();
+//        spawnGhosts();
+//        spawnGhostKing();
 
         playMusic();
     }
