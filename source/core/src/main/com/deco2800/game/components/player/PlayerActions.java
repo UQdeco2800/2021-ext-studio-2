@@ -121,7 +121,7 @@ public class PlayerActions extends Component {
     Sound jumpSound = ServiceLocator.getResourceService().getAsset("sounds/jump.ogg", Sound.class);
 
     Body body = physicsComponent.getBody();
-    body.applyForceToCenter(0, 80f, true);
+    body.applyForceToCenter(0, 400f, true);
 
     jumpSound.play();
 
