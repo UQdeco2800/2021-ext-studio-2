@@ -216,8 +216,8 @@ public class ForestGameArea extends GameArea {
     resourceService.unloadAssets(forestTextures);
     resourceService.unloadAssets(forestTextureAtlases);
     resourceService.unloadAssets(forestSounds);
-    resourceService.loadSounds(jumpSounds);
-    resourceService.loadSounds(turnSounds);
+    resourceService.unloadAssets(jumpSounds);
+    resourceService.unloadAssets(turnSounds);
     resourceService.unloadAssets(forestMusic);
   }
 
