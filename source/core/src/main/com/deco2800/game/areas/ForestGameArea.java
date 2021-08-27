@@ -20,13 +20,12 @@ import org.slf4j.LoggerFactory;
 /** Forest area for the demo game with trees, a player, and some enemies. */
 public class ForestGameArea extends GameArea {
   private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
-  private static final int NUM_TREES = 3;
+  private static final int NUM_TREES = 6;
   private static final int NUM_GHOSTS = 2;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(0, 10);
   private static final float WALL_WIDTH = 0.1f;
   private static final String[] forestTextures = {
     "images/box_boy_leaf.png",
-    //"images/tree.png",
     "images/images.jpg",
     "images/ghost_king.png",
     "images/ghost_1.png",
@@ -74,7 +73,7 @@ public class ForestGameArea extends GameArea {
     spawnTerrain();
 
     player = spawnPlayer();
-    spawnTrees();
+    beginSpawnObstacles();
 
     spawnGhosts();
     spawnGhostKing();
@@ -150,13 +149,23 @@ public class ForestGameArea extends GameArea {
   }
 
 
-  private void spawnTrees() {
-    GridPoint2 minPos = new GridPoint2(0, 0);
-    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+  public void beginSpawnObstacles() {
+    GridPoint2 minPos = new GridPoint2((int)player.getPosition().x, 0);
+    GridPoint2 maxPos = new GridPoint2((int)player.getPosition().x + 30, 0);
 
     for (int i = 0; i < NUM_TREES; i++) {
       GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
-      Entity tree = ObstacleFactory.createTree(player);
+      Entity tree = ObstacleFactory.createObstacle(player);
+      spawnEntityAt(tree, randomPos, true, false);
+    }
+  }
+
+  public void continueSpawnObstacles() {
+    GridPoint2 minPos = new GridPoint2((int)player.getPosition().x + 20, 0);
+    GridPoint2 maxPos = new GridPoint2((int)player.getPosition().x + 40, 0);
+    for (int i = 0; i < NUM_TREES; i++) {
+      GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
+      Entity tree = ObstacleFactory.createObstacle(player);
       spawnEntityAt(tree, randomPos, true, false);
     }
   }
