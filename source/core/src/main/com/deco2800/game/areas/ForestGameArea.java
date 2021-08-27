@@ -22,7 +22,7 @@ public class ForestGameArea extends GameArea {
   private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
   private static final int NUM_TREES = 3;
   private static final int NUM_GHOSTS = 2;
-  private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
+  private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(0, 10);
   private static final float WALL_WIDTH = 0.1f;
   private static final String[] forestTextures = {
     "images/box_boy_leaf.png",
@@ -57,7 +57,7 @@ public class ForestGameArea extends GameArea {
 
   private final TerrainFactory terrainFactory;
 
-  private Entity player;
+  public Entity player;
 
   public ForestGameArea(TerrainFactory terrainFactory) {
     super();
@@ -88,7 +88,7 @@ public class ForestGameArea extends GameArea {
     spawnEntity(ui);
   }
 
-  private void spawnTerrain() {
+  public void spawnTerrain() {
     // Background terrain
     terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO);
     spawnEntity(new Entity().addComponent(terrain));
@@ -117,6 +117,38 @@ public class ForestGameArea extends GameArea {
     spawnEntityAt(
         ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
   }
+
+
+  public void spawnTerrainRandomly(int xValue) {
+    // Background terrain
+    terrain = terrainFactory.createTerrainRandomly(TerrainType.FOREST_DEMO, xValue);
+    spawnEntity(new Entity().addComponent(terrain));
+
+    // Terrain walls
+    float tileSize = terrain.getTileSize();
+    GridPoint2 tileBounds = terrain.getMapBounds(0);
+    Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
+
+    // Left
+    spawnEntityAt(
+            ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
+    // Right
+    spawnEntityAt(
+            ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
+            new GridPoint2(tileBounds.x, 0),
+            false,
+            false);
+    // Top
+    spawnEntityAt(
+            ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
+            new GridPoint2(0, tileBounds.y),
+            false,
+            false);
+    // Bottom
+    spawnEntityAt(
+            ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
+  }
+
 
   private void spawnTrees() {
     GridPoint2 minPos = new GridPoint2(0, 0);

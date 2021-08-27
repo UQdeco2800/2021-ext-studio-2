@@ -17,14 +17,18 @@ import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 
+import java.util.Random;
+
 /** Factory for creating game terrains. */
 public class TerrainFactory {
 
-  private static final GridPoint2 MAP_SIZE = new GridPoint2(15, 3);
+  private static final GridPoint2 MAP_SIZE = new GridPoint2(22, 3);
+
 
 
   private final OrthographicCamera camera;
   private final TerrainOrientation orientation;
+
 
   /**
    * Create a terrain factory with Orthogonal orientation
@@ -98,12 +102,12 @@ public class TerrainFactory {
     fillTiles(layer, MAP_SIZE, grassTile);
 
     // Add some grass and rocks
-//    fillTilesAtRandom(layer, MAP_SIZE, grassTuftTile, TUFT_TILE_COUNT);
+    // fillTilesAtRandom(layer, MAP_SIZE, grassTuftTile, TUFT_TILE_COUNT);
 
     tiledMap.getLayers().add(layer);
     return tiledMap;
   }
-
+/*
   private static void fillTilesAtRandom(
       TiledMapTileLayer layer, GridPoint2 mapSize, TerrainTile tile, int amount) {
     GridPoint2 min = new GridPoint2(0, 0);
@@ -114,17 +118,74 @@ public class TerrainFactory {
       Cell cell = layer.getCell(tilePos.x, tilePos.y);
       cell.setTile(tile);
     }
-  }
+  }*/
 
   private static void fillTiles(TiledMapTileLayer layer, GridPoint2 mapSize, TerrainTile tile) {
     for (int x = 0; x < mapSize.x; x++) {
-      for (int y = 0; y < mapSize.y; y++) {
+      for (int y = 1; y < mapSize.y; y++) {
         Cell cell = new Cell();
         cell.setTile(tile);
         layer.setCell(x, y, cell);
       }
     }
   }
+
+
+
+  public TerrainComponent createTerrainRandomly(TerrainType terrainType, int xValue) {
+    MAP_SIZE.set(MAP_SIZE.x+20, MAP_SIZE.y);
+    ResourceService resourceService = ServiceLocator.getResourceService();
+    switch (terrainType) {
+      case FOREST_DEMO:
+        TextureRegion orthoRoad =
+                new TextureRegion(resourceService.getAsset("images/road.png", Texture.class));
+        return createForestDemoTerrainRandomly(1, orthoRoad, xValue);
+      default:
+        return null;
+    }
+  }
+
+  private TerrainComponent createForestDemoTerrainRandomly(
+          float tileWorldSize, TextureRegion road, int xValue) {
+    GridPoint2 tilePixelSize = new GridPoint2(road.getRegionWidth(), road.getRegionHeight());
+    TiledMap tiledMap = createForestDemoTilesRandomly(tilePixelSize, road, xValue);
+    TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize.x);
+    return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
+  }
+
+  private TiledMap createForestDemoTilesRandomly(
+          GridPoint2 tileSize, TextureRegion road, int xValue) {
+    TiledMap tiledMap = new TiledMap();
+    TerrainTile grassTile = new TerrainTile(road);
+    TiledMapTileLayer layer = new TiledMapTileLayer(MAP_SIZE.x, MAP_SIZE.y, tileSize.x, tileSize.y);
+
+    // Create base grass
+    fillTilesRandomly(layer, MAP_SIZE, grassTile, xValue);
+
+    // Add some grass and rocks
+    // fillTilesAtRandom(layer, MAP_SIZE, grassTuftTile, TUFT_TILE_COUNT);
+
+    tiledMap.getLayers().add(layer);
+    return tiledMap;
+  }
+
+  private static void fillTilesRandomly(TiledMapTileLayer layer, GridPoint2 mapSize, TerrainTile tile, int xValue) {
+    Random rand = new Random();
+    int index = rand.nextInt(1);
+
+    if(index == 0){
+      for (int x = xValue+10; x < mapSize.x; x++) {
+        for (int y = 1; y < mapSize.y; y++) {
+          Cell cell = new Cell();
+          cell.setTile(tile);
+          layer.setCell(x, y, cell);
+        }
+      }
+    }
+  }
+
+
+
 
   /**
    * This enum should contain the different terrains in your game, e.g. forest, cave, home, all with

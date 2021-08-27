@@ -18,7 +18,7 @@ public class PlayerStatsDisplay extends UIComponent {
     private Image heartImage;
     private Label healthLabel;
     // import here for implementing the clock
-    ScoringSystemV1 clock = new ScoringSystemV1();
+    //ScoringSystemV1 clock = new ScoringSystemV1();
 
     /**
      * Creates reusable ui styles and adds actors to the stage.
@@ -30,7 +30,7 @@ public class PlayerStatsDisplay extends UIComponent {
         addActors();
 
         entity.getEvents().addListener("updateHealth", this::updatePlayerHealthUI);
-        clock.startGameClock();
+        //clock.startGameClock();
     }
 
     /**
