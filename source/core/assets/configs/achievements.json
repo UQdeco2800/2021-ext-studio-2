@@ -1,0 +1,30 @@
+{
+  "veteranBronze": {
+    "type": "BRONZE",
+    "iconPath": "images/achievements/veteranBronze.png",
+    "message": "Survived for 10 minutes!",
+    "bonus": 10,
+    "condition": {
+      "time": 10
+    }
+  },
+  "gameBreakerSilver":{
+    "type": "SILVER",
+    "iconPath": "images/achievements/gameBreakerSilver.png",
+    "message": "You've survived for 8 minutes with full heath!",
+    "bonus": 20,
+    "condition": {
+      "time": 8,
+      "health": 100
+    }
+  },
+  "toolMasterGold": {
+    "type": "GOLD",
+    "iconPath": "images/achievements/toolMasterGold.png",
+    "message": "You have successfully picked up 20 items!",
+    "bonus": 20,
+    "condition": {
+      "itemCount": 20
+    }
+  }
+}
