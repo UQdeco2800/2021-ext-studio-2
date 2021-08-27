@@ -19,7 +19,7 @@ public class PhysicsEngine implements Disposable {
   private static final Logger logger = LoggerFactory.getLogger(PhysicsEngine.class);
   private static final float MAX_UPDATE_TIME = 0.25f;
   private static final float PHYSICS_TIMESTEP = 0.016f;
-  private static final Vector2 GRAVITY = new Vector2(0f, -10);
+  private static final Vector2 GRAVITY = new Vector2(0f, -50);
   private static final int VELOCITY_ITERATIONS = 6;
   private static final int POSITION_ITERATIONS = 2;
 

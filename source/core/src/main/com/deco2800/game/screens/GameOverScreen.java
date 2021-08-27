@@ -1,6 +1,8 @@
 package com.deco2800.game.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
@@ -19,7 +21,6 @@ import com.deco2800.game.components.gameover.GameOverDisplay;
 public class GameOverScreen extends ScreenAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-    private static final String[] mainGameTextures = {"images/gobg.jpg"};
     private final Renderer renderer;
     private final GameOverDisplay gomd;
 
@@ -32,12 +33,12 @@ public class GameOverScreen extends ScreenAdapter {
         ServiceLocator.registerRenderService(new RenderService());
         renderer = RenderFactory.createRenderer();
         renderer.getCamera().getEntity().setPosition(2f, 1f);
-
         Stage stage = ServiceLocator.getRenderService().getStage();
         Entity ui = new Entity();
         gomd = new GameOverDisplay(game);
         ui.addComponent(gomd).addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
+
 
     }
 
@@ -64,6 +65,5 @@ public class GameOverScreen extends ScreenAdapter {
         ServiceLocator.getEntityService().dispose();
         ServiceLocator.clear();
     }
-
 
 }
