@@ -56,7 +56,7 @@ public class ObstacleFactory {
 //				.addComponent(new ObstacleDispare())
 				.addComponent(animator)
 				.addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-				.addComponent(new CombatStatsComponent(2000, 1))
+				.addComponent(new CombatStatsComponent(2000, 10))
 				.addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
 				.addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
 				.addComponent(aiComponent)
@@ -71,7 +71,7 @@ public class ObstacleFactory {
 		//tree.scaleHeight(1f);
 //    tree.setScale(4,2);
 
-		PhysicsUtils.setScaledCollider(tree, 1f, 1f);
+		PhysicsUtils.setScaledCollider(tree, 1f, 0.7f);
 //打开动画
 //    animator.startAnimation("enemy2");
 

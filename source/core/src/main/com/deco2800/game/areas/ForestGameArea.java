@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 /** Forest area for the demo game with trees, a player, and some enemies. */
 public class ForestGameArea extends GameArea {
   private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
-  private static final int NUM_TREES = 6;
+  private static final int NUM_TREES = 3;
   private static final int NUM_GHOSTS = 2;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(0, 10);
   private static final float WALL_WIDTH = 0.1f;
@@ -155,7 +155,7 @@ public class ForestGameArea extends GameArea {
     GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
     for (int i = 0; i < NUM_TREES; i++) {
-      GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+      GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
       Entity tree = ObstacleFactory.createTree(player);
       spawnEntityAt(tree, randomPos, true, false);
     }
@@ -216,8 +216,8 @@ public class ForestGameArea extends GameArea {
     resourceService.unloadAssets(forestTextures);
     resourceService.unloadAssets(forestTextureAtlases);
     resourceService.unloadAssets(forestSounds);
-    resourceService.loadSounds(jumpSounds);
-    resourceService.loadSounds(turnSounds);
+    resourceService.unloadAssets(jumpSounds);
+    resourceService.unloadAssets(turnSounds);
     resourceService.unloadAssets(forestMusic);
   }
 

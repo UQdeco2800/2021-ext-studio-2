@@ -21,7 +21,10 @@ import java.util.Random;
 
 /** Factory for creating game terrains. */
 public class TerrainFactory {
+
   private static final GridPoint2 MAP_SIZE = new GridPoint2(22, 3);
+
+
 
   private final OrthographicCamera camera;
   private final TerrainOrientation orientation;
@@ -60,7 +63,9 @@ public class TerrainFactory {
       case FOREST_DEMO:
         TextureRegion orthoRoad =
             new TextureRegion(resourceService.getAsset("images/road.png", Texture.class));
+
         return createForestDemoTerrain(1, orthoRoad);
+
       default:
         return null;
     }
