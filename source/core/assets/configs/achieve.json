@@ -45,7 +45,7 @@
       "name": "Game Breaker",
       "type": "SILVER",
       "iconPath": "images/achievements/gameBreakerSilver.png",
-      "message": "You've survived for 8 minutes with full heath!",
+      "message": "You've survived for 8 minutes with full health!",
       "bonus": 20,
       "condition": {
         "time": 8,
@@ -56,7 +56,7 @@
       "name": "Game Breaker",
       "type": "GOLD",
       "iconPath": "images/achievements/gameBreakerGold.png",
-      "message": "You've survived for 10 minutes with full heath!",
+      "message": "You've survived for 10 minutes with full health!",
       "bonus": 25,
       "condition": {
         "time": 10,
