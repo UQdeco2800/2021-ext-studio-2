@@ -33,8 +33,8 @@
     {
       "name": "Game Breaker",
       "type": "BRONZE",
-      "iconPath": "images/achievements/gameBreakerSilver.png",
-      "message": "You've survived for 5 minutes with full heath!",
+      "iconPath": "images/achievements/gameBreakerBronze.png",
+      "message": "You've survived for 5 minutes with full health!",
       "bonus": 15,
       "condition": {
         "time": 5,
