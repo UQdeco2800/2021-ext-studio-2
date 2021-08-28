@@ -47,7 +47,7 @@ public class PlayerFactory {
             .addComponent(new InventoryComponent(stats.gold))
             .addComponent(inputComponent)
             .addComponent(new PlayerStatsDisplay())
-            .addComponent(new AchievementsStatsComponent())
+            .addComponent(new AchievementsStatsComponent(stats.health))
             .addComponent(new AchievementsDisplay());
 
     PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);

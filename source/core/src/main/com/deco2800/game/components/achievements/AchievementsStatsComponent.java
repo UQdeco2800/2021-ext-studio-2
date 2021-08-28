@@ -22,6 +22,15 @@ public class AchievementsStatsComponent extends Component {
         achievements = AchievementFactory.getAchievements();
     }
 
+    public AchievementsStatsComponent(int health) {
+        this.health = health;
+
+        time = -1;
+        itemCount = -1;
+        achievements = AchievementFactory.getAchievements();
+    }
+
+
     @Override
     public void create() {
         super.create();
