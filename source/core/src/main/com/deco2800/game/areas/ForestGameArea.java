@@ -189,7 +189,7 @@ public class ForestGameArea extends GameArea {
             maxPos = new GridPoint2(playerX + 40, 0);
         }
 
-        for (int i = 0; i < NUM_OBSTACLES; i++) {
+        for (int i = 0; i < NUM_OBSTACLES; i++) {''
             do {
                 randomPos = RandomUtils.randomX(3, minPos, maxPos);
             } while (randomPoints.contains(randomPos));
