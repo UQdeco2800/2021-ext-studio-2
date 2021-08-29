@@ -167,8 +167,8 @@ public class ForestGameArea extends GameArea {
 
   private void spawnFirstAid(){
 
-    for(int i = 1; i < 3; i++ ) {
-      GridPoint2 position = new GridPoint2(i * 10, 5);
+    for(int i = 1; i < 6; i++ ) {
+      GridPoint2 position = new GridPoint2(i * 3, 5);
       Entity firstAid = ItemFactory.createFirstAid(player);
       spawnEntityAt(firstAid, position, false, false);
     }
