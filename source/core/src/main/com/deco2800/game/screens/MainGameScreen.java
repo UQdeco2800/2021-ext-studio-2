@@ -91,7 +91,7 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.getEntityService().update();
     renderer.render();
 
-    // making player to move constantly
+    // making player to move constantly, adding right_side animation
     player.setPosition((float) (player.getPosition().x+0.05), player.getPosition().y);
     player.getEvents().trigger(("right_side"));
 
