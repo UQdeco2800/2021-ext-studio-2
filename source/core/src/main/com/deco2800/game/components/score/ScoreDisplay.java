@@ -16,15 +16,11 @@ import com.deco2800.game.ui.UIComponent;
  * A ui component for displaying player score
  */
 public class ScoreDisplay extends UIComponent {
-    Table table;
+    Table tableForText;
+    Table tableForBoard;
     private Label scoreLabel;
-
-    // Import the scoring system (potentially bad code)
-    // Not needed anymore remove in next commit
-
-
-    private final GameTime gameTime = new GameTime();
     private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
+    private Image scoreBoard;
 
     /**
      * Creates reusable ui styles and adds actors to the stage.
@@ -44,23 +40,36 @@ public class ScoreDisplay extends UIComponent {
      * @see Table for positioning options
      */
     private void addActors() {
-        table = new Table();
-        table.bottom().right();
-        table.setFillParent(true);
-        table.padTop(45f).padLeft(5f);
+        //Use two tables to fill the png with the score text
+        tableForText = new Table();
+        tableForText.bottom().right();
+        tableForText.setFillParent(true);
+        tableForText.padBottom(60).padRight(80);
+
+        tableForBoard = new Table();
+        tableForBoard.bottom().right();
+        tableForBoard.setFillParent(true);
+        tableForBoard.padBottom(-35).padRight(-52);
+
+        // Score Board
+        float boardSideLength = 250f;
+        scoreBoard = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/scoreboard.png", Texture.class));
 
         // Score text
         int score = 0;
-        CharSequence scoreText = String.format("Score: %d", score);
+        CharSequence scoreText = "" + score;
         scoreLabel = new Label(scoreText, skin, "large");
 
-        table.add(scoreLabel);
-        stage.addActor(table);
+        tableForBoard.add(scoreBoard).size(boardSideLength);
+        tableForText.add(scoreLabel);
+        stage.addActor(tableForText);
+        stage.addActor(tableForBoard);
     }
 
     @Override
     public void draw(SpriteBatch batch) {
-        // Designs of the Scoreboard will go here
+
     }
 
     @Override
@@ -74,7 +83,7 @@ public class ScoreDisplay extends UIComponent {
      * Updates the player's score on the ui.
      */
     public void updatePlayerScoreUI(int score) {
-        CharSequence text = String.format("Score: %d", score);
+        CharSequence text = "" + score;
         scoreLabel.setText(text);
     }
 
@@ -82,6 +91,7 @@ public class ScoreDisplay extends UIComponent {
     public void dispose() {
         super.dispose();
         scoreLabel.remove();
+        scoreBoard.remove();
     }
 
 }
