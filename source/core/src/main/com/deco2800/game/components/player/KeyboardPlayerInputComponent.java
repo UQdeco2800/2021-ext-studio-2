@@ -26,13 +26,16 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   @Override
   public boolean keyDown(int keycode) {
     switch (keycode) {
-      case Keys.A:
-      case Keys.LEFT:
-        walkDirection.add(Vector2Utils.LEFT);
-        triggerWalkEvent();
-        entity.getEvents().trigger(("left_side"));
-        entity.getEvents().trigger(("walkLeft"));
-        return true;
+      /**
+       * Left movement animation
+       * case Keys.A:
+       *case Keys.LEFT:
+       *walkDirection.add(Vector2Utils.LEFT);
+       *triggerWalkEvent();
+       *entity.getEvents().trigger(("left_side"));
+       *entity.getEvents().trigger(("walkLeft"));
+       *return true;
+      */
       case Keys.S:
       case Keys.DOWN:
         walkDirection.add(Vector2Utils.DOWN);

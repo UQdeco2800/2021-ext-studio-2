@@ -45,6 +45,7 @@ public class PlayerFactory {
                     ServiceLocator.getResourceService().
                             getAsset("images/ghost.atlas",
                                     TextureAtlas.class));
+
     animator.addAnimation("Turn_right", 0.1f,
             Animation.PlayMode.LOOP);
     animator.addAnimation("Turn_left", 0.1f,
