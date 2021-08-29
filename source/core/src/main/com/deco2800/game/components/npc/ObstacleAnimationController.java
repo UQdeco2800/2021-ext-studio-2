@@ -18,7 +18,7 @@ public class ObstacleAnimationController extends Component {
 		super.create();
 		animator = this.entity.getComponent(AnimationRenderComponent.class);
 		entity.getEvents().addListener("ObstacleDisappearStart", this::obstacleDisappear);
-		entity.getEvents().addListener("ObstacleDisappearStart", this::obstacle_2_Disappear);
+		//entity.getEvents().addListener("ObstacleDisappearStart", this::obstacle_2_Disappear);
 	}
 
 	/**
@@ -31,9 +31,5 @@ public class ObstacleAnimationController extends Component {
 		animator.getEntity().setDisappear();
 	}
 
-	void obstacle_2_Disappear() {
-		animator.getEntity().setRemoveTexture();
-		animator.startAnimation("obstacle2");
-		animator.getEntity().setDisappear();
-	}
+
 }
