@@ -45,6 +45,7 @@ public class GameOverDisplay extends UIComponent {
         pointText.setDisabled(true);
 
         TextButton playAgainButton = new TextButton("Click to play \n again", skin);
+        TextButton mainMenuButton = new TextButton("Main Menu", skin);
 
         playAgainButton.addListener(
                 new ChangeListener() {
@@ -52,6 +53,14 @@ public class GameOverDisplay extends UIComponent {
                     public void changed(ChangeEvent changeEvent, Actor actor) {
                         logger.info("play again button clicked");
                         game.setScreen(GdxGame.ScreenType.MAIN_GAME);
+                    }
+                });
+        mainMenuButton.addListener(
+                new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent changeEvent, Actor actor) {
+                        logger.info("return menu button clicked");
+                        game.setScreen(GdxGame.ScreenType.MAIN_MENU);
                     }
                 });
 
@@ -63,6 +72,7 @@ public class GameOverDisplay extends UIComponent {
         table.add(pointText).right().padRight(15f);
         table.row().padTop(25f);
         table.add(playAgainButton).bottom().padBottom(15f);
+        table.add(mainMenuButton).bottom().padBottom(15f);
         table.setFillParent(true);
         stage.addActor(table);
     }

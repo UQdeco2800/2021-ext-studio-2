@@ -23,6 +23,7 @@ public class MainMenuActions extends Component {
     entity.getEvents().addListener("load", this::onLoad);
     entity.getEvents().addListener("exit", this::onExit);
     entity.getEvents().addListener("settings", this::onSettings);
+    entity.getEvents().addListener("gameOver", this::onGameOver);
   }
 
   /**
@@ -55,5 +56,13 @@ public class MainMenuActions extends Component {
   private void onSettings() {
     logger.info("Launching settings screen");
     game.setScreen(GdxGame.ScreenType.SETTINGS);
+  }
+
+  /**
+   * Swaps to the GameOver screen.
+   */
+  private void onGameOver() {
+    logger.info("Launching GameOver screen");
+    game.setScreen(GdxGame.ScreenType.GAME_OVER);
   }
 }
