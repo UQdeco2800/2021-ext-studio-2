@@ -8,7 +8,7 @@ import java.util.TimerTask;
 
 /**This class is written by team 9.
  * This class handles the scoring system*/
-public class ScoringSystemV1 {
+public class ScoringSystemV1 implements ScoringSystem {
 
     //indicate the gaming time in seconds, minutes and hours.
     //They start from zero.
@@ -94,6 +94,7 @@ public class ScoringSystemV1 {
      * Return the total score
      * @return int scores
      */
+    @Override
     public int getScore(int... args) {
         //At this moment, the seconds is the final score;
 //        return scoreSeconds;
