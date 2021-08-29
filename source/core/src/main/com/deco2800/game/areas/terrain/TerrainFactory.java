@@ -143,34 +143,28 @@ public class TerrainFactory {
       case FOREST_DEMO:
         TextureRegion orthoRoad =
                 new TextureRegion(resourceService.getAsset("images/road.png", Texture.class));
-        TextureRegion orthoWater =
-                new TextureRegion(resourceService.getAsset("images/water.png", Texture.class));
-        return createForestDemoTerrainRandomly(1, orthoRoad, orthoWater, xValue);
+        return createForestDemoTerrainRandomly(1, orthoRoad, xValue);
       default:
         return null;
     }
   }
 
   private TerrainComponent createForestDemoTerrainRandomly(
-          float tileWorldSize, TextureRegion road, TextureRegion water, int xValue) {
+          float tileWorldSize, TextureRegion road, int xValue) {
     GridPoint2 tilePixelSize = new GridPoint2(road.getRegionWidth(), road.getRegionHeight());
-    TiledMap tiledMap = createForestDemoTilesRandomly(tilePixelSize, road, water, xValue);
+    TiledMap tiledMap = createForestDemoTilesRandomly(tilePixelSize, road, xValue);
     TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize.x);
     return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
   }
 
   private TiledMap createForestDemoTilesRandomly(
-          GridPoint2 tileSize, TextureRegion road, TextureRegion water, int xValue) {
+          GridPoint2 tileSize, TextureRegion road, int xValue) {
     TiledMap tiledMap = new TiledMap();
     TerrainTile grassTile = new TerrainTile(road);
-    TerrainTile waterTile = new TerrainTile(water);
     TiledMapTileLayer layer = new TiledMapTileLayer(MAP_SIZE.x, MAP_SIZE.y, tileSize.x, tileSize.y);
 
     // Create base grass
     fillTilesRandomly(layer, MAP_SIZE, grassTile, xValue);
-
-    // Add water
-    fillTilesAtRandom(layer, MAP_SIZE, waterTile, 5, xValue);
 
     // Add some grass and rocks
     // fillTilesAtRandom(layer, MAP_SIZE, grassTuftTile, TUFT_TILE_COUNT);
