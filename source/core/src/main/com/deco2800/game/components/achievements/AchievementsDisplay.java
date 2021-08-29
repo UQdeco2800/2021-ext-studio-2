@@ -14,12 +14,16 @@ import com.deco2800.game.ui.UIComponent;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * A UI component to display achievement cards and labels for corresponding achievements
+ */
 public class AchievementsDisplay extends UIComponent{
     Table table;
     private Image achievementImg;
     private Label achievementLabel;
     private static final String[] textures = AchievementFactory.getTextures();
     private ExecutorService service;
+
 
     @Override
     public void create() {
@@ -32,19 +36,26 @@ public class AchievementsDisplay extends UIComponent{
         entity.getEvents().addListener("updateAchievement", this::updateAchievementsUI);
     }
 
-
+    /**
+     * Load all achievements' assets
+     */
     private void loadAssets() {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(textures);
         ServiceLocator.getResourceService().loadAll();
     }
 
+    /**
+     * Unload all achievements' assets
+     */
     private void unloadAssets() {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(textures);
     }
 
-
+    /**
+     * Adds a new table as an actor to the stage
+     */
     private void addActors() {
         table = new Table();
         table.top();
@@ -56,7 +67,11 @@ public class AchievementsDisplay extends UIComponent{
 
     }
 
-
+    /**
+     * Achievement UI updates are guaranteed to execute sequentially,
+     * and no more than one update will be active at any given time
+     * @param achievement Configuration with properties and conditions for corresponding achievement
+     */
     private void updateAchievementsUI(BaseAchievementConfig achievement) {
 
         service.execute(() -> {
@@ -69,6 +84,10 @@ public class AchievementsDisplay extends UIComponent{
 
     }
 
+    /**
+     * Renders the current achievement notification on the table
+     * @param achievement Configuration with properties and conditions for corresponding achievement
+     */
     private void renderAchievement(BaseAchievementConfig achievement){
         CharSequence text = achievement.message;
         achievementLabel = new Label(text, skin, "small");
