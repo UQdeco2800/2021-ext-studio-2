@@ -1,10 +1,15 @@
 package com.deco2800.game.components.score;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.services.GameTime;
+import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
+
+import java.text.DecimalFormat;
 
 /**
  * A ui component for displaying player time. This is a similar class of ScoreDisplay
@@ -13,8 +18,10 @@ public class TimerDisplay extends UIComponent {
     //prepare values and ui labels.
     Table table;
     private Label timeLabel;
-    private final GameTime gameTime = new GameTime();
     private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
+    private Image clockImage;
+
+    DecimalFormat formatter = new DecimalFormat("00");
 
     /**
      * Creates reusable ui styles and adds actors to the stage.
@@ -36,14 +43,22 @@ public class TimerDisplay extends UIComponent {
         table = new Table();
         table.top().left();
         table.setFillParent(true);
-        table.padTop(90f).padLeft(10f);
+        table.padTop(200f).padLeft(10f);
 
-        // Score text
+        //Add Clock image
+        float clockSideLength = 40f;
+        clockImage = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/clock.png", Texture.class));
+
+        //Add Clock text
         int minute = 0;
         int second = 0;
-        CharSequence TimerText = minute + " : " + second;
+        String minuteFormatted = formatter.format(minute);
+        String secondFormatted = formatter.format(second);
+        CharSequence TimerText = minuteFormatted + " : " + secondFormatted;
         timeLabel = new Label(TimerText, skin, "large");
 
+        table.add(clockImage).size(clockSideLength).pad(3);
         table.add(timeLabel);
         stage.addActor(table);
     }
@@ -64,7 +79,9 @@ public class TimerDisplay extends UIComponent {
      * Updates the player's gaming time on the ui.
      */
     public void updatePlayerTimerUI(int minute, int second) {
-        CharSequence text = minute + " : " + second;
+        String minuteFormatted = formatter.format(minute);
+        String secondFormatted = formatter.format(second);
+        CharSequence text = minuteFormatted + " : " + secondFormatted;
         timeLabel.setText(text);
     }
 
@@ -72,5 +89,6 @@ public class TimerDisplay extends UIComponent {
     public void dispose() {
         super.dispose();
         timeLabel.remove();
+        clockImage.remove();
     }
 }

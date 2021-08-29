@@ -10,7 +10,7 @@ import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
-import com.sun.tools.javac.Main;
+//import com.sun.tools.javac.Main;
 
 
 public class ObstacleDispare extends Component {
