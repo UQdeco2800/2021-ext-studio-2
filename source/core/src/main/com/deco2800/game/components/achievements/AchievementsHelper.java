@@ -7,7 +7,7 @@ import com.deco2800.game.events.EventHandler;
  * the game and has a built-in event handler. This is similar
  * to an analytics system found in many software applications.
  *
- * @implNote
+ * Example:
  * AchievementsHelper.getInstance().trackItemPickedUpEvent();
  */
 public class AchievementsHelper {
