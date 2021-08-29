@@ -18,12 +18,13 @@ import java.util.concurrent.Executors;
  * A UI component to display achievement cards and labels for corresponding achievements
  */
 public class AchievementsDisplay extends UIComponent{
-    Table table;
+    private static final int RENDER_DURATION = 5000;
+    private Table table;
     private Image achievementImg;
     private Label achievementLabel;
     private static final String[] textures = AchievementFactory.getTextures();
-    private ExecutorService service;
 
+    private ExecutorService service;
 
     @Override
     public void create() {
@@ -31,8 +32,11 @@ public class AchievementsDisplay extends UIComponent{
         loadAssets();
         addActors();
 
+        /* An event pool which runs long-running rendering tasks on a single thread. These expensive
+         * tasks are a part of an unbounded queue which executes them sequentially.*/
         service = Executors.newSingleThreadExecutor();
 
+        /* Listen to achievement events*/
         entity.getEvents().addListener("updateAchievement", this::updateAchievementsUI);
     }
 
@@ -74,13 +78,21 @@ public class AchievementsDisplay extends UIComponent{
      */
     private void updateAchievementsUI(BaseAchievementConfig achievement) {
 
-        service.execute(() -> {
-            try {
-                renderAchievement(achievement);
-                Thread.sleep(5000);
-                table.clear();
-            } catch (InterruptedException ignored) {}
-        });
+        /* Queue expensive task to run on a separate thread asynchronously.*/
+        if(!service.isShutdown()) {
+            service.execute(() -> {
+                try {
+                    /* Render achievement card */
+                    renderAchievement(achievement);
+                    /* Wait for some time */
+                    Thread.sleep(RENDER_DURATION);
+                    /* Remove card from screen */
+                    table.clear();
+
+                } catch (InterruptedException ignored) {
+                }
+            });
+        }
 
     }
 
@@ -103,6 +115,8 @@ public class AchievementsDisplay extends UIComponent{
     public void dispose() {
         super.dispose();
 
+        /* If the in game screen is out of focus, cancel all future tasks. This has to be
+         * done in order to prevent memory leaks, unforeseen exceptions and other nasty bugs.*/
         service.shutdownNow();
 
         if(achievementImg != null) {

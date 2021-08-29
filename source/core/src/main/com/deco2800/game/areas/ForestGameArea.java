@@ -241,6 +241,9 @@ public class ForestGameArea extends GameArea {
     this.unloadAssets();
   }
 
+  /**
+   * Achievements system tracking which depends on the game area's lifecycle
+   */
   private void trackAchievements(){
     spawnEntity(AchievementFactory.createAchievementEntity());
   }
