@@ -13,6 +13,17 @@ public class RandomUtils {
     return new GridPoint2(MathUtils.random(start.x, end.x), MathUtils.random(start.y, end.y));
   }
 
+  /**
+   * Used to randomly generate entities at a specific height.
+   * @param y The height that the entity needs to generate.
+   * @param start The minimum value of x.
+   * @param end The maximum value of x.
+   * @return A point in a 2D grid, with integer x and y coordinates.
+   */
+  public static GridPoint2 randomX(int y, GridPoint2 start, GridPoint2 end) {
+    return new GridPoint2(MathUtils.random(start.x, end.x), y);
+  }
+
   private RandomUtils() {
     throw new IllegalStateException("Instantiating static util class");
   }

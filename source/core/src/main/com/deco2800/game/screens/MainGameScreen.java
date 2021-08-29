@@ -5,8 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
+import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.maingame.MainGameActions;
+import com.deco2800.game.components.maingame.MainGameDisplay;
 import com.deco2800.game.components.score.ScoreDisplay;
 import com.deco2800.game.components.score.ScoringSystem;
 import com.deco2800.game.components.score.ScoringSystemV1;
@@ -38,16 +40,19 @@ import org.slf4j.LoggerFactory;
  */
 public class MainGameScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-  private static final String[] mainGameTextures = {"images/heart.png", "images/clock.png", "images/scoreboard.png"};
+  private static final String[] mainGameTextures = {"images/heart.png", "images/clock.png", "images/scoreboard.png", "images/background.png"};
   private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;
 
+  private Entity player;
+  private ForestGameArea forestGameArea;
+  private int counter = 0;
+
   public MainGameScreen(GdxGame game) {
     this.game = game;
-
     logger.debug("Initialising main game screen services");
     ServiceLocator.registerTimeSource(new GameTime());
 
@@ -70,8 +75,10 @@ public class MainGameScreen extends ScreenAdapter {
 
     logger.debug("Initialising main game screen entities");
     TerrainFactory terrainFactory = new TerrainFactory(renderer.getCamera());
-    ForestGameArea forestGameArea = new ForestGameArea(terrainFactory);
+    forestGameArea = new ForestGameArea(terrainFactory);
     forestGameArea.create();
+
+    player = forestGameArea.player;
   }
 
   @Override
@@ -83,6 +90,18 @@ public class MainGameScreen extends ScreenAdapter {
     physicsEngine.update();
     ServiceLocator.getEntityService().update();
     renderer.render();
+
+    // making player to move constantly
+    player.setPosition((float) (player.getPosition().x+0.05), player.getPosition().y);
+    // Centralize the screen to player
+    Vector2 screenVector = player.getPosition();
+    screenVector.y = 7f;
+    renderer.getCamera().getEntity().setPosition(screenVector);
+    // infinite loop for terrain
+    if(screenVector.x > (2*counter+1)*10) {
+      counter+=1;
+      forestGameArea.spawnTerrainRandomly((int) (screenVector.x+2));
+    }
   }
 
   @Override
