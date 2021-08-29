@@ -39,7 +39,7 @@ public class AchievementsStatsComponent extends Component {
 
     /**
      * Maintains the current health of player
-     * @param health
+     * @param health player's changed health
      */
     public void setHealth(int health) {
         this.health = health;
@@ -48,7 +48,7 @@ public class AchievementsStatsComponent extends Component {
 
     /**
      * Maintains the in game time
-     * @param time
+     * @param time current game time
      */
     public void setTime(long time) {
         this.time = time;
