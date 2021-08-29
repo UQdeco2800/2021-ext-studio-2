@@ -1,5 +1,8 @@
 package com.deco2800.game.entities.factories;
 
+import com.deco2800.game.components.achievements.AchievementsDisplay;
+import com.deco2800.game.components.achievements.AchievementsStatsComponent;
+import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.AchievementConfigs;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.files.FileLoader;
@@ -22,6 +25,12 @@ public class AchievementFactory {
      * Returns a list of achievements from the "achieve.json" file
      * @return achievements - A list of achievements inflated from the JSON file
      */
+    public static Entity createAchievementEntity(){
+        return new Entity()
+                .addComponent(new AchievementsStatsComponent())
+                .addComponent(new AchievementsDisplay());
+    }
+
     public static List<BaseAchievementConfig> getAchievements(){
         return configs.achievements;
     }

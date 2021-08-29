@@ -7,10 +7,7 @@ import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.ItemFactory;
-import com.deco2800.game.entities.factories.NPCFactory;
-import com.deco2800.game.entities.factories.ObstacleFactory;
-import com.deco2800.game.entities.factories.PlayerFactory;
+import com.deco2800.game.entities.factories.*;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
@@ -84,7 +81,10 @@ public class ForestGameArea extends GameArea {
     spawnFirstAid();
 
     playMusic();
+
+    trackAchievements();
   }
+
 
   private void displayUI() {
     Entity ui = new Entity();
@@ -239,5 +239,9 @@ public class ForestGameArea extends GameArea {
     super.dispose();
     ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class).stop();
     this.unloadAssets();
+  }
+
+  private void trackAchievements(){
+    spawnEntity(AchievementFactory.createAchievementEntity());
   }
 }

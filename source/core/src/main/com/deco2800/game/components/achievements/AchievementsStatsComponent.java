@@ -6,9 +6,11 @@ import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.services.ServiceLocator;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AchievementsStatsComponent extends Component {
-    private final List<BaseAchievementConfig> achievements;
+    private static List<BaseAchievementConfig> achievements =
+            AchievementFactory.getAchievements();
 
     private int health;
     private long time;
@@ -18,16 +20,6 @@ public class AchievementsStatsComponent extends Component {
         itemCount = -1;
         health = 100;
         time = -1;
-
-        achievements = AchievementFactory.getAchievements();
-    }
-
-    public AchievementsStatsComponent(int health) {
-        this.health = health;
-
-        time = -1;
-        itemCount = -1;
-        achievements = AchievementFactory.getAchievements();
     }
 
 
@@ -35,7 +27,10 @@ public class AchievementsStatsComponent extends Component {
     public void create() {
         super.create();
 
-        entity.getEvents().addListener("updateHealth", this::setHealth);
+        AchievementsHelper.getInstance().getEvents()
+                .addListener(AchievementsHelper.HEALTH_EVENT, this::setHealth);
+        AchievementsHelper.getInstance().getEvents()
+                .addListener(AchievementsHelper.ITEM_PICKED_UP_EVENT, this::setItemCount);
     }
 
     public void setHealth(int health) {
@@ -54,14 +49,28 @@ public class AchievementsStatsComponent extends Component {
         setTime(currentTime);
     }
 
-    public void setItemCount(int itemCount) {
-        this.itemCount = itemCount;
+    public void setItemCount() {
+        if(itemCount == -1){
+            itemCount = 1;
+        } else {
+            ++itemCount;
+        }
         checkForValidAchievements();
     }
 
 
-    public List<BaseAchievementConfig> getAchievements() {
+    public static List<BaseAchievementConfig> getAchievements() {
         return achievements;
+    }
+
+    public static List<BaseAchievementConfig> getUnlockedAchievements(){
+        return achievements
+                .stream().filter(achievement -> achievement.unlocked)
+                .collect(Collectors.toList());
+    }
+
+    public static void resetAchievements(){
+        achievements = AchievementFactory.getAchievements();
     }
 
     private void checkForValidAchievements() {

@@ -3,6 +3,7 @@ package com.deco2800.game.components.items;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.components.achievements.AchievementsHelper;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
@@ -28,14 +29,13 @@ public class FirstAidFunction extends Component {
         entity.getEvents().addListener("collisionStart", this::onCollisionStart);
         hitboxComponent = this.entity.getComponent(HitboxComponent.class);
 
-
-
     }
     private void onCollisionStart(Fixture me, Fixture other){
         TestBuffForItem incHealth = new TestBuffForItem();
        if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
                     incHealth.increaseHealth(target);
                     entity.getEvents().trigger("itemPickedUp");
+                    AchievementsHelper.getInstance().trackItemPickedUpEvent();
 
 
            new Thread(() -> {
