@@ -5,7 +5,9 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.ItemFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
@@ -44,7 +46,8 @@ public class ForestGameArea extends GameArea {
     "images/mpc_left_view.png",
     "images/mpc_right_view.png",
     "images/road.png",
-    "images/water.png"
+    "images/water.png",
+          "images/Items/first_aid_kit.png"
   };
   private static final String[] forestTextureAtlases = {
     "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas", "images/airport.atlas"
@@ -78,6 +81,7 @@ public class ForestGameArea extends GameArea {
 
     spawnGhosts();
     spawnGhostKing();
+    spawnFirstAid();
 
     playMusic();
   }
@@ -158,6 +162,15 @@ public class ForestGameArea extends GameArea {
       GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
       Entity tree = ObstacleFactory.createTree(player);
       spawnEntityAt(tree, randomPos, true, false);
+    }
+  }
+
+  private void spawnFirstAid(){
+
+    for(int i = 1; i < 6; i++ ) {
+      GridPoint2 position = new GridPoint2(i * 3, 5);
+      Entity firstAid = ItemFactory.createFirstAid(player);
+      spawnEntityAt(firstAid, position, false, false);
     }
   }
 
