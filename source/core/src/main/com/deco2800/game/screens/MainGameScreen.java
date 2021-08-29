@@ -85,9 +85,6 @@ public class MainGameScreen extends ScreenAdapter {
   @Override
   public void render(float delta) {
 
-    //new Entity().getEvents().trigger("updateScore");
-    //new Entity().getEvents().trigger("updateTime");
-
     physicsEngine.update();
     ServiceLocator.getEntityService().update();
     renderer.render();
