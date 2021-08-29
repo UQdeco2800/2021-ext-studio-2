@@ -9,7 +9,10 @@ public class TestBuffForItem {
 
 
     public void increaseHealth(Entity target){
-
+        /**
+         * test buff effect for the first aid kit increases health of the target by 10
+         * @param target entity of which the health needs to be updated
+         */
         health = target.getComponent(CombatStatsComponent.class).getHealth();
         if(health < 100) {
             health = health + 10;
