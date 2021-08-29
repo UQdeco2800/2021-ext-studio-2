@@ -44,7 +44,9 @@ public class ForestGameArea extends GameArea {
     "images/mpc_left_view.png",
     "images/mpc_right_view.png",
     "images/road.png",
-    "images/water.png"
+    "images/water.png",
+    "images/rock.jpg",
+    "images/wood.jpg"
   };
   private static final String[] forestTextureAtlases = {
     "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas", "images/airport.atlas"
@@ -72,6 +74,7 @@ public class ForestGameArea extends GameArea {
     displayUI();
 
     spawnTerrain();
+    spawnRocks();
 
     player = spawnPlayer();
     spawnTrees();
@@ -149,6 +152,32 @@ public class ForestGameArea extends GameArea {
             ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
   }
 
+  private void spawnRocks() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    for (int i = 0; i < 5; i++) {
+      GridPoint2 randomPos = RandomUtils.randomX(4, minPos, maxPos);
+      Entity rock = ObstacleFactory.createRock();
+      spawnEntityAt(rock, randomPos, true, false);
+    }
+  }
+
+  public void spawnRocksRandomly(int xValue) {
+    GridPoint2 minPos = new GridPoint2(xValue+10, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    for (int i = 0; i < 5; i++) {
+      GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
+      Entity rock = ObstacleFactory.createRock();
+      spawnEntityAt(rock, randomPos, true, false);
+      GridPoint2 randomPosTwo = RandomUtils.randomX(4, minPos, maxPos);
+      Entity rockTwo = ObstacleFactory.createRock();
+      spawnEntityAt(rockTwo, randomPosTwo, true, false);
+    }
+  }
+
+  private void spawnWoods() {}
 
   private void spawnTrees() {
     GridPoint2 minPos = new GridPoint2(0, 0);

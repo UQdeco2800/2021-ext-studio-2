@@ -29,6 +29,10 @@ public class TerrainFactory {
   private final OrthographicCamera camera;
   private final TerrainOrientation orientation;
 
+  public GridPoint2 getMapSize() {
+    return MAP_SIZE;
+  }
+
 
   /**
    * Create a terrain factory with Orthogonal orientation
