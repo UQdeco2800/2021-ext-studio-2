@@ -1,0 +1,41 @@
+
+main_player_move.png
+size: 8192, 4096
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+main_player_move
+  rotate: false
+  xy: 2, 2
+  size: 1365, 2251
+  orig: 1365, 2251
+  offset: 0, 0
+  index: 4
+main_player_move
+  rotate: false
+  xy: 1369, 2
+  size: 1329, 2251
+  orig: 1329, 2251
+  offset: 0, 0
+  index: 3
+main_player_move
+  rotate: false
+  xy: 2700, 2
+  size: 1182, 2251
+  orig: 1182, 2251
+  offset: 0, 0
+  index: 2
+main_player_move
+  rotate: false
+  xy: 3884, 2
+  size: 1071, 2251
+  orig: 1071, 2251
+  offset: 0, 0
+  index: 1
+main_player_rightside
+  rotate: false
+  xy: 4957, 2
+  size: 960, 2251
+  orig: 960, 2251
+  offset: 0, 0
+  index: 1
