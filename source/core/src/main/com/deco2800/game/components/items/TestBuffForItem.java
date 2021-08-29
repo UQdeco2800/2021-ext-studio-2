@@ -11,8 +11,10 @@ public class TestBuffForItem {
     public void increaseHealth(Entity target){
 
         health = target.getComponent(CombatStatsComponent.class).getHealth();
-        health = health + 10;
-        target.getComponent(CombatStatsComponent.class).setHealth(health);
-        target.getEvents().trigger("updateHealth", health);
+        if(health < 100) {
+            health = health + 10;
+            target.getComponent(CombatStatsComponent.class).setHealth(health);
+            target.getEvents().trigger("updateHealth", health);
+        }
     }
 }
