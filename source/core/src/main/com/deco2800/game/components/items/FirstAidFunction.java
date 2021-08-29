@@ -10,13 +10,16 @@ import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 
+import java.lang.reflect.Method;
+
 public class FirstAidFunction extends Component {
 
 
     private int health;
     private Entity target;
     HitboxComponent hitboxComponent;
-    public FirstAidFunction( Entity target){
+
+    public FirstAidFunction(Entity target){
         this.target = target;
 
     }
@@ -29,13 +32,10 @@ public class FirstAidFunction extends Component {
 
     }
     private void onCollisionStart(Fixture me, Fixture other){
-        health = target.getComponent(CombatStatsComponent.class).getHealth();
-
+        TestBuffForItem incHealth = new TestBuffForItem();
        if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
-                health = health + 10;
-                target.getComponent(CombatStatsComponent.class).setHealth(health);
-                target.getEvents().trigger("updateHealth", this.health);
-
+                    incHealth.increaseHealth(target);
+                   // entity.getEvents().trigger("itemPickedUp");
 
 
            new Thread(() -> {
@@ -44,7 +44,5 @@ public class FirstAidFunction extends Component {
 
         }
     }
-    private void checkPlayer(Entity target){
 
-    }
 }
