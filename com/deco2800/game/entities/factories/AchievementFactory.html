@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":9,"i1":9};
+<script type="text/javascript">var data = {"i0":9,"i1":9,"i2":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -98,6 +98,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">AchievementFactory</span>
 extends java.lang.Object</pre>
+<div class="block">Factory to create Achievement entities with predefined conditions.
+
+ <p>Each Achievement entity type should have a creation method that returns a corresponding entity.
+ Predefined achievement entity conditions can be loaded from configs stored as json files which are defined in
+ "achieve.json".</div>
 </section>
 <section class="summary">
 <ul class="blockList">
@@ -145,14 +150,23 @@ extends java.lang.Object</pre>
 </thead>
 <tbody>
 <tr class="altColor" id="i0">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createAchievementEntity()">createAchievementEntity</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns a list of achievements from the "achieve.json" file</div>
+</td>
+</tr>
+<tr class="rowColor" id="i1">
 <td class="colFirst"><code>static java.util.List&lt;<a href="../configs/achievements/BaseAchievementConfig.html" title="class in com.deco2800.game.entities.configs.achievements">BaseAchievementConfig</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAchievements()">getAchievements</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i1">
+<tr class="altColor" id="i2">
 <td class="colFirst"><code>static java.lang.String[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTextures()">getTextures</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns a list of paths to corresponding achievement texture images</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -194,6 +208,17 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
+<h3><a id="createAchievementEntity()">createAchievementEntity</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createAchievementEntity</span>()</div>
+<div class="block">Returns a list of achievements from the "achieve.json" file</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>achievements - A list of achievements inflated from the JSON file</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="getAchievements()">getAchievements</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="../configs/achievements/BaseAchievementConfig.html" title="class in com.deco2800.game.entities.configs.achievements">BaseAchievementConfig</a>&gt;</span>&nbsp;<span class="memberName">getAchievements</span>()</div>
 </section>
@@ -202,6 +227,11 @@ extends java.lang.Object</pre>
 <section class="detail">
 <h3><a id="getTextures()">getTextures</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">java.lang.String[]</span>&nbsp;<span class="memberName">getTextures</span>()</div>
+<div class="block">Returns a list of paths to corresponding achievement texture images</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>paths - A list of paths inflated from achievement list generated using getAchievements()</dd>
+</dl>
 </section>
 </li>
 </ul>

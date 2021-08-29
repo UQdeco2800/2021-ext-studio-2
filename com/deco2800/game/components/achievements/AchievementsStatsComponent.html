@@ -19,8 +19,8 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+<script type="text/javascript">var data = {"i0":10,"i1":9,"i2":9,"i3":9,"i4":10,"i5":10,"i6":10,"i7":10};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -100,6 +100,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">AchievementsStatsComponent</span>
 extends <a href="../Component.html" title="class in com.deco2800.game.components">Component</a></pre>
+<div class="block">The class listens to game statistics given the forest area lifecycle
+ and emits new achievement events</div>
 </section>
 <section class="summary">
 <ul class="blockList">
@@ -136,10 +138,6 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">AchievementsStatsComponent</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int)">AchievementsStatsComponent</a></span>&#8203;(int&nbsp;health)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -152,7 +150,7 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 </a>
 <h2>Method Summary</h2>
 <div class="memberSummary">
-<div role="tablist" aria-orientation="horizontal"><button role="tab" aria-selected="true" aria-controls="memberSummary_tabpanel" tabindex="0" onkeydown="switchTab(event)" id="t0" class="activeTableTab">All Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t2" class="tableTab" onclick="show(2);">Instance Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t4" class="tableTab" onclick="show(8);">Concrete Methods</button></div>
+<div role="tablist" aria-orientation="horizontal"><button role="tab" aria-selected="true" aria-controls="memberSummary_tabpanel" tabindex="0" onkeydown="switchTab(event)" id="t0" class="activeTableTab">All Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t1" class="tableTab" onclick="show(1);">Static Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t2" class="tableTab" onclick="show(2);">Instance Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t4" class="tableTab" onclick="show(8);">Concrete Methods</button></div>
 <div id="memberSummary_tabpanel" role="tabpanel">
 <table aria-labelledby="t0">
 <thead>
@@ -171,26 +169,48 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 </td>
 </tr>
 <tr class="rowColor" id="i1">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../entities/configs/achievements/BaseAchievementConfig.html" title="class in com.deco2800.game.entities.configs.achievements">BaseAchievementConfig</a>&gt;</code></td>
+<td class="colFirst"><code>static java.util.List&lt;<a href="../../entities/configs/achievements/BaseAchievementConfig.html" title="class in com.deco2800.game.entities.configs.achievements">BaseAchievementConfig</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAchievements()">getAchievements</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns a list of all achievements</div>
+</td>
 </tr>
 <tr class="altColor" id="i2">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setHealth(int)">setHealth</a></span>&#8203;(int&nbsp;health)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><code>static java.util.List&lt;<a href="../../entities/configs/achievements/BaseAchievementConfig.html" title="class in com.deco2800.game.entities.configs.achievements">BaseAchievementConfig</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getUnlockedAchievements()">getUnlockedAchievements</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns a list of unlocked achievements</div>
+</td>
 </tr>
 <tr class="rowColor" id="i3">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setItemCount(int)">setItemCount</a></span>&#8203;(int&nbsp;itemCount)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><code>static void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#resetAchievements()">resetAchievements</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Lock all the achievements again</div>
+</td>
 </tr>
 <tr class="altColor" id="i4">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTime(long)">setTime</a></span>&#8203;(long&nbsp;time)</code></th>
-<td class="colLast">&nbsp;</td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setHealth(int)">setHealth</a></span>&#8203;(int&nbsp;health)</code></th>
+<td class="colLast">
+<div class="block">Maintains the current health of player</div>
+</td>
 </tr>
 <tr class="rowColor" id="i5">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setItemCount()">setItemCount</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Maintains the count of the number of items picked up</div>
+</td>
+</tr>
+<tr class="altColor" id="i6">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTime(long)">setTime</a></span>&#8203;(long&nbsp;time)</code></th>
+<td class="colLast">
+<div class="block">Maintains the in game time</div>
+</td>
+</tr>
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
@@ -230,12 +250,6 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">AchievementsStatsComponent</span>()</div>
 </section>
 </li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="&lt;init&gt;(int)">AchievementsStatsComponent</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">AchievementsStatsComponent</span>&#8203;(<span class="arguments">int&nbsp;health)</span></div>
-</section>
-</li>
 </ul>
 </section>
 </li>
@@ -263,12 +277,22 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <section class="detail">
 <h3><a id="setHealth(int)">setHealth</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setHealth</span>&#8203;(<span class="arguments">int&nbsp;health)</span></div>
+<div class="block">Maintains the current health of player</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>health</code> - player's changed health</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="setTime(long)">setTime</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setTime</span>&#8203;(<span class="arguments">long&nbsp;time)</span></div>
+<div class="block">Maintains the in game time</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>time</code> - current game time</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
@@ -286,14 +310,38 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="setItemCount(int)">setItemCount</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setItemCount</span>&#8203;(<span class="arguments">int&nbsp;itemCount)</span></div>
+<h3><a id="setItemCount()">setItemCount</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setItemCount</span>()</div>
+<div class="block">Maintains the count of the number of items picked up</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getAchievements()">getAchievements</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="../../entities/configs/achievements/BaseAchievementConfig.html" title="class in com.deco2800.game.entities.configs.achievements">BaseAchievementConfig</a>&gt;</span>&nbsp;<span class="memberName">getAchievements</span>()</div>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="../../entities/configs/achievements/BaseAchievementConfig.html" title="class in com.deco2800.game.entities.configs.achievements">BaseAchievementConfig</a>&gt;</span>&nbsp;<span class="memberName">getAchievements</span>()</div>
+<div class="block">Returns a list of all achievements</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>achievements</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="getUnlockedAchievements()">getUnlockedAchievements</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="../../entities/configs/achievements/BaseAchievementConfig.html" title="class in com.deco2800.game.entities.configs.achievements">BaseAchievementConfig</a>&gt;</span>&nbsp;<span class="memberName">getUnlockedAchievements</span>()</div>
+<div class="block">Returns a list of unlocked achievements</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>unlockedAchievements</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="resetAchievements()">resetAchievements</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">resetAchievements</span>()</div>
+<div class="block">Lock all the achievements again</div>
 </section>
 </li>
 </ul>
