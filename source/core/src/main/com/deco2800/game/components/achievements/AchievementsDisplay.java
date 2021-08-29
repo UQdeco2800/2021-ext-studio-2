@@ -5,27 +5,31 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.compression.lzma.Base;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class AchievementsDisplay extends UIComponent{
     Table table;
     private Image achievementImg;
     private Label achievementLabel;
     private static final String[] textures = AchievementFactory.getTextures();
-    long prevTime;
+    private ExecutorService service;
 
     @Override
     public void create() {
         super.create();
         loadAssets();
         addActors();
-        entity.getEvents().addListener("updateAchievement", this::updateAchievementsUI);
 
+        service = Executors.newSingleThreadExecutor();
+
+        entity.getEvents().addListener("updateAchievement", this::updateAchievementsUI);
     }
 
 
@@ -53,11 +57,16 @@ public class AchievementsDisplay extends UIComponent{
     }
 
 
-    public void updateAchievementsUI(BaseAchievementConfig achievement) {
-        if(achievementLabel != null && achievementImg != null) {
-            table.clear();
-        }
-        renderAchievement(achievement);
+    private void updateAchievementsUI(BaseAchievementConfig achievement) {
+
+        service.execute(() -> {
+            try {
+                renderAchievement(achievement);
+                Thread.sleep(5000);
+                table.clear();
+            } catch (InterruptedException ignored) {}
+        });
+
     }
 
     private void renderAchievement(BaseAchievementConfig achievement){
@@ -65,19 +74,22 @@ public class AchievementsDisplay extends UIComponent{
         achievementLabel = new Label(text, skin, "small");
         achievementImg = new Image(ServiceLocator.getResourceService()
                 .getAsset(achievement.iconPath, Texture.class));
-
-        table.row().padTop(10f);
         table.add(achievementImg).size(300f,150f);
-        table.row().padTop(15f);
-
+        table.row();
         table.add(achievementLabel);
+
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        if(achievementImg.isVisible()){
+
+        service.shutdownNow();
+
+        if(achievementImg != null) {
             achievementImg.remove();
+        }
+        if(achievementLabel != null){
             achievementLabel.remove();
         }
         unloadAssets();
