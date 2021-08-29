@@ -102,6 +102,7 @@ public class MainGameScreen extends ScreenAdapter {
       counter+=1;
       forestGameArea.spawnTerrainRandomly((int) (screenVector.x+2));
       forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
+      forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
     }
   }
 

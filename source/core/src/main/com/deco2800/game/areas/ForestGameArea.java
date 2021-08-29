@@ -75,6 +75,7 @@ public class ForestGameArea extends GameArea {
 
     spawnTerrain();
     spawnRocks();
+    spawnWoods();
 
     player = spawnPlayer();
     spawnTrees();
@@ -177,7 +178,33 @@ public class ForestGameArea extends GameArea {
     }
   }
 
-  private void spawnWoods() {}
+  private void spawnWoods() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    for (int i = 0; i < 5; i++) {
+      GridPoint2 randomPos = RandomUtils.randomX(6, minPos, maxPos);
+      Entity rock = ObstacleFactory.createWood();
+      spawnEntityAt(rock, randomPos, true, false);
+      GridPoint2 randomPosTwo = RandomUtils.randomX(8, minPos, maxPos);
+      Entity rockTwo = ObstacleFactory.createWood();
+      spawnEntityAt(rockTwo, randomPosTwo, true, false);
+    }
+  }
+
+  public void spawnWoodsRandomly(int xValue) {
+    GridPoint2 minPos = new GridPoint2(xValue+10, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    for (int i = 0; i < 5; i++) {
+      GridPoint2 randomPos = RandomUtils.randomX(6, minPos, maxPos);
+      Entity rock = ObstacleFactory.createWood();
+      spawnEntityAt(rock, randomPos, true, false);
+      GridPoint2 randomPosTwo = RandomUtils.randomX(8, minPos, maxPos);
+      Entity rockTwo = ObstacleFactory.createWood();
+      spawnEntityAt(rockTwo, randomPosTwo, true, false);
+    }
+  }
 
   private void spawnTrees() {
     GridPoint2 minPos = new GridPoint2(0, 0);

@@ -118,6 +118,29 @@ public class ObstacleFactory {
 		return rock;
 	}
 
+	/**
+	 * Creates a wood.
+	 *
+	 * @return Wood entity
+	 */
+	public static Entity createWood() {
+		Entity wood = new Entity();
+
+		wood.addComponent(new TextureRenderComponent("images/wood.jpg"))
+				.addComponent(new PhysicsComponent())
+				.addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+				.addComponent(new CombatStatsComponent(2000, 10))
+				.addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+				.addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+				.addComponent(new ObstacleAnimationController());
+
+
+		wood.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+		wood.getComponent(TextureRenderComponent.class).scaleEntity();
+
+		return wood;
+	}
+
 	private ObstacleFactory() {
 		throw new IllegalStateException("Instantiating static util class");
 	}
