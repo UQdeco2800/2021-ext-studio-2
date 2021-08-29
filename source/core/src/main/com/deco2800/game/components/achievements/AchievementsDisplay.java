@@ -64,9 +64,7 @@ public class AchievementsDisplay extends UIComponent{
                 renderAchievement(achievement);
                 Thread.sleep(5000);
                 table.clear();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            } catch (InterruptedException ignored) {}
         });
 
     }
@@ -85,6 +83,9 @@ public class AchievementsDisplay extends UIComponent{
     @Override
     public void dispose() {
         super.dispose();
+
+        service.shutdownNow();
+
         if(achievementImg != null) {
             achievementImg.remove();
         }
