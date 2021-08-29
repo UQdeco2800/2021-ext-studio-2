@@ -24,7 +24,7 @@ import java.util.ArrayList;
  */
 public class ForestGameArea extends GameArea {
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
-    private static final int NUM_OBSTACLES = 5; // Cannot be greater than 20 (range of loading map)
+    private static final int NUM_OBSTACLES = 2; // Cannot be greater than 20 (range of loading map)
     private static final int NUM_GHOSTS = 2;
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(0, 10);
     private static final float WALL_WIDTH = 0.1f;
@@ -47,10 +47,12 @@ public class ForestGameArea extends GameArea {
             "images/mpc_left_view.png",
             "images/mpc_right_view.png",
             "images/road.png",
-            "images/water.png"
+            "images/water.png",
+            "images/obstacle_1.png",
+            "images/obstacle2.png"
     };
     private static final String[] forestTextureAtlases = {
-            "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas", "images/airport.atlas"
+            "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas", "images/airport.atlas","images/obstacle_1.atlas", "images/obstacle_2.atlas"
     };
     private static final String[] forestSounds = {"sounds/Impact4.ogg"};
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
@@ -81,6 +83,7 @@ public class ForestGameArea extends GameArea {
 
         player = spawnPlayer();
         spawnObstacles();
+
 
 //        spawnGhosts();
 //        spawnGhostKing();
@@ -173,6 +176,7 @@ public class ForestGameArea extends GameArea {
         GridPoint2 minPos;
         GridPoint2 maxPos;
         GridPoint2 randomPos;
+        GridPoint2 randomPos2;
         ArrayList<GridPoint2> randomPoints = new ArrayList<GridPoint2>();
         int playerX = (int) player.getPosition().x;
 //        System.out.print("playerX:" + playerX + "\n");
@@ -190,12 +194,21 @@ public class ForestGameArea extends GameArea {
                 randomPos = RandomUtils.randomX(3, minPos, maxPos);
             } while (randomPoints.contains(randomPos));
 
+            do {
+                randomPos2 = RandomUtils.randomX(3, minPos, maxPos);
+            }  while (randomPoints.contains(randomPos2));
+
             randomPoints.add(randomPos);
+            randomPoints.add(randomPos2);
+
             Entity obstacle = ObstacleFactory.createObstacle(player);
+            Entity obstacle2 = ObstacleFactory.createObstacle_2(player);
             spawnEntityAt(obstacle, randomPos, true, false);
+            spawnEntityAt(obstacle2, randomPos2, true, false);
         }
 //        System.out.print("minPos: " + minPos + "\tmaxPos: " + maxPos + "\nTotal randomPoints" + randomPoints + "\n");
     }
+
 
 
     private Entity spawnPlayer() {

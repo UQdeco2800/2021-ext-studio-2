@@ -47,10 +47,10 @@ public class ObstacleFactory {
 
 		AnimationRenderComponent animator =
 				new AnimationRenderComponent(
-						ServiceLocator.getResourceService().getAsset("images/airport.atlas", TextureAtlas.class));
-		animator.addAnimation("enemy2", 0.2f, Animation.PlayMode.LOOP);
+						ServiceLocator.getResourceService().getAsset("images/obstacle_1.atlas", TextureAtlas.class));
+		animator.addAnimation("obstacles", 0.2f, Animation.PlayMode.LOOP);
 
-		obstacle.addComponent(new TextureRenderComponent("images/enemy2.png"))
+		obstacle.addComponent(new TextureRenderComponent("images/obstacle_1.png"))
 				.addComponent(new PhysicsComponent())
 				//  .addComponent(new ObstacleDispare())
 //				.addComponent(new ObstacleDispare())
@@ -70,8 +70,57 @@ public class ObstacleFactory {
 
 		//tree.scaleHeight(1f);
 //    tree.setScale(4,2);
+		obstacle.setScale(2,3);
 
-		PhysicsUtils.setScaledCollider(obstacle, 1f, 0.2f);
+		PhysicsUtils.setScaledCollider(obstacle, 1f, 0.7f);
+//打开动画
+//    animator.startAnimation("enemy2");
+
+
+		return obstacle;
+	}
+
+
+	/**
+	 * second obstacle
+	 */
+	public static Entity createObstacle_2(Entity target) {
+		//AnimationRenderComponent animator = new AnimationRenderComponent("images/ghost.atlas");
+		Entity obstacle = new Entity();
+
+		AITaskComponent aiComponent =
+				new AITaskComponent()
+						.addTask(new ObstacleDisapperTask(target, 10, 1.7f));
+
+		AnimationRenderComponent animator =
+				new AnimationRenderComponent(
+						ServiceLocator.getResourceService().getAsset("images/obstacle_2.atlas", TextureAtlas.class));
+		animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
+
+		obstacle.addComponent(new TextureRenderComponent("images/obstacle2.png"))
+				.addComponent(new PhysicsComponent())
+				//  .addComponent(new ObstacleDispare())
+//				.addComponent(new ObstacleDispare())
+				.addComponent(animator)
+				.addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+				.addComponent(new CombatStatsComponent(2000, 10))
+				.addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+//				.addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 10f))
+				.addComponent(aiComponent)
+				.addComponent(new ObstacleAnimationController());
+
+
+		obstacle.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+		obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
+//		tree.getComponent(ObstacleDispare.class).update();
+//    tree.getComponent(AnimationRenderComponent.class).scaleEntity();
+
+		//tree.scaleHeight(1f);
+//    tree.setScale(4,2);
+
+
+		PhysicsUtils.setScaledCollider(obstacle, 0.2f, 0.1f);
+		obstacle.setScale(2,2);
 //打开动画
 //    animator.startAnimation("enemy2");
 
