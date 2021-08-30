@@ -12,8 +12,6 @@ import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
-import java.util.concurrent.ExecutorService;
-
 /**
  * A UI component to display achievement cards and labels for corresponding achievements
  */
@@ -23,7 +21,6 @@ public class AchievementsDisplay extends UIComponent {
     private Table table;
     private Image achievementImg;
     private Label achievementLabel;
-    private ExecutorService service;
 
     @Override
     public void create() {
