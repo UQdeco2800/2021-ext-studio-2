@@ -86,24 +86,7 @@ public class PlayerActions extends Component {
 
     }
   }
-
-  /**
-   * Updates the player sprite to turn left
-   */
-
-  void walkLeft() {
-    if(!walkLeft){
-      walkLeft = true;
-      Sound turnSound = ServiceLocator.getResourceService().getAsset("sounds/turnDirection.ogg", Sound.class);
-      turnSound.play();
-
-      /*TextureRenderComponent playerTexture = entity.getComponent(TextureRenderComponent.class);
-      playerTexture.dispose();
-      Entity player = entity;
-      player.addComponent(new TextureRenderComponent("images/mpc_left_view.png"));*/
-
-    }
-  }
+  
 
   /**
    * Makes the player attack.
