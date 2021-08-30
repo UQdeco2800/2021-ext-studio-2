@@ -84,6 +84,7 @@ public class AchievementsDisplay extends UIComponent {
                 Thread.sleep(RENDER_DURATION);
                 /* Remove card from screen */
                 table.clear();
+            } catch (InterruptedException ignored) {
             } catch (Exception e) {
                 e.printStackTrace();
             }
