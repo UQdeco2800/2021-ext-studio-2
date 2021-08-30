@@ -6,7 +6,6 @@ import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.items.FirstAidFunction;
 import com.deco2800.game.components.items.TestBuffForItem;
 import com.deco2800.game.components.player.PlayerStatsDisplay;
-import com.deco2800.game.components.tasks.ObstacleDisapperTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.ColliderComponent;

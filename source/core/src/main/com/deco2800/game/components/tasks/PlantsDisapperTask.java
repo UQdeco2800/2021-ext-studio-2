@@ -11,20 +11,21 @@ import com.deco2800.game.services.ServiceLocator;
  * When the character is a certain distance away from obstacles, trigger
  * the "ObstacleDisappearStart" event.
  */
-public class ObstacleDisapperTask extends DefaultTask implements PriorityTask {
+public class PlantsDisapperTask extends DefaultTask implements PriorityTask {
 	private final Entity target;
 	private final int priority;
 	private final float viewDistance;
 	private final PhysicsEngine physics;
 	private final DebugRenderer debugRenderer;
 
+
 	/**
+	 * The PlantsDisappearStart event will be triggered when the character is at a certain distance from the Plants
 	 * @param target The entity to chase.
 	 * @param priority Task priority when chasing (0 when not chasing).
 	 * @param viewDistance Maximum distance from the entity at which chasing can start.
-//	 * @param maxChaseDistance Maximum distance from the entity while chasing before giving up.
 	 */
-	public ObstacleDisapperTask(Entity target, int priority, float viewDistance) {
+	public PlantsDisapperTask(Entity target, int priority, float viewDistance) {
 		this.target = target;
 		this.priority = priority;
 		this.viewDistance = viewDistance;
@@ -35,16 +36,27 @@ public class ObstacleDisapperTask extends DefaultTask implements PriorityTask {
 	@Override
 	public void start() {
 		super.start();
-		this.owner.getEntity().getEvents().trigger("ObstacleDisappearStart");
+		this.owner.getEntity().getEvents().trigger("PlantsDisappearStart");
 	}
 
-
+	/**
+	 *
+	 * @return priority
+	 */
 	@Override
 	public int getPriority() {
 		float dst = getDistanceToTarget();
-		if (dst < viewDistance) {
-			return priority;
+		float targetY = target.getPosition().y;
+		if (targetY > 6) {
+			if (dst < (viewDistance + 2)) {
+				return priority;
+			}
+		} else {
+			if (dst < viewDistance) {
+				return priority;
+			}
 		}
+
 		return -1;
 	}
 

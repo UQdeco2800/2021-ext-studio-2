@@ -97,10 +97,16 @@ public class MainGameScreen extends ScreenAdapter {
     Vector2 screenVector = player.getPosition();
     screenVector.y = 7f;
     renderer.getCamera().getEntity().setPosition(screenVector);
-    // infinite loop for terrain
+    // infinite loop for terrain and obstacles
     if(screenVector.x > (2*counter+1)*10) {
       counter+=1;
       forestGameArea.spawnTerrainRandomly((int) (screenVector.x+2));
+      forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
+      forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
+      
+      // Generate obstacles
+      forestGameArea.spawnObstacles();
+
     }
   }
 
