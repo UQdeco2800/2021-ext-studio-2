@@ -3,7 +3,6 @@ package com.deco2800.game.entities.configs.achievements;
  * Defines a basic set of a condition properties for each achievement
  * stored in achievement config files (achieve.json)
  * to be loaded by Achievement Factory
- *
  */
 public class ConditionConfig {
     public int time = -1;
