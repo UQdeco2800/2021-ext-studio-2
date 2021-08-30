@@ -15,9 +15,7 @@ public class TestBuffForItem {
          */
         health = target.getComponent(CombatStatsComponent.class).getHealth();
         if(health < 100) {
-            health = health + 10;
-            target.getComponent(CombatStatsComponent.class).setHealth(health);
-            target.getEvents().trigger("updateHealth", health);
+            target.getComponent(CombatStatsComponent.class).addHealth(10);
         }
     }
 }

@@ -9,6 +9,7 @@ import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.maingame.MainGameDisplay;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.score.ScoreDisplay;
 import com.deco2800.game.components.score.ScoringSystem;
 import com.deco2800.game.components.score.ScoringSystemV1;
@@ -91,16 +92,29 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.getEntityService().update();
     renderer.render();
 
+    CombatStatsComponent playerStats = player.getComponent(CombatStatsComponent.class);
+    if (playerStats.isDead()) {
+      logger.info("Display Game Over Screen");
+      game.setScreen(GdxGame.ScreenType.GAME_OVER);
+      return;
+    }
+
     // making player to move constantly
     player.setPosition((float) (player.getPosition().x+0.05), player.getPosition().y);
     // Centralize the screen to player
     Vector2 screenVector = player.getPosition();
     screenVector.y = 7f;
     renderer.getCamera().getEntity().setPosition(screenVector);
-    // infinite loop for terrain
+    // infinite loop for terrain and obstacles
     if(screenVector.x > (2*counter+1)*10) {
       counter+=1;
       forestGameArea.spawnTerrainRandomly((int) (screenVector.x+2));
+      forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
+      forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
+      
+      // Generate obstacles
+      forestGameArea.spawnObstacles();
+
     }
   }
 
@@ -157,19 +171,19 @@ public class MainGameScreen extends ScreenAdapter {
     logger.debug("Creating ui");
     Stage stage = ServiceLocator.getRenderService().getStage();
     InputComponent inputComponent =
-        ServiceLocator.getInputService().getInputFactory().createForTerminal();
+            ServiceLocator.getInputService().getInputFactory().createForTerminal();
 
     Entity ui = new Entity();
     ui.addComponent(new InputDecorator(stage, 10))
-        .addComponent(new PerformanceDisplay())
-        .addComponent(new MainGameActions(this.game))
-        .addComponent(new MainGameExitDisplay())
-        .addComponent(new Terminal())
-        .addComponent(inputComponent)
+            .addComponent(new PerformanceDisplay())
+            .addComponent(new MainGameActions(this.game))
+            .addComponent(new MainGameExitDisplay())
+            .addComponent(new Terminal())
+            .addComponent(inputComponent)
             //display the score and the time -- team 9
             .addComponent(new ScoreDisplay())
             .addComponent(new TimerDisplay())
-        .addComponent(new TerminalDisplay());
+            .addComponent(new TerminalDisplay());
 
     ServiceLocator.getEntityService().register(ui);
   }
