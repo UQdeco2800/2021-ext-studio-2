@@ -3,6 +3,7 @@ package com.deco2800.game.components.items;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.components.achievements.AchievementsHelper;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
@@ -45,7 +46,7 @@ public class FirstAidComponent extends Component {
        {
                     incHealth.increaseHealth(target);
                     entity.getEvents().trigger("itemPickedUp");
-
+                    AchievementsHelper.getInstance().trackItemPickedUpEvent();
 
            new Thread(() -> {
                 entity.dispose();
