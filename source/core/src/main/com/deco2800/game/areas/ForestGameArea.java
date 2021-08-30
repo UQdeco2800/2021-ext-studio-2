@@ -156,7 +156,6 @@ public class ForestGameArea extends GameArea {
         player = spawnPlayer();
         spawnObstacles();
 
-
 //        spawnGhosts();
 //        spawnGhostKing();
         spawnFirstAid();
@@ -282,6 +281,8 @@ public class ForestGameArea extends GameArea {
         }
 //        System.out.print("minPos: " + minPos + "\tmaxPos: " + maxPos + "\nTotal randomPoints" + randomPoints + "\n");
     }
+
+
 
     private void spawnFirstAid() {
 
