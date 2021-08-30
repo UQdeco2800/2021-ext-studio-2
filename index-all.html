@@ -568,6 +568,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/PhysicsEngine.html#createJoint(com.badlogic.gdx.physics.box2d.JointDef)">createJoint(JointDef)</a></span> - Method in class com.deco2800.game.physics.<a href="com/deco2800/game/physics/PhysicsEngine.html" title="class in com.deco2800.game.physics">PhysicsEngine</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/ObstacleFactory.html#createPlantsObstacle(com.deco2800.game.entities.Entity)">createPlantsObstacle(Entity)</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/ObstacleFactory.html" title="class in com.deco2800.game.entities.factories">ObstacleFactory</a></dt>
+<dd>
+<div class="block">Creates a tree entity.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/PlayerFactory.html#createPlayer()">createPlayer()</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/PlayerFactory.html" title="class in com.deco2800.game.entities.factories">PlayerFactory</a></dt>
 <dd>
 <div class="block">Create a player entity.</div>
@@ -580,9 +584,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/terrain/TerrainFactory.html#createTerrainRandomly(com.deco2800.game.areas.terrain.TerrainFactory.TerrainType,int)">createTerrainRandomly(TerrainFactory.TerrainType, int)</a></span> - Method in class com.deco2800.game.areas.terrain.<a href="com/deco2800/game/areas/terrain/TerrainFactory.html" title="class in com.deco2800.game.areas.terrain">TerrainFactory</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/ObstacleFactory.html#createTree(com.deco2800.game.entities.Entity)">createTree(Entity)</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/ObstacleFactory.html" title="class in com.deco2800.game.entities.factories">ObstacleFactory</a></dt>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/ObstacleFactory.html#createThornsObstacle(com.deco2800.game.entities.Entity)">createThornsObstacle(Entity)</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/ObstacleFactory.html" title="class in com.deco2800.game.entities.factories">ObstacleFactory</a></dt>
 <dd>
-<div class="block">Creates a tree entity.</div>
+<div class="block">second obstacle</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/ObstacleFactory.html#createWall(float,float)">createWall(float, float)</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/ObstacleFactory.html" title="class in com.deco2800.game.entities.factories">ObstacleFactory</a></dt>
 <dd>
@@ -1090,8 +1094,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/ChaseTask.html#getPriority()">getPriority()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/ChaseTask.html" title="class in com.deco2800.game.components.tasks">ChaseTask</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/ObstacleDisapperTask.html#getPriority()">getPriority()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/ObstacleDisapperTask.html" title="class in com.deco2800.game.components.tasks">ObstacleDisapperTask</a></dt>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/PlantsDisapperTask.html#getPriority()">getPriority()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/PlantsDisapperTask.html" title="class in com.deco2800.game.components.tasks">PlantsDisapperTask</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/ThornsDisapperTask.html#getPriority()">getPriority()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/ThornsDisapperTask.html" title="class in com.deco2800.game.components.tasks">ThornsDisapperTask</a></dt>
+<dd>
+<div class="block">The priority is determined based on the height of the person and the distance from the obstacle.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/WanderTask.html#getPriority()">getPriority()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/WanderTask.html" title="class in com.deco2800.game.components.tasks">WanderTask</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/input/InputComponent.html#getPriority()">getPriority()</a></span> - Method in class com.deco2800.game.input.<a href="com/deco2800/game/input/InputComponent.html" title="class in com.deco2800.game.input">InputComponent</a></dt>
@@ -1639,13 +1647,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/npc/ObstacleAnimationController.html#%3Cinit%3E()">ObstacleAnimationController()</a></span> - Constructor for class com.deco2800.game.components.npc.<a href="com/deco2800/game/components/npc/ObstacleAnimationController.html" title="class in com.deco2800.game.components.npc">ObstacleAnimationController</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/deco2800/game/components/tasks/ObstacleDisapperTask.html" title="class in com.deco2800.game.components.tasks"><span class="typeNameLink">ObstacleDisapperTask</span></a> - Class in <a href="com/deco2800/game/components/tasks/package-summary.html">com.deco2800.game.components.tasks</a></dt>
-<dd>
-<div class="block">When the character is a certain distance away from obstacles, trigger
- the "ObstacleDisappearStart" event.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/ObstacleDisapperTask.html#%3Cinit%3E(com.deco2800.game.entities.Entity,int,float)">ObstacleDisapperTask(Entity, int, float)</a></span> - Constructor for class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/ObstacleDisapperTask.html" title="class in com.deco2800.game.components.tasks">ObstacleDisapperTask</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/components/Obstacle/ObstacleDispare.html" title="class in com.deco2800.game.components.Obstacle"><span class="typeNameLink">ObstacleDispare</span></a> - Class in <a href="com/deco2800/game/components/Obstacle/package-summary.html">com.deco2800.game.components.Obstacle</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/Obstacle/ObstacleDispare.html#%3Cinit%3E()">ObstacleDispare()</a></span> - Constructor for class com.deco2800.game.components.Obstacle.<a href="com/deco2800/game/components/Obstacle/ObstacleDispare.html" title="class in com.deco2800.game.components.Obstacle">ObstacleDispare</a></dt>
@@ -1755,6 +1756,15 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/input/InputComponent.html#pinchStopHandled()">pinchStopHandled()</a></span> - Method in class com.deco2800.game.input.<a href="com/deco2800/game/input/InputComponent.html" title="class in com.deco2800.game.input">InputComponent</a></dt>
 <dd>
 <div class="block">Wrapper for pinch stop that can be overridden.</div>
+</dd>
+<dt><a href="com/deco2800/game/components/tasks/PlantsDisapperTask.html" title="class in com.deco2800.game.components.tasks"><span class="typeNameLink">PlantsDisapperTask</span></a> - Class in <a href="com/deco2800/game/components/tasks/package-summary.html">com.deco2800.game.components.tasks</a></dt>
+<dd>
+<div class="block">When the character is a certain distance away from obstacles, trigger
+ the "ObstacleDisappearStart" event.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/PlantsDisapperTask.html#%3Cinit%3E(com.deco2800.game.entities.Entity,int,float)">PlantsDisapperTask(Entity, int, float)</a></span> - Constructor for class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/PlantsDisapperTask.html" title="class in com.deco2800.game.components.tasks">PlantsDisapperTask</a></dt>
+<dd>
+<div class="block">The PlantsDisappearStart event will be triggered when the character is at a certain distance from the Plants</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/ForestGameArea.html#player">player</a></span> - Variable in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/ForestGameArea.html" title="class in com.deco2800.game.areas">ForestGameArea</a></dt>
 <dd>&nbsp;</dd>
@@ -2256,6 +2266,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Spawn entity on a given tile.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/areas/ForestGameArea.html#spawnObstacles()">spawnObstacles()</a></span> - Method in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/ForestGameArea.html" title="class in com.deco2800.game.areas">ForestGameArea</a></dt>
+<dd>
+<div class="block">Obstacles are randomly generated according to the position of the character.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/ForestGameArea.html#spawnTerrain()">spawnTerrain()</a></span> - Method in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/ForestGameArea.html" title="class in com.deco2800.game.areas">ForestGameArea</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/ForestGameArea.html#spawnTerrainRandomly(int)">spawnTerrainRandomly(int)</a></span> - Method in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/ForestGameArea.html" title="class in com.deco2800.game.areas">ForestGameArea</a></dt>
@@ -2276,7 +2290,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/MovementTask.html#start()">start()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/MovementTask.html" title="class in com.deco2800.game.components.tasks">MovementTask</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/ObstacleDisapperTask.html#start()">start()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/ObstacleDisapperTask.html" title="class in com.deco2800.game.components.tasks">ObstacleDisapperTask</a></dt>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/PlantsDisapperTask.html#start()">start()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/PlantsDisapperTask.html" title="class in com.deco2800.game.components.tasks">PlantsDisapperTask</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/ThornsDisapperTask.html#start()">start()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/ThornsDisapperTask.html" title="class in com.deco2800.game.components.tasks">ThornsDisapperTask</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/WaitTask.html#start()">start()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/WaitTask.html" title="class in com.deco2800.game.components.tasks">WaitTask</a></dt>
 <dd>
@@ -2406,6 +2422,15 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/rendering/TextureRenderComponent.html#%3Cinit%3E(java.lang.String)">TextureRenderComponent(String)</a></span> - Constructor for class com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/TextureRenderComponent.html" title="class in com.deco2800.game.rendering">TextureRenderComponent</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/deco2800/game/components/tasks/ThornsDisapperTask.html" title="class in com.deco2800.game.components.tasks"><span class="typeNameLink">ThornsDisapperTask</span></a> - Class in <a href="com/deco2800/game/components/tasks/package-summary.html">com.deco2800.game.components.tasks</a></dt>
+<dd>
+<div class="block">When the character is a certain distance away from obstacles, trigger
+ the "ObstacleDisappearStart" event.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/ThornsDisapperTask.html#%3Cinit%3E(com.deco2800.game.entities.Entity,int,float)">ThornsDisapperTask(Entity, int, float)</a></span> - Constructor for class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/ThornsDisapperTask.html" title="class in com.deco2800.game.components.tasks">ThornsDisapperTask</a></dt>
+<dd>
+<div class="block">The ThornsDisappearStart event will be triggered when the character is a certain distance from Thorns.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/terrain/TerrainComponent.html#tileToWorldPosition(int,int)">tileToWorldPosition(int, int)</a></span> - Method in class com.deco2800.game.areas.terrain.<a href="com/deco2800/game/areas/terrain/TerrainComponent.html" title="class in com.deco2800.game.areas.terrain">TerrainComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/terrain/TerrainComponent.html#tileToWorldPosition(com.badlogic.gdx.math.GridPoint2)">tileToWorldPosition(GridPoint2)</a></span> - Method in class com.deco2800.game.areas.terrain.<a href="com/deco2800/game/areas/terrain/TerrainComponent.html" title="class in com.deco2800.game.areas.terrain">TerrainComponent</a></dt>
