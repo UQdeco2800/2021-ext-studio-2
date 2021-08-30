@@ -46,7 +46,7 @@ public class ObstacleFactory {
 						ServiceLocator.getResourceService().getAsset("images/obstacle_1.atlas", TextureAtlas.class));
 		animator.addAnimation("obstacles", 0.2f, Animation.PlayMode.LOOP);
 
-		obstacle.addComponent(new TextureRenderComponent("images/obstacle_1.png"))
+		obstacle.addComponent(new TextureRenderComponent("images/obstacle_1_new.png"))
 				.addComponent(new PhysicsComponent())
 				.addComponent(animator)
 				.addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))

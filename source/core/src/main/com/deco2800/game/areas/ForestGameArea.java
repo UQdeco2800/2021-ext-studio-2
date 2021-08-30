@@ -117,7 +117,7 @@ public class ForestGameArea extends GameArea {
             "images/rock.jpg",
             "images/wood.jpg",
             "images/Items/first_aid_kit.png",
-            "images/obstacle_1.png",
+            "images/obstacle_1_new.png",
             "images/obstacle2.png"
     };
     private static final String[] forestTextureAtlases = {
