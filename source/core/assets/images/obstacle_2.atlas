@@ -1,0 +1,33 @@
+obstacle_2.png
+size: 1680, 620
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+obstacle2
+  rotate: false
+  xy: 10, 10
+  size: 400, 600
+  orig: 400, 600
+  offset: 0, 0
+  index: -1
+obstacle2
+  rotate: false
+  xy: 430, 10
+  size: 400, 600
+  orig: 400, 600
+  offset: 0, 0
+  index: -1
+obstacle2
+  rotate: false
+  xy: 850, 10
+  size: 400, 600
+  orig: 400, 600
+  offset: 0, 0
+  index: -1
+obstacle2
+  rotate: false
+  xy: 1270, 10
+  size: 400, 600
+  orig: 400, 600
+  offset: 0, 0
+  index: -1

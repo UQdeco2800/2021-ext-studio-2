@@ -8,6 +8,14 @@ public class deBuff extends CombatStatsComponent {
     }
 
     public void decreaseHealth(){
-        addHealth(-1);
+        addHealth(-10);
     }
+
+    public void poisoning() throws InterruptedException {
+        for (int i = 0; i < 3; i++) {
+            addHealth(-10);
+            Thread.sleep(1000);
+        }
+    }
+
 }

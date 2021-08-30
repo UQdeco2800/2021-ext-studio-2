@@ -7,7 +7,6 @@ import com.deco2800.game.components.achievements.AchievementsDisplay;
 import com.deco2800.game.components.achievements.AchievementsStatsComponent;
 import com.deco2800.game.components.player.InventoryComponent;
 import com.deco2800.game.components.player.PlayerActions;
-import com.deco2800.game.components.player.PlayerAnimationController;
 import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.PlayerConfig;
@@ -30,7 +29,7 @@ import com.deco2800.game.services.ServiceLocator;
  */
 public class PlayerFactory {
   private static final PlayerConfig stats =
-      FileLoader.readClass(PlayerConfig.class, "configs/player.json");
+          FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
   /**
    * Create a player entity.
@@ -38,33 +37,29 @@ public class PlayerFactory {
    */
   public static Entity createPlayer() {
     InputComponent inputComponent =
-        ServiceLocator.getInputService().getInputFactory().createForPlayer();
+            ServiceLocator.getInputService().getInputFactory().createForPlayer();
 
     AnimationRenderComponent animator =
             new AnimationRenderComponent(
-                    ServiceLocator.getResourceService().
-                            getAsset("images/main_player_move.atlas",
+                    ServiceLocator.getResourceService()
+                            .getAsset("images/mpcMovement.atlas",
                                     TextureAtlas.class));
-
-    animator.addAnimation("main_player_move", 0.2f,
-            Animation.PlayMode.LOOP);
+    animator.addAnimation("main_player_run", 0.1f, Animation.PlayMode.LOOP);
+    animator.addAnimation("main_player_walk", 0.5f, Animation.PlayMode.LOOP);
+    animator.addAnimation("mpc_front", 1f, Animation.PlayMode.LOOP);
 
     Entity player =
-        new Entity()
-            .addComponent(new TextureRenderComponent("images/mpc_front_stroke.png"))
-            .addComponent(new PhysicsComponent())
-            .addComponent(new ColliderComponent())
-            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
-            .addComponent(new PlayerActions())
-            .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
-            .addComponent(new InventoryComponent(stats.gold))
-            .addComponent(inputComponent)
-            .addComponent(new PlayerStatsDisplay())
-            .addComponent(animator)
-            .addComponent(new PlayerAnimationController())
-            .addComponent(new AchievementsStatsComponent(stats.health))
-            .addComponent(new AchievementsDisplay());
-
+            new Entity()
+                    .addComponent(new TextureRenderComponent("images/mpc_front_stroke.png"))
+                    .addComponent(new PhysicsComponent())
+                    .addComponent(new ColliderComponent())
+                    .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
+                    .addComponent(new PlayerActions())
+                    .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                    .addComponent(new InventoryComponent(stats.gold))
+                    .addComponent(inputComponent)
+                    .addComponent(new PlayerStatsDisplay())
+                    .addComponent(animator);
 
     PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
     player.getComponent(ColliderComponent.class).setDensity(1.5f);
