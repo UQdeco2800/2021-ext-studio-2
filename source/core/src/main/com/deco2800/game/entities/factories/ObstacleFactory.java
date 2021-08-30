@@ -1,5 +1,6 @@
 package com.deco2800.game.entities.factories;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -45,7 +46,9 @@ public class ObstacleFactory {
 						ServiceLocator.getResourceService().getAsset("images/obstacle_1.atlas", TextureAtlas.class));
 		animator.addAnimation("obstacles", 0.2f, Animation.PlayMode.LOOP);
 
-		obstacle.addComponent(new TextureRenderComponent("images/obstacle_1——new.png"))
+
+		obstacle.addComponent(new TextureRenderComponent("images/obstacle_1_new.png"))
+
 				.addComponent(new PhysicsComponent())
 				.addComponent(animator)
 				.addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
@@ -127,6 +130,52 @@ public class ObstacleFactory {
 				.addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
 		wall.setScale(width, height);
 		return wall;
+	}
+
+	/**
+	 * Creates a rock.
+	 *
+	 * @return Rock entity
+	 */
+	public static Entity createRock() {
+		Entity rock = new Entity();
+
+		rock.addComponent(new TextureRenderComponent("images/rock.jpg"))
+				.addComponent(new PhysicsComponent())
+				.addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+				.addComponent(new CombatStatsComponent(2000, 10))
+				.addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+				.addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+				.addComponent(new ObstacleAnimationController());
+
+
+		rock.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+		rock.getComponent(TextureRenderComponent.class).scaleEntity();
+
+		return rock;
+	}
+
+	/**
+	 * Creates a wood.
+	 *
+	 * @return Wood entity
+	 */
+	public static Entity createWood() {
+		Entity wood = new Entity();
+
+		wood.addComponent(new TextureRenderComponent("images/wood.jpg"))
+				.addComponent(new PhysicsComponent())
+				.addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+				.addComponent(new CombatStatsComponent(2000, 10))
+				.addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+				.addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+				.addComponent(new ObstacleAnimationController());
+
+
+		wood.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+		wood.getComponent(TextureRenderComponent.class).scaleEntity();
+
+		return wood;
 	}
 
 	private ObstacleFactory() {

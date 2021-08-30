@@ -23,6 +23,70 @@ import java.util.ArrayList;
  */
 public class ForestGameArea extends GameArea {
 
+    private void spawnRocks() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < 5; i++) {
+            GridPoint2 randomPos = RandomUtils.randomX(4, minPos, maxPos);
+            Entity rock = ObstacleFactory.createRock();
+            spawnEntityAt(rock, randomPos, true, false);
+        }
+    }
+
+    public void spawnRocksRandomly(int xValue) {
+        GridPoint2 minPos = new GridPoint2(xValue+10, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < 5; i++) {
+            GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
+            Entity rock = ObstacleFactory.createRock();
+            spawnEntityAt(rock, randomPos, true, false);
+            GridPoint2 randomPosTwo = RandomUtils.randomX(4, minPos, maxPos);
+            Entity rockTwo = ObstacleFactory.createRock();
+            spawnEntityAt(rockTwo, randomPosTwo, true, false);
+        }
+    }
+
+    private void spawnWoods() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < 5; i++) {
+            GridPoint2 randomPos = RandomUtils.randomX(6, minPos, maxPos);
+            Entity rock = ObstacleFactory.createWood();
+            spawnEntityAt(rock, randomPos, true, false);
+            GridPoint2 randomPosTwo = RandomUtils.randomX(8, minPos, maxPos);
+            Entity rockTwo = ObstacleFactory.createWood();
+            spawnEntityAt(rockTwo, randomPosTwo, true, false);
+        }
+    }
+
+    public void spawnWoodsRandomly(int xValue) {
+        GridPoint2 minPos = new GridPoint2(xValue+10, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < 5; i++) {
+            GridPoint2 randomPos = RandomUtils.randomX(6, minPos, maxPos);
+            Entity rock = ObstacleFactory.createWood();
+            spawnEntityAt(rock, randomPos, true, false);
+            GridPoint2 randomPosTwo = RandomUtils.randomX(8, minPos, maxPos);
+            Entity rockTwo = ObstacleFactory.createWood();
+            spawnEntityAt(rockTwo, randomPosTwo, true, false);
+        }
+    }
+
+//  private void spawnTrees() {
+//    GridPoint2 minPos = new GridPoint2(0, 0);
+//    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+//
+//    for (int i = 0; i < NUM_TREES; i++) {
+//      GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
+//      Entity tree = ObstacleFactory.createTree(player);
+//      spawnEntityAt(tree, randomPos, true, false);
+//    }
+//  }
+
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
     /* The number of each type of obstacle. Note: total obstacles cannot be greater than 20 (range of loading map)*/
     private static final int NUM_OBSTACLES = 2;
@@ -50,9 +114,12 @@ public class ForestGameArea extends GameArea {
             "images/mpc_right_view.png",
             "images/road.png",
             "images/water.png",
+            "images/rock.jpg",
+            "images/wood.jpg",
             "images/Items/first_aid_kit.png",
             "images/obstacle_1_new.png",
             "images/obstacle2_vision2.png"
+
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas", "images/airport.atlas", "images/obstacle_1.atlas", "images/obstacle_2.atlas"
@@ -83,6 +150,8 @@ public class ForestGameArea extends GameArea {
         displayUI();
 
         spawnTerrain();
+        spawnRocks();
+        spawnWoods();
 
         player = spawnPlayer();
         spawnObstacles();
