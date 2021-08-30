@@ -221,7 +221,7 @@ public class ForestGameArea extends GameArea {
       GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
       Entity tree = ObstacleFactory.createTree(player);
       spawnEntityAt(tree, randomPos, true, false);
-
+    }
 
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
     /* The number of each type of obstacle. Note: total obstacles cannot be greater than 20 (range of loading map)*/
