@@ -126,7 +126,7 @@ public class ForestGameArea extends GameArea {
     private static final String[] forestSounds = {"sounds/Impact4.ogg"};
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
-    private static final String backgroundMusic = "sounds/neverGonna.mp3";
+    private static final String backgroundMusic = "sounds/temp_bgm.wav";
     private static final String[] forestMusic = {backgroundMusic};
     private boolean firstGenerate = true;
 
