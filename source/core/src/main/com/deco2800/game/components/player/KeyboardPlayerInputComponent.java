@@ -66,8 +66,12 @@ public class KeyboardPlayerInputComponent extends InputComponent {
       case Keys.D:
       case Keys.RIGHT:
         walkDirection.sub(Vector2Utils.RIGHT);
+        entity.getEvents().trigger(("stopWalkRight"));
         triggerWalkEvent();
         return true;
+      case Keys.W:
+      case Keys.UP:
+        entity.getEvents().trigger("stopJump");
       default:
         return false;
     }
