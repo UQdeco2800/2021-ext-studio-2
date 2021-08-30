@@ -78,15 +78,9 @@ public class PlayerActions extends Component {
       walkLeft = false;
       Sound turnSound = ServiceLocator.getResourceService().getAsset("sounds/turnDirection.ogg", Sound.class);
       turnSound.play();
-
-     /* TextureRenderComponent playerTexture = entity.getComponent(TextureRenderComponent.class);
-      playerTexture.dispose();
-      Entity player = entity;
-      player.addComponent(new TextureRenderComponent("images/mpc_right_view.png"));*/
-
     }
   }
-  
+
 
   /**
    * Makes the player attack.
