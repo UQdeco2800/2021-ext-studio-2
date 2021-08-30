@@ -83,7 +83,7 @@ public class ObstacleFactory {
 						ServiceLocator.getResourceService().getAsset("images/obstacle_2.atlas", TextureAtlas.class));
 		animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
 
-		obstacle.addComponent(new TextureRenderComponent("images/obstacle2.png"))
+		obstacle.addComponent(new TextureRenderComponent("images/obstacle2_vision2.png"))
 				.addComponent(new PhysicsComponent())
 				//  .addComponent(new ObstacleDispare())
 //				.addComponent(new ObstacleDispare())
