@@ -40,20 +40,5 @@ public  class ItemFactory {
     }
 
 
-    public static Entity createWater(Entity target){
-        /**
-         * creates an entity for water
-         * @param target The entity which is passed on to the first Aid component
-         * @return entity
-         */
-        Entity water = new Entity()
-                .addComponent(new TextureRenderComponent("images/Items/water.png"))
-                .addComponent(new PhysicsComponent())
-                .addComponent(new ColliderComponent())
-                .addComponent(new FirstAidComponent(target));
-
-        return water;
-    }
-
 
 }
