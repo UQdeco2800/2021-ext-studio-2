@@ -1,6 +1,8 @@
 package com.deco2800.game.components.npc;
 
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 
 /**
@@ -17,19 +19,28 @@ public class ObstacleAnimationController extends Component {
 	public void create() {
 		super.create();
 		animator = this.entity.getComponent(AnimationRenderComponent.class);
-		entity.getEvents().addListener("ObstacleDisappearStart", this::obstacleDisappear);
-		//entity.getEvents().addListener("ObstacleDisappearStart", this::obstacle_2_Disappear);
+		entity.getEvents().addListener("PlantsDisappearStart", this::plantsDisappear);
+		entity.getEvents().addListener("ThornsDisappearStart", this::thornsDisappear);
 	}
 
 	/**
 	 * When the monitored event is triggered, play the obstacle explosion animation, and disable the
 	 * obstacle (let it disappear).
 	 */
-	void obstacleDisappear() {
+	void plantsDisappear() {
 		animator.getEntity().setRemoveTexture();
 		animator.startAnimation("obstacles");
 		animator.getEntity().setDisappear();
 	}
 
+	/**
+	 * When the monitored event is triggered, play the obstacle explosion animation, and disable the
+	 * obstacle (let it disappear).
+	 */
+	void thornsDisappear() {
+		animator.getEntity().setRemoveTexture();
+		animator.startAnimation("obstacle2");
+		animator.getEntity().setDisappear();
+	}
 
 }

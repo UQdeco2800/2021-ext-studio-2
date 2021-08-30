@@ -24,7 +24,9 @@ import java.util.ArrayList;
  */
 public class ForestGameArea extends GameArea {
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
-    private static final int NUM_OBSTACLES = 2; // Cannot be greater than 20 (range of loading map)
+    /* The number of each type of obstacle. Note: total obstacles cannot be greater than 20 (range of loading map)*/
+    private static final int NUM_OBSTACLES = 2;
+
     private static final int NUM_GHOSTS = 2;
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(0, 10);
     private static final float WALL_WIDTH = 0.1f;
@@ -178,8 +180,10 @@ public class ForestGameArea extends GameArea {
         GridPoint2 randomPos;
         GridPoint2 randomPos2;
         ArrayList<GridPoint2> randomPoints = new ArrayList<GridPoint2>();
+
         int playerX = (int) player.getPosition().x;
 //        System.out.print("playerX:" + playerX + "\n");
+
         if (firstGenerate) {
             minPos = new GridPoint2(playerX, 0);
             maxPos = new GridPoint2(playerX + 30, 0);
@@ -193,18 +197,17 @@ public class ForestGameArea extends GameArea {
             do {
                 randomPos = RandomUtils.randomX(3, minPos, maxPos);
             } while (randomPoints.contains(randomPos));
+            randomPoints.add(randomPos);
 
             do {
                 randomPos2 = RandomUtils.randomX(3, minPos, maxPos);
             }  while (randomPoints.contains(randomPos2));
-
-            randomPoints.add(randomPos);
             randomPoints.add(randomPos2);
 
-            Entity obstacle = ObstacleFactory.createObstacle(player);
-            Entity obstacle2 = ObstacleFactory.createObstacle_2(player);
+            Entity obstacle = ObstacleFactory.createPlantsObstacle(player);
+            Entity obstacle2 = ObstacleFactory.createThornsObstacle(player);
             spawnEntityAt(obstacle, randomPos, true, false);
-            spawnEntityAt(obstacle2, randomPos2, true, false);
+            spawnEntityAt(obstacle2, randomPos2, true, true);
         }
 //        System.out.print("minPos: " + minPos + "\tmaxPos: " + maxPos + "\nTotal randomPoints" + randomPoints + "\n");
     }
