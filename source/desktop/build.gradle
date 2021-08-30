@@ -11,6 +11,7 @@ task run(dependsOn: classes, type: JavaExec) {
     workingDir = project.assetsDir
     ignoreExitValue = true
     jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties", "-XstartOnFirstThread"]
+
 }
 
 task debug(dependsOn: classes, type: JavaExec) {

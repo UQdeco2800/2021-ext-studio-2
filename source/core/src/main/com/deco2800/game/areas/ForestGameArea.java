@@ -76,16 +76,16 @@ public class ForestGameArea extends GameArea {
         }
     }
 
-//  private void spawnTrees() {
-//    GridPoint2 minPos = new GridPoint2(0, 0);
-//    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-//
-//    for (int i = 0; i < NUM_TREES; i++) {
-//      GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
-//      Entity tree = ObstacleFactory.createTree(player);
-//      spawnEntityAt(tree, randomPos, true, false);
-//    }
-//  }
+    //  private void spawnTrees() {
+    //    GridPoint2 minPos = new GridPoint2(0, 0);
+    //    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+    //
+    //    for (int i = 0; i < NUM_TREES; i++) {
+    //      GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
+    //      Entity tree = ObstacleFactory.createTree(player);
+    //      spawnEntityAt(tree, randomPos, true, false);
+    //    }
+    //  }
 
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
     /* The number of each type of obstacle. Note: total obstacles cannot be greater than 20 (range of loading map)*/
@@ -159,8 +159,8 @@ public class ForestGameArea extends GameArea {
         spawnObstacles();
 
 
-//        spawnGhosts();
-//        spawnGhostKing();
+    //        spawnGhosts();
+    //        spawnGhostKing();
         spawnFirstAid();
         spawnApple();
         playMusic();
@@ -256,7 +256,7 @@ public class ForestGameArea extends GameArea {
         ArrayList<GridPoint2> randomPoints = new ArrayList<GridPoint2>();
 
         int playerX = (int) player.getPosition().x;
-//        System.out.print("playerX:" + playerX + "\n");
+    //        System.out.print("playerX:" + playerX + "\n");
 
         if (firstGenerate) {
             minPos = new GridPoint2(playerX, 0);
@@ -283,7 +283,7 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(obstacle, randomPos, true, false);
             spawnEntityAt(obstacle2, randomPos2, true, true);
         }
-//        System.out.print("minPos: " + minPos + "\tmaxPos: " + maxPos + "\nTotal randomPoints" + randomPoints + "\n");
+    //        System.out.print("minPos: " + minPos + "\tmaxPos: " + maxPos + "\nTotal randomPoints" + randomPoints + "\n");
     }
 
     private void spawnFirstAid() {

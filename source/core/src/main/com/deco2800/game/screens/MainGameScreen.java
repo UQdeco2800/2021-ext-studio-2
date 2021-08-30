@@ -91,7 +91,6 @@ public class MainGameScreen extends ScreenAdapter {
     physicsEngine.update();
     ServiceLocator.getEntityService().update();
     renderer.render();
-
     CombatStatsComponent playerStats = player.getComponent(CombatStatsComponent.class);
     if (playerStats.isDead()) {
       logger.info("Display Game Over Screen");
@@ -100,7 +99,10 @@ public class MainGameScreen extends ScreenAdapter {
     }
 
     // making player to move constantly
+    
     player.setPosition((float) (player.getPosition().x+0.05), player.getPosition().y);
+    player.getEvents().trigger(("right_side"));
+
     // Centralize the screen to player
     Vector2 screenVector = player.getPosition();
     screenVector.y = 7f;
