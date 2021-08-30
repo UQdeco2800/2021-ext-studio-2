@@ -14,16 +14,16 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
 import java.lang.reflect.Method;
 
 public class FirstAidComponent extends Component {
-    /**
-     * creates a first aid component that detects when the player collides with
-     * the entity and when collided it runs a buff function for the Item
-     * @param target entity on which the buff function will work on
-     *
-     */
+
 
     private Entity target;
     HitboxComponent hitboxComponent;
 
+    /**
+     *creates a first aid component that detects when the player collides with
+     * the entity and when collided it runs a buff function for the Item
+     * @param target  entity on which the buff function will work on
+     */
     public FirstAidComponent(Entity target){
         this.target = target;
 
@@ -34,12 +34,13 @@ public class FirstAidComponent extends Component {
         hitboxComponent = this.entity.getComponent(HitboxComponent.class);
     }
 
+    /**
+     * checks if the collision is done with the player and then runs a testBuff effect for the Item
+     * and triggers "ItemPickedUp" event
+     */
     private void onCollisionStart(Fixture me, Fixture other){
 
-        /**
-         * checks if the collision is done with the player and then runs a testBuff effect for the Item
-         * and triggers "ItemPickedUp" event
-         */
+
 
         TestBuffForItem incHealth = new TestBuffForItem();
        if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) // checking if the collision is done with the player
@@ -49,8 +50,15 @@ public class FirstAidComponent extends Component {
                     AchievementsHelper.getInstance().trackItemPickedUpEvent();
 
            new Thread(() -> {
-                entity.dispose();
-            }).start();  // --> event.dispose() not working without wrapping it in a Thread
+               try {
+                   entity.dispose();
+               }
+               catch (Exception e){
+                   System.out.print(e);
+               }
+            }).start();   // --> event.dispose() not working without wrapping it in a Thread
+
+
 
         }
     }
