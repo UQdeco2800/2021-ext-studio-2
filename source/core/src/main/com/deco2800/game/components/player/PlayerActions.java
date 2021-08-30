@@ -39,6 +39,7 @@ public class PlayerActions extends Component {
 
 
 
+
   @Override
   public void update() {
     if (moving) {
@@ -90,6 +91,13 @@ public class PlayerActions extends Component {
     animator.stopAnimation();
     animator.startAnimation("main_player_walk");
 
+  }
+
+  /** [[DEPRECATED]]
+   * Updates the player sprite to turn left
+   */
+  
+  void walkLeft() {
   }
 
   /**
