@@ -43,12 +43,10 @@ public class PlayerFactory {
     AnimationRenderComponent animator =
             new AnimationRenderComponent(
                     ServiceLocator.getResourceService().
-                            getAsset("images/ghost.atlas",
+                            getAsset("images/main_player_move.atlas",
                                     TextureAtlas.class));
 
-    animator.addAnimation("Turn_right", 0.1f,
-            Animation.PlayMode.LOOP);
-    animator.addAnimation("Turn_left", 0.1f,
+    animator.addAnimation("main_player_move", 0.2f,
             Animation.PlayMode.LOOP);
 
     Entity player =

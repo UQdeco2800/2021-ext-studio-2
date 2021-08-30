@@ -19,7 +19,8 @@ public class PlayerAnimationController extends Component {
     }
 
     void animateRight() {
-        animator.startAnimation("turn_right");
+        animator.getEntity().setRemoveTexture();
+        animator.startAnimation("main_player_move");
     }
     /**
     * void animateLeft() {
