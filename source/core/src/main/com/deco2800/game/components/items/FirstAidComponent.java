@@ -13,14 +13,18 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
 
 import java.lang.reflect.Method;
 
-public class FirstAidFunction extends Component {
+public class FirstAidComponent extends Component {
 
 
-    private int health;
     private Entity target;
     HitboxComponent hitboxComponent;
 
-    public FirstAidFunction(Entity target){
+    /**
+     *creates a first aid component that detects when the player collides with
+     * the entity and when collided it runs a buff function for the Item
+     * @param target  entity on which the buff function will work on
+     */
+    public FirstAidComponent(Entity target){
         this.target = target;
 
     }
@@ -28,21 +32,35 @@ public class FirstAidFunction extends Component {
     public void create(){
         entity.getEvents().addListener("collisionStart", this::onCollisionStart);
         hitboxComponent = this.entity.getComponent(HitboxComponent.class);
-
     }
+
+    /**
+     * checks if the collision is done with the player and then runs a testBuff effect for the Item
+     * and triggers "ItemPickedUp" event
+     */
     private void onCollisionStart(Fixture me, Fixture other){
+
+
+
         TestBuffForItem incHealth = new TestBuffForItem();
-       if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+
+       if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) // checking if the collision is done with the player
+       {
                     incHealth.increaseHealth(target);
                     entity.getEvents().trigger("itemPickedUp");
                     AchievementsHelper.getInstance().trackItemPickedUpEvent();
 
-
            new Thread(() -> {
-                entity.dispose();
-            }).start();
+               try {
+                   entity.dispose();
+               }
+               catch (Exception e){
+                   System.out.print(e);
+               }
+            }).start();   // --> event.dispose() not working without wrapping it in a Thread
+
+
 
         }
     }
-
 }

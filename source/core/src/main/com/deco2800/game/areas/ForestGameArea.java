@@ -117,6 +117,7 @@ public class ForestGameArea extends GameArea {
             "images/rock.jpg",
             "images/wood.jpg",
             "images/Items/first_aid_kit.png",
+            "images/Items/food.png",
             "images/obstacle_1_new.png",
             "images/obstacle2.png",
             "images/mpcMovement.png"
@@ -161,6 +162,7 @@ public class ForestGameArea extends GameArea {
 //        spawnGhosts();
 //        spawnGhostKing();
         spawnFirstAid();
+        spawnApple();
         playMusic();
         trackAchievements();
     }
@@ -286,12 +288,24 @@ public class ForestGameArea extends GameArea {
 
     private void spawnFirstAid() {
 
-        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i < 31; i++) {
             GridPoint2 position = new GridPoint2(i * 3, 5);
             Entity firstAid = ItemFactory.createFirstAid(player);
             spawnEntityAt(firstAid, position, false, false);
         }
     }
+
+    private void spawnApple() {
+
+        for (int i = 1; i < 31; i++) {
+            GridPoint2 position = new GridPoint2(i * 10, 10);
+            Entity firstAid = ItemFactory.createApple(player);
+            spawnEntityAt(firstAid, position, false, false);
+        }
+    }
+
+
+
 
     private Entity spawnPlayer() {
         Entity newPlayer = PlayerFactory.createPlayer();
