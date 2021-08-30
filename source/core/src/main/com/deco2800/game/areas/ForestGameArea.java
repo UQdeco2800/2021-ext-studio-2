@@ -5,10 +5,9 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.NPCFactory;
-import com.deco2800.game.entities.factories.ObstacleFactory;
-import com.deco2800.game.entities.factories.PlayerFactory;
+import com.deco2800.game.entities.factories.*;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
@@ -23,6 +22,7 @@ import java.util.ArrayList;
  * Forest area for the demo game with trees, a player, and some enemies.
  */
 public class ForestGameArea extends GameArea {
+
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
     /* The number of each type of obstacle. Note: total obstacles cannot be greater than 20 (range of loading map)*/
     private static final int NUM_OBSTACLES = 2;
@@ -50,11 +50,12 @@ public class ForestGameArea extends GameArea {
             "images/mpc_right_view.png",
             "images/road.png",
             "images/water.png",
+            "images/Items/first_aid_kit.png",
             "images/obstacle_1.png",
             "images/obstacle2.png"
     };
     private static final String[] forestTextureAtlases = {
-            "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas", "images/airport.atlas","images/obstacle_1.atlas", "images/obstacle_2.atlas"
+            "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas", "images/airport.atlas", "images/obstacle_1.atlas", "images/obstacle_2.atlas"
     };
     private static final String[] forestSounds = {"sounds/Impact4.ogg"};
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
@@ -89,8 +90,9 @@ public class ForestGameArea extends GameArea {
 
 //        spawnGhosts();
 //        spawnGhostKing();
-
+        spawnFirstAid();
         playMusic();
+        trackAchievements();
     }
 
     private void displayUI() {
@@ -166,11 +168,11 @@ public class ForestGameArea extends GameArea {
      * is called, NUM_OBSTACLES obstacles are generated in the range of (0-30) units after the
      * player's position. For each subsequent call, the position of generating obstacles is twenty
      * units behind the player, and the generating range is 20 units.
-     *
+     * <p>
      * For example, the first call to the player x position is 0, and the x range for generating
      * obstacles is 0-30.  The second call to the player's x position is 10, and the x range for
      * generating obstacles is 31-50.
-     *
+     * <p>
      * You can uncomment to view the player's position and the range and specific coordinates of the
      * generated obstacles.
      */
@@ -201,7 +203,7 @@ public class ForestGameArea extends GameArea {
 
             do {
                 randomPos2 = RandomUtils.randomX(3, minPos, maxPos);
-            }  while (randomPoints.contains(randomPos2));
+            } while (randomPoints.contains(randomPos2));
             randomPoints.add(randomPos2);
 
             Entity obstacle = ObstacleFactory.createPlantsObstacle(player);
@@ -212,7 +214,14 @@ public class ForestGameArea extends GameArea {
 //        System.out.print("minPos: " + minPos + "\tmaxPos: " + maxPos + "\nTotal randomPoints" + randomPoints + "\n");
     }
 
+    private void spawnFirstAid() {
 
+        for (int i = 1; i < 6; i++) {
+            GridPoint2 position = new GridPoint2(i * 3, 5);
+            Entity firstAid = ItemFactory.createFirstAid(player);
+            spawnEntityAt(firstAid, position, false, false);
+        }
+    }
 
     private Entity spawnPlayer() {
         Entity newPlayer = PlayerFactory.createPlayer();
@@ -280,4 +289,13 @@ public class ForestGameArea extends GameArea {
         ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class).stop();
         this.unloadAssets();
     }
+
+
+    /**
+     * Achievements system tracking which depends on the game area's lifecycle
+     */
+    private void trackAchievements() {
+        spawnEntity(AchievementFactory.createAchievementEntity());
+    }
+
 }
