@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ public class GameOverDisplay extends UIComponent {
     private Table rootTable;
     private double points = 0.0;
     private TextField pointText;
+    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
 
     public GameOverDisplay(GdxGame game) {
         super();
@@ -40,6 +42,8 @@ public class GameOverDisplay extends UIComponent {
         gameOverLabel.setColor(Color.PINK);
 
         Label pointsLabel = new Label("Points:", skin);
+
+        points = scoringSystem.getScore(scoringSystem.getScoreSeconds());
 
         pointText = new TextField(String.valueOf(points), skin);
         pointText.setDisabled(true);
