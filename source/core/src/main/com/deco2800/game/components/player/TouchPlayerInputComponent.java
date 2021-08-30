@@ -36,6 +36,7 @@ public class TouchPlayerInputComponent extends InputComponent {
         return true;
       case Input.Keys.RIGHT:
         walkDirection.add(Vector2Utils.RIGHT);
+        entity.getEvents().trigger(("right_side"));
         triggerWalkEvent();
         return true;
       default:
@@ -62,6 +63,7 @@ public class TouchPlayerInputComponent extends InputComponent {
         return true;
       case Input.Keys.RIGHT:
         walkDirection.sub(Vector2Utils.RIGHT);
+        entity.getEvents().trigger(("right_side"));
         triggerWalkEvent();
         return true;
       default:
