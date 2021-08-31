@@ -63,8 +63,8 @@ public class ScoreDisplay extends UIComponent {
 
         tableForBoard.add(scoreBoard).size(boardSideLength);
         tableForText.add(scoreLabel);
-        stage.addActor(tableForText);
         stage.addActor(tableForBoard);
+        stage.addActor(tableForText);
     }
 
     @Override
