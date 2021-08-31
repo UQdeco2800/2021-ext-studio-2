@@ -147,7 +147,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Adds to the player's gold.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/buff.html#addHealth()">addHealth()</a></span> - Method in class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/buff.html" title="class in com.deco2800.game.components.buff">buff</a></dt>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/Buff.html#addHealth()">addHealth()</a></span> - Method in class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/Buff.html" title="class in com.deco2800.game.components.buff">Buff</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/CombatStatsComponent.html#addHealth(int)">addHealth(int)</a></span> - Method in class com.deco2800.game.components.<a href="com/deco2800/game/components/CombatStatsComponent.html" title="class in com.deco2800.game.components">CombatStatsComponent</a></dt>
 <dd>
@@ -263,9 +263,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/components/PhysicsComponent.AlignY.html#BOTTOM">BOTTOM</a></span> - com.deco2800.game.physics.components.<a href="com/deco2800/game/physics/components/PhysicsComponent.AlignY.html" title="enum in com.deco2800.game.physics.components">PhysicsComponent.AlignY</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/deco2800/game/components/buff/buff.html" title="class in com.deco2800.game.components.buff"><span class="typeNameLink">buff</span></a> - Class in <a href="com/deco2800/game/components/buff/package-summary.html">com.deco2800.game.components.buff</a></dt>
+<dt><a href="com/deco2800/game/components/buff/Buff.html" title="class in com.deco2800.game.components.buff"><span class="typeNameLink">Buff</span></a> - Class in <a href="com/deco2800/game/components/buff/package-summary.html">com.deco2800.game.components.buff</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/buff.html#%3Cinit%3E(int,int)">buff(int, int)</a></span> - Constructor for class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/buff.html" title="class in com.deco2800.game.components.buff">buff</a></dt>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/Buff.html#%3Cinit%3E(com.deco2800.game.entities.Entity)">Buff(Entity)</a></span> - Constructor for class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/Buff.html" title="class in com.deco2800.game.components.buff">Buff</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/deco2800/game/components/buff/BuffAnimationController.html" title="class in com.deco2800.game.components.buff"><span class="typeNameLink">BuffAnimationController</span></a> - Class in <a href="com/deco2800/game/components/buff/package-summary.html">com.deco2800.game.components.buff</a></dt>
+<dd>
+<div class="block">This class listens to events relevant to a  player entity's state and plays the animation
+ when eat some buff or duff thing</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/BuffAnimationController.html#%3Cinit%3E()">BuffAnimationController()</a></span> - Constructor for class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/BuffAnimationController.html" title="class in com.deco2800.game.components.buff">BuffAnimationController</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a id="I:C">
@@ -292,6 +299,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/components/PhysicsComponent.AlignX.html#CENTER">CENTER</a></span> - com.deco2800.game.physics.components.<a href="com/deco2800/game/physics/components/PhysicsComponent.AlignX.html" title="enum in com.deco2800.game.physics.components">PhysicsComponent.AlignX</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/components/PhysicsComponent.AlignY.html#CENTER">CENTER</a></span> - com.deco2800.game.physics.components.<a href="com/deco2800/game/physics/components/PhysicsComponent.AlignY.html" title="enum in com.deco2800.game.physics.components">PhysicsComponent.AlignY</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/PlayerActions.html#changeCurrentSpeed(com.badlogic.gdx.math.Vector2)">changeCurrentSpeed(Vector2)</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/PlayerActions.html" title="class in com.deco2800.game.components.player">PlayerActions</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/components/tasks/ChaseTask.html" title="class in com.deco2800.game.components.tasks"><span class="typeNameLink">ChaseTask</span></a> - Class in <a href="com/deco2800/game/components/tasks/package-summary.html">com.deco2800.game.components.tasks</a></dt>
 <dd>
@@ -454,6 +463,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/achievements/AchievementsStatsComponent.html#create()">create()</a></span> - Method in class com.deco2800.game.components.achievements.<a href="com/deco2800/game/components/achievements/AchievementsStatsComponent.html" title="class in com.deco2800.game.components.achievements">AchievementsStatsComponent</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/BuffAnimationController.html#create()">create()</a></span> - Method in class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/BuffAnimationController.html" title="class in com.deco2800.game.components.buff">BuffAnimationController</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/Component.html#create()">create()</a></span> - Method in class com.deco2800.game.components.<a href="com/deco2800/game/components/Component.html" title="class in com.deco2800.game.components">Component</a></dt>
 <dd>
 <div class="block">Called when the entity is created and registered.</div>
@@ -465,6 +476,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/gameover/GameOverDisplay.html#create()">create()</a></span> - Method in class com.deco2800.game.components.gameover.<a href="com/deco2800/game/components/gameover/GameOverDisplay.html" title="class in com.deco2800.game.components.gameover">GameOverDisplay</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/items/FirstAidComponent.html#create()">create()</a></span> - Method in class com.deco2800.game.components.items.<a href="com/deco2800/game/components/items/FirstAidComponent.html" title="class in com.deco2800.game.components.items">FirstAidComponent</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/items/FirstAidFunction.html#create()">create()</a></span> - Method in class com.deco2800.game.components.items.<a href="com/deco2800/game/components/items/FirstAidFunction.html" title="class in com.deco2800.game.components.items">FirstAidFunction</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/maingame/MainGameActions.html#create()">create()</a></span> - Method in class com.deco2800.game.components.maingame.<a href="com/deco2800/game/components/maingame/MainGameActions.html" title="class in com.deco2800.game.components.maingame">MainGameActions</a></dt>
 <dd>&nbsp;</dd>
@@ -620,9 +633,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h2 class="title">D</h2>
 <dl>
-<dt><a href="com/deco2800/game/components/buff/deBuff.html" title="class in com.deco2800.game.components.buff"><span class="typeNameLink">deBuff</span></a> - Class in <a href="com/deco2800/game/components/buff/package-summary.html">com.deco2800.game.components.buff</a></dt>
+<dt><a href="com/deco2800/game/components/buff/DeBuff.html" title="class in com.deco2800.game.components.buff"><span class="typeNameLink">DeBuff</span></a> - Class in <a href="com/deco2800/game/components/buff/package-summary.html">com.deco2800.game.components.buff</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/deBuff.html#%3Cinit%3E(int,int)">deBuff(int, int)</a></span> - Constructor for class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/deBuff.html" title="class in com.deco2800.game.components.buff">deBuff</a></dt>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/DeBuff.html#%3Cinit%3E(com.deco2800.game.entities.Entity)">DeBuff(Entity)</a></span> - Constructor for class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/DeBuff.html" title="class in com.deco2800.game.components.buff">DeBuff</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/ui/terminal/commands/DebugCommand.html" title="class in com.deco2800.game.ui.terminal.commands"><span class="typeNameLink">DebugCommand</span></a> - Class in <a href="com/deco2800/game/ui/terminal/commands/package-summary.html">com.deco2800.game.ui.terminal.commands</a></dt>
 <dd>
@@ -638,8 +651,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/rendering/DebugRenderer.html#%3Cinit%3E(com.badlogic.gdx.physics.box2d.Box2DDebugRenderer,com.badlogic.gdx.graphics.glutils.ShapeRenderer)">DebugRenderer(Box2DDebugRenderer, ShapeRenderer)</a></span> - Constructor for class com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/DebugRenderer.html" title="class in com.deco2800.game.rendering">DebugRenderer</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/deBuff.html#decreaseHealth()">decreaseHealth()</a></span> - Method in class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/deBuff.html" title="class in com.deco2800.game.components.buff">deBuff</a></dt>
-<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/DeBuff.html#decreaseHealth()">decreaseHealth()</a></span> - Method in class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/DeBuff.html" title="class in com.deco2800.game.components.buff">DeBuff</a></dt>
+<dd>
+<div class="block">Decreasing HEALTH</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/PhysicsLayer.html#DEFAULT">DEFAULT</a></span> - Static variable in class com.deco2800.game.physics.<a href="com/deco2800/game/physics/PhysicsLayer.html" title="class in com.deco2800.game.physics">PhysicsLayer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/ai/tasks/DefaultTask.html" title="class in com.deco2800.game.ai.tasks"><span class="typeNameLink">DefaultTask</span></a> - Class in <a href="com/deco2800/game/ai/tasks/package-summary.html">com.deco2800.game.ai.tasks</a></dt>
@@ -892,6 +907,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">creates a first aid component that detects when the player collides with
  the entity and when collided it runs a buff function for the Item</div>
 </dd>
+<dt><a href="com/deco2800/game/components/items/FirstAidFunction.html" title="class in com.deco2800.game.components.items"><span class="typeNameLink">FirstAidFunction</span></a> - Class in <a href="com/deco2800/game/components/items/package-summary.html">com.deco2800.game.components.items</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/items/FirstAidFunction.html#%3Cinit%3E(com.deco2800.game.entities.Entity)">FirstAidFunction(Entity)</a></span> - Constructor for class com.deco2800.game.components.items.<a href="com/deco2800/game/components/items/FirstAidFunction.html" title="class in com.deco2800.game.components.items">FirstAidFunction</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/raycast/RaycastHit.html#fixture">fixture</a></span> - Variable in class com.deco2800.game.physics.raycast.<a href="com/deco2800/game/physics/raycast/RaycastHit.html" title="class in com.deco2800.game.physics.raycast">RaycastHit</a></dt>
 <dd>
 <div class="block">Fixture which was hit.</div>
@@ -1125,6 +1144,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/ChaseTask.html#getPriority()">getPriority()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/ChaseTask.html" title="class in com.deco2800.game.components.tasks">ChaseTask</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/ObstacleDisapperTask.html#getPriority()">getPriority()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/ObstacleDisapperTask.html" title="class in com.deco2800.game.components.tasks">ObstacleDisapperTask</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/PlantsDisappearTask.html#getPriority()">getPriority()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/PlantsDisappearTask.html" title="class in com.deco2800.game.components.tasks">PlantsDisappearTask</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/ThornsDisappearTask.html#getPriority()">getPriority()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/ThornsDisappearTask.html" title="class in com.deco2800.game.components.tasks">ThornsDisappearTask</a></dt>
@@ -1310,7 +1331,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/items/TestBuffForItem.html#increaseHealth(com.deco2800.game.entities.Entity)">increaseHealth(Entity)</a></span> - Method in class com.deco2800.game.components.items.<a href="com/deco2800/game/components/items/TestBuffForItem.html" title="class in com.deco2800.game.components.items">TestBuffForItem</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/buff.html#increaseHealthLimit()">increaseHealthLimit()</a></span> - Method in class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/buff.html" title="class in com.deco2800.game.components.buff">buff</a></dt>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/Buff.html#increaseHealthLimit()">increaseHealthLimit()</a></span> - Method in class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/Buff.html" title="class in com.deco2800.game.components.buff">Buff</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/input/InputComponent.html" title="class in com.deco2800.game.input"><span class="typeNameLink">InputComponent</span></a> - Class in <a href="com/deco2800/game/input/package-summary.html">com.deco2800.game.input</a></dt>
 <dd>
@@ -1682,6 +1703,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/Obstacle/ObstacleAnimationController.html#%3Cinit%3E()">ObstacleAnimationController()</a></span> - Constructor for class com.deco2800.game.components.Obstacle.<a href="com/deco2800/game/components/Obstacle/ObstacleAnimationController.html" title="class in com.deco2800.game.components.Obstacle">ObstacleAnimationController</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/deco2800/game/components/tasks/ObstacleDisapperTask.html" title="class in com.deco2800.game.components.tasks"><span class="typeNameLink">ObstacleDisapperTask</span></a> - Class in <a href="com/deco2800/game/components/tasks/package-summary.html">com.deco2800.game.components.tasks</a></dt>
+<dd>
+<div class="block">When the character is a certain distance away from obstacles, trigger
+ the "ObstacleDisappearStart" event.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/ObstacleDisapperTask.html#%3Cinit%3E(com.deco2800.game.entities.Entity,int,float)">ObstacleDisapperTask(Entity, int, float)</a></span> - Constructor for class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/ObstacleDisapperTask.html" title="class in com.deco2800.game.components.tasks">ObstacleDisapperTask</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/entities/factories/ObstacleFactory.html" title="class in com.deco2800.game.entities.factories"><span class="typeNameLink">ObstacleFactory</span></a> - Class in <a href="com/deco2800/game/entities/factories/package-summary.html">com.deco2800.game.entities.factories</a></dt>
 <dd>
 <div class="block">Factory to create obstacle entities.</div>
@@ -1834,8 +1862,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Point at which the raycast hit the fixture.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/deBuff.html#poisoning()">poisoning()</a></span> - Method in class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/deBuff.html" title="class in com.deco2800.game.components.buff">deBuff</a></dt>
-<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/DeBuff.html#poisoning()">poisoning()</a></span> - Method in class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/DeBuff.html" title="class in com.deco2800.game.components.buff">DeBuff</a></dt>
+<dd>
+<div class="block">A poisoning status of Player</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/PhysicsContactListener.html#postSolve(com.badlogic.gdx.physics.box2d.Contact,com.badlogic.gdx.physics.box2d.ContactImpulse)">postSolve(Contact, ContactImpulse)</a></span> - Method in class com.deco2800.game.physics.<a href="com/deco2800/game/physics/PhysicsContactListener.html" title="class in com.deco2800.game.physics">PhysicsContactListener</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/PhysicsContactListener.html#preSolve(com.badlogic.gdx.physics.box2d.Contact,com.badlogic.gdx.physics.box2d.Manifold)">preSolve(Contact, Manifold)</a></span> - Method in class com.deco2800.game.physics.<a href="com/deco2800/game/physics/PhysicsContactListener.html" title="class in com.deco2800.game.physics">PhysicsContactListener</a></dt>
@@ -2290,6 +2320,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/UIComponent.html#skin">skin</a></span> - Static variable in class com.deco2800.game.ui.<a href="com/deco2800/game/ui/UIComponent.html" title="class in com.deco2800.game.ui">UIComponent</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/DeBuff.html#slowSpeed()">slowSpeed()</a></span> - Method in class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/DeBuff.html" title="class in com.deco2800.game.components.buff">DeBuff</a></dt>
+<dd>
+<div class="block">Player's movement will be slow</div>
+</dd>
 <dt><a href="com/deco2800/game/utils/SortedIntMap.html" title="class in com.deco2800.game.utils"><span class="typeNameLink">SortedIntMap</span></a>&lt;<a href="com/deco2800/game/utils/SortedIntMap.html" title="type parameter in SortedIntMap">V</a>&gt; - Class in <a href="com/deco2800/game/utils/package-summary.html">com.deco2800.game.utils</a></dt>
 <dd>
 <div class="block">A map sorted by the value of key with O(1) iteration.</div>
@@ -2333,6 +2367,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/ChaseTask.html#start()">start()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/ChaseTask.html" title="class in com.deco2800.game.components.tasks">ChaseTask</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/MovementTask.html#start()">start()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/MovementTask.html" title="class in com.deco2800.game.components.tasks">MovementTask</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/ObstacleDisapperTask.html#start()">start()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/ObstacleDisapperTask.html" title="class in com.deco2800.game.components.tasks">ObstacleDisapperTask</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/PlantsDisappearTask.html#start()">start()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/PlantsDisappearTask.html" title="class in com.deco2800.game.components.tasks">PlantsDisappearTask</a></dt>
 <dd>&nbsp;</dd>
@@ -2697,6 +2733,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Updates the player's gaming time on the ui.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/Entity.html#updateSpeed(com.badlogic.gdx.math.Vector2)">updateSpeed(Vector2)</a></span> - Method in class com.deco2800.game.entities.<a href="com/deco2800/game/entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/files/UserSettings.html" title="class in com.deco2800.game.files"><span class="typeNameLink">UserSettings</span></a> - Class in <a href="com/deco2800/game/files/package-summary.html">com.deco2800.game.files</a></dt>
 <dd>
 <div class="block">Reading, Writing, and applying user settings in the game.</div>
