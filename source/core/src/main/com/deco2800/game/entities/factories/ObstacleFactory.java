@@ -18,6 +18,8 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Factory to create obstacle entities.
@@ -26,6 +28,7 @@ import com.deco2800.game.services.ServiceLocator;
  */
 public class ObstacleFactory {
 
+    private static final Logger logger = LoggerFactory.getLogger(ObstacleFactory.class);
     /**
      * Creates a Plants Obstacle.
      *
@@ -54,6 +57,8 @@ public class ObstacleFactory {
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
         obstacle.setScale(2, 3);
         PhysicsUtils.setScaledCollider(obstacle, 1f, 0.7f);
+
+        logger.info("Create a Plants Obstacle");
 
         return obstacle;
     }
@@ -89,6 +94,8 @@ public class ObstacleFactory {
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(obstacle, 0.2f, 0.3f);
         obstacle.setScale(2, 2);
+
+        logger.info("Create a Thorns Obstacle");
 
         return obstacle;
     }
