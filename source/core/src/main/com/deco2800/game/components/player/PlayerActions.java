@@ -39,6 +39,15 @@ public class PlayerActions extends Component {
 
 
 
+  public void changeCurrentSpeed(Vector2 currentSpeed) {
+    Body body = physicsComponent.getBody();
+    Vector2 velocity = body.getLinearVelocity();
+    Vector2 desiredVelocity = walkDirection.cpy().scl(currentSpeed);
+    // impulse = (desiredVel - currentVel) * mass
+    Vector2 impulse = desiredVelocity.sub(velocity).scl(body.getMass());
+    body.applyLinearImpulse(impulse, body.getWorldCenter(), true);
+  }
+
 
   @Override
   public void update() {

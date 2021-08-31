@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
+import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.events.EventHandler;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
@@ -61,6 +62,11 @@ public class Entity {
         this.enabled = enabled;
     }
 
+
+    public void updateSpeed(Vector2 speed){
+        PlayerActions component = this.getComponent(PlayerActions.class);
+        component.changeCurrentSpeed(speed);
+    }
 
     /**
      * Disappear an entity.
