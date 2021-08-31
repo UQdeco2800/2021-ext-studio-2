@@ -5,36 +5,28 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.deco2800.game.concurrency.AsyncTaskQueue;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 /**
  * A UI component to display achievement cards and labels for corresponding achievements
  */
-public class AchievementsDisplay extends UIComponent{
+public class AchievementsDisplay extends UIComponent {
     private static final int RENDER_DURATION = 5000;
+    private static final String[] textures = AchievementFactory.getTextures();
     private Table table;
     private Image achievementImg;
     private Label achievementLabel;
-    private static final String[] textures = AchievementFactory.getTextures();
-
-    private ExecutorService service;
 
     @Override
     public void create() {
         super.create();
         loadAssets();
         addActors();
-
-        /* An event pool which runs long-running rendering tasks on a single thread. These expensive
-         * tasks are a part of an unbounded queue which executes them sequentially.*/
-        service = Executors.newSingleThreadExecutor();
 
         /* Listen to achievement events*/
         entity.getEvents().addListener("updateAchievement", this::updateAchievementsUI);
@@ -66,6 +58,7 @@ public class AchievementsDisplay extends UIComponent{
         table.setFillParent(true);
         stage.addActor(table);
     }
+
     @Override
     public void draw(SpriteBatch batch) {
 
@@ -74,38 +67,38 @@ public class AchievementsDisplay extends UIComponent{
     /**
      * Achievement UI updates are guaranteed to execute sequentially,
      * and no more than one update will be active at any given time
+     *
      * @param achievement Configuration with properties and conditions for corresponding achievement
      */
     private void updateAchievementsUI(BaseAchievementConfig achievement) {
-
-        /* Queue expensive task to run on a separate thread asynchronously.*/
-        if(!service.isShutdown()) {
-            service.execute(() -> {
-                try {
-                    /* Render achievement card */
-                    renderAchievement(achievement);
-                    /* Wait for some time */
-                    Thread.sleep(RENDER_DURATION);
-                    /* Remove card from screen */
-                    table.clear();
-
-                } catch (InterruptedException ignored) {
-                }
-            });
-        }
-
+        /* Queue expensive task to run on a separate single thread
+         * to run asynchronously. */
+        AsyncTaskQueue.enqueueTask(() -> {
+            try {
+                /* Render achievement card */
+                renderAchievement(achievement);
+                /* Wait for some time */
+                Thread.sleep(RENDER_DURATION);
+                /* Remove card from screen */
+                table.clear();
+            } catch (InterruptedException ignored) {
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     /**
      * Renders the current achievement notification on the table
+     *
      * @param achievement Configuration with properties and conditions for corresponding achievement
      */
-    private void renderAchievement(BaseAchievementConfig achievement){
+    private void renderAchievement(BaseAchievementConfig achievement) {
         CharSequence text = achievement.message;
         achievementLabel = new Label(text, skin, "small");
         achievementImg = new Image(ServiceLocator.getResourceService()
                 .getAsset(achievement.iconPath, Texture.class));
-        table.add(achievementImg).size(300f,150f);
+        table.add(achievementImg).size(300f, 150f);
         table.row();
         table.add(achievementLabel);
 
@@ -116,13 +109,14 @@ public class AchievementsDisplay extends UIComponent{
         super.dispose();
 
         /* If the in game screen is out of focus, cancel all future tasks. This has to be
-         * done in order to prevent memory leaks, unforeseen exceptions and other nasty bugs.*/
-        service.shutdownNow();
+         * done in order to prevent memory leaks, unforeseen exceptions and
+         * other nasty bugs.*/
+        AsyncTaskQueue.cancelFutureTasksNow();
 
-        if(achievementImg != null) {
+        if (achievementImg != null) {
             achievementImg.remove();
         }
-        if(achievementLabel != null){
+        if (achievementLabel != null) {
             achievementLabel.remove();
         }
         unloadAssets();

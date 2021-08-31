@@ -3,7 +3,6 @@ package com.deco2800.game.entities.configs.achievements;
 /**
  * Defines a basic set of achievement properties stored in achievement config file (achieve.json)
  * to be loaded by Achievement Factory
- *
  */
 public class BaseAchievementConfig {
      public int bonus = 0;

@@ -8,9 +8,9 @@ import java.util.List;
 
 public class Bag implements BagInterface {
 
-    /**
-     * 所有物品
-     * 物品
+    /*
+      所有物品
+      物品
      */
     private List<Entity> entities;
 

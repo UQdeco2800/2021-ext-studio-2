@@ -76,16 +76,16 @@ public class ForestGameArea extends GameArea {
         }
     }
 
-//  private void spawnTrees() {
-//    GridPoint2 minPos = new GridPoint2(0, 0);
-//    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-//
-//    for (int i = 0; i < NUM_TREES; i++) {
-//      GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
-//      Entity tree = ObstacleFactory.createTree(player);
-//      spawnEntityAt(tree, randomPos, true, false);
-//    }
-//  }
+    //  private void spawnTrees() {
+    //    GridPoint2 minPos = new GridPoint2(0, 0);
+    //    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+    //
+    //    for (int i = 0; i < NUM_TREES; i++) {
+    //      GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
+    //      Entity tree = ObstacleFactory.createTree(player);
+    //      spawnEntityAt(tree, randomPos, true, false);
+    //    }
+    //  }
 
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
     /* The number of each type of obstacle. Note: total obstacles cannot be greater than 20 (range of loading map)*/
@@ -117,17 +117,20 @@ public class ForestGameArea extends GameArea {
             "images/rock.jpg",
             "images/wood.jpg",
             "images/Items/first_aid_kit.png",
+            "images/Items/food.png",
             "images/obstacle_1_new.png",
-            "images/obstacle2_vision2.png"
+            "images/obstacle2_vision2.png",
+            "images/mpcMovement.png"
+
 
     };
     private static final String[] forestTextureAtlases = {
-            "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas", "images/airport.atlas", "images/obstacle_1.atlas", "images/obstacle_2.atlas"
+            "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas", "images/airport.atlas", "images/obstacle_1.atlas", "images/obstacle_2.atlas", "images/mpcMovement.atlas"
     };
     private static final String[] forestSounds = {"sounds/Impact4.ogg"};
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
-    private static final String backgroundMusic = "sounds/neverGonna.mp3";
+    private static final String backgroundMusic = "sounds/temp_bgm.wav";
     private static final String[] forestMusic = {backgroundMusic};
     private boolean firstGenerate = true;
 
@@ -158,6 +161,7 @@ public class ForestGameArea extends GameArea {
 
 //        spawnGhosts();
 //        spawnGhostKing();
+
         spawnFirstAid();
         playMusic();
         trackAchievements();
@@ -285,12 +289,15 @@ public class ForestGameArea extends GameArea {
 
     private void spawnFirstAid() {
 
-        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i < 31; i++) {
             GridPoint2 position = new GridPoint2(i * 3, 5);
             Entity firstAid = ItemFactory.createFirstAid(player);
             spawnEntityAt(firstAid, position, false, false);
         }
     }
+
+
+
 
     private Entity spawnPlayer() {
         Entity newPlayer = PlayerFactory.createPlayer();
