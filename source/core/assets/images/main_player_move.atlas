@@ -1,0 +1,40 @@
+main_player_move.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+main_player_move
+  rotate: false
+  xy: 2, 1088
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_move
+  rotate: false
+  xy: 2, 545
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_move
+  rotate: false
+  xy: 545, 1088
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 4
+main_player_move
+  rotate: false
+  xy: 2, 2
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_rightside
+  rotate: false
+  xy: 545, 545
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1

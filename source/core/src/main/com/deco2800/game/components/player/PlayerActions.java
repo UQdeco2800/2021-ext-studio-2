@@ -1,5 +1,7 @@
 package com.deco2800.game.components.player;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -123,11 +125,32 @@ public class PlayerActions extends Component {
 
   void jump() {
     Sound jumpSound = ServiceLocator.getResourceService().getAsset("sounds/jump.ogg", Sound.class);
-
+    jumpSound.play();
+    
     Body body = physicsComponent.getBody();
     body.applyForceToCenter(0, 400f, true);
 
-    jumpSound.play();
+//    Vector2 a = body.getLinearVelocity();
+//    float force = 0;
+//
+//    if(Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+//      if(a.x < 50) force = 400f;
+//    }
+//    else if(Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+//      if(a.x > -50) force = -400f;
+//    }
+//    else{
+//      body.getFixtureList().get(0).setFriction(.4f);
+//      body.getFixtureList().get(0).setFriction(.4f);
+//    }
+//
+//    if(Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)){
+//      a.y = 5;
+//      body.setLinearVelocity(a);
+//    }
+//    body.applyForceToCenter(force, 400f, true);
+
+
 
   }
 }

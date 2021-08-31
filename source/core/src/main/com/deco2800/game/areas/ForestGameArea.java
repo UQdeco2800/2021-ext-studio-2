@@ -76,16 +76,16 @@ public class ForestGameArea extends GameArea {
         }
     }
 
-//  private void spawnTrees() {
-//    GridPoint2 minPos = new GridPoint2(0, 0);
-//    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-//
-//    for (int i = 0; i < NUM_TREES; i++) {
-//      GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
-//      Entity tree = ObstacleFactory.createTree(player);
-//      spawnEntityAt(tree, randomPos, true, false);
-//    }
-//  }
+    //  private void spawnTrees() {
+    //    GridPoint2 minPos = new GridPoint2(0, 0);
+    //    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+    //
+    //    for (int i = 0; i < NUM_TREES; i++) {
+    //      GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
+    //      Entity tree = ObstacleFactory.createTree(player);
+    //      spawnEntityAt(tree, randomPos, true, false);
+    //    }
+    //  }
 
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
     /* The number of each type of obstacle. Note: total obstacles cannot be greater than 20 (range of loading map)*/
@@ -119,8 +119,9 @@ public class ForestGameArea extends GameArea {
             "images/Items/first_aid_kit.png",
             "images/Items/food.png",
             "images/obstacle_1_new.png",
-            "images/obstacle2.png",
+            "images/obstacle2_vision2.png",
             "images/mpcMovement.png"
+
 
     };
     private static final String[] forestTextureAtlases = {
@@ -167,11 +168,10 @@ public class ForestGameArea extends GameArea {
         player = spawnPlayer();
         spawnObstacles();
 
-
 //        spawnGhosts();
 //        spawnGhostKing();
+
         spawnFirstAid();
-        spawnApple();
         playMusic();
         trackAchievements();
     }
@@ -253,19 +253,18 @@ public class ForestGameArea extends GameArea {
      * For example, the first call to the player x position is 0, and the x range for generating
      * obstacles is 0-30.  The second call to the player's x position is 10, and the x range for
      * generating obstacles is 31-50.
-     * <p>
-     * You can uncomment to view the player's position and the range and specific coordinates of the
-     * generated obstacles.
      */
     public void spawnObstacles() {
         GridPoint2 minPos;
         GridPoint2 maxPos;
         GridPoint2 randomPos;
         GridPoint2 randomPos2;
+        // Record the coordinates of all obstacles, Record the coordinates of all obstacles to prevent obstacles
+        // from being generated at the same location
         ArrayList<GridPoint2> randomPoints = new ArrayList<GridPoint2>();
 
         int playerX = (int) player.getPosition().x;
-//        System.out.print("playerX:" + playerX + "\n");
+        logger.info("player x coordinate: {}", playerX);
 
         if (firstGenerate) {
             minPos = new GridPoint2(playerX, 0);
@@ -292,23 +291,16 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(obstacle, randomPos, true, false);
             spawnEntityAt(obstacle2, randomPos2, true, true);
         }
-//        System.out.print("minPos: " + minPos + "\tmaxPos: " + maxPos + "\nTotal randomPoints" + randomPoints + "\n");
+        logger.info("Min x: {}, Max x: {}; Total randomPoints {}", minPos.x, maxPos.x, randomPoints);
     }
+
+
 
     private void spawnFirstAid() {
 
         for (int i = 1; i < 31; i++) {
             GridPoint2 position = new GridPoint2(i * 3, 5);
             Entity firstAid = ItemFactory.createFirstAid(player);
-            spawnEntityAt(firstAid, position, false, false);
-        }
-    }
-
-    private void spawnApple() {
-
-        for (int i = 1; i < 31; i++) {
-            GridPoint2 position = new GridPoint2(i * 10, 10);
-            Entity firstAid = ItemFactory.createApple(player);
             spawnEntityAt(firstAid, position, false, false);
         }
     }

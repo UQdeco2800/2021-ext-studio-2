@@ -26,6 +26,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   @Override
   public boolean keyDown(int keycode) {
     switch (keycode) {
+
       case Keys.S:
       case Keys.DOWN:
         walkDirection.add(Vector2Utils.DOWN);
