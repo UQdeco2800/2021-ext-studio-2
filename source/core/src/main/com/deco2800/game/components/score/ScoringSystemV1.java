@@ -91,6 +91,20 @@ public class ScoringSystemV1 implements ScoringSystem {
     }
 
     /**
+     * Stop the timer in the scoringSystem class.
+     */
+    public void stopTimerForTest() {
+        clock.cancel();
+    }
+
+    /**
+     * Instead of stop the timer, just stop the task
+     */
+    public void stopTimerTaskForTest() {
+        task.cancel();
+    }
+
+    /**
      * Return the total score
      * @return int scores
      */

@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.achievements.AchievementsHelper;
 import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
@@ -72,6 +73,9 @@ public class PlayerStatsDisplay extends UIComponent {
     public void updatePlayerHealthUI(int health) {
         CharSequence text = String.format("Health: %d", health);
         healthLabel.setText(text);
+
+        // Track changes in health
+        AchievementsHelper.getInstance().trackHealthEvent(health);
 
         //when player is dead the timer stops.
         if (health <= 0) {

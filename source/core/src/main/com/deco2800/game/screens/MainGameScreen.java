@@ -40,8 +40,7 @@ import org.slf4j.LoggerFactory;
  */
 public class MainGameScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-  private static final String[] mainGameTextures =
-          {"images/heart.png", "images/background.png", "images/clock.png", "images/scoreboard.png"};
+  private static final String[] mainGameTextures = {"images/heart.png", "images/clock.png", "images/scoreboard.png", "images/background.png"};
   private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 
   private final GdxGame game;
@@ -85,6 +84,9 @@ public class MainGameScreen extends ScreenAdapter {
   @Override
   public void render(float delta) {
 
+    //new Entity().getEvents().trigger("updateScore");
+    //new Entity().getEvents().trigger("updateTime");
+
     physicsEngine.update();
     ServiceLocator.getEntityService().update();
     renderer.render();
@@ -95,10 +97,12 @@ public class MainGameScreen extends ScreenAdapter {
     Vector2 screenVector = player.getPosition();
     screenVector.y = 7f;
     renderer.getCamera().getEntity().setPosition(screenVector);
-    // infinite loop for terrain
+    // infinite loop for terrain and obstacles
     if(screenVector.x > (2*counter+1)*10) {
       counter+=1;
       forestGameArea.spawnTerrainRandomly((int) (screenVector.x+2));
+      // Generate obstacles
+      forestGameArea.spawnObstacles();
     }
   }
 

@@ -1,3 +1,7 @@
+dependencies {
+    implementation 'junit:junit:4.12'
+    implementation 'junit:junit:4.12'
+}
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 sourceSets.main.java.srcDirs = [ "src/main/" ]
