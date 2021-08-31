@@ -85,6 +85,7 @@ public class MainGameScreen extends ScreenAdapter {
 
     //new Entity().getEvents().trigger("updateScore");
     //new Entity().getEvents().trigger("updateTime");
+    //System.out.println("GABAG");
 
     physicsEngine.update();
     ServiceLocator.getEntityService().update();
@@ -94,6 +95,7 @@ public class MainGameScreen extends ScreenAdapter {
     player.setPosition((float) (player.getPosition().x+0.05), player.getPosition().y);
     // Centralize the screen to player
     Vector2 screenVector = player.getPosition();
+    System.out.println(player.getRelativePosition());
     screenVector.y = 7f;
     renderer.getCamera().getEntity().setPosition(screenVector);
     // infinite loop for terrain

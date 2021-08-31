@@ -39,6 +39,9 @@ public class Entity {
     private boolean removeTexture = false;
     private boolean created = false;
     private Vector2 position = Vector2.Zero.cpy();
+    private Vector2 relativePosition = Vector2.Zero.cpy();
+
+
     private Vector2 scale = new Vector2(1, 1);
     private Array<Component> createdComponents;
 
@@ -61,7 +64,6 @@ public class Entity {
         this.enabled = enabled;
     }
 
-
     /**
      * Disappear an entity.
      */
@@ -83,6 +85,15 @@ public class Entity {
     }
 
     /**
+     * Get the entity's game position relative to stage position.
+     *
+     * @return position
+     */
+    public Vector2 getRelativePosition() {
+        return relativePosition.cpy(); // Cpy gives us pass-by-value to prevent bugs
+    }
+
+    /**
      * Set the entity's game position.
      *
      * @param position new position.
@@ -101,7 +112,22 @@ public class Entity {
     public void setPosition(float x, float y) {
         this.position.x = x;
         this.position.y = y;
+        setRelativePosition(x, y);
         getEvents().trigger(EVT_NAME_POS, position.cpy());
+    }
+
+    /**
+     * Set the entity's game position in relation to stage location.
+     *
+     * @param x new x position
+     * @param y new y position
+     */
+    public void setRelativePosition(float x, float y) {
+        this.relativePosition.x = x;
+        this.relativePosition.y = y - (float)3.1149995;
+        if(this.relativePosition.y <= 2.3841858E-7){
+            this.relativePosition.y = 0;
+        }
     }
 
     /**
@@ -112,6 +138,8 @@ public class Entity {
      */
     public void setPosition(Vector2 position, boolean notify) {
         this.position = position;
+        this.relativePosition.x = position.x;
+        this.relativePosition.y = position.y - (float)3.1149995;
         if (notify) {
             getEvents().trigger(EVT_NAME_POS, position);
         }

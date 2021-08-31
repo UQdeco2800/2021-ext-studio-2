@@ -15,6 +15,8 @@ public class CombatStatsComponent extends Component {
   private static final Logger logger = LoggerFactory.getLogger(CombatStatsComponent.class);
   private int health;
   private int baseAttack;
+  private int hunger = 100;
+  private int thirst = 100;
 
   public CombatStatsComponent(int health, int baseAttack) {
     setHealth(health);
@@ -55,8 +57,6 @@ public class CombatStatsComponent extends Component {
     }
   }
 
-
-
   /**
    * Adds to the player's health. The amount added can be negative.
    *
@@ -64,6 +64,38 @@ public class CombatStatsComponent extends Component {
    */
   public void addHealth(int health) {
     setHealth(this.health + health);
+  }
+
+  /**
+   * Returns the entity's hunger.
+   *
+   * @return entity's hunger
+   */
+  public int getHunger() {
+    return hunger;
+  }
+
+  /**
+   * Sets the entity's hunger.
+   */
+  public void setHunger(int hungerChange) {
+    hunger = getHunger() - hungerChange;
+  }
+
+  /**
+   * Gets the entity's thirst.
+   *
+   * @return entity's health
+   */
+  public int getThirst() {
+    return thirst;
+  }
+
+  /**
+   * Sets the entity's thirst.
+   */
+  public void setThirst(int thirstChange) {
+    thirst = getThirst() - thirstChange;
   }
 
   /**

@@ -36,7 +36,9 @@ public class PlayerActions extends Component {
 
   @Override
   public void update() {
+    System.out.println();
     if (moving) {
+      //System.out.println("ME WALK");
       updateSpeed();
     }
   }

@@ -3,6 +3,7 @@ package com.deco2800.game.components.score;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.ui.UIComponent;
 
@@ -57,7 +58,9 @@ public class TimerDisplay extends UIComponent {
     public void update() {
         super.update();
         //update the clock regularly
+
         entity.getEvents().trigger("updateTime", scoringSystem.getMinutes(), scoringSystem.getSeconds());
+
     }
 
     /**
