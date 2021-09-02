@@ -9,19 +9,33 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
  */
 public class PlayerAnimationController extends Component {
     AnimationRenderComponent animator;
-
+    private boolean texturePresent = true;
     @Override
     public void create() {
         super.create();
         animator = this.entity.getComponent(AnimationRenderComponent.class);
-        entity.getEvents().addListener("right_side", this::animateRight);
+        entity.getEvents().addListener("walkRight", this::animateRight);
+        entity.getEvents().addListener("stopWalkRight", this::stopAnimateRight);
+
         //entity.getEvents().addListener("left_side", this::animateLeft);
     }
 
-    void animateRight() {
-        animator.getEntity().setRemoveTexture();
-        animator.startAnimation("main_player_move");
+
+
+    private void animateRight() {
+        if(texturePresent) {
+            animator.getEntity().setRemoveTexture();
+            texturePresent = false;
+        }
+        animator.stopAnimation();
+        animator.startAnimation("main_player_run");
     }
+
+    private void stopAnimateRight() {
+        animator.stopAnimation();
+        animator.startAnimation("main_player_walk");
+    }
+
     /**
     * void animateLeft() {
     *    animator.startAnimation("turn_left");

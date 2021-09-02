@@ -33,7 +33,6 @@ public class PlayerActions extends Component {
     entity.getEvents().addListener("walk", this::walk);
     entity.getEvents().addListener("walkStop", this::stopWalking);
     entity.getEvents().addListener("walkRight", this::walkRight);
-    entity.getEvents().addListener("stopWalkRight", this::stopWalkRight);
     entity.getEvents().addListener("walkLeft", this::walkLeft);
     entity.getEvents().addListener("attack", this::attack);
     entity.getEvents().addListener("jump", this::jump);
@@ -91,18 +90,18 @@ public class PlayerActions extends Component {
    */
 
   void walkRight() {
-    animator.getEntity().setRemoveTexture();
-    animator.stopAnimation();
-    animator.startAnimation("main_player_run");
+//    animator.getEntity().setRemoveTexture();
+//    animator.stopAnimation();
+//    animator.startAnimation("main_player_run");
     Sound turnSound = ServiceLocator.getResourceService().getAsset("sounds/turnDirection.ogg", Sound.class);
     turnSound.play();
   }
-
-  void stopWalkRight() {
-    animator.stopAnimation();
-    animator.startAnimation("main_player_walk");
-
-  }
+//
+//  void stopWalkRight() {
+//    animator.stopAnimation();
+//    animator.startAnimation("main_player_walk");
+//
+//  }
 
   /** [[DEPRECATED]]
    * Updates the player sprite to turn left

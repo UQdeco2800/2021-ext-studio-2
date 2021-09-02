@@ -9,6 +9,7 @@ import com.deco2800.game.components.buff.BuffAnimationController;
 import com.deco2800.game.components.npc.GhostAnimationController;
 import com.deco2800.game.components.player.InventoryComponent;
 import com.deco2800.game.components.player.PlayerActions;
+import com.deco2800.game.components.player.PlayerAnimationController;
 import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.PlayerConfig;
@@ -64,7 +65,8 @@ public class PlayerFactory {
         deBuffAnimator.addAnimation("debuffDecrease", 0.1f, Animation.PlayMode.LOOP);
         Entity player =
                 new Entity()
-                        .addComponent(new TextureRenderComponent("images/mpc_front_stroke.png"))
+                        .addComponent(new TextureRenderComponent("images/mpc_right.png"))
+                        .addComponent(new PlayerAnimationController())
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent())
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
