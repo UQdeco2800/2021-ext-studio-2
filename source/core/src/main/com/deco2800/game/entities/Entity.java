@@ -38,6 +38,7 @@ public class Entity {
     private boolean enabled = true;
     private boolean disappear = false;
     private boolean removeTexture = false;
+    private boolean dispose = false;
     private boolean created = false;
     private Vector2 position = Vector2.Zero.cpy();
     private Vector2 scale = new Vector2(1, 1);
@@ -69,19 +70,27 @@ public class Entity {
     }
 
     /**
-     * Set disappear to true.
+     * Set disappear to true. The code that works subsequently is in update.
      */
     public void setDisappear() {
-        logger.info("Setting disappear={} on entity {}", removeTexture, this);
         this.disappear = true;
+        logger.info("Setting disappear={} on entity {}", removeTexture, this);
     }
 
     /**
-     * Set removeTexture to true.
+     * Set removeTexture to true. The code that works subsequently is in update.
      */
     public void setRemoveTexture() {
-        logger.info("Setting removeTexture={} on entity {}", removeTexture, this);
         this.removeTexture = true;
+        logger.info("Setting removeTexture={} on entity {}", removeTexture, this);
+    }
+
+    /**
+     * Set dispose to true. The code that works subsequently is in update.
+     */
+    public void setDispose(){
+        this.dispose = true;
+        logger.info("Setting dispose={} on entity {}", dispose, this);
     }
 
     /**
@@ -296,14 +305,16 @@ public class Entity {
         if (!enabled) {
             return;
         }
-        if (disappear) {
-            this.removeAfterAnimation1f();
+
+        if (dispose) {
+            this.dispose();
             return;
         }
 
         for (Component component : createdComponents) {
             // When texture and animation are given an entity at the same time, the texture needs to disappear when the
             // animation is played to avoid the conflict between the texture and the animation.
+//            System.out.print("removeTexture "+removeTexture+ ", on Entity: "+this+"\n");
             if (removeTexture) {
                 if (component.getClass().equals(TextureRenderComponent.class)) {
                     logger.info("Remove {} on entity{}", component.getClass().getSimpleName(), this);
@@ -311,6 +322,10 @@ public class Entity {
                 }
             }
             component.triggerUpdate();
+        }
+        if (disappear) {
+            this.removeAfterAnimation1f();
+            return;
         }
     }
 
