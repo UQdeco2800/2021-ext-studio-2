@@ -68,7 +68,7 @@ public class PlayerFactory {
                         .addComponent(new TextureRenderComponent("images/mpc_right.png"))
                         .addComponent(new PlayerAnimationController())
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ColliderComponent())
+                        .addComponent(new ColliderComponent().setLayer(PhysicsLayer.PLAYER))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
                         .addComponent(new PlayerActions())
                         .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))

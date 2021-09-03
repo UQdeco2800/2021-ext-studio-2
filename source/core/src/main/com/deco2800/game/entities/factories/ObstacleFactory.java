@@ -1,5 +1,6 @@
 package com.deco2800.game.entities.factories;
 
+import com.badlogic.gdx.assets.loaders.SynchronousAssetLoader;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -92,29 +93,6 @@ public class ObstacleFactory {
 
 
     /**
-     * Creates a Meteorite
-     *
-     * @param target character.
-     * @return the thorns obstacle entity
-     */
-    public static Entity createMeteorite(Entity target) {
-        Entity meteorite = createBaseObstacle(target, BodyType.DynamicBody)
-                        .addComponent(new TextureRenderComponent("images/stone.png"))
-                        .addComponent(new CombatStatsComponent(2000, 5))
-                        .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
-                        .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Meteorite));
-
-        meteorite.getComponent(TextureRenderComponent.class).scaleEntity();
-        PhysicsUtils.setScaledCollider(meteorite, 1f, 1f);
-        meteorite.setScale(1, 1);
-
-        logger.info("Create a Meteorite");
-
-        return meteorite;
-    }
-
-
-    /**
      * Create basic obstacle entity
      *
      * @param target   the character entity
@@ -126,11 +104,37 @@ public class ObstacleFactory {
                 new Entity()
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-                        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
-
+                        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE));
         obstacle.getComponent(PhysicsComponent.class).setBodyType(bodyType);
         return obstacle;
     }
+
+    /**
+     * Creates a Meteorite
+     *
+     * @param target character.
+     * @return the thorns obstacle entity
+     */
+    public static Entity createMeteorite(Entity target) {
+        Entity meteorite =
+                new Entity()
+                        .addComponent(new PhysicsComponent())
+                        .addComponent(new ColliderComponent().setLayer(PhysicsLayer.METEORITE))
+                        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.METEORITE))
+                        .addComponent(new TextureRenderComponent("images/stone.png"))
+                        .addComponent(new CombatStatsComponent(2000, 5))
+                        .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+                        .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Meteorite));
+        meteorite.getComponent(TextureRenderComponent.class).scaleEntity();
+        PhysicsUtils.setScaledCollider(meteorite, 1f, 1f);
+        meteorite.setScale(1, 1);
+        logger.info("Create a Meteorite");
+
+        return meteorite;
+    }
+
+
+
 
 
     /**
@@ -143,7 +147,7 @@ public class ObstacleFactory {
     public static Entity createWall(float width, float height) {
         Entity wall = new Entity()
                 .addComponent(new PhysicsComponent().setBodyType(BodyType.StaticBody))
-                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.WALL));
         wall.setScale(width, height);
         return wall;
     }

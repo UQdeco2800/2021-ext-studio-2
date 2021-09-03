@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Null;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
+import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
@@ -21,7 +22,9 @@ public class ObstacleDisappear extends Component {
 
     public enum ObstacleType {
         PlantsObstacle, ThornsObstacle, Meteorite;
-    };
+    }
+
+    ;
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleDisappear.class);
     AnimationRenderComponent animator;
@@ -32,9 +35,8 @@ public class ObstacleDisappear extends Component {
         this.obstacleType = obstacleType;
     }
 
-    public void create(){
+    public void create() {
         hitboxComponent = this.entity.getComponent(HitboxComponent.class);
-        this.entity.getComponent(HitboxComponent.class).setSensor(false);
         animator = this.entity.getComponent(AnimationRenderComponent.class);
 
         switch (obstacleType) {
@@ -58,7 +60,7 @@ public class ObstacleDisappear extends Component {
      * obstacle (let it disappear).
      */
     void plantsDisappear(Fixture me, Fixture other) {
-        if (other.isSensor()) {
+        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
             logger.info("PlantsDisappearStart was triggered.");
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacles");
@@ -71,7 +73,7 @@ public class ObstacleDisappear extends Component {
      * obstacle (let it disappear).
      */
     void thornsDisappear(Fixture me, Fixture other) {
-        if (other.isSensor()) {
+        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
             logger.info("ThornsDisappearStart was triggered.");
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacle2");
@@ -80,12 +82,12 @@ public class ObstacleDisappear extends Component {
 
     }
 
-    private void meteoriteDisappear(Fixture me, Fixture other){
-        System.out.print("getBody: "+ other.getBody()+"\tgetFilterData: "+ other.getFilterData()+"\tisSensor: "+ other.isSensor()+"\tgetClass: "+ other.getClass()+"\tgetFriction: "+  other.getFriction()+"\tgetDensity: "+  other.getDensity()+"\tgetType: "+  other.getType()+"\tgetUserData: "+ other.getUserData()+"\n");
-        if (other.isSensor()){
+    private void meteoriteDisappear(Fixture me, Fixture other) {
+        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
 //            animator.startAnimation("enemy2");
             entity.setDispose();
         }
+
     }
 
 }
