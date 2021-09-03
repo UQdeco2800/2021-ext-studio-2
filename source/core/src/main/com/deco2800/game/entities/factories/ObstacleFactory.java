@@ -187,10 +187,10 @@ public class ObstacleFactory {
         rock.addComponent(new TextureRenderComponent("images/rock.jpg"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-                .addComponent(new CombatStatsComponent(2000, 10))
-                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
-                .addComponent(new ObstacleAnimationController());
+//                .addComponent(new CombatStatsComponent(2000, 10))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
+//                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+//                .addComponent(new ObstacleAnimationController());
 
 
         rock.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
@@ -210,10 +210,10 @@ public class ObstacleFactory {
         wood.addComponent(new TextureRenderComponent("images/wood.jpg"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-                .addComponent(new CombatStatsComponent(2000, 10))
-                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
-                .addComponent(new ObstacleAnimationController());
+//                .addComponent(new CombatStatsComponent(2000, 10))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
+//                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+//                .addComponent(new ObstacleAnimationController());
 
 
         wood.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);

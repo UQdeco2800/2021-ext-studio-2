@@ -20,7 +20,6 @@ public class ObstacleDispare extends Component {
     HitboxComponent hitboxComponent;
 
     public void create(){
-        System.out.println("aaaaaa");
         entity.getEvents().addListener("collisionStart", this::onCollisionStart);
         hitboxComponent = this.entity.getComponent(HitboxComponent.class);
         this.entity.getComponent(HitboxComponent.class).setSensor(false);
