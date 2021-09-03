@@ -117,7 +117,7 @@ public class MainGameScreen extends ScreenAdapter {
       // Generate obstacles
       forestGameArea.spawnObstacles();
       // Generate meteorites
-      forestGameArea.spawnMeteorites(3, 5);
+      forestGameArea.spawnMeteorites(3, 3);
 
     }
   }

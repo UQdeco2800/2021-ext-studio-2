@@ -2,15 +2,10 @@ package com.deco2800.game.entities.factories;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.Obstacle.ObstacleDispare;
+import com.deco2800.game.components.Obstacle.ObstacleDisappear;
 import com.deco2800.game.components.TouchAttackComponent;
-import com.deco2800.game.components.Obstacle.ObstacleAnimationController;
-import com.deco2800.game.components.tasks.PlantsDisappearTask;
-import com.deco2800.game.components.tasks.ThornsDisappearTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -40,9 +35,6 @@ public class ObstacleFactory {
      */
     public static Entity createPlantsObstacle(Entity target) {
         Entity obstacle = createBaseObstacle(target, BodyType.StaticBody);
-        AITaskComponent aiComponent =
-                new AITaskComponent()
-                        .addTask(new PlantsDisappearTask(target, 10, 1.5f));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -55,8 +47,8 @@ public class ObstacleFactory {
                 .addComponent(animator)
                 .addComponent(new CombatStatsComponent(2000, 20))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 10f))
-                .addComponent(aiComponent)
-                .addComponent(new ObstacleAnimationController());
+                .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.PlantsObstacle));
+
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
         obstacle.setScale(2, 3);
         PhysicsUtils.setScaledCollider(obstacle, 1f, 0.7f);
@@ -76,10 +68,6 @@ public class ObstacleFactory {
 
         Entity obstacle = createBaseObstacle(target, BodyType.StaticBody);
 
-        AITaskComponent aiComponent =
-                new AITaskComponent()
-                        .addTask(new ThornsDisappearTask(target, 10, 1.3f));
-
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService()
@@ -91,8 +79,7 @@ public class ObstacleFactory {
                 .addComponent(animator)
                 .addComponent(new CombatStatsComponent(2000, 10))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
-                .addComponent(aiComponent)
-                .addComponent(new ObstacleAnimationController());
+                .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.ThornsObstacle));
 
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(obstacle, 0.2f, 0.3f);
@@ -111,28 +98,13 @@ public class ObstacleFactory {
      * @return the thorns obstacle entity
      */
     public static Entity createMeteorite(Entity target) {
-
-        Entity meteorite =
-                new Entity()
-                        .addComponent(new PhysicsComponent())
-                        .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-                        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-
-//        AnimationRenderComponent animator =
-//                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService()
-//                                .getAsset("images/obstacle_2.atlas", TextureAtlas.class));
-//        animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
-
-
-                .addComponent(new TextureRenderComponent("images/stone.png"))
-//                .addComponent(animator)
-                .addComponent(new CombatStatsComponent(2000, 5))
-                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
-                .addComponent(new ObstacleDispare());
+        Entity meteorite = createBaseObstacle(target, BodyType.DynamicBody)
+                        .addComponent(new TextureRenderComponent("images/stone.png"))
+                        .addComponent(new CombatStatsComponent(2000, 5))
+                        .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+                        .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Meteorite));
 
         meteorite.getComponent(TextureRenderComponent.class).scaleEntity();
-        meteorite.getComponent(PhysicsComponent.class).setBodyType(BodyType.DynamicBody);
         PhysicsUtils.setScaledCollider(meteorite, 1f, 1f);
         meteorite.setScale(1, 1);
 
