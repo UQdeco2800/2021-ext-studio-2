@@ -38,6 +38,7 @@ public class Entity {
     private boolean enabled = true;
     private boolean disappear = false;
     private boolean removeTexture = false;
+    private boolean dispose = false;
     private boolean created = false;
     private Vector2 position = Vector2.Zero.cpy();
     private Vector2 scale = new Vector2(1, 1);
@@ -82,6 +83,11 @@ public class Entity {
     public void setRemoveTexture() {
         logger.info("Setting removeTexture={} on entity {}", removeTexture, this);
         this.removeTexture = true;
+    }
+
+    public void setDispose(){
+        logger.info("Setting dispose={} on entity {}", dispose, this);
+        this.dispose = true;
     }
 
     /**
@@ -298,6 +304,10 @@ public class Entity {
         }
         if (disappear) {
             this.removeAfterAnimation1f();
+            return;
+        }
+        if (dispose) {
+            this.dispose();
             return;
         }
 
