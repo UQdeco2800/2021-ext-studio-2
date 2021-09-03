@@ -43,26 +43,18 @@ public class PlayerFactory {
         InputComponent inputComponent =
                 ServiceLocator.getInputService().getInputFactory().createForPlayer();
 
-        AnimationRenderComponent animator =
-                new AnimationRenderComponent(
-                        ServiceLocator.getResourceService()
-                                .getAsset("images/mpcMovement.atlas",
-                                        TextureAtlas.class));
+        AnimationRenderComponent animator = createAnimationComponent("images/mpcMovement.atlas");
+
         animator.addAnimation("main_player_run", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("main_player_walk", 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("mpc_front", 1f, Animation.PlayMode.LOOP);
-        AnimationRenderComponent buffAnimator =
-                new AnimationRenderComponent(
-                        ServiceLocator.getResourceService()
-                                .getAsset("images/buff.atlas",
-                                        TextureAtlas.class));
+
+        AnimationRenderComponent buffAnimator = createAnimationComponent("images/buff.atlas");
         buffAnimator.addAnimation("buffIncrease", 0.1f, Animation.PlayMode.LOOP);
-        AnimationRenderComponent deBuffAnimator =
-                new AnimationRenderComponent(
-                        ServiceLocator.getResourceService()
-                                .getAsset("images/debuff.atlas",
-                                        TextureAtlas.class));
+
+        AnimationRenderComponent deBuffAnimator = createAnimationComponent("images/debuff.atlas");
         deBuffAnimator.addAnimation("debuffDecrease", 0.1f, Animation.PlayMode.LOOP);
+
         Entity player =
                 new Entity()
                         .addComponent(new TextureRenderComponent("images/mpc_right.png"))
@@ -90,4 +82,12 @@ public class PlayerFactory {
     private PlayerFactory() {
         throw new IllegalStateException("Instantiating static util class");
     }
+
+    private static AnimationRenderComponent createAnimationComponent(String atlasPath) {
+        return new AnimationRenderComponent(
+                ServiceLocator.getResourceService()
+                        .getAsset(atlasPath,
+                                TextureAtlas.class));
+    }
+
 }
