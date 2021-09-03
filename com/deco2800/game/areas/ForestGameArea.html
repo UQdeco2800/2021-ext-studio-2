@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -199,27 +199,36 @@ extends <a href="GameArea.html" title="class in com.deco2800.game.areas">GameAre
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnMeteorites(int,int)">spawnMeteorites</a></span>&#8203;(int&nbsp;basicNum,
+int&nbsp;extraNum)</code></th>
+<td class="colLast">
+<div class="block">Generate a certain number of meteorites, the total generated number is between
+ basicNum and basicNum + extraNum, called by render() in MainGameScreen.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i3">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnObstacles()">spawnObstacles</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Obstacles are randomly generated according to the position of the character.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnRocksRandomly(int)">spawnRocksRandomly</a></span>&#8203;(int&nbsp;xValue)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnTerrain()">spawnTerrain</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnTerrainRandomly(int)">spawnTerrainRandomly</a></span>&#8203;(int&nbsp;xValue)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnWoodsRandomly(int)">spawnWoodsRandomly</a></span>&#8203;(int&nbsp;xValue)</code></th>
 <td class="colLast">&nbsp;</td>
@@ -330,6 +339,20 @@ extends <a href="GameArea.html" title="class in com.deco2800.game.areas">GameAre
  For example, the first call to the player x position is 0, and the x range for generating
  obstacles is 0-30.  The second call to the player's x position is 10, and the x range for
  generating obstacles is 31-50.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="spawnMeteorites(int,int)">spawnMeteorites</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnMeteorites</span>&#8203;(<span class="arguments">int&nbsp;basicNum,
+int&nbsp;extraNum)</span></div>
+<div class="block">Generate a certain number of meteorites, the total generated number is between
+ basicNum and basicNum + extraNum, called by render() in MainGameScreen.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>basicNum</code> - basic number of meteorites</dd>
+<dd><code>extraNum</code> - additional number of meteorites</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
