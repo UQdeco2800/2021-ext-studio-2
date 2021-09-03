@@ -16,7 +16,7 @@ public class PlayerAnimationController extends Component {
         animator = this.entity.getComponent(AnimationRenderComponent.class);
         entity.getEvents().addListener("walkRight", this::animateRight);
         entity.getEvents().addListener("stopWalkRight", this::stopAnimateRight);
-
+        //entity.getEvents().addListener("jump", this::animateJump);
         //entity.getEvents().addListener("left_side", this::animateLeft);
     }
 
@@ -30,6 +30,18 @@ public class PlayerAnimationController extends Component {
         animator.stopAnimation();
         animator.startAnimation("main_player_run");
     }
+
+    /**
+     *  private void animateJump() {
+     *         if(texturePresent) {
+     *             animator.getEntity().setRemoveTexture();
+     *             texturePresent = false;
+     *         }
+     *         animator.stopAnimation();
+     *         animator.startAnimation("main_player_jump");
+     *     }
+     */
+
 
     private void stopAnimateRight() {
         animator.stopAnimation();
