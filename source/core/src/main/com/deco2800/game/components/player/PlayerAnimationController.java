@@ -2,6 +2,7 @@ package com.deco2800.game.components.player;
 
 import com.deco2800.game.components.Component;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.TextureRenderComponent;
 
 /**
  * This class listens to events relevant to a Player entity's state and
@@ -25,7 +26,7 @@ public class PlayerAnimationController extends Component {
     
     private void preAnimationCleanUp() {
         if(texturePresent) {
-            animator.getEntity().setRemoveTexture();
+            animator.getEntity().getComponent(TextureRenderComponent.class).dispose();
             texturePresent = false;
         }
         animator.stopAnimation();
