@@ -5,10 +5,14 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CameraComponent;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.physics.PhysicsUtils;
+import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.Renderer;
@@ -25,10 +29,9 @@ public class PlayerActions extends Component {
   private PhysicsComponent physicsComponent;
   private Vector2 walkDirection = Vector2.Zero.cpy();
   private boolean moving = false;
-  AnimationRenderComponent animator;
+
   @Override
   public void create() {
-    animator = this.entity.getComponent(AnimationRenderComponent.class);
     physicsComponent = entity.getComponent(PhysicsComponent.class);
     entity.getEvents().addListener("walk", this::walk);
     entity.getEvents().addListener("walkStop", this::stopWalking);
@@ -119,8 +122,10 @@ public class PlayerActions extends Component {
    */
 
   private void crouch() {
-    Sound crouchSound = ServiceLocator.getResourceService().getAsset("sounds/crouch.ogg", Sound.class);
+    Sound crouchSound = ServiceLocator.getResourceService().getAsset("sounds/turnDirection.ogg", Sound.class);
     crouchSound.play();
+
+    PhysicsUtils.setScaledCollider(entity,  1f, 0.5f);
   }
 
 
