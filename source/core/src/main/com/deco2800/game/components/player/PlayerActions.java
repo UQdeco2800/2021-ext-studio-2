@@ -35,6 +35,7 @@ public class PlayerActions extends Component {
     entity.getEvents().addListener("walkRight", this::walkRight);
     entity.getEvents().addListener("attack", this::attack);
     entity.getEvents().addListener("jump", this::jump);
+    entity.getEvents().addListener("crouch", this::crouch);
   }
 
 
@@ -112,4 +113,15 @@ public class PlayerActions extends Component {
     Body body = physicsComponent.getBody();
     body.applyForceToCenter(0, 400f, true);
   }
+
+  /**
+   * Makes the player crouch
+   */
+
+  private void crouch() {
+    Sound crouchSound = ServiceLocator.getResourceService().getAsset("sounds/crouch.ogg", Sound.class);
+    crouchSound.play();
+  }
+
+
 }
