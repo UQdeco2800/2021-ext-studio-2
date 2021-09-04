@@ -33,7 +33,6 @@ public class PlayerActions extends Component {
     entity.getEvents().addListener("walk", this::walk);
     entity.getEvents().addListener("walkStop", this::stopWalking);
     entity.getEvents().addListener("walkRight", this::walkRight);
-    entity.getEvents().addListener("walkLeft", this::walkLeft);
     entity.getEvents().addListener("attack", this::attack);
     entity.getEvents().addListener("jump", this::jump);
   }
@@ -90,24 +89,8 @@ public class PlayerActions extends Component {
    */
 
   void walkRight() {
-//    animator.getEntity().setRemoveTexture();
-//    animator.stopAnimation();
-//    animator.startAnimation("main_player_run");
     Sound turnSound = ServiceLocator.getResourceService().getAsset("sounds/turnDirection.ogg", Sound.class);
     turnSound.play();
-  }
-//
-//  void stopWalkRight() {
-//    animator.stopAnimation();
-//    animator.startAnimation("main_player_walk");
-//
-//  }
-
-  /** [[DEPRECATED]]
-   * Updates the player sprite to turn left
-   */
-  
-  void walkLeft() {
   }
 
   /**
@@ -128,28 +111,5 @@ public class PlayerActions extends Component {
     
     Body body = physicsComponent.getBody();
     body.applyForceToCenter(0, 400f, true);
-
-//    Vector2 a = body.getLinearVelocity();
-//    float force = 0;
-//
-//    if(Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-//      if(a.x < 50) force = 400f;
-//    }
-//    else if(Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-//      if(a.x > -50) force = -400f;
-//    }
-//    else{
-//      body.getFixtureList().get(0).setFriction(.4f);
-//      body.getFixtureList().get(0).setFriction(.4f);
-//    }
-//
-//    if(Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)){
-//      a.y = 5;
-//      body.setLinearVelocity(a);
-//    }
-//    body.applyForceToCenter(force, 400f, true);
-
-
-
   }
 }
