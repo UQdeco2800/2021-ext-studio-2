@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.Obstacle.ObstacleDisappear;
 import com.deco2800.game.components.npc.GhostAnimationController;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.tasks.ChaseTask;
@@ -56,7 +57,8 @@ public class NPCFactory {
     ghost
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
         .addComponent(animator)
-        .addComponent(new GhostAnimationController());
+        .addComponent(new GhostAnimationController())
+            .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Ghost));
 
     ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
 

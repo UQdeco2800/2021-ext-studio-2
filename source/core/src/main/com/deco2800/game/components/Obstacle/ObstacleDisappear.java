@@ -21,7 +21,7 @@ import java.lang.reflect.Method;
 public class ObstacleDisappear extends Component {
 
     public enum ObstacleType {
-        PlantsObstacle, ThornsObstacle, Meteorite;
+        PlantsObstacle, ThornsObstacle, Meteorite,Ghost;
     }
 
     ;
@@ -49,6 +49,8 @@ public class ObstacleDisappear extends Component {
             case Meteorite:
                 entity.getEvents().addListener("collisionStart", this::meteoriteDisappear);
                 break;
+            case Ghost:
+                entity.getEvents().addListener("collisionStart",  this::GhostDisappear);
             default:
                 logger.error("No corresponding event.");
         }
@@ -86,6 +88,15 @@ public class ObstacleDisappear extends Component {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
 //            animator.startAnimation("enemy2");
             entity.setDispose();
+        }
+
+    }
+
+    void GhostDisappear(Fixture me, Fixture other) {
+        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
+//            animator.startAnimation("enemy2");
+            animator.getEntity().setRemoveTexture();
+            animator.getEntity().setDisappear();
         }
 
     }

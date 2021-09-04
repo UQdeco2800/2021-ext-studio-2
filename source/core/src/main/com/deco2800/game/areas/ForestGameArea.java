@@ -165,8 +165,8 @@ public class ForestGameArea extends GameArea {
         displayUI();
 
         spawnTerrain();
-        spawnRocks();
-        spawnWoods();
+//        spawnRocks();
+//        spawnWoods();
 
         player = spawnPlayer();
         spawnObstacles();
@@ -297,6 +297,28 @@ public class ForestGameArea extends GameArea {
 
         }
         logger.info("Min x: {}, Max x: {}; Total randomPoints {}", minPos.x, maxPos.x, randomPoints);
+    }
+
+    public void spawnRangeObstacles() {
+        int playerX = (int) player.getPosition().x;
+        GridPoint2 minPos = new GridPoint2(playerX + 10, 0);
+        GridPoint2 maxPos = new GridPoint2(playerX + 40, 0);
+        GridPoint2 randomPosTwo = RandomUtils.randomX(11, minPos, maxPos);
+        Entity Range = ObstacleFactory.createRangeObstacle(player);
+        spawnEntityAt(Range, randomPosTwo, true, true);
+//        Entity ghost = NPCFactory.createGhost(player);
+//        if (ObstacleAttackTask.enemy_posion!=null) {
+//            spawnEntityAt(ghost, ObstacleAttackTask.enemy_posion, true, true);
+//            System.out.println(ObstacleAttackTask.enemy_posion);
+////            System.out.println(randomPosTwo);
+//        }
+    }
+
+    public void spawnAttackObstacles(Vector2 position) {
+        Entity ghost = NPCFactory.createGhost(player);
+
+        spawnEntityAt(ghost, position, false, false);
+
     }
 
 
