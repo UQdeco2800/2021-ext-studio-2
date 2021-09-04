@@ -29,8 +29,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
 
       case Keys.S:
       case Keys.DOWN:
-        walkDirection.add(Vector2Utils.DOWN);
-        triggerWalkEvent();
+        entity.getEvents().trigger(("crouch"));
         return true;
       case Keys.D:
       case Keys.RIGHT:
@@ -61,8 +60,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     switch (keycode) {
       case Keys.S:
       case Keys.DOWN:
-        walkDirection.sub(Vector2Utils.DOWN);
-        triggerWalkEvent();
+        entity.getEvents().trigger(("stopCrouch"));
         return true;
       case Keys.D:
       case Keys.RIGHT:
@@ -73,6 +71,10 @@ public class KeyboardPlayerInputComponent extends InputComponent {
       case Keys.W:
       case Keys.UP:
         entity.getEvents().trigger("stopJump");
+        return true;
+      case Keys.SPACE:
+        entity.getEvents().trigger("stopAttack");
+        return true;
       default:
         return false;
     }
