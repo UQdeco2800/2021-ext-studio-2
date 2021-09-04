@@ -22,9 +22,7 @@ public class ObstacleDisappear extends Component {
 
     public enum ObstacleType {
         PlantsObstacle, ThornsObstacle, Meteorite,Ghost;
-    }
-
-    ;
+    };
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleDisappear.class);
     AnimationRenderComponent animator;
@@ -95,7 +93,7 @@ public class ObstacleDisappear extends Component {
     void GhostDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
 //            animator.startAnimation("enemy2");
-            animator.getEntity().setRemoveTexture();
+//            animator.getEntity().setRemoveTexture();
             animator.getEntity().setDisappear();
         }
 
