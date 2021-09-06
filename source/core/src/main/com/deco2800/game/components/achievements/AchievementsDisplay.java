@@ -71,12 +71,14 @@ public class AchievementsDisplay extends UIComponent {
      * @param achievement Configuration with properties and conditions for corresponding achievement
      */
     private void updateAchievementsUI(BaseAchievementConfig achievement) {
-        /* Queue expensive task to run on a separate single thread
-         * to run asynchronously. */
+        /* Queue expensive task to run on a separate
+         * single thread to run asynchronously. */
         AsyncTaskQueue.enqueueTask(() -> {
             try {
                 /* Render achievement card */
                 renderAchievement(achievement);
+                /* Trigger bonus points event */
+                AchievementsHelper.getInstance().trackBonusPoints(achievement.bonus);
                 /* Wait for some time */
                 Thread.sleep(RENDER_DURATION);
                 /* Remove card from screen */

@@ -13,6 +13,7 @@ import com.deco2800.game.events.EventHandler;
 public class AchievementsHelper {
     public static final String ITEM_PICKED_UP_EVENT = "itemPickedUpEvent";
     public static final String HEALTH_EVENT = "healthEvent";
+    public static final String ACHIEVEMENTS_BONUS_POINTS = "updateBonusPoints";
 
     private static AchievementsHelper instance;
     private final EventHandler handler;
@@ -60,4 +61,11 @@ public class AchievementsHelper {
         handler.trigger(HEALTH_EVENT, health);
     }
 
+    /**
+     * Triggers an event when a new bonus point event is encountered
+     * @param bonusPoints the bonus points
+     */
+    public void trackBonusPoints(int bonusPoints){
+        handler.trigger(ACHIEVEMENTS_BONUS_POINTS, bonusPoints);
+    }
 }
