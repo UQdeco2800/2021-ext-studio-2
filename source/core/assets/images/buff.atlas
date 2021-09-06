@@ -1,0 +1,33 @@
+buff1-increase_health_limit_entire.png
+size: 276, 95
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+buffIncrease
+  rotate: false
+  xy: 0, 0
+  size: 69, 95
+  orig: 69, 95
+  offset: 0, 0
+  index: -1
+buffIncrease
+  rotate: false
+  xy: 69, 0
+  size: 69, 95
+  orig: 69, 95
+  offset: 0, 0
+  index: -1
+buffIncrease
+  rotate: false
+  xy: 138, 0
+  size: 69, 95
+  orig: 69, 95
+  offset: 0, 0
+  index: -1
+buffIncrease
+  rotate: false
+  xy: 207, 0
+  size: 69, 95
+  orig: 69, 95
+  offset: 0, 0
+  index: -1

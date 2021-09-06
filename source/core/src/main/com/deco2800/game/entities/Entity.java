@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
+import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.events.EventHandler;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
@@ -37,6 +38,7 @@ public class Entity {
     private boolean enabled = true;
     private boolean disappear = false;
     private boolean removeTexture = false;
+    private boolean dispose = false;
     private boolean created = false;
     private Vector2 position = Vector2.Zero.cpy();
     private Vector2 scale = new Vector2(1, 1);
@@ -62,17 +64,35 @@ public class Entity {
     }
 
 
+    public void updateSpeed(Vector2 speed){
+        PlayerActions component = this.getComponent(PlayerActions.class);
+        component.changeCurrentSpeed(speed);
+    }
+
     /**
-     * Disappear an entity.
+     * Set disappear to true. The code that works subsequently is in update.
      */
     public void setDisappear() {
         this.disappear = true;
+        logger.info("Setting disappear={} on entity {}", removeTexture, this);
     }
 
+    /**
+     * Set removeTexture to true. The code that works subsequently is in update.
+     */
     public void setRemoveTexture() {
-        System.out.print("setRemoveTexture");
         this.removeTexture = true;
+        logger.info("Setting removeTexture={} on entity {}", removeTexture, this);
     }
+
+    /**
+     * Set dispose to true. The code that works subsequently is in update.
+     */
+    public void setDispose(){
+        this.dispose = true;
+        logger.info("Setting dispose={} on entity {}", dispose, this);
+    }
+
     /**
      * Get the entity's game position.
      *
@@ -227,13 +247,18 @@ public class Entity {
 
     /**
      * Let the obstacles disappear after playing the animation for one second.
+     *
+     * The purpose of setting this method: When dispose() is used for animation components, all entities that use the
+     * same animation become black boxes. Therefore, this method is currently used to make obstacles disappear.
      */
-    public void remove() {
+    public void removeAfterAnimation1f() {
         if (this.getComponent(AnimationRenderComponent.class).getAnimationPlayTime() > 1f) {
             for (Component component : createdComponents) {
                 if (component.getClass().equals(AnimationRenderComponent.class)) {
+                    logger.info("{} stopped on entity {}", component.getClass().getSimpleName(), this);
                     ((AnimationRenderComponent) component).stopAnimation();
                 } else {
+                    logger.info("{} disposed on entity {}", component.getClass().getSimpleName(), this);
                     component.dispose();
                 }
             }
@@ -241,92 +266,100 @@ public class Entity {
         }
     }
 
-        /**
-         * Create the entity and start running. This is called when the entity is registered in the world,
-         * and should not be called manually.
-         */
-        public void create () {
-            if (created) {
-                logger.error(
-                        "{} was created twice. Entity should only be registered with the entity service once.",
-                        this);
-                return;
-            }
-            createdComponents = components.values().toArray();
-            for (Component component : createdComponents) {
-                component.create();
-            }
-            created = true;
+    /**
+     * Create the entity and start running. This is called when the entity is registered in the world,
+     * and should not be called manually.
+     */
+    public void create() {
+        if (created) {
+            logger.error(
+                    "{} was created twice. Entity should only be registered with the entity service once.",
+                    this);
+            return;
         }
-
-        /**
-         * Perform an early update on all components. This is called by the entity service and should not
-         * be called manually.
-         */
-        public void earlyUpdate () {
-            if (!enabled) {
-                return;
-            }
-            for (Component component : createdComponents) {
-                component.triggerEarlyUpdate();
-            }
+        createdComponents = components.values().toArray();
+        for (Component component : createdComponents) {
+            component.create();
         }
+        created = true;
+    }
 
-        /**
-         * Perform an update on all components. This is called by the entity service and should not be
-         * called manually.
-         */
-        public void update () {
-            if (!enabled) {
-                return;
-            }
-            if (disappear) {
-                this.remove();
-                return;
-            }
-
-            for (Component component : createdComponents) {
-                if (removeTexture) {
-                    if (component.getClass().equals(TextureRenderComponent.class)) {
-                        System.out.print("update remove TextureRenderComponent\n");
-                        component.dispose();
-                    }
-                }
-                component.triggerUpdate();
-            }
+    /**
+     * Perform an early update on all components. This is called by the entity service and should not
+     * be called manually.
+     */
+    public void earlyUpdate() {
+        if (!enabled) {
+            return;
         }
-
-        /**
-         * This entity's unique ID. Used for equality checks
-         *
-         * @return unique ID
-         */
-        public int getId () {
-            return id;
-        }
-
-        /**
-         * Get the event handler attached to this entity. Can be used to trigger events from an attached
-         * component, or listen to events from a component.
-         *
-         * @return entity's event handler
-         */
-        public EventHandler getEvents () {
-            return eventHandler;
-        }
-
-        @Override
-        public boolean equals (Object obj){
-            return (obj instanceof Entity && ((Entity) obj).getId() == this.getId());
-        }
-
-        @Override
-        public int hashCode () {
-            return super.hashCode();
-        }
-
-        @Override
-        public String toString () {
-            return String.format("Entity{id=%d}", id);
+        for (Component component : createdComponents) {
+            component.triggerEarlyUpdate();
         }
     }
+
+    /**
+     * Perform an update on all components. This is called by the entity service and should not be
+     * called manually.
+     */
+    public void update() {
+        if (!enabled) {
+            return;
+        }
+
+        if (dispose) {
+            this.dispose();
+            return;
+        }
+
+        for (Component component : createdComponents) {
+            // When texture and animation are given an entity at the same time, the texture needs to disappear when the
+            // animation is played to avoid the conflict between the texture and the animation.
+//            System.out.print("removeTexture "+removeTexture+ ", on Entity: "+this+"\n");
+            if (removeTexture) {
+                if (component.getClass().equals(TextureRenderComponent.class)) {
+                    logger.info("Remove {} on entity{}", component.getClass().getSimpleName(), this);
+                    component.dispose();
+                }
+            }
+            component.triggerUpdate();
+        }
+        if (disappear) {
+            this.removeAfterAnimation1f();
+            return;
+        }
+    }
+
+    /**
+     * This entity's unique ID. Used for equality checks
+     *
+     * @return unique ID
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Get the event handler attached to this entity. Can be used to trigger events from an attached
+     * component, or listen to events from a component.
+     *
+     * @return entity's event handler
+     */
+    public EventHandler getEvents() {
+        return eventHandler;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof Entity && ((Entity) obj).getId() == this.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Entity{id=%d}", id);
+    }
+}

@@ -1,5 +1,7 @@
 package com.deco2800.game.components.player;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -31,13 +33,21 @@ public class PlayerActions extends Component {
     entity.getEvents().addListener("walk", this::walk);
     entity.getEvents().addListener("walkStop", this::stopWalking);
     entity.getEvents().addListener("walkRight", this::walkRight);
-    entity.getEvents().addListener("stopWalkRight", this::stopWalkRight);
     entity.getEvents().addListener("walkLeft", this::walkLeft);
     entity.getEvents().addListener("attack", this::attack);
     entity.getEvents().addListener("jump", this::jump);
   }
 
 
+
+  public void changeCurrentSpeed(Vector2 currentSpeed) {
+    Body body = physicsComponent.getBody();
+    Vector2 velocity = body.getLinearVelocity();
+    Vector2 desiredVelocity = walkDirection.cpy().scl(currentSpeed);
+    // impulse = (desiredVel - currentVel) * mass
+    Vector2 impulse = desiredVelocity.sub(velocity).scl(body.getMass());
+    body.applyLinearImpulse(impulse, body.getWorldCenter(), true);
+  }
 
 
   @Override
@@ -80,18 +90,18 @@ public class PlayerActions extends Component {
    */
 
   void walkRight() {
-    animator.getEntity().setRemoveTexture();
-    animator.stopAnimation();
-    animator.startAnimation("main_player_run");
+//    animator.getEntity().setRemoveTexture();
+//    animator.stopAnimation();
+//    animator.startAnimation("main_player_run");
     Sound turnSound = ServiceLocator.getResourceService().getAsset("sounds/turnDirection.ogg", Sound.class);
     turnSound.play();
   }
-
-  void stopWalkRight() {
-    animator.stopAnimation();
-    animator.startAnimation("main_player_walk");
-
-  }
+//
+//  void stopWalkRight() {
+//    animator.stopAnimation();
+//    animator.startAnimation("main_player_walk");
+//
+//  }
 
   /** [[DEPRECATED]]
    * Updates the player sprite to turn left
@@ -114,11 +124,32 @@ public class PlayerActions extends Component {
 
   void jump() {
     Sound jumpSound = ServiceLocator.getResourceService().getAsset("sounds/jump.ogg", Sound.class);
-
+    jumpSound.play();
+    
     Body body = physicsComponent.getBody();
     body.applyForceToCenter(0, 400f, true);
 
-    jumpSound.play();
+//    Vector2 a = body.getLinearVelocity();
+//    float force = 0;
+//
+//    if(Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+//      if(a.x < 50) force = 400f;
+//    }
+//    else if(Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+//      if(a.x > -50) force = -400f;
+//    }
+//    else{
+//      body.getFixtureList().get(0).setFriction(.4f);
+//      body.getFixtureList().get(0).setFriction(.4f);
+//    }
+//
+//    if(Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)){
+//      a.y = 5;
+//      body.setLinearVelocity(a);
+//    }
+//    body.applyForceToCenter(force, 400f, true);
+
+
 
   }
 }

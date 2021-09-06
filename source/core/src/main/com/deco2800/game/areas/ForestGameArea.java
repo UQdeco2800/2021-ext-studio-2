@@ -36,7 +36,7 @@ public class ForestGameArea extends GameArea {
     }
 
     public void spawnRocksRandomly(int xValue) {
-        GridPoint2 minPos = new GridPoint2(xValue+10, 0);
+        GridPoint2 minPos = new GridPoint2(xValue + 10, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         for (int i = 0; i < 5; i++) {
@@ -64,7 +64,7 @@ public class ForestGameArea extends GameArea {
     }
 
     public void spawnWoodsRandomly(int xValue) {
-        GridPoint2 minPos = new GridPoint2(xValue+10, 0);
+        GridPoint2 minPos = new GridPoint2(xValue + 10, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         for (int i = 0; i < 5; i++) {
@@ -77,16 +77,16 @@ public class ForestGameArea extends GameArea {
         }
     }
 
-//  private void spawnTrees() {
-//    GridPoint2 minPos = new GridPoint2(0, 0);
-//    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-//
-//    for (int i = 0; i < NUM_TREES; i++) {
-//      GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
-//      Entity tree = ObstacleFactory.createTree(player);
-//      spawnEntityAt(tree, randomPos, true, false);
-//    }
-//  }
+    //  private void spawnTrees() {
+    //    GridPoint2 minPos = new GridPoint2(0, 0);
+    //    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+    //
+    //    for (int i = 0; i < NUM_TREES; i++) {
+    //      GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
+    //      Entity tree = ObstacleFactory.createTree(player);
+    //      spawnEntityAt(tree, randomPos, true, false);
+    //    }
+    //  }
 
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
     /* The number of each type of obstacle. Note: total obstacles cannot be greater than 20 (range of loading map)*/
@@ -113,6 +113,7 @@ public class ForestGameArea extends GameArea {
             "images/mpc_front_stroke.png",
             "images/mpc_left_view.png",
             "images/mpc_right_view.png",
+            "images/mpc_right.png",
             "images/road.png",
             "images/water.png",
             "images/rock.jpg",
@@ -124,12 +125,24 @@ public class ForestGameArea extends GameArea {
             "images/Items/bandage.png",
             "images/Items/syringe.png",
             "images/obstacle_1_new.png",
-            "images/obstacle2.png",
-            "images/mpcMovement.png"
+            "images/obstacle2_vision2.png",
+            "images/mpcMovement.png",
+            "images/stone.png",
+
 
     };
     private static final String[] forestTextureAtlases = {
-            "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas", "images/airport.atlas", "images/obstacle_1.atlas", "images/obstacle_2.atlas", "images/mpcMovement.atlas"
+            "images/terrain_iso_grass.atlas",
+            "images/ghost.atlas",
+            "images/ghostKing.atlas",
+            "images/airport.atlas",
+            "images/buff.atlas",
+            "images/debuff.atlas",
+            "images" +
+                    "/obstacle_1.atlas",
+            "images/obstacle_2.atlas",
+            "images/mpcMovement.atlas",
+
     };
     private static final String[] forestSounds = {"sounds/Impact4.ogg"};
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
@@ -163,11 +176,10 @@ public class ForestGameArea extends GameArea {
         player = spawnPlayer();
         spawnObstacles();
 
-
 //        spawnGhosts();
 //        spawnGhostKing();
+
         spawnFirstAid();
-        spawnApple();
         playMusic();
         trackAchievements();
         setBonusItems(player);
@@ -182,6 +194,7 @@ public class ForestGameArea extends GameArea {
     public void spawnTerrain() {
         // Background terrain
         terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO);
+
         spawnEntity(new Entity().addComponent(terrain));
 
         // Terrain walls
@@ -250,19 +263,18 @@ public class ForestGameArea extends GameArea {
      * For example, the first call to the player x position is 0, and the x range for generating
      * obstacles is 0-30.  The second call to the player's x position is 10, and the x range for
      * generating obstacles is 31-50.
-     * <p>
-     * You can uncomment to view the player's position and the range and specific coordinates of the
-     * generated obstacles.
      */
     public void spawnObstacles() {
         GridPoint2 minPos;
         GridPoint2 maxPos;
         GridPoint2 randomPos;
         GridPoint2 randomPos2;
+        // Record the coordinates of all obstacles, Record the coordinates of all obstacles to prevent obstacles
+        // from being generated at the same location
         ArrayList<GridPoint2> randomPoints = new ArrayList<GridPoint2>();
 
         int playerX = (int) player.getPosition().x;
-//        System.out.print("playerX:" + playerX + "\n");
+        logger.info("player x coordinate: {}", playerX);
 
         if (firstGenerate) {
             minPos = new GridPoint2(playerX, 0);
@@ -288,9 +300,30 @@ public class ForestGameArea extends GameArea {
             Entity obstacle2 = ObstacleFactory.createThornsObstacle(player);
             spawnEntityAt(obstacle, randomPos, true, false);
             spawnEntityAt(obstacle2, randomPos2, true, true);
+
         }
-//        System.out.print("minPos: " + minPos + "\tmaxPos: " + maxPos + "\nTotal randomPoints" + randomPoints + "\n");
+        logger.info("Min x: {}, Max x: {}; Total randomPoints {}", minPos.x, maxPos.x, randomPoints);
     }
+
+
+    /**
+     * Generate a certain number of meteorites, the total generated number is between
+     * basicNum and basicNum + extraNum, called by render() in MainGameScreen.
+     *
+     * @param basicNum basic number of meteorites
+     * @param extraNum additional number of meteorites
+     */
+    public void spawnMeteorites(int basicNum, int extraNum) {
+        int meteoritesNum = (int) (Math.random() * (extraNum + 1));
+        for (int i = 0; i < basicNum + meteoritesNum; i++) {
+            int x = (int) (Math.random() * 10); // x distance from player
+            GridPoint2 point = new GridPoint2((int) player.getPosition().x + x, 20);
+            Entity stone = ObstacleFactory.createMeteorite(player);
+            spawnEntityAt(stone, point, true, true);
+            logger.info("Spawn meteorites at {}", point);
+        }
+    }
+
 
     private void spawnFirstAid() {
 
@@ -300,17 +333,6 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(firstAid, position, false, false);
         }
     }
-
-    private void spawnApple() {
-
-        for (int i = 1; i < 31; i++) {
-            GridPoint2 position = new GridPoint2(i * 10, 10);
-            Entity firstAid = ItemFactory.createApple(player);
-            spawnEntityAt(firstAid, position, false, false);
-        }
-    }
-
-
 
 
     private Entity spawnPlayer() {

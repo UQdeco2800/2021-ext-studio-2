@@ -83,7 +83,7 @@ public class UserSettings {
      * FPS cap of the game. Independant of screen FPS.
      */
     public int fps = 60;
-    public boolean fullscreen = true;
+    public boolean fullscreen = false;
     public boolean vsync = true;
     /**
      * ui Scale. Currently unused, but can be implemented.
