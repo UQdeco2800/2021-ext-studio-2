@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
@@ -118,6 +119,10 @@ public class ForestGameArea extends GameArea {
             "images/wood.jpg",
             "images/Items/first_aid_kit.png",
             "images/Items/food.png",
+            "images/Items/water.png",
+            "images/Items/magic_potion.png",
+            "images/Items/bandage.png",
+            "images/Items/syringe.png",
             "images/obstacle_1_new.png",
             "images/obstacle2.png",
             "images/mpcMovement.png"
@@ -165,6 +170,7 @@ public class ForestGameArea extends GameArea {
         spawnApple();
         playMusic();
         trackAchievements();
+        setBonusItems(player);
     }
 
     private void displayUI() {
@@ -311,6 +317,10 @@ public class ForestGameArea extends GameArea {
         Entity newPlayer = PlayerFactory.createPlayer();
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         return newPlayer;
+    }
+    private void setBonusItems(Entity player) {
+        AchievementsBonusItems bonusItems = new AchievementsBonusItems(player);
+        bonusItems.setBonusItem();
     }
 
     private void spawnGhosts() {

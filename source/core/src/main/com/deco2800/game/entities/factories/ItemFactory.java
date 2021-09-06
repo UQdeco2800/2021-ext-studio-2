@@ -39,6 +39,63 @@ public  class ItemFactory {
         return apple;
     }
 
+    public static Entity createWater(Entity target){
+        /**
+         * creates an entity for a water
+         * @param target The entity which is passed on to the first Aid component
+         * @return entity
+         */
+        Entity water = new Entity()
+                .addComponent(new TextureRenderComponent("images/Items/water.png"))
+                .addComponent(new PhysicsComponent())
+                .addComponent(new ColliderComponent())
+                .addComponent(new FirstAidComponent(target));
 
+        return water;
+    }
 
+    public static Entity createMagicPotion(Entity target){
+        /**
+         * creates an entity for a magic potion
+         * @param target The entity which is passed on to the first Aid component
+         * @return entity
+         */
+        Entity magicPotion = new Entity()
+                .addComponent(new TextureRenderComponent("images/Items/magic_potion.png"))
+                .addComponent(new PhysicsComponent())
+                .addComponent(new ColliderComponent())
+                .addComponent(new FirstAidComponent(target));
+
+        return magicPotion;
+    }
+
+    public static Entity createSyringe(Entity target){
+        /**
+         * creates an entity for a syringe
+         * @param target The entity which is passed on to the first Aid component
+         * @return entity
+         */
+        Entity syringe = new Entity()
+                .addComponent(new TextureRenderComponent("images/Items/syringe.png"))
+                .addComponent(new PhysicsComponent())
+                .addComponent(new ColliderComponent())
+                .addComponent(new FirstAidComponent(target));
+
+        return syringe;
+    }
+
+    public static Entity createBandage(Entity target){
+        /**
+         * creates an entity for a bandage
+         * @param target The entity which is passed on to the first Aid component
+         * @return entity
+         */
+        Entity bandage = new Entity()
+                .addComponent(new TextureRenderComponent("images/Items/bandage.png"))
+                .addComponent(new PhysicsComponent())
+                .addComponent(new ColliderComponent())
+                .addComponent(new FirstAidComponent(target));
+
+        return bandage;
+    }
 }
