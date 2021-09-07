@@ -19,6 +19,8 @@ import com.deco2800.game.ui.UIComponent;
 public class AchievementsDisplay extends UIComponent {
     private static final int RENDER_DURATION = 5000;
     private static final String[] textures = AchievementFactory.getTextures();
+    private static final String[] bonusSoundPath = {"sounds/achievementSound.wav"};
+    private static final String[] bonusBgPath = {"images/achievements/bonusBg.png"};
     private Table table;
     private Table tableForBonusBg;
     private Table tableForBonus;
@@ -26,7 +28,7 @@ public class AchievementsDisplay extends UIComponent {
     private Image bonusImg;
     private Label achievementLabel;
     private Label bonusLabel;
-    private Sound achievementSound;
+
     @Override
     public void create() {
         super.create();
@@ -43,10 +45,9 @@ public class AchievementsDisplay extends UIComponent {
     private void loadAssets() {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(textures);
-        resourceService.loadTextures(new String[]{"images/achievements/bonusBg.png"});
-        String[] s ={"sounds/achievementSound.wav"};
-        resourceService.loadSounds(s);
-        ServiceLocator.getResourceService().loadAll();
+        resourceService.loadTextures(bonusBgPath);
+        resourceService.loadSounds(bonusSoundPath);
+        resourceService.loadAll();
     }
 
     /**
@@ -54,9 +55,9 @@ public class AchievementsDisplay extends UIComponent {
      */
     private void unloadAssets() {
         ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.unloadAssets(bonusBgPath);
         resourceService.unloadAssets(textures);
-        String[] s ={"sounds/achievementSound.wav"};
-        resourceService.unloadAssets(s);
+        resourceService.unloadAssets(bonusSoundPath);
     }
 
     /**
@@ -134,7 +135,7 @@ public class AchievementsDisplay extends UIComponent {
     }
 
     private void playAchievementSound() {
-        achievementSound = ServiceLocator.getResourceService().
+        Sound achievementSound = ServiceLocator.getResourceService().
                 getAsset("sounds/achievementSound.wav", Sound.class);
         achievementSound.play();
 
@@ -144,14 +145,14 @@ public class AchievementsDisplay extends UIComponent {
      * Renders the bonus score associated with achievements
      */
     private void renderBonus(BaseAchievementConfig achievement) {
-        bonusImg=new Image(ServiceLocator.getResourceService().getAsset
-                ("images/achievements/bonusBg.png",Texture.class));
-        String s ="+";
+        bonusImg = new Image(ServiceLocator.getResourceService().getAsset
+                ("images/achievements/bonusBg.png", Texture.class));
+        String s = "+";
         CharSequence text = s.concat(Integer.toString(achievement.bonus));
-        bonusLabel = new Label(text,skin,"small");
-        bonusLabel.setFontScale(1.4f,1.4f);
+        bonusLabel = new Label(text, skin, "small");
+        bonusLabel.setFontScale(1.4f, 1.4f);
         bonusLabel.setAlignment(100);
-        tableForBonusBg.add(bonusImg).size(150f,45f);
+        tableForBonusBg.add(bonusImg).size(150f, 45f);
         tableForBonus.add(bonusLabel).padBottom(10f).padRight(60f);
 
     }
@@ -171,7 +172,7 @@ public class AchievementsDisplay extends UIComponent {
         if (achievementLabel != null) {
             achievementLabel.remove();
         }
-        if (bonusLabel!= null) {
+        if (bonusLabel != null) {
             bonusLabel.remove();
         }
         if (bonusImg != null) {
