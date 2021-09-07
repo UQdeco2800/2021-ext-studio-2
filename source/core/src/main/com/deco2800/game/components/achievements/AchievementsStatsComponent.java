@@ -117,6 +117,9 @@ public class AchievementsStatsComponent extends Component {
         switch (itemName) {
             case AchievementsHelper.ITEM_FIRST_AID:
                 setFirstAid();
+                break;
+            default:
+                return;
         }
 
     }
