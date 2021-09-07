@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  */
 public class AchievementFactory {
     private static final AchievementConfigs configs =
-            FileLoader.readClass(AchievementConfigs.class, "configs/achieve.json");
+            FileLoader.readClass(AchievementConfigs.class, "configs/achievements.json");
 
     /**
      * Returns a list of achievements from the "achieve.json" file
