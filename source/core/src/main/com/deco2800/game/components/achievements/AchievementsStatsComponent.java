@@ -133,11 +133,7 @@ public class AchievementsStatsComponent extends Component {
      * Maintains the count of the number of items picked up
      */
     public void setItemCount() {
-        if (itemCount == -1) {
-            itemCount = 1;
-        } else {
-            ++itemCount;
-        }
+        ++itemCount;
         checkForValidAchievements();
     }
 
