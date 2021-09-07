@@ -76,7 +76,7 @@ public class ScoreDisplay extends UIComponent {
     public void update() {
         super.update();
         entity.getEvents().trigger("updateScore",
-                scoringSystem.getScore(scoringSystem.getScoreSeconds()));
+                scoringSystem.getScore());
     }
 
     /**
