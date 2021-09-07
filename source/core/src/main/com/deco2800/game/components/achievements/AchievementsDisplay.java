@@ -47,7 +47,6 @@ public class AchievementsDisplay extends UIComponent {
         String[] s ={"sounds/achievementSound.wav"};
         resourceService.loadSounds(s);
         ServiceLocator.getResourceService().loadAll();
-
     }
 
     /**
@@ -56,6 +55,8 @@ public class AchievementsDisplay extends UIComponent {
     private void unloadAssets() {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(textures);
+        String[] s ={"sounds/achievementSound.wav"};
+        resourceService.unloadAssets(s);
     }
 
     /**
