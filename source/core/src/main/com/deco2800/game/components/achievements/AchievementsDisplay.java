@@ -70,11 +70,9 @@ public class AchievementsDisplay extends UIComponent {
         tableForBonusBg = new Table();
         tableForBonusBg.bottom().right();
         tableForBonusBg.setFillParent(true);
-        tableForBonusBg.padBottom(0).padRight(0);
         tableForBonus = new Table();
         tableForBonus.bottom().right();
         tableForBonus.setFillParent(true);
-        tableForBonus.padBottom(0).padRight(0);
         stage.addActor(table);
         stage.addActor(tableForBonusBg);
         stage.addActor(tableForBonus);
