@@ -1,0 +1,33 @@
+main_player_jump.png
+size: 4096, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+main_player_jump
+  rotate: false
+  xy: 2, 2
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_jump
+  rotate: false
+  xy: 545, 2
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_jump
+  rotate: false
+  xy: 1088, 2
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_rightside
+  rotate: false
+  xy: 1631, 2
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
