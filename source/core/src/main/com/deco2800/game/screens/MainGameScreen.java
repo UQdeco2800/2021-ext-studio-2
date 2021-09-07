@@ -17,6 +17,7 @@ import com.deco2800.game.components.score.TimerDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.files.GameInfo;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
@@ -100,8 +101,12 @@ public class MainGameScreen extends ScreenAdapter {
     renderer.render();
     CombatStatsComponent playerStats = player.getComponent(CombatStatsComponent.class);
     if (playerStats.isDead()) {
+      logger.info("Performing Post Game Tasks");
+      performPostGameTasks();
+
       logger.info("Display Game Over Screen");
       game.setScreen(GdxGame.ScreenType.GAME_OVER);
+
       return;
     }
 
@@ -203,5 +208,14 @@ public class MainGameScreen extends ScreenAdapter {
             .addComponent(new TerminalDisplay());
 
     ServiceLocator.getEntityService().register(ui);
+  }
+
+  /**
+   * Tasks to perform when the game is over.
+   * The game is considered to be over when the player dies.
+   */
+  private void performPostGameTasks(){
+    /* Increment the number of games that have been played */
+    GameInfo.incrementGameCount();
   }
 }
