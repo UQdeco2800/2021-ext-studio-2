@@ -16,8 +16,11 @@ import com.deco2800.game.ui.UIComponent;
  */
 public class PlayerStatsDisplay extends UIComponent {
     Table table;
+    Table goldTable;
     private Image heartImage;
     private Label healthLabel;
+    private Image goldImage;
+    private Label goldLabel;
     // import here for implementing the clock
     ScoringSystemV1 clock = new ScoringSystemV1();
 
@@ -31,6 +34,7 @@ public class PlayerStatsDisplay extends UIComponent {
         addActors();
 
         entity.getEvents().addListener("updateHealth", this::updatePlayerHealthUI);
+        entity.getEvents().addListener("updateGold", this::updatePlayerGold);
         clock.startGameClock();
     }
 
@@ -57,6 +61,25 @@ public class PlayerStatsDisplay extends UIComponent {
         table.add(heartImage).size(heartSideLength).pad(5);
         table.add(healthLabel);
         stage.addActor(table);
+
+        goldTable = new Table();
+        goldTable.top().right();
+        table.setFillParent(true);
+        table.padTop(45f).padLeft(5f);
+
+        // Gold image
+        float goldSideLength = 30f;
+        goldImage = new Image(ServiceLocator.getResourceService().getAsset("images/heart.png", Texture.class));
+
+        // Gold text
+        entity.getComponent(InventoryComponent.class).setGold(-1);
+        int gold = entity.getComponent(InventoryComponent.class).getGold();
+        CharSequence goldText = String.format("Gold: %d", gold);
+        goldLabel = new Label(goldText, skin, "large");
+
+        table.add(goldImage).size(goldSideLength).pad(5);
+        table.add(goldLabel);
+        stage.addActor(goldTable);
     }
 
     @Override
@@ -81,6 +104,11 @@ public class PlayerStatsDisplay extends UIComponent {
         if (health <= 0) {
             ScoringSystemV1.stopTimerTask();
         }
+    }
+
+    public void updatePlayerGold(int gold) {
+        CharSequence text = String.format("Gold: %d", gold);
+        goldLabel.setText(text);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.deco2800.game.components.items;
 
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
@@ -9,7 +10,10 @@ import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
+import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.TextureRenderComponent;
+import com.deco2800.game.services.ServiceLocator;
 
 import java.lang.reflect.Method;
 
@@ -49,16 +53,22 @@ public class FirstAidComponent extends Component {
                     incHealth.increaseHealth(target);
                     entity.getEvents().trigger("itemPickedUp");
                     AchievementsHelper.getInstance().trackItemPickedUpEvent();
-
-           new Thread(() -> {
+           Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
+           if (physBody.getFixtureList().contains(other, true)) {
+               physBody.destroyFixture(other);
+           }
+           entity.getComponent(TextureRenderComponent.class).dispose();
+           ServiceLocator.getEntityService().unregister(entity);
+           /*new Thread(() -> {
                try {
-                   entity.dispose();
+
+                   //entity.dispose();
                }
                catch (Exception e){
                    System.out.print(e);
                }
             }).start();   // --> event.dispose() not working without wrapping it in a Thread
-
+                */
 
 
         }

@@ -1,8 +1,10 @@
 package com.deco2800.game.entities.factories;
 
 import com.deco2800.game.components.items.FirstAidComponent;
+import com.deco2800.game.components.items.GoldComponent;
 import com.deco2800.game.components.items.TestBuffForItem;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.physics.PhysicsUtils;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
@@ -97,5 +99,23 @@ public  class ItemFactory {
                 .addComponent(new FirstAidComponent(target));
 
         return bandage;
+    }
+
+    public static Entity createGold(Entity target){
+        /**
+         * creates an entity for a gold
+         * @param target The entity which is passed on to the gold component
+         * @return entity
+         */
+        Entity gold = new Entity()
+                .addComponent(new TextureRenderComponent("images/Items/goldCoin.png"))
+                .addComponent(new PhysicsComponent())
+                .addComponent(new ColliderComponent())
+                .addComponent(new GoldComponent(target));
+        gold.getComponent(TextureRenderComponent.class).scaleEntity();
+        gold.scaleHeight(1.5f);
+        PhysicsUtils.setScaledCollider(gold, 0.5f, 0.2f);
+
+        return gold;
     }
 }

@@ -124,6 +124,7 @@ public class ForestGameArea extends GameArea {
             "images/Items/magic_potion.png",
             "images/Items/bandage.png",
             "images/Items/syringe.png",
+            "images/Items/goldCoin.png",
             "images/obstacle_1_new.png",
             "images/obstacle2_vision2.png",
             "images/mpcMovement.png",
@@ -180,6 +181,7 @@ public class ForestGameArea extends GameArea {
 //        spawnGhostKing();
 
         spawnFirstAid();
+        spawnGold();
         playMusic();
         trackAchievements();
         setBonusItems(player);
@@ -334,6 +336,14 @@ public class ForestGameArea extends GameArea {
         }
     }
 
+    private void spawnGold() {
+        int k = 0;
+        for (int i = 0; i < 4; i++) {
+            GridPoint2 position = new GridPoint2(20+k++, 40);
+            Entity gold = ItemFactory.createGold(player);
+            spawnEntityAt(gold, position, false, false);
+        }
+    }
 
     private Entity spawnPlayer() {
         Entity newPlayer = PlayerFactory.createPlayer();
