@@ -1,5 +1,6 @@
 package com.deco2800.game.components.achievements;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -25,7 +26,7 @@ public class AchievementsDisplay extends UIComponent {
     private Image bonusImg;
     private Label achievementLabel;
     private Label bonusLabel;
-
+    private Sound achievementSound;
     @Override
     public void create() {
         super.create();
@@ -43,7 +44,10 @@ public class AchievementsDisplay extends UIComponent {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(textures);
         resourceService.loadTextures(new String[]{"images/achievements/bonusBg.png"});
+        String[] s ={"sounds/achievementSound.wav"};
+        resourceService.loadSounds(s);
         ServiceLocator.getResourceService().loadAll();
+
     }
 
     /**
@@ -94,6 +98,8 @@ public class AchievementsDisplay extends UIComponent {
                 renderAchievement(achievement);
                 /* Render bonus popup */
                 renderBonus(achievement);
+                /* Play achievement sound */
+                playAchievementSound();
                 /* Trigger bonus points event */
                 AchievementsHelper.getInstance().trackBonusPoints(achievement.bonus);
                 /* Wait for some time */
@@ -123,6 +129,14 @@ public class AchievementsDisplay extends UIComponent {
         table.add(achievementImg).size(300f, 150f);
         table.row();
         table.add(achievementLabel);
+
+    }
+
+    private void playAchievementSound() {
+        achievementSound = ServiceLocator.getResourceService().
+                getAsset("sounds/achievementSound.wav", Sound.class);
+        achievementSound.play();
+
     }
 
     /**
