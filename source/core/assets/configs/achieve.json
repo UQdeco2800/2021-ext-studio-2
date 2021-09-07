@@ -160,7 +160,7 @@
       "name": "Master",
       "type": "BRONZE",
       "iconPath": "images/achievements/masterBronze.png",
-      "message": "Wow! You have collected 50 points!",
+      "message": "Wow! You have crossed the score of 50!",
       "bonus": 10,
       "condition": {
         "score": 50
@@ -170,7 +170,7 @@
       "name": "Master",
       "type": "SILVER",
       "iconPath": "images/achievements/masterSilver.png",
-      "message": "Wow! You have collected 100 points!",
+      "message": "Wow! You have crossed the score of 100!",
       "bonus": 15,
       "condition": {
         "score": 100
@@ -180,7 +180,7 @@
       "name": "Master",
       "type": "GOLD",
       "iconPath": "images/achievements/masterGold.png",
-      "message": "Wow! You have collected 150 points!",
+      "message": "Wow! You have crossed the score of 150!",
       "bonus": 20,
       "condition": {
         "score": 150
