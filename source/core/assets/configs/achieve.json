@@ -92,6 +92,99 @@
       "condition": {
         "itemCount": 3
       }
+    },
+    {
+      "name": "Healer",
+      "type": "BRONZE",
+      "iconPath": "images/achievements/healerBronze.png",
+      "message": "You have successfully picked up 5 first aids!",
+      "bonus": 10,
+      "condition": {
+        "firstAids": 1
+      }
+    },
+    {
+      "name": "Healer",
+      "type": "SILVER",
+      "iconPath": "images/achievements/healerSilver.png",
+      "message": "You have successfully picked up 10 first aids!",
+      "bonus": 15,
+      "condition": {
+        "firstAids": 2
+      }
+    },
+    {
+      "name": "Healer",
+      "type": "GOLD",
+      "iconPath": "images/achievements/healerGold.png",
+      "message": "You have successfully picked up 15 first aids!",
+      "bonus": 20,
+      "condition": {
+        "firstAids": 3
+      }
+    },
+    {
+      "name": "Stranger",
+      "type": "BRONZE",
+      "iconPath": "images/achievements/strangerBronze.png",
+      "message": "Wow! You managed not to pick up any items for first 10 minutes!",
+      "bonus": 10,
+      "condition": {
+        "itemCount": 0,
+        "time": 10
+      }
+    },
+    {
+      "name": "Stranger",
+      "type": "SILVER",
+      "iconPath": "images/achievements/strangerSilver.png",
+      "message": "Wow! You managed not to pick up any items for first 15 minutes!",
+      "bonus": 15,
+      "condition": {
+        "itemCount": 0,
+        "time": 15
+      }
+    },
+    {
+      "name": "Stranger",
+      "type": "GOLD",
+      "iconPath": "images/achievements/strangerGold.png",
+      "message": "Wow! You managed not to pick up any items for first 20 minutes!",
+      "bonus": 20,
+      "condition": {
+        "itemCount": 0,
+        "time": 20
+      }
+    },
+    {
+      "name": "Master",
+      "type": "BRONZE",
+      "iconPath": "images/achievements/masterBronze.png",
+      "message": "Wow! You have collected 50 points!",
+      "bonus": 20,
+      "condition": {
+        "score": 50
+      }
+    },
+    {
+      "name": "Master",
+      "type": "SILVER",
+      "iconPath": "images/achievements/masterSilver.png",
+      "message": "Wow! You have collected 100 points!",
+      "bonus": 20,
+      "condition": {
+        "score": 100
+      }
+    },
+    {
+      "name": "Master",
+      "type": "GOLD",
+      "iconPath": "images/achievements/masterGold.png",
+      "message": "Wow! You have collected 150 points!",
+      "bonus": 20,
+      "condition": {
+        "score": 150
+      }
     }
   ]
 }

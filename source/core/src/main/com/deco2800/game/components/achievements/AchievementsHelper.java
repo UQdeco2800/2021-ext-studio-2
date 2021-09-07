@@ -15,6 +15,8 @@ public class AchievementsHelper {
     public static final String HEALTH_EVENT = "healthEvent";
     public static final String ACHIEVEMENTS_BONUS_POINTS = "updateBonusPoints";
 
+    public static final String ITEM_FIRST_AID = "firstAid";
+
     private static AchievementsHelper instance;
     private final EventHandler handler;
 
@@ -49,7 +51,7 @@ public class AchievementsHelper {
      * the achievements system
      */
     public void trackItemPickedUpEvent() {
-        handler.trigger(ITEM_PICKED_UP_EVENT);
+        handler.trigger(ITEM_PICKED_UP_EVENT, "");
     }
 
     /**
@@ -67,5 +69,13 @@ public class AchievementsHelper {
      */
     public void trackBonusPoints(int bonusPoints){
         handler.trigger(ACHIEVEMENTS_BONUS_POINTS, bonusPoints);
+    }
+
+    /**
+     * Triggers an event when a first aid item is picked up by the player
+     * @param itemName name of the item
+     */
+    public void trackItemPickedUpEvent(String itemName) {
+        handler.trigger(ITEM_PICKED_UP_EVENT, itemName);
     }
 }

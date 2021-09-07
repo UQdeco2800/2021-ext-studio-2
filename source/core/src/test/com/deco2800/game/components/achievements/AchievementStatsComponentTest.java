@@ -43,9 +43,6 @@ public class AchievementStatsComponentTest {
         achievements.add(genAchievement("Game Breaker", 5, 100, -1));
         achievements.add(genAchievement("Game Breaker", 8, 100, -1));
         achievements.add(genAchievement("Game Breaker", 10, 100, -1));
-        achievements.add(genAchievement("Tool Master", -1, -1, 1));
-        achievements.add(genAchievement("Tool Master", -1, -1, 2));
-        achievements.add(genAchievement("Tool Master", -1, -1, 3));
 
         return achievements;
     }
@@ -111,24 +108,42 @@ public class AchievementStatsComponentTest {
 
         Method method = getIsValidMethod();
 
+
         AchievementsStatsComponent component = generateEntity()
                 .getComponent(AchievementsStatsComponent.class);
 
-        for (BaseAchievementConfig a : getList()) {
+        component.setTime(0);
+        component.setHealth(0);
 
-            component.setTime(9);
-            component.setHealth(70);
+        component.setItemCountByVal(1);
+        BaseAchievementConfig achievement = genAchievement("Tool Master", -1, -1, 1);
+        assertEquals(method.invoke(component, achievement), true);
+        achievement.unlocked = false;
 
-            for (int i = 0; i <= 99; i++) {
-                component.setItemCount();
-            }
+        component.setItemCountByVal(2);
+        achievement = genAchievement("Tool Master", -1, -1, 2);
+        assertEquals(method.invoke(component, achievement), true);
+        achievement.unlocked = false;
 
-            if (a.name.equals("Tool Master")) {
-                assertEquals(method.invoke(component, a), true);
-            } else {
-                assertEquals(method.invoke(component, a), false);
-            }
-        }
+        component.setItemCountByVal(3);
+        achievement = genAchievement("Tool Master", -1, -1, 3);
+        assertEquals(method.invoke(component, achievement), true);
+        achievement.unlocked = false;
+
+        component.setItemCountByVal(-1);
+        assertEquals(method.invoke(component, achievement), false);
+
+        component.setItemCountByVal(1);
+        assertEquals(method.invoke(component, achievement), false);
+
+        component.setItemCountByVal(2);
+        assertEquals(method.invoke(component, achievement), false);
+
+        component.setItemCountByVal(4);
+        assertEquals(method.invoke(component, achievement), false);
+
+        component.setItemCountByVal(99);
+        assertEquals(method.invoke(component, achievement), false);
     }
 
     @Test
@@ -165,9 +180,6 @@ public class AchievementStatsComponentTest {
         for (BaseAchievementConfig a : getList()) {
             component.setTime(999999999);
             component.setHealth(100);
-            for (int i = 0; i < 999; i++) {
-                component.setItemCount();
-            }
 
             assertEquals(method.invoke(component, a), true);
         }
