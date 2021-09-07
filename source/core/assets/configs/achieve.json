@@ -161,7 +161,7 @@
       "type": "BRONZE",
       "iconPath": "images/achievements/masterBronze.png",
       "message": "Wow! You have collected 50 points!",
-      "bonus": 20,
+      "bonus": 10,
       "condition": {
         "score": 50
       }
@@ -171,7 +171,7 @@
       "type": "SILVER",
       "iconPath": "images/achievements/masterSilver.png",
       "message": "Wow! You have collected 100 points!",
-      "bonus": 20,
+      "bonus": 15,
       "condition": {
         "score": 100
       }

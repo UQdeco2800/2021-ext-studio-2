@@ -17,7 +17,7 @@ import com.deco2800.game.ui.UIComponent;
  * A UI component to display achievement cards and labels for corresponding achievements
  */
 public class AchievementsDisplay extends UIComponent {
-    private static final int RENDER_DURATION = 5000;
+    private static final int RENDER_DURATION = 1500;
     private static final String[] textures = AchievementFactory.getTextures();
     private static final String[] bonusSoundPath = {"sounds/achievementSound.wav"};
     private static final String[] bonusBgPath = {"images/achievements/bonusBg.png"};
