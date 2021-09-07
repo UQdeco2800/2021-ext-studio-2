@@ -44,6 +44,7 @@ public class Entity {
     private Vector2 scale = new Vector2(1, 1);
     private Array<Component> createdComponents;
 
+
     public Entity() {
         id = nextId;
         nextId++;

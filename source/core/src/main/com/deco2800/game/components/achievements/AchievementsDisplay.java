@@ -19,8 +19,12 @@ public class AchievementsDisplay extends UIComponent {
     private static final int RENDER_DURATION = 5000;
     private static final String[] textures = AchievementFactory.getTextures();
     private Table table;
+    private Table tableForBonusBg;
+    private Table tableForBonus;
     private Image achievementImg;
+    private Image bonusImg;
     private Label achievementLabel;
+    private Label bonusLabel;
 
     @Override
     public void create() {
@@ -38,6 +42,7 @@ public class AchievementsDisplay extends UIComponent {
     private void loadAssets() {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(textures);
+        resourceService.loadTextures(new String[]{"images/achievements/bonusBg.png"});
         ServiceLocator.getResourceService().loadAll();
     }
 
@@ -56,7 +61,17 @@ public class AchievementsDisplay extends UIComponent {
         table = new Table();
         table.top();
         table.setFillParent(true);
+        tableForBonusBg = new Table();
+        tableForBonusBg.bottom().right();
+        tableForBonusBg.setFillParent(true);
+        tableForBonusBg.padBottom(0).padRight(0);
+        tableForBonus = new Table();
+        tableForBonus.bottom().right();
+        tableForBonus.setFillParent(true);
+        tableForBonus.padBottom(0).padRight(0);
         stage.addActor(table);
+        stage.addActor(tableForBonusBg);
+        stage.addActor(tableForBonus);
     }
 
     @Override
@@ -77,12 +92,17 @@ public class AchievementsDisplay extends UIComponent {
             try {
                 /* Render achievement card */
                 renderAchievement(achievement);
+                /* Render bonus popup */
+                renderBonus(achievement);
                 /* Trigger bonus points event */
                 AchievementsHelper.getInstance().trackBonusPoints(achievement.bonus);
                 /* Wait for some time */
                 Thread.sleep(RENDER_DURATION);
                 /* Remove card from screen */
                 table.clear();
+                /* Remove bonus UI From screen */
+                tableForBonusBg.clear();
+                tableForBonus.clear();
             } catch (InterruptedException ignored) {
             } catch (Exception e) {
                 e.printStackTrace();
@@ -103,6 +123,21 @@ public class AchievementsDisplay extends UIComponent {
         table.add(achievementImg).size(300f, 150f);
         table.row();
         table.add(achievementLabel);
+    }
+
+    /**
+     * Renders the bonus score associated with achievements
+     */
+    private void renderBonus(BaseAchievementConfig achievement) {
+        bonusImg=new Image(ServiceLocator.getResourceService().getAsset
+                ("images/achievements/bonusBg.png",Texture.class));
+        String s ="+";
+        CharSequence text = s.concat(Integer.toString(achievement.bonus));
+        bonusLabel = new Label(text,skin,"small");
+        bonusLabel.setFontScale(1.4f,1.4f);
+        bonusLabel.setAlignment(100);
+        tableForBonusBg.add(bonusImg).size(150f,45f);
+        tableForBonus.add(bonusLabel).padBottom(10f).padRight(60f);
 
     }
 
@@ -120,6 +155,12 @@ public class AchievementsDisplay extends UIComponent {
         }
         if (achievementLabel != null) {
             achievementLabel.remove();
+        }
+        if (bonusLabel!= null) {
+            bonusLabel.remove();
+        }
+        if (bonusImg != null) {
+            bonusImg.remove();
         }
         unloadAssets();
     }
