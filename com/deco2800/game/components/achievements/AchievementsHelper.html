@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":9,"i2":10,"i3":10};
+<script type="text/javascript">var data = {"i0":10,"i1":9,"i2":10,"i3":10,"i4":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -126,10 +126,15 @@ extends java.lang.Object</pre>
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#HEALTH_EVENT">HEALTH_EVENT</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#ACHIEVEMENTS_BONUS_POINTS">ACHIEVEMENTS_BONUS_POINTS</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#HEALTH_EVENT">HEALTH_EVENT</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#ITEM_PICKED_UP_EVENT">ITEM_PICKED_UP_EVENT</a></span></code></th>
 <td class="colLast">&nbsp;</td>
@@ -173,13 +178,20 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#trackBonusPoints(int)">trackBonusPoints</a></span>&#8203;(int&nbsp;bonusPoints)</code></th>
+<td class="colLast">
+<div class="block">Triggers an event when a new bonus point event is encountered</div>
+</td>
+</tr>
+<tr class="rowColor" id="i3">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#trackHealthEvent(int)">trackHealthEvent</a></span>&#8203;(int&nbsp;health)</code></th>
 <td class="colLast">
 <div class="block">Tracks changes in the health property of the player
  and triggers an event for the achievements system</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#trackItemPickedUpEvent()">trackItemPickedUpEvent</a></span>()</code></th>
 <td class="colLast">
@@ -226,6 +238,16 @@ extends java.lang.Object</pre>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../constant-values.html#com.deco2800.game.components.achievements.AchievementsHelper.HEALTH_EVENT">Constant Field Values</a></dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="ACHIEVEMENTS_BONUS_POINTS">ACHIEVEMENTS_BONUS_POINTS</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType">java.lang.String</span>&nbsp;<span class="memberName">ACHIEVEMENTS_BONUS_POINTS</span></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../constant-values.html#com.deco2800.game.components.achievements.AchievementsHelper.ACHIEVEMENTS_BONUS_POINTS">Constant Field Values</a></dd>
 </dl>
 </section>
 </li>
@@ -281,6 +303,17 @@ extends java.lang.Object</pre>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>health</code> - the player's health</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="trackBonusPoints(int)">trackBonusPoints</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">trackBonusPoints</span>&#8203;(<span class="arguments">int&nbsp;bonusPoints)</span></div>
+<div class="block">Triggers an event when a new bonus point event is encountered</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>bonusPoints</code> - the bonus points</dd>
 </dl>
 </section>
 </li>
