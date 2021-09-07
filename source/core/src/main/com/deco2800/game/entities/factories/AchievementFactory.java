@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
  *
  * <p>Each Achievement entity type should have a creation method that returns a corresponding entity.
  * Predefined achievement entity conditions can be loaded from configs stored as json files which are defined in
- * "achieve.json".
+ * "achievements.json".
  */
 public class AchievementFactory {
     private static final AchievementConfigs configs =
             FileLoader.readClass(AchievementConfigs.class, "configs/achievements.json");
 
     /**
-     * Returns a list of achievements from the "achieve.json" file
+     * Returns a list of achievements from the "achievements.json" file
      * @return achievements - A list of achievements inflated from the JSON file
      */
     public static Entity createAchievementEntity(){

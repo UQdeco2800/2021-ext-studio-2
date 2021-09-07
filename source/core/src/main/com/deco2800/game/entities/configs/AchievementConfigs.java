@@ -7,8 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Defines an Arraylist to store a basic set of achievement properties stored in achievement config files (achieve.json)
- * to be loaded by Achievement Factory
+ * Defines an Arraylist to store a basic set of achievement properties stored in
+ * achievement config files (achievements.json) to be loaded by Achievement Factory
  */
 public class AchievementConfigs {
     public List<BaseAchievementConfig> achievements = new LinkedList<>();
