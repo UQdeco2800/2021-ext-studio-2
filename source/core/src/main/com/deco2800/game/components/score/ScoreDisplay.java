@@ -96,7 +96,7 @@ public class ScoreDisplay extends UIComponent {
      */
     private void updateScoreByPoints(int bonusPoints){
         // Add bonusPoints to the score here
-        // ...
+        scoringSystem.addToScore(bonusPoints);
     }
 
     @Override
