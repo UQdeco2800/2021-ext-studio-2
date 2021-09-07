@@ -4,9 +4,11 @@ import com.badlogic.gdx.assets.loaders.SynchronousAssetLoader;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Obstacle.ObstacleDisappear;
 import com.deco2800.game.components.TouchAttackComponent;
+import com.deco2800.game.components.tasks.ObstacleAttackTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -93,6 +95,38 @@ public class ObstacleFactory {
 
 
     /**
+     * Create range obstacle entity
+     */
+    public static Entity createRangeObstacle(Entity target) {
+
+        Entity obstacle = new Entity();
+
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new ObstacleAttackTask(target,10,5f));
+
+//        AnimationRenderComponent animator =
+//                new AnimationRenderComponent(
+//                        ServiceLocator.getResourceService()
+//                                .getAsset("images/obstacle_2.atlas", TextureAtlas.class));
+//        animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
+
+        obstacle
+                .addComponent(new TextureRenderComponent("images/enemy2.png"))
+                // .addComponent(animator)
+                .addComponent(aiComponent);
+
+
+        obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
+
+        obstacle.setScale(2, 2);
+
+
+        return obstacle;
+    }
+
+
+    /**
      * Create basic obstacle entity
      *
      * @param target   the character entity
@@ -162,9 +196,9 @@ public class ObstacleFactory {
 
         rock.addComponent(new TextureRenderComponent("images/rock.jpg"))
                 .addComponent(new PhysicsComponent())
-                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
 //                .addComponent(new CombatStatsComponent(2000, 10))
-                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
+//                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
 //                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
 //                .addComponent(new ObstacleAnimationController());
 
@@ -185,9 +219,9 @@ public class ObstacleFactory {
 
         wood.addComponent(new TextureRenderComponent("images/wood.jpg"))
                 .addComponent(new PhysicsComponent())
-                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
 //                .addComponent(new CombatStatsComponent(2000, 10))
-                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
+//                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
 //                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
 //                .addComponent(new ObstacleAnimationController());
 
