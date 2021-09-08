@@ -17,9 +17,9 @@ public class HistoryScoreDisplay extends UIComponent {
 
     private static final Logger logger = LoggerFactory.getLogger(HistoryScoreDisplay.class);
     private final GdxGame game;
-    private Table tableForScores;
-    private Table tableForTitle;
-    private Table tableForButton;
+    private Table table;
+    //private Table tableForTitle;
+    //private Table tableForButton;
 
     public HistoryScoreDisplay(GdxGame game) {
         this.game = game;
@@ -53,29 +53,20 @@ public class HistoryScoreDisplay extends UIComponent {
                 });
 
         // Position each label and assets.
-        tableForScores = new Table();
-        tableForButton = new Table();
-        tableForTitle = new Table();
-        tableForTitle.top().padTop(10f);
-        tableForTitle.add(historyScoreLabel);
+        table = new Table();
+        table.add(historyScoreLabel);
 
-        tableForScores.add(scoreLabel);
-        tableForScores.add(dateLabel);
-        tableForScores.center();
+        table.add(scoreLabel);
+        table.add(dateLabel);
 
-        tableForButton.add(mainMenuButton);
-        tableForButton.bottom().padLeft(20f);
-        tableForScores.setFillParent(true);
-        stage.addActor(tableForScores);
-        stage.addActor(tableForButton);
-        stage.addActor(tableForTitle);
+        table.add(mainMenuButton);
+        table.setFillParent(true);
+        stage.addActor(table);
     }
 
     @Override
     public void dispose() {
-        tableForScores.clear();
-        tableForButton.clear();
-        tableForTitle.clear();
+        table.clear();
         super.dispose();
     }
 
