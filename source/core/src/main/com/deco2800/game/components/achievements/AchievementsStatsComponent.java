@@ -14,8 +14,7 @@ import java.util.stream.Collectors;
  * and emits new achievement events
  */
 public class AchievementsStatsComponent extends Component {
-    private static List<BaseAchievementConfig> achievements =
-            AchievementFactory.getAchievements();
+    private static List<BaseAchievementConfig> achievements = AchievementFactory.getAchievements();
     private final ScoringSystemV1 scoringSystemV1;
     private int health;
     private long time;
