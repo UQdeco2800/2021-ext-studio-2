@@ -16,21 +16,23 @@ import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 import java.lang.reflect.Method;
+import java.util.function.Consumer;
 
-public class FirstAidComponent extends Component {
+public class ItemComponent extends Component {
 
 
     private Entity target;
     HitboxComponent hitboxComponent;
+    private Consumer<Entity> callback;
 
     /**
      *creates a first aid component that detects when the player collides with
      * the entity and when collided it runs a buff function for the Item
      * @param target  entity on which the buff function will work on
      */
-    public FirstAidComponent(Entity target){
+    public ItemComponent(Entity target, Consumer<Entity> callback){
         this.target = target;
-
+        this.callback = callback;
     }
 
     public void create(){
@@ -45,12 +47,10 @@ public class FirstAidComponent extends Component {
     private void onCollisionStart(Fixture me, Fixture other){
 
 
-
-        TestBuffForItem incHealth = new TestBuffForItem();
-
        if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) // checking if the collision is done with the player
        {
-                    incHealth.increaseHealth(target);
+
+                    callback.accept(target);
 
                     entity.getEvents().trigger("itemPickedUp");
                     AchievementsHelper.getInstance().trackItemPickedUpEvent();
@@ -61,10 +61,13 @@ public class FirstAidComponent extends Component {
 
                     AchievementsHelper.getInstance().trackItemPickedUpEvent(AchievementsHelper.ITEM_FIRST_AID);
 
-
-                   entity.getComponent(TextureRenderComponent.class).dispose();
-                   ServiceLocator.getEntityService().unregister(entity);
-
+                try {
+                    entity.getComponent(TextureRenderComponent.class).dispose();
+                    ServiceLocator.getEntityService().unregister(entity);
+                }
+                catch (Exception e){
+                    System.out.print(e);
+                }
 
 
         }

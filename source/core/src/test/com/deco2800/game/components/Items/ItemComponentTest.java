@@ -2,7 +2,7 @@ package com.deco2800.game.components.Items;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.items.FirstAidComponent;
+import com.deco2800.game.components.items.ItemComponent;
 import com.deco2800.game.components.items.TestBuffForItem;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(GameExtension.class)
-public class FirstAidComponentTest {
+public class ItemComponentTest {
     @BeforeEach
     void beforeEach() {
         ServiceLocator.registerPhysicsService(new PhysicsService());
@@ -40,11 +40,12 @@ public class FirstAidComponentTest {
 
 
     Entity createFirstAid(Entity target){
+        TestBuffForItem incHealth = new TestBuffForItem();
         Entity entity = new Entity()
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
                 .addComponent(new HitboxComponent())
-                .addComponent(new FirstAidComponent(target));
+                .addComponent(new ItemComponent(target,(player) -> incHealth.increaseHealth(player)));
         entity.create();
         return entity;
     }

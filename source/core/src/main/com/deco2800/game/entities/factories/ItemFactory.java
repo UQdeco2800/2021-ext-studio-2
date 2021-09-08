@@ -1,6 +1,6 @@
 package com.deco2800.game.entities.factories;
 
-import com.deco2800.game.components.items.FirstAidComponent;
+import com.deco2800.game.components.items.ItemComponent;
 import com.deco2800.game.components.items.GoldComponent;
 import com.deco2800.game.components.items.TestBuffForItem;
 import com.deco2800.game.entities.Entity;
@@ -10,20 +10,19 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 
 public  class ItemFactory {
-
+    private static TestBuffForItem inchealth = new TestBuffForItem();
     public static Entity createFirstAid(Entity target){
         /**
          * creates an entity for a firstAidKit
          * @param target The entity which is passed on to the first Aid component
          * @return entity
          */
-        TestBuffForItem inchealth = new TestBuffForItem();
-        inchealth.increaseHealth(target);
+
         Entity firstAid = new Entity()
                 .addComponent(new TextureRenderComponent("images/Items/first_aid_kit.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
-                .addComponent(new FirstAidComponent(target));
+                .addComponent(new ItemComponent(target, (player) -> inchealth.increaseHealth(player)));
 
         return firstAid;
     }
@@ -38,7 +37,7 @@ public  class ItemFactory {
                 .addComponent(new TextureRenderComponent("images/Items/food.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
-                .addComponent(new FirstAidComponent(target));
+                .addComponent(new ItemComponent(target,(player) -> inchealth.increaseHealth(player)));
 
         return apple;
     }
@@ -53,7 +52,7 @@ public  class ItemFactory {
                 .addComponent(new TextureRenderComponent("images/Items/water.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
-                .addComponent(new FirstAidComponent(target));
+                .addComponent(new ItemComponent(target,(player) -> inchealth.increaseHealth(player)));
 
         return water;
     }
@@ -68,7 +67,7 @@ public  class ItemFactory {
                 .addComponent(new TextureRenderComponent("images/Items/magic_potion.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
-                .addComponent(new FirstAidComponent(target));
+                .addComponent(new ItemComponent(target,(player) -> inchealth.increaseHealth(player)));
 
         return magicPotion;
     }
@@ -83,7 +82,7 @@ public  class ItemFactory {
                 .addComponent(new TextureRenderComponent("images/Items/syringe.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
-                .addComponent(new FirstAidComponent(target));
+                .addComponent(new ItemComponent(target,(player) -> inchealth.increaseHealth(player)));
 
         return syringe;
     }
@@ -98,7 +97,7 @@ public  class ItemFactory {
                 .addComponent(new TextureRenderComponent("images/Items/bandage.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
-                .addComponent(new FirstAidComponent(target));
+                .addComponent(new ItemComponent(target,(player) -> inchealth.increaseHealth(player)));
 
         return bandage;
     }
