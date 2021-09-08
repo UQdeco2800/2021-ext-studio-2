@@ -16,12 +16,13 @@ public class PlayerAnimationController extends Component {
         super.create();
         animator = this.entity.getComponent(AnimationRenderComponent.class);
         entity.getEvents().addListener("walkRight", this::animateRight);
-        entity.getEvents().addListener("stopWalkRight", this::stopAnimateRight);
+        entity.getEvents().addListener("stopWalkRight", this::stopAnimateAll);
         entity.getEvents().addListener("crouch", this::animateCrouch);
-        entity.getEvents().addListener("stopCrouch", this::stopAnimateCrouch);
+        entity.getEvents().addListener("stopCrouch", this::stopAnimateAll);
         entity.getEvents().addListener("attack", this::animateAttack);
-        entity.getEvents().addListener("stopAttack", this::stopAnimateAttack);
-        // entity.getEvents().addListener("jump", this::animateJump);
+        entity.getEvents().addListener("stopAttack", this::stopAnimateAll);
+        entity.getEvents().addListener("jump", this::animateJump);
+        entity.getEvents().addListener("stopJump", this::stopAnimateAll);
     }
     
     private void preAnimationCleanUp() {
@@ -37,35 +38,27 @@ public class PlayerAnimationController extends Component {
         animator.startAnimation("main_player_crouch");
         
     }
-    private void stopAnimateCrouch() {
-        preAnimationCleanUp();
-        animator.startAnimation("main_player_walk");
-    }
 
     private void animateRight() {
         preAnimationCleanUp();
         animator.startAnimation("main_player_run");
     }
 
-    private void stopAnimateRight() {
-        preAnimationCleanUp();
-        animator.startAnimation("main_player_walk");
-    }
 
     private void animateAttack() {
         preAnimationCleanUp();
         animator.startAnimation("main_player_attack");
     }
 
-    private void stopAnimateAttack() {
+    private void stopAnimateAll() {
         preAnimationCleanUp();
         animator.startAnimation("main_player_walk");
     }
 
-//    private void animateJump() {
-//         preAnimationCleanUp()
-//         animator.startAnimation("main_player_jump");
-//    }
+    private void animateJump() {
+         preAnimationCleanUp();
+         animator.startAnimation("main_player_jump");
+    }
     
 
 

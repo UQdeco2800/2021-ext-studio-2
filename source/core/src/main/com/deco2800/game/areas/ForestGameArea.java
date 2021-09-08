@@ -113,6 +113,7 @@ public class ForestGameArea extends GameArea {
             "images/mpc_left_view.png",
             "images/mpc_right_view.png",
             "images/mpc_right.png",
+            "images/main_player_jump.png",
             "images/road.png",
             "images/water.png",
             "images/rock.jpg",
@@ -137,6 +138,7 @@ public class ForestGameArea extends GameArea {
                     "/obstacle_1.atlas",
             "images/obstacle_2.atlas",
             "images/mpcMovement.atlas",
+            "images/main_player_jump.atlas",
 
     };
     private static final String[] forestSounds = {"sounds/Impact4.ogg"};

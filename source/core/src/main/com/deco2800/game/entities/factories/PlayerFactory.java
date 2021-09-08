@@ -44,7 +44,6 @@ public class PlayerFactory {
                 ServiceLocator.getInputService().getInputFactory().createForPlayer();
 
         AnimationRenderComponent animator = createAnimationComponent("images/mpcMovement.atlas");
-
         animator.addAnimation("main_player_run", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("main_player_walk", 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("mpc_front", 1f, Animation.PlayMode.LOOP);
@@ -55,6 +54,9 @@ public class PlayerFactory {
         AnimationRenderComponent deBuffAnimator = createAnimationComponent("images/debuff.atlas");
         deBuffAnimator.addAnimation("debuffDecrease", 0.1f, Animation.PlayMode.LOOP);
 
+        AnimationRenderComponent jumpAnimator = createAnimationComponent("images/main_player_jump.atlas");
+        jumpAnimator.addAnimation("main_player_jump", 0.33f, Animation.PlayMode.LOOP);
+        jumpAnimator.addAnimation("main_player_rightside",1f, Animation.PlayMode.LOOP);
         Entity player =
                 new Entity()
                         .addComponent(new TextureRenderComponent("images/mpc_right.png"))
@@ -70,6 +72,7 @@ public class PlayerFactory {
                         .addComponent(animator)
                         .addComponent(buffAnimator)
                         .addComponent(deBuffAnimator)
+                        .addComponent(jumpAnimator)
                         .addComponent(new BuffAnimationController());
 
 
