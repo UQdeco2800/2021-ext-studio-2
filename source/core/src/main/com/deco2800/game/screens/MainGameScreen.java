@@ -44,9 +44,12 @@ public class MainGameScreen extends ScreenAdapter {
   private static final String[] mainGameTextures = {"images/heart.png", "images/clock.png", "images/scoreboard.png", "images/background.png"};
   private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 
+
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;
+  private static Vector2 enemyPosition;
+  private static boolean spownEnemy;
 
   private Entity player;
   private ForestGameArea forestGameArea;
@@ -80,6 +83,10 @@ public class MainGameScreen extends ScreenAdapter {
     forestGameArea.create();
 
     player = forestGameArea.player;
+  }
+  public static void setSpownEnemy(Vector2 position) {
+    enemyPosition = position;
+    spownEnemy = true;
   }
 
   @Override
@@ -116,9 +123,15 @@ public class MainGameScreen extends ScreenAdapter {
       
       // Generate obstacles
       forestGameArea.spawnObstacles();
-      // Generate meteorites
+      // Generate meteoritesw
       forestGameArea.spawnMeteorites(3, 3);
+      forestGameArea.spawnRangeObstacles();
 
+    }
+
+    if (spownEnemy) {
+      forestGameArea.spawnAttackObstacles(enemyPosition);
+      spownEnemy = false;
     }
   }
 
