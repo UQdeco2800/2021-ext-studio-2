@@ -128,6 +128,10 @@ public class AchievementsStatsComponent extends Component {
         ++firstAids;
         checkForValidAchievements();
     }
+    public void setFirstAidByVal(int firstAids) {
+        this.firstAids = firstAids;
+        checkForValidAchievements();
+    }
 
     /**
      * Maintains the count of the number of items picked up
