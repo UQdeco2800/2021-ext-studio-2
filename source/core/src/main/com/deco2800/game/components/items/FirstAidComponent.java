@@ -62,16 +62,8 @@ public class FirstAidComponent extends Component {
                     AchievementsHelper.getInstance().trackItemPickedUpEvent(AchievementsHelper.ITEM_FIRST_AID);
 
 
-           new Thread(() -> {
-               try {
                    entity.getComponent(TextureRenderComponent.class).dispose();
                    ServiceLocator.getEntityService().unregister(entity);
-                   //entity.dispose();
-               }
-               catch (Exception e){
-                   System.out.print(e);
-               }
-            }).start();   // --> event.dispose() not working without wrapping it in a Thread
 
 
 

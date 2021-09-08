@@ -17,6 +17,8 @@ public  class ItemFactory {
          * @param target The entity which is passed on to the first Aid component
          * @return entity
          */
+        TestBuffForItem inchealth = new TestBuffForItem();
+        inchealth.increaseHealth(target);
         Entity firstAid = new Entity()
                 .addComponent(new TextureRenderComponent("images/Items/first_aid_kit.png"))
                 .addComponent(new PhysicsComponent())
