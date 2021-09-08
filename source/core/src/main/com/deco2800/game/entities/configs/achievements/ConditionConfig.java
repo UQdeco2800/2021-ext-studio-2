@@ -8,4 +8,6 @@ public class ConditionConfig {
     public int time = -1;
     public int health = -1;
     public int itemCount = -1;
+    public int score = -1;
+    public int firstAids = -1;
 }
