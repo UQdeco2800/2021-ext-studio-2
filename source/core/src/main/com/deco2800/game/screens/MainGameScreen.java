@@ -103,6 +103,9 @@ public class MainGameScreen extends ScreenAdapter {
     CombatStatsComponent playerStats = player.getComponent(CombatStatsComponent.class);
     if (playerStats.isDead()) {
       logger.info("Performing Post Game Tasks");
+      /* NOTE: Call this method first before displaying the game over screen
+       * and performing other tasks. This method has to be called as soon as
+       * the player dies. */
       performPostGameTasks();
 
       logger.info("Display Game Over Screen");
@@ -222,7 +225,7 @@ public class MainGameScreen extends ScreenAdapter {
     /* Increment the number of games that have been played
      * NOTE: Perform all subsequent tasks after this has been called */
     GameInfo.incrementGameCount();
-    /* Store the achievements record and reset achievements */
+    /* Store the achievements record and in a JSON file and then reset achievements */
     AchievementRecords.storeGameRecord();
   }
 }

@@ -32,11 +32,16 @@ public class AchievementsDisplay extends UIComponent {
     @Override
     public void create() {
         super.create();
+
+        AsyncTaskQueue.newQueue();
+
         loadAssets();
         addActors();
 
         /* Listen to achievement events*/
         entity.getEvents().addListener("updateAchievement", this::updateAchievementsUI);
+        entity.getEvents().addListener("clear", this::clear);
+        entity.getEvents().addListener("display", this::display);
     }
 
     /**
@@ -94,27 +99,38 @@ public class AchievementsDisplay extends UIComponent {
          * single thread to run asynchronously. */
         AsyncTaskQueue.enqueueTask(() -> {
             try {
-                /* Render achievement card */
-                renderAchievement(achievement);
-                /* Render bonus popup */
-                renderBonus(achievement);
-                /* Play achievement sound */
-                playAchievementSound();
-                /* Trigger bonus points event */
-                AchievementsHelper.getInstance().trackBonusPoints(achievement.bonus);
+                entity.getEvents().trigger("display", achievement);
                 /* Wait for some time */
                 Thread.sleep(RENDER_DURATION);
-                /* Remove card from screen */
-                table.clear();
-                /* Remove bonus UI From screen */
-                tableForBonusBg.clear();
-                tableForBonus.clear();
+                entity.getEvents().trigger("clear");
             } catch (InterruptedException ignored) {
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
     }
+
+    private synchronized void display(BaseAchievementConfig achievement){
+        System.out.println(achievement.name + achievement.type);
+        /* Render achievement card */
+        renderAchievement(achievement);
+        /* Render bonus popup */
+        renderBonus(achievement);
+        /* Play achievement sound */
+        playAchievementSound();
+        /* Trigger bonus points event */
+        AchievementsHelper.getInstance().trackBonusPoints(achievement.bonus);
+    }
+
+    private synchronized void clear(){
+        /* Remove card from screen */
+        table.clear();
+        /* Remove bonus UI From screen */
+        tableForBonusBg.clear();
+        tableForBonus.clear();
+    }
+
+
 
     /**
      * Renders the current achievement notification on the table

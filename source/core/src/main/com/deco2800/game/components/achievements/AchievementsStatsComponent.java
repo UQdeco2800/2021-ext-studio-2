@@ -23,13 +23,17 @@ public class AchievementsStatsComponent extends Component {
     private int firstAids;
 
     public AchievementsStatsComponent() {
+        scoringSystemV1 = new ScoringSystemV1();
+
+        initStats();
+    }
+
+    private void initStats(){
         itemCount = 0;
         health = 100;
         time = -1;
         score = 0;
         firstAids = 0;
-
-        scoringSystemV1 = new ScoringSystemV1();
     }
 
     /**
@@ -56,12 +60,16 @@ public class AchievementsStatsComponent extends Component {
      * Lock all the achievements again
      */
     public static void resetAchievements() {
-        achievements = AchievementFactory.getAchievements();
+        achievements.forEach(achievement -> achievement.unlocked = false);
     }
 
     @Override
     public void create() {
         super.create();
+
+        initStats();
+
+        resetAchievements();
 
         AchievementsHelper.getInstance().getEvents()
                 .addListener(AchievementsHelper.HEALTH_EVENT, this::setHealth);

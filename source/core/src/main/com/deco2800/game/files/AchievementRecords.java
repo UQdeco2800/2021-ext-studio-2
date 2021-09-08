@@ -24,8 +24,6 @@ public class AchievementRecords {
         record.game = GameInfo.getGameCount();
         record.achievements = AchievementsStatsComponent.getUnlockedAchievements();
 
-        AchievementsStatsComponent.resetAchievements();
-
         ScoringSystemV1 scoringSystemV1 = new ScoringSystemV1();
         record.score = scoringSystemV1.getScore();
 
@@ -36,7 +34,6 @@ public class AchievementRecords {
     }
 
     /**
-     *
      * @param game the game number (nth game played)
      * @return unlocked achievements of that particular game
      */
