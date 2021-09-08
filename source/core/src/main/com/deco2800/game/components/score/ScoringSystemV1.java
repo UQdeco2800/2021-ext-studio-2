@@ -16,6 +16,7 @@ public class ScoringSystemV1 {
     private static int minutes = 0;
     private static int hours = 0;
 
+    private static int score = 0;
     public GameTime gameTime;
 
     //scoreSeconds is just seconds
@@ -32,6 +33,7 @@ public class ScoringSystemV1 {
         @Override
         public void run() {
             seconds++;
+            score++;
             scoreSeconds++;
             if (seconds == 60) {
                 seconds = 0;
@@ -59,6 +61,7 @@ public class ScoringSystemV1 {
             @Override
             public void run() {
                 seconds++;
+                score++;
                 scoreSeconds++;
                 if (seconds == 60) {
                     seconds = 0;
@@ -94,10 +97,12 @@ public class ScoringSystemV1 {
      * Return the total score
      * @return int scores
      */
-    public int getScore(int... args) {
-        //At this moment, the seconds is the final score;
-//        return scoreSeconds;
-        return (args[0]);
+    public int getScore() {
+        return score;
+    }
+
+    public void addToScore(int bonus) {
+        score = score + bonus;
     }
     /**
      * Return the current seconds of the timer.
