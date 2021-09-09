@@ -14,6 +14,8 @@ import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.GdxGame.ScreenType;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
+import com.deco2800.game.files.AchievementRecords;
+import com.deco2800.game.files.GameChapters;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
@@ -95,24 +97,30 @@ public class AchievementRecordsDisplay extends UIComponent {
 
     private void renderGameStory() {
         chapterTable = new Table();
-
-
-        for (int i = 1; i < 6; i++) {
+        List<GameChapters.Chapter> unlockedChapters = AchievementRecords.getUnlockedChapters();
+        unlockedChapters.forEach(chapter -> {
             Image linkImg = new Image(ServiceLocator.getResourceService()
                     .getAsset("images/story/chapterLink.png", Texture.class));
-            ImageButton chapterImg = getImageButton("images/story/chapter" + i + ".png");
-            chapterImg.addListener(new ChangeListener() {
+            ImageButton unlockedChapterImg = getImageButton("images/story/chapter" + chapter.id + ".png");
+            Image lockedChapterImg = new Image(ServiceLocator.getResourceService()
+                    .getAsset("images/story/chapterLock.png", Texture.class));
+            unlockedChapterImg.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     game.setScreen(ScreenType.MAIN_MENU);
                 }
             });
-            chapterTable.add(chapterImg);
-            if (i != 5) {
-                chapterTable.add(linkImg);
+
+            if(chapter.unlocked){
+                chapterTable.add(unlockedChapterImg);
+            } else {
+                chapterTable.add(lockedChapterImg);
             }
 
-        }
+            if (chapter.id != unlockedChapters.size()) {
+                chapterTable.add(linkImg);
+            }
+        });
     }
 
     private void renderNoAchievements() {
