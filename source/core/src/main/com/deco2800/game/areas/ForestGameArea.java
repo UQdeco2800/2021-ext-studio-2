@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
-import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
 import com.deco2800.game.utils.math.GridPoint2Utils;
@@ -142,8 +141,8 @@ public class ForestGameArea extends GameArea {
     private static final String[] forestSounds = {"sounds/Impact4.ogg"};
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
-    private static final String backgroundMusic = "sounds/temp_bgm.wav";
-    private static final String[] forestMusic = {backgroundMusic};
+    private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
+    private static final String[] forestMusic = {BACKGROUNDMUSIC};
     private boolean firstGenerate = true;
 
     private final TerrainFactory terrainFactory;
@@ -378,7 +377,7 @@ public class ForestGameArea extends GameArea {
     }
 
     private void playMusic() {
-        Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
+        Music music = ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class);
         music.setLooping(true);
         music.setVolume(0.3f);
         music.play();
@@ -414,7 +413,7 @@ public class ForestGameArea extends GameArea {
     @Override
     public void dispose() {
         super.dispose();
-        ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class).stop();
+        ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class).stop();
         this.unloadAssets();
     }
 
