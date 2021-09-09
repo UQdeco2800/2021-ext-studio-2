@@ -87,20 +87,27 @@ public class AchievementRecords {
     }
 
     public static List<GameChapters.Chapter> getUnlockedChapters() {
+
         List<GameChapters.Chapter> chapters = GameChapters.getChapters();
 
+        Set<String> goldAchievements = new LinkedHashSet<>();
+
+        /* The following algorithm to extract the best achievements can be optimized later. */
         for (Map.Entry<Integer, Record> e : getRecords().records.entrySet()) {
-            Record record = e.getValue();
-            record.achievements.forEach(a -> {
+            Record value = e.getValue();
+            value.achievements.forEach(a -> {
                 if (a.type.equals("GOLD")) {
-                    chapters.forEach(chapter -> {
-                        if (chapter.achievement.equals(a.name)) {
-                            chapter.unlocked = true;
-                        }
-                    });
+                    goldAchievements.add(a.name);
                 }
             });
         }
+
+        for (int i = 0; i < goldAchievements.size(); i++) {
+            if (i < chapters.size()) {
+                chapters.get(i).unlocked = true;
+            }
+        }
+
         return chapters;
     }
 
