@@ -4,6 +4,8 @@ import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.concurrent.TimeUnit;
+
 
 /**
  * This class listens to events relevant to the Main Menu Screen and does something when one of the
@@ -20,6 +22,7 @@ public class MainMenuActions extends Component {
   @Override
   public void create() {
     entity.getEvents().addListener("start", this::onStart);
+    entity.getEvents().addListener("startCountDown", this::onStartCountDown);
     entity.getEvents().addListener("load", this::onLoad);
     entity.getEvents().addListener("exit", this::onExit);
     entity.getEvents().addListener("settings", this::onSettings);
@@ -31,10 +34,32 @@ public class MainMenuActions extends Component {
   /**
    * Swaps to the Main Game screen.
    */
+  private void onStartCountDown() {
+    logger.info("Start game");
+
+    game.setScreen(GdxGame.ScreenType.BUFFER_START_COUNT_DOWN);
+
+  // delay 3s
+    //try {
+      //TimeUnit.SECONDS.sleep(5);
+      //this.onStart();
+    //} catch (InterruptedException e) {
+
+    //}
+  }
+
+  /**
+   * Swaps to the Main Game screen.
+   */
   private void onStart() {
     logger.info("Start game");
+
     game.setScreen(GdxGame.ScreenType.MAIN_GAME);
   }
+
+
+
+
 
   /**
    * Intended for loading a saved game state.

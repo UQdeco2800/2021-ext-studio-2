@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 /**
  * A ui component for displaying the Main menu.
  */
+
 public class MainMenuDisplay extends UIComponent {
   private static final Logger logger = LoggerFactory.getLogger(MainMenuDisplay.class);
   private static final float Z_INDEX = 2f;
@@ -48,7 +49,7 @@ public class MainMenuDisplay extends UIComponent {
           @Override
           public void changed(ChangeEvent changeEvent, Actor actor) {
             logger.debug("Start button clicked");
-            entity.getEvents().trigger("start");
+            entity.getEvents().trigger("startCountDown");
           }
         });
 
