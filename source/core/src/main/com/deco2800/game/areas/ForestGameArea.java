@@ -180,7 +180,7 @@ public class ForestGameArea extends GameArea {
 //        spawnGhosts();
 //        spawnGhostKing();
 
-//        spawnFirstAid();
+        spawnFirstAid();
         playMusic();
         trackAchievements();
     }
