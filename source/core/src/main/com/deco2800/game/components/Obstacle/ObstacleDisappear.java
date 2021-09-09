@@ -64,7 +64,7 @@ public class ObstacleDisappear extends Component {
             logger.info("PlantsDisappearStart was triggered.");
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacles");
-            animator.getEntity().setDisappear();
+            animator.getEntity().setDisappearAfterAnimation(1f);
         }
     }
 
@@ -77,15 +77,16 @@ public class ObstacleDisappear extends Component {
             logger.info("ThornsDisappearStart was triggered.");
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacle2");
-            animator.getEntity().setDisappear();
+            animator.getEntity().setDisappearAfterAnimation(1f);
         }
 
     }
 
     private void meteoriteDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-//            animator.startAnimation("enemy2");
-            entity.setDispose();
+            animator.getEntity().setRemoveTexture();
+            animator.startAnimation("stone1");
+            animator.getEntity().setDisappearAfterAnimation(0.32f);
         }
 
     }
@@ -94,7 +95,7 @@ public class ObstacleDisappear extends Component {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
 //            animator.startAnimation("enemy2");
 //            animator.getEntity().setRemoveTexture();
-            animator.getEntity().setDisappear();
+            animator.getEntity().setDisappearAfterAnimation(1.5f);
         }
 
     }

@@ -22,6 +22,7 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
@@ -50,18 +51,19 @@ public class NPCFactory {
 
     AnimationRenderComponent animator =
         new AnimationRenderComponent(
-            ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
-    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
+            ServiceLocator.getResourceService().getAsset("images/Facehugger.atlas", TextureAtlas.class));
+    animator.addAnimation("baolian1", 0.1f, Animation.PlayMode.LOOP);
+    //animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
 
     ghost
+            //.addComponent(new TextureRenderComponent("images/Facehugger.png"))
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
         .addComponent(animator)
         .addComponent(new GhostAnimationController())
             .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Ghost));
 
-    ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
-
+//    ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
+        ghost.setScale(2.4f,2.4f);
     return ghost;
   }
 
