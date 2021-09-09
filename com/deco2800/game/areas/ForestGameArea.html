@@ -204,11 +204,14 @@ extends <a href="GameArea.html" title="class in com.deco2800.game.areas">GameAre
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnMeteorites(int,int)">spawnMeteorites</a></span>&#8203;(int&nbsp;basicNum,
-int&nbsp;extraNum)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnMeteorites(int,int,int,int,int,int)">spawnMeteorites</a></span>&#8203;(int&nbsp;bigNum,
+int&nbsp;middleNum,
+int&nbsp;smallNum,
+int&nbsp;bigRandomRange,
+int&nbsp;midRandomRange,
+int&nbsp;smaillRandomRange)</code></th>
 <td class="colLast">
-<div class="block">Generate a certain number of meteorites, the total generated number is between
- basicNum and basicNum + extraNum, called by render() in MainGameScreen.</div>
+<div class="block">Generate a certain number of meteorites, called by render() in MainGameScreen.</div>
 </td>
 </tr>
 <tr class="altColor" id="i4">
@@ -365,15 +368,32 @@ int&nbsp;extraNum)</code></th>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="spawnMeteorites(int,int)">spawnMeteorites</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnMeteorites</span>&#8203;(<span class="arguments">int&nbsp;basicNum,
-int&nbsp;extraNum)</span></div>
-<div class="block">Generate a certain number of meteorites, the total generated number is between
- basicNum and basicNum + extraNum, called by render() in MainGameScreen.</div>
+<h3><a id="spawnMeteorites(int,int,int,int,int,int)">spawnMeteorites</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnMeteorites</span>&#8203;(<span class="arguments">int&nbsp;bigNum,
+int&nbsp;middleNum,
+int&nbsp;smallNum,
+int&nbsp;bigRandomRange,
+int&nbsp;midRandomRange,
+int&nbsp;smaillRandomRange)</span></div>
+<div class="block">Generate a certain number of meteorites, called by render() in MainGameScreen. The final number of meteorites
+ is the sum of all parameters.
+
+ Big size meteorites: 1.5 - 2 times of the multiples of meteorites texture,
+                      total number is bigNum(+bigRandomRange), the values in parentheses are random.
+ Midden size meteorites: 1 - 1.5 times of the multiples of meteorites texture,
+                      total number is middleNum(+midRandomRange)
+ Small size meteorites: 0.5 + randomSize: 0.5 - 1 times of the multiples of meteorites texture,
+                      total number is smallNum(+smaillRandomRange)
+
+ e.g. 1(+2) means that the number of generations is at least 1, and the final possible range is 1-3.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>basicNum</code> - basic number of meteorites</dd>
-<dd><code>extraNum</code> - additional number of meteorites</dd>
+<dd><code>bigNum</code> - At least the number of large meteorites generated.</dd>
+<dd><code>middleNum</code> - At least the number of middle meteorites generated.</dd>
+<dd><code>smallNum</code> - At least the number of small meteorites generated.</dd>
+<dd><code>bigRandomRange</code> - The number of large meteorites that may be randomly generated.</dd>
+<dd><code>midRandomRange</code> - The number of middle meteorites that may be randomly generated.</dd>
+<dd><code>smaillRandomRange</code> - The number of small meteorites that may be randomly generated.</dd>
 </dl>
 </section>
 </li>

@@ -238,9 +238,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor" id="i12">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeAfterAnimation1f()">removeAfterAnimation1f</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeAfterAnimation()">removeAfterAnimation</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Let the obstacles disappear after playing the animation for one second.</div>
+<div class="block">Let the obstacles disappear after playing the animation for animationTime second.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i13">
@@ -259,7 +259,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="rowColor" id="i15">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDisappear()">setDisappear</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDisappearAfterAnimation(float)">setDisappearAfterAnimation</a></span>&#8203;(float&nbsp;animationTime)</code></th>
 <td class="colLast">
 <div class="block">Set disappear to true.</div>
 </td>
@@ -398,9 +398,13 @@ float&nbsp;y)</code></th>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="setDisappear()">setDisappear</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setDisappear</span>()</div>
-<div class="block">Set disappear to true. The code that works subsequently is in update.</div>
+<h3><a id="setDisappearAfterAnimation(float)">setDisappearAfterAnimation</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setDisappearAfterAnimation</span>&#8203;(<span class="arguments">float&nbsp;animationTime)</span></div>
+<div class="block">Set disappear to true. These variables play a role in removeAfterAnimation() and update().</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>animationTime</code> - Set how long the animation will disappear after playing</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
@@ -570,9 +574,9 @@ float&nbsp;y)</span></div>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="removeAfterAnimation1f()">removeAfterAnimation1f</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeAfterAnimation1f</span>()</div>
-<div class="block">Let the obstacles disappear after playing the animation for one second.
+<h3><a id="removeAfterAnimation()">removeAfterAnimation</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeAfterAnimation</span>()</div>
+<div class="block">Let the obstacles disappear after playing the animation for animationTime second. Is called by update().
 
  The purpose of setting this method: When dispose() is used for animation components, all entities that use the
  same animation become black boxes. Therefore, this method is currently used to make obstacles disappear.</div>
