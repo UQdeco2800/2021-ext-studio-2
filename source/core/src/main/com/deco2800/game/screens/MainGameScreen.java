@@ -117,7 +117,6 @@ public class MainGameScreen extends ScreenAdapter {
     // making player to move constantly
     
     player.setPosition((float) (player.getPosition().x+0.05), player.getPosition().y);
-    player.getEvents().trigger(("right_side"));
 
     // Centralize the screen to player
     Vector2 screenVector = player.getPosition();
