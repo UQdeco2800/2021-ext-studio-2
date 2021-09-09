@@ -38,7 +38,6 @@ public class MainMenuDisplay extends UIComponent {
     TextButton loadBtn = new TextButton("Load", skin);
     TextButton settingsBtn = new TextButton("Settings", skin);
     TextButton exitBtn = new TextButton("Exit", skin);
-    TextButton gameOverBtn = new TextButton("Game Over", skin);
     //Team9 History Scores
     TextButton historyScoreBtn = new TextButton("History Score", skin);
 
@@ -80,14 +79,6 @@ public class MainMenuDisplay extends UIComponent {
           }
         });
 
-    gameOverBtn.addListener(new ChangeListener() {
-        @Override
-        public void changed(ChangeEvent event, Actor actor) {
-            logger.debug("Game Over button clicked");
-            entity.getEvents().trigger("gameOver");
-        }
-    });
-
     historyScoreBtn.addListener(new ChangeListener() {
         @Override
         public void changed(ChangeEvent event, Actor actor) {
@@ -105,8 +96,6 @@ public class MainMenuDisplay extends UIComponent {
     table.add(settingsBtn).padTop(15f);
     table.row();
     table.add(exitBtn).padTop(15f);
-    table.row();
-    table.add(gameOverBtn).padTop(15f);
     table.row();
     table.add(historyScoreBtn).padTop(15f);
     stage.addActor(table);
