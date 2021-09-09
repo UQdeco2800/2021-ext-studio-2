@@ -113,7 +113,7 @@ public  class ItemFactory {
                 .addComponent(new ColliderComponent())
                 .addComponent(new GoldComponent(target));
         gold.getComponent(TextureRenderComponent.class).scaleEntity();
-        gold.scaleHeight(1.5f);
+        gold.scaleHeight(0.8f);
         PhysicsUtils.setScaledCollider(gold, 0.5f, 0.2f);
 
         return gold;
