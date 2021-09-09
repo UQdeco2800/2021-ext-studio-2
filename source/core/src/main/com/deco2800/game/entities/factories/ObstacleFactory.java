@@ -124,7 +124,7 @@ public class ObstacleFactory {
 
         //ddddobstacle.getComponent(TextureRenderComponent.class).scaleEntity();
 
-        obstacle.setScale(2, 2);
+        obstacle.setScale(2.3f, 2.3f);
 
 
 

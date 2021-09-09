@@ -63,7 +63,7 @@ public class NPCFactory {
             .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Ghost));
 
 //    ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
-        ghost.setScale(2,2);
+        ghost.setScale(2.4f,2.4f);
     return ghost;
   }
 
