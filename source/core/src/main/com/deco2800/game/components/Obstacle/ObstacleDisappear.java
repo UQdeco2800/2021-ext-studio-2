@@ -84,8 +84,9 @@ public class ObstacleDisappear extends Component {
 
     private void meteoriteDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-//            animator.startAnimation("enemy2");
-            entity.setDispose();
+            animator.getEntity().setRemoveTexture();
+            animator.startAnimation("stone1");
+            animator.getEntity().setDisappear();
         }
 
     }
@@ -94,6 +95,7 @@ public class ObstacleDisappear extends Component {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
 //            animator.startAnimation("enemy2");
 //            animator.getEntity().setRemoveTexture();
+
             animator.getEntity().setDisappear();
         }
 

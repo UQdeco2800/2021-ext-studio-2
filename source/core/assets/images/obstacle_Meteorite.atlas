@@ -1,4 +1,4 @@
-Meteorite.png
+obstacle_Meteorite.png
 size: 2048, 2048
 format: RGBA8888
 filter: Linear,Linear
@@ -10,21 +10,21 @@ stone1
   orig: 1024, 1024
   offset: 0, 0
   index: -1
-stone2
+stone1
   rotate: false
   xy: 1024, 0
   size: 1024, 1024
   orig: 1024, 1024
   offset: 0, 0
   index: -1
-stone3
+stone1
   rotate: false
   xy: 0, 1024
   size: 1024, 1024
   orig: 1024, 1024
   offset: 0, 0
   index: -1
-stone4
+stone1
   rotate: false
   xy: 1024, 1024
   size: 1024, 1024

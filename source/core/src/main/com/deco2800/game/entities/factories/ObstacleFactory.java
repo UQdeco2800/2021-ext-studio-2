@@ -105,21 +105,27 @@ public class ObstacleFactory {
                 new AITaskComponent()
                         .addTask(new ObstacleAttackTask(target,10,5f));
 
-//        AnimationRenderComponent animator =
-//                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService()
-//                                .getAsset("images/obstacle_2.atlas", TextureAtlas.class));
-//        animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService()
+                                .getAsset("images/monkey.atlas", TextureAtlas.class));
+
+        animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
+
 
         obstacle
-                .addComponent(new TextureRenderComponent("images/enemy2.png"))
-                // .addComponent(animator)
+                //.addComponent(new TextureRenderComponent("images/monkey_original.png"))
+                .addComponent(animator)
                 .addComponent(aiComponent);
 
 
-        obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
+        animator.startAnimation("1m");
+
+
+        //ddddobstacle.getComponent(TextureRenderComponent.class).scaleEntity();
 
         obstacle.setScale(2, 2);
+
 
 
         return obstacle;
@@ -150,18 +156,26 @@ public class ObstacleFactory {
      * @return the thorns obstacle entity
      */
     public static Entity createMeteorite(Entity target) {
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService()
+                                .getAsset("images/obstacle_Meteorite.atlas", TextureAtlas.class));
+
+        animator.addAnimation("stone1", 0.2f, Animation.PlayMode.LOOP);
+
         Entity meteorite =
                 new Entity()
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.METEORITE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.METEORITE))
-                        .addComponent(new TextureRenderComponent("images/stone.png"))
+                        .addComponent(new TextureRenderComponent("images/stone1.png"))
                         .addComponent(new CombatStatsComponent(2000, 5))
                         .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+                        .addComponent(animator)
                         .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Meteorite));
         meteorite.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(meteorite, 1f, 1f);
-        meteorite.setScale(1, 1);
+        meteorite.setScale(2, 2);
         logger.info("Create a Meteorite");
 
         return meteorite;
@@ -205,6 +219,7 @@ public class ObstacleFactory {
 
         rock.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         rock.getComponent(TextureRenderComponent.class).scaleEntity();
+
 
         return rock;
     }
