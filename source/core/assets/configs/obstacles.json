@@ -1,11 +1,11 @@
 {
   "plant": {
     "health": 2000,
-    "baseAttack": 10
+    "baseAttack": 5
   },
   "thorn": {
     "health": 2000,
-    "baseAttack": 5
+    "baseAttack": 3
   },
   "bigMeteorite": {
     "health": 2000,

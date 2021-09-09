@@ -181,13 +181,12 @@ public class ObstacleFactory {
                 logger.error("Don't have this meteorite type");
         };
 
-
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService()
                                 .getAsset("images/obstacle_Meteorite.atlas", TextureAtlas.class));
 
-        animator.addAnimation("stone1", 0.2f, Animation.PlayMode.LOOP);
+        animator.addAnimation("stone1", 0.08f, Animation.PlayMode.LOOP);
 
         Entity meteorite =
                 new Entity()
