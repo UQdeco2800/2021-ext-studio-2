@@ -97,8 +97,8 @@ public class AchievementRecordsDisplay extends UIComponent {
 
     private void renderGameStory() {
         chapterTable = new Table();
-        List<GameChapters.Chapter> unlockedChapters = AchievementRecords.getUnlockedChapters();
-        unlockedChapters.forEach(chapter -> {
+        List<GameChapters.Chapter> chapters = AchievementRecords.getUnlockedChapters();
+        chapters.forEach(chapter -> {
             Image linkImg = new Image(ServiceLocator.getResourceService()
                     .getAsset("images/story/chapterLink.png", Texture.class));
             ImageButton unlockedChapterImg = getImageButton("images/story/chapter" + chapter.id + ".png");
@@ -117,7 +117,7 @@ public class AchievementRecordsDisplay extends UIComponent {
                 chapterTable.add(lockedChapterImg);
             }
 
-            if (chapter.id != unlockedChapters.size()) {
+            if (chapter.id != chapters.size()) {
                 chapterTable.add(linkImg);
             }
         });
