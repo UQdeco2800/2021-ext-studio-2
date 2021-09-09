@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * and emits new achievement events
  */
 public class AchievementsStatsComponent extends Component {
-    private static List<BaseAchievementConfig> achievements = AchievementFactory.getAchievements();
+    private static final List<BaseAchievementConfig> achievements = AchievementFactory.getAchievements();
     private final ScoringSystemV1 scoringSystemV1;
     private int health;
     private long time;
@@ -100,7 +100,7 @@ public class AchievementsStatsComponent extends Component {
     /**
      * Maintains the current score
      *
-     * @param score
+     * @param score the current game score
      */
     public void setScore(int score) {
         this.score = score;
@@ -126,7 +126,6 @@ public class AchievementsStatsComponent extends Component {
                 setFirstAid();
                 break;
             default:
-                return;
         }
 
     }

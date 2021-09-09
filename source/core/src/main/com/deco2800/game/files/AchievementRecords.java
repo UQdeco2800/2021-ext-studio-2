@@ -41,6 +41,51 @@ public class AchievementRecords {
         return getRecords().findByGame(game).achievements;
     }
 
+    public static List<BaseAchievementConfig> getBestRecords(){
+        Map<String, BaseAchievementConfig> bestAchievementsMap = new LinkedHashMap<>();
+
+        /* The following algorithm to extract the best achievements can be optimized later. */
+
+        for (Map.Entry<Integer, Record> e : getRecords().records.entrySet()) {
+            Record value = e.getValue();
+            value.achievements.forEach(a -> {
+                if (a.type.equals("GOLD")) {
+                    bestAchievementsMap.put(a.name, a);
+                }
+            });
+        }
+
+        for (Map.Entry<Integer, Record> e : getRecords().records.entrySet()) {
+            Record value = e.getValue();
+            value.achievements.forEach(a -> {
+                if (a.type.equals("SILVER")) {
+                    /* Add the achievement if it does not have its superior counterpart (Gold) */
+                    bestAchievementsMap.putIfAbsent(a.name, a);
+                }
+            });
+        }
+
+        for (Map.Entry<Integer, Record> e : getRecords().records.entrySet()) {
+            Record record = e.getValue();
+            record.achievements.forEach(a -> {
+                if (a.type.equals("BRONZE")) {
+                    /* Add the achievement if it does not have its superior counterpart (Silver) */
+                    bestAchievementsMap.putIfAbsent(a.name, a);
+                }
+            });
+        }
+
+        List<BaseAchievementConfig> bestAchievements = new LinkedList<>();
+
+
+        for (Map.Entry<String, BaseAchievementConfig> entry : bestAchievementsMap.entrySet()) {
+            BaseAchievementConfig achievement = entry.getValue();
+            bestAchievements.add(achievement);
+        }
+
+        return bestAchievements;
+    }
+
     /**
      * Store the new records in JSON file
      * @param records new records
@@ -63,7 +108,7 @@ public class AchievementRecords {
         /**
          * An ordered mapping of the game number and associated achievements
          */
-        public HashMap<Integer, Record> records = new LinkedHashMap<>();
+        public Map<Integer, Record> records = new LinkedHashMap<>();
 
         /**
          * @param game the game number

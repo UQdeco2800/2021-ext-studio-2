@@ -111,7 +111,6 @@ public class AchievementsDisplay extends UIComponent {
     }
 
     private synchronized void display(BaseAchievementConfig achievement){
-        System.out.println(achievement.name + achievement.type);
         /* Render achievement card */
         renderAchievement(achievement);
         /* Render bonus popup */
