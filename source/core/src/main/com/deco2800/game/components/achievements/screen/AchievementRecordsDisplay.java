@@ -2,11 +2,16 @@ package com.deco2800.game.components.achievements.screen;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.deco2800.game.GdxGame;
+import com.deco2800.game.GdxGame.ScreenType;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.services.ServiceLocator;
@@ -15,12 +20,16 @@ import com.deco2800.game.ui.UIComponent;
 import java.util.List;
 
 public class AchievementRecordsDisplay extends UIComponent {
-    Table bgTable;
-    Table table;
+    private final GdxGame game;
     List<BaseAchievementConfig> bestAchievements;
+    private Table bgTable;
+    private Table table;
+    private Table crossTable;
 
-    public AchievementRecordsDisplay(List<BaseAchievementConfig> bestAchievements) {
+    public AchievementRecordsDisplay(GdxGame game, List<BaseAchievementConfig> bestAchievements) {
         this.bestAchievements = bestAchievements;
+        this.game = game;
+
     }
 
     @Override
@@ -33,11 +42,21 @@ public class AchievementRecordsDisplay extends UIComponent {
     private void addActors() {
         Image img = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/achievements/achievementBackground.png", Texture.class));
-
+        ImageButton crossImg = new ImageButton(new TextureRegionDrawable(new TextureRegion(
+                new Texture("images/achievements/crossButton.png"))));
+        crossImg.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(ScreenType.MAIN_MENU);
+            }
+        });
         bgTable = new Table();
         bgTable.setFillParent(true);
         bgTable.add(img);
-
+        crossTable = new Table();
+        crossTable.setFillParent(true);
+        crossTable.top().right();
+        crossTable.add(crossImg);
         table = new Table();
         table.setFillParent(true);
 
@@ -58,6 +77,7 @@ public class AchievementRecordsDisplay extends UIComponent {
         table.add(label);
 
         stage.addActor(bgTable);
+        stage.addActor(crossTable);
         stage.addActor(table);
     }
 
@@ -69,8 +89,8 @@ public class AchievementRecordsDisplay extends UIComponent {
 
     private void renderBestAchievements() {
         for (BaseAchievementConfig achievement : AchievementFactory.getAchievements()) {
-                Image img = new Image(ServiceLocator.getResourceService()
-                        .getAsset(achievement.iconPath, Texture.class));
+            Image img = new Image(ServiceLocator.getResourceService()
+                    .getAsset(achievement.iconPath, Texture.class));
         }
     }
 
@@ -82,7 +102,7 @@ public class AchievementRecordsDisplay extends UIComponent {
     @Override
     public void dispose() {
         super.dispose();
-
+        crossTable.clear();
         table.clear();
         bgTable.clear();
     }

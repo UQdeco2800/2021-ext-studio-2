@@ -1,6 +1,7 @@
 package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.achievements.screen.AchievementRecordsDisplay;
 import com.deco2800.game.entities.Entity;
@@ -9,6 +10,7 @@ import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.files.AchievementRecords;
+import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
@@ -84,10 +86,13 @@ public class AchievementsScreen extends ScreenAdapter {
     }
 
     private void createUI() {
+        logger.debug("Creating achievement screen ui");
+
         List<BaseAchievementConfig> bestAchievements = AchievementRecords.getBestRecords();
+        Stage stage = ServiceLocator.getRenderService().getStage();
 
         Entity ui = new Entity();
-        ui.addComponent(new AchievementRecordsDisplay(bestAchievements));
+        ui.addComponent(new AchievementRecordsDisplay(game, bestAchievements)).addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
     }
 
