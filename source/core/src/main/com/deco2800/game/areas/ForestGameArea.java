@@ -108,10 +108,7 @@ public class ForestGameArea extends GameArea {
             "images/iso_grass_1.png",
             "images/iso_grass_2.png",
             "images/iso_grass_3.png",
-            "images/mpc_front_stroke.png",
-            "images/mpc_left_view.png",
-            "images/mpc_right_view.png",
-            "images/mpc_right.png",
+            "images/mpc/mpc_right.png",
             "images/road.png",
             "images/water.png",
             "images/rock.jpg",
@@ -120,12 +117,11 @@ public class ForestGameArea extends GameArea {
             "images/Items/food.png",
             "images/obstacle_1_new.png",
             "images/obstacle2_vision2.png",
-            "images/mpcMovement.png",
             "images/stone.png",
             "images/monkey_original.png",
             "images/Facehugger.png",
-            "images/stone1.png"
-
+            "images/stone1.png",
+            "images/mpc/mpcAnimation.png"
 
     };
     private static final String[] forestTextureAtlases = {
@@ -141,9 +137,8 @@ public class ForestGameArea extends GameArea {
             "images/mpcMovement.atlas",
             "images/monkey.atlas",
             "images/Facehugger.atlas",
-            "images/obstacle_Meteorite.atlas"
-
-
+            "images/obstacle_Meteorite.atlas",
+            "images/mpc/mpcAnimation.atlas",
     };
     private static final String[] forestSounds = {"sounds/Impact4.ogg"};
     private static final String[] jumpSounds = {"sounds/jump.ogg"};

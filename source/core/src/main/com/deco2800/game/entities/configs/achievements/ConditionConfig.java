@@ -1,7 +1,7 @@
 package com.deco2800.game.entities.configs.achievements;
 /**
  * Defines a basic set of a condition properties for each achievement
- * stored in achievement config files (achieve.json)
+ * stored in achievement config files (achievements.json)
  * to be loaded by Achievement Factory
  */
 public class ConditionConfig {

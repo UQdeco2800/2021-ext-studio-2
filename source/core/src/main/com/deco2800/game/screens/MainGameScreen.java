@@ -17,6 +17,8 @@ import com.deco2800.game.components.score.TimerDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.files.AchievementRecords;
+import com.deco2800.game.files.GameInfo;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
@@ -100,15 +102,21 @@ public class MainGameScreen extends ScreenAdapter {
     renderer.render();
     CombatStatsComponent playerStats = player.getComponent(CombatStatsComponent.class);
     if (playerStats.isDead()) {
+      logger.info("Performing Post Game Tasks");
+      /* NOTE: Call this method first before displaying the game over screen
+       * and performing other tasks. This method has to be called as soon as
+       * the player dies. */
+      performPostGameTasks();
+
       logger.info("Display Game Over Screen");
       game.setScreen(GdxGame.ScreenType.GAME_OVER);
+
       return;
     }
 
     // making player to move constantly
     
     player.setPosition((float) (player.getPosition().x+0.05), player.getPosition().y);
-    player.getEvents().trigger(("right_side"));
 
     // Centralize the screen to player
     Vector2 screenVector = player.getPosition();
@@ -203,5 +211,20 @@ public class MainGameScreen extends ScreenAdapter {
             .addComponent(new TerminalDisplay());
 
     ServiceLocator.getEntityService().register(ui);
+  }
+
+  /**
+   * Tasks to perform when the game is over.
+   * The game is considered to be over when the player dies.
+   *
+   * NOTE: Make sure this method is called as soon as the player dies,
+   * and before the game over screen is displayed.
+   */
+  private void performPostGameTasks(){
+    /* Increment the number of games that have been played
+     * NOTE: Perform all subsequent tasks after this has been called */
+    GameInfo.incrementGameCount();
+    /* Store the achievements record and in a JSON file and then reset achievements */
+    AchievementRecords.storeGameRecord();
   }
 }
