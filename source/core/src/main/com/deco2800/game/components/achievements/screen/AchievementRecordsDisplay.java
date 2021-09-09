@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.GdxGame.ScreenType;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class AchievementRecordsDisplay extends UIComponent {
     private final GdxGame game;
-    List<BaseAchievementConfig> bestAchievements;
+    private final List<BaseAchievementConfig> bestAchievements;
     private Table bgTable;
     private Table table;
     private Table crossTable;
@@ -43,8 +44,7 @@ public class AchievementRecordsDisplay extends UIComponent {
     private void addActors() {
         Image img = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/achievements/achievementBackground.png", Texture.class));
-        ImageButton crossImg = new ImageButton(new TextureRegionDrawable(new TextureRegion(
-                new Texture("images/achievements/crossButton.png"))));
+        ImageButton crossImg = getImageButton("images/achievements/crossButton.png");
         crossImg.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -58,13 +58,14 @@ public class AchievementRecordsDisplay extends UIComponent {
         crossTable.setFillParent(true);
         crossTable.top().right();
         crossTable.add(crossImg);
+
         table = new Table();
         table.setFillParent(true);
 
         Label label = new Label("Your Best Achievements", skin);
         label.setFontScale(2);
 
-        table.top().left();
+        table.center();
         table.add(label);
         table.row();
 
@@ -82,8 +83,14 @@ public class AchievementRecordsDisplay extends UIComponent {
         table.row();
         table.add(chapterTable);
         stage.addActor(bgTable);
-        stage.addActor(crossTable);
+
         stage.addActor(table);
+        stage.addActor(crossTable);
+    }
+
+    private ImageButton getImageButton(String path) {
+        return new ImageButton(new TextureRegionDrawable(new TextureRegion(
+                new Texture(path))));
     }
 
     private void renderGameStory() {
@@ -91,9 +98,9 @@ public class AchievementRecordsDisplay extends UIComponent {
 
 
         for (int i = 1; i < 6; i++) {
-            Image linkImg = new Image(ServiceLocator.getResourceService().getAsset("images/story/chapterLink.png", Texture.class));
-            ImageButton chapterImg = new ImageButton(new TextureRegionDrawable(new TextureRegion(
-                    new Texture("images/story/chapter" + i + ".png"))));
+            Image linkImg = new Image(ServiceLocator.getResourceService()
+                    .getAsset("images/story/chapterLink.png", Texture.class));
+            ImageButton chapterImg = getImageButton("images/story/chapter" + i + ".png");
             chapterImg.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -121,7 +128,8 @@ public class AchievementRecordsDisplay extends UIComponent {
             ++i;
             Image img = new Image(ServiceLocator.getResourceService()
                     .getAsset(achievement.iconPath, Texture.class));
-            achievementsTable.add(img).center().pad(10f).size(150, 120);
+            img.setScaling(Scaling.fit);
+            achievementsTable.add(img).center().pad(10f).size(220, 220);
             if (i % 3 == 0) {
                 achievementsTable.row();
             }

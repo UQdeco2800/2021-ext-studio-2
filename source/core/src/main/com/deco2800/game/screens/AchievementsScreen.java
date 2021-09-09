@@ -26,7 +26,7 @@ public class AchievementsScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(AchievementsScreen.class);
     private static final String[] achievementTextures = AchievementFactory.getTextures();
     private static final String[] backgroundImg = {"images/achievements/achievementBackground.png"};
-    private static final String chapterNumbers = "images/story/chapter";
+    private static final String chapterPath = "images/story/chapter";
     private final GdxGame game;
     private final Renderer renderer;
 
@@ -53,10 +53,10 @@ public class AchievementsScreen extends ScreenAdapter {
         resourceService.loadTextures(achievementTextures);
         resourceService.loadTextures(backgroundImg);
         for (int i = 1; i < 6; i++) {
-            resourceService.loadTextures(new String[]{chapterNumbers + i + ".png"});
+            resourceService.loadTextures(new String[]{chapterPath + i + ".png"});
         }
-        resourceService.loadTextures(new String[]{chapterNumbers + "Link.png"});
-        resourceService.loadTextures(new String[]{chapterNumbers + "Lock.png"});
+        resourceService.loadTextures(new String[]{chapterPath + "Link.png"});
+        resourceService.loadTextures(new String[]{chapterPath + "Lock.png"});
 
         resourceService.loadAll();
     }
@@ -67,12 +67,10 @@ public class AchievementsScreen extends ScreenAdapter {
         resourceService.unloadAssets(achievementTextures);
         resourceService.unloadAssets(backgroundImg);
         for (int i = 1; i < 6; i++) {
-            resourceService.unloadAssets(new String[]{chapterNumbers + i + ".png"});
+            resourceService.unloadAssets(new String[]{chapterPath + i + ".png"});
         }
-        resourceService.unloadAssets(new String[]{chapterNumbers + "Link.png"});
-        resourceService.unloadAssets(new String[]{chapterNumbers + "Lock.png"});
-
-
+        resourceService.unloadAssets(new String[]{chapterPath + "Link.png"});
+        resourceService.unloadAssets(new String[]{chapterPath + "Lock.png"});
     }
 
     @Override
