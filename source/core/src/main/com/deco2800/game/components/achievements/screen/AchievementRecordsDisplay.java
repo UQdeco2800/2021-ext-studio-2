@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.GdxGame.ScreenType;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
-import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
@@ -25,6 +24,8 @@ public class AchievementRecordsDisplay extends UIComponent {
     private Table bgTable;
     private Table table;
     private Table crossTable;
+    private Table chapterTable;
+    private Table achievementsTable;
 
     public AchievementRecordsDisplay(GdxGame game, List<BaseAchievementConfig> bestAchievements) {
         this.bestAchievements = bestAchievements;
@@ -62,8 +63,9 @@ public class AchievementRecordsDisplay extends UIComponent {
 
         Label label = new Label("Your Best Achievements", skin);
         label.setFontScale(2);
-        table.add(label);
 
+        table.top().left();
+        table.add(label);
         table.row();
 
         if (bestAchievements.isEmpty()) {
@@ -71,14 +73,39 @@ public class AchievementRecordsDisplay extends UIComponent {
         } else {
             renderBestAchievements();
         }
-
+        table.add(achievementsTable);
+        table.row();
         label = new Label("Game Story", skin);
         label.setFontScale(2);
         table.add(label);
-
+        renderGameStory();
+        table.row();
+        table.add(chapterTable);
         stage.addActor(bgTable);
         stage.addActor(crossTable);
         stage.addActor(table);
+    }
+
+    private void renderGameStory() {
+        chapterTable = new Table();
+
+
+        for (int i = 1; i < 6; i++) {
+            Image linkImg = new Image(ServiceLocator.getResourceService().getAsset("images/story/chapterLink.png", Texture.class));
+            ImageButton chapterImg = new ImageButton(new TextureRegionDrawable(new TextureRegion(
+                    new Texture("images/story/chapter" + i + ".png"))));
+            chapterImg.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    game.setScreen(ScreenType.MAIN_MENU);
+                }
+            });
+            chapterTable.add(chapterImg);
+            if (i != 5) {
+                chapterTable.add(linkImg);
+            }
+
+        }
     }
 
     private void renderNoAchievements() {
@@ -88,9 +115,16 @@ public class AchievementRecordsDisplay extends UIComponent {
     }
 
     private void renderBestAchievements() {
-        for (BaseAchievementConfig achievement : AchievementFactory.getAchievements()) {
+        achievementsTable = new Table();
+        int i = 0;
+        for (BaseAchievementConfig achievement : bestAchievements) {
+            ++i;
             Image img = new Image(ServiceLocator.getResourceService()
                     .getAsset(achievement.iconPath, Texture.class));
+            achievementsTable.add(img).center().pad(10f).size(150, 120);
+            if (i % 3 == 0) {
+                achievementsTable.row();
+            }
         }
     }
 
