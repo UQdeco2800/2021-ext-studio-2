@@ -44,4 +44,16 @@ public class AchievementFactory {
                 .stream().map(achievement -> achievement.iconPath).collect(Collectors.toList())
                 .toArray(new String[configs.achievements.size()]);
     }
+
+    public static BaseAchievementConfig getAchievementByNameAndType(String name, String type){
+        BaseAchievementConfig achievement = new BaseAchievementConfig();
+
+        for (BaseAchievementConfig a : AchievementFactory.getAchievements()) {
+            if (name.equals(a.name) && type.equals(a.type)) {
+                achievement = a;
+            }
+        }
+
+        return achievement;
+    }
 }

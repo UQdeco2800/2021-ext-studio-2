@@ -3,10 +3,12 @@ package com.deco2800.game.files;
 import com.deco2800.game.components.achievements.AchievementsStatsComponent;
 import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
+import com.deco2800.game.entities.factories.AchievementFactory;
 
 import java.io.File;
 import java.util.*;
 
+import static com.deco2800.game.entities.factories.AchievementFactory.getAchievementByNameAndType;
 import static com.deco2800.game.files.FileLoader.Location.EXTERNAL;
 
 public class AchievementRecords {
@@ -84,6 +86,28 @@ public class AchievementRecords {
         }
 
         return bestAchievements;
+    }
+
+    public static List<BaseAchievementConfig> getNextUnlockAchievements(){
+        List<BaseAchievementConfig> betterAchievements = new LinkedList<>();
+
+        Set<String> nextUnlocks = new LinkedHashSet<>();
+
+        getBestRecords().forEach(achievement -> {
+            if(achievement.type.equals("BRONZE")){
+                betterAchievements.add(getAchievementByNameAndType(achievement.name, "SILVER"));
+            } else if(achievement.type.equals("SILVER")){
+                betterAchievements.add(getAchievementByNameAndType(achievement.name, "GOLD"));
+            }
+            nextUnlocks.add(achievement.name);
+        });
+
+        AchievementFactory.getAchievements().forEach(achievement -> {
+            if(!nextUnlocks.contains(achievement.name) && achievement.type.equals("BRONZE")){
+                betterAchievements.add(achievement);
+            }
+        });
+        return betterAchievements;
     }
 
     public static List<GameChapters.Chapter> getUnlockedChapters() {

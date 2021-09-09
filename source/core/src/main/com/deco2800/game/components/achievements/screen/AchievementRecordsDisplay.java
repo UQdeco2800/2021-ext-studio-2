@@ -4,10 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
@@ -85,7 +82,6 @@ public class AchievementRecordsDisplay extends UIComponent {
         table.row();
         table.add(chapterTable);
         stage.addActor(bgTable);
-
         stage.addActor(table);
         stage.addActor(crossTable);
     }
@@ -131,12 +127,23 @@ public class AchievementRecordsDisplay extends UIComponent {
 
     private void renderBestAchievements() {
         achievementsTable = new Table();
+        renderAchievements(AchievementRecords.getBestRecords(), 1);
+//        renderAchievements(AchievementRecords.getNextUnlockAchievements(), 0.55f);
+    }
+
+
+    private void renderAchievements(List<BaseAchievementConfig> achievements, float alpha){
+        if(achievements.isEmpty()){
+            return;
+        }
+
         int i = 0;
-        for (BaseAchievementConfig achievement : bestAchievements) {
+        for (BaseAchievementConfig achievement : achievements) {
             ++i;
             Image img = new Image(ServiceLocator.getResourceService()
                     .getAsset(achievement.iconPath, Texture.class));
             img.setScaling(Scaling.fit);
+            img.setColor(255, 255, 255, alpha);
             achievementsTable.add(img).center().pad(10f).size(220, 220);
             if (i % 3 == 0) {
                 achievementsTable.row();
