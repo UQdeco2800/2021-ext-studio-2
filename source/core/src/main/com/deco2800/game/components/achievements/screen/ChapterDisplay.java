@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.deco2800.game.files.GameChapters;
@@ -36,21 +33,23 @@ public class ChapterDisplay extends UIComponent {
 
         dialog.setBackground(background.getDrawable());
 
-        dialog.padTop(50).padBottom(50);
+        dialog.pad(50);
 
-        Label story = new Label(chapter.content, new Label.LabelStyle(new BitmapFont(), Color.BROWN));
-        story.setFontScale(2);
+        Label story = new Label(chapter.content, new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        story.setFontScale(1.2f);
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
 
         dialog.getContentTable().add(story).width(1000).row();
-        dialog.getButtonTable().add(renderCloseButton()).row();
+        dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
 
         dialog.show(stage);
     }
 
-    private TextButton renderCloseButton(){
-        TextButton closeButton = new TextButton("CLOSE", skin);
+    private ImageButton renderCloseButton(){
+        Image crossButtonImg = new Image(new Texture("images/achievements/crossButton.png"));
+
+        ImageButton closeButton = new ImageButton(crossButtonImg.getDrawable());
 
         closeButton.addListener(new ChangeListener() {
             @Override
