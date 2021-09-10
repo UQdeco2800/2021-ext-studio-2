@@ -1,11 +1,15 @@
 package com.deco2800.game.components.achievements.screen;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.deco2800.game.files.GameChapters;
 import com.deco2800.game.ui.UIComponent;
 
@@ -20,23 +24,20 @@ public class ChapterDisplay extends UIComponent {
 
     private void openChapter(GameChapters.Chapter chapter) {
         // Display gui
-        Dialog dialog = new Dialog("Game Story", skin);
+        Dialog dialog = new Dialog("Chapter "+ chapter.id, skin);
+        dialog.setModal(true);
+        dialog.setMovable(true);
+        dialog.setResizable(true);
 
-        Label heading = new Label("Chapter " + chapter.id, new Label.LabelStyle(new BitmapFont(), Color.GOLD));
-        heading.setFontScale(2);
+        dialog.padTop(50).padBottom(50);
 
         Label story = new Label(chapter.content, new Label.LabelStyle(new BitmapFont(), Color.BROWN));
-        story.setFontScale(1);
+        story.setFontScale(2);
         story.setWrap(true);
+        story.setAlignment(Align.topLeft);
 
-        Table table = new Table(skin);
-        table.setFillParent(true);
-        table.top().left();
-        table.add(heading);
-        table.row().fillX();
-        table.add(story);
-
-        dialog.add(table);
+        dialog.getContentTable().add(story).width(850).row();
+        dialog.getButtonTable().add(new TextButton("Close", skin));
 
         dialog.show(stage);
     }
