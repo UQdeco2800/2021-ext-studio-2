@@ -42,8 +42,7 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     @Override
     public void start() {
         super.start();
-
-        MainGameScreen.setSpownEnemy(owner.getEntity().getPosition());
+        MainGameScreen.setSpownFacehugger(owner.getEntity().getPosition());
     }
 
 

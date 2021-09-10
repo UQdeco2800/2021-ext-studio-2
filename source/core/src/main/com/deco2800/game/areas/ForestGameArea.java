@@ -174,9 +174,6 @@ public class ForestGameArea extends GameArea {
         player = spawnPlayer();
         spawnObstacles();
 
-//        spawnGhosts();
-//        spawnGhostKing();
-
         spawnFirstAid();
         playMusic();
         trackAchievements();
@@ -337,24 +334,25 @@ public class ForestGameArea extends GameArea {
     /**
      * Generate a certain number of meteorites, called by render() in MainGameScreen. The final number of meteorites
      * is the sum of all parameters.
-     *
+     * <p>
      * Big size meteorites: 1.5 - 2 times of the multiples of meteorites texture,
-     *                      total number is bigNum(+bigRandomRange), the values in parentheses are random.
+     * total number is bigNum(+bigRandomRange), the values in parentheses are random.
      * Midden size meteorites: 1 - 1.5 times of the multiples of meteorites texture,
-     *                      total number is middleNum(+midRandomRange)
+     * total number is middleNum(+midRandomRange)
      * Small size meteorites: 0.5 + randomSize: 0.5 - 1 times of the multiples of meteorites texture,
-     *                      total number is smallNum(+smaillRandomRange)
-     *
+     * total number is smallNum(+smaillRandomRange)
+     * <p>
      * e.g. 1(+2) means that the number of generations is at least 1, and the final possible range is 1-3.
      *
-     * @param bigNum At least the number of large meteorites generated.
-     * @param middleNum At least the number of middle meteorites generated.
-     * @param smallNum At least the number of small meteorites generated.
-     * @param bigRandomRange The number of large meteorites that may be randomly generated.
-     * @param midRandomRange The number of middle meteorites that may be randomly generated.
+     * @param bigNum            At least the number of large meteorites generated.
+     * @param middleNum         At least the number of middle meteorites generated.
+     * @param smallNum          At least the number of small meteorites generated.
+     * @param bigRandomRange    The number of large meteorites that may be randomly generated.
+     * @param midRandomRange    The number of middle meteorites that may be randomly generated.
      * @param smaillRandomRange The number of small meteorites that may be randomly generated.
      */
-    public void spawnMeteorites(int bigNum, int middleNum, int smallNum, int bigRandomRange, int midRandomRange, int smaillRandomRange) {
+    public void spawnMeteorites(int bigNum, int middleNum, int smallNum, int bigRandomRange, int midRandomRange,
+                                int smaillRandomRange) {
         int bigNumRandom = bigNum + (int) (Math.random() * (bigRandomRange + 1));
         int midNumRandom = middleNum + (int) (Math.random() * (midRandomRange + 1));
         int smallNumRandom = smallNum + (int) (Math.random() * (smaillRandomRange + 1));
@@ -370,7 +368,7 @@ public class ForestGameArea extends GameArea {
             bigSize = 1.5 + randomSize; // 1.5 - 2 size of the meteorites
             midSize = 1 + randomSize; // 1 - 1.5 size of the meteorites
             smallSize = 0.5 + randomSize; // 0.5 - 1 size of the meteorites
-            int x = (int) (int) (player.getPosition().x + Math.random() * 10);
+            int x = (int) (player.getPosition().x + 5 + Math.random()*5);
             int y = (int) (20 + Math.random() * 2);
             GridPoint2 point = new GridPoint2(x, y);
 
@@ -410,25 +408,7 @@ public class ForestGameArea extends GameArea {
         return newPlayer;
     }
 
-//    private void spawnGhosts() {
-//        GridPoint2 minPos = new GridPoint2(0, 0);
-//        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-//
-//        for (int i = 0; i < NUM_GHOSTS; i++) {
-//            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-//            Entity ghost = NPCFactory.createGhost(player);
-//            spawnEntityAt(ghost, randomPos, true, true);
-//        }
-//    }
 
-//    private void spawnGhostKing() {
-//        GridPoint2 minPos = new GridPoint2(0, 0);
-//        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-//
-//        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-//        Entity ghostKing = NPCFactory.createGhostKing(player);
-//        spawnEntityAt(ghostKing, randomPos, true, true);
-//    }
 
     private void playMusic() {
         Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
