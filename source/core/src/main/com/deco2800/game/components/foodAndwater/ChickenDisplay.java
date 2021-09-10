@@ -5,29 +5,24 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.deco2800.game.components.player.Bag;
 import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
-
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
  * A ui component for displaying food system.
  */
 public class ChickenDisplay extends UIComponent {
-    
-    //prepare values and ui labels.
     static Table tables;
     private Label timeLabel;
     private final ChickenSystemV1 chickenSystem = new ChickenSystemV1();
-    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
+    private final ScoringSystemV1 timeCount = new ScoringSystemV1();
     public static ArrayList<Image> ChickenImage = new ArrayList<>();
-    private int count_image=4;
+    private final int count_image=4;
     private int chickencurrent = 4;
 
-    DecimalFormat formatter = new DecimalFormat("00");
+
 
     public ChickenDisplay() {
     }
@@ -74,14 +69,13 @@ public class ChickenDisplay extends UIComponent {
 
     @Override
     public void draw(SpriteBatch batch) {
-        // Designs of the timer, a small clock icon will go here
     }
 
     @Override
     public void update() {
         super.update();
-        int minutes = scoringSystem.getMinutes();
-        int seconds = scoringSystem.getSeconds();
+        int minutes = timeCount.getMinutes();
+        int seconds = timeCount.getSeconds();
 
         int dis = (minutes*60+seconds)/1;
         if(dis>chickenSystem.getTimer()){

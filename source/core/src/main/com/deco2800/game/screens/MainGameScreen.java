@@ -7,6 +7,8 @@ import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.areas.terrain.TerrainFactory;
+import com.deco2800.game.components.foodAndwater.ChickenDisplay;
+import com.deco2800.game.components.foodAndwater.WaterDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.maingame.MainGameDisplay;
 import com.deco2800.game.components.CombatStatsComponent;
@@ -259,7 +261,10 @@ public class MainGameScreen extends ScreenAdapter {
                 //display the score and the time -- team 9
                 .addComponent(new ScoreDisplay())
                 .addComponent(new TimerDisplay())
-                .addComponent(new TerminalDisplay());
+                .addComponent(new TerminalDisplay())
+                .addComponent(new ChickenDisplay())
+                .addComponent(new WaterDisplay());
+
 
         ServiceLocator.getEntityService().register(ui);
     }
