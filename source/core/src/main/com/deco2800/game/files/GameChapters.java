@@ -10,12 +10,13 @@ public class GameChapters {
 
     public static List<GameChapters.Chapter> getUnlockedChapters() {
 
-        List<GameChapters.Chapter> chapters = GameChapters.getChapters();
+        List<GameChapters.Chapter> chapters = getChapters();
 
         Set<String> goldAchievements = new LinkedHashSet<>();
 
         /* Extracting gold achievements unlocked by the player */
-        for (Map.Entry<Integer, AchievementRecords.Record> e : AchievementRecords.getRecords().records.entrySet()) {
+        for (Map.Entry<Integer, AchievementRecords.Record> e :
+                AchievementRecords.getRecords().records.entrySet()) {
             AchievementRecords.Record value = e.getValue();
             value.achievements.forEach(a -> {
                 if (a.type.equals("GOLD")) {

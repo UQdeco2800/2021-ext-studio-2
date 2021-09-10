@@ -4,6 +4,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.achievements.screen.AchievementRecordsDisplay;
+import com.deco2800.game.components.achievements.screen.ChapterDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
@@ -103,7 +104,9 @@ public class AchievementsScreen extends ScreenAdapter {
         Stage stage = ServiceLocator.getRenderService().getStage();
 
         Entity ui = new Entity();
-        ui.addComponent(new AchievementRecordsDisplay(game, bestAchievements)).addComponent(new InputDecorator(stage, 10));
+        ui.addComponent(new AchievementRecordsDisplay(game, bestAchievements))
+                .addComponent(new ChapterDisplay())
+                .addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
     }
 

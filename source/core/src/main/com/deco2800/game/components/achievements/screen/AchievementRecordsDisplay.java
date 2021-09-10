@@ -106,7 +106,7 @@ public class AchievementRecordsDisplay extends UIComponent {
             unlockedChapterImg.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    game.setScreen(ScreenType.MAIN_MENU);
+                    entity.getEvents().trigger("openChapter", chapter);
                 }
             });
 
