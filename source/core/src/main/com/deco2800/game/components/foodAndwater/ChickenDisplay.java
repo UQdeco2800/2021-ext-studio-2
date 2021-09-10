@@ -77,7 +77,7 @@ public class ChickenDisplay extends UIComponent {
         int minutes = timeCount.getMinutes();
         int seconds = timeCount.getSeconds();
 
-        int dis = (minutes*60+seconds)/1;
+        int dis = (minutes * 60 + seconds) / 3;
         if(dis>chickenSystem.getTimer()){
             chickenSystem.setDiffrence(1);
             chickenSystem.setTimer(dis);
@@ -93,8 +93,8 @@ public class ChickenDisplay extends UIComponent {
      */
     public void updatePlayerTimerUI(int dis) {
 
-        if(chickencurrent>0 && dis>0){
-            chickencurrent-=dis;
+        if(dis>0){
+
             if(ChickenImage.size()>0){
                 tables.reset();
                 tables.top().left();
@@ -106,8 +106,6 @@ public class ChickenDisplay extends UIComponent {
                     tables.add(ima).size(30f).pad(3);
                 }
             }
-        }else {
-            chickencurrent-=0;
         }
     }
 

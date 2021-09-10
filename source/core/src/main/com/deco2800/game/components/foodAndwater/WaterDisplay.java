@@ -17,7 +17,7 @@ public class WaterDisplay extends UIComponent {
     static Table tables;
     private Label timeLabel;
     private final WaterSystemV1 waterSystem = new WaterSystemV1();
-    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
+    private final ScoringSystemV1 countTime = new ScoringSystemV1();
     public static ArrayList<Image> waterImage = new ArrayList<>();
     private final int count_image=4;
     private int waterCurrent = 4;
@@ -71,8 +71,8 @@ public class WaterDisplay extends UIComponent {
     @Override
     public void update() {
         super.update();
-        int minutes = scoringSystem.getMinutes();
-        int seconds = scoringSystem.getSeconds();
+        int minutes = countTime.getMinutes();
+        int seconds = countTime.getSeconds();
 
         int dis = (minutes*60+seconds)/2;
         if(dis>waterSystem.getTimer()){
@@ -90,8 +90,8 @@ public class WaterDisplay extends UIComponent {
      */
     public void updatePlayerTimerUI(int dis) {
 
-        if(waterCurrent>0 && dis>0){
-            waterCurrent-=dis;
+        if(dis>0){
+
             if(waterImage.size()>0){
                 tables.reset();
                 tables.top().left();
@@ -103,8 +103,6 @@ public class WaterDisplay extends UIComponent {
                     tables.add(ima).size(30f).pad(3);
                 }
             }
-        }else {
-            waterCurrent-=0;
         }
     }
 
