@@ -8,7 +8,6 @@ import com.deco2800.game.entities.factories.AchievementFactory;
 import java.io.File;
 import java.util.*;
 
-import static com.deco2800.game.entities.factories.AchievementFactory.getAchievementByNameAndType;
 import static com.deco2800.game.files.FileLoader.Location.EXTERNAL;
 
 public class AchievementRecords {
@@ -94,11 +93,6 @@ public class AchievementRecords {
         Set<String> nextUnlocks = new LinkedHashSet<>();
 
         getBestRecords().forEach(achievement -> {
-            if (achievement.type.equals("BRONZE")) {
-                betterAchievements.add(getAchievementByNameAndType(achievement.name, "SILVER"));
-            } else if (achievement.type.equals("SILVER")) {
-                betterAchievements.add(getAchievementByNameAndType(achievement.name, "GOLD"));
-            }
             nextUnlocks.add(achievement.name);
         });
 

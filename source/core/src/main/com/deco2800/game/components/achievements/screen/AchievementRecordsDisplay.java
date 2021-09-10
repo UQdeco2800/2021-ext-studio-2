@@ -131,7 +131,7 @@ public class AchievementRecordsDisplay extends UIComponent {
     private void renderBestAchievements() {
         achievementsTable = new Table();
         renderAchievements(AchievementRecords.getBestRecords(), 1);
-//        renderAchievements(AchievementRecords.getNextUnlockAchievements(), 0.55f);
+        renderAchievements(AchievementRecords.getNextUnlockAchievements(), 0.55f);
     }
 
 
@@ -147,7 +147,7 @@ public class AchievementRecordsDisplay extends UIComponent {
                     .getAsset(achievement.iconPath, Texture.class));
             img.setScaling(Scaling.fit);
             img.setColor(255, 255, 255, alpha);
-            achievementsTable.add(img).center().pad(10f).size(220, 220);
+            achievementsTable.add(img).center().padLeft(10f).padRight(10f).size(220, 150);
             if (i % 3 == 0) {
                 achievementsTable.row();
             }
