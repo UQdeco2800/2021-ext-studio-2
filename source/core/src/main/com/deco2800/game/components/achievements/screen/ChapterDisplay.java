@@ -29,7 +29,6 @@ public class ChapterDisplay extends UIComponent {
     private void openChapter(GameChapters.Chapter chapter) {
         // Display gui
         dialog = new Dialog("Chapter "+ chapter.id, skin);
-        Dialog dialog = new Dialog("Chapter "+ chapter.id, skin);
         dialog.setModal(true);
         dialog.setMovable(true);
         dialog.setResizable(true);
@@ -43,7 +42,7 @@ public class ChapterDisplay extends UIComponent {
         story.setAlignment(Align.topLeft);
 
         dialog.getContentTable().add(story).width(850).row();
-        dialog.getButtonTable().add(renderCloseButton());
+        dialog.getButtonTable().add(renderCloseButton()).row();
 
         dialog.show(stage);
     }
@@ -54,7 +53,7 @@ public class ChapterDisplay extends UIComponent {
         closeButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                dialog.remove();
+                dialog.hide();
             }
         });
 
