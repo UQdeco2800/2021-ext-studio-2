@@ -3,11 +3,9 @@ package com.deco2800.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.deco2800.game.components.score.HistoryScoreDisplay;
 import com.deco2800.game.files.UserSettings;
-import com.deco2800.game.screens.GameOverScreen;
-import com.deco2800.game.screens.MainGameScreen;
-import com.deco2800.game.screens.MainMenuScreen;
-import com.deco2800.game.screens.SettingsScreen;
+import com.deco2800.game.screens.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +24,7 @@ public class GdxGame extends Game {
     }
 
     public enum ScreenType {
-        MAIN_MENU, MAIN_GAME, SETTINGS, GAME_OVER
+        MAIN_MENU, MAIN_GAME, SETTINGS, GAME_OVER, HISTORY_SCORES, ACHIEVEMENTS
     }
 
     @Override
@@ -85,6 +83,10 @@ public class GdxGame extends Game {
                 return new SettingsScreen(this);
             case GAME_OVER:
                 return new GameOverScreen(this);
+            case HISTORY_SCORES:
+                return new HistoryScoreScreen(this);
+            case ACHIEVEMENTS:
+                return new AchievementsScreen(this);
             default:
                 return null;
         }

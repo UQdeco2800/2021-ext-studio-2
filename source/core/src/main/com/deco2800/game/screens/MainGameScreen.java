@@ -17,6 +17,8 @@ import com.deco2800.game.components.score.TimerDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.files.AchievementRecords;
+import com.deco2800.game.files.GameInfo;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
@@ -44,9 +46,12 @@ public class MainGameScreen extends ScreenAdapter {
   private static final String[] mainGameTextures = {"images/heart.png", "images/clock.png", "images/scoreboard.png", "images/background.png"};
   private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 
+
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;
+  private static Vector2 enemyPosition;
+  private static boolean spownEnemy;
 
   private Entity player;
   private ForestGameArea forestGameArea;
@@ -81,6 +86,10 @@ public class MainGameScreen extends ScreenAdapter {
 
     player = forestGameArea.player;
   }
+  public static void setSpownEnemy(Vector2 position) {
+    enemyPosition = position;
+    spownEnemy = true;
+  }
 
   @Override
   public void render(float delta) {
@@ -93,8 +102,15 @@ public class MainGameScreen extends ScreenAdapter {
     renderer.render();
     CombatStatsComponent playerStats = player.getComponent(CombatStatsComponent.class);
     if (playerStats.isDead()) {
+      logger.info("Performing Post Game Tasks");
+      /* NOTE: Call this method first before displaying the game over screen
+       * and performing other tasks. This method has to be called as soon as
+       * the player dies. */
+      performPostGameTasks();
+
       logger.info("Display Game Over Screen");
       game.setScreen(GdxGame.ScreenType.GAME_OVER);
+
       return;
     }
 
@@ -110,14 +126,20 @@ public class MainGameScreen extends ScreenAdapter {
     if(screenVector.x > (2*counter+1)*10) {
       counter+=1;
       forestGameArea.spawnTerrainRandomly((int) (screenVector.x+2));
-      forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
-      forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
-      
+//      forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
+//      forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
+//
       // Generate obstacles
       forestGameArea.spawnObstacles();
-      // Generate meteorites
-      forestGameArea.spawnMeteorites(3, 3);
+      // Generate meteoritesw
+      forestGameArea.spawnMeteorites(0, 1,2,1,1,2);
+      forestGameArea.spawnRangeObstacles();
 
+    }
+
+    if (spownEnemy) {
+      forestGameArea.spawnAttackObstacles(enemyPosition);
+      spownEnemy = false;
     }
   }
 
@@ -189,5 +211,20 @@ public class MainGameScreen extends ScreenAdapter {
             .addComponent(new TerminalDisplay());
 
     ServiceLocator.getEntityService().register(ui);
+  }
+
+  /**
+   * Tasks to perform when the game is over.
+   * The game is considered to be over when the player dies.
+   *
+   * NOTE: Make sure this method is called as soon as the player dies,
+   * and before the game over screen is displayed.
+   */
+  private void performPostGameTasks(){
+    /* Increment the number of games that have been played
+     * NOTE: Perform all subsequent tasks after this has been called */
+    GameInfo.incrementGameCount();
+    /* Store the achievements record and in a JSON file and then reset achievements */
+    AchievementRecords.storeGameRecord();
   }
 }

@@ -1,5 +1,6 @@
 package com.deco2800.game.components.achievements;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -16,20 +17,31 @@ import com.deco2800.game.ui.UIComponent;
  * A UI component to display achievement cards and labels for corresponding achievements
  */
 public class AchievementsDisplay extends UIComponent {
-    private static final int RENDER_DURATION = 5000;
+    private static final int RENDER_DURATION = 1500;
     private static final String[] textures = AchievementFactory.getTextures();
+    private static final String[] bonusSoundPath = {"sounds/achievementSound.wav"};
+    private static final String[] bonusBgPath = {"images/achievements/bonusBg.png"};
     private Table table;
+    private Table tableForBonusBg;
+    private Table tableForBonus;
     private Image achievementImg;
+    private Image bonusImg;
     private Label achievementLabel;
+    private Label bonusLabel;
 
     @Override
     public void create() {
         super.create();
+
+        AsyncTaskQueue.newQueue();
+
         loadAssets();
         addActors();
 
         /* Listen to achievement events*/
         entity.getEvents().addListener("updateAchievement", this::updateAchievementsUI);
+        entity.getEvents().addListener("clear", this::clear);
+        entity.getEvents().addListener("display", this::display);
     }
 
     /**
@@ -38,7 +50,9 @@ public class AchievementsDisplay extends UIComponent {
     private void loadAssets() {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(textures);
-        ServiceLocator.getResourceService().loadAll();
+        resourceService.loadTextures(bonusBgPath);
+        resourceService.loadSounds(bonusSoundPath);
+        resourceService.loadAll();
     }
 
     /**
@@ -46,7 +60,9 @@ public class AchievementsDisplay extends UIComponent {
      */
     private void unloadAssets() {
         ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.unloadAssets(bonusBgPath);
         resourceService.unloadAssets(textures);
+        resourceService.unloadAssets(bonusSoundPath);
     }
 
     /**
@@ -56,7 +72,15 @@ public class AchievementsDisplay extends UIComponent {
         table = new Table();
         table.top();
         table.setFillParent(true);
+        tableForBonusBg = new Table();
+        tableForBonusBg.bottom().right();
+        tableForBonusBg.setFillParent(true);
+        tableForBonus = new Table();
+        tableForBonus.bottom().right();
+        tableForBonus.setFillParent(true);
         stage.addActor(table);
+        stage.addActor(tableForBonusBg);
+        stage.addActor(tableForBonus);
     }
 
     @Override
@@ -71,22 +95,41 @@ public class AchievementsDisplay extends UIComponent {
      * @param achievement Configuration with properties and conditions for corresponding achievement
      */
     private void updateAchievementsUI(BaseAchievementConfig achievement) {
-        /* Queue expensive task to run on a separate single thread
-         * to run asynchronously. */
+        /* Queue expensive task to run on a separate
+         * single thread to run asynchronously. */
         AsyncTaskQueue.enqueueTask(() -> {
             try {
-                /* Render achievement card */
-                renderAchievement(achievement);
+                entity.getEvents().trigger("display", achievement);
                 /* Wait for some time */
                 Thread.sleep(RENDER_DURATION);
-                /* Remove card from screen */
-                table.clear();
+                entity.getEvents().trigger("clear");
             } catch (InterruptedException ignored) {
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
     }
+
+    private synchronized void display(BaseAchievementConfig achievement){
+        /* Render achievement card */
+        renderAchievement(achievement);
+        /* Render bonus popup */
+        renderBonus(achievement);
+        /* Play achievement sound */
+        playAchievementSound();
+        /* Trigger bonus points event */
+        AchievementsHelper.getInstance().trackBonusPoints(achievement.bonus);
+    }
+
+    private synchronized void clear(){
+        /* Remove card from screen */
+        table.clear();
+        /* Remove bonus UI From screen */
+        tableForBonusBg.clear();
+        tableForBonus.clear();
+    }
+
+
 
     /**
      * Renders the current achievement notification on the table
@@ -104,6 +147,29 @@ public class AchievementsDisplay extends UIComponent {
 
     }
 
+    private void playAchievementSound() {
+        Sound achievementSound = ServiceLocator.getResourceService().
+                getAsset("sounds/achievementSound.wav", Sound.class);
+        achievementSound.play();
+
+    }
+
+    /**
+     * Renders the bonus score associated with achievements
+     */
+    private void renderBonus(BaseAchievementConfig achievement) {
+        bonusImg = new Image(ServiceLocator.getResourceService().getAsset
+                ("images/achievements/bonusBg.png", Texture.class));
+        String s = "+";
+        CharSequence text = s.concat(Integer.toString(achievement.bonus));
+        bonusLabel = new Label(text, skin, "small");
+        bonusLabel.setFontScale(1.4f, 1.4f);
+        bonusLabel.setAlignment(100);
+        tableForBonusBg.add(bonusImg).size(150f, 45f);
+        tableForBonus.add(bonusLabel).padBottom(10f).padRight(60f);
+
+    }
+
     @Override
     public void dispose() {
         super.dispose();
@@ -118,6 +184,12 @@ public class AchievementsDisplay extends UIComponent {
         }
         if (achievementLabel != null) {
             achievementLabel.remove();
+        }
+        if (bonusLabel != null) {
+            bonusLabel.remove();
+        }
+        if (bonusImg != null) {
+            bonusImg.remove();
         }
         unloadAssets();
     }
