@@ -145,8 +145,8 @@ public class ForestGameArea extends GameArea {
     private static final String[] forestSounds = {"sounds/Impact4.ogg"};
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
-    private static final String backgroundMusic = "sounds/temp_bgm.wav";
-    private static final String[] forestMusic = {backgroundMusic};
+    private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
+    private static final String[] forestMusic = {BACKGROUNDMUSIC};
     private boolean firstGenerate = true;
 
     private final TerrainFactory terrainFactory;
@@ -411,7 +411,7 @@ public class ForestGameArea extends GameArea {
 
 
     private void playMusic() {
-        Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
+        Music music = ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class);
         music.setLooping(true);
         music.setVolume(0.3f);
         music.play();
@@ -447,7 +447,7 @@ public class ForestGameArea extends GameArea {
     @Override
     public void dispose() {
         super.dispose();
-        ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class).stop();
+        ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class).stop();
         this.unloadAssets();
     }
 
