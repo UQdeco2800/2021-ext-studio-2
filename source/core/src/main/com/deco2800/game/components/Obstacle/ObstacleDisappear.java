@@ -2,6 +2,7 @@ package com.deco2800.game.components.Obstacle;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.Null;
 import com.deco2800.game.components.Component;
@@ -11,6 +12,7 @@ import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.screens.MainGameScreen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,8 +23,10 @@ import java.lang.reflect.Method;
 public class ObstacleDisappear extends Component {
 
     public enum ObstacleType {
-        PlantsObstacle, ThornsObstacle, Meteorite,Ghost;
-    };
+        PlantsObstacle, ThornsObstacle, Meteorite, Ghost;
+    }
+
+    ;
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleDisappear.class);
     AnimationRenderComponent animator;
@@ -48,7 +52,7 @@ public class ObstacleDisappear extends Component {
                 entity.getEvents().addListener("collisionStart", this::meteoriteDisappear);
                 break;
             case Ghost:
-                entity.getEvents().addListener("collisionStart",  this::GhostDisappear);
+                entity.getEvents().addListener("collisionStart", this::GhostDisappear);
             default:
                 logger.error("No corresponding event.");
         }
@@ -73,13 +77,21 @@ public class ObstacleDisappear extends Component {
      * obstacle (let it disappear).
      */
     void thornsDisappear(Fixture me, Fixture other) {
-        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-            logger.info("ThornsDisappearStart was triggered.");
-            animator.getEntity().setRemoveTexture();
-            animator.startAnimation("obstacle2");
-            animator.getEntity().setDisappearAfterAnimation(1f);
+        if (hitboxComponent.getFixture() != me) {
+            // Not triggered by hitbox, ignore
+            return;
         }
 
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return;
+        }
+
+        MainGameScreen.setSlowPlayer(5f);
+        logger.info("ThornsDisappearStart was triggered.");
+        animator.getEntity().setRemoveTexture();
+        animator.startAnimation("obstacle2");
+        animator.getEntity().setDisappearAfterAnimation(1f);
     }
 
     private void meteoriteDisappear(Fixture me, Fixture other) {
