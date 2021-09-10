@@ -130,4 +130,20 @@ public class ChickenDisplay extends UIComponent {
             ChickenImage.remove(i);
         }
     }
+
+    //添加或者删除图片
+    public static void addorremoveImage(int value){
+        if(value==1){
+            if(ChickenImage.size()<4){
+                ChickenImage.add(new Image(ServiceLocator.getResourceService()
+                        .getAsset("images/heart.png", Texture.class)));
+                tables.add(ChickenImage.get(ChickenImage.size()-1)).size(30f).pad(3);
+            }
+
+        }else if(value==-1){
+            if(ChickenImage.size()>0){
+                tables.removeActor(ChickenImage.get(ChickenImage.size()-1));
+            }
+        }
+    }
 }
