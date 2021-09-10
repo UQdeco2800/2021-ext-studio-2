@@ -125,10 +125,11 @@ public class MainGameScreen extends ScreenAdapter {
     // infinite loop for terrain and obstacles
     if(screenVector.x > (2*counter+1)*10) {
       counter+=1;
+      forestGameArea.showScrollingBackground(counter);
       forestGameArea.spawnTerrainRandomly((int) (screenVector.x+2));
 //      forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
 //      forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
-//
+
       // Generate obstacles
       forestGameArea.spawnObstacles();
       // Generate meteoritesw
