@@ -10,7 +10,10 @@ task run(dependsOn: classes, type: JavaExec) {
     standardInput = System.in
     workingDir = project.assetsDir
     ignoreExitValue = true
+    // For mac
     jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties", "-XstartOnFirstThread"]
+    // For windows
+    // jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties"]
 
 }
 
