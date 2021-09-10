@@ -26,7 +26,7 @@ import java.util.List;
 public class AchievementsScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(AchievementsScreen.class);
     private static final String[] achievementTextures = AchievementFactory.getTextures();
-    private static final String[] backgroundImages = {"images/achievements/achievementBackground.png", "images/achievements/bg.png"};
+    private static final String[] backgroundImages = {"images/achievements/achievementBackground.png", "images/story/chapterDialog.png"};
     private static final String chapterPath = "images/story/chapter";
     private final GdxGame game;
     private final Renderer renderer;

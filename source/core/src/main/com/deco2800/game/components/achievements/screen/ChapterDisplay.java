@@ -5,9 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.files.GameChapters;
 import com.deco2800.game.ui.UIComponent;
 
@@ -24,19 +28,19 @@ public class ChapterDisplay extends UIComponent {
 
     private void openChapter(GameChapters.Chapter chapter) {
         // Display gui
-        dialog = new Dialog("Chapter "+ chapter.id, skin);
+        dialog = new Dialog("Chapter " + chapter.id, skin);
         dialog.setModal(true);
         dialog.setMovable(true);
         dialog.setResizable(true);
 
-        Image background = new Image(new Texture("images/achievements/bg.png"));
-
+        Image background = new Image(new Texture("images/story/chapterDialog.png"));
+        background.setScaling(Scaling.fit);
         dialog.setBackground(background.getDrawable());
 
         dialog.pad(50);
 
         Label story = new Label(chapter.content, new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        story.setFontScale(1.2f);
+        story.setFontScale(1.5f);
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
 
