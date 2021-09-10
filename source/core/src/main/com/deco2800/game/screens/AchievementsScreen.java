@@ -26,7 +26,7 @@ import java.util.List;
 public class AchievementsScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(AchievementsScreen.class);
     private static final String[] achievementTextures = AchievementFactory.getTextures();
-    private static final String[] backgroundImg = {"images/achievements/achievementBackground.png"};
+    private static final String[] backgroundImages = {"images/achievements/achievementBackground.png", "images/story/chapterDialog.png"};
     private static final String chapterPath = "images/story/chapter";
     private final GdxGame game;
     private final Renderer renderer;
@@ -52,7 +52,7 @@ public class AchievementsScreen extends ScreenAdapter {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(achievementTextures);
-        resourceService.loadTextures(backgroundImg);
+        resourceService.loadTextures(backgroundImages);
         for (int i = 1; i < 6; i++) {
             resourceService.loadTextures(new String[]{chapterPath + i + ".png"});
         }
@@ -66,7 +66,7 @@ public class AchievementsScreen extends ScreenAdapter {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(achievementTextures);
-        resourceService.unloadAssets(backgroundImg);
+        resourceService.unloadAssets(backgroundImages);
         for (int i = 1; i < 6; i++) {
             resourceService.unloadAssets(new String[]{chapterPath + i + ".png"});
         }
