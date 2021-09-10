@@ -7,6 +7,7 @@ import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
+import com.deco2800.game.rendering.BackgroundRenderComponent;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
@@ -118,6 +119,7 @@ public class ForestGameArea extends GameArea {
             "images/obstacle_1_new.png",
             "images/obstacle2_vision2.png",
             "images/stone.png",
+            "images/background.png",
             "images/monkey_original.png",
             "images/Facehugger.png",
             "images/stone1.png",
@@ -162,10 +164,10 @@ public class ForestGameArea extends GameArea {
     @Override
     public void create() {
         loadAssets();
-
+        showBackground();
         displayUI();
-
         spawnTerrain();
+
 //        spawnRocks();
 //        spawnWoods();
 
@@ -178,6 +180,20 @@ public class ForestGameArea extends GameArea {
         spawnFirstAid();
         playMusic();
         trackAchievements();
+    }
+
+    private void showBackground() {
+        Entity gameBg = new Entity();
+        gameBg.addComponent(new BackgroundRenderComponent("images/background.png"));
+        spawnEntity(gameBg);
+    }
+
+    public void showScrollingBackground(int counter) {
+        Entity gameBg = new Entity();
+        BackgroundRenderComponent newBg = new BackgroundRenderComponent("images/background.png");
+        newBg.setHorizontal(30f * counter);
+        gameBg.addComponent(newBg);
+        spawnEntity(gameBg);
     }
 
     private void displayUI() {
