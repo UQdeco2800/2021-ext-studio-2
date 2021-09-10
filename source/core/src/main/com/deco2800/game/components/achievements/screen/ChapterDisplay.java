@@ -4,13 +4,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.deco2800.game.files.GameChapters;
 import com.deco2800.game.ui.UIComponent;
@@ -33,7 +32,10 @@ public class ChapterDisplay extends UIComponent {
         dialog.setMovable(true);
         dialog.setResizable(true);
 
-        dialog.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("images/achievements/bg.png"))));
+        Image background = new Image(new Texture("images/achievements/bg.png"));
+
+        dialog.setBackground(background.getDrawable());
+
         dialog.padTop(50).padBottom(50);
 
         Label story = new Label(chapter.content, new Label.LabelStyle(new BitmapFont(), Color.BROWN));
@@ -41,7 +43,7 @@ public class ChapterDisplay extends UIComponent {
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
 
-        dialog.getContentTable().add(story).width(850).row();
+        dialog.getContentTable().add(story).width(1000).row();
         dialog.getButtonTable().add(renderCloseButton()).row();
 
         dialog.show(stage);
