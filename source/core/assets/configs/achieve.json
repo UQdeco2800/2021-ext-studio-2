@@ -1,0 +1,97 @@
+{
+  "achievements": [
+    {
+      "name": "Veteran",
+      "type": "BRONZE",
+      "iconPath": "images/achievements/veteranBronze.png",
+      "message": "Survived for 10 minutes!",
+      "bonus": 10,
+      "condition": {
+        "time": 10
+      }
+    },
+    {
+      "name": "Veteran",
+      "type": "SILVER",
+      "iconPath": "images/achievements/veteranSilver.png",
+      "message": "Survived for 15 minutes!",
+      "bonus": 15,
+      "condition": {
+        "time": 15
+      }
+    },
+    {
+      "name": "Veteran",
+      "type": "GOLD",
+      "iconPath": "images/achievements/veteranGold.png",
+      "message": "Survived for 20 minutes!",
+      "bonus": 20,
+      "condition": {
+        "time": 20
+      }
+    },
+    {
+      "name": "Game Breaker",
+      "type": "BRONZE",
+      "iconPath": "images/achievements/gameBreakerBronze.png",
+      "message": "You've survived for 5 minutes with full health!",
+      "bonus": 15,
+      "condition": {
+        "time": 5,
+        "health": 100
+      }
+    },
+    {
+      "name": "Game Breaker",
+      "type": "SILVER",
+      "iconPath": "images/achievements/gameBreakerSilver.png",
+      "message": "You've survived for 8 minutes with full health!",
+      "bonus": 20,
+      "condition": {
+        "time": 8,
+        "health": 100
+      }
+    },
+    {
+      "name": "Game Breaker",
+      "type": "GOLD",
+      "iconPath": "images/achievements/gameBreakerGold.png",
+      "message": "You've survived for 10 minutes with full health!",
+      "bonus": 25,
+      "condition": {
+        "time": 10,
+        "health": 100
+      }
+    },
+    {
+      "name": "Tool Master",
+      "type": "BRONZE",
+      "iconPath": "images/achievements/toolMasterBronze.png",
+      "message": "You have successfully picked up 10 items!",
+      "bonus": 10,
+      "condition": {
+        "itemCount": 1
+      }
+    },
+    {
+      "name": "Tool Master",
+      "type": "SILVER",
+      "iconPath": "images/achievements/toolMasterSilver.png",
+      "message": "You have successfully picked up 15 items!",
+      "bonus": 15,
+      "condition": {
+        "itemCount": 2
+      }
+    },
+    {
+      "name": "Tool Master",
+      "type": "GOLD",
+      "iconPath": "images/achievements/toolMasterGold.png",
+      "message": "You have successfully picked up 20 items!",
+      "bonus": 20,
+      "condition": {
+        "itemCount": 3
+      }
+    }
+  ]
+}

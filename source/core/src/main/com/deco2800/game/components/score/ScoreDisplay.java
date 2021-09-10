@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.achievements.AchievementsHelper;
 import com.deco2800.game.components.score.ScoringSystem;
 import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.services.GameTime;
@@ -32,8 +31,6 @@ public class ScoreDisplay extends UIComponent {
         super.create();
         addActors();
 
-        AchievementsHelper.getInstance().getEvents()
-                .addListener(AchievementsHelper.ACHIEVEMENTS_BONUS_POINTS, this::updateScoreByPoints);
         entity.getEvents().addListener("updateScore", this::updatePlayerScoreUI);
     }
 
@@ -79,7 +76,7 @@ public class ScoreDisplay extends UIComponent {
     public void update() {
         super.update();
         entity.getEvents().trigger("updateScore",
-                scoringSystem.getScore());
+                scoringSystem.getScore(scoringSystem.getScoreSeconds()));
     }
 
     /**
@@ -88,15 +85,6 @@ public class ScoreDisplay extends UIComponent {
     public void updatePlayerScoreUI(int score) {
         CharSequence text = "" + score;
         scoreLabel.setText(text);
-    }
-
-    /**
-     * Updates the score based on bonus points
-     * @param bonusPoints bonus points of each achievement
-     */
-    private void updateScoreByPoints(int bonusPoints){
-        // Add bonusPoints to the score here
-        scoringSystem.addToScore(bonusPoints);
     }
 
     @Override

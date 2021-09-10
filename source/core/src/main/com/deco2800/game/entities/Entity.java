@@ -39,12 +39,10 @@ public class Entity {
     private boolean disappear = false;
     private boolean removeTexture = false;
     private boolean dispose = false;
-    private float animationTime = 0;
     private boolean created = false;
     private Vector2 position = Vector2.Zero.cpy();
     private Vector2 scale = new Vector2(1, 1);
     private Array<Component> createdComponents;
-
 
     public Entity() {
         id = nextId;
@@ -72,12 +70,10 @@ public class Entity {
     }
 
     /**
-     * Set disappear to true. These variables play a role in removeAfterAnimation() and update().
-     * @param animationTime Set how long the animation will disappear after playing
+     * Set disappear to true. The code that works subsequently is in update.
      */
-    public void setDisappearAfterAnimation(float animationTime) {
+    public void setDisappear() {
         this.disappear = true;
-        this.animationTime = animationTime;
         logger.info("Setting disappear={} on entity {}", removeTexture, this);
     }
 
@@ -250,13 +246,13 @@ public class Entity {
     }
 
     /**
-     * Let the obstacles disappear after playing the animation for animationTime second. Is called by update().
+     * Let the obstacles disappear after playing the animation for one second.
      *
      * The purpose of setting this method: When dispose() is used for animation components, all entities that use the
      * same animation become black boxes. Therefore, this method is currently used to make obstacles disappear.
      */
-    public void removeAfterAnimation() {
-        if (this.getComponent(AnimationRenderComponent.class).getAnimationPlayTime() > animationTime) {
+    public void removeAfterAnimation1f() {
+        if (this.getComponent(AnimationRenderComponent.class).getAnimationPlayTime() > 1f) {
             for (Component component : createdComponents) {
                 if (component.getClass().equals(AnimationRenderComponent.class)) {
                     logger.info("{} stopped on entity {}", component.getClass().getSimpleName(), this);
@@ -328,7 +324,7 @@ public class Entity {
             component.triggerUpdate();
         }
         if (disappear) {
-            this.removeAfterAnimation();
+            this.removeAfterAnimation1f();
             return;
         }
     }

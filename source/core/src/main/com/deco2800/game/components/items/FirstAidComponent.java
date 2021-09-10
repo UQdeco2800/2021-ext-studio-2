@@ -47,7 +47,8 @@ public class FirstAidComponent extends Component {
        if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) // checking if the collision is done with the player
        {
                     incHealth.increaseHealth(target);
-                    AchievementsHelper.getInstance().trackItemPickedUpEvent(AchievementsHelper.ITEM_FIRST_AID);
+                    entity.getEvents().trigger("itemPickedUp");
+                    AchievementsHelper.getInstance().trackItemPickedUpEvent();
 
            new Thread(() -> {
                try {

@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(GameExtension.class)
 public class AchievementStatsComponentTest {
 
-    private BaseAchievementConfig genAchievement(String name, int time, int health, int itemCount, int score, int firstAids) {
+    private BaseAchievementConfig genAchievement(String name, int time, int health, int itemCount) {
         BaseAchievementConfig achievement = new BaseAchievementConfig();
         achievement.bonus = 0;
         achievement.name = name;
@@ -26,13 +26,10 @@ public class AchievementStatsComponentTest {
         achievement.iconPath = "ignored";
         achievement.message = "ignored";
         achievement.unlocked = false;
-
         ConditionConfig condition = new ConditionConfig();
         condition.itemCount = itemCount;
         condition.time = time;
         condition.health = health;
-        condition.score = score;
-        condition.firstAids = firstAids;
         achievement.condition = condition;
 
         return achievement;
@@ -40,15 +37,16 @@ public class AchievementStatsComponentTest {
 
     private List<BaseAchievementConfig> getList() {
         List<BaseAchievementConfig> achievements = new ArrayList<>();
-        achievements.add(genAchievement("Veteran", 10, -1, -1, -1, -1));
-        achievements.add(genAchievement("Veteran", 15, -1, -1, -1, -1));
-        achievements.add(genAchievement("Veteran", 20, -1, -1, -1, -1));
-        achievements.add(genAchievement("Game Breaker", 5, 100, -1, -1, -1));
-        achievements.add(genAchievement("Game Breaker", 8, 100, -1, -1, -1));
-        achievements.add(genAchievement("Game Breaker", 10, 100, -1, -1, -1));
-        achievements.add(genAchievement("Master", -1, -1, -1, 50, -1));
-        achievements.add(genAchievement("Master", -1, -1, -1, 100, -1));
-        achievements.add(genAchievement("Master", -1, -1, -1, 150, -1));
+        achievements.add(genAchievement("Veteran", 10, -1, -1));
+        achievements.add(genAchievement("Veteran", 15, -1, -1));
+        achievements.add(genAchievement("Veteran", 20, -1, -1));
+        achievements.add(genAchievement("Game Breaker", 5, 100, -1));
+        achievements.add(genAchievement("Game Breaker", 8, 100, -1));
+        achievements.add(genAchievement("Game Breaker", 10, 100, -1));
+        achievements.add(genAchievement("Tool Master", -1, -1, 1));
+        achievements.add(genAchievement("Tool Master", -1, -1, 2));
+        achievements.add(genAchievement("Tool Master", -1, -1, 3));
+
         return achievements;
     }
 
@@ -63,7 +61,7 @@ public class AchievementStatsComponentTest {
     void shouldCheckIsValid() throws NoSuchMethodException,
             InvocationTargetException, IllegalAccessException {
 
-        BaseAchievementConfig achievement = genAchievement("ignored", 50, -1, 0, -1, -1);
+        BaseAchievementConfig achievement = genAchievement("ignored", 50, -1, 0);
 
         AchievementsStatsComponent component = new AchievementsStatsComponent();
 
@@ -113,129 +111,24 @@ public class AchievementStatsComponentTest {
 
         Method method = getIsValidMethod();
 
-
         AchievementsStatsComponent component = generateEntity()
                 .getComponent(AchievementsStatsComponent.class);
 
-        component.setTime(0);
-        component.setHealth(0);
+        for (BaseAchievementConfig a : getList()) {
 
-        component.setItemCountByVal(1);
-        BaseAchievementConfig achievement = genAchievement("Tool Master", -1, -1, 1, -1, -1);
-        assertEquals(method.invoke(component, achievement), true);
-        achievement.unlocked = false;
+            component.setTime(9);
+            component.setHealth(70);
 
-        component.setItemCountByVal(2);
-        achievement = genAchievement("Tool Master", -1, -1, 2, -1, -1);
-        assertEquals(method.invoke(component, achievement), true);
-        achievement.unlocked = false;
+            for (int i = 0; i <= 99; i++) {
+                component.setItemCount();
+            }
 
-        component.setItemCountByVal(3);
-        achievement = genAchievement("Tool Master", -1, -1, 3, -1, -1);
-        assertEquals(method.invoke(component, achievement), true);
-        achievement.unlocked = false;
-
-        component.setItemCountByVal(-1);
-        assertEquals(method.invoke(component, achievement), false);
-
-        component.setItemCountByVal(1);
-        assertEquals(method.invoke(component, achievement), false);
-
-        component.setItemCountByVal(2);
-        assertEquals(method.invoke(component, achievement), false);
-
-        component.setItemCountByVal(4);
-        assertEquals(method.invoke(component, achievement), false);
-
-        component.setItemCountByVal(99);
-        assertEquals(method.invoke(component, achievement), false);
-    }
-
-    @Test
-    void shouldCorrectlyValidateStrangerAchievements() throws
-            IllegalAccessException,
-            InvocationTargetException, NoSuchMethodException {
-
-        Method method = getIsValidMethod();
-
-
-        AchievementsStatsComponent component = generateEntity()
-                .getComponent(AchievementsStatsComponent.class);
-
-        component.setTime(999999);
-        component.setItemCountByVal(0);
-        BaseAchievementConfig achievement = genAchievement("Stranger", 10, -1, 0, -1, -1);
-        assertEquals(method.invoke(component, achievement), true);
-        achievement.unlocked = false;
-        component.setTime(999999);
-        component.setItemCountByVal(0);
-        achievement = genAchievement("Stranger", 15, -1, 0, -1, -1);
-        assertEquals(method.invoke(component, achievement), true);
-        achievement.unlocked = false;
-        component.setTime(999999);
-        component.setItemCountByVal(0);
-        achievement = genAchievement("Stranger", 20, -1, 0, -1, -1);
-        assertEquals(method.invoke(component, achievement), true);
-        achievement.unlocked = false;
-
-        component.setItemCountByVal(-1);
-        assertEquals(method.invoke(component, achievement), false);
-
-        component.setItemCountByVal(1);
-        assertEquals(method.invoke(component, achievement), false);
-
-        component.setItemCountByVal(2);
-        assertEquals(method.invoke(component, achievement), false);
-
-        component.setItemCountByVal(4);
-        assertEquals(method.invoke(component, achievement), false);
-
-        component.setItemCountByVal(99);
-        assertEquals(method.invoke(component, achievement), false);
-    }
-
-    @Test
-    void shouldCorrectlyValidateHealerAchievements() throws
-            IllegalAccessException,
-            InvocationTargetException, NoSuchMethodException {
-
-        Method method = getIsValidMethod();
-
-
-        AchievementsStatsComponent component = generateEntity()
-                .getComponent(AchievementsStatsComponent.class);
-
-        component.setTime(0);
-        component.setHealth(0);
-        component.setFirstAidByVal(1);
-        BaseAchievementConfig achievement = genAchievement("Healer", -1, -1, -1, -1, 1);
-        assertEquals(method.invoke(component, achievement), true);
-        achievement.unlocked = false;
-
-        component.setFirstAidByVal(2);
-        achievement = genAchievement("Healer", -1, -1, -1, -1, 2);
-        assertEquals(method.invoke(component, achievement), true);
-        achievement.unlocked = false;
-
-        component.setFirstAidByVal(3);
-        achievement = genAchievement("Healer", -1, -1, -1, -1, 3);
-        assertEquals(method.invoke(component, achievement), true);
-        achievement.unlocked = false;
-
-        component.setFirstAidByVal(1);
-        assertEquals(method.invoke(component, achievement), false);
-
-        component.setFirstAidByVal(1);
-        assertEquals(method.invoke(component, achievement), false);
-
-        component.setFirstAidByVal(2);
-        assertEquals(method.invoke(component, achievement), false);
-
-        component.setFirstAidByVal(4);
-        assertEquals(method.invoke(component, achievement), false);
-
-        component.setFirstAidByVal(99);
-        assertEquals(method.invoke(component, achievement), false);
+            if (a.name.equals("Tool Master")) {
+                assertEquals(method.invoke(component, a), true);
+            } else {
+                assertEquals(method.invoke(component, a), false);
+            }
+        }
     }
 
     @Test
@@ -261,27 +154,6 @@ public class AchievementStatsComponentTest {
     }
 
     @Test
-    void shouldCorrectlyValidateMasterAchievements() throws
-            NoSuchMethodException,
-            InvocationTargetException, IllegalAccessException {
-
-        Method method = getIsValidMethod();
-
-        AchievementsStatsComponent component = generateEntity()
-                .getComponent(AchievementsStatsComponent.class);
-        for (BaseAchievementConfig a : getList()) {
-            component.setScore(99999);
-
-            if (a.name.equals("Master")) {
-                assertEquals(method.invoke(component, a), true);
-            } else {
-                assertEquals(method.invoke(component, a), false);
-            }
-        }
-    }
-
-
-    @Test
     void allAchievementsShouldBeValid() throws NoSuchMethodException,
             InvocationTargetException, IllegalAccessException {
 
@@ -293,7 +165,10 @@ public class AchievementStatsComponentTest {
         for (BaseAchievementConfig a : getList()) {
             component.setTime(999999999);
             component.setHealth(100);
-            component.setScore(99999);
+            for (int i = 0; i < 999; i++) {
+                component.setItemCount();
+            }
+
             assertEquals(method.invoke(component, a), true);
         }
     }

@@ -21,8 +21,10 @@ import java.lang.reflect.Method;
 public class ObstacleDisappear extends Component {
 
     public enum ObstacleType {
-        PlantsObstacle, ThornsObstacle, Meteorite,Ghost;
-    };
+        PlantsObstacle, ThornsObstacle, Meteorite;
+    }
+
+    ;
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleDisappear.class);
     AnimationRenderComponent animator;
@@ -47,8 +49,6 @@ public class ObstacleDisappear extends Component {
             case Meteorite:
                 entity.getEvents().addListener("collisionStart", this::meteoriteDisappear);
                 break;
-            case Ghost:
-                entity.getEvents().addListener("collisionStart",  this::GhostDisappear);
             default:
                 logger.error("No corresponding event.");
         }
@@ -64,7 +64,7 @@ public class ObstacleDisappear extends Component {
             logger.info("PlantsDisappearStart was triggered.");
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacles");
-            animator.getEntity().setDisappearAfterAnimation(1f);
+            animator.getEntity().setDisappear();
         }
     }
 
@@ -77,25 +77,15 @@ public class ObstacleDisappear extends Component {
             logger.info("ThornsDisappearStart was triggered.");
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacle2");
-            animator.getEntity().setDisappearAfterAnimation(1f);
+            animator.getEntity().setDisappear();
         }
 
     }
 
     private void meteoriteDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-            animator.getEntity().setRemoveTexture();
-            animator.startAnimation("stone1");
-            animator.getEntity().setDisappearAfterAnimation(0.32f);
-        }
-
-    }
-
-    void GhostDisappear(Fixture me, Fixture other) {
-        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
 //            animator.startAnimation("enemy2");
-//            animator.getEntity().setRemoveTexture();
-            animator.getEntity().setDisappearAfterAnimation(1.5f);
+            entity.setDispose();
         }
 
     }

@@ -43,7 +43,7 @@ public class GameOverDisplay extends UIComponent {
 
         Label pointsLabel = new Label("Points:", skin);
 
-        points = scoringSystem.getScore();
+        points = scoringSystem.getScore(scoringSystem.getScoreSeconds());
 
         pointText = new TextField(String.valueOf(points), skin);
         pointText.setDisabled(true);
