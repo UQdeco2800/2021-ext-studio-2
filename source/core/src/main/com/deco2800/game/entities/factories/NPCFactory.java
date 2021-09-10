@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.Obstacle.ObstacleDisappear;
 import com.deco2800.game.components.npc.GhostAnimationController;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.tasks.ChaseTask;
@@ -21,6 +22,7 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
@@ -49,17 +51,19 @@ public class NPCFactory {
 
     AnimationRenderComponent animator =
         new AnimationRenderComponent(
-            ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
-    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
+            ServiceLocator.getResourceService().getAsset("images/Facehugger.atlas", TextureAtlas.class));
+    animator.addAnimation("baolian1", 0.1f, Animation.PlayMode.LOOP);
+    //animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
 
     ghost
+            //.addComponent(new TextureRenderComponent("images/Facehugger.png"))
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
         .addComponent(animator)
-        .addComponent(new GhostAnimationController());
+        .addComponent(new GhostAnimationController())
+            .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Ghost));
 
-    ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
-
+//    ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
+        ghost.setScale(2.4f,2.4f);
     return ghost;
   }
 
@@ -98,7 +102,7 @@ public class NPCFactory {
     AITaskComponent aiComponent =
         new AITaskComponent()
             .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-            .addTask(new ChaseTask(target, 10, 3f, 4f));
+            .addTask(new ChaseTask(target, 10, 4f, 4f));
     Entity npc =
         new Entity()
             .addComponent(new PhysicsComponent())
