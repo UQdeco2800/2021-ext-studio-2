@@ -14,8 +14,7 @@ import java.util.stream.Collectors;
  * and emits new achievement events
  */
 public class AchievementsStatsComponent extends Component {
-    private static List<BaseAchievementConfig> achievements =
-            AchievementFactory.getAchievements();
+    private static final List<BaseAchievementConfig> achievements = AchievementFactory.getAchievements();
     private final ScoringSystemV1 scoringSystemV1;
     private int health;
     private long time;
@@ -24,13 +23,17 @@ public class AchievementsStatsComponent extends Component {
     private int firstAids;
 
     public AchievementsStatsComponent() {
+        scoringSystemV1 = new ScoringSystemV1();
+
+        initStats();
+    }
+
+    private void initStats(){
         itemCount = 0;
         health = 100;
         time = -1;
         score = 0;
         firstAids = 0;
-
-        scoringSystemV1 = new ScoringSystemV1();
     }
 
     /**
@@ -57,12 +60,16 @@ public class AchievementsStatsComponent extends Component {
      * Lock all the achievements again
      */
     public static void resetAchievements() {
-        achievements = AchievementFactory.getAchievements();
+        achievements.forEach(achievement -> achievement.unlocked = false);
     }
 
     @Override
     public void create() {
         super.create();
+
+        initStats();
+
+        resetAchievements();
 
         AchievementsHelper.getInstance().getEvents()
                 .addListener(AchievementsHelper.HEALTH_EVENT, this::setHealth);
@@ -93,7 +100,7 @@ public class AchievementsStatsComponent extends Component {
     /**
      * Maintains the current score
      *
-     * @param score
+     * @param score the current game score
      */
     public void setScore(int score) {
         this.score = score;
@@ -119,13 +126,16 @@ public class AchievementsStatsComponent extends Component {
                 setFirstAid();
                 break;
             default:
-                return;
         }
 
     }
 
     private void setFirstAid() {
         ++firstAids;
+        checkForValidAchievements();
+    }
+    public void setFirstAidByVal(int firstAids) {
+        this.firstAids = firstAids;
         checkForValidAchievements();
     }
 

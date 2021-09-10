@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
-import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
 import com.deco2800.game.rendering.BackgroundRenderComponent;
@@ -110,10 +109,7 @@ public class ForestGameArea extends GameArea {
             "images/iso_grass_1.png",
             "images/iso_grass_2.png",
             "images/iso_grass_3.png",
-            "images/mpc_front_stroke.png",
-            "images/mpc_left_view.png",
-            "images/mpc_right_view.png",
-            "images/mpc_right.png",
+            "images/mpc/mpc_right.png",
             "images/road.png",
             "images/water.png",
             "images/rock.jpg",
@@ -122,10 +118,12 @@ public class ForestGameArea extends GameArea {
             "images/Items/food.png",
             "images/obstacle_1_new.png",
             "images/obstacle2_vision2.png",
-            "images/mpcMovement.png",
             "images/stone.png",
-            "images/background.png"
-
+            "images/background.png",
+            "images/monkey_original.png",
+            "images/Facehugger.png",
+            "images/stone1.png",
+            "images/mpc/mpcAnimation.png"
 
     };
     private static final String[] forestTextureAtlases = {
@@ -139,7 +137,10 @@ public class ForestGameArea extends GameArea {
                     "/obstacle_1.atlas",
             "images/obstacle_2.atlas",
             "images/mpcMovement.atlas",
-
+            "images/monkey.atlas",
+            "images/Facehugger.atlas",
+            "images/obstacle_Meteorite.atlas",
+            "images/mpc/mpcAnimation.atlas",
     };
     private static final String[] forestSounds = {"sounds/Impact4.ogg"};
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
@@ -339,21 +340,62 @@ public class ForestGameArea extends GameArea {
 
 
     /**
-     * Generate a certain number of meteorites, the total generated number is between
-     * basicNum and basicNum + extraNum, called by render() in MainGameScreen.
+     * Generate a certain number of meteorites, called by render() in MainGameScreen. The final number of meteorites
+     * is the sum of all parameters.
      *
-     * @param basicNum basic number of meteorites
-     * @param extraNum additional number of meteorites
+     * Big size meteorites: 1.5 - 2 times of the multiples of meteorites texture,
+     *                      total number is bigNum(+bigRandomRange), the values in parentheses are random.
+     * Midden size meteorites: 1 - 1.5 times of the multiples of meteorites texture,
+     *                      total number is middleNum(+midRandomRange)
+     * Small size meteorites: 0.5 + randomSize: 0.5 - 1 times of the multiples of meteorites texture,
+     *                      total number is smallNum(+smaillRandomRange)
+     *
+     * e.g. 1(+2) means that the number of generations is at least 1, and the final possible range is 1-3.
+     *
+     * @param bigNum At least the number of large meteorites generated.
+     * @param middleNum At least the number of middle meteorites generated.
+     * @param smallNum At least the number of small meteorites generated.
+     * @param bigRandomRange The number of large meteorites that may be randomly generated.
+     * @param midRandomRange The number of middle meteorites that may be randomly generated.
+     * @param smaillRandomRange The number of small meteorites that may be randomly generated.
      */
-    public void spawnMeteorites(int basicNum, int extraNum) {
-        int meteoritesNum = (int) (Math.random() * (extraNum + 1));
-        for (int i = 0; i < basicNum + meteoritesNum; i++) {
-            int x = (int) (Math.random() * 10); // x distance from player
-            GridPoint2 point = new GridPoint2((int) player.getPosition().x + x, 20);
-            Entity stone = ObstacleFactory.createMeteorite(player);
+    public void spawnMeteorites(int bigNum, int middleNum, int smallNum, int bigRandomRange, int midRandomRange, int smaillRandomRange) {
+        int bigNumRandom = bigNum + (int) (Math.random() * (bigRandomRange + 1));
+        int midNumRandom = middleNum + (int) (Math.random() * (midRandomRange + 1));
+        int smallNumRandom = smallNum + (int) (Math.random() * (smaillRandomRange + 1));
+        int meteoritesNum = bigNumRandom + midNumRandom + smallNumRandom;
+
+        double randomSize; // Generate random range for size
+        double bigSize;
+        double midSize;
+        double smallSize;
+
+        for (int i = 0; i < meteoritesNum; i++) {
+            randomSize = Math.random() * 0.5; // 0-0.5
+            bigSize = 1.5 + randomSize; // 1.5 - 2 size of the meteorites
+            midSize = 1 + randomSize; // 1 - 1.5 size of the meteorites
+            smallSize = 0.5 + randomSize; // 0.5 - 1 size of the meteorites
+            int x = (int) (int) (player.getPosition().x + Math.random() * 10);
+            int y = (int) (20 + Math.random() * 2);
+            GridPoint2 point = new GridPoint2(x, y);
+
+            Entity stone;
+
+            if (i < bigNumRandom) { // must have a big meteorites
+                stone = ObstacleFactory.createMeteorite(player, (float) bigSize, ObstacleFactory.MeteoriteType.BigMeteorite);
+                System.out.println("Big stone = " + point + "\ti = " + i);
+            } else if (i < bigNumRandom + midNumRandom) {
+                stone = ObstacleFactory.createMeteorite(player, (float) midSize, ObstacleFactory.MeteoriteType.MiddleMeteorite);
+                System.out.println("Mid stone = " + point + "\ti = " + i);
+            } else {
+                stone = ObstacleFactory.createMeteorite(player, (float) smallSize, ObstacleFactory.MeteoriteType.SmallMeteorite);
+                System.out.println("Small stone = " + point + "\ti = " + i);
+            }
+
+
             spawnEntityAt(stone, point, true, true);
-            logger.info("Spawn meteorites at {}", point);
         }
+        logger.info("bigNumRandom = {}, midNumRandom = {}, smallNumRandom = {}", bigNumRandom, midNumRandom, smallNumRandom);
     }
 
 
