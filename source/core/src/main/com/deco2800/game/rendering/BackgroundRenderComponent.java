@@ -26,6 +26,7 @@ public class BackgroundRenderComponent extends RenderComponent {
 
     @Override
     public void draw(SpriteBatch batch) {
+        batch.draw(texture, -30, 0, 30, 15);
         batch.draw(texture, horizontal, 0, 30, 15);
     }
 
