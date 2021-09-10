@@ -126,7 +126,7 @@ public class ChickenDisplay extends UIComponent {
     }
 
     //add a image/remove a image
-    public static void addorremoveImage(int value){
+    public static void addOrRemoveImage(int value){
         if(value==1){
             if(ChickenImage.size()<4){
                 ChickenImage.add(new Image(ServiceLocator.getResourceService()

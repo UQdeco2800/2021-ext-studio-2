@@ -123,7 +123,7 @@ public class WaterDisplay extends UIComponent {
     }
 
     //add a image/remove a image
-    public static void addorremoveImage(int value){
+    public static void addOrRemoveImage(int value){
         if(value==1){
             if(waterImage.size()<4){
                 waterImage.add(new Image(ServiceLocator.getResourceService()
