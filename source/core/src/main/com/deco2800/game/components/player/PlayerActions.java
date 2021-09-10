@@ -124,8 +124,6 @@ public class PlayerActions extends Component {
   private void crouch() {
     Sound crouchSound = ServiceLocator.getResourceService().getAsset("sounds/turnDirection.ogg", Sound.class);
     crouchSound.play();
-
-    PhysicsUtils.setScaledCollider(entity,  1f, 0.5f);
   }
 
 
