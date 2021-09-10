@@ -29,6 +29,7 @@ public class AchievementRecordsDisplay extends UIComponent {
     private Table crossTable;
     private Table chapterTable;
     private Table achievementsTable;
+    private int i = 0;
 
     public AchievementRecordsDisplay(GdxGame game, List<BaseAchievementConfig> bestAchievements) {
         this.bestAchievements = bestAchievements;
@@ -70,12 +71,13 @@ public class AchievementRecordsDisplay extends UIComponent {
         table.center();
         table.add(label);
         table.row();
-
+        achievementsTable = new Table();
         if (bestAchievements.isEmpty()) {
             renderNoAchievements();
         } else {
             renderBestAchievements();
         }
+        renderAchievements(AchievementRecords.getNextUnlockAchievements(), 0.55f);
         table.add(achievementsTable);
         table.row();
         label = new Label("Game Story", skin);
@@ -129,9 +131,9 @@ public class AchievementRecordsDisplay extends UIComponent {
     }
 
     private void renderBestAchievements() {
-        achievementsTable = new Table();
+
         renderAchievements(AchievementRecords.getBestRecords(), 1);
-        renderAchievements(AchievementRecords.getNextUnlockAchievements(), 0.55f);
+
     }
 
 
@@ -140,7 +142,6 @@ public class AchievementRecordsDisplay extends UIComponent {
             return;
         }
 
-        int i = 0;
         for (BaseAchievementConfig achievement : achievements) {
             ++i;
             Image img = new Image(ServiceLocator.getResourceService()
