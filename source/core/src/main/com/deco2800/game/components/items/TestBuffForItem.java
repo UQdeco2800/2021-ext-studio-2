@@ -1,7 +1,7 @@
 package com.deco2800.game.components.items;
 
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.foodAndwater.ChickenDisplay;
+import com.deco2800.game.components.foodAndwater.FoodDisplay;
 import com.deco2800.game.entities.Entity;
 
 public class TestBuffForItem {
@@ -17,8 +17,8 @@ public class TestBuffForItem {
 
         //add a image when player pick up a Blood Pack
         if(target!=null){
-            if(ChickenDisplay.ChickenImage.size()<4){
-                ChickenDisplay.addOrRemoveImage(1);
+            if(FoodDisplay.ChickenImage.size()<4){
+                FoodDisplay.addOrRemoveImage(1);
             }
         }
 

@@ -5,15 +5,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
-import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.areas.terrain.TerrainFactory;
-import com.deco2800.game.components.foodAndwater.ChickenDisplay;
+import com.deco2800.game.components.foodAndwater.FoodDisplay;
 import com.deco2800.game.components.foodAndwater.WaterDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
-import com.deco2800.game.components.maingame.MainGameDisplay;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.score.ScoreDisplay;
-import com.deco2800.game.components.score.ScoringSystem;
 import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.components.score.TimerDisplay;
 import com.deco2800.game.entities.Entity;
@@ -262,7 +259,7 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new ScoreDisplay())
                 .addComponent(new TimerDisplay())
                 .addComponent(new TerminalDisplay())
-                .addComponent(new ChickenDisplay())
+                .addComponent(new FoodDisplay())
                 .addComponent(new WaterDisplay());
 
 

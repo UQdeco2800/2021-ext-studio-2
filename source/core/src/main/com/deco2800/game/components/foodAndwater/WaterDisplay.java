@@ -16,11 +16,9 @@ import java.util.ArrayList;
 public class WaterDisplay extends UIComponent {
     static Table tables;
     private Label timeLabel;
-    private final WaterSystemV1 waterSystem = new WaterSystemV1();
+    private final CountWaterSystem countWaterSystem = new CountWaterSystem();
     private final ScoringSystemV1 countTime = new ScoringSystemV1();
     public static ArrayList<Image> waterImage = new ArrayList<>();
-    private final int count_image=4;
-    private int waterCurrent = 4;
 
 
     public WaterDisplay() {
@@ -52,7 +50,8 @@ public class WaterDisplay extends UIComponent {
         waterImage.add(new Image(ServiceLocator.getResourceService()
                 .getAsset("images/clock.png", Texture.class)));
 
-        CharSequence TimerText =waterCurrent + "";
+        int waterCurrent = 4;
+        CharSequence TimerText = waterCurrent + "";
         timeLabel = new Label(TimerText, skin, "large");
 
         tables.add(waterImage.get(0)).size(clockSideLength).pad(3);
@@ -75,14 +74,14 @@ public class WaterDisplay extends UIComponent {
         int seconds = countTime.getSeconds();
 
         int dis = (minutes*60+seconds)/2;
-        if(dis>waterSystem.getTimer()){
-            waterSystem.setDiffrence(1);
-            waterSystem.setTimer(dis);
+        if(dis> countWaterSystem.getTimer()){
+            countWaterSystem.setDiffrence(1);
+            countWaterSystem.setTimer(dis);
         }else {
-            waterSystem.setDiffrence(0);
+            countWaterSystem.setDiffrence(0);
         }
         //update the clock regularly
-        entity.getEvents().trigger("updateWater",waterSystem.getDiffrence());
+        entity.getEvents().trigger("updateWater", countWaterSystem.getDiffrence());
     }
 
     /**
@@ -90,14 +89,13 @@ public class WaterDisplay extends UIComponent {
      */
     public void updatePlayerTimerUI(int dis) {
 
-        if(dis>0){
-
-            if(waterImage.size()>0){
+        if(dis > 0){
+            if(waterImage.size() > 0){
                 tables.reset();
                 tables.top().left();
                 tables.setFillParent(true);
                 tables.padTop(150f).padLeft(10f);
-                waterImage.remove(waterImage.size()-1);
+                waterImage.remove(waterImage.size() - 1);
 
                 for (Image ima: waterImage) {
                     tables.add(ima).size(30f).pad(3);

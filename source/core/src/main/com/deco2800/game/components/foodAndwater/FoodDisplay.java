@@ -13,10 +13,10 @@ import java.util.ArrayList;
 /**
  * A ui component for displaying food system.
  */
-public class ChickenDisplay extends UIComponent {
+public class FoodDisplay extends UIComponent {
     static Table tables;
     private Label timeLabel;
-    private final ChickenSystemV1 chickenSystem = new ChickenSystemV1();
+    private final CountFoodSystem countFoodSystem = new CountFoodSystem();
     private final ScoringSystemV1 timeCount = new ScoringSystemV1();
     public static ArrayList<Image> ChickenImage = new ArrayList<>();
     private final int count_image=4;
@@ -24,7 +24,7 @@ public class ChickenDisplay extends UIComponent {
 
 
 
-    public ChickenDisplay() {
+    public FoodDisplay() {
     }
 
 
@@ -78,14 +78,14 @@ public class ChickenDisplay extends UIComponent {
         int seconds = timeCount.getSeconds();
 
         int dis = (minutes * 60 + seconds) / 3;
-        if(dis>chickenSystem.getTimer()){
-            chickenSystem.setDiffrence(1);
-            chickenSystem.setTimer(dis);
+        if(dis> countFoodSystem.getTimer()){
+            countFoodSystem.setDiffrence(1);
+            countFoodSystem.setTimer(dis);
         }else {
-            chickenSystem.setDiffrence(0);
+            countFoodSystem.setDiffrence(0);
         }
         //update the clock regularly
-        entity.getEvents().trigger("updateChicken",chickenSystem.getDiffrence());
+        entity.getEvents().trigger("updateChicken", countFoodSystem.getDiffrence());
     }
 
     /**
