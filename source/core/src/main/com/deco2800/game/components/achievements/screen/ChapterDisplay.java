@@ -39,12 +39,12 @@ public class ChapterDisplay extends UIComponent {
 
         dialog.pad(50).padTop(100);
 
-        Label story = new Label(chapter.content, new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        Label story = new Label(chapter.content, new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
         story.setFontScale(1.1f);
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
 
-        Label heading = new Label("Chapter " + chapter.id, new Label.LabelStyle(new BitmapFont(), Color.GOLD));
+        Label heading = new Label("Chapter " + chapter.id, new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         heading.setFontScale(2f);
         dialog.getContentTable().add(heading).expandX().row();
         dialog.getContentTable().add(story).width(600).row();
