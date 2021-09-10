@@ -204,10 +204,15 @@ extends <a href="GameArea.html" title="class in com.deco2800.game.areas">GameAre
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnAttackObstacles(com.badlogic.gdx.math.Vector2)">spawnAttackObstacles</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnFaceWorm(com.badlogic.gdx.math.Vector2)">spawnFaceWorm</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i4">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnFlyingMonkey()">spawnFlyingMonkey</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnMeteorites(int,int,int,int,int,int)">spawnMeteorites</a></span>&#8203;(int&nbsp;bigNum,
 int&nbsp;middleNum,
@@ -219,17 +224,12 @@ int&nbsp;smaillRandomRange)</code></th>
 <div class="block">Generate a certain number of meteorites, called by render() in MainGameScreen.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnObstacles()">spawnObstacles</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Obstacles are randomly generated according to the position of the character.</div>
 </td>
-</tr>
-<tr class="altColor" id="i6">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnRangeObstacles()">spawnRangeObstacles</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
@@ -367,14 +367,14 @@ int&nbsp;smaillRandomRange)</code></th>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="spawnRangeObstacles()">spawnRangeObstacles</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnRangeObstacles</span>()</div>
+<h3><a id="spawnFlyingMonkey()">spawnFlyingMonkey</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnFlyingMonkey</span>()</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="spawnAttackObstacles(com.badlogic.gdx.math.Vector2)">spawnAttackObstacles</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnAttackObstacles</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</span></div>
+<h3><a id="spawnFaceWorm(com.badlogic.gdx.math.Vector2)">spawnFaceWorm</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnFaceWorm</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -388,14 +388,14 @@ int&nbsp;midRandomRange,
 int&nbsp;smaillRandomRange)</span></div>
 <div class="block">Generate a certain number of meteorites, called by render() in MainGameScreen. The final number of meteorites
  is the sum of all parameters.
-
+ <p>
  Big size meteorites: 1.5 - 2 times of the multiples of meteorites texture,
-                      total number is bigNum(+bigRandomRange), the values in parentheses are random.
+ total number is bigNum(+bigRandomRange), the values in parentheses are random.
  Midden size meteorites: 1 - 1.5 times of the multiples of meteorites texture,
-                      total number is middleNum(+midRandomRange)
+ total number is middleNum(+midRandomRange)
  Small size meteorites: 0.5 + randomSize: 0.5 - 1 times of the multiples of meteorites texture,
-                      total number is smallNum(+smaillRandomRange)
-
+ total number is smallNum(+smaillRandomRange)
+ <p>
  e.g. 1(+2) means that the number of generations is at least 1, and the final possible range is 1-3.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>

@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9,"i6":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -181,8 +181,18 @@ int&nbsp;height)</code></th>
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>static void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSpownEnemy(com.badlogic.gdx.math.Vector2)">setSpownEnemy</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</code></th>
-<td class="colLast">&nbsp;</td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSlowPlayer(float)">setSlowPlayer</a></span>&#8203;(float&nbsp;slowPlayerTime)</code></th>
+<td class="colLast">
+<div class="block">Set the player deceleration time, the value set in the function is used by slowPlayer(), and the function is
+ implemented in render().</div>
+</td>
+</tr>
+<tr class="altColor" id="i6">
+<td class="colFirst"><code>static void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSpownFacehugger(com.badlogic.gdx.math.Vector2)">setSpownFacehugger</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</code></th>
+<td class="colLast">
+<div class="block">Set the location where the monster is spawned, and called by start() in ObstacleAttackTask.java.</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -229,8 +239,26 @@ int&nbsp;height)</code></th>
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="setSpownEnemy(com.badlogic.gdx.math.Vector2)">setSpownEnemy</a></h3>
-<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setSpownEnemy</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</span></div>
+<h3><a id="setSpownFacehugger(com.badlogic.gdx.math.Vector2)">setSpownFacehugger</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setSpownFacehugger</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</span></div>
+<div class="block">Set the location where the monster is spawned, and called by start() in ObstacleAttackTask.java.
+ The variable is used by the spokenFacehugger(). This function plays a role in render().</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>position</code> - Where the monster spawns.</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setSlowPlayer(float)">setSlowPlayer</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setSlowPlayer</span>&#8203;(<span class="arguments">float&nbsp;slowPlayerTime)</span></div>
+<div class="block">Set the player deceleration time, the value set in the function is used by slowPlayer(), and the function is
+ implemented in render(). This function called by thornsDisappear() in ObstacleDisappear.java</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>slowPlayerTime</code> - How many seconds the player slows down.</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
