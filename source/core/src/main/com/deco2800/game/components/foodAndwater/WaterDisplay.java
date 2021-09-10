@@ -42,13 +42,13 @@ public class WaterDisplay extends UIComponent {
         //Add water image ---use clock at that moment
         float clockSideLength = 30f;
         waterImage.add(new Image(ServiceLocator.getResourceService()
-                .getAsset("images/clock.png", Texture.class)));
+                .getAsset("images/water1.png", Texture.class)));
         waterImage.add(new Image(ServiceLocator.getResourceService()
-                .getAsset("images/clock.png", Texture.class)));
+                .getAsset("images/water1.png", Texture.class)));
         waterImage.add(new Image(ServiceLocator.getResourceService()
-                .getAsset("images/clock.png", Texture.class)));
+                .getAsset("images/water1.png", Texture.class)));
         waterImage.add(new Image(ServiceLocator.getResourceService()
-                .getAsset("images/clock.png", Texture.class)));
+                .getAsset("images/water1.png", Texture.class)));
 
         int waterCurrent = 4;
         CharSequence TimerText = waterCurrent + "";
@@ -123,7 +123,7 @@ public class WaterDisplay extends UIComponent {
         if(value==1){
             if(waterImage.size()<4){
                 waterImage.add(new Image(ServiceLocator.getResourceService()
-                        .getAsset("images/heart.png", Texture.class)));
+                        .getAsset("images/water1.png", Texture.class)));
                 tables.add(waterImage.get(waterImage.size()-1)).size(30f).pad(3);
             }
 

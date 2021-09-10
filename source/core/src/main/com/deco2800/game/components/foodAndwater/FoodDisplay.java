@@ -10,6 +10,7 @@ import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import java.util.ArrayList;
 
+
 /**
  * A ui component for displaying food system.
  */
@@ -20,7 +21,7 @@ public class FoodDisplay extends UIComponent {
     private final ScoringSystemV1 timeCount = new ScoringSystemV1();
     public static ArrayList<Image> ChickenImage = new ArrayList<>();
     private final int count_image=4;
-    private int chickencurrent = 4;
+    private int chickenCurrent = 4;
 
 
 
@@ -48,16 +49,15 @@ public class FoodDisplay extends UIComponent {
         //Add Food image
         float clockSideLength = 30f;
         ChickenImage.add(new Image(ServiceLocator.getResourceService()
-                .getAsset("images/heart.png", Texture.class)));
+                .getAsset("images/food1.png", Texture.class)));
         ChickenImage.add(new Image(ServiceLocator.getResourceService()
-                .getAsset("images/heart.png", Texture.class)));
+                .getAsset("images/food1.png", Texture.class)));
         ChickenImage.add(new Image(ServiceLocator.getResourceService()
-                .getAsset("images/heart.png", Texture.class)));
+                .getAsset("images/food1.png", Texture.class)));
         ChickenImage.add(new Image(ServiceLocator.getResourceService()
-                .getAsset("images/heart.png", Texture.class)));
-        //Add Clock text
+                .getAsset("images/food1.png", Texture.class)));
 
-        CharSequence TimerText =chickencurrent+"";
+        CharSequence TimerText =chickenCurrent+"";
         timeLabel = new Label(TimerText, skin, "large");
 
         tables.add(ChickenImage.get(0)).size(clockSideLength).pad(3);
@@ -128,7 +128,7 @@ public class FoodDisplay extends UIComponent {
         if(value==1){
             if(ChickenImage.size()<4){
                 ChickenImage.add(new Image(ServiceLocator.getResourceService()
-                        .getAsset("images/heart.png", Texture.class)));
+                        .getAsset("images/food1.png", Texture.class)));
                 tables.add(ChickenImage.get(ChickenImage.size()-1)).size(30f).pad(3);
             }
 
