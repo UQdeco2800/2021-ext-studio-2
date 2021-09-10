@@ -14,7 +14,7 @@ import com.deco2800.game.rendering.RenderComponent;
  * shows the 'ground' in the game. Enabling/disabling this component will show/hide the terrain.
  */
 public class TerrainComponent extends RenderComponent {
-  private static final int TERRAIN_LAYER = 0;
+  private static final int TERRAIN_LAYER = 1;
 
   private final TiledMap tiledMap;
   private final TiledMapRenderer tiledMapRenderer;
