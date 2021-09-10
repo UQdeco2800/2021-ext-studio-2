@@ -10,10 +10,14 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 import com.badlogic.gdx.ScreenAdapter;
 
+import com.deco2800.game.GdxGame;
+import com.deco2800.game.ui.UIComponent;
+
 import com.deco2800.game.components.Component;
 
 
 public class BufferStartCountDown extends ScreenAdapter {
+    private final GdxGame game;
     JFrame window;
     JLabel counterLabel;
     Font font1 = new Font("Arial", Font.PLAIN, 70);
@@ -23,7 +27,9 @@ public class BufferStartCountDown extends ScreenAdapter {
     DecimalFormat dFormat = new DecimalFormat("00");
 
 
-    public BufferStartCountDown() {
+    public BufferStartCountDown(GdxGame game) {
+       // super();
+        this.game = game;
 
         window = new JFrame();
         window.setSize(800,600);
@@ -69,6 +75,11 @@ public class BufferStartCountDown extends ScreenAdapter {
                 }
                 if(minute==0 && second==0) {
                     timer.stop();
+                    window.setVisible(false); //you can't see me!
+                    window.dispose();
+
+
+                    game.setScreen(GdxGame.ScreenType.MAIN_GAME);
 
 
                 }

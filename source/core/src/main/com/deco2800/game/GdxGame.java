@@ -86,7 +86,7 @@ public class GdxGame extends Game {
             case HISTORY_SCORES:
                 return new HistoryScoreScreen(this);
             case BUFFER_START_COUNT_DOWN:
-                return new BufferStartCountDown();
+                return new BufferStartCountDown(this);
             default:
                 return null;
         }
