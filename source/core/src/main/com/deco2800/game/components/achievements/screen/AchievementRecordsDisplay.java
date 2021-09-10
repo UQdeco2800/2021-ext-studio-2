@@ -4,7 +4,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
@@ -93,7 +96,7 @@ public class AchievementRecordsDisplay extends UIComponent {
 
     private void renderGameStory() {
         chapterTable = new Table();
-        List<GameChapters.Chapter> chapters = AchievementRecords.getUnlockedChapters();
+        List<GameChapters.Chapter> chapters = GameChapters.getUnlockedChapters();
         chapters.forEach(chapter -> {
             Image linkImg = new Image(ServiceLocator.getResourceService()
                     .getAsset("images/story/chapterLink.png", Texture.class));
@@ -107,7 +110,7 @@ public class AchievementRecordsDisplay extends UIComponent {
                 }
             });
 
-            if(chapter.unlocked){
+            if (chapter.unlocked) {
                 chapterTable.add(unlockedChapterImg);
             } else {
                 chapterTable.add(lockedChapterImg);
@@ -132,8 +135,8 @@ public class AchievementRecordsDisplay extends UIComponent {
     }
 
 
-    private void renderAchievements(List<BaseAchievementConfig> achievements, float alpha){
-        if(achievements.isEmpty()){
+    private void renderAchievements(List<BaseAchievementConfig> achievements, float alpha) {
+        if (achievements.isEmpty()) {
             return;
         }
 

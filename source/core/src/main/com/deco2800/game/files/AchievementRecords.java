@@ -88,52 +88,28 @@ public class AchievementRecords {
         return bestAchievements;
     }
 
-    public static List<BaseAchievementConfig> getNextUnlockAchievements(){
+    public static List<BaseAchievementConfig> getNextUnlockAchievements() {
         List<BaseAchievementConfig> betterAchievements = new LinkedList<>();
 
         Set<String> nextUnlocks = new LinkedHashSet<>();
 
         getBestRecords().forEach(achievement -> {
-            if(achievement.type.equals("BRONZE")){
+            if (achievement.type.equals("BRONZE")) {
                 betterAchievements.add(getAchievementByNameAndType(achievement.name, "SILVER"));
-            } else if(achievement.type.equals("SILVER")){
+            } else if (achievement.type.equals("SILVER")) {
                 betterAchievements.add(getAchievementByNameAndType(achievement.name, "GOLD"));
             }
             nextUnlocks.add(achievement.name);
         });
 
         AchievementFactory.getAchievements().forEach(achievement -> {
-            if(!nextUnlocks.contains(achievement.name) && achievement.type.equals("BRONZE")){
+            if (!nextUnlocks.contains(achievement.name) && achievement.type.equals("BRONZE")) {
                 betterAchievements.add(achievement);
             }
         });
         return betterAchievements;
     }
 
-    public static List<GameChapters.Chapter> getUnlockedChapters() {
-
-        List<GameChapters.Chapter> chapters = GameChapters.getChapters();
-
-        Set<String> goldAchievements = new LinkedHashSet<>();
-
-        /* The following algorithm to extract the best achievements can be optimized later. */
-        for (Map.Entry<Integer, Record> e : getRecords().records.entrySet()) {
-            Record value = e.getValue();
-            value.achievements.forEach(a -> {
-                if (a.type.equals("GOLD")) {
-                    goldAchievements.add(a.name);
-                }
-            });
-        }
-
-        for (int i = 0; i < goldAchievements.size(); i++) {
-            if (i < chapters.size()) {
-                chapters.get(i).unlocked = true;
-            }
-        }
-
-        return chapters;
-    }
 
     public static Records getRecords() {
         Records records = FileLoader.readClass(Records.class, path, EXTERNAL);
