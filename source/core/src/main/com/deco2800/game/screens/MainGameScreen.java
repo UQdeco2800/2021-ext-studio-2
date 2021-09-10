@@ -133,12 +133,12 @@ public class MainGameScreen extends ScreenAdapter {
       forestGameArea.spawnObstacles();
       // Generate meteoritesw
       forestGameArea.spawnMeteorites(0, 1,2,1,1,2);
-      forestGameArea.spawnRangeObstacles();
+      forestGameArea.spawnFlyingMonkey();
 
     }
 
     if (spownEnemy) {
-      forestGameArea.spawnAttackObstacles(enemyPosition);
+      forestGameArea.spawnFaceWorm(enemyPosition);
       spownEnemy = false;
     }
   }

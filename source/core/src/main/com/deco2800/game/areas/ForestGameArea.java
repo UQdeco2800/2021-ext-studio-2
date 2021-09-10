@@ -300,23 +300,18 @@ public class ForestGameArea extends GameArea {
         logger.info("Min x: {}, Max x: {}; Total randomPoints {}", minPos.x, maxPos.x, randomPoints);
     }
 
-    public void spawnRangeObstacles() {
+    public void spawnFlyingMonkey() {
         int playerX = (int) player.getPosition().x;
         GridPoint2 minPos = new GridPoint2(playerX + 10, 0);
         GridPoint2 maxPos = new GridPoint2(playerX + 40, 0);
         GridPoint2 randomPosTwo = RandomUtils.randomX(11, minPos, maxPos);
-        Entity Range = ObstacleFactory.createRangeObstacle(player);
+        Entity Range = NPCFactory.createFlyingMonkey(player);
         spawnEntityAt(Range, randomPosTwo, true, true);
-//        Entity ghost = NPCFactory.createGhost(player);
-//        if (ObstacleAttackTask.enemy_posion!=null) {
-//            spawnEntityAt(ghost, ObstacleAttackTask.enemy_posion, true, true);
-//            System.out.println(ObstacleAttackTask.enemy_posion);
-////            System.out.println(randomPosTwo);
-//        }
+
     }
 
-    public void spawnAttackObstacles(Vector2 position) {
-        Entity ghost = NPCFactory.createGhost(player);
+    public void spawnFaceWorm(Vector2 position) {
+        Entity ghost = NPCFactory.createFaceWorm(player);
 
         spawnEntityAt(ghost, position, false, false);
 
@@ -399,25 +394,25 @@ public class ForestGameArea extends GameArea {
         return newPlayer;
     }
 
-    private void spawnGhosts() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+//    private void spawnGhosts() {
+//        GridPoint2 minPos = new GridPoint2(0, 0);
+//        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+//
+//        for (int i = 0; i < NUM_GHOSTS; i++) {
+//            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+//            Entity ghost = NPCFactory.createGhost(player);
+//            spawnEntityAt(ghost, randomPos, true, true);
+//        }
+//    }
 
-        for (int i = 0; i < NUM_GHOSTS; i++) {
-            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity ghost = NPCFactory.createGhost(player);
-            spawnEntityAt(ghost, randomPos, true, true);
-        }
-    }
-
-    private void spawnGhostKing() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-        Entity ghostKing = NPCFactory.createGhostKing(player);
-        spawnEntityAt(ghostKing, randomPos, true, true);
-    }
+//    private void spawnGhostKing() {
+//        GridPoint2 minPos = new GridPoint2(0, 0);
+//        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+//
+//        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+//        Entity ghostKing = NPCFactory.createGhostKing(player);
+//        spawnEntityAt(ghostKing, randomPos, true, true);
+//    }
 
     private void playMusic() {
         Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);

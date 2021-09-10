@@ -103,43 +103,43 @@ public class ObstacleFactory {
         return obstacle;
     }
 
-
-    /**
-     * Create range obstacle entity
-     */
-    public static Entity createRangeObstacle(Entity target) {
-
-        Entity obstacle = new Entity();
-
-        AITaskComponent aiComponent =
-                new AITaskComponent()
-                        .addTask(new ObstacleAttackTask(target,10,5f));
-
-        AnimationRenderComponent animator =
-                new AnimationRenderComponent(
-                        ServiceLocator.getResourceService()
-                                .getAsset("images/monkey.atlas", TextureAtlas.class));
-
-        animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
-
-
-        obstacle
-                //.addComponent(new TextureRenderComponent("images/monkey_original.png"))
-                .addComponent(animator)
-                .addComponent(aiComponent);
-
-
-        animator.startAnimation("1m");
-
-
-        //ddddobstacle.getComponent(TextureRenderComponent.class).scaleEntity();
-
-        obstacle.setScale(2.3f, 2.3f);
-
-
-
-        return obstacle;
-    }
+//
+//    /**
+//     * Create range obstacle entity
+//     */
+//    public static Entity createRangeObstacle(Entity target) {
+//
+//        Entity obstacle = new Entity();
+//
+//        AITaskComponent aiComponent =
+//                new AITaskComponent()
+//                        .addTask(new ObstacleAttackTask(target,10,5f));
+//
+//        AnimationRenderComponent animator =
+//                new AnimationRenderComponent(
+//                        ServiceLocator.getResourceService()
+//                                .getAsset("images/monkey.atlas", TextureAtlas.class));
+//
+//        animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
+//
+//
+//        obstacle
+//                //.addComponent(new TextureRenderComponent("images/monkey_original.png"))
+//                .addComponent(animator)
+//                .addComponent(aiComponent);
+//
+//
+//        animator.startAnimation("1m");
+//
+//
+//        //ddddobstacle.getComponent(TextureRenderComponent.class).scaleEntity();
+//
+//        obstacle.setScale(2.3f, 2.3f);
+//
+//
+//
+//        return obstacle;
+//    }
 
 
     /**
