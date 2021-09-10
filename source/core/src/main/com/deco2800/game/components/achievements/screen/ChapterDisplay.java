@@ -19,24 +19,24 @@ public class ChapterDisplay extends UIComponent {
     }
 
     private void openChapter(GameChapters.Chapter chapter) {
+        // Display gui
         Dialog dialog = new Dialog("Game Story", skin);
 
         Label heading = new Label("Chapter " + chapter.id, new Label.LabelStyle(new BitmapFont(), Color.GOLD));
         heading.setFontScale(2);
 
         Label story = new Label(chapter.content, new Label.LabelStyle(new BitmapFont(), Color.BROWN));
-        story.setFontScale(0.7f);
+        story.setFontScale(1);
         story.setWrap(true);
-        Table table = new Table();
+
+        Table table = new Table(skin);
         table.setFillParent(true);
-        table.center().top();
+        table.top().left();
+        table.add(heading);
+        table.row().fillX();
+        table.add(story);
 
-        table.add(heading).center();
-
-        table.row();
-        table.add(story).center();
         dialog.add(table);
-
 
         dialog.show(stage);
     }
