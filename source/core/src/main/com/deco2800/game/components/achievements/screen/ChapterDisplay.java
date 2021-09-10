@@ -30,21 +30,21 @@ public class ChapterDisplay extends UIComponent {
         // Display gui
         dialog = new Dialog("Chapter " + chapter.id, skin);
         dialog.setModal(true);
-        dialog.setMovable(true);
+        dialog.setMovable(false);
         dialog.setResizable(true);
 
         Image background = new Image(new Texture("images/story/chapterDialog.png"));
         background.setScaling(Scaling.fit);
         dialog.setBackground(background.getDrawable());
 
-        dialog.pad(50);
+        dialog.pad(50).padTop(100);
 
         Label story = new Label(chapter.content, new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        story.setFontScale(1.5f);
+        story.setFontScale(1.1f);
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
 
-        dialog.getContentTable().add(story).width(1000).row();
+        dialog.getContentTable().add(story).width(600).row();
         dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
 
         dialog.show(stage);
