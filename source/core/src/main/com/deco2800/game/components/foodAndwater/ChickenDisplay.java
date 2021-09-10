@@ -131,7 +131,7 @@ public class ChickenDisplay extends UIComponent {
         }
     }
 
-    //添加或者删除图片
+    //add a image/remove a image
     public static void addorremoveImage(int value){
         if(value==1){
             if(ChickenImage.size()<4){
