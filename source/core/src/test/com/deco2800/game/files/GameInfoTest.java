@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
@@ -18,18 +17,22 @@ public class GameInfoTest {
 
     /**
      * Change the value of a private static final variable
-     * @param field the private static final variable field
+     *
+     * @param field    the private static final variable field
      * @param newValue the value to replace
-     * @throws Exception arbitrary exceptions to be ignored
      */
-    static void setFinalStatic(Field field, Object newValue) throws Exception {
-        field.setAccessible(true);
+    static void setFinalStatic(Field field, Object newValue) {
+        try {
+            field.setAccessible(true);
 
-        Field modifiersField = Field.class.getDeclaredField("modifiers");
-        modifiersField.setAccessible(true);
-        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+            Field modifiersField = Field.class.getDeclaredField("modifiers");
+            modifiersField.setAccessible(true);
+            modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
 
-        field.set(null, newValue);
+            field.set(null, newValue);
+        } catch (Exception ignored) {
+
+        }
     }
 
 
