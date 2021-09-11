@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.score.ScoringSystemV1;
+import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import java.util.ArrayList;
@@ -138,4 +140,19 @@ public class FoodDisplay extends UIComponent {
             }
         }
     }
+
+
+/*    *//**
+     * test buff effect for the first aid kit increases 1 food image
+     * @param target entity of food
+     *//*
+    public void increaseFood(Entity target) {
+
+        if (target != null) {
+            if (FoodDisplay.ChickenImage.size() < 4) {
+                FoodDisplay.addOrRemoveImage(1);
+            }
+        }
+    }*/
+
 }

@@ -15,13 +15,6 @@ public class TestBuffForItem {
          * @param target entity of which the health needs to be updated
          */
 
-        //add a image when player pick up a Blood Pack
-        if(target!=null){
-            if(FoodDisplay.ChickenImage.size()<4){
-                FoodDisplay.addOrRemoveImage(1);
-            }
-        }
-
         health = target.getComponent(CombatStatsComponent.class).getHealth();
         if(health < 100) {
             target.getComponent(CombatStatsComponent.class).addHealth(10);
