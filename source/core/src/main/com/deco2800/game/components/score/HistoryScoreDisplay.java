@@ -1,14 +1,13 @@
 package com.deco2800.game.components.score;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +16,10 @@ public class HistoryScoreDisplay extends UIComponent {
 
     private static final Logger logger = LoggerFactory.getLogger(HistoryScoreDisplay.class);
     private final GdxGame game;
-    private Table table;
-    //private Table tableForTitle;
-    //private Table tableForButton;
+    private Table scoreDataTable;
+    private Table boardTable;
+    private Table buttonTable;
+    private Image board;
 
     public HistoryScoreDisplay(GdxGame game) {
         this.game = game;
@@ -33,16 +33,7 @@ public class HistoryScoreDisplay extends UIComponent {
 
     private void createHistoryScoreBoard() {
         // Create components on the score board
-        Label historyScoreLabel = new Label("History Scores", skin);
-        historyScoreLabel.setFontScale(2.0f);
-        Label scoreLabel = new Label("Your Scores", skin);
-        scoreLabel.setFontScale(1.0f);
-        Label dateLabel = new Label("Date", skin);
-        dateLabel.setFontScale(1.0f);
         TextButton mainMenuButton = new TextButton("Main Menu", skin);
-
-        //need to figure out how to read a file and display.
-
         mainMenuButton.addListener(
                 new ChangeListener() {
                     @Override
@@ -51,22 +42,35 @@ public class HistoryScoreDisplay extends UIComponent {
                         game.setScreen(GdxGame.ScreenType.MAIN_MENU);
                     }
                 });
+        //prepare all the tables
+        scoreDataTable = new Table();
+        scoreDataTable.top().padTop(2.0f);
+        scoreDataTable.setFillParent(true);
+        boardTable = new Table();
+        boardTable.center();
+        boardTable.setFillParent(true);
+        buttonTable = new Table();
+        buttonTable.bottom().right();
+        buttonTable.padBottom(35f).padRight(52f);
+        buttonTable.setFillParent(true);
 
-        // Position each label and assets.
-        table = new Table();
-        table.add(historyScoreLabel);
+        board = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/historyScoreBoard.png", Texture.class));
 
-        table.add(scoreLabel);
-        table.add(dateLabel);
-
-        table.add(mainMenuButton);
-        table.setFillParent(true);
-        stage.addActor(table);
+        float boardSideLength = 800f;
+        boardTable.add(board).size(boardSideLength);
+        buttonTable.add(mainMenuButton);
+        // add the board to the stage first so that its can be under of score data
+        stage.addActor(boardTable);
+        stage.addActor(scoreDataTable);
+        stage.addActor(buttonTable);
     }
 
     @Override
     public void dispose() {
-        table.clear();
+        scoreDataTable.clear();
+        buttonTable.center();
+        boardTable.clear();
         super.dispose();
     }
 
