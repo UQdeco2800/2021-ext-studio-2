@@ -1,33 +1,33 @@
 monkey.png
-size: 252, 775
+size: 1044, 261
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 1m
   rotate: false
-  xy: 0, 0
-  size: 252, 202
+  xy: 3, 3
+  size: 255, 255
   orig: 255, 255
-  offset: 3, 35
+  offset: 0, 0
   index: -1
 1m
   rotate: false
-  xy: 0, 202
-  size: 251, 193
+  xy: 264, 3
+  size: 255, 255
   orig: 255, 255
-  offset: 0, 27
+  offset: 0, 0
   index: -1
 1m
   rotate: false
-  xy: 0, 395
-  size: 251, 190
+  xy: 525, 3
+  size: 255, 255
   orig: 255, 255
-  offset: 0, 18
+  offset: 0, 0
   index: -1
 1m
   rotate: false
-  xy: 0, 585
-  size: 222, 190
+  xy: 786, 3
+  size: 255, 255
   orig: 255, 255
-  offset: 16, 39
+  offset: 0, 0
   index: -1
