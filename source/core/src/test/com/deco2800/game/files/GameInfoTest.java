@@ -37,7 +37,8 @@ public class GameInfoTest {
     void beforeEach() throws Exception {
         // Changing the JSON file path so that the original game is not affected
         setFinalStatic(GameInfo.class.getDeclaredField("path"),
-                "DECO2800Game" + File.separator + "gameInfoTest.json");
+                "test/files/gameInfoTest.json");
+        setFinalStatic(GameInfo.class.getDeclaredField("location"), FileLoader.Location.LOCAL);
     }
 
 
@@ -52,7 +53,7 @@ public class GameInfoTest {
     @Test
     void returnsZeroGameCountsIfNoPrevious() throws Exception {
         setFinalStatic(GameInfo.class.getDeclaredField("path"),
-                "DECO2800Game" + File.separator + "missing.json");
+                "test/files/missing.json");
         int count = GameInfo.getGameCount();
         assertEquals(count, 0);
     }

@@ -2,8 +2,6 @@ package com.deco2800.game.files;
 
 import java.io.File;
 
-import static com.deco2800.game.files.FileLoader.Location.EXTERNAL;
-
 /**
  * The class is responsible for keeping a tab of the game metadata
  */
@@ -11,6 +9,7 @@ public class GameInfo {
     private static final String ROOT_DIR = "DECO2800Game";
     private static final String GAME_INFO_FILE = "gameInfo.json";
     private static final String path = ROOT_DIR + File.separator + GAME_INFO_FILE;
+    private static final FileLoader.Location location = FileLoader.Location.INTERNAL;
 
     /**
      * Increment the total number of games that have been
@@ -38,7 +37,7 @@ public class GameInfo {
      * @param info the game metadata to persist in local storage
      */
     public static void setGameMetadata(GameMetadata info){
-        FileLoader.writeClass(info, path, FileLoader.Location.EXTERNAL);
+        FileLoader.writeClass(info, path, location);
     }
 
     /**
@@ -46,7 +45,7 @@ public class GameInfo {
      * @return latest metadata stored in local storage
      */
     public static GameMetadata getGameMetadata(){
-        GameMetadata info = FileLoader.readClass(GameMetadata.class, path, EXTERNAL);
+        GameMetadata info = FileLoader.readClass(GameMetadata.class, path, location);
         return info != null ? info : new GameMetadata();
     }
 
