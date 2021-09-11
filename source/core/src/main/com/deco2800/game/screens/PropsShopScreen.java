@@ -20,9 +20,10 @@ public class PropsShopScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private final Renderer renderer;
     private final PropsShopDisplay propsShopDisplay;
+    private static final String[] mainGameTextures = {"images/heart.png","images/Items/props/add_food.png","images/Items/props/add_health.png","images/Items/props/add_water.png","images/Items/props/shield.png"};
 
     public PropsShopScreen(GdxGame game){
-        logger.debug("drawing history score board ui");
+        logger.debug("drawing props shop ui");
         ServiceLocator.registerInputService(new InputService());
         ServiceLocator.registerResourceService(new ResourceService());
         ServiceLocator.registerEntityService(new EntityService());
@@ -30,6 +31,7 @@ public class PropsShopScreen extends ScreenAdapter {
         renderer = RenderFactory.createRenderer();
         renderer.getCamera().getEntity().setPosition(2f, 1f);
         Stage stage = ServiceLocator.getRenderService().getStage();
+        loadAssets();
         Entity ui = new Entity();
         propsShopDisplay = new PropsShopDisplay(game);
         ui.addComponent(propsShopDisplay).addComponent(new InputDecorator(stage, 10));
@@ -48,9 +50,23 @@ public class PropsShopScreen extends ScreenAdapter {
         logger.info("Resized renderer: ({} x {})", width, height);
     }
 
+    private void loadAssets() {
+        logger.debug("Loading assets");
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.loadTextures(mainGameTextures);
+        ServiceLocator.getResourceService().loadAll();
+    }
+
+    private void unloadAssets() {
+        logger.debug("Unloading assets");
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.unloadAssets(mainGameTextures);
+    }
+
     @Override
     public void dispose() {
         renderer.dispose();
+        unloadAssets();
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
         ServiceLocator.clear();
