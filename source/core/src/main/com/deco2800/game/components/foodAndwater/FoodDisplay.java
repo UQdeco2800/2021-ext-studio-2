@@ -154,5 +154,4 @@ public class FoodDisplay extends UIComponent {
             }
         }
     }*/
-
 }
