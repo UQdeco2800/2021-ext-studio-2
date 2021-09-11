@@ -24,7 +24,6 @@ public class WaterDisplay extends UIComponent {
     public WaterDisplay() {
     }
 
-
     @Override
     public void create() {
         super.create();
