@@ -28,7 +28,7 @@ public class PropsShopDisplay extends UIComponent {
 
     public PropsShopDisplay(GdxGame game) {
         this.game = game;
-        this.file = new File("gold.txt");
+        this.file = new File("./core/assets/gold.txt");
     }
 
     @Override

@@ -68,8 +68,8 @@ public class PlayerStatsDisplay extends UIComponent {
         table.padTop(45f).padLeft(5f);
 
         // Gold image
-        float goldSideLength = 30f;
-        goldImage = new Image(ServiceLocator.getResourceService().getAsset("images/heart.png", Texture.class));
+        float goldSideLength = 40f;
+        goldImage = new Image(ServiceLocator.getResourceService().getAsset("images/Items/goldCoin.png", Texture.class));
 
         // Gold text
         entity.getComponent(InventoryComponent.class).setGold(-1);

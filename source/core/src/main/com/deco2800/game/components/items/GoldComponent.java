@@ -12,7 +12,6 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,7 +23,7 @@ public class GoldComponent extends Component {
 
     public GoldComponent(Entity player) {
         this.player = player;
-        file =new File("gold.txt");
+        file =new File("./core/assets/gold.txt");
         try {
         fileWriter = new FileWriter(file.getName());}
         catch (IOException e) {
