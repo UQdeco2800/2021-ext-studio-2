@@ -9,7 +9,7 @@ public class GameInfo {
     private static final String ROOT_DIR = "DECO2800Game";
     private static final String GAME_INFO_FILE = "gameInfo.json";
     private static final String path = ROOT_DIR + File.separator + GAME_INFO_FILE;
-    private static final FileLoader.Location location = FileLoader.Location.INTERNAL;
+    private static final FileLoader.Location location = FileLoader.Location.EXTERNAL;
 
     /**
      * Increment the total number of games that have been

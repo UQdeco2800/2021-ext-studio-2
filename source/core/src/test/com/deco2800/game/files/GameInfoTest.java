@@ -2,10 +2,12 @@ package com.deco2800.game.files;
 
 
 import com.deco2800.game.extensions.GameExtension;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
@@ -59,5 +61,15 @@ public class GameInfoTest {
                 "test/files/missing.json");
         int count = GameInfo.getGameCount();
         assertEquals(count, 0);
+    }
+
+    @AfterEach
+    void afterEach(){
+        private static final String ROOT_DIR = "DECO2800Game";
+        private static final String GAME_INFO_FILE = "gameInfo.json";
+        private static final String path = ROOT_DIR + File.separator + GAME_INFO_FILE;
+        private static final FileLoader.Location location = FileLoader.Location.INTERNAL;
+
+
     }
 }
