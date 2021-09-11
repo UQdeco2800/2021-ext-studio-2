@@ -6,9 +6,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Obstacle.ObstacleDisappear;
-import com.deco2800.game.components.npc.GhostAnimationController;
+import com.deco2800.game.components.npc.EnemyAnimationController;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.tasks.ChaseTask;
+import com.deco2800.game.components.tasks.ObstacleAttackTask;
 import com.deco2800.game.components.tasks.WanderTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.BaseEntityConfig;
@@ -22,7 +23,10 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Factory to create non-playable character (NPC) entities with predefined components.
@@ -37,59 +41,60 @@ import com.deco2800.game.services.ServiceLocator;
 public class NPCFactory {
   private static final NPCConfigs configs =
       FileLoader.readClass(NPCConfigs.class, "configs/NPCs.json");
-
+  private static final Logger logger = LoggerFactory.getLogger(NPCConfigs.class);
   /**
-   * Creates a ghost entity.
+   * Creates a Face Worm.
    *
    * @param target entity to chase
    * @return entity
    */
-  public static Entity createGhost(Entity target) {
-    Entity ghost = createBaseNPC(target);
-    BaseEntityConfig config = configs.ghost;
+  public static Entity createFaceWorm(Entity target) {
+    Entity FaceWorm = createBaseNPC(target);
+    BaseEntityConfig config = configs.faceWorm;
 
     AnimationRenderComponent animator =
         new AnimationRenderComponent(
-            ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
-    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
+            ServiceLocator.getResourceService().getAsset("images/Facehugger.atlas", TextureAtlas.class));
+    animator.addAnimation("baolian1", 0.1f, Animation.PlayMode.LOOP);
 
-    ghost
+    FaceWorm
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
         .addComponent(animator)
-        .addComponent(new GhostAnimationController())
-            .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Ghost));
+        .addComponent(new EnemyAnimationController())
+        .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.FaceWorm));
 
-    ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
-
-    return ghost;
+    FaceWorm.setScale(2.4f,2.4f);
+    logger.debug("Create a Face Worm");
+    return FaceWorm;
   }
-
   /**
-   * Creates a ghost king entity.
-   *
-   * @param target entity to chase
-   * @return entity
+   * Create Flying Monkey
    */
-  public static Entity createGhostKing(Entity target) {
-    Entity ghostKing = createBaseNPC(target);
-    GhostKingConfig config = configs.ghostKing;
+  public static Entity createFlyingMonkey(Entity target) {
+
+    Entity Monkey = new Entity();
+
+    AITaskComponent aiComponent =
+            new AITaskComponent()
+                    .addTask(new ObstacleAttackTask(target,10,6f));
 
     AnimationRenderComponent animator =
-        new AnimationRenderComponent(
-            ServiceLocator.getResourceService()
-                .getAsset("images/ghostKing.atlas", TextureAtlas.class));
-    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
+            new AnimationRenderComponent(
+                    ServiceLocator.getResourceService()
+                            .getAsset("images/monkey.atlas", TextureAtlas.class));
 
-    ghostKing
-        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-        .addComponent(animator)
-        .addComponent(new GhostAnimationController());
+    animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
 
-    ghostKing.getComponent(AnimationRenderComponent.class).scaleEntity();
-    return ghostKing;
+    Monkey
+            .addComponent(animator)
+            .addComponent(aiComponent);
+
+    animator.startAnimation("1m");
+    Monkey.setScale(2.3f, 2.3f);
+    logger.debug("Create a Flying Monkey");
+    return Monkey;
   }
+
 
   /**
    * Creates a generic NPC to be used as a base entity by more specific NPC creation methods.

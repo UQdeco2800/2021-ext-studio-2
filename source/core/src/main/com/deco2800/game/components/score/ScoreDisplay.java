@@ -31,7 +31,7 @@ public class ScoreDisplay extends UIComponent {
     public void create() {
         super.create();
         addActors();
-
+        //add achievement score to the score.
         AchievementsHelper.getInstance().getEvents()
                 .addListener(AchievementsHelper.ACHIEVEMENTS_BONUS_POINTS, this::updateScoreByPoints);
         entity.getEvents().addListener("updateScore", this::updatePlayerScoreUI);

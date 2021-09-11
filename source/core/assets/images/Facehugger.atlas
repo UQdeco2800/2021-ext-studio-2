@@ -1,0 +1,33 @@
+Facehugger_1.png
+size: 384,97
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+baolian1
+  rotate: false
+  xy: 0, 0
+  size: 96, 97
+  orig: 96, 97
+  offset: 0, 0
+  index: -1
+baolian1
+  rotate: false
+  xy: 96, 0
+  size: 96, 97
+  orig: 96, 97
+  offset: 0, 0
+  index: -1
+baolian1
+  rotate: false
+  xy: 192, 0
+  size: 96, 97
+  orig: 96, 97
+  offset: 0, 0
+  index: -1
+baolian1
+  rotate: false
+  xy: 288, 0
+  size: 96, 97
+  orig: 96, 97
+  offset: 0, 0
+  index: -1

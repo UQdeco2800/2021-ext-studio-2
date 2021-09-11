@@ -2,6 +2,7 @@ package com.deco2800.game.components.Obstacle;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.Null;
 import com.deco2800.game.components.Component;
@@ -11,6 +12,7 @@ import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.screens.MainGameScreen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,8 +23,8 @@ import java.lang.reflect.Method;
 public class ObstacleDisappear extends Component {
 
     public enum ObstacleType {
-        PlantsObstacle, ThornsObstacle, Meteorite,Ghost;
-    };
+        PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm;
+    }
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleDisappear.class);
     AnimationRenderComponent animator;
@@ -47,8 +49,9 @@ public class ObstacleDisappear extends Component {
             case Meteorite:
                 entity.getEvents().addListener("collisionStart", this::meteoriteDisappear);
                 break;
-            case Ghost:
-                entity.getEvents().addListener("collisionStart",  this::GhostDisappear);
+            case FaceWorm:
+                entity.getEvents().addListener("collisionStart", this::faceWormDisappear);
+                break;
             default:
                 logger.error("No corresponding event.");
         }
@@ -61,10 +64,10 @@ public class ObstacleDisappear extends Component {
      */
     void plantsDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-            logger.info("PlantsDisappearStart was triggered.");
+            logger.debug("PlantsDisappearStart was triggered.");
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacles");
-            animator.getEntity().setDisappear();
+            animator.getEntity().setDisappearAfterAnimation(1f);
         }
     }
 
@@ -73,28 +76,37 @@ public class ObstacleDisappear extends Component {
      * obstacle (let it disappear).
      */
     void thornsDisappear(Fixture me, Fixture other) {
-        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-            logger.info("ThornsDisappearStart was triggered.");
-            animator.getEntity().setRemoveTexture();
-            animator.startAnimation("obstacle2");
-            animator.getEntity().setDisappear();
+        if (hitboxComponent.getFixture() != me) {
+            // Not triggered by hitbox, ignore
+            return;
         }
 
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return;
+        }
+
+        MainGameScreen.setSlowPlayer(5f);
+        logger.debug("ThornsDisappearStart was triggered.");
+        animator.getEntity().setRemoveTexture();
+        animator.startAnimation("obstacle2");
+        animator.getEntity().setDisappearAfterAnimation(1f);
     }
 
     private void meteoriteDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-//            animator.startAnimation("enemy2");
-            entity.setDispose();
+            logger.debug("meteoriteDisappear was triggered.");
+            animator.getEntity().setRemoveTexture();
+            animator.startAnimation("stone1");
+            animator.getEntity().setDisappearAfterAnimation(0.32f);
         }
 
     }
 
-    void GhostDisappear(Fixture me, Fixture other) {
+    void faceWormDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-//            animator.startAnimation("enemy2");
-//            animator.getEntity().setRemoveTexture();
-            animator.getEntity().setDisappear();
+            logger.debug("faceWormDisappear was triggered.");
+            animator.getEntity().setDisappearAfterAnimation(1.5f);
         }
 
     }
