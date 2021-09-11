@@ -1,12 +1,16 @@
 package com.deco2800.game.components.gameover;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.score.ScoringSystemV1;
+import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,10 +41,6 @@ public class GameOverDisplay extends UIComponent {
 
     private void createGameOverTable() {
         // Create components
-        Label gameOverLabel = new Label("Game Over", skin);
-        gameOverLabel.setFontScale(5.0f);
-        gameOverLabel.setColor(Color.PINK);
-
         Label pointsLabel = new Label("Points:", skin);
 
         points = scoringSystem.getScore();
@@ -78,9 +78,22 @@ public class GameOverDisplay extends UIComponent {
                     }
                 });
 
+        Image gameOver =
+                new Image(
+                        ServiceLocator.getResourceService()
+                                .getAsset("images/gameOver.png", Texture.class));
+
         // Position Components on table
+        Stack stack = new Stack();
+        stack.setFillParent(true);
+        stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
+        Image background = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/background.png", Texture.class));
+        background.setScaling(Scaling.stretch);
+        stack.add(background);
+
         Table table = new Table();
-        table.add(gameOverLabel).top().padTop(10f);
+        table.add(gameOver).top().padTop(10f);
         table.row().padTop(40f);
         table.add(pointsLabel).right();
         table.add(pointText).right().padRight(15f);
@@ -89,6 +102,8 @@ public class GameOverDisplay extends UIComponent {
         table.add(mainMenuButton).bottom().padBottom(15f);
         table.add(historyScoreButton).bottom().padBottom(15f);
         table.setFillParent(true);
+
+        stage.addActor(stack);
         stage.addActor(table);
     }
 
