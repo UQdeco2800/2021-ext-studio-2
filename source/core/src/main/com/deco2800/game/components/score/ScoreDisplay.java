@@ -20,7 +20,7 @@ public class ScoreDisplay extends UIComponent {
     Table tableForText;
     Table tableForBoard;
     private Label scoreLabel;
-    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
+//    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
     private Image scoreBoard;
 
     /**
@@ -79,7 +79,7 @@ public class ScoreDisplay extends UIComponent {
     public void update() {
         super.update();
         entity.getEvents().trigger("updateScore",
-                scoringSystem.getScore());
+                ServiceLocator.getScoreService().getScore());
     }
 
     /**
@@ -96,7 +96,7 @@ public class ScoreDisplay extends UIComponent {
      */
     private void updateScoreByPoints(int bonusPoints){
         // Add bonusPoints to the score here
-        scoringSystem.addToScore(bonusPoints);
+        ServiceLocator.getScoreService().addToScore(bonusPoints);
     }
 
     @Override
