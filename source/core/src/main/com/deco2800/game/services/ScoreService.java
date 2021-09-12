@@ -1,5 +1,6 @@
 package com.deco2800.game.services;
 
+import com.deco2800.game.files.UserHistoryScores;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,5 +30,15 @@ public class ScoreService {
     /** give score in seconds */
     private int getBaseScore() {
         return (int) gametime.getTime()/1000;
+    }
+
+    /** save the current score in the score history */
+    public void saveCurrentScoreToHistory() {
+
+    }
+
+    /** retrieve the score history */
+    public UserHistoryScores.HistoryScores getScoreHistory() {
+        return UserHistoryScores.get();
     }
 }
