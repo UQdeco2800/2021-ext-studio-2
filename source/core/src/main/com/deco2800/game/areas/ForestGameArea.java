@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
 import com.deco2800.game.rendering.BackgroundRenderComponent;
@@ -177,6 +178,8 @@ public class ForestGameArea extends GameArea {
         spawnFirstAid();
         playMusic();
         trackAchievements();
+        //DeBuff deBuff = new DeBuff(player);
+        //deBuff.slowSpeed();
     }
 
     private void showBackground() {
