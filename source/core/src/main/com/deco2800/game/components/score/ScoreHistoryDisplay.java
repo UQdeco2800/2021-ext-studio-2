@@ -1,6 +1,5 @@
 package com.deco2800.game.components.score;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -12,9 +11,9 @@ import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HistoryScoreDisplay extends UIComponent {
+public class ScoreHistoryDisplay extends UIComponent {
 
-    private static final Logger logger = LoggerFactory.getLogger(HistoryScoreDisplay.class);
+    private static final Logger logger = LoggerFactory.getLogger(ScoreHistoryDisplay.class);
     private final GdxGame game;
     private Table scoreDataTable;
     private Table boardTable;
@@ -22,17 +21,17 @@ public class HistoryScoreDisplay extends UIComponent {
     private Table bgTable;
     private Image board;
 
-    public HistoryScoreDisplay(GdxGame game) {
+    public ScoreHistoryDisplay(GdxGame game) {
         this.game = game;
     }
 
     @Override
     public void create() {
         super.create();
-        createHistoryScoreBoard();
+        createScoreHistoryBoard();
     }
 
-    private void createHistoryScoreBoard() {
+    private void createScoreHistoryBoard() {
         // Create components on the score board
         TextButton mainMenuButton = new TextButton("Main Menu", skin);
         mainMenuButton.addListener(

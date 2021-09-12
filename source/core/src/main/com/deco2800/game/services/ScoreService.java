@@ -1,6 +1,6 @@
 package com.deco2800.game.services;
 
-import com.deco2800.game.files.UserHistoryScores;
+import com.deco2800.game.files.UserScoreHistory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +38,7 @@ public class ScoreService {
     }
 
     /** retrieve the score history */
-    public UserHistoryScores.HistoryScores getScoreHistory() {
-        return UserHistoryScores.get();
+    public UserScoreHistory.ScoreHistory getScoreHistory() {
+        return UserScoreHistory.get();
     }
 }

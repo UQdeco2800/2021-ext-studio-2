@@ -7,40 +7,40 @@ import java.io.File;
 /**
  * Reading, Writing, and applying history scores in the game.
  */
-public class UserHistoryScores {
+public class UserScoreHistory {
   private static final String ROOT_DIR = "data";
-  private static final String HISTORY_SCORES_FILE = "history_scores.json";
+  private static final String SCORE_HISTORY_FILE = "history_scores.json";
 
   /**
    * Get the stored history scores
    * @return Copy of the current history scores
    */
-  public static HistoryScores get() {
-    String path = ROOT_DIR + File.separator + HISTORY_SCORES_FILE;
-    HistoryScores historyScores = FileLoader.readClass(HistoryScores.class, path, Location.LOCAL);
+  public static ScoreHistory get() {
+    String path = ROOT_DIR + File.separator + SCORE_HISTORY_FILE;
+    ScoreHistory scoreHistory = FileLoader.readClass(ScoreHistory.class, path, Location.LOCAL);
 
     // Use default values if file doesn't exist
-    if (historyScores != null) return historyScores;
+    if (scoreHistory != null) return scoreHistory;
 
     // set the file if it doesn't exist
-    HistoryScores newHistoryScores = new HistoryScores();
-    UserHistoryScores.set(newHistoryScores);
-    return newHistoryScores;
+    ScoreHistory newScoreHistory = new ScoreHistory();
+    UserScoreHistory.set(newScoreHistory);
+    return newScoreHistory;
   }
 
   /**
    * Set the stored history scores
-   * @param historyScores New scores to store
+   * @param scoreHistory New scores to store
    */
-  public static void set(HistoryScores historyScores) {
-    String path = ROOT_DIR + File.separator + HISTORY_SCORES_FILE;
-    FileLoader.writeClass(historyScores, path, Location.LOCAL);
+  public static void set(ScoreHistory scoreHistory) {
+    String path = ROOT_DIR + File.separator + SCORE_HISTORY_FILE;
+    FileLoader.writeClass(scoreHistory, path, Location.LOCAL);
   }
 
   /**
    * Stores history scores, can be serialised/deserialized.
    */
-  public static class HistoryScores {
+  public static class ScoreHistory {
     /**
      * List of Player's scores
      */
@@ -87,7 +87,7 @@ public class UserHistoryScores {
     }
   }
 
-//  private UserHistoryScores() {
+//  private UserScoreHistory() {
 //    throw new IllegalStateException("Instantiating static util class");
 //  }
 }

@@ -3,8 +3,7 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.components.gameover.GameOverDisplay;
-import com.deco2800.game.components.score.HistoryScoreDisplay;
+import com.deco2800.game.components.score.ScoreHistoryDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -21,7 +20,7 @@ public class HistoryScoreScreen extends ScreenAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private final Renderer renderer;
-    private final HistoryScoreDisplay historyScoreDisplay;
+    private final ScoreHistoryDisplay scoreHistoryDisplay;
     private static final String[] historyScoreTextures =
             {"images/historyScoreBoard.png", "images/achievements/achievementBackground.png"};
 
@@ -37,8 +36,8 @@ public class HistoryScoreScreen extends ScreenAdapter {
         loadAssets();
         Stage stage = ServiceLocator.getRenderService().getStage();
         Entity ui = new Entity();
-        historyScoreDisplay = new HistoryScoreDisplay(game);
-        ui.addComponent(historyScoreDisplay).addComponent(new InputDecorator(stage, 10));
+        scoreHistoryDisplay = new ScoreHistoryDisplay(game);
+        ui.addComponent(scoreHistoryDisplay).addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
     }
 
