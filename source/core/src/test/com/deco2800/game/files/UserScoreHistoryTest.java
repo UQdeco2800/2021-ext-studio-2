@@ -8,7 +8,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.deco2800.game.files.UserScoreHistory.ScoreHistory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(GameExtension.class)
@@ -17,6 +16,7 @@ class UserScoreHistoryTest {
 
     @BeforeEach
     void setUp() {
+
     }
 
     @AfterEach
@@ -28,22 +28,7 @@ class UserScoreHistoryTest {
      *
      */
     @Test
-    void shouldReadAndWriteToJSONFile() {
-        int _testInt = 200; boolean _testBool = true;
+    void shouldReadAndWriteScoreHistory() {
 
-        // create a sample class
-        ScoreHistory _Score_history = new ScoreHistory();
-        _Score_history.testInt = _testInt;
-        _Score_history.testBool = _testBool;
-
-        // write that class
-        UserScoreHistory.set(_Score_history);
-
-        // read the class
-        ScoreHistory scoreHistory = UserScoreHistory.get();
-
-        // verify write
-        assertEquals(scoreHistory.testBool, _Score_history.testBool);
-        assertEquals(scoreHistory.testInt, _Score_history.testInt);
     }
 }

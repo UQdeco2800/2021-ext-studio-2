@@ -1,10 +1,8 @@
 package com.deco2800.game.services;
 
-import com.deco2800.game.files.UserScoreHistory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.deco2800.game.files.UserScoreHistory.*;
 
 /** controls the game score */
 public class ScoreService {
@@ -37,10 +35,5 @@ public class ScoreService {
     /** save the current score in the score history */
     public void saveCurrentScoreToHistory() {
 
-    }
-
-    /** retrieve the score history */
-    public ScoreHistory getScoreHistory() {
-        return UserScoreHistory.get();
     }
 }
