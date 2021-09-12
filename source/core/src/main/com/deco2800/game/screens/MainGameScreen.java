@@ -279,5 +279,7 @@ public class MainGameScreen extends ScreenAdapter {
         GameInfo.incrementGameCount();
         /* Store the achievements record and in a JSON file and then reset achievements */
         AchievementRecords.storeGameRecord();
+        /* Store the player score in the score history */
+        ServiceLocator.getScoreService().saveCurrentScoreToHistory();
     }
 }
