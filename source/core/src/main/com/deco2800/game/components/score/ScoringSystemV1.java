@@ -8,7 +8,6 @@ import java.util.TimerTask;
 
 /**This class is written by team 9.
  * This class handles the scoring system*/
-//decide to keep this name otherwise need to change lots of things.
 public class ScoringSystemV1 {
 
     //indicate the gaming time in seconds, minutes and hours.
