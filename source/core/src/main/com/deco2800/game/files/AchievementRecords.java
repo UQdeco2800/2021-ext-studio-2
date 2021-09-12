@@ -87,6 +87,27 @@ public class AchievementRecords {
         return bestAchievements;
     }
 
+    /**
+     * Get the number of gold achievements that the user has unlocked
+     *
+     * @return count of unlocked gold achievements
+     */
+    public static int getGoldAchievementsCount() {
+        Set<String> goldAchievements = new LinkedHashSet<>();
+
+        for (Map.Entry<Integer, Record> e :
+                getRecords().records.entrySet()) {
+            Record value = e.getValue();
+            value.achievements.forEach(a -> {
+                if (a.type.equals("GOLD")) {
+                    goldAchievements.add(a.name);
+                }
+            });
+        }
+
+        return goldAchievements.size();
+    }
+
     public static List<BaseAchievementConfig> getNextUnlockAchievements() {
         List<BaseAchievementConfig> betterAchievements = new LinkedList<>();
 
