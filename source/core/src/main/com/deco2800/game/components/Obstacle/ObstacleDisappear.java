@@ -23,8 +23,10 @@ import java.lang.reflect.Method;
 public class ObstacleDisappear extends Component {
 
     public enum ObstacleType {
-        PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm;
+        PlantsObstacle, ThornsObstacle, Meteorite, Ghost;
     }
+
+    ;
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleDisappear.class);
     AnimationRenderComponent animator;
@@ -49,9 +51,8 @@ public class ObstacleDisappear extends Component {
             case Meteorite:
                 entity.getEvents().addListener("collisionStart", this::meteoriteDisappear);
                 break;
-            case FaceWorm:
-                entity.getEvents().addListener("collisionStart", this::faceWormDisappear);
-                break;
+            case Ghost:
+                entity.getEvents().addListener("collisionStart", this::GhostDisappear);
             default:
                 logger.error("No corresponding event.");
         }
@@ -64,7 +65,7 @@ public class ObstacleDisappear extends Component {
      */
     void plantsDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-            logger.debug("PlantsDisappearStart was triggered.");
+            logger.info("PlantsDisappearStart was triggered.");
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacles");
             animator.getEntity().setDisappearAfterAnimation(1f);
@@ -87,7 +88,7 @@ public class ObstacleDisappear extends Component {
         }
 
         MainGameScreen.setSlowPlayer(5f);
-        logger.debug("ThornsDisappearStart was triggered.");
+        logger.info("ThornsDisappearStart was triggered.");
         animator.getEntity().setRemoveTexture();
         animator.startAnimation("obstacle2");
         animator.getEntity().setDisappearAfterAnimation(1f);
@@ -95,7 +96,6 @@ public class ObstacleDisappear extends Component {
 
     private void meteoriteDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-            logger.debug("meteoriteDisappear was triggered.");
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("stone1");
             animator.getEntity().setDisappearAfterAnimation(0.32f);
@@ -103,9 +103,10 @@ public class ObstacleDisappear extends Component {
 
     }
 
-    void faceWormDisappear(Fixture me, Fixture other) {
+    void GhostDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-            logger.debug("faceWormDisappear was triggered.");
+//            animator.startAnimation("enemy2");
+//            animator.getEntity().setRemoveTexture();
             animator.getEntity().setDisappearAfterAnimation(1.5f);
         }
 

@@ -43,9 +43,11 @@ import org.slf4j.LoggerFactory;
  */
 public class MainGameScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-    private static final String[] mainGameTextures = {"images/heart.png", "images/clock.png", "images/scoreboard.png", "images/background.png"
-    ,"images/Sprint2_Buffs_Debuffs/Poisoning.png","images/Sprint2_Buffs_Debuffs/decrease_health.png","images" +
-            "/Sprint2_Buffs_Debuffs/increase_health.png","images/Sprint2_Buffs_Debuffs/decrease_speed.png"};
+    private static final String[] mainGameTextures = {"images/heart.png", "images/clock.png",
+            "images/scoreboard.png", "images/background.png","images/water1.png","images/food1.png",
+            "images/Sprint2_Buffs_Debuffs/Poisoning.png","images/Sprint2_Buffs_Debuffs/decrease_health.png","images" +
+            "/Sprint2_Buffs_Debuffs/increase_health.png","images/Sprint2_Buffs_Debuffs/decrease_speed.png"
+    };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 
 

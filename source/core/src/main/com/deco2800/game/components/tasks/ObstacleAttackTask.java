@@ -25,11 +25,15 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     private GameArea gameArea;
 
     public static Vector2 enemy_posion;
+    // public static GridPoint2 enemy_posion;
+    // private Entity player;
+
 
     public ObstacleAttackTask(Entity target, int priority, float viewDistance) {
         this.target = target;
         this.priority = priority;
         this.viewDistance = viewDistance;
+//        this.gameArea = ServiceLocator.getGameAreaService();
         physics = ServiceLocator.getPhysicsService().getPhysics();
         debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
