@@ -82,7 +82,7 @@ public class PlayerFactory {
         PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
         player.getComponent(ColliderComponent.class).setDensity(1.5f);
         player.getComponent(TextureRenderComponent.class).scaleEntity();
-        player.getEvents().trigger(("startAnimation"));
+        player.getEvents().trigger(("startMPCAnimation"));
         return player;
     }
 

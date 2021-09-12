@@ -23,8 +23,8 @@ public class PlayerAnimationController extends Component {
         entity.getEvents().addListener("stopAttack", this::animateWalk);
         entity.getEvents().addListener("jump", this::animateJump);
         entity.getEvents().addListener("stopJump", this::animateWalk);
-        entity.getEvents().addListener("startAnimation", this::animateWalk);
-        entity.getEvents().addListener("stopAnimation", this::preAnimationCleanUp);
+        entity.getEvents().addListener("startMPCAnimation", this::animateWalk);
+        entity.getEvents().addListener("stopMPCAnimation", this::preAnimationCleanUp);
     }
 
     /**
