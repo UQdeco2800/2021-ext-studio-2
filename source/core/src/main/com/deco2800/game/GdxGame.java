@@ -24,7 +24,7 @@ public class GdxGame extends Game {
     }
 
     public enum ScreenType {
-        MAIN_MENU, MAIN_GAME, SETTINGS, GAME_OVER, HISTORY_SCORES, BUFFER_START_COUNT_DOWN
+        MAIN_MENU, MAIN_GAME, SETTINGS, GAME_OVER, HISTORY_SCORES, BUFFER_START_COUNT_DOWN_DISPLAY
     }
 
     @Override
@@ -85,8 +85,8 @@ public class GdxGame extends Game {
                 return new GameOverScreen(this);
             case HISTORY_SCORES:
                 return new HistoryScoreScreen(this);
-            case BUFFER_START_COUNT_DOWN:
-                return new BufferStartCountDown(this);
+            case BUFFER_START_COUNT_DOWN_DISPLAY:
+                return new BufferStartCountDownDisplay(game: this);
             default:
                 return null;
         }

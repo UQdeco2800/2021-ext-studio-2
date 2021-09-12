@@ -37,7 +37,7 @@ public class MainMenuActions extends Component {
   private void onStartCountDown() {
     logger.info("Start game");
 
-    game.setScreen(GdxGame.ScreenType.BUFFER_START_COUNT_DOWN);
+    game.setScreen(GdxGame.ScreenType.BUFFER_START_COUNT_DOWN_DISPLAY);
 
   // delay 3s
     //try {
