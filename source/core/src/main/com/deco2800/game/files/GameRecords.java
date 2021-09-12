@@ -64,6 +64,7 @@ public class GameRecords {
 
     /**
      * Returns the list of scores
+     *
      * @return score of that particular game
      */
     public static List<Score> getAllScores() {
@@ -74,16 +75,17 @@ public class GameRecords {
     }
 
     /**
-     * Returns the list of scores (highest score first)
+     * Returns the list of scores (the highest score first)
+     *
      * @return scores by descending order of score value
      */
-    public static List<Score> getHighestScores(){
-        // sort
+    public static List<Score> getHighestScores() {
+        // Sort
         List<Score> list = getAllScores()
                 .stream()
                 .sorted(Comparator.comparingInt(Score::getScore))
                 .collect(Collectors.toList());
-        // reverse for descending
+        // Reverse the list to get a descending order of scores
         Collections.reverse(list);
 
         return list;
@@ -93,48 +95,42 @@ public class GameRecords {
     public static List<BaseAchievementConfig> getBestRecords() {
         Map<String, BaseAchievementConfig> bestAchievementsMap = new LinkedHashMap<>();
 
-        /* The following algorithm to extract the best achievements can be optimized later. */
-
-        for (Map.Entry<Integer, Record> e : getRecords().records.entrySet()) {
-            Record value = e.getValue();
-            value.achievements.forEach(a -> {
-                if (a.type.equals("GOLD")) {
-                    bestAchievementsMap.put(a.name, a);
+        // Map of unlocked gold achievements
+        getRecords().records.values().forEach(record -> {
+            record.achievements.forEach(achievement -> {
+                if (achievement.type.equals("GOLD")) {
+                    bestAchievementsMap.put(achievement.name, achievement);
                 }
             });
-        }
+        });
 
-        for (Map.Entry<Integer, Record> e : getRecords().records.entrySet()) {
-            Record value = e.getValue();
-            value.achievements.forEach(a -> {
-                if (a.type.equals("SILVER")) {
-                    /* Add the achievement if it does not have its superior counterpart (Gold) */
-                    bestAchievementsMap.putIfAbsent(a.name, a);
+        // Add silver achievements with no gold counterparts
+        getRecords().records.values().forEach(record -> {
+            record.achievements.forEach(achievement -> {
+                if (achievement.type.equals("SILVER")) {
+                    bestAchievementsMap.putIfAbsent(achievement.name, achievement);
                 }
             });
-        }
+        });
 
-        for (Map.Entry<Integer, Record> e : getRecords().records.entrySet()) {
-            Record record = e.getValue();
-            record.achievements.forEach(a -> {
-                if (a.type.equals("BRONZE")) {
-                    /* Add the achievement if it does not have its superior counterpart (Silver) */
-                    bestAchievementsMap.putIfAbsent(a.name, a);
+        // And bronze achievements with no superior counterparts
+        getRecords().records.values().forEach(record -> {
+            record.achievements.forEach(achievement -> {
+                if (achievement.type.equals("BRONZE")) {
+                    bestAchievementsMap.putIfAbsent(achievement.name, achievement);
                 }
             });
-        }
+        });
 
-        List<BaseAchievementConfig> bestAchievements = new LinkedList<>();
-
-
-        for (Map.Entry<String, BaseAchievementConfig> entry : bestAchievementsMap.entrySet()) {
-            BaseAchievementConfig achievement = entry.getValue();
-            bestAchievements.add(achievement);
-        }
-
-        return bestAchievements;
+        // Return the list of best achievements
+        return new LinkedList<>(bestAchievementsMap.values());
     }
 
+    /**
+     * Returns a list of achievements that can be unlocked next
+     *
+     * @return list of bronze achievements yet to be unlocked
+     */
     public static List<BaseAchievementConfig> getNextUnlockAchievements() {
         List<BaseAchievementConfig> betterAchievements = new LinkedList<>();
 
@@ -233,10 +229,27 @@ public class GameRecords {
          */
         public String dateTime = LocalDateTime.now().toString();
 
-        public LocalDateTime getDateTime(){
+        /**
+         * Returns local date and time object of when the game ended, i.e,
+         * the time of player's death.
+         * <p>
+         * LocalDateTime objects are easier to work with. Parse the
+         * given dateTime string into a LocalDateTime object.
+         * <p>
+         * Note: This could be mapped to the JSON but the FileLoader
+         * gives SEVERE type errors when reading the file.
+         *
+         * @return LocalDateTime object of the dateTime property
+         */
+        public LocalDateTime getDateTime() {
             return LocalDateTime.parse(this.dateTime);
         }
 
+        /**
+         * In game score
+         *
+         * @return the score of the particular game
+         */
         public Integer getScore() {
             return score;
         }
