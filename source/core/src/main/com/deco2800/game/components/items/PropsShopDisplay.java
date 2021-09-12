@@ -51,7 +51,7 @@ public class PropsShopDisplay extends UIComponent {
         int dummy;
 
         try{
-            this.fileReader = new FileReader(this.file);
+            this.fileReader = new FileReader(this.file.getName());
             resultNumber = fileReader.read(result);
             if (!Character.isDigit(result[0])) {
                 fileReader.close();
