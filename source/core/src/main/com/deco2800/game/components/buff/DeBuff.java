@@ -54,7 +54,6 @@ public class DeBuff{
 
     /**
      * Player's movement will be slow
-     * @throws InterruptedException
      */
     public void slowSpeed()  {
         PlayerStatsDisplay playerComponent = this.player.getComponent(PlayerStatsDisplay.class);
