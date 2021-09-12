@@ -1,6 +1,8 @@
 package com.deco2800.game.components.score;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -47,7 +49,7 @@ public class ScoreDisplay extends UIComponent {
         tableForText = new Table();
         tableForText.bottom().right();
         tableForText.setFillParent(true);
-        tableForText.padBottom(60).padRight(80);
+        tableForText.padBottom(60).padRight(60);
 
         tableForBoard = new Table();
         tableForBoard.bottom().right();
@@ -62,8 +64,8 @@ public class ScoreDisplay extends UIComponent {
         // Score text
         int score = 0;
         CharSequence scoreText = "" + score;
-        scoreLabel = new Label(scoreText, skin, "large");
-
+        scoreLabel = new Label(scoreText, new Label.LabelStyle(new BitmapFont(), Color.GOLD));
+        scoreLabel.setFontScale(2f);
         tableForBoard.add(scoreBoard).size(boardSideLength);
         tableForText.add(scoreLabel);
         stage.addActor(tableForBoard);
