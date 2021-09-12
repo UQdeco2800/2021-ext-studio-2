@@ -16,7 +16,7 @@ import com.deco2800.game.components.score.TimerDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.files.AchievementRecords;
+import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.files.GameInfo;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.input.InputDecorator;
@@ -280,6 +280,6 @@ public class MainGameScreen extends ScreenAdapter {
          * NOTE: Perform all subsequent tasks after this has been called */
         GameInfo.incrementGameCount();
         /* Store the achievements record and in a JSON file and then reset achievements */
-        AchievementRecords.storeGameRecord();
+        GameRecords.storeGameRecord();
     }
 }

@@ -15,9 +15,9 @@ public class GameChapters {
         Set<String> goldAchievements = new LinkedHashSet<>();
 
         /* Extracting gold achievements unlocked by the player */
-        for (Map.Entry<Integer, AchievementRecords.Record> e :
-                AchievementRecords.getRecords().records.entrySet()) {
-            AchievementRecords.Record value = e.getValue();
+        for (Map.Entry<Integer, GameRecords.Record> e :
+                GameRecords.getRecords().records.entrySet()) {
+            GameRecords.Record value = e.getValue();
             value.achievements.forEach(a -> {
                 if (a.type.equals("GOLD")) {
                     goldAchievements.add(a.name);

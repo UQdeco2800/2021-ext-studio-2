@@ -6,13 +6,15 @@ import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.factories.AchievementFactory;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.deco2800.game.files.FileLoader.Location.EXTERNAL;
 
-public class AchievementRecords {
+public class GameRecords {
     private static final String ROOT_DIR = "DECO2800Game";
-    private static final String RECORDS_FILE = "achievements.json";
+    private static final String RECORDS_FILE = "gameRecords.json";
     private static final String path = ROOT_DIR + File.separator + RECORDS_FILE;
 
     /**
@@ -22,15 +24,24 @@ public class AchievementRecords {
     public static void storeGameRecord() {
         Record record = new Record();
 
-        record.game = GameInfo.getGameCount();
+        // Storing game count
+        int gameCount = GameInfo.getGameCount();
+        record.game = gameCount;
+
+        // Storing achievements
         record.achievements = AchievementsStatsComponent.getUnlockedAchievements();
 
+        // Fetching the score
         ScoringSystemV1 scoringSystemV1 = new ScoringSystemV1();
-        record.score = scoringSystemV1.getScore();
 
+        record.scoreData.score = scoringSystemV1.getScore();
+        record.scoreData.game = gameCount;
+
+        // Add the record
         Records records = getRecords();
         records.add(record);
 
+        // Write updated records list JSON
         setRecords(records);
     }
 
@@ -41,6 +52,36 @@ public class AchievementRecords {
     public static List<BaseAchievementConfig> getAchievementsByGame(int game) {
         return getRecords().findByGame(game).achievements;
     }
+
+    /**
+     * @param game the game number (nth game played)
+     * @return score of that particular game
+     */
+    public static Score getScoreByGame(int game) {
+        return getRecords().findByGame(game).scoreData;
+    }
+
+
+    /**
+     * Returns the list of scores
+     * @return score of that particular game
+     */
+    public static List<Score> getAllScores() {
+        return getRecords().records
+                .values().stream()
+                .map(record -> record.scoreData)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns the list of scores (highest score first)
+     * @return scores by descending order of score value
+     */
+    public static List<Score> getHighestScores(){
+        return getAllScores().stream().sorted((o1, o2) -> Math.max(o1.score, o2.score))
+                .collect(Collectors.toList());
+    }
+
 
     public static List<BaseAchievementConfig> getBestRecords() {
         Map<String, BaseAchievementConfig> bestAchievementsMap = new LinkedHashMap<>();
@@ -166,8 +207,23 @@ public class AchievementRecords {
          */
         public List<BaseAchievementConfig> achievements = new LinkedList<>();
         /**
-         * Score of that particular game
+         * Score details of that particular game
          */
+        public Score scoreData = new Score();
+    }
+
+    public static class Score {
+        /**
+         * Score of that particular game
+         **/
         public int score = 0;
+        /**
+         * The game number, for ease of access
+         */
+        public int game = 0;
+        /**
+         * Time when the game ended, i.e, the player died.
+         */
+        public LocalDateTime time = LocalDateTime.now();
     }
 }
