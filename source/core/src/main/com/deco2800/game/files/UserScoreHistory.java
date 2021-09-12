@@ -9,7 +9,7 @@ import java.io.File;
  */
 public class UserScoreHistory {
   private static final String ROOT_DIR = "data";
-  private static final String SCORE_HISTORY_FILE = "history_scores.json";
+  private static final String SCORE_HISTORY_FILE = "score_history.json";
 
   /**
    * Get the stored history scores

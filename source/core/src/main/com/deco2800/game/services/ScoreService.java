@@ -4,6 +4,8 @@ import com.deco2800.game.files.UserScoreHistory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.deco2800.game.files.UserScoreHistory.*;
+
 /** controls the game score */
 public class ScoreService {
     private static Logger logger = LoggerFactory.getLogger(ScoreService.class);
@@ -38,7 +40,7 @@ public class ScoreService {
     }
 
     /** retrieve the score history */
-    public UserScoreHistory.ScoreHistory getScoreHistory() {
+    public ScoreHistory getScoreHistory() {
         return UserScoreHistory.get();
     }
 }
