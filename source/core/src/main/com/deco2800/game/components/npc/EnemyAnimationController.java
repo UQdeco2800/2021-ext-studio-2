@@ -4,7 +4,7 @@ import com.deco2800.game.components.Component;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 
 /**
- * This class listens to events relevant to a ghost entity's state and plays the animation when one
+ * This class listens to events relevant to a enemy entity's state and plays the animation when one
  * of the events is triggered.
  */
 public class EnemyAnimationController extends Component {
@@ -14,13 +14,8 @@ public class EnemyAnimationController extends Component {
   public void create() {
     super.create();
     animator = this.entity.getComponent(AnimationRenderComponent.class);
-//    entity.getEvents().addListener("wanderStart", this::animateWander);
     entity.getEvents().addListener("chaseStart", this::animateChase);
   }
-
-//  void animateWander() {
-//    animator.startAnimation("float");
-//  }
 
   void animateChase() {
     animator.startAnimation("baolian1");
