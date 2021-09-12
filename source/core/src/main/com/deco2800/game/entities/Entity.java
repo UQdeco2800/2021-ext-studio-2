@@ -78,7 +78,7 @@ public class Entity {
     public void setDisappearAfterAnimation(float animationTime) {
         this.disappear = true;
         this.animationTime = animationTime;
-        logger.debug("Setting disappear={} on entity {}", removeTexture, this);
+        logger.info("Setting disappear={} on entity {}", removeTexture, this);
     }
 
     /**
@@ -86,7 +86,7 @@ public class Entity {
      */
     public void setRemoveTexture() {
         this.removeTexture = true;
-        logger.debug("Setting removeTexture={} on entity {}", removeTexture, this);
+        logger.info("Setting removeTexture={} on entity {}", removeTexture, this);
     }
 
     /**
@@ -94,7 +94,7 @@ public class Entity {
      */
     public void setDispose(){
         this.dispose = true;
-        logger.debug("Setting dispose={} on entity {}", dispose, this);
+        logger.info("Setting dispose={} on entity {}", dispose, this);
     }
 
     /**
@@ -256,21 +256,17 @@ public class Entity {
      * same animation become black boxes. Therefore, this method is currently used to make obstacles disappear.
      */
     public void removeAfterAnimation() {
-        String loggerInfo = "";
         if (this.getComponent(AnimationRenderComponent.class).getAnimationPlayTime() > animationTime) {
             for (Component component : createdComponents) {
                 if (component.getClass().equals(AnimationRenderComponent.class)) {
-                    loggerInfo += "\t"+component.getClass().getSimpleName() + " stopped on entity " + this +"\n";
+                    logger.info("{} stopped on entity {}", component.getClass().getSimpleName(), this);
                     ((AnimationRenderComponent) component).stopAnimation();
                 } else {
-                    loggerInfo += "\t"+component.getClass().getSimpleName() + " disposed on entity " + this +"\n";
+                    logger.info("{} disposed on entity {}", component.getClass().getSimpleName(), this);
                     component.dispose();
                 }
             }
             ServiceLocator.getEntityService().unregister(this);
-        }
-        if (loggerInfo.strip() != "") {
-            logger.debug(loggerInfo.strip());
         }
     }
 
@@ -322,9 +318,10 @@ public class Entity {
         for (Component component : createdComponents) {
             // When texture and animation are given an entity at the same time, the texture needs to disappear when the
             // animation is played to avoid the conflict between the texture and the animation.
+//            System.out.print("removeTexture "+removeTexture+ ", on Entity: "+this+"\n");
             if (removeTexture) {
                 if (component.getClass().equals(TextureRenderComponent.class)) {
-                    logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
+                    logger.info("Remove {} on entity{}", component.getClass().getSimpleName(), this);
                     component.dispose();
                 }
             }

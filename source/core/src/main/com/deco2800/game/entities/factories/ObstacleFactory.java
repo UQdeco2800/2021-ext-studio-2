@@ -37,9 +37,7 @@ public class ObstacleFactory {
 
     public enum MeteoriteType {
         SmallMeteorite, MiddleMeteorite, BigMeteorite;
-    }
-
-    ;
+    };
 
     /**
      * Creates a Plants Obstacle.
@@ -68,7 +66,7 @@ public class ObstacleFactory {
         obstacle.setScale(2, 3);
         PhysicsUtils.setScaledCollider(obstacle, 1f, 0.7f);
 
-        logger.debug("Create a Plants Obstacle");
+        logger.info("Create a Plants Obstacle");
 
         return obstacle;
     }
@@ -100,10 +98,48 @@ public class ObstacleFactory {
         PhysicsUtils.setScaledCollider(obstacle, 0.2f, 0.3f);
         obstacle.setScale(2, 2);
 
-        logger.debug("Create a Thorns Obstacle");
+        logger.info("Create a Thorns Obstacle");
 
         return obstacle;
     }
+
+//
+//    /**
+//     * Create range obstacle entity
+//     */
+//    public static Entity createRangeObstacle(Entity target) {
+//
+//        Entity obstacle = new Entity();
+//
+//        AITaskComponent aiComponent =
+//                new AITaskComponent()
+//                        .addTask(new ObstacleAttackTask(target,10,5f));
+//
+//        AnimationRenderComponent animator =
+//                new AnimationRenderComponent(
+//                        ServiceLocator.getResourceService()
+//                                .getAsset("images/monkey.atlas", TextureAtlas.class));
+//
+//        animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
+//
+//
+//        obstacle
+//                //.addComponent(new TextureRenderComponent("images/monkey_original.png"))
+//                .addComponent(animator)
+//                .addComponent(aiComponent);
+//
+//
+//        animator.startAnimation("1m");
+//
+//
+//        //ddddobstacle.getComponent(TextureRenderComponent.class).scaleEntity();
+//
+//        obstacle.setScale(2.3f, 2.3f);
+//
+//
+//
+//        return obstacle;
+//    }
 
 
     /**
@@ -131,7 +167,6 @@ public class ObstacleFactory {
      */
     public static Entity createMeteorite(Entity target, float size, MeteoriteType meteoriteType) {
         BaseEntityConfig config = null;
-
         switch (meteoriteType) {
             case BigMeteorite:
                 config = configs.bigMeteorite;
@@ -144,8 +179,7 @@ public class ObstacleFactory {
                 break;
             default:
                 logger.error("Don't have this meteorite type");
-        }
-        ;
+        };
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -167,10 +201,13 @@ public class ObstacleFactory {
         meteorite.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(meteorite, 1f, 1f);
         meteorite.setScale(size, size);
-        logger.debug("Create a Meteorite");
+        logger.info("Create a Meteorite");
 
         return meteorite;
     }
+
+
+
 
 
     /**
@@ -199,7 +236,6 @@ public class ObstacleFactory {
         rock.addComponent(new TextureRenderComponent("images/rock.jpg"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
-        // Comment out by team 8, you can restore them at will
 //                .addComponent(new CombatStatsComponent(2000, 10))
 //                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
 //                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
@@ -224,7 +260,6 @@ public class ObstacleFactory {
         wood.addComponent(new TextureRenderComponent("images/wood.jpg"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
-        // Comment out by team 8, you can restore them at will
 //                .addComponent(new CombatStatsComponent(2000, 10))
 //                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
 //                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))

@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.achievements.AchievementsHelper;
+import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
@@ -18,9 +19,15 @@ public class PlayerStatsDisplay extends UIComponent {
     Table table;
     Table goldTable;
     private Image heartImage;
+    private Image poisoningImage;
+    private Image decreaseSpeedImage;
+    private Image decreaseHealthImage;
+    private Image increaseHealthImage;
     private Label healthLabel;
     private Image goldImage;
     private Label goldLabel;
+    private float buffSideLength = 80f;
+
     // import here for implementing the clock
     ScoringSystemV1 clock = new ScoringSystemV1();
 
@@ -32,7 +39,6 @@ public class PlayerStatsDisplay extends UIComponent {
     public void create() {
         super.create();
         addActors();
-
         entity.getEvents().addListener("updateHealth", this::updatePlayerHealthUI);
         entity.getEvents().addListener("updateGold", this::updatePlayerGold);
         clock.startGameClock();
@@ -52,7 +58,14 @@ public class PlayerStatsDisplay extends UIComponent {
         // Heart image
         float heartSideLength = 30f;
         heartImage = new Image(ServiceLocator.getResourceService().getAsset("images/heart.png", Texture.class));
-
+        poisoningImage = new Image(ServiceLocator.getResourceService().getAsset("images/Sprint2_Buffs_Debuffs/Poisoning.png",
+                Texture.class));
+        decreaseSpeedImage = new Image(ServiceLocator.getResourceService().getAsset("images/Sprint2_Buffs_Debuffs" +
+                "/decrease_speed.png", Texture.class));
+        increaseHealthImage = new Image(ServiceLocator.getResourceService().getAsset("images/Sprint2_Buffs_Debuffs/increase_health.png",
+                Texture.class));
+        decreaseHealthImage = new Image(ServiceLocator.getResourceService().getAsset("images/Sprint2_Buffs_Debuffs/decrease_health.png",
+                Texture.class));
         // Health text
         int health = entity.getComponent(CombatStatsComponent.class).getHealth();
         CharSequence healthText = String.format("Health: %d", health);
@@ -80,6 +93,7 @@ public class PlayerStatsDisplay extends UIComponent {
         table.add(goldImage).size(goldSideLength).pad(5);
         table.add(goldLabel);
         stage.addActor(goldTable);
+
     }
 
     @Override
@@ -104,6 +118,41 @@ public class PlayerStatsDisplay extends UIComponent {
         if (health <= 0) {
             ScoringSystemV1.stopTimerTask();
         }
+    }
+
+    public void addPoisoningImage() {
+        table.add(poisoningImage).size(buffSideLength).pad(5);
+        stage.addActor(table);
+    }
+    public void removePoisoningImage() {
+        poisoningImage.remove();
+    }
+
+    public void addDecreaseSpeedImage() {
+        table.add(decreaseSpeedImage).size(buffSideLength).pad(5);
+    }
+    public void removeDecreaseSpeedImage() {
+        decreaseSpeedImage.remove();
+    }
+
+    public void addDecreaseHealthImage() {
+        table.add(decreaseHealthImage).size(buffSideLength).pad(5);
+    }
+    public void removeDecreaseHealthImage() {
+        decreaseHealthImage.remove();
+    }
+    public void addIncreaseHealthImage() {
+        table.add(increaseHealthImage).size(buffSideLength).pad(5);
+    }
+    public void removeIncreaseHealthImage() {
+        increaseHealthImage.remove();
+    }
+
+    public void removeAllBuff(){
+        poisoningImage.remove();
+        decreaseSpeedImage.remove();
+        decreaseHealthImage.remove();
+        increaseHealthImage.remove();
     }
 
     public void updatePlayerGold(int gold) {
