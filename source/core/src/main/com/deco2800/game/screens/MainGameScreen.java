@@ -44,7 +44,9 @@ import org.slf4j.LoggerFactory;
  */
 public class MainGameScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-    private static final String[] mainGameTextures = {"images/heart.png", "images/clock.png", "images/scoreboard.png", "images/background.png"};
+    private static final String[] mainGameTextures =
+            {"images/heart.png", "images/clock.png", "images/clock_animation.png","images/scoreboard.png", "images/background.png"};
+    private static final String[] mainGameTexturesAtlases = {"images/clock.atlas"};
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 
 
@@ -232,6 +234,7 @@ public class MainGameScreen extends ScreenAdapter {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(mainGameTextures);
+        resourceService.loadTextureAtlases(mainGameTexturesAtlases);
         ServiceLocator.getResourceService().loadAll();
     }
 
@@ -239,6 +242,7 @@ public class MainGameScreen extends ScreenAdapter {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(mainGameTextures);
+        resourceService.unloadAssets(mainGameTexturesAtlases);
     }
 
     /**
