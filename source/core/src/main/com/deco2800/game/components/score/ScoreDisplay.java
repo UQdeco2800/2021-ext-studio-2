@@ -64,7 +64,7 @@ public class ScoreDisplay extends UIComponent {
         // Score text
         int score = 0;
         CharSequence scoreText = "" + score;
-        scoreLabel = new Label(scoreText, new Label.LabelStyle(new BitmapFont(), Color.GOLD));
+        scoreLabel = new Label(scoreText, new Label.LabelStyle(new BitmapFont(), Color.VIOLET));
         scoreLabel.setFontScale(2f);
         tableForBoard.add(scoreBoard).size(boardSideLength);
         tableForText.add(scoreLabel);
