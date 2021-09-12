@@ -6,17 +6,27 @@ import org.slf4j.LoggerFactory;
 
 import static com.deco2800.game.files.UserScoreHistory.*;
 
-/** controls the game score */
+/** controls the game score
+ * */
 public class ScoreService {
     private static Logger logger = LoggerFactory.getLogger(ScoreService.class);
     private int bonus;
     private GameTime gametime;
 
+    /**
+     * Constructor of score service
+     * gametime is the basic score calculation parameter.
+     * bonus is other features bonus scores.
+     */
     public ScoreService() {
         gametime = new GameTime();
         bonus = 0;
     }
 
+    /**
+     * Add bonus points to the score
+     * @param bonus bonus points
+     */
     public void addToScore(int bonus) {
         this.bonus += bonus;
     }
