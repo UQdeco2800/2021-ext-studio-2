@@ -5,13 +5,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
-import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.areas.terrain.TerrainFactory;
+import com.deco2800.game.components.foodAndwater.FoodDisplay;
+import com.deco2800.game.components.foodAndwater.WaterDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
-import com.deco2800.game.components.maingame.MainGameDisplay;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.score.ScoreDisplay;
-import com.deco2800.game.components.score.ScoringSystem;
 import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.components.score.TimerDisplay;
 import com.deco2800.game.entities.Entity;
@@ -43,8 +42,10 @@ import org.slf4j.LoggerFactory;
  */
 public class MainGameScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-    private static final String[] mainGameTextures = {"images/heart.png", "images/clock.png", "images/scoreboard.png", "images/background.png"};
+    private static final String[] mainGameTextures = {"images/heart.png", "images/clock.png",
+            "images/scoreboard.png", "images/background.png","images/water1.png","images/food1.png"};
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
+
 
 
     private final GdxGame game;
@@ -259,7 +260,10 @@ public class MainGameScreen extends ScreenAdapter {
                 //display the score and the time -- team 9
                 .addComponent(new ScoreDisplay())
                 .addComponent(new TimerDisplay())
-                .addComponent(new TerminalDisplay());
+                .addComponent(new TerminalDisplay())
+                .addComponent(new FoodDisplay())
+                .addComponent(new WaterDisplay());
+
 
         ServiceLocator.getEntityService().register(ui);
     }
