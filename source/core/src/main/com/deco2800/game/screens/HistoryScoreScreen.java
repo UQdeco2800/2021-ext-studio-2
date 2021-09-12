@@ -22,8 +22,6 @@ public class HistoryScoreScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private final Renderer renderer;
     private final HistoryScoreDisplay historyScoreDisplay;
-    private static final String[] historyScoreTextures =
-            {"images/historyScoreBoard.png", "images/achievements/achievementBackground.png"};
 
 
     public HistoryScoreScreen(GdxGame game) {
@@ -34,7 +32,6 @@ public class HistoryScoreScreen extends ScreenAdapter {
         ServiceLocator.registerRenderService(new RenderService());
         renderer = RenderFactory.createRenderer();
         renderer.getCamera().getEntity().setPosition(2f, 1f);
-        loadAssets();
         Stage stage = ServiceLocator.getRenderService().getStage();
         Entity ui = new Entity();
         historyScoreDisplay = new HistoryScoreDisplay(game);
@@ -54,23 +51,9 @@ public class HistoryScoreScreen extends ScreenAdapter {
         logger.info("Resized renderer: ({} x {})", width, height);
     }
 
-    private void loadAssets() {
-        logger.debug("Loading assets");
-        ResourceService resourceService = ServiceLocator.getResourceService();
-        resourceService.loadTextures(historyScoreTextures);
-        ServiceLocator.getResourceService().loadAll();
-    }
-
-    private void unloadAssets() {
-        logger.debug("Unloading assets");
-        ResourceService resourceService = ServiceLocator.getResourceService();
-        resourceService.unloadAssets(historyScoreTextures);
-    }
-
     @Override
     public void dispose() {
         renderer.dispose();
-        unloadAssets();
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
         ServiceLocator.clear();

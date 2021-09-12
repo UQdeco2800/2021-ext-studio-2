@@ -50,7 +50,6 @@ public class GameOverDisplay extends UIComponent {
 
         TextButton playAgainButton = new TextButton("Click to play \n again", skin);
         TextButton mainMenuButton = new TextButton("Main Menu", skin);
-        TextButton historyScoreButton = new TextButton("History Score", skin);
 
         playAgainButton.addListener(
                 new ChangeListener() {
@@ -69,15 +68,6 @@ public class GameOverDisplay extends UIComponent {
                     }
                 });
 
-        historyScoreButton.addListener(
-                new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("go to history score board button clicked");
-                        game.setScreen(GdxGame.ScreenType.HISTORY_SCORES);
-                    }
-                });
-
         // Position Components on table
         Table table = new Table();
         table.add(gameOverLabel).top().padTop(10f);
@@ -87,7 +77,6 @@ public class GameOverDisplay extends UIComponent {
         table.row().padTop(25f);
         table.add(playAgainButton).bottom().padBottom(15f);
         table.add(mainMenuButton).bottom().padBottom(15f);
-        table.add(historyScoreButton).bottom().padBottom(15f);
         table.setFillParent(true);
         stage.addActor(table);
     }
