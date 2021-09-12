@@ -6,7 +6,7 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.achievements.AchievementsDisplay;
 import com.deco2800.game.components.achievements.AchievementsStatsComponent;
 import com.deco2800.game.components.buff.BuffAnimationController;
-import com.deco2800.game.components.npc.GhostAnimationController;
+//import com.deco2800.game.components.npc.GhostAnimationController;
 import com.deco2800.game.components.player.InventoryComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.player.PlayerAnimationController;
