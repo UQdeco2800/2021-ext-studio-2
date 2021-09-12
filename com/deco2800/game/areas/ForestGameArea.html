@@ -205,16 +205,12 @@ extends <a href="GameArea.html" title="class in com.deco2800.game.areas">GameAre
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnFaceWorm(com.badlogic.gdx.math.Vector2)">spawnFaceWorm</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</code></th>
-<td class="colLast">
-<div class="block">Generate Face Worm at current Flying Monkeys location.</div>
-</td>
+<td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i4">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnFlyingMonkey()">spawnFlyingMonkey</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Generate Flying Monkeys at random locations.</div>
-</td>
+<td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
@@ -223,9 +219,9 @@ int&nbsp;middleNum,
 int&nbsp;smallNum,
 int&nbsp;bigRandomRange,
 int&nbsp;midRandomRange,
-int&nbsp;smallRandomRange)</code></th>
+int&nbsp;smaillRandomRange)</code></th>
 <td class="colLast">
-<div class="block">Generate a certain number of meteorites, called by render() in MainGameScreen.java.</div>
+<div class="block">Generate a certain number of meteorites, called by render() in MainGameScreen.</div>
 </td>
 </tr>
 <tr class="altColor" id="i6">
@@ -362,7 +358,7 @@ int&nbsp;smallRandomRange)</code></th>
 <div class="block">Obstacles are randomly generated according to the position of the character. The first time it
  is called, NUM_OBSTACLES obstacles are generated in the range of (0-30) units after the
  player's position. For each subsequent call, the position of generating obstacles is twenty
- units behind the player, and the generating range is 20 units. Called by render() in MainGameScreen.java.
+ units behind the player, and the generating range is 20 units.
  <p>
  For example, the first call to the player x position is 0, and the x range for generating
  obstacles is 0-30.  The second call to the player's x position is 10, and the x range for
@@ -373,18 +369,12 @@ int&nbsp;smallRandomRange)</code></th>
 <section class="detail">
 <h3><a id="spawnFlyingMonkey()">spawnFlyingMonkey</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnFlyingMonkey</span>()</div>
-<div class="block">Generate Flying Monkeys at random locations. Called by render() in MainGameScreen.java</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="spawnFaceWorm(com.badlogic.gdx.math.Vector2)">spawnFaceWorm</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnFaceWorm</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</span></div>
-<div class="block">Generate Face Worm at current Flying Monkeys location. Called by render() in MainGameScreen.java</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>position</code> - the location of flying monkeys</dd>
-</dl>
 </section>
 </li>
 <li class="blockList">
@@ -395,8 +385,8 @@ int&nbsp;middleNum,
 int&nbsp;smallNum,
 int&nbsp;bigRandomRange,
 int&nbsp;midRandomRange,
-int&nbsp;smallRandomRange)</span></div>
-<div class="block">Generate a certain number of meteorites, called by render() in MainGameScreen.java. The final number of meteorites
+int&nbsp;smaillRandomRange)</span></div>
+<div class="block">Generate a certain number of meteorites, called by render() in MainGameScreen. The final number of meteorites
  is the sum of all parameters.
  <p>
  Big size meteorites: 1.5 - 2 times of the multiples of meteorites texture,
@@ -404,7 +394,7 @@ int&nbsp;smallRandomRange)</span></div>
  Midden size meteorites: 1 - 1.5 times of the multiples of meteorites texture,
  total number is middleNum(+midRandomRange)
  Small size meteorites: 0.5 + randomSize: 0.5 - 1 times of the multiples of meteorites texture,
- total number is smallNum(+smallRandomRange)
+ total number is smallNum(+smaillRandomRange)
  <p>
  e.g. 1(+2) means that the number of generations is at least 1, and the final possible range is 1-3.</div>
 <dl>
@@ -414,7 +404,7 @@ int&nbsp;smallRandomRange)</span></div>
 <dd><code>smallNum</code> - At least the number of small meteorites generated.</dd>
 <dd><code>bigRandomRange</code> - The number of large meteorites that may be randomly generated.</dd>
 <dd><code>midRandomRange</code> - The number of middle meteorites that may be randomly generated.</dd>
-<dd><code>smallRandomRange</code> - The number of small meteorites that may be randomly generated.</dd>
+<dd><code>smaillRandomRange</code> - The number of small meteorites that may be randomly generated.</dd>
 </dl>
 </section>
 </li>
