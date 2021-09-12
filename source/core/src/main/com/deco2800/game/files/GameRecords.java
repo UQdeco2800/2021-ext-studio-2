@@ -78,8 +78,15 @@ public class GameRecords {
      * @return scores by descending order of score value
      */
     public static List<Score> getHighestScores(){
-        return getAllScores().stream().sorted((o1, o2) -> Math.max(o1.score, o2.score))
+        // sort
+        List<Score> list = getAllScores()
+                .stream()
+                .sorted(Comparator.comparingInt(Score::getScore))
                 .collect(Collectors.toList());
+        // reverse for descending
+        Collections.reverse(list);
+
+        return list;
     }
 
 
@@ -224,6 +231,14 @@ public class GameRecords {
         /**
          * Time when the game ended, i.e, the player died.
          */
-        public LocalDateTime time = LocalDateTime.now();
+        public String dateTime = LocalDateTime.now().toString();
+
+        public LocalDateTime getDateTime(){
+            return LocalDateTime.parse(this.dateTime);
+        }
+
+        public Integer getScore() {
+            return score;
+        }
     }
 }
