@@ -17,12 +17,15 @@ import com.deco2800.game.ui.UIComponent;
  */
 public class PlayerStatsDisplay extends UIComponent {
     Table table;
+    Table goldTable;
     private Image heartImage;
     private Image poisoningImage;
     private Image decreaseSpeedImage;
     private Image decreaseHealthImage;
     private Image increaseHealthImage;
     private Label healthLabel;
+    private Image goldImage;
+    private Label goldLabel;
     private float buffSideLength = 80f;
 
     // import here for implementing the clock
@@ -37,6 +40,7 @@ public class PlayerStatsDisplay extends UIComponent {
         super.create();
         addActors();
         entity.getEvents().addListener("updateHealth", this::updatePlayerHealthUI);
+        entity.getEvents().addListener("updateGold", this::updatePlayerGold);
         clock.startGameClock();
     }
 
@@ -70,6 +74,25 @@ public class PlayerStatsDisplay extends UIComponent {
         table.add(heartImage).size(heartSideLength).pad(5);
         table.add(healthLabel);
         stage.addActor(table);
+
+        goldTable = new Table();
+        goldTable.top().right();
+        table.setFillParent(true);
+        table.padTop(45f).padLeft(5f);
+
+        // Gold image
+        float goldSideLength = 40f;
+        goldImage = new Image(ServiceLocator.getResourceService().getAsset("images/Items/goldCoin.png", Texture.class));
+
+        // Gold text
+        entity.getComponent(InventoryComponent.class).setGold(-1);
+        int gold = entity.getComponent(InventoryComponent.class).getGold();
+        CharSequence goldText = String.format("Gold: %d", gold);
+        goldLabel = new Label(goldText, skin, "large");
+
+        table.add(goldImage).size(goldSideLength).pad(5);
+        table.add(goldLabel);
+        stage.addActor(goldTable);
 
     }
 
@@ -130,6 +153,11 @@ public class PlayerStatsDisplay extends UIComponent {
         decreaseSpeedImage.remove();
         decreaseHealthImage.remove();
         increaseHealthImage.remove();
+    }
+
+    public void updatePlayerGold(int gold) {
+        CharSequence text = String.format("Gold: %d", gold);
+        goldLabel.setText(text);
     }
 
     @Override
