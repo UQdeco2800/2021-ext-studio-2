@@ -28,6 +28,7 @@ import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
+import com.deco2800.game.services.ScoreService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.terminal.Terminal;
 import com.deco2800.game.ui.terminal.TerminalDisplay;
@@ -70,6 +71,7 @@ public class MainGameScreen extends ScreenAdapter {
         this.game = game;
         logger.debug("Initialising main game screen services");
         ServiceLocator.registerTimeSource(new GameTime());
+        ServiceLocator.registerScoreService(new ScoreService());
 
         PhysicsService physicsService = new PhysicsService();
         ServiceLocator.registerPhysicsService(physicsService);
