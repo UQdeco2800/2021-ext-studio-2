@@ -46,12 +46,10 @@ public class ItemComponent extends Component {
      */
     private void onCollisionStart(Fixture me, Fixture other){
 
-
        if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) // checking if the collision is done with the player
        {
-
                     callback.accept(target);
-
+                    entity.getEvents().trigger(("itemPickUp"));
                     entity.getEvents().trigger("itemPickedUp");
                     AchievementsHelper.getInstance().trackItemPickedUpEvent();
            Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
