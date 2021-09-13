@@ -26,6 +26,12 @@ public class ChapterDisplay extends UIComponent {
         entity.getEvents().addListener("openChapter", this::openChapter);
     }
 
+    /**
+     * Called when an event is received. Opens the dialog and displays the content of
+     * the unlocked chapter. This involves rendering chapter art, chapter paragraphs and
+     * a close button.
+     * @param chapter event payload
+     */
     private void openChapter(GameChapters.Chapter chapter) {
         // Display gui
         dialog = new Dialog("", skin);
@@ -59,6 +65,10 @@ public class ChapterDisplay extends UIComponent {
         dialog.show(stage);
     }
 
+    /**
+     * The close button which triggers a task to close the dialog.
+     * @return closeButton image
+     */
     private ImageButton renderCloseButton() {
         Image crossButtonImg = new Image(new Texture("images/achievements/crossButton.png"));
 

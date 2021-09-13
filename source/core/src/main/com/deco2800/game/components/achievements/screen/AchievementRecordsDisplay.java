@@ -23,6 +23,10 @@ import com.deco2800.game.ui.UIComponent;
 
 import java.util.List;
 
+/**
+ * This class is responsible for displaying the achievement records
+ * and the associated locked and unlocked chapters.
+ */
 public class AchievementRecordsDisplay extends UIComponent {
     private final GdxGame game;
     private final List<BaseAchievementConfig> bestAchievements;
@@ -33,6 +37,13 @@ public class AchievementRecordsDisplay extends UIComponent {
     private Table achievementsTable;
     private int i = 0;
 
+
+    /**
+     * Only the best achievements are displayed. Takes in the list of best
+     * achievements as an argument.
+     * @param game Libgdx game object
+     * @param bestAchievements The list of best achievements
+     */
     public AchievementRecordsDisplay(GdxGame game, List<BaseAchievementConfig> bestAchievements) {
         this.bestAchievements = bestAchievements;
         this.game = game;
@@ -93,11 +104,24 @@ public class AchievementRecordsDisplay extends UIComponent {
         stage.addActor(crossTable);
     }
 
+    /**
+     * Returns an image button to be reused everywhere.
+     * @param path the image path
+     * @return ImageButton to be displayed
+     */
     private ImageButton getImageButton(String path) {
         return new ImageButton(new TextureRegionDrawable(new TextureRegion(
                 new Texture(path))));
     }
 
+    /**
+     * Renders the list of chapters (both locked and unlocked)
+     * Clicking on an unlocked chapter results in the opening of a dialog
+     * which displays the chapter art, some part of the story. A close
+     * button has been added so that the dialog can be dismissed.
+     *
+     * On clicking a chapter, an event is emitted with the chapter's necessary content.
+     */
     private void renderGameStory() {
         chapterTable = new Table();
         List<GameChapters.Chapter> chapters = GameChapters.getUnlockedChapters();
@@ -126,6 +150,9 @@ public class AchievementRecordsDisplay extends UIComponent {
         });
     }
 
+    /**
+     * UI state when there are no achievements
+     */
     private void renderNoAchievements() {
         Label message = new Label("Play a game to unlock achievements!",
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -133,13 +160,19 @@ public class AchievementRecordsDisplay extends UIComponent {
         table.row();
     }
 
+    /**
+     * Renders the list of best achievements (the ones with full opacity)
+     */
     private void renderBestAchievements() {
-
         renderAchievements(GameRecords.getBestRecords(), 1);
-
     }
 
 
+    /**
+     * Utility function to render the given list of achievements
+     * @param achievements list of achievements
+     * @param alpha the opacity of each image (low for the ones which are locked)
+     */
     private void renderAchievements(List<BaseAchievementConfig> achievements, float alpha) {
         if (achievements.isEmpty()) {
             return;
