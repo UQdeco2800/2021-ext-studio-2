@@ -2,6 +2,7 @@ package com.deco2800.game.components.player;
 
 import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.services.ServiceLocator;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,6 +45,8 @@ public class Bag implements BagInterface {
         entities.add(e);
         //when pick up one item, score will increase by 10 points.
         scoringSystem.addToScore(10);
+        //using ScoreService
+        ServiceLocator.getScoreService().addToScore(10);
     }
     public void remove(Entity e) {
         entities.remove(e);

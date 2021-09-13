@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.GdxGame.ScreenType;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
-import com.deco2800.game.files.AchievementRecords;
+import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.files.GameChapters;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
@@ -77,7 +77,7 @@ public class AchievementRecordsDisplay extends UIComponent {
         } else {
             renderBestAchievements();
         }
-        renderAchievements(AchievementRecords.getNextUnlockAchievements(), 0.55f);
+        renderAchievements(GameRecords.getNextUnlockAchievements(), 0.55f);
         table.add(achievementsTable);
         table.row();
         label = new Label("Game Story", skin);
@@ -132,7 +132,7 @@ public class AchievementRecordsDisplay extends UIComponent {
 
     private void renderBestAchievements() {
 
-        renderAchievements(AchievementRecords.getBestRecords(), 1);
+        renderAchievements(GameRecords.getBestRecords(), 1);
 
     }
 
