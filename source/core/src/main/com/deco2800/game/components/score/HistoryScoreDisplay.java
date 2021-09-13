@@ -62,7 +62,7 @@ public class HistoryScoreDisplay extends UIComponent {
         boardTable.add(board).size(boardSideLength);
         buttonTable.add(mainMenuButton);
         Image bgImage = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/achievements/achievementBackground.png", Texture.class));
+                .getAsset("images/historyScoreBg.png", Texture.class));
         bgTable = new Table();
         bgTable.setFillParent(true);
         bgTable.add(bgImage);
