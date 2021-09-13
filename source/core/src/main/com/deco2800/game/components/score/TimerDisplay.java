@@ -48,7 +48,7 @@ public class TimerDisplay extends UIComponent {
         //Add Clock image
         float clockSideLength = 40f;
         clockImage = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/clock.png", Texture.class));
+                .getAsset("images/clockV2.png", Texture.class));
 
         //Add Clock text
         int minute = 0;
