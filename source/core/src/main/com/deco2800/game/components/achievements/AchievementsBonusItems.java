@@ -7,6 +7,10 @@ import com.deco2800.game.services.ServiceLocator;
 
 import java.util.Random;
 
+/**
+ *  The AchievementsBonusItems class is used to spawn bonus items at the game world
+ *  when there is a achievement unlocked by the player character
+ */
 public class AchievementsBonusItems {
     Entity target;
     Entity bonusItem;
@@ -26,10 +30,19 @@ public class AchievementsBonusItems {
     public Entity getTarget() {
         return this.target;
     }
+
+    /**
+     *  adding a "spawnBonusItem" event for the AchievementsHelper and it could triggered
+     *  when the player character unlocked one achievement
+     */
     public void setBonusItem() {
         AchievementsHelper.getInstance().getEvents().addListener("spawnBonusItem", this::spawnBonusItem);
     }
 
+    /**
+     *  This func is used to spawn bonus items at the game world
+     *  and the sort of bonus items spawned is random
+     */
     public void spawnBonusItem() {
         new Thread(() -> {
             try {

@@ -37,7 +37,7 @@ public class MainMenuDisplay extends UIComponent {
       Image background =
               new Image(
                       ServiceLocator.getResourceService()
-                              .getAsset("images/background/background.png", Texture.class));
+                              .getAsset("images/menu_background/menu_background.png", Texture.class));
 
     TextButton startBtn = new TextButton("Start", skin);
     TextButton loadBtn = new TextButton("Load", skin);

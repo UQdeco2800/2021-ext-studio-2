@@ -19,6 +19,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * A ui component for displaying the props shop.
+ */
 public class PropsShopDisplay extends UIComponent {
     private static final Logger logger = LoggerFactory.getLogger(PropsShopDisplay.class);
     private final GdxGame game;
@@ -42,6 +45,9 @@ public class PropsShopDisplay extends UIComponent {
         createPropsShopBoard(goldGotLastRound);
     }
 
+    /**
+     * Used to get the last round of gold got by the player character
+     */
     private int getGold() {
 
         int resultNumber;

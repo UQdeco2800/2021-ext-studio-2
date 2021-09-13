@@ -21,6 +21,13 @@ public class GoldComponent extends Component {
     File file;
     FileWriter fileWriter;
 
+    /**
+     * Creates a gold component that detects when the player collides with
+     * the entity and when collided the player character will achieve a goldCoin.
+     * If the player character died in the current game round, the amount of
+     * goldCoin it got will be recorded and it could be used at the props shop
+     * @param player  the entity which could pickup golds
+     */
     public GoldComponent(Entity player) {
         this.player = player;
         file =new File("./core/assets/gold.txt");
@@ -35,28 +42,44 @@ public class GoldComponent extends Component {
         entity.getEvents().addListener("collisionStart", this::onCollisionStart);
         entity.getEvents().addListener("recordGold", this::recordGold);
     }
+
     public void update() {
         if (player.getComponent(CombatStatsComponent.class).isDead()) {
             entity.getEvents().trigger("recordGold", player.getComponent(InventoryComponent.class).getGold());
         }
     }
 
+    /**
+     * Checks if the collision is done with the player and then a goldCoin will be added to the character
+     * and triggers "ItemPickedUp" event
+     * @param me the fixture of player character
+     * @param other the fixture of the entity which the component subjects to
+     */
     private void onCollisionStart(Fixture me, Fixture other){
 
         if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) // checking if the collision is done with the player
         {
             entity.getEvents().trigger("itemPickedUp");
             AchievementsHelper.getInstance().trackItemPickedUpEvent();
+            this.player.getComponent(InventoryComponent.class).addGold(1);
             Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
             if (physBody.getFixtureList().contains(other, true)) {
                 physBody.destroyFixture(other);
             }
-            entity.getComponent(TextureRenderComponent.class).dispose();
-            ServiceLocator.getEntityService().unregister(entity);
-            this.player.getComponent(InventoryComponent.class).addGold(1);
+            try {
+                entity.getComponent(TextureRenderComponent.class).dispose();
+                ServiceLocator.getEntityService().unregister(entity);}
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
+    /**
+     * This func is used to store the amount of goldCoin got from the player character
+     * @param  gold the amount of goldCoin got from the player character in the current game round
+     */
     private void recordGold(int gold) {
         try{
             String goldAmountLastRound = Integer.toString(gold);
