@@ -65,10 +65,21 @@ public class DeBuff{
         player.updateSpeed(new Vector2(2,8));
     }
 
+    /**
+     * when player is hunger,player will be slow
+     */
     public void Hunger() {
         if(FoodDisplay.isHunger()){
             slowSpeed();
         }
     }
 
+    /**
+     * when player is thirst ,player will be lose hp
+     */
+    public void Thirsty() {
+        if(WaterDisplay.isThirst()){
+            decreaseHealth();
+        }
+    }
 }

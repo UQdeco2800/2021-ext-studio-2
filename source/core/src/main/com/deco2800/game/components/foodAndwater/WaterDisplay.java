@@ -149,7 +149,7 @@ public class WaterDisplay extends UIComponent {
     /**
      * when player have no water, this function will return true
      */
-    public boolean isThirst(){
+    public static boolean isThirst(){
         return waterImage.size() <= 0;
     }
 
