@@ -162,17 +162,17 @@ public class AchievementStatsComponentTest {
         AchievementsStatsComponent component = generateEntity()
                 .getComponent(AchievementsStatsComponent.class);
 
-        component.setTime(999999);
+        component.setTime(999999999);
         component.setItemCountByVal(0);
         BaseAchievementConfig achievement = genAchievement("Stranger", 10, -1, 0, -1, -1);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
-        component.setTime(999999);
+        component.setTime(999999999);
         component.setItemCountByVal(0);
         achievement = genAchievement("Stranger", 15, -1, 0, -1, -1);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
-        component.setTime(999999);
+        component.setTime(999999999);
         component.setItemCountByVal(0);
         achievement = genAchievement("Stranger", 20, -1, 0, -1, -1);
         assertEquals(method.invoke(component, achievement), true);
@@ -270,7 +270,7 @@ public class AchievementStatsComponentTest {
         AchievementsStatsComponent component = generateEntity()
                 .getComponent(AchievementsStatsComponent.class);
         for (BaseAchievementConfig a : getList()) {
-            component.setScore(99999);
+            component.setScore(999999999);
 
             if (a.name.equals("Master")) {
                 assertEquals(method.invoke(component, a), true);

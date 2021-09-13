@@ -26,18 +26,29 @@ public class ChapterDisplay extends UIComponent {
         entity.getEvents().addListener("openChapter", this::openChapter);
     }
 
+    /**
+     * Called when an event is received. Opens the dialog and displays the content of
+     * the unlocked chapter. This involves rendering chapter art, chapter paragraphs and
+     * a close button.
+     * @param chapter event payload
+     */
     private void openChapter(GameChapters.Chapter chapter) {
         // Display gui
         dialog = new Dialog("", skin);
         dialog.setModal(true);
         dialog.setMovable(false);
         dialog.setResizable(true);
-
+        Image chapterArt;
+        if (chapter.id == 2) {
+            chapterArt = new Image(new Texture("images/story/chapter2art.png"));
+        } else {
+            chapterArt = new Image(new Texture("images/story/chapter1art.png"));
+        }
         Image background = new Image(new Texture("images/story/chapterDialog.png"));
         background.setScaling(Scaling.fit);
         dialog.setBackground(background.getDrawable());
 
-        dialog.pad(50).padTop(100);
+        dialog.pad(50).padTop(120);
 
         Label story = new Label(chapter.content, new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
         story.setFontScale(1.1f);
@@ -47,13 +58,18 @@ public class ChapterDisplay extends UIComponent {
         Label heading = new Label("Chapter " + chapter.id, new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         heading.setFontScale(2f);
         dialog.getContentTable().add(heading).expandX().row();
+        dialog.getContentTable().add(chapterArt).height(122).width(240).row();
         dialog.getContentTable().add(story).width(600).row();
         dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
 
         dialog.show(stage);
     }
 
-    private ImageButton renderCloseButton(){
+    /**
+     * The close button which triggers a task to close the dialog.
+     * @return closeButton image
+     */
+    private ImageButton renderCloseButton() {
         Image crossButtonImg = new Image(new Texture("images/achievements/crossButton.png"));
 
         ImageButton closeButton = new ImageButton(crossButtonImg.getDrawable());

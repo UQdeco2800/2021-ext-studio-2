@@ -178,7 +178,6 @@ public class GameRecords {
                 }
             });
         }
-
         return goldAchievements.size();
     }
 
