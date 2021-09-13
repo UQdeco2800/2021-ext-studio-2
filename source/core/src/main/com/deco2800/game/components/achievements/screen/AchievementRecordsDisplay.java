@@ -1,6 +1,8 @@
 package com.deco2800.game.components.achievements.screen;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -14,8 +16,8 @@ import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.GdxGame.ScreenType;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
-import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.files.GameChapters;
+import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
@@ -65,7 +67,7 @@ public class AchievementRecordsDisplay extends UIComponent {
         table = new Table();
         table.setFillParent(true);
 
-        Label label = new Label("Your Best Achievements", skin);
+        Label label = new Label("Your Best Achievements", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         label.setFontScale(2);
 
         table.center();
@@ -80,7 +82,7 @@ public class AchievementRecordsDisplay extends UIComponent {
         renderAchievements(GameRecords.getNextUnlockAchievements(), 0.55f);
         table.add(achievementsTable);
         table.row();
-        label = new Label("Game Story", skin);
+        label = new Label("Game Story", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         label.setFontScale(2);
         table.add(label);
         renderGameStory();
@@ -125,7 +127,8 @@ public class AchievementRecordsDisplay extends UIComponent {
     }
 
     private void renderNoAchievements() {
-        Label message = new Label("Play a game to unlock achievements!", skin);
+        Label message = new Label("Play a game to unlock achievements!",
+                new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         table.add(message);
         table.row();
     }

@@ -28,6 +28,7 @@ public class AchievementsScreen extends ScreenAdapter {
     private static final String[] achievementTextures = AchievementFactory.getTextures();
     private static final String[] backgroundImages = {"images/achievements/achievementBackground.png", "images/story/chapterDialog.png"};
     private static final String chapterPath = "images/story/chapter";
+    private static final String[] chapterArt = {"images/story/chapter1art.png"};
     private final GdxGame game;
     private final Renderer renderer;
 
@@ -53,6 +54,7 @@ public class AchievementsScreen extends ScreenAdapter {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(achievementTextures);
         resourceService.loadTextures(backgroundImages);
+        resourceService.loadTextures(chapterArt);
         for (int i = 1; i < 6; i++) {
             resourceService.loadTextures(new String[]{chapterPath + i + ".png"});
         }
