@@ -23,8 +23,15 @@ public class PlayerAnimationController extends Component {
         entity.getEvents().addListener("stopAttack", this::stopAnimateAll);
         entity.getEvents().addListener("jump", this::animateJump);
         entity.getEvents().addListener("stopJump", this::stopAnimateAll);
+        entity.getEvents().addListener("pickUpItem", this::itemPickUp);
+        entity.getEvents().addListener("stopPickUpItem", this::stopAnimateAll);
     }
-    
+
+    private void itemPickUp() {
+        preAnimationCleanUp();
+        animator.startAnimation("main_player_pickup");
+    }
+
     private void preAnimationCleanUp() {
         if(texturePresent) {
             animator.getEntity().getComponent(TextureRenderComponent.class).dispose();

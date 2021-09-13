@@ -27,10 +27,8 @@ public class FirstAidFunction extends Component {
     public void create(){
         entity.getEvents().addListener("collisionStart", this::onCollisionStart);
         hitboxComponent = this.entity.getComponent(HitboxComponent.class);
-
-
-
     }
+
     private void onCollisionStart(Fixture me, Fixture other){
         TestBuffForItem incHealth = new TestBuffForItem();
        if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
