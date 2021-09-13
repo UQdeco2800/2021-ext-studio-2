@@ -33,7 +33,7 @@ public class FirstAidFunction extends Component {
         TestBuffForItem incHealth = new TestBuffForItem();
        if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
                     incHealth.increaseHealth(target);
-                    entity.getEvents().trigger("itemPickedUp");
+                    entity.getEvents().trigger("itemPickUp");
 
 
            new Thread(() -> {
