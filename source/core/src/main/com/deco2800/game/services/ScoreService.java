@@ -9,11 +9,18 @@ public class ScoreService {
     private int bonus;
     private GameTime gametime;
 
+    /**
+     * Constructor of ScoreService. Initialise a new gametime
+     */
     public ScoreService() {
         gametime = new GameTime();
         bonus = 0;
     }
 
+    /**
+     * add bonus score to scores
+     * @param bonus the bonus score from other feature
+     */
     public void addToScore(int bonus) {
         this.bonus += bonus;
     }
