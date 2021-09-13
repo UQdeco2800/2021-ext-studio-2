@@ -227,9 +227,11 @@ public class GameRecordsTest {
         assertEquals(expectedScoreOrder.length, highestScores.size());
         assertEquals(expectedScoreOrder.length, GameRecords.getAllScores().size());
 
-        // Nevertheless, a dynamic test to check if its in descending order
-        for (int j = 1; j < highestScores.size(); j++) {
-            assertFalse(highestScores.get(0).getScore() < highestScores.get(1).getScore());
+        if (highestScores.size() >= 2) {
+            // Nevertheless, a dynamic test to check if its in descending order
+            for (int j = 1; j < highestScores.size(); j++) {
+                assertFalse(highestScores.get(0).getScore() < highestScores.get(1).getScore());
+            }
         }
 
     }
