@@ -19,6 +19,7 @@ public class HistoryScoreDisplay extends UIComponent {
     private Table scoreDataTable;
     private Table boardTable;
     private Table buttonTable;
+    private Table bgTable;
     private Image board;
 
     public HistoryScoreDisplay(GdxGame game) {
@@ -60,7 +61,13 @@ public class HistoryScoreDisplay extends UIComponent {
         float boardSideLength = 800f;
         boardTable.add(board).size(boardSideLength);
         buttonTable.add(mainMenuButton);
+        Image bgImage = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/achievements/achievementBackground.png", Texture.class));
+        bgTable = new Table();
+        bgTable.setFillParent(true);
+        bgTable.add(bgImage);
         // add the board to the stage first so that its can be under of score data
+        stage.addActor(bgTable);
         stage.addActor(boardTable);
         stage.addActor(scoreDataTable);
         stage.addActor(buttonTable);
@@ -71,6 +78,7 @@ public class HistoryScoreDisplay extends UIComponent {
         scoreDataTable.clear();
         buttonTable.center();
         boardTable.clear();
+        bgTable.clear();
         super.dispose();
     }
 

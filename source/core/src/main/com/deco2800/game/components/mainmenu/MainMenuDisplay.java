@@ -34,6 +34,11 @@ public class MainMenuDisplay extends UIComponent {
             ServiceLocator.getResourceService()
                 .getAsset("images/box_boy_title.png", Texture.class));
 
+      Image background =
+              new Image(
+                      ServiceLocator.getResourceService()
+                              .getAsset("images/background/background.png", Texture.class));
+
     TextButton startBtn = new TextButton("Start", skin);
     TextButton loadBtn = new TextButton("Load", skin);
     TextButton settingsBtn = new TextButton("Settings", skin);
@@ -95,7 +100,9 @@ public class MainMenuDisplay extends UIComponent {
               entity.getEvents().trigger("achievements");
           }
     });
-
+    Table bgTable = new Table();
+    bgTable.setFillParent(true);
+    bgTable.add(background);
     table.add(title);
     table.row();
     table.add(startBtn).padTop(30f);
@@ -109,6 +116,7 @@ public class MainMenuDisplay extends UIComponent {
     table.add(historyScoreBtn).padTop(15f);
     table.row();
     table.add(achievementsBtn).padTop(15f);
+    stage.addActor(bgTable);
     stage.addActor(table);
   }
 

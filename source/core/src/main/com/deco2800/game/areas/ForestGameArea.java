@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
 import com.deco2800.game.rendering.BackgroundRenderComponent;
@@ -123,7 +124,9 @@ public class ForestGameArea extends GameArea {
             "images/monkey_original.png",
             "images/Facehugger.png",
             "images/stone1.png",
-            "images/mpc/mpcAnimation.png"
+            "images/mpc/mpcAnimation.png",
+            "images/food1.png",
+            "images/water1.png",
 
     };
     private static final String[] forestTextureAtlases = {
@@ -141,6 +144,8 @@ public class ForestGameArea extends GameArea {
             "images/Facehugger.atlas",
             "images/obstacle_Meteorite.atlas",
             "images/mpc/mpcAnimation.atlas",
+            "images/food1.png",
+            "images/water1.png",
     };
     private static final String[] forestSounds = {"sounds/Impact4.ogg"};
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
@@ -177,6 +182,8 @@ public class ForestGameArea extends GameArea {
         spawnFirstAid();
         playMusic();
         trackAchievements();
+        //DeBuff deBuff = new DeBuff(player);
+        //deBuff.slowSpeed();
     }
 
     private void showBackground() {

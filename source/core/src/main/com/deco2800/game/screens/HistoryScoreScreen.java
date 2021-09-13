@@ -22,7 +22,8 @@ public class HistoryScoreScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private final Renderer renderer;
     private final HistoryScoreDisplay historyScoreDisplay;
-    private static final String[] historyScoreTextures = {"images/historyScoreBoard.png"};
+    private static final String[] historyScoreTextures =
+            {"images/historyScoreBoard.png", "images/achievements/achievementBackground.png"};
 
 
     public HistoryScoreScreen(GdxGame game) {
