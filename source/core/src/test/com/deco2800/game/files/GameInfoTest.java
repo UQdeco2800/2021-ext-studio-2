@@ -52,8 +52,10 @@ public class GameInfoTest {
     @Test
     void incrementsGameCountByOne() {
         int count = GameInfo.getGameCount();
+        // increase the game count by 1
         GameInfo.incrementGameCount();
         int newCount = GameInfo.getGameCount();
+        // Check if the game count increased by 1
         assertEquals(newCount, count + 1);
     }
 
