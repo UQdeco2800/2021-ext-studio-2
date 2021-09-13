@@ -1,5 +1,5 @@
 
-MPC_Animation.png
+mpcAnimation.png
 size: 4096, 2048
 format: RGBA8888
 filter: Nearest, Nearest
@@ -25,9 +25,23 @@ main_player_attack
   orig: 542, 542
   offset: 0, 0
   index: 2
+main_player_crouch
+  rotate: false
+  xy: 3262, 1090
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_crouch
+  rotate: false
+  xy: 3261, 547
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
 main_player_front
   rotate: false
-  xy: 1089, 546
+  xy: 1088, 3
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -48,7 +62,7 @@ main_player_jump
   index: 1
 main_player_jump
   rotate: false
-  xy: 1088, 3
+  xy: 1632, 547
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -69,21 +83,21 @@ main_player_pickup
   index: 3
 main_player_pickup
   rotate: false
-  xy: 545, 2
+  xy: 1089, 546
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_pickup
   rotate: false
-  xy: 2175, 547
+  xy: 2718, 547
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 4
 main_player_right
   rotate: false
-  xy: 2718, 547
+  xy: 1631, 3
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -97,7 +111,7 @@ main_player_run
   index: 2
 main_player_run
   rotate: false
-  xy: 1632, 547
+  xy: 2175, 547
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -111,7 +125,7 @@ main_player_walk
   index: 2
 main_player_walk
   rotate: false
-  xy: 3262, 1090
+  xy: 545, 2
   size: 541, 541
   orig: 541, 541
   offset: 0, 0

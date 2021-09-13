@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
@@ -117,6 +118,11 @@ public class ForestGameArea extends GameArea {
             "images/wood.jpg",
             "images/Items/first_aid_kit.png",
             "images/Items/food.png",
+            "images/Items/water.png",
+            "images/Items/magic_potion.png",
+            "images/Items/bandage.png",
+            "images/Items/syringe.png",
+            "images/Items/goldCoin.png",
             "images/obstacle_1_new.png",
             "images/obstacle2_vision2.png",
             "images/stone.png",
@@ -139,7 +145,6 @@ public class ForestGameArea extends GameArea {
             "images" +
                     "/obstacle_1.atlas",
             "images/obstacle_2.atlas",
-            "images/mpcMovement.atlas",
             "images/monkey.atlas",
             "images/Facehugger.atlas",
             "images/obstacle_Meteorite.atlas",
@@ -180,10 +185,10 @@ public class ForestGameArea extends GameArea {
         spawnObstacles();
 
         spawnFirstAid();
+        spawnGold();
         playMusic();
         trackAchievements();
-        //DeBuff deBuff = new DeBuff(player);
-        //deBuff.slowSpeed();
+        setBonusItems(player);
     }
 
     private void showBackground() {
@@ -278,6 +283,9 @@ public class ForestGameArea extends GameArea {
      * For example, the first call to the player x position is 0, and the x range for generating
      * obstacles is 0-30.  The second call to the player's x position is 10, and the x range for
      * generating obstacles is 31-50.
+     * <p>
+     * Note: Temporarily reduce the range of obstacles generated for the first time, new range (25-30) units,
+     * leaving enough space for the item group
      */
     public void spawnObstacles() {
         GridPoint2 minPos;
@@ -294,7 +302,10 @@ public class ForestGameArea extends GameArea {
         logger.debug("player x coordinate: {}", playerX);
 
         if (firstGenerate) {
-            minPos = new GridPoint2(playerX, 0);
+            // Temporarily reduce the range of obstacles generated for the first time, leaving enough space for
+            // the item group
+            // minPos = new GridPoint2(playerX, 0);
+            minPos = new GridPoint2(playerX + 25, 0);
             maxPos = new GridPoint2(playerX + 30, 0);
             firstGenerate = false;
         } else {
@@ -317,8 +328,8 @@ public class ForestGameArea extends GameArea {
             Entity obstacle2 = ObstacleFactory.createThornsObstacle(player);
             spawnEntityAt(obstacle, randomPos, true, false);
             spawnEntityAt(obstacle2, randomPos2, true, true);
-            loggerInfo += "Create Plants Obstacle at "+ randomPos + "\t";
-            loggerInfo += "Create Thorns Obstacle at "+ randomPos2 + "\t";
+            loggerInfo += "Create Plants Obstacle at " + randomPos + "\t";
+            loggerInfo += "Create Thorns Obstacle at " + randomPos2 + "\t";
         }
         logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}", minPos.x, maxPos.x, randomPoints, loggerInfo);
     }
@@ -333,15 +344,18 @@ public class ForestGameArea extends GameArea {
         GridPoint2 randomPosTwo = RandomUtils.randomX(11, minPos, maxPos);
         Entity Range = NPCFactory.createFlyingMonkey(player);
         spawnEntityAt(Range, randomPosTwo, true, true);
+        logger.debug("Spawn a flying monkey on position = {}", randomPosTwo);
     }
 
     /**
      * Generate Face Worm at current Flying Monkeys location. Called by render() in MainGameScreen.java
+     *
      * @param position the location of flying monkeys
      */
     public void spawnFaceWorm(Vector2 position) {
         Entity ghost = NPCFactory.createFaceWorm(player);
         spawnEntityAt(ghost, position, false, false);
+        logger.debug("Spawn a face worm on position = {}", position);
     }
 
 
@@ -358,11 +372,11 @@ public class ForestGameArea extends GameArea {
      * <p>
      * e.g. 1(+2) means that the number of generations is at least 1, and the final possible range is 1-3.
      *
-     * @param bigNum            At least the number of large meteorites generated.
-     * @param middleNum         At least the number of middle meteorites generated.
-     * @param smallNum          At least the number of small meteorites generated.
-     * @param bigRandomRange    The number of large meteorites that may be randomly generated.
-     * @param midRandomRange    The number of middle meteorites that may be randomly generated.
+     * @param bigNum           At least the number of large meteorites generated.
+     * @param middleNum        At least the number of middle meteorites generated.
+     * @param smallNum         At least the number of small meteorites generated.
+     * @param bigRandomRange   The number of large meteorites that may be randomly generated.
+     * @param midRandomRange   The number of middle meteorites that may be randomly generated.
      * @param smallRandomRange The number of small meteorites that may be randomly generated.
      */
     public void spawnMeteorites(int bigNum, int middleNum, int smallNum, int bigRandomRange, int midRandomRange,
@@ -418,11 +432,24 @@ public class ForestGameArea extends GameArea {
         }
     }
 
+    private void spawnGold() {
+        int k = 0;
+        for (int i = 0; i < 20; i++) {
+            GridPoint2 position = new GridPoint2(20 + k++, 40);
+            Entity gold = ItemFactory.createGold(player);
+            spawnEntityAt(gold, position, false, false);
+        }
+    }
 
     private Entity spawnPlayer() {
         Entity newPlayer = PlayerFactory.createPlayer();
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         return newPlayer;
+    }
+
+    private void setBonusItems(Entity player) {
+        AchievementsBonusItems bonusItems = new AchievementsBonusItems(player);
+        bonusItems.setBonusItem();
     }
 
 

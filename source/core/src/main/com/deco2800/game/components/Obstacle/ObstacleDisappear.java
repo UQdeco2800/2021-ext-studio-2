@@ -19,9 +19,14 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 //import com.sun.tools.javac.Main;
 
-
+/**
+ * Used to handle collision events between obstacles and enemies
+ */
 public class ObstacleDisappear extends Component {
 
+    /**
+     * The types of obstacles and enemies are used to determine the type of entity that triggers the event.
+     */
     public enum ObstacleType {
         PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm;
     }
@@ -59,21 +64,29 @@ public class ObstacleDisappear extends Component {
 
 
     /**
-     * When the monitored event is triggered, play the obstacle explosion animation, and disable the
-     * obstacle (let it disappear).
+     * When the monitored event is triggered, play the plants explosion animation, and disable the
+     * plants (let it disappear).
      */
     void plantsDisappear(Fixture me, Fixture other) {
-        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-            logger.debug("PlantsDisappearStart was triggered.");
-            animator.getEntity().setRemoveTexture();
-            animator.startAnimation("obstacles");
-            animator.getEntity().setDisappearAfterAnimation(1f);
+        if (hitboxComponent.getFixture() != me) {
+            // Not triggered by hitbox, ignore
+            return;
         }
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return;
+        }
+
+        logger.debug("PlantsDisappearStart was triggered.");
+        animator.getEntity().setRemoveTexture();
+        animator.startAnimation("obstacles");
+        animator.getEntity().setDisappearAfterAnimation(1f);
+
     }
 
     /**
-     * When the monitored event is triggered, play the obstacle explosion animation, and disable the
-     * obstacle (let it disappear).
+     * When the monitored event is triggered, play the thorns animation, and disable the
+     * thorns (let it disappear) and slow the player.
      */
     void thornsDisappear(Fixture me, Fixture other) {
         if (hitboxComponent.getFixture() != me) {
@@ -93,7 +106,16 @@ public class ObstacleDisappear extends Component {
         animator.getEntity().setDisappearAfterAnimation(1f);
     }
 
+    /**
+     * When the monitored event is triggered, play the meteorite explosion animation, and disable the
+     * meteorite (let it disappear).
+     */
     private void meteoriteDisappear(Fixture me, Fixture other) {
+        if (hitboxComponent.getFixture() != me) {
+            // Not triggered by hitbox, ignore
+            return;
+        }
+
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
             logger.debug("meteoriteDisappear was triggered.");
             animator.getEntity().setRemoveTexture();
@@ -103,6 +125,9 @@ public class ObstacleDisappear extends Component {
 
     }
 
+    /**
+     * When the monitored event is triggered, disable the face Worm (let it disappear).
+     */
     void faceWormDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
             logger.debug("faceWormDisappear was triggered.");

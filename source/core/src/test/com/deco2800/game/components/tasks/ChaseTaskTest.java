@@ -51,7 +51,7 @@ class ChaseTaskTest {
       ServiceLocator.getPhysicsService().getPhysics().update();
     }
     float newDistance = entity.getPosition().dst(target.getPosition());
-    //assertTrue(newDistance < initialDistance);
+    assertTrue(newDistance < initialDistance);
   }
 
   @Test

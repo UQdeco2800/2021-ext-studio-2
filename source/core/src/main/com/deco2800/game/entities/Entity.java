@@ -78,7 +78,7 @@ public class Entity {
     public void setDisappearAfterAnimation(float animationTime) {
         this.disappear = true;
         this.animationTime = animationTime;
-        logger.debug("Setting disappear={} on entity {}", removeTexture, this);
+        logger.debug("Setting disappear={} on entity {}", disappear, this);
     }
 
     /**
@@ -95,6 +95,22 @@ public class Entity {
     public void setDispose(){
         this.dispose = true;
         logger.debug("Setting dispose={} on entity {}", dispose, this);
+    }
+
+    public boolean isDisappear() {
+        return disappear;
+    }
+
+    public boolean isRemoveTexture() {
+        return removeTexture;
+    }
+
+    public boolean isDispose() {
+        return dispose;
+    }
+
+    public float getAnimationTime() {
+        return animationTime;
     }
 
     /**
@@ -269,9 +285,9 @@ public class Entity {
             }
             ServiceLocator.getEntityService().unregister(this);
         }
-        if (loggerInfo.strip() != "") {
-            logger.debug(loggerInfo.strip());
-        }
+       if (loggerInfo.strip() != "") {
+           logger.debug(loggerInfo.strip());
+       }
     }
 
     /**

@@ -7,6 +7,7 @@ import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.services.ServiceLocator;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -19,8 +20,13 @@ public class AchievementsStatsComponent extends Component {
     private int health;
     private long time;
     private int itemCount;
+
+    private boolean bonusItemSign;
+
+
     private int score;
     private int firstAids;
+
 
     public AchievementsStatsComponent() {
         scoringSystemV1 = new ScoringSystemV1();
@@ -32,6 +38,9 @@ public class AchievementsStatsComponent extends Component {
         itemCount = 0;
         health = 100;
         time = -1;
+
+        bonusItemSign = false;
+
         score = 0;
         firstAids = 0;
     }
@@ -54,6 +63,7 @@ public class AchievementsStatsComponent extends Component {
         return achievements
                 .stream().filter(achievement -> achievement.unlocked)
                 .collect(Collectors.toList());
+
     }
 
     /**
@@ -112,7 +122,14 @@ public class AchievementsStatsComponent extends Component {
         long currentTime = ServiceLocator.getTimeSource().getTime();
         setTime(currentTime);
 
+
+        if(bonusItemSign) {
+            AchievementsHelper.getInstance().getEvents().trigger("spawnBonusItem");
+            bonusItemSign = false;
+        }
+
         setScore(scoringSystemV1.getScore());
+
     }
 
     public void handleItemPickup(String itemName) {
@@ -210,6 +227,7 @@ public class AchievementsStatsComponent extends Component {
         if (valid) {
             achievement.unlocked = true;
             entity.getEvents().trigger("updateAchievement", achievement);
+            bonusItemSign = true;
         }
 
         return true;

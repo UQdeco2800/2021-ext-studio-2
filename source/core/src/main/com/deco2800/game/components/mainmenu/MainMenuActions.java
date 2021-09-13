@@ -25,6 +25,7 @@ public class MainMenuActions extends Component {
     entity.getEvents().addListener("settings", this::onSettings);
     entity.getEvents().addListener("gameOver", this::onGameOver);
     //Team History Score board
+    entity.getEvents().addListener("displayPropsShop", this::onDisplayPropsShop);
     entity.getEvents().addListener("displayHistoryScores", this::onDisplayHistoryScores);
     entity.getEvents().addListener("achievements", this::onAchievements);
   }
@@ -67,6 +68,11 @@ public class MainMenuActions extends Component {
   private void onGameOver() {
     logger.info("Launching GameOver screen");
     game.setScreen(GdxGame.ScreenType.GAME_OVER);
+  }
+
+  private void onDisplayPropsShop() {
+    logger.info("Open the propsShop");
+    game.setScreen(GdxGame.ScreenType.PROPS_SHOP);
   }
 
   private void onDisplayHistoryScores() {

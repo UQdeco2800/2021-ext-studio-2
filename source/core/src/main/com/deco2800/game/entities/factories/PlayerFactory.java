@@ -52,8 +52,8 @@ public class PlayerFactory {
         mpcAnimator.addAnimation("main_player_jump", 2.5f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_attack", 1f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_crouch", 1f, Animation.PlayMode.LOOP);
-        mpcAnimator.addAnimation("main_player_pickup", 1f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_right", 1f, Animation.PlayMode.LOOP);
+        mpcAnimator.addAnimation("main_player_pickup",0.125f,Animation.PlayMode.LOOP);
 
         AnimationRenderComponent buffAnimator = createAnimationComponent("images/buff.atlas");
         buffAnimator.addAnimation("buffIncrease", 0.1f, Animation.PlayMode.LOOP);
@@ -84,7 +84,7 @@ public class PlayerFactory {
         PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
         player.getComponent(ColliderComponent.class).setDensity(1.5f);
         player.getComponent(TextureRenderComponent.class).scaleEntity();
-        player.getEvents().trigger(("startAnimation"));
+        player.getEvents().trigger(("startMPCAnimation"));
         return player;
     }
 

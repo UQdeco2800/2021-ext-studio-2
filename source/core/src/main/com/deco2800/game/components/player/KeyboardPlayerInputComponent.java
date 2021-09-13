@@ -44,6 +44,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
       case Keys.UP:
         entity.getEvents().trigger(("jump"));
         return true;
+      case Keys.X:
+        entity.getEvents().trigger("itemPickUp");
+        return true;
       default:
         return false;
     }
@@ -74,6 +77,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         return true;
       case Keys.SPACE:
         entity.getEvents().trigger("stopAttack");
+        return true;
+      case Keys.X:
+        entity.getEvents().trigger("stopPickUp");
         return true;
       default:
         return false;

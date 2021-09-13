@@ -12,6 +12,12 @@ import com.deco2800.game.rendering.TextureRenderComponent;
 public class PlayerAnimationController extends Component {
     AnimationRenderComponent animator;
     private boolean texturePresent = true;
+
+    /**
+     * The function create animation listeners and
+     * adds them to the events of the entity,
+     * so that they can be triggered
+     */
     @Override
     public void create() {
         super.create();
@@ -23,10 +29,19 @@ public class PlayerAnimationController extends Component {
         entity.getEvents().addListener("stopAttack", this::animateWalk);
         entity.getEvents().addListener("jump", this::animateJump);
         entity.getEvents().addListener("stopJump", this::animateWalk);
-        entity.getEvents().addListener("startAnimation", this::animateWalk);
-        entity.getEvents().addListener("stopAnimation", this::preAnimationCleanUp);
+        entity.getEvents().addListener("itemPickUp", this::animatePickUp);
+        entity.getEvents().addListener("stopPickUp", this::animateWalk);
+        entity.getEvents().addListener("startMPCAnimation", this::animateWalk);
+        entity.getEvents().addListener("stopMPCAnimation", this::preAnimationCleanUp);
     }
 
+    /**
+     *  Makes the player pickup items
+     */
+    private void animatePickUp() {
+        preAnimationCleanUp();
+        animator.startAnimation("main_player_pickup");
+    }
     /**
      * Makes the player crouch.
      */

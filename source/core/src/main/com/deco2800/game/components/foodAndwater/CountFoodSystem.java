@@ -1,25 +1,37 @@
 package com.deco2800.game.components.foodAndwater;
 
-
+/**
+ * this class handles the food update
+ */
 public class CountFoodSystem {
 
     private int timer=0;
-    private int diffrence=0;
+    private int difference=0;
 
-    public void setTimer(int value){
-        this.timer=value;
+    /**
+     * set a time
+     * @param value a integer
+     */
+    public void setTimer(int value){ this.timer=value; }
+
+    /**
+     * set the time difference
+     * @param difference a integer
+     */
+    public void setDifference(int difference){
+        this.difference=difference;
     }
 
-    public void setDiffrence(int diffrence){
-        this.diffrence=diffrence;
-    }
-
+    /**
+     * return the time
+     */
     public int getTimer(){
         return this.timer;
     }
 
-    public int getDiffrence(){
-        return this.diffrence;
-    }
+    /**
+     * return the time difference
+     */
+    public int getDifference(){ return this.difference;}
 
 }
