@@ -5,12 +5,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
+import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.areas.terrain.TerrainFactory;
-import com.deco2800.game.components.foodAndwater.FoodDisplay;
-import com.deco2800.game.components.foodAndwater.WaterDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
+import com.deco2800.game.components.maingame.MainGameDisplay;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.score.ScoreDisplay;
+import com.deco2800.game.components.score.ScoringSystem;
 import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.components.score.TimerDisplay;
 import com.deco2800.game.entities.Entity;
@@ -27,6 +28,7 @@ import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
+import com.deco2800.game.services.ScoreService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.terminal.Terminal;
 import com.deco2800.game.ui.terminal.TerminalDisplay;
@@ -34,7 +36,8 @@ import com.deco2800.game.components.maingame.MainGameExitDisplay;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import com.deco2800.game.components.foodAndwater.FoodDisplay;
+import com.deco2800.game.components.foodAndwater.WaterDisplay;
 /**
  * The game screen containing the main game.
  *
@@ -42,10 +45,12 @@ import org.slf4j.LoggerFactory;
  */
 public class MainGameScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-    private static final String[] mainGameTextures = {"images/heart.png", "images/clock.png",
-            "images/scoreboard.png", "images/background.png","images/water1.png","images/food1.png"};
+    private static final String[] mainGameTextures = {"images/heart.png", "images/clockV2.png",
+            "images/scoreboardV2.png", "images/background.png","images/water1.png","images/food1.png",
+            "images/Sprint2_Buffs_Debuffs/Poisoning.png","images/Sprint2_Buffs_Debuffs/decrease_health.png","images" +
+            "/Sprint2_Buffs_Debuffs/increase_health.png","images/Sprint2_Buffs_Debuffs/decrease_speed.png"
+    };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
-
 
 
     private final GdxGame game;
@@ -67,6 +72,7 @@ public class MainGameScreen extends ScreenAdapter {
         this.game = game;
         logger.debug("Initialising main game screen services");
         ServiceLocator.registerTimeSource(new GameTime());
+        ServiceLocator.registerScoreService(new ScoreService());
 
         PhysicsService physicsService = new PhysicsService();
         ServiceLocator.registerPhysicsService(physicsService);

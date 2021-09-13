@@ -91,6 +91,14 @@ public class GameRecords {
         return list;
     }
 
+    /**
+     * Store the new records in JSON file
+     *
+     * @param records new records
+     */
+    public static void setRecords(Records records) {
+        FileLoader.writeClass(records, path, EXTERNAL);
+    }
 
     public static List<BaseAchievementConfig> getBestRecords() {
         Map<String, BaseAchievementConfig> bestAchievementsMap = new LinkedHashMap<>();
@@ -126,6 +134,11 @@ public class GameRecords {
         return new LinkedList<>(bestAchievementsMap.values());
     }
 
+    public static Records getRecords() {
+        Records records = FileLoader.readClass(Records.class, path, EXTERNAL);
+        return records != null ? records : new Records();
+    }
+
     /**
      * Returns a list of achievements that can be unlocked next
      *
@@ -148,20 +161,27 @@ public class GameRecords {
         return betterAchievements;
     }
 
-
-    public static Records getRecords() {
-        Records records = FileLoader.readClass(Records.class, path, EXTERNAL);
-        return records != null ? records : new Records();
-    }
-
     /**
-     * Store the new records in JSON file
+     * Get the number of gold achievements that the user has unlocked
      *
-     * @param records new records
+     * @return count of unlocked gold achievements
      */
-    public static void setRecords(Records records) {
-        FileLoader.writeClass(records, path, EXTERNAL);
+    public static int getGoldAchievementsCount() {
+        Set<String> goldAchievements = new LinkedHashSet<>();
+
+        for (Map.Entry<Integer, Record> e :
+                getRecords().records.entrySet()) {
+            Record value = e.getValue();
+            value.achievements.forEach(a -> {
+                if (a.type.equals("GOLD")) {
+                    goldAchievements.add(a.name);
+                }
+            });
+        }
+
+        return goldAchievements.size();
     }
+
 
     /**
      * A mapping of the game number (nth game played) and associated record,
