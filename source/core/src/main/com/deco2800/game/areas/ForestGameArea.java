@@ -279,7 +279,7 @@ public class ForestGameArea extends GameArea {
      * Obstacles are randomly generated according to the position of the character. The first time it
      * is called, NUM_OBSTACLES obstacles are generated in the range of (0-30) units after the
      * player's position. For each subsequent call, the position of generating obstacles is twenty
-     * units behind the player, and the generating range is 20 units.
+     * units behind the player, and the generating range is 20 units. Called by render() in MainGameScreen.java.
      * <p>
      * For example, the first call to the player x position is 0, and the x range for generating
      * obstacles is 0-30.  The second call to the player's x position is 10, and the x range for
@@ -294,8 +294,10 @@ public class ForestGameArea extends GameArea {
         // from being generated at the same location
         ArrayList<GridPoint2> randomPoints = new ArrayList<GridPoint2>();
 
+        String loggerInfo = "";
+
         int playerX = (int) player.getPosition().x;
-        logger.info("player x coordinate: {}", playerX);
+        logger.debug("player x coordinate: {}", playerX);
 
         if (firstGenerate) {
             minPos = new GridPoint2(playerX, 0);
@@ -321,11 +323,15 @@ public class ForestGameArea extends GameArea {
             Entity obstacle2 = ObstacleFactory.createThornsObstacle(player);
             spawnEntityAt(obstacle, randomPos, true, false);
             spawnEntityAt(obstacle2, randomPos2, true, true);
-
+            loggerInfo += "Create Plants Obstacle at "+ randomPos + "\t";
+            loggerInfo += "Create Thorns Obstacle at "+ randomPos2 + "\t";
         }
-        logger.info("Min x: {}, Max x: {}; Total randomPoints {}", minPos.x, maxPos.x, randomPoints);
+        logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}", minPos.x, maxPos.x, randomPoints, loggerInfo);
     }
 
+    /**
+     * Generate Flying Monkeys at random locations. Called by render() in MainGameScreen.java
+     */
     public void spawnFlyingMonkey() {
         int playerX = (int) player.getPosition().x;
         GridPoint2 minPos = new GridPoint2(playerX + 10, 0);
@@ -333,19 +339,20 @@ public class ForestGameArea extends GameArea {
         GridPoint2 randomPosTwo = RandomUtils.randomX(11, minPos, maxPos);
         Entity Range = NPCFactory.createFlyingMonkey(player);
         spawnEntityAt(Range, randomPosTwo, true, true);
-
     }
 
+    /**
+     * Generate Face Worm at current Flying Monkeys location. Called by render() in MainGameScreen.java
+     * @param position the location of flying monkeys
+     */
     public void spawnFaceWorm(Vector2 position) {
         Entity ghost = NPCFactory.createFaceWorm(player);
-
         spawnEntityAt(ghost, position, false, false);
-
     }
 
 
     /**
-     * Generate a certain number of meteorites, called by render() in MainGameScreen. The final number of meteorites
+     * Generate a certain number of meteorites, called by render() in MainGameScreen.java. The final number of meteorites
      * is the sum of all parameters.
      * <p>
      * Big size meteorites: 1.5 - 2 times of the multiples of meteorites texture,
@@ -353,7 +360,7 @@ public class ForestGameArea extends GameArea {
      * Midden size meteorites: 1 - 1.5 times of the multiples of meteorites texture,
      * total number is middleNum(+midRandomRange)
      * Small size meteorites: 0.5 + randomSize: 0.5 - 1 times of the multiples of meteorites texture,
-     * total number is smallNum(+smaillRandomRange)
+     * total number is smallNum(+smallRandomRange)
      * <p>
      * e.g. 1(+2) means that the number of generations is at least 1, and the final possible range is 1-3.
      *
@@ -362,13 +369,13 @@ public class ForestGameArea extends GameArea {
      * @param smallNum          At least the number of small meteorites generated.
      * @param bigRandomRange    The number of large meteorites that may be randomly generated.
      * @param midRandomRange    The number of middle meteorites that may be randomly generated.
-     * @param smaillRandomRange The number of small meteorites that may be randomly generated.
+     * @param smallRandomRange The number of small meteorites that may be randomly generated.
      */
     public void spawnMeteorites(int bigNum, int middleNum, int smallNum, int bigRandomRange, int midRandomRange,
-                                int smaillRandomRange) {
+                                int smallRandomRange) {
         int bigNumRandom = bigNum + (int) (Math.random() * (bigRandomRange + 1));
         int midNumRandom = middleNum + (int) (Math.random() * (midRandomRange + 1));
-        int smallNumRandom = smallNum + (int) (Math.random() * (smaillRandomRange + 1));
+        int smallNumRandom = smallNum + (int) (Math.random() * (smallRandomRange + 1));
         int meteoritesNum = bigNumRandom + midNumRandom + smallNumRandom;
 
         double randomSize; // Generate random range for size
@@ -376,12 +383,14 @@ public class ForestGameArea extends GameArea {
         double midSize;
         double smallSize;
 
+        String loggerInfo = "";
+
         for (int i = 0; i < meteoritesNum; i++) {
             randomSize = Math.random() * 0.5; // 0-0.5
             bigSize = 1.5 + randomSize; // 1.5 - 2 size of the meteorites
             midSize = 1 + randomSize; // 1 - 1.5 size of the meteorites
             smallSize = 0.5 + randomSize; // 0.5 - 1 size of the meteorites
-            int x = (int) (player.getPosition().x + 5 + Math.random()*5);
+            int x = (int) (player.getPosition().x + 5 + Math.random() * 5);
             int y = (int) (20 + Math.random() * 2);
             GridPoint2 point = new GridPoint2(x, y);
 
@@ -389,19 +398,20 @@ public class ForestGameArea extends GameArea {
 
             if (i < bigNumRandom) { // must have a big meteorites
                 stone = ObstacleFactory.createMeteorite(player, (float) bigSize, ObstacleFactory.MeteoriteType.BigMeteorite);
-                System.out.println("Big stone = " + point + "\ti = " + i);
+                loggerInfo += "Big stone = " + point + "\t";
             } else if (i < bigNumRandom + midNumRandom) {
                 stone = ObstacleFactory.createMeteorite(player, (float) midSize, ObstacleFactory.MeteoriteType.MiddleMeteorite);
-                System.out.println("Mid stone = " + point + "\ti = " + i);
+                loggerInfo += "Mid stone = " + point + "\t";
             } else {
                 stone = ObstacleFactory.createMeteorite(player, (float) smallSize, ObstacleFactory.MeteoriteType.SmallMeteorite);
-                System.out.println("Small stone = " + point + "\ti = " + i);
+                loggerInfo += "Small stone = " + point + "\t";
             }
 
 
             spawnEntityAt(stone, point, true, true);
         }
-        logger.info("bigNumRandom = {}, midNumRandom = {}, smallNumRandom = {}", bigNumRandom, midNumRandom, smallNumRandom);
+        logger.debug("bigNumRandom = {}, midNumRandom = {}, smallNumRandom = {}, stones points: {}",
+                bigNumRandom, midNumRandom, smallNumRandom, loggerInfo);
     }
 
 
@@ -432,7 +442,6 @@ public class ForestGameArea extends GameArea {
         AchievementsBonusItems bonusItems = new AchievementsBonusItems(player);
         bonusItems.setBonusItem();
     }
-
 
 
     private void playMusic() {

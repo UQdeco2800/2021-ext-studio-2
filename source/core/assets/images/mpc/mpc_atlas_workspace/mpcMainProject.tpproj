@@ -1,6 +1,6 @@
 name=mpcAnimation
 filename=
-output=../../../../../../../../../../Desktop/main_player_animation
+output=.
 
 alias=true
 alphaThreshold=0
@@ -11,7 +11,7 @@ fast=false
 filterMag=Nearest
 filterMin=Nearest
 ignoreBlankImages=true
-maxHeight=2048
+maxHeight=4096
 maxWidth=4096
 minHeight=16
 minWidth=16
@@ -32,7 +32,7 @@ limitMemory=true
 useIndexes=true
 
 scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:../../../../../../../../../../Desktop/main_player_animation/source/main_player_front.png,type:Input,regionName:null},{path:../../../../../../../../../../Desktop/main_player_animation/source/main_player_jump_1.png,type:Input,regionName:null},{path:../../../../../../../../../../Desktop/main_player_animation/source/main_player_jump_2.png,type:Input,regionName:null},{path:../../../../../../../../../../Desktop/main_player_animation/source/main_player_jump_3.png,type:Input,regionName:null},{path:../../../../../../../../../../Desktop/main_player_animation/source/main_player_right.png,type:Input,regionName:null},{path:../../../../../../../../../../Desktop/main_player_animation/source/main_player_run_1.png,type:Input,regionName:null},{path:../../../../../../../../../../Desktop/main_player_animation/source/main_player_run_2.png,type:Input,regionName:null},{path:../../../../../../../../../../Desktop/main_player_animation/source/main_player_walk_1.png,type:Input,regionName:null},{path:../../../../../../../../../../Desktop/main_player_animation/source/main_player_walk_2.png,type:Input,regionName:null}]
+inputFiles=[{path:source/main_player_attack_2.png,type:Input,regionName:null},{path:source/main_player_attack_3.png,type:Input,regionName:null},{path:source/main_player_attack_1.png,type:Input,regionName:null},{path:source/main_player_pickup_2.png,type:Input,regionName:null},{path:source/main_player_pickup_3.png,type:Input,regionName:null},{path:source/main_player_pickup_4.png,type:Input,regionName:null},{path:source/main_player_right.png,type:Input,regionName:null},{path:source/main_player_run_1.png,type:Input,regionName:null},{path:source/main_player_run_2.png,type:Input,regionName:null},{path:source/main_player_walk_1.png,type:Input,regionName:null},{path:source/main_player_walk_2.png,type:Input,regionName:null},{path:source/main_player_crouch_1.png,type:Input,regionName:null},{path:source/main_player_crouch_2.png,type:Input,regionName:null},{path:source/main_player_front.png,type:Input,regionName:null},{path:source/main_player_jump_1.png,type:Input,regionName:null},{path:source/main_player_jump_2.png,type:Input,regionName:null},{path:source/main_player_jump_3.png,type:Input,regionName:null},{path:source/main_player_pickup_1.png,type:Input,regionName:null}]
 
 
 -PROJ-

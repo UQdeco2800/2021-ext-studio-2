@@ -1,6 +1,8 @@
 package com.deco2800.game.components.score;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -20,7 +22,7 @@ public class ScoreDisplay extends UIComponent {
     Table tableForText;
     Table tableForBoard;
     private Label scoreLabel;
-    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
+//    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
     private Image scoreBoard;
 
     /**
@@ -31,7 +33,7 @@ public class ScoreDisplay extends UIComponent {
     public void create() {
         super.create();
         addActors();
-
+        //add achievement score to the score.
         AchievementsHelper.getInstance().getEvents()
                 .addListener(AchievementsHelper.ACHIEVEMENTS_BONUS_POINTS, this::updateScoreByPoints);
         entity.getEvents().addListener("updateScore", this::updatePlayerScoreUI);
@@ -47,7 +49,7 @@ public class ScoreDisplay extends UIComponent {
         tableForText = new Table();
         tableForText.bottom().right();
         tableForText.setFillParent(true);
-        tableForText.padBottom(60).padRight(80);
+        tableForText.padBottom(60).padRight(60);
 
         tableForBoard = new Table();
         tableForBoard.bottom().right();
@@ -57,12 +59,13 @@ public class ScoreDisplay extends UIComponent {
         // Score Board
         float boardSideLength = 250f;
         scoreBoard = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/scoreboard.png", Texture.class));
+                .getAsset("images/scoreboardV2.png", Texture.class));
 
         // Score text
         int score = 0;
         CharSequence scoreText = "" + score;
-        scoreLabel = new Label(scoreText, skin, "large");
+        scoreLabel = new Label(scoreText, new Label.LabelStyle(new BitmapFont(), Color.VIOLET));
+        scoreLabel.setFontScale(2f);
 
         tableForBoard.add(scoreBoard).size(boardSideLength);
         tableForText.add(scoreLabel);
@@ -79,7 +82,7 @@ public class ScoreDisplay extends UIComponent {
     public void update() {
         super.update();
         entity.getEvents().trigger("updateScore",
-                scoringSystem.getScore());
+                ServiceLocator.getScoreService().getScore());
     }
 
     /**
@@ -96,7 +99,7 @@ public class ScoreDisplay extends UIComponent {
      */
     private void updateScoreByPoints(int bonusPoints){
         // Add bonusPoints to the score here
-        scoringSystem.addToScore(bonusPoints);
+        ServiceLocator.getScoreService().addToScore(bonusPoints);
     }
 
     @Override
