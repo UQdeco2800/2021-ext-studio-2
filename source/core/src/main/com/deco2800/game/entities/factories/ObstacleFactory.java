@@ -127,7 +127,7 @@ public class ObstacleFactory {
      * Creates a Meteorite
      *
      * @param target character.
-     * @return the thorns obstacle entity
+     * @return the meteorite obstacle entity
      */
     public static Entity createMeteorite(Entity target, float size, MeteoriteType meteoriteType) {
         BaseEntityConfig config = null;
