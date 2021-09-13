@@ -23,7 +23,7 @@ public class GameOverDisplay extends UIComponent {
     private static final Logger logger = LoggerFactory.getLogger(GameOverDisplay.class);
     private final GdxGame game;
 
-    private Table rootTable;
+    private Table table;
     private double points = 0.0;
     private TextField pointText;
     private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
@@ -41,16 +41,36 @@ public class GameOverDisplay extends UIComponent {
 
     private void createGameOverTable() {
         // Create components
-        Label pointsLabel = new Label("Points:", skin);
+        //Label pointsLabel = new Label("Points:", skin);
 
+        table = new Table();
+        table.setFillParent(true);
         points = scoringSystem.getScore();
 
         pointText = new TextField(String.valueOf(points), skin);
         pointText.setDisabled(true);
 
+
+
+        Image tittle =
+                new Image(
+                        ServiceLocator.getResourceService()
+                                .getAsset("images/gameOver.png", Texture.class));
+
+
+        TextButton pointsLabel = new TextButton("Points: ", skin);
         TextButton playAgainButton = new TextButton("Click to play \n again", skin);
         TextButton mainMenuButton = new TextButton("Main Menu", skin);
         TextButton historyScoreButton = new TextButton("History Score", skin);
+
+        pointsLabel.addListener(
+                new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent changeEvent, Actor actor) {
+
+
+                    }
+                });
 
         playAgainButton.addListener(
                 new ChangeListener() {
@@ -78,10 +98,7 @@ public class GameOverDisplay extends UIComponent {
                     }
                 });
 
-        Image gameOver =
-                new Image(
-                        ServiceLocator.getResourceService()
-                                .getAsset("images/gameOver.png", Texture.class));
+
 
         // Position Components on table
         Stack stack = new Stack();
@@ -92,15 +109,23 @@ public class GameOverDisplay extends UIComponent {
         background.setScaling(Scaling.stretch);
         stack.add(background);
 
+        Table bgTable = new Table();
+        bgTable.setFillParent(true);
+
         Table table = new Table();
-        table.add(gameOver).top().padTop(10f);
-        table.row().padTop(40f);
-        table.add(pointsLabel).right();
-        table.add(pointText).right().padRight(15f);
-        table.row().padTop(25f);
+        table.add(tittle).bottom().padBottom(50f);
+        table.row();
+        table.add(pointsLabel).bottom();
+        table.row();
+        table.add(pointText).bottom().padBottom(15f);
+
+        table.row();
         table.add(playAgainButton).bottom().padBottom(15f);
+        table.row();
         table.add(mainMenuButton).bottom().padBottom(15f);
+        table.row();
         table.add(historyScoreButton).bottom().padBottom(15f);
+        table.row();
         table.setFillParent(true);
 
         stage.addActor(stack);
@@ -109,7 +134,7 @@ public class GameOverDisplay extends UIComponent {
 
     @Override
     public void dispose() {
-        rootTable.clear();
+        table.clear();
         super.dispose();
     }
 
