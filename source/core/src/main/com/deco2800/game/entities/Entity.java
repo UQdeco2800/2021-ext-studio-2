@@ -285,9 +285,9 @@ public class Entity {
             }
             ServiceLocator.getEntityService().unregister(this);
         }
-        if (loggerInfo.strip() != "") {
-            logger.debug(loggerInfo.strip());
-        }
+       // if (loggerInfo.strip() != "") {
+          //  logger.debug(loggerInfo.strip());
+      //  }
     }
 
     /**

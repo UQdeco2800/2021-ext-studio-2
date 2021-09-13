@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
@@ -117,6 +118,11 @@ public class ForestGameArea extends GameArea {
             "images/wood.jpg",
             "images/Items/first_aid_kit.png",
             "images/Items/food.png",
+            "images/Items/water.png",
+            "images/Items/magic_potion.png",
+            "images/Items/bandage.png",
+            "images/Items/syringe.png",
+            "images/Items/goldCoin.png",
             "images/obstacle_1_new.png",
             "images/obstacle2_vision2.png",
             "images/stone.png",
@@ -180,10 +186,10 @@ public class ForestGameArea extends GameArea {
         spawnObstacles();
 
         spawnFirstAid();
+        spawnGold();
         playMusic();
         trackAchievements();
-        //DeBuff deBuff = new DeBuff(player);
-        //deBuff.slowSpeed();
+        setBonusItems(player);
     }
 
     private void showBackground() {
@@ -418,11 +424,23 @@ public class ForestGameArea extends GameArea {
         }
     }
 
+    private void spawnGold() {
+        int k = 0;
+        for (int i = 0; i < 20; i++) {
+            GridPoint2 position = new GridPoint2(20+k++, 40);
+            Entity gold = ItemFactory.createGold(player);
+            spawnEntityAt(gold, position, false, false);
+        }
+    }
 
     private Entity spawnPlayer() {
         Entity newPlayer = PlayerFactory.createPlayer();
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         return newPlayer;
+    }
+    private void setBonusItems(Entity player) {
+        AchievementsBonusItems bonusItems = new AchievementsBonusItems(player);
+        bonusItems.setBonusItem();
     }
 
 
