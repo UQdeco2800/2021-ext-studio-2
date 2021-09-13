@@ -97,6 +97,22 @@ public class Entity {
         logger.debug("Setting dispose={} on entity {}", dispose, this);
     }
 
+    public boolean isDisappear() {
+        return disappear;
+    }
+
+    public boolean isRemoveTexture() {
+        return removeTexture;
+    }
+
+    public boolean isDispose() {
+        return dispose;
+    }
+
+    public float getAnimationTime() {
+        return animationTime;
+    }
+
     /**
      * Get the entity's game position.
      *

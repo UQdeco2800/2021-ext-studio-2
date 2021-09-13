@@ -145,7 +145,6 @@ public class ObstacleFactory {
             default:
                 logger.error("Don't have this meteorite type");
         }
-        ;
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
