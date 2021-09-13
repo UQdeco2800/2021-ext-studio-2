@@ -1,8 +1,6 @@
 package com.deco2800.game.entities.factories;
 
-import com.deco2800.game.components.items.ItemComponent;
-import com.deco2800.game.components.items.GoldComponent;
-import com.deco2800.game.components.items.TestBuffForItem;
+import com.deco2800.game.components.items.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsUtils;
 import com.deco2800.game.physics.components.ColliderComponent;
@@ -11,7 +9,8 @@ import com.deco2800.game.rendering.TextureRenderComponent;
 
 public  class ItemFactory {
     private static TestBuffForItem inchealth = new TestBuffForItem();
-    public static Entity createFirstAid(Entity target){
+
+    public static Entity createFirstAid(Entity target,InventorySystem inv){
         /**
          * creates an entity for a firstAidKit
          * @param target The entity which is passed on to the first Aid component
@@ -22,6 +21,7 @@ public  class ItemFactory {
                 .addComponent(new TextureRenderComponent("images/Items/first_aid_kit.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
+                .addComponent(new ItemBar(target, inv))
                 .addComponent(new ItemComponent(target, (player) -> inchealth.increaseHealth(player)));
 
         return firstAid;

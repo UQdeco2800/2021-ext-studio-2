@@ -7,6 +7,8 @@ import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.buff.DeBuff;
+import com.deco2800.game.components.items.InventorySystem;
+import com.deco2800.game.components.items.ItemBar;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
 import com.deco2800.game.rendering.BackgroundRenderComponent;
@@ -35,6 +37,7 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(rock, randomPos, true, false);
         }
     }
+
 
     public void spawnRocksRandomly(int xValue) {
         GridPoint2 minPos = new GridPoint2(xValue + 10, 0);
@@ -96,6 +99,7 @@ public class ForestGameArea extends GameArea {
     private static final int NUM_GHOSTS = 2;
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(0, 10);
     private static final float WALL_WIDTH = 0.1f;
+    private ItemBar itembar;
     private static final String[] forestTextures = {
             "images/box_boy_leaf.png",
             "images/images.jpg",
@@ -162,6 +166,7 @@ public class ForestGameArea extends GameArea {
     private final TerrainFactory terrainFactory;
 
     public Entity player;
+    private InventorySystem pro;
 
     public ForestGameArea(TerrainFactory terrainFactory) {
         super();
@@ -183,14 +188,19 @@ public class ForestGameArea extends GameArea {
 
         player = spawnPlayer();
         spawnObstacles();
-
+        pro = new InventorySystem(player);
         spawnFirstAid();
         spawnGold();
         playMusic();
         trackAchievements();
         setBonusItems(player);
+        player.getEvents().addListener("B pressed", this::InvSys);
     }
 
+    public void InvSys()
+    {
+        pro.pressbutton();
+    }
     private void showBackground() {
         Entity gameBg = new Entity();
         gameBg.addComponent(new BackgroundRenderComponent("images/background.png"));
@@ -427,7 +437,7 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 1; i < 31; i++) {
             GridPoint2 position = new GridPoint2(i * 3, 5);
-            Entity firstAid = ItemFactory.createFirstAid(player);
+            Entity firstAid = ItemFactory.createFirstAid(player,pro);
             spawnEntityAt(firstAid, position, false, false);
         }
     }
