@@ -91,15 +91,6 @@ public class GameRecords {
         return list;
     }
 
-    /**
-     * Store the new records in JSON file
-     *
-     * @param records new records
-     */
-    public static void setRecords(Records records) {
-        FileLoader.writeClass(records, path, EXTERNAL);
-    }
-
     public static List<BaseAchievementConfig> getBestRecords() {
         Map<String, BaseAchievementConfig> bestAchievementsMap = new LinkedHashMap<>();
 
@@ -137,6 +128,15 @@ public class GameRecords {
     public static Records getRecords() {
         Records records = FileLoader.readClass(Records.class, path, EXTERNAL);
         return records != null ? records : new Records();
+    }
+
+    /**
+     * Store the new records in JSON file
+     *
+     * @param records new records
+     */
+    public static void setRecords(Records records) {
+        FileLoader.writeClass(records, path, EXTERNAL);
     }
 
     /**
@@ -181,7 +181,6 @@ public class GameRecords {
 
         return goldAchievements.size();
     }
-
 
     /**
      * A mapping of the game number (nth game played) and associated record,
