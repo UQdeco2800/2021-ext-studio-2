@@ -114,3 +114,5 @@ Thumbs.db
 /ios/IOSLauncher.app
 /ios/IOSLauncher.app.dSYM
 /core/assets/test/files/gameInfoTest.json
+/core/assets/test/files/gameRecords.json
+/core/assets/test/files/gameInfoValidTest.json

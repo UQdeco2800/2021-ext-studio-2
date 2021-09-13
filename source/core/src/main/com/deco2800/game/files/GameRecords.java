@@ -10,12 +10,11 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.deco2800.game.files.FileLoader.Location.EXTERNAL;
-
 public class GameRecords {
     private static final String ROOT_DIR = "DECO2800Game";
     private static final String RECORDS_FILE = "gameRecords.json";
     private static final String path = ROOT_DIR + File.separator + RECORDS_FILE;
+    private static final FileLoader.Location location = FileLoader.Location.EXTERNAL;
 
     /**
      * Stores the records of the most recent game played into a JSON file
@@ -126,7 +125,7 @@ public class GameRecords {
     }
 
     public static Records getRecords() {
-        Records records = FileLoader.readClass(Records.class, path, EXTERNAL);
+        Records records = FileLoader.readClass(Records.class, path, location);
         return records != null ? records : new Records();
     }
 
@@ -136,7 +135,7 @@ public class GameRecords {
      * @param records new records
      */
     public static void setRecords(Records records) {
-        FileLoader.writeClass(records, path, EXTERNAL);
+        FileLoader.writeClass(records, path, location);
     }
 
     /**
@@ -149,9 +148,7 @@ public class GameRecords {
 
         Set<String> nextUnlocks = new LinkedHashSet<>();
 
-        getBestRecords().forEach(achievement -> {
-            nextUnlocks.add(achievement.name);
-        });
+        getBestRecords().forEach(achievement -> nextUnlocks.add(achievement.name));
 
         AchievementFactory.getAchievements().forEach(achievement -> {
             if (!nextUnlocks.contains(achievement.name) && achievement.type.equals("BRONZE")) {
@@ -169,15 +166,11 @@ public class GameRecords {
     public static int getGoldAchievementsCount() {
         Set<String> goldAchievements = new LinkedHashSet<>();
 
-        for (Map.Entry<Integer, Record> e :
-                getRecords().records.entrySet()) {
-            Record value = e.getValue();
-            value.achievements.forEach(a -> {
-                if (a.type.equals("GOLD")) {
-                    goldAchievements.add(a.name);
-                }
-            });
-        }
+        getRecords().records.forEach((key, value) -> value.achievements.forEach(a -> {
+            if (a.type.equals("GOLD")) {
+                goldAchievements.add(a.name);
+            }
+        }));
 
         return goldAchievements.size();
     }
@@ -197,7 +190,7 @@ public class GameRecords {
          * @return records of a particular game (null if absent)
          */
         public Record findByGame(int game) {
-            return records.get(game);
+            return records.get(String.valueOf(game));
         }
 
         /**

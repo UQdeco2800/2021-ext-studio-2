@@ -1,0 +1,47 @@
+{
+  records: {
+    class: java.util.LinkedHashMap
+    1: {
+      scoreData: {
+        score: 12
+        game: 1
+      }
+    }
+    2: {
+      scoreData: {
+        score: 32321
+        game: 2
+      }
+    }
+    3: {
+      scoreData: {
+        score: 2332
+        game: 3
+      }
+    }
+    4: {
+      scoreData: {
+        score: 3233
+        game: 4
+      }
+    }
+    5: {
+      scoreData: {
+        score: 4343
+        game: 5
+      }
+    },
+    6: {
+      scoreData: {
+        score: 99999
+        game: 6
+      }
+    },
+    7: {
+      scoreData: {
+        score: 9
+        game: 7
+      }
+    }
+  }
+}

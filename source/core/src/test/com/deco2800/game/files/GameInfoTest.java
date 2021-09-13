@@ -16,19 +16,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class GameInfoTest {
 
     /**
-     * Change the value of a private static final variable
+     * Using Reflection to change the value of a private static final variable
      *
      * @param field    the private static final variable field
      * @param newValue the value to replace
      */
     static void setFinalStatic(Field field, Object newValue) {
         try {
+            // Make the field accessible
             field.setAccessible(true);
 
+            // Remove the final modifier so that the field can be modified again
             Field modifiersField = Field.class.getDeclaredField("modifiers");
             modifiersField.setAccessible(true);
             modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
 
+            // Set the required value for the purposes of this test
             field.set(null, newValue);
         } catch (Exception ignored) {
 
@@ -41,7 +44,8 @@ public class GameInfoTest {
         // Changing the JSON file path so that the original game is not affected
         setFinalStatic(GameInfo.class.getDeclaredField("path"),
                 "test/files/gameInfoTest.json");
-        setFinalStatic(GameInfo.class.getDeclaredField("location"), FileLoader.Location.LOCAL);
+        setFinalStatic(GameInfo.class.getDeclaredField("location"),
+                FileLoader.Location.LOCAL);
     }
 
 
