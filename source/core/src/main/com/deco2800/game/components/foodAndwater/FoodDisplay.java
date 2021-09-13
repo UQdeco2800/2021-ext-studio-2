@@ -149,7 +149,7 @@ public class FoodDisplay extends UIComponent {
     /**
      * when player have no food, this function will return true
      */
-    public boolean isHunger(){
+    public static boolean isHunger(){
         return chickenImage.size() <= 0;
     }
 
@@ -158,7 +158,6 @@ public class FoodDisplay extends UIComponent {
      * @param target entity of food
      *//*
     public void increaseFood(Entity target) {
-
         if (target != null) {
             if (FoodDisplay.chickenImage.size() < 4) {
                 FoodDisplay.addOrRemoveImage(1);

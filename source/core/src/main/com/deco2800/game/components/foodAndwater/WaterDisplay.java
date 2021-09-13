@@ -158,13 +158,10 @@ public class WaterDisplay extends UIComponent {
      * @param target entity of food
      *//*
     public void increaseWater(Entity target) {
-
         if (target != null) {
             if (WaterDisplay.waterImage.size() < 4) {
                 WaterDisplay.addOrRemoveImage(1);
             }
         }
     }*/
-
-
 }

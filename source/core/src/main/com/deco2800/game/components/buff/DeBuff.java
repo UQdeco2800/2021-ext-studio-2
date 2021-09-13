@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.components.foodAndwater.FoodDisplay;
+import com.deco2800.game.components.foodAndwater.WaterDisplay;
 
 public class DeBuff{
     /**
@@ -60,9 +62,13 @@ public class DeBuff{
         if (playerComponent!=null){
             playerComponent.addDecreaseSpeedImage();
         }
-
         player.updateSpeed(new Vector2(2,8));
+    }
 
+    public void Hunger() {
+        if(FoodDisplay.isHunger()){
+            slowSpeed();
+        }
     }
 
 }
