@@ -15,33 +15,47 @@ import java.util.stream.Collectors;
  *
  * <p>Each Achievement entity type should have a creation method that returns a corresponding entity.
  * Predefined achievement entity conditions can be loaded from configs stored as json files which are defined in
- * "achieve.json".
+ * "achievements.json".
  */
 public class AchievementFactory {
     private static final AchievementConfigs configs =
-            FileLoader.readClass(AchievementConfigs.class, "configs/achieve.json");
+            FileLoader.readClass(AchievementConfigs.class, "configs/achievements.json");
 
     /**
-     * Returns a list of achievements from the "achieve.json" file
+     * Returns a list of achievements from the "achievements.json" file
+     *
      * @return achievements - A list of achievements inflated from the JSON file
      */
-    public static Entity createAchievementEntity(){
+    public static Entity createAchievementEntity() {
         return new Entity()
                 .addComponent(new AchievementsStatsComponent())
                 .addComponent(new AchievementsDisplay());
     }
 
-    public static List<BaseAchievementConfig> getAchievements(){
+    public static List<BaseAchievementConfig> getAchievements() {
         return configs.achievements;
     }
 
     /**
      * Returns a list of paths to corresponding achievement texture images
+     *
      * @return paths - A list of paths inflated from achievement list generated using getAchievements()
      */
-    public static String[] getTextures(){
+    public static String[] getTextures() {
         return configs.achievements
                 .stream().map(achievement -> achievement.iconPath).collect(Collectors.toList())
                 .toArray(new String[configs.achievements.size()]);
+    }
+
+    public static BaseAchievementConfig getAchievementByNameAndType(String name, String type) {
+        BaseAchievementConfig achievement = new BaseAchievementConfig();
+
+        for (BaseAchievementConfig a : AchievementFactory.getAchievements()) {
+            if (name.equals(a.name) && type.equals(a.type)) {
+                achievement = a;
+            }
+        }
+
+        return achievement;
     }
 }

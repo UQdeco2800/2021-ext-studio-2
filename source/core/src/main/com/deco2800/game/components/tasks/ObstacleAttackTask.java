@@ -25,15 +25,11 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     private GameArea gameArea;
 
     public static Vector2 enemy_posion;
-    // public static GridPoint2 enemy_posion;
-    // private Entity player;
-
 
     public ObstacleAttackTask(Entity target, int priority, float viewDistance) {
         this.target = target;
         this.priority = priority;
         this.viewDistance = viewDistance;
-//        this.gameArea = ServiceLocator.getGameAreaService();
         physics = ServiceLocator.getPhysicsService().getPhysics();
         debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
@@ -42,8 +38,7 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     @Override
     public void start() {
         super.start();
-
-        MainGameScreen.setSpownEnemy(owner.getEntity().getPosition());
+        MainGameScreen.setSpownFacehugger(enemyCreatePosition());
     }
 
 
@@ -58,6 +53,10 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
         }
 
         return -1;
+    }
+
+    public Vector2 enemyCreatePosition(){
+        return owner.getEntity().getPosition();
     }
 
     private float getDistanceToTarget() {

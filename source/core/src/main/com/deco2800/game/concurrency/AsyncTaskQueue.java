@@ -43,7 +43,12 @@ public class AsyncTaskQueue {
      * These expensive tasks are a part of an unbounded queue which executes them sequentially.
      * The tasks are executed sequentially on the same thread.
      */
-    private static final ExecutorService queue = Executors.newSingleThreadExecutor();
+    private static ExecutorService queue = Executors.newSingleThreadExecutor();
+
+    public static void newQueue(){
+        cancelFutureTasksNow();
+        queue = Executors.newSingleThreadExecutor();
+    }
 
     /**
      * Check if the asynchronous task queue is accepting any tasks
@@ -58,14 +63,21 @@ public class AsyncTaskQueue {
      * already enqueued tasks.
      */
     public static void cancelFutureTasks() {
-        queue.shutdown();
+        try {
+            queue.shutdown();
+        } catch (Exception ignored){
+
+        }
     }
 
     /**
      * Shut down the task queue immediately and cancel all future tasks.
      */
     public static void cancelFutureTasksNow() {
-        queue.shutdownNow();
+        try {
+            queue.shutdownNow();
+        } catch (Exception ignored){
+        }
     }
 
     /**
@@ -75,12 +87,12 @@ public class AsyncTaskQueue {
      *
      * @param task Preferably a lambda function with some long-running piece of code.
      */
-    public static void enqueueTask(Runnable task){
-        try{
-            if(!isShutDown()){
+    public static void enqueueTask(Runnable task) {
+        try {
+            if (!isShutDown()) {
                 queue.execute(task);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

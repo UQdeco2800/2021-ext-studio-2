@@ -5,8 +5,10 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.achievements.AchievementsDisplay;
 import com.deco2800.game.components.achievements.AchievementsStatsComponent;
+import com.deco2800.game.components.buff.Buff;
 import com.deco2800.game.components.buff.BuffAnimationController;
-import com.deco2800.game.components.npc.GhostAnimationController;
+//import com.deco2800.game.components.npc.GhostAnimationController;
+import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.components.player.InventoryComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.player.PlayerAnimationController;
@@ -43,29 +45,27 @@ public class PlayerFactory {
         InputComponent inputComponent =
                 ServiceLocator.getInputService().getInputFactory().createForPlayer();
 
-        AnimationRenderComponent animator =
-                new AnimationRenderComponent(
-                        ServiceLocator.getResourceService()
-                                .getAsset("images/mpcMovement.atlas",
-                                        TextureAtlas.class));
-        animator.addAnimation("main_player_run", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("main_player_walk", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("mpc_front", 1f, Animation.PlayMode.LOOP);
-        AnimationRenderComponent buffAnimator =
-                new AnimationRenderComponent(
-                        ServiceLocator.getResourceService()
-                                .getAsset("images/buff.atlas",
-                                        TextureAtlas.class));
+        AnimationRenderComponent mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation.atlas");
+        mpcAnimator.addAnimation("main_player_run", 0.1f, Animation.PlayMode.LOOP);
+        mpcAnimator.addAnimation("main_player_walk", 0.5f, Animation.PlayMode.LOOP);
+        mpcAnimator.addAnimation("main_player_front", 1f, Animation.PlayMode.LOOP);
+        mpcAnimator.addAnimation("main_player_jump", 2.5f, Animation.PlayMode.LOOP);
+        mpcAnimator.addAnimation("main_player_attack", 1f, Animation.PlayMode.LOOP);
+        mpcAnimator.addAnimation("main_player_crouch", 1f, Animation.PlayMode.LOOP);
+        mpcAnimator.addAnimation("main_player_pickup", 1f, Animation.PlayMode.LOOP);
+        mpcAnimator.addAnimation("main_player_right", 1f, Animation.PlayMode.LOOP);
+
+        AnimationRenderComponent buffAnimator = createAnimationComponent("images/buff.atlas");
         buffAnimator.addAnimation("buffIncrease", 0.1f, Animation.PlayMode.LOOP);
-        AnimationRenderComponent deBuffAnimator =
-                new AnimationRenderComponent(
-                        ServiceLocator.getResourceService()
-                                .getAsset("images/debuff.atlas",
-                                        TextureAtlas.class));
+
+        AnimationRenderComponent deBuffAnimator = createAnimationComponent("images/debuff.atlas");
         deBuffAnimator.addAnimation("debuffDecrease", 0.1f, Animation.PlayMode.LOOP);
+
+
+
         Entity player =
                 new Entity()
-                        .addComponent(new TextureRenderComponent("images/mpc_right.png"))
+                        .addComponent(new TextureRenderComponent("images/mpc/mpc_right.png"))
                         .addComponent(new PlayerAnimationController())
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent())
@@ -75,7 +75,7 @@ public class PlayerFactory {
                         .addComponent(new InventoryComponent(stats.gold))
                         .addComponent(inputComponent)
                         .addComponent(new PlayerStatsDisplay())
-                        .addComponent(animator)
+                        .addComponent(mpcAnimator)
                         .addComponent(buffAnimator)
                         .addComponent(deBuffAnimator)
                         .addComponent(new BuffAnimationController());
@@ -84,10 +84,19 @@ public class PlayerFactory {
         PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
         player.getComponent(ColliderComponent.class).setDensity(1.5f);
         player.getComponent(TextureRenderComponent.class).scaleEntity();
+        player.getEvents().trigger(("startAnimation"));
         return player;
     }
 
     private PlayerFactory() {
         throw new IllegalStateException("Instantiating static util class");
     }
+
+    private static AnimationRenderComponent createAnimationComponent(String atlasPath) {
+        return new AnimationRenderComponent(
+                ServiceLocator.getResourceService()
+                        .getAsset(atlasPath,
+                                TextureAtlas.class));
+    }
+
 }

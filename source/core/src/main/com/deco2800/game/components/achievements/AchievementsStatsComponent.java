@@ -7,6 +7,7 @@ import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.services.ServiceLocator;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -14,23 +15,34 @@ import java.util.stream.Collectors;
  * and emits new achievement events
  */
 public class AchievementsStatsComponent extends Component {
-    private static List<BaseAchievementConfig> achievements =
-            AchievementFactory.getAchievements();
+    private static final List<BaseAchievementConfig> achievements = AchievementFactory.getAchievements();
     private final ScoringSystemV1 scoringSystemV1;
     private int health;
     private long time;
     private int itemCount;
+
+    private boolean bonusItemSign;
+
+
     private int score;
     private int firstAids;
 
+
     public AchievementsStatsComponent() {
+        scoringSystemV1 = new ScoringSystemV1();
+
+        initStats();
+    }
+
+    private void initStats(){
         itemCount = 0;
         health = 100;
         time = -1;
+
+        bonusItemSign = false;
+
         score = 0;
         firstAids = 0;
-
-        scoringSystemV1 = new ScoringSystemV1();
     }
 
     /**
@@ -51,18 +63,23 @@ public class AchievementsStatsComponent extends Component {
         return achievements
                 .stream().filter(achievement -> achievement.unlocked)
                 .collect(Collectors.toList());
+
     }
 
     /**
      * Lock all the achievements again
      */
     public static void resetAchievements() {
-        achievements = AchievementFactory.getAchievements();
+        achievements.forEach(achievement -> achievement.unlocked = false);
     }
 
     @Override
     public void create() {
         super.create();
+
+        initStats();
+
+        resetAchievements();
 
         AchievementsHelper.getInstance().getEvents()
                 .addListener(AchievementsHelper.HEALTH_EVENT, this::setHealth);
@@ -93,7 +110,7 @@ public class AchievementsStatsComponent extends Component {
     /**
      * Maintains the current score
      *
-     * @param score
+     * @param score the current game score
      */
     public void setScore(int score) {
         this.score = score;
@@ -105,7 +122,14 @@ public class AchievementsStatsComponent extends Component {
         long currentTime = ServiceLocator.getTimeSource().getTime();
         setTime(currentTime);
 
+
+        if(bonusItemSign) {
+            AchievementsHelper.getInstance().getEvents().trigger("spawnBonusItem");
+            bonusItemSign = false;
+        }
+
         setScore(scoringSystemV1.getScore());
+
     }
 
     public void handleItemPickup(String itemName) {
@@ -119,7 +143,6 @@ public class AchievementsStatsComponent extends Component {
                 setFirstAid();
                 break;
             default:
-                return;
         }
 
     }
@@ -204,6 +227,7 @@ public class AchievementsStatsComponent extends Component {
         if (valid) {
             achievement.unlocked = true;
             entity.getEvents().trigger("updateAchievement", achievement);
+            bonusItemSign = true;
         }
 
         return true;

@@ -2,6 +2,7 @@ package com.deco2800.game.components.player;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.utils.math.Vector2Utils;
 import com.badlogic.gdx.InputProcessor;
@@ -27,16 +28,15 @@ public class TouchPlayerInputComponent extends InputComponent {
   public boolean keyDown(int keycode) {
     switch (keycode) {
       case Input.Keys.UP:
-        walkDirection.add(Vector2Utils.UP);
-        triggerWalkEvent();
+        entity.getEvents().trigger(("jump"));
         return true;
       case Input.Keys.DOWN:
-        walkDirection.add(Vector2Utils.DOWN);
-        triggerWalkEvent();
+        entity.getEvents().trigger(("crouch"));
         return true;
       case Input.Keys.RIGHT:
         walkDirection.add(Vector2Utils.RIGHT);
         triggerWalkEvent();
+        entity.getEvents().trigger(("walkRight"));
         return true;
       default:
         return false;
@@ -53,15 +53,14 @@ public class TouchPlayerInputComponent extends InputComponent {
   public boolean keyUp(int keycode) {
     switch (keycode) {
       case Input.Keys.UP:
-        walkDirection.sub(Vector2Utils.UP);
-        triggerWalkEvent();
+        entity.getEvents().trigger("stopJump");
         return true;
       case Input.Keys.DOWN:
-        walkDirection.sub(Vector2Utils.DOWN);
-        triggerWalkEvent();
+        entity.getEvents().trigger(("stopCrouch"));
         return true;
       case Input.Keys.RIGHT:
         walkDirection.sub(Vector2Utils.RIGHT);
+        entity.getEvents().trigger(("stopWalkRight"));
         triggerWalkEvent();
         return true;
       default:

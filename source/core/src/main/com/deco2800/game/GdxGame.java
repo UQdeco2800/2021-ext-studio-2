@@ -24,7 +24,9 @@ public class GdxGame extends Game {
     }
 
     public enum ScreenType {
-        MAIN_MENU, MAIN_GAME, SETTINGS, GAME_OVER, HISTORY_SCORES
+
+        MAIN_MENU, MAIN_GAME, SETTINGS, GAME_OVER, PROPS_SHOP, HISTORY_SCORES,
+        ACHIEVEMENTS
     }
 
     @Override
@@ -83,8 +85,12 @@ public class GdxGame extends Game {
                 return new SettingsScreen(this);
             case GAME_OVER:
                 return new GameOverScreen(this);
+            case PROPS_SHOP:
+                return new PropsShopScreen(this);
             case HISTORY_SCORES:
                 return new HistoryScoreScreen(this);
+            case ACHIEVEMENTS:
+                return new AchievementsScreen(this);
             default:
                 return null;
         }
