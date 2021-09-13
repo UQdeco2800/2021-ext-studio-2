@@ -39,8 +39,8 @@ public class FirstAidFunction extends Component {
 
 
            new Thread(() -> {
-                entity.dispose();
-            }).start();
+               entity.dispose();
+           }).start();
 
         }
     }
