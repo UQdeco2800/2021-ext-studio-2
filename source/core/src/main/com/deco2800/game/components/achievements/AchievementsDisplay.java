@@ -163,7 +163,7 @@ public class AchievementsDisplay extends UIComponent {
     /**
      * Renders the bonus score associated with achievements
      */
-    private synchronized void renderBonus(BaseAchievementConfig achievement) {
+    private void renderBonus(BaseAchievementConfig achievement) {
         bonusImg = new Image(ServiceLocator.getResourceService().getAsset
                 ("images/achievements/bonusBg.png", Texture.class));
         String s = "+";
