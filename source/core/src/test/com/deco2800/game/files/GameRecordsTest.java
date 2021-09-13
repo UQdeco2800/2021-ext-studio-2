@@ -129,7 +129,7 @@ public class GameRecordsTest {
     }
 
     @BeforeEach
-    void beforeEach() throws NoSuchFieldException {
+    void beforeEach() throws Exception {
         // The feature depends on the Game Info feature
         setFinalStatic(GameInfo.class.getDeclaredField("path"),
                 "test/files/gameInfoValidTest.json");
@@ -153,7 +153,7 @@ public class GameRecordsTest {
     }
 
     @Test
-    void missingRecordsFile() throws NoSuchFieldException {
+    void missingRecordsFile() throws Exception {
         // Missing record file should not crash the game
         setFinalStatic(GameRecords.class.getDeclaredField("path"),
                 "test/files/missingRecords.json");
@@ -204,7 +204,7 @@ public class GameRecordsTest {
     }
 
     @Test
-    void getHighestScores() throws NoSuchFieldException {
+    void getHighestScores() throws Exception {
         // Reset test records file
         GameRecords.setRecords(new GameRecords.Records());
 
