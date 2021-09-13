@@ -36,7 +36,8 @@ import com.deco2800.game.components.maingame.MainGameExitDisplay;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import com.deco2800.game.components.foodAndwater.FoodDisplay;
+import com.deco2800.game.components.foodAndwater.WaterDisplay;
 /**
  * The game screen containing the main game.
  *
@@ -265,7 +266,10 @@ public class MainGameScreen extends ScreenAdapter {
                 //display the score and the time -- team 9
                 .addComponent(new ScoreDisplay())
                 .addComponent(new TimerDisplay())
-                .addComponent(new TerminalDisplay());
+                .addComponent(new TerminalDisplay())
+                .addComponent(new FoodDisplay())
+                .addComponent(new WaterDisplay());
+
 
         ServiceLocator.getEntityService().register(ui);
     }
