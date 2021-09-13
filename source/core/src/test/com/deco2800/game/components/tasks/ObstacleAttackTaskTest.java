@@ -31,6 +31,20 @@ class ObstacleAttackTaskTest {
         ServiceLocator.registerPhysicsService(new PhysicsService());
     }
     @Test
+    void shouldGetVector2Position(){
+        Entity target = new Entity();
+        target.setPosition(0f, 6f);
+        Entity entity = makePhysicsEntity();
+        entity.create();
+        entity.setPosition(0f, 4f);
+        ObstacleAttackTask obstacleAttackTask = new ObstacleAttackTask(target,10,6);
+
+        obstacleAttackTask.create(() -> entity);
+
+        assertEquals(entity.getPosition(), obstacleAttackTask.enemyCreatePosition());
+    }
+
+    @Test
     void shouldDrawEntityInDistance() {
         Entity target = new Entity();
         target.setPosition(0f, 6f);
@@ -50,6 +64,8 @@ class ObstacleAttackTaskTest {
         assertTrue(obstacleAttackTask.getPriority() < 0);
 
     }
+
+
    
 
     private Entity makePhysicsEntity() {
