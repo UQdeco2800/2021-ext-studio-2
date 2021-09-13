@@ -3,7 +3,7 @@ package com.deco2800.game.files;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.deco2800.game.files.AchievementRecords.getGoldAchievementsCount;
+import static com.deco2800.game.files.GameRecords.getGoldAchievementsCount;
 
 public class GameChapters {
 
@@ -20,6 +20,7 @@ public class GameChapters {
 
         List<GameChapters.Chapter> chapters = getChapters();
 
+
         /* Extracting gold achievements unlocked by the player */
         int goldAchievements = getGoldAchievementsCount();
 
@@ -32,7 +33,6 @@ public class GameChapters {
 
         return chapters;
     }
-
 
     public static class Chapters {
         public List<Chapter> chapters = new LinkedList<>();

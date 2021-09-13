@@ -16,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(GameExtension.class)
 public class GameChaptersTest {
 
-    MockedStatic<AchievementRecords> gameInfoMockedStatic =
-            Mockito.mockStatic(AchievementRecords.class);
+    MockedStatic<GameRecords> gameInfoMockedStatic =
+            Mockito.mockStatic(GameRecords.class);
 
     @Test
     void chaptersAreLockedByDefault() {
@@ -93,9 +93,9 @@ public class GameChaptersTest {
     }
 
     private void setGoldAchievementsToBeReturned(int count) {
-        gameInfoMockedStatic.when(AchievementRecords::getGoldAchievementsCount)
+        gameInfoMockedStatic.when(GameRecords::getGoldAchievementsCount)
                 .thenReturn(count);
-        assertEquals(AchievementRecords.getGoldAchievementsCount(), count);
+        assertEquals(GameRecords.getGoldAchievementsCount(), count);
     }
 
     @AfterEach
