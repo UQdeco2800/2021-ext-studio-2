@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+<script type="text/javascript">var data = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -108,7 +108,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">FoodDisplay</span>
 extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui">UIComponent</a></pre>
-<div class="block">A ui component for displaying food system.</div>
+<div class="block">A ui component for displaying food system. Player lose a chicken for 3 sec</div>
 </section>
 <section class="summary">
 <ul class="blockList">
@@ -131,7 +131,7 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code>static java.util.ArrayList&lt;<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/scenes/scene2d/ui/Image.html?is-external=true" title="class or interface in com.badlogic.gdx.scenes.scene2d.ui" class="externalLink">Image</a>&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#ChickenImage">ChickenImage</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#chickenImage">chickenImage</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -195,20 +195,22 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>static void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addOrRemoveImage(int)">addOrRemoveImage</a></span>&#8203;(int&nbsp;value)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Add/remove a image</div>
+</td>
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create()">create</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Called when the entity is created and registered.</div>
+<div class="block">Creates reusable food ui styles and adds actors to the stage.</div>
 </td>
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#dispose()">dispose</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Called when the component is disposed.</div>
+<div class="block">remove chickenImage by useing a for loop</div>
 </td>
 </tr>
 <tr class="rowColor" id="i3">
@@ -221,20 +223,29 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 <tr class="altColor" id="i4">
 <td class="colFirst"><code>java.util.ArrayList&lt;<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/scenes/scene2d/ui/Image.html?is-external=true" title="class or interface in com.badlogic.gdx.scenes.scene2d.ui" class="externalLink">Image</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getHunger()">getHunger</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">return the chickenImage</div>
+</td>
 </tr>
 <tr class="rowColor" id="i5">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isHunger()">isHunger</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Called once per frame of the game, and should be used for most component logic.</div>
+<div class="block">when player have no food, this function will return true</div>
 </td>
 </tr>
 <tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Reduce food when time increase</div>
+</td>
+</tr>
+<tr class="rowColor" id="i7">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updatePlayerTimerUI(int)">updatePlayerTimerUI</a></span>&#8203;(int&nbsp;dis)</code></th>
 <td class="colLast">
-<div class="block">Updates the Chicken ui time on the ui.</div>
+<div class="block">Updates the Chicken ui time by time increase.</div>
 </td>
 </tr>
 </tbody>
@@ -286,8 +297,8 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="ChickenImage">ChickenImage</a></h3>
-<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/scenes/scene2d/ui/Image.html?is-external=true" title="class or interface in com.badlogic.gdx.scenes.scene2d.ui" class="externalLink">Image</a>&gt;</span>&nbsp;<span class="memberName">ChickenImage</span></div>
+<h3><a id="chickenImage">chickenImage</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/scenes/scene2d/ui/Image.html?is-external=true" title="class or interface in com.badlogic.gdx.scenes.scene2d.ui" class="externalLink">Image</a>&gt;</span>&nbsp;<span class="memberName">chickenImage</span></div>
 </section>
 </li>
 </ul>
@@ -320,9 +331,8 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 <section class="detail">
 <h3><a id="create()">create</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">create</span>()</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../Component.html#create()">Component</a></code></span></div>
-<div class="block">Called when the entity is created and registered. Initial logic such as calls to GetComponent
- should be made here, not in the constructor which is called before an entity is finished.</div>
+<div class="block">Creates reusable food ui styles and adds actors to the stage.
+ And starts the counting the time.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../../ui/UIComponent.html#create()">create</a></code>&nbsp;in class&nbsp;<code><a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui">UIComponent</a></code></dd>
@@ -347,9 +357,7 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 <section class="detail">
 <h3><a id="update()">update</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">update</span>()</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../Component.html#update()">Component</a></code></span></div>
-<div class="block">Called once per frame of the game, and should be used for most component logic. Not called if
- component is disabled.</div>
+<div class="block">Reduce food when time increase</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../Component.html#update()">update</a></code>&nbsp;in class&nbsp;<code><a href="../Component.html" title="class in com.deco2800.game.components">Component</a></code></dd>
@@ -360,21 +368,14 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 <section class="detail">
 <h3><a id="updatePlayerTimerUI(int)">updatePlayerTimerUI</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">updatePlayerTimerUI</span>&#8203;(<span class="arguments">int&nbsp;dis)</span></div>
-<div class="block">Updates the Chicken ui time on the ui.</div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="getHunger()">getHunger</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/scenes/scene2d/ui/Image.html?is-external=true" title="class or interface in com.badlogic.gdx.scenes.scene2d.ui" class="externalLink">Image</a>&gt;</span>&nbsp;<span class="memberName">getHunger</span>()</div>
+<div class="block">Updates the Chicken ui time by time increase.</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="dispose()">dispose</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">dispose</span>()</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../Component.html#dispose()">Component</a></code></span></div>
-<div class="block">Called when the component is disposed. Dispose of any internal resources here.</div>
+<div class="block">remove chickenImage by useing a for loop</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/utils/Disposable.html?is-external=true#dispose()" title="class or interface in com.badlogic.gdx.utils" class="externalLink">dispose</a></code>&nbsp;in interface&nbsp;<code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/utils/Disposable.html?is-external=true" title="class or interface in com.badlogic.gdx.utils" class="externalLink">Disposable</a></code></dd>
@@ -385,8 +386,28 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="getHunger()">getHunger</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/scenes/scene2d/ui/Image.html?is-external=true" title="class or interface in com.badlogic.gdx.scenes.scene2d.ui" class="externalLink">Image</a>&gt;</span>&nbsp;<span class="memberName">getHunger</span>()</div>
+<div class="block">return the chickenImage</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="addOrRemoveImage(int)">addOrRemoveImage</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addOrRemoveImage</span>&#8203;(<span class="arguments">int&nbsp;value)</span></div>
+<div class="block">Add/remove a image</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - = 1, add a image;</dd>
+<dd><code>value</code> - = -1, remove a image</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="isHunger()">isHunger</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isHunger</span>()</div>
+<div class="block">when player have no food, this function will return true</div>
 </section>
 </li>
 </ul>
