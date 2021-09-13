@@ -5,32 +5,29 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.score.ScoringSystemV1;
-import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import java.util.ArrayList;
 
-
 /**
- * A ui component for displaying food system.
+ * A ui component for displaying food system. Player lose a chicken for 3 sec
  */
 public class FoodDisplay extends UIComponent {
-    static Table tables;
+    static Table table;
     private Label timeLabel;
     private final CountFoodSystem countFoodSystem = new CountFoodSystem();
     private final ScoringSystemV1 timeCount = new ScoringSystemV1();
-    public static ArrayList<Image> ChickenImage = new ArrayList<>();
-    private final int count_image=4;
+    public static ArrayList<Image> chickenImage = new ArrayList<>();
+    private final int count_image = 4;
     private int chickenCurrent = 4;
 
+    public FoodDisplay() { }
 
-
-    public FoodDisplay() {
-    }
-
-
+    /**
+     * Creates reusable food ui styles and adds actors to the stage.
+     * And starts the counting the time.
+     */
     @Override
     public void create() {
         super.create();
@@ -39,116 +36,131 @@ public class FoodDisplay extends UIComponent {
     }
 
     /**
-     * Creates actors and positions them on the stage using a tables.
-     *
+     * Creates actors, add images into list, and positions them on the stage using a table.
+     * @see Table for positioning options
      */
     private void addActors() {
-        tables = new Table();
-        tables.top().left();
-        tables.setFillParent(true);
-        tables.padTop(100f).padLeft(10f);
+        table = new Table();
+        table.top().left();
+        table.setFillParent(true);
+        table.padTop(100f).padLeft(10f);
 
         //Add Food image
         float clockSideLength = 30f;
-        ChickenImage.add(new Image(ServiceLocator.getResourceService()
+        chickenImage.add(new Image(ServiceLocator.getResourceService()
                 .getAsset("images/food1.png", Texture.class)));
-        ChickenImage.add(new Image(ServiceLocator.getResourceService()
+        chickenImage.add(new Image(ServiceLocator.getResourceService()
                 .getAsset("images/food1.png", Texture.class)));
-        ChickenImage.add(new Image(ServiceLocator.getResourceService()
+        chickenImage.add(new Image(ServiceLocator.getResourceService()
                 .getAsset("images/food1.png", Texture.class)));
-        ChickenImage.add(new Image(ServiceLocator.getResourceService()
+        chickenImage.add(new Image(ServiceLocator.getResourceService()
                 .getAsset("images/food1.png", Texture.class)));
 
-        CharSequence TimerText =chickenCurrent+"";
+        CharSequence TimerText =chickenCurrent + "";
         timeLabel = new Label(TimerText, skin, "large");
-
-        tables.add(ChickenImage.get(0)).size(clockSideLength).pad(3);
-        tables.add(ChickenImage.get(1)).size(clockSideLength).pad(3);
-        tables.add(ChickenImage.get(2)).size(clockSideLength).pad(3);
-        tables.add(ChickenImage.get(3)).size(clockSideLength).pad(3);
-        stage.addActor(tables);
+        //add images into the screen
+        table.add(chickenImage.get(0)).size(clockSideLength).pad(3);
+        table.add(chickenImage.get(1)).size(clockSideLength).pad(3);
+        table.add(chickenImage.get(2)).size(clockSideLength).pad(3);
+        table.add(chickenImage.get(3)).size(clockSideLength).pad(3);
+        stage.addActor(table);
     }
 
     @Override
     public void draw(SpriteBatch batch) {
+        // draw is handled by the stage
     }
 
+    /**
+     * Reduce food when time increase
+     */
     @Override
     public void update() {
         super.update();
         int minutes = timeCount.getMinutes();
         int seconds = timeCount.getSeconds();
-
         int dis = (minutes * 60 + seconds) / 3;
-        if(dis> countFoodSystem.getTimer()){
-            countFoodSystem.setDiffrence(1);
+        if(dis > countFoodSystem.getTimer()){
+            countFoodSystem.setDifference(1);
             countFoodSystem.setTimer(dis);
         }else {
-            countFoodSystem.setDiffrence(0);
+            countFoodSystem.setDifference(0);
         }
-        entity.getEvents().trigger("updateChicken", countFoodSystem.getDiffrence());
+        //update the water regularly
+        entity.getEvents().trigger("updateChicken", countFoodSystem.getDifference());
     }
 
     /**
-     * Updates the Chicken ui time on the ui.
+     * Updates the Chicken ui time by time increase.
      */
     public void updatePlayerTimerUI(int dis) {
-
-        if(dis>0){
-
-            if(ChickenImage.size()>0){
-                tables.reset();
-                tables.top().left();
-                tables.setFillParent(true);
-                tables.padTop(100f).padLeft(10f);
-                ChickenImage.remove(ChickenImage.size()-1);
-
-                for (Image ima: ChickenImage) {
-                    tables.add(ima).size(30f).pad(3);
+        if(dis > 0){
+            if(chickenImage.size() > 0){
+                table.reset();
+                table.top().left();
+                table.setFillParent(true);
+                table.padTop(100f).padLeft(10f);
+                chickenImage.remove(chickenImage.size() - 1);
+                for (Image ima: chickenImage) {
+                    table.add(ima).size(30f).pad(3);
                 }
             }
         }
     }
 
-
-    public ArrayList<Image> getHunger(){
-        return ChickenImage;
-    }
-
+    /**
+     * remove chickenImage by useing a for loop
+     */
     @Override
     public void dispose() {
         super.dispose();
         timeLabel.remove();
-        for (int i=0;i<ChickenImage.size();++i){
-            ChickenImage.remove(i);
+        for (int i = 0; i < chickenImage.size(); ++i){
+            chickenImage.remove(i);
         }
     }
 
-    //add a image/remove a image
+    /**
+     * return the chickenImage
+     */
+    public ArrayList<Image> getHunger(){
+        return chickenImage;
+    }
+
+    /**
+     * Add/remove a image
+     * @param value = 1, add a image;
+     * @param value = -1, remove a image
+     */
     public static void addOrRemoveImage(int value){
-        if(value==1){
-            if(ChickenImage.size()<4){
-                ChickenImage.add(new Image(ServiceLocator.getResourceService()
+        if(value == 1){
+            if(chickenImage.size() < 4){
+                chickenImage.add(new Image(ServiceLocator.getResourceService()
                         .getAsset("images/food1.png", Texture.class)));
-                tables.add(ChickenImage.get(ChickenImage.size()-1)).size(30f).pad(3);
+                table.add(chickenImage.get(chickenImage.size() - 1)).size(30f).pad(3);
             }
-
-        }else if(value==-1){
-            if(ChickenImage.size()>0){
-                tables.removeActor(ChickenImage.get(ChickenImage.size()-1));
+        }else if(value == -1){
+            if(chickenImage.size() > 0){
+                table.removeActor(chickenImage.get(chickenImage.size() - 1));
             }
         }
     }
 
+    /**
+     * when player have no food, this function will return true
+     */
+    public boolean isHunger(){
+        return chickenImage.size() <= 0;
+    }
 
-/*    *//**
+    /*    *//**
      * test buff effect for the first aid kit increases 1 food image
      * @param target entity of food
      *//*
     public void increaseFood(Entity target) {
 
         if (target != null) {
-            if (FoodDisplay.ChickenImage.size() < 4) {
+            if (FoodDisplay.chickenImage.size() < 4) {
                 FoodDisplay.addOrRemoveImage(1);
             }
         }
