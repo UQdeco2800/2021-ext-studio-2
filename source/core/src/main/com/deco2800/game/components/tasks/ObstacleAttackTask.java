@@ -38,7 +38,7 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     @Override
     public void start() {
         super.start();
-        MainGameScreen.setSpownFacehugger(owner.getEntity().getPosition());
+        DrawEnemy();
     }
 
 
@@ -53,6 +53,9 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
         }
 
         return -1;
+    }
+    public void DrawEnemy(){
+        MainGameScreen.setSpownFacehugger(owner.getEntity().getPosition());
     }
 
     private float getDistanceToTarget() {

@@ -1,31 +1,30 @@
-
 face_resize.png
 size: 1536,388
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-face1
+baolian1
   rotate: false
   xy: 0, 0
   size: 384, 388
   orig: 384, 388
   offset: 0, 0
   index: -1
-face2
+baolian1
   rotate: false
   xy: 384, 0
   size: 384, 388
   orig: 384, 388
   offset: 0, 0
   index: -1
-face3
+baolian1
   rotate: false
   xy: 768, 0
   size: 384, 388
   orig: 384, 388
   offset: 0, 0
   index: -1
-face4
+baolian1
   rotate: false
   xy: 1152, 0
   size: 384, 388
