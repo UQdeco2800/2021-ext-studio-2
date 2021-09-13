@@ -17,7 +17,7 @@ import com.deco2800.game.components.score.TimerDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.files.AchievementRecords;
+import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.files.GameInfo;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.input.InputDecorator;
@@ -36,7 +36,8 @@ import com.deco2800.game.components.maingame.MainGameExitDisplay;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import com.deco2800.game.components.foodAndwater.FoodDisplay;
+import com.deco2800.game.components.foodAndwater.WaterDisplay;
 /**
  * The game screen containing the main game.
  *
@@ -44,7 +45,11 @@ import org.slf4j.LoggerFactory;
  */
 public class MainGameScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-    private static final String[] mainGameTextures = {"images/heart.png", "images/clock.png", "images/scoreboard.png", "images/background.png"};
+    private static final String[] mainGameTextures = {"images/heart.png", "images/clockV2.png",
+            "images/scoreboardV2.png", "images/background.png","images/water1.png","images/food1.png",
+            "images/Sprint2_Buffs_Debuffs/Poisoning.png","images/Sprint2_Buffs_Debuffs/decrease_health.png","images" +
+            "/Sprint2_Buffs_Debuffs/increase_health.png","images/Sprint2_Buffs_Debuffs/decrease_speed.png"
+    };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 
 
@@ -261,7 +266,10 @@ public class MainGameScreen extends ScreenAdapter {
                 //display the score and the time -- team 9
                 .addComponent(new ScoreDisplay())
                 .addComponent(new TimerDisplay())
-                .addComponent(new TerminalDisplay());
+                .addComponent(new TerminalDisplay())
+                .addComponent(new FoodDisplay())
+                .addComponent(new WaterDisplay());
+
 
         ServiceLocator.getEntityService().register(ui);
     }
@@ -278,6 +286,6 @@ public class MainGameScreen extends ScreenAdapter {
          * NOTE: Perform all subsequent tasks after this has been called */
         GameInfo.incrementGameCount();
         /* Store the achievements record and in a JSON file and then reset achievements */
-        AchievementRecords.storeGameRecord();
+        GameRecords.storeGameRecord();
     }
 }

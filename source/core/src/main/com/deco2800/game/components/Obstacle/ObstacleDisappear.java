@@ -63,12 +63,20 @@ public class ObstacleDisappear extends Component {
      * obstacle (let it disappear).
      */
     void plantsDisappear(Fixture me, Fixture other) {
-        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-            logger.debug("PlantsDisappearStart was triggered.");
-            animator.getEntity().setRemoveTexture();
-            animator.startAnimation("obstacles");
-            animator.getEntity().setDisappearAfterAnimation(1f);
+        if (hitboxComponent.getFixture() != me) {
+            // Not triggered by hitbox, ignore
+            return;
         }
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return;
+        }
+
+        logger.debug("PlantsDisappearStart was triggered.");
+        animator.getEntity().setRemoveTexture();
+        animator.startAnimation("obstacles");
+        animator.getEntity().setDisappearAfterAnimation(1f);
+
     }
 
     /**
@@ -94,6 +102,11 @@ public class ObstacleDisappear extends Component {
     }
 
     private void meteoriteDisappear(Fixture me, Fixture other) {
+        if (hitboxComponent.getFixture() != me) {
+            // Not triggered by hitbox, ignore
+            return;
+        }
+
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
             logger.debug("meteoriteDisappear was triggered.");
             animator.getEntity().setRemoveTexture();
