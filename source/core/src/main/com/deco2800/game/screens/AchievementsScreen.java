@@ -10,7 +10,7 @@ import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.files.AchievementRecords;
+import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
@@ -100,7 +100,7 @@ public class AchievementsScreen extends ScreenAdapter {
     private void createUI() {
         logger.debug("Creating achievement screen ui");
 
-        List<BaseAchievementConfig> bestAchievements = AchievementRecords.getBestRecords();
+        List<BaseAchievementConfig> bestAchievements = GameRecords.getBestRecords();
         Stage stage = ServiceLocator.getRenderService().getStage();
 
         Entity ui = new Entity();

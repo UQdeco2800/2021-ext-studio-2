@@ -23,7 +23,7 @@ public class HistoryScoreScreen extends ScreenAdapter {
     private final Renderer renderer;
     private final HistoryScoreDisplay historyScoreDisplay;
     private static final String[] historyScoreTextures =
-            {"images/historyScoreBoard.png", "images/achievements/achievementBackground.png"};
+            {"images/historyScoreBoard.png", "images/historyScoreBg.png"};
 
 
     public HistoryScoreScreen(GdxGame game) {

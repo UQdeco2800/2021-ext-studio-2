@@ -17,7 +17,7 @@ import com.deco2800.game.components.score.TimerDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.files.AchievementRecords;
+import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.files.GameInfo;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.input.InputDecorator;
@@ -45,8 +45,8 @@ import com.deco2800.game.components.foodAndwater.WaterDisplay;
  */
 public class MainGameScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-    private static final String[] mainGameTextures = {"images/heart.png", "images/clock.png",
-            "images/scoreboard.png", "images/background.png","images/water1.png","images/food1.png",
+    private static final String[] mainGameTextures = {"images/heart.png", "images/clockV2.png",
+            "images/scoreboardV2.png", "images/background.png","images/water1.png","images/food1.png",
             "images/Sprint2_Buffs_Debuffs/Poisoning.png","images/Sprint2_Buffs_Debuffs/decrease_health.png","images" +
             "/Sprint2_Buffs_Debuffs/increase_health.png","images/Sprint2_Buffs_Debuffs/decrease_speed.png"
     };
@@ -286,6 +286,6 @@ public class MainGameScreen extends ScreenAdapter {
          * NOTE: Perform all subsequent tasks after this has been called */
         GameInfo.incrementGameCount();
         /* Store the achievements record and in a JSON file and then reset achievements */
-        AchievementRecords.storeGameRecord();
+        GameRecords.storeGameRecord();
     }
 }
