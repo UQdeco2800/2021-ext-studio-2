@@ -43,16 +43,15 @@ public class PlayerFactory {
         InputComponent inputComponent =
                 ServiceLocator.getInputService().getInputFactory().createForPlayer();
 
-        AnimationRenderComponent mpcAnimator = createAnimationComponent("images/mpc/MPC_Animation.atlas");
+        AnimationRenderComponent mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation.atlas");
         mpcAnimator.addAnimation("main_player_run", 0.1f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_walk", 0.5f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_front", 1f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_jump", 2.5f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_attack", 1f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_crouch", 1f, Animation.PlayMode.LOOP);
-        mpcAnimator.addAnimation("main_player_pickup", 1f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_right", 1f, Animation.PlayMode.LOOP);
-        mpcAnimator.addAnimation("main_player_pickup",0.25f,Animation.PlayMode.LOOP);
+        mpcAnimator.addAnimation("main_player_pickup",0.125f,Animation.PlayMode.LOOP);
 
         AnimationRenderComponent buffAnimator = createAnimationComponent("images/buff.atlas");
         buffAnimator.addAnimation("buffIncrease", 0.1f, Animation.PlayMode.LOOP);
