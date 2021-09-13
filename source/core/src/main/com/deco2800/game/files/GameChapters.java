@@ -1,6 +1,9 @@
 package com.deco2800.game.files;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+
+import static com.deco2800.game.files.AchievementRecords.getGoldAchievementsCount;
 
 public class GameChapters {
 
@@ -8,25 +11,20 @@ public class GameChapters {
         return FileLoader.readClass(Chapters.class, "configs/story.json").chapters;
     }
 
+    /**
+     * Returns the number of chapters
+     *
+     * @return unlocked chapters
+     */
     public static List<GameChapters.Chapter> getUnlockedChapters() {
 
         List<GameChapters.Chapter> chapters = getChapters();
 
-        Set<String> goldAchievements = new LinkedHashSet<>();
-
         /* Extracting gold achievements unlocked by the player */
-        for (Map.Entry<Integer, AchievementRecords.Record> e :
-                AchievementRecords.getRecords().records.entrySet()) {
-            AchievementRecords.Record value = e.getValue();
-            value.achievements.forEach(a -> {
-                if (a.type.equals("GOLD")) {
-                    goldAchievements.add(a.name);
-                }
-            });
-        }
+        int goldAchievements = getGoldAchievementsCount();
 
         /* The number of unlocked gold achievements equals the number of unlocked chapters */
-        for (int i = 0; i < goldAchievements.size(); i++) {
+        for (int i = 0; i < goldAchievements; i++) {
             if (i < chapters.size()) {
                 chapters.get(i).unlocked = true;
             }
@@ -34,6 +32,7 @@ public class GameChapters {
 
         return chapters;
     }
+
 
     public static class Chapters {
         public List<Chapter> chapters = new LinkedList<>();
