@@ -23,6 +23,7 @@ public class GameOverScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private final Renderer renderer;
     private final GameOverDisplay gomd;
+    private static final String[] gameOverTextures = {"images/gameOver.png", "images/background.png"};
 
 
     public GameOverScreen(GdxGame game) {
@@ -35,6 +36,7 @@ public class GameOverScreen extends ScreenAdapter {
         renderer.getCamera().getEntity().setPosition(2f, 1f);
         Stage stage = ServiceLocator.getRenderService().getStage();
         Entity ui = new Entity();
+        loadAssets();
         gomd = new GameOverDisplay(game);
         ui.addComponent(gomd).addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
@@ -64,6 +66,13 @@ public class GameOverScreen extends ScreenAdapter {
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
         ServiceLocator.clear();
+    }
+
+    private void loadAssets() {
+        logger.debug("Loading assets");
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.loadTextures(gameOverTextures);
+        ServiceLocator.getResourceService().loadAll();
     }
 
 }

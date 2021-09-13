@@ -1,7 +1,9 @@
 package com.deco2800.game.components.achievements;
 
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -37,6 +39,10 @@ public class AchievementsDisplay extends UIComponent {
 
         loadAssets();
         addActors();
+
+        bonusLabel = new Label("", new Label.LabelStyle(new BitmapFont(), Color.GOLD));
+        bonusLabel.setFontScale(1.4f);
+        bonusLabel.setAlignment(100);
 
         /* Listen to achievement events*/
         entity.getEvents().addListener("updateAchievement", this::updateAchievementsUI);
@@ -162,9 +168,7 @@ public class AchievementsDisplay extends UIComponent {
                 ("images/achievements/bonusBg.png", Texture.class));
         String s = "+";
         CharSequence text = s.concat(Integer.toString(achievement.bonus));
-        bonusLabel = new Label(text, skin, "small");
-        bonusLabel.setFontScale(1.4f, 1.4f);
-        bonusLabel.setAlignment(100);
+        bonusLabel.setText(text);
         tableForBonusBg.add(bonusImg).size(150f, 45f);
         tableForBonus.add(bonusLabel).padBottom(10f).padRight(60f);
 

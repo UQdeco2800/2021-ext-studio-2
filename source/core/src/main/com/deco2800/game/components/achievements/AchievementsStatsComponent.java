@@ -7,7 +7,6 @@ import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.services.ServiceLocator;
 
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -192,7 +191,7 @@ public class AchievementsStatsComponent extends Component {
 
         boolean valid = false;
         if (achievement.condition.time != -1) {
-            valid = achievement.condition.time * 1000L <= time;
+            valid = achievement.condition.time * 60000L <= time;
             if (!valid) {
                 return false;
             }

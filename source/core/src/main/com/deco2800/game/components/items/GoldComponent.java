@@ -60,6 +60,7 @@ public class GoldComponent extends Component {
         if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) // checking if the collision is done with the player
         {
             entity.getEvents().trigger("itemPickedUp");
+            entity.getEvents().trigger(("itemPickUp"));
             AchievementsHelper.getInstance().trackItemPickedUpEvent();
             this.player.getComponent(InventoryComponent.class).addGold(1);
             Body physBody = entity.getComponent(PhysicsComponent.class).getBody();

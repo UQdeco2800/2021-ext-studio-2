@@ -4,30 +4,30 @@
       "name": "Veteran",
       "type": "BRONZE",
       "iconPath": "images/achievements/veteranBronze.png",
-      "message": "Survived for 10 minutes!",
+      "message": "Survived for 1 minute!",
       "bonus": 10,
       "condition": {
-        "time": 10
+        "time": 1
       }
     },
     {
       "name": "Veteran",
       "type": "SILVER",
       "iconPath": "images/achievements/veteranSilver.png",
-      "message": "Survived for 15 minutes!",
+      "message": "Survived for 3 minutes!",
       "bonus": 15,
       "condition": {
-        "time": 15
+        "time": 3
       }
     },
     {
       "name": "Veteran",
       "type": "GOLD",
       "iconPath": "images/achievements/veteranGold.png",
-      "message": "Survived for 20 minutes!",
+      "message": "Survived for 9 minutes!",
       "bonus": 20,
       "condition": {
-        "time": 20
+        "time": 9
       }
     },
     {
@@ -70,7 +70,7 @@
       "message": "You have successfully picked up 10 items!",
       "bonus": 10,
       "condition": {
-        "itemCount": 1
+        "itemCount": 10
       }
     },
     {
@@ -80,7 +80,7 @@
       "message": "You have successfully picked up 15 items!",
       "bonus": 15,
       "condition": {
-        "itemCount": 2
+        "itemCount": 15
       }
     },
     {
@@ -90,7 +90,7 @@
       "message": "You have successfully picked up 20 items!",
       "bonus": 20,
       "condition": {
-        "itemCount": 3
+        "itemCount": 20
       }
     },
     {
@@ -100,60 +100,60 @@
       "message": "You have successfully picked up 5 first aids!",
       "bonus": 10,
       "condition": {
-        "firstAids": 1
+        "firstAids": 5
       }
     },
     {
       "name": "Healer",
       "type": "SILVER",
       "iconPath": "images/achievements/healerSilver.png",
-      "message": "You have successfully picked up 10 first aids!",
+      "message": "You have successfully picked up 15 first aids!",
       "bonus": 15,
       "condition": {
-        "firstAids": 2
+        "firstAids": 15
       }
     },
     {
       "name": "Healer",
       "type": "GOLD",
       "iconPath": "images/achievements/healerGold.png",
-      "message": "You have successfully picked up 15 first aids!",
+      "message": "You have successfully picked up 30 first aids!",
       "bonus": 20,
       "condition": {
-        "firstAids": 3
+        "firstAids": 30
       }
     },
     {
       "name": "Stranger",
       "type": "BRONZE",
       "iconPath": "images/achievements/strangerBronze.png",
-      "message": "Wow! You managed not to pick up any items for first 10 minutes!",
+      "message": "Wow! You managed not to pick up any items for first 4 minutes!",
       "bonus": 10,
       "condition": {
         "itemCount": 0,
-        "time": 10
+        "time": 4
       }
     },
     {
       "name": "Stranger",
       "type": "SILVER",
       "iconPath": "images/achievements/strangerSilver.png",
-      "message": "Wow! You managed not to pick up any items for first 15 minutes!",
+      "message": "Wow! You managed not to pick up any items for first 7 minutes!",
       "bonus": 15,
       "condition": {
         "itemCount": 0,
-        "time": 15
+        "time": 7
       }
     },
     {
       "name": "Stranger",
       "type": "GOLD",
       "iconPath": "images/achievements/strangerGold.png",
-      "message": "Wow! You managed not to pick up any items for first 20 minutes!",
+      "message": "Wow! You managed not to pick up any items for first 11 minutes!",
       "bonus": 20,
       "condition": {
         "itemCount": 0,
-        "time": 20
+        "time": 11
       }
     },
     {
