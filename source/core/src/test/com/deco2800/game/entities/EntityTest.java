@@ -180,7 +180,7 @@ class EntityTest {
   }
 
     @Test
-    void shouldDisappearAfterAnimation() {
+    void shouldStopOrDisposeAfterAnimation() {
       Entity entity = new Entity();
 
       AnimationRenderComponent animator = mock(AnimationRenderComponent.class);
@@ -218,7 +218,7 @@ class EntityTest {
     }
 
     @Test
-    void shouldDispose() {
+    void shouldDisposeComponentAfterSetDispose() {
       Entity entity = new Entity();
       TestComponent1 component = spy(TestComponent1.class);
       entity.addComponent(component);
