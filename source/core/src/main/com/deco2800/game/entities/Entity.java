@@ -78,7 +78,7 @@ public class Entity {
     public void setDisappearAfterAnimation(float animationTime) {
         this.disappear = true;
         this.animationTime = animationTime;
-        logger.debug("Setting disappear={} on entity {}", removeTexture, this);
+        logger.debug("Setting disappear={} on entity {}", disappear, this);
     }
 
     /**

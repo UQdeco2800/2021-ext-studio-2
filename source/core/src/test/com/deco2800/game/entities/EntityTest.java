@@ -11,9 +11,14 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.extensions.GameExtension;
+import com.deco2800.game.physics.PhysicsService;
+import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.TextureRenderComponent;
+import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -174,7 +179,61 @@ class EntityTest {
     verify(component, times(0)).update();
   }
 
-  static class TestComponent1 extends Component {}
+    @Test
+    void shouldDisappearAfterAnimation() {
+      Entity entity = new Entity();
+
+      AnimationRenderComponent animator = mock(AnimationRenderComponent.class);
+      animator.addAnimation("try",0.2f, Animation.PlayMode.LOOP);
+      entity.addComponent(animator);
+
+      TestComponent1 component = spy(TestComponent1.class);
+      entity.addComponent(component);
+
+      entity.create();
+      EntityService entityService = mock(EntityService.class);
+      ServiceLocator.registerEntityService(entityService);
+
+      entity.setDisappearAfterAnimation(1f);
+      when(animator.getAnimationPlayTime()).thenReturn(1.1f);
+
+      entity.update();
+      verify(animator).stopAnimation();
+      verify(component).dispose();
+    }
+
+    @Test
+    void shouldRemoveTexture() {
+      Entity entity = new Entity();
+
+      TextureRenderComponent textureRenderComponent = mock(TextureRenderComponent.class);
+      entity.addComponent(textureRenderComponent);
+
+      entity.create();
+
+      entity.setRemoveTexture();
+
+      entity.update();
+      verify(textureRenderComponent).dispose();
+    }
+
+    @Test
+    void shouldDispose() {
+      Entity entity = new Entity();
+      TestComponent1 component = spy(TestComponent1.class);
+      entity.addComponent(component);
+
+      entity.create();
+      EntityService entityService = mock(EntityService.class);
+      ServiceLocator.registerEntityService(entityService);
+
+      entity.setDispose();
+
+      entity.update();
+      verify(component).dispose();
+    }
+
+    static class TestComponent1 extends Component {}
 
   static class TestComponent2 extends Component {}
 }
