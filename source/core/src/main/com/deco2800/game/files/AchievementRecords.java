@@ -3,6 +3,7 @@ package com.deco2800.game.files;
 import com.deco2800.game.components.achievements.AchievementsStatsComponent;
 import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
+import com.deco2800.game.entities.factories.AchievementFactory;
 
 import java.io.File;
 import java.util.*;
@@ -18,7 +19,7 @@ public class AchievementRecords {
      * Stores the records of the most recent game played into a JSON file
      * Note: Run this method only after the in game count has updated
      */
-    public static void storeGameRecord(){
+    public static void storeGameRecord() {
         Record record = new Record();
 
         record.game = GameInfo.getGameCount();
@@ -41,7 +42,7 @@ public class AchievementRecords {
         return getRecords().findByGame(game).achievements;
     }
 
-    public static List<BaseAchievementConfig> getBestRecords(){
+    public static List<BaseAchievementConfig> getBestRecords() {
         Map<String, BaseAchievementConfig> bestAchievementsMap = new LinkedHashMap<>();
 
         /* The following algorithm to extract the best achievements can be optimized later. */
@@ -86,18 +87,36 @@ public class AchievementRecords {
         return bestAchievements;
     }
 
-    /**
-     * Store the new records in JSON file
-     * @param records new records
-     */
-    public static void setRecords(Records records){
-        FileLoader.writeClass(records, path, EXTERNAL);
+    public static List<BaseAchievementConfig> getNextUnlockAchievements() {
+        List<BaseAchievementConfig> betterAchievements = new LinkedList<>();
+
+        Set<String> nextUnlocks = new LinkedHashSet<>();
+
+        getBestRecords().forEach(achievement -> {
+            nextUnlocks.add(achievement.name);
+        });
+
+        AchievementFactory.getAchievements().forEach(achievement -> {
+            if (!nextUnlocks.contains(achievement.name) && achievement.type.equals("BRONZE")) {
+                betterAchievements.add(achievement);
+            }
+        });
+        return betterAchievements;
     }
 
 
-    public static Records getRecords(){
+    public static Records getRecords() {
         Records records = FileLoader.readClass(Records.class, path, EXTERNAL);
         return records != null ? records : new Records();
+    }
+
+    /**
+     * Store the new records in JSON file
+     *
+     * @param records new records
+     */
+    public static void setRecords(Records records) {
+        FileLoader.writeClass(records, path, EXTERNAL);
     }
 
     /**
@@ -114,15 +133,16 @@ public class AchievementRecords {
          * @param game the game number
          * @return records of a particular game (null if absent)
          */
-        public Record findByGame(int game){
+        public Record findByGame(int game) {
             return records.get(game);
         }
 
         /**
          * Add a new record to the mapping
+         *
          * @param record the record to be added
          */
-        public void add(Record record){
+        public void add(Record record) {
             records.put(record.game, record);
         }
     }
@@ -133,13 +153,21 @@ public class AchievementRecords {
      * Games are identified based on the game numbers.
      */
     public static class Record {
-        /** The game number (nth game played) */
+        /**
+         * The game number (nth game played)
+         */
         public int game = 0;
-        /** A unique record id */
+        /**
+         * A unique record id
+         */
         public String id = UUID.randomUUID().toString();
-        /** List of unlocked achievements */
+        /**
+         * List of unlocked achievements
+         */
         public List<BaseAchievementConfig> achievements = new LinkedList<>();
-        /** Score of that particular game */
+        /**
+         * Score of that particular game
+         */
         public int score = 0;
     }
 }
