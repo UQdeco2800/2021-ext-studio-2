@@ -17,6 +17,9 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles how to display the history scores on HistoryScoreScreen
+ */
 public class HistoryScoreDisplay extends UIComponent {
 
     private static final Logger logger = LoggerFactory.getLogger(HistoryScoreDisplay.class);
@@ -26,6 +29,10 @@ public class HistoryScoreDisplay extends UIComponent {
     private Table bgTable;
     private Image board;
 
+    /**
+     * Constructor of display class.
+     * @param game the game.
+     */
     public HistoryScoreDisplay(GdxGame game) {
         this.game = game;
     }
@@ -36,6 +43,9 @@ public class HistoryScoreDisplay extends UIComponent {
         createHistoryScoreBoard();
     }
 
+    /**
+     * Use tables, labels, images and buttons to create the board.
+     */
     private void createHistoryScoreBoard() {
         // Create components on the score board
         TextButton mainMenuButton = new TextButton("Main Menu", skin);
