@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
+import com.deco2800.game.components.buff.Buff;
 import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.components.items.InventorySystem;
 import com.deco2800.game.components.items.ItemBar;
@@ -188,6 +189,8 @@ public class ForestGameArea extends GameArea {
 
         player = spawnPlayer();
         spawnObstacles();
+        Buff buff = new Buff(player);
+        buff.addHealth();
         pro = new InventorySystem(player);
         spawnFirstAid();
         spawnGold();

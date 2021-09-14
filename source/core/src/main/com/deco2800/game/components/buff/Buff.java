@@ -26,8 +26,6 @@ public class Buff  {
             playerComponent.addIncreaseHealthImage();
         }
         component.addHealth(10);
-        this.player.getEvents().trigger(("buffStart"));
-
     }
 
     public void increaseHealthLimit(){

@@ -12,6 +12,7 @@ public class DeBuff{
      * player
      */
     private Entity player;
+    private Boolean stopFlag = false;
     /**
      * player's status
      */
@@ -39,14 +40,17 @@ public class DeBuff{
      * @throws InterruptedException
      */
     public void poisoning() throws InterruptedException {
+        this.stopFlag = false;
         PlayerStatsDisplay playerComponent = this.player.getComponent(PlayerStatsDisplay.class);
         if (playerComponent!=null){
             playerComponent.addPoisoningImage();
         }
         for (int i = 0; i < 3; i++) {
-            component.addHealth(-10);
-            this.player.getEvents().trigger(("deBuffStart"));
-            Thread.sleep(200);
+            if (!stopFlag){
+                component.addHealth(-10);
+                this.player.getEvents().trigger(("deBuffStart"));
+                Thread.sleep(500);
+            }
         }
         if (playerComponent!=null){
             playerComponent.removePoisoningImage();
@@ -54,15 +58,25 @@ public class DeBuff{
 
     }
 
+    public void removePoisoning()   {
+        this.stopFlag = true;
+    }
     /**
      * Player's movement will be slow
+     * @throws InterruptedException
      */
     public void slowSpeed()  {
         PlayerStatsDisplay playerComponent = this.player.getComponent(PlayerStatsDisplay.class);
         if (playerComponent!=null){
             playerComponent.addDecreaseSpeedImage();
         }
+
         player.updateSpeed(new Vector2(2,8));
+
+    }
+
+    public void removeSlowSpeed()   {
+        player.updateSpeed(new Vector2(4,8));
     }
 
     /**
