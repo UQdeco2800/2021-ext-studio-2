@@ -10,7 +10,7 @@ import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.files.AchievementRecords;
+import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
@@ -28,6 +28,7 @@ public class AchievementsScreen extends ScreenAdapter {
     private static final String[] achievementTextures = AchievementFactory.getTextures();
     private static final String[] backgroundImages = {"images/achievements/achievementBackground.png", "images/story/chapterDialog.png"};
     private static final String chapterPath = "images/story/chapter";
+    private static final String[] chapterArt = {"images/story/chapter1art.png", "images/story/chapter2art.png"};
     private final GdxGame game;
     private final Renderer renderer;
 
@@ -53,6 +54,7 @@ public class AchievementsScreen extends ScreenAdapter {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(achievementTextures);
         resourceService.loadTextures(backgroundImages);
+        resourceService.loadTextures(chapterArt);
         for (int i = 1; i < 6; i++) {
             resourceService.loadTextures(new String[]{chapterPath + i + ".png"});
         }
@@ -100,7 +102,7 @@ public class AchievementsScreen extends ScreenAdapter {
     private void createUI() {
         logger.debug("Creating achievement screen ui");
 
-        List<BaseAchievementConfig> bestAchievements = AchievementRecords.getBestRecords();
+        List<BaseAchievementConfig> bestAchievements = GameRecords.getBestRecords();
         Stage stage = ServiceLocator.getRenderService().getStage();
 
         Entity ui = new Entity();

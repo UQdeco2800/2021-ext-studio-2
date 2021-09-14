@@ -3,9 +3,7 @@ package com.deco2800.game.services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-/** controls the game score
- * */
+/** controls the game score */
 public class ScoreService {
     private static Logger logger = LoggerFactory.getLogger(ScoreService.class);
     private int bonus;

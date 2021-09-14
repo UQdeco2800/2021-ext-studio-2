@@ -59,13 +59,14 @@ public class ScoreDisplay extends UIComponent {
         // Score Board
         float boardSideLength = 250f;
         scoreBoard = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/scoreboard.png", Texture.class));
+                .getAsset("images/scoreboardV2.png", Texture.class));
 
         // Score text
         int score = 0;
         CharSequence scoreText = "" + score;
         scoreLabel = new Label(scoreText, new Label.LabelStyle(new BitmapFont(), Color.VIOLET));
         scoreLabel.setFontScale(2f);
+
         tableForBoard.add(scoreBoard).size(boardSideLength);
         tableForText.add(scoreLabel);
         stage.addActor(tableForBoard);

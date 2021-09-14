@@ -49,7 +49,7 @@ public class Bag implements BagInterface {
         //These two does not affect each other.
         //old way
         scoringSystem.addToScore(10);
-        //alternative way
+        //using ScoreService
         ServiceLocator.getScoreService().addToScore(10);
     }
     public void remove(Entity e) {

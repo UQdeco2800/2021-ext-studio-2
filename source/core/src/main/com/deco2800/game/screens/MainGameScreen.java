@@ -7,6 +7,7 @@ import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.areas.terrain.TerrainFactory;
+import com.deco2800.game.components.items.PropsShopDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.maingame.MainGameDisplay;
 import com.deco2800.game.components.CombatStatsComponent;
@@ -17,7 +18,7 @@ import com.deco2800.game.components.score.TimerDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.files.AchievementRecords;
+import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.files.GameInfo;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.input.InputDecorator;
@@ -36,6 +37,8 @@ import com.deco2800.game.components.maingame.MainGameExitDisplay;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.deco2800.game.components.foodAndwater.FoodDisplay;
+import com.deco2800.game.components.foodAndwater.WaterDisplay;
 
 /**
  * The game screen containing the main game.
@@ -44,9 +47,11 @@ import org.slf4j.LoggerFactory;
  */
 public class MainGameScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-    private static final String[] mainGameTextures =
-            {"images/heart.png", "images/clock.png", "images/clock_animation.png","images/scoreboard.png", "images/background.png"};
-    private static final String[] mainGameTexturesAtlases = {"images/clock.atlas"};
+    private static final String[] mainGameTextures = {"images/heart.png", "images/clockV2.png",
+            "images/scoreboardV2.png", "images/background.png", "images/water1.png", "images/food1.png",
+            "images/Sprint2_Buffs_Debuffs/Poisoning.png", "images/Sprint2_Buffs_Debuffs/decrease_health.png", "images" +
+            "/Sprint2_Buffs_Debuffs/increase_health.png", "images/Sprint2_Buffs_Debuffs/decrease_speed.png"
+    };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 
 
@@ -99,11 +104,13 @@ public class MainGameScreen extends ScreenAdapter {
     /**
      * Set the location where the monster is spawned, and called by start() in ObstacleAttackTask.java.
      * The variable is used by the spokenFacehugger(). This function plays a role in render().
+     *
      * @param position Where the monster spawns.
      */
     public static void setSpownFacehugger(Vector2 position) {
         facehuggerPosition = position;
         spownFacehugger = true;
+        logger.debug("Set facehuggerPosition = {}, spownFacehugger = {}", facehuggerPosition, spownFacehugger);
     }
 
     /**
@@ -113,6 +120,7 @@ public class MainGameScreen extends ScreenAdapter {
         if (spownFacehugger) {
             forestGameArea.spawnFaceWorm(facehuggerPosition);
             spownFacehugger = false;
+            logger.debug("Set spownFacehugger = {}", spownFacehugger);
         }
     }
 
@@ -129,6 +137,7 @@ public class MainGameScreen extends ScreenAdapter {
         } else { // double set
             MainGameScreen.slowPlayerTime += slowPlayerTime;
         }
+        logger.debug("Set slowPlayer = {}, Total slowPlayerTime = {}", slowPlayer, slowPlayerTime);
     }
 
 
@@ -139,9 +148,11 @@ public class MainGameScreen extends ScreenAdapter {
         if (slowPlayer) {
             slowPlayerTime -= ServiceLocator.getTimeSource().getDeltaTime();
             if (slowPlayerTime > 0) {
+                logger.debug("Slow player remain time = {}", slowPlayerTime);
                 player.setPosition((float) (player.getPosition().x - 0.06), player.getPosition().y);
             } else {
                 slowPlayer = false;
+                logger.debug("End of slow player");
             }
         }
     }
@@ -189,6 +200,7 @@ public class MainGameScreen extends ScreenAdapter {
             forestGameArea.spawnObstacles();
             // Generate meteorites
             forestGameArea.spawnMeteorites(0, 1, 2, 1, 1, 2);
+            // Generate enemies
             forestGameArea.spawnFlyingMonkey();
         }
         // Generate monster
@@ -234,7 +246,6 @@ public class MainGameScreen extends ScreenAdapter {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(mainGameTextures);
-        resourceService.loadTextureAtlases(mainGameTexturesAtlases);
         ServiceLocator.getResourceService().loadAll();
     }
 
@@ -242,7 +253,6 @@ public class MainGameScreen extends ScreenAdapter {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(mainGameTextures);
-        resourceService.unloadAssets(mainGameTexturesAtlases);
     }
 
     /**
@@ -265,7 +275,10 @@ public class MainGameScreen extends ScreenAdapter {
                 //display the score and the time -- team 9
                 .addComponent(new ScoreDisplay())
                 .addComponent(new TimerDisplay())
-                .addComponent(new TerminalDisplay());
+                .addComponent(new TerminalDisplay())
+                .addComponent(new FoodDisplay())
+                .addComponent(new WaterDisplay());
+
 
         ServiceLocator.getEntityService().register(ui);
     }
@@ -282,8 +295,6 @@ public class MainGameScreen extends ScreenAdapter {
          * NOTE: Perform all subsequent tasks after this has been called */
         GameInfo.incrementGameCount();
         /* Store the achievements record and in a JSON file and then reset achievements */
-        AchievementRecords.storeGameRecord();
-        /* Store the player score in the score history */
-        ServiceLocator.getScoreService().saveCurrentScoreToHistory();
+        GameRecords.storeGameRecord();
     }
 }
