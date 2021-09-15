@@ -136,7 +136,7 @@ public class WaterDisplay extends UIComponent {
         if(value == 1){
             if(waterImage.size() < 4){
                 waterImage.add(new Image(ServiceLocator.getResourceService()
-                        .getAsset("images/food1.png", Texture.class)));
+                        .getAsset("images/water1.png", Texture.class)));
                 table.add(waterImage.get(waterImage.size() - 1)).size(30f).pad(3);
             }
         }else if(value == -1){

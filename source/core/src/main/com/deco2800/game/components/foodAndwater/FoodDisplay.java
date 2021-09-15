@@ -86,7 +86,7 @@ public class FoodDisplay extends UIComponent {
         }else {
             countFoodSystem.setDifference(0);
         }
-        //update the water regularly
+        //update the food regularly
         entity.getEvents().trigger("updateChicken", countFoodSystem.getDifference());
     }
 
