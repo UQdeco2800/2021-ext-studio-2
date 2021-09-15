@@ -1,5 +1,6 @@
 package com.deco2800.game.screens;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -11,6 +12,8 @@ import com.deco2800.game.components.items.PropsShopDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.maingame.MainGameDisplay;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
+import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.score.ScoreDisplay;
 import com.deco2800.game.components.score.ScoringSystem;
 import com.deco2800.game.components.score.ScoringSystemV1;
@@ -35,6 +38,7 @@ import com.deco2800.game.ui.terminal.Terminal;
 import com.deco2800.game.ui.terminal.TerminalDisplay;
 import com.deco2800.game.components.maingame.MainGameExitDisplay;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
+import com.deco2800.game.utils.math.Vector2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.deco2800.game.components.foodAndwater.FoodDisplay;
@@ -61,6 +65,14 @@ public class MainGameScreen extends ScreenAdapter {
 
     private static Vector2 facehuggerPosition;
     private static boolean spownFacehugger;
+
+    public static spaceshipAttack spaceshipState = spaceshipAttack.Before; /////////////////////////////////////////////////////////////////
+    private static Vector2 positionHitSpaceship;
+    public static float spaceshipTime = 10f;
+
+    public static enum spaceshipAttack {
+        Before, Start, On, Finish;
+    }
 
     private Entity player;
     private ForestGameArea forestGameArea;
@@ -157,6 +169,57 @@ public class MainGameScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * Generate monsters based on the position of the enemy monkey, which is called by render().
+     */
+    public static void setSpaceshipAttack() {
+        spaceshipState = spaceshipAttack.Start;
+    }
+
+    /**
+     * Set the position and status of the character according to the state of the spacecraft, which is called by render().
+     */
+    private void SpaceshipAttackScene() {
+        switch (spaceshipState) {
+            case Start:
+//                System.out.println("Start");
+                positionHitSpaceship = player.getPosition();
+                player.setPosition(player.getPosition().x - 8, player.getPosition().y);
+                player.setPosition((float) (player.getPosition().x - 0.05), player.getPosition().y);
+                // If the player is walking, stop
+                if (!player.getComponent(KeyboardPlayerInputComponent.class).getWalkDirection().epsilonEquals(Vector2.Zero)) {
+                    player.getComponent(KeyboardPlayerInputComponent.class).keyUp(Input.Keys.D);
+                }
+                spaceshipState = spaceshipAttack.On;
+                break;
+            case On:
+//                System.out.println("On");
+                player.setPosition((float) (player.getPosition().x - 0.05), player.getPosition().y);
+                spaceshipTime -= ServiceLocator.getTimeSource().getDeltaTime();
+                if (spaceshipTime <= 0) {
+                    spaceshipState = spaceshipAttack.Finish;
+                }
+                break;
+            case Finish:
+//                System.out.println("Finish");
+            default:
+        }
+    }
+
+    private void gerateObstaclesEnemiesByMapRefresh(int counter) {
+        // Control the spawning of spaceships or other obstacles
+        if (counter == 3) {
+            forestGameArea.spawnSpaceship();
+        } else {
+            // Generate obstacles
+            forestGameArea.spawnObstacles();
+            // Generate meteorites
+            forestGameArea.spawnMeteorites(0, 1, 2, 1, 1, 2);
+            // Generate enemies
+            forestGameArea.spawnFlyingMonkey();
+        }
+    }
+
     @Override
     public void render(float delta) {
 
@@ -180,34 +243,37 @@ public class MainGameScreen extends ScreenAdapter {
             return;
         }
 
-        // making player to move constantly
+        // Control the position of the character when the spaceship appears
+        SpaceshipAttackScene();
 
+        // making player to move constantly
         player.setPosition((float) (player.getPosition().x + 0.05), player.getPosition().y);
 
         // Centralize the screen to player
         Vector2 screenVector = player.getPosition();
         screenVector.y = 7f;
-        renderer.getCamera().getEntity().setPosition(screenVector);
+        // Update camera position (change based on team6 contribution)
+        if (spaceshipState == spaceshipAttack.On || spaceshipState == spaceshipAttack.Start ||
+                (spaceshipState == spaceshipAttack.Finish && screenVector.x <= positionHitSpaceship.x)) {
+            renderer.getCamera().getEntity().setPosition(new Vector2(positionHitSpaceship.x, 7f));
+        }
+        else {
+            renderer.getCamera().getEntity().setPosition(screenVector);
+        }
+
         // infinite loop for terrain and obstacles
         if (screenVector.x > (2 * counter + 1) * 10) {
             counter += 1;
             forestGameArea.showScrollingBackground(counter);
             forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2));
-//      forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
-//      forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
-
-            // Generate obstacles
-            forestGameArea.spawnObstacles();
-            // Generate meteorites
-            forestGameArea.spawnMeteorites(0, 1, 2, 1, 1, 2);
-            // Generate enemies
-            forestGameArea.spawnFlyingMonkey();
+            //      forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
+            //      forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
+            gerateObstaclesEnemiesByMapRefresh(counter);
         }
         // Generate monster
         spownFacehugger();
         // Thorns effect trigger
         slowPlayer();
-
     }
 
     @Override

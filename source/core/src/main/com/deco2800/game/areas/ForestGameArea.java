@@ -138,7 +138,7 @@ public class ForestGameArea extends GameArea {
             "images/mpc/mpcAnimation.png",
             "images/food1.png",
             "images/water1.png",
-
+            "images/ufo.png",
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas",
@@ -198,12 +198,14 @@ public class ForestGameArea extends GameArea {
         trackAchievements();
         setBonusItems(player);
         player.getEvents().addListener("B pressed", this::InvSys);
+
+//        spawnSpaceship();//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
-    public void InvSys()
-    {
+    public void InvSys() {
         pro.pressbutton();
     }
+
     private void showBackground() {
         Entity gameBg = new Entity();
         gameBg.addComponent(new BackgroundRenderComponent("images/background.png"));
@@ -344,7 +346,7 @@ public class ForestGameArea extends GameArea {
             loggerInfo += "Create Plants Obstacle at " + randomPos + "\t";
             loggerInfo += "Create Thorns Obstacle at " + randomPos2 + "\t";
         }
-        logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}", minPos.x, maxPos.x, randomPoints, loggerInfo);
+        logger.info("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}", minPos.x, maxPos.x, randomPoints, loggerInfo);
     }
 
     /**
@@ -352,7 +354,7 @@ public class ForestGameArea extends GameArea {
      */
     public void spawnFlyingMonkey() {
         int playerX = (int) player.getPosition().x;
-        GridPoint2 minPos = new GridPoint2(playerX + 10, 0);
+        GridPoint2 minPos = new GridPoint2(playerX + 21, 0);//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         GridPoint2 maxPos = new GridPoint2(playerX + 40, 0);
         GridPoint2 randomPosTwo = RandomUtils.randomX(11, minPos, maxPos);
         Entity Range = NPCFactory.createFlyingMonkey(player);
@@ -435,12 +437,27 @@ public class ForestGameArea extends GameArea {
                 bigNumRandom, midNumRandom, smallNumRandom, loggerInfo);
     }
 
+    /**
+     * Generate Spaceship at fixed location.
+     */
+    public void spawnSpaceship() {//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        int playerX = (int) player.getPosition().x;
+//        GridPoint2 minPos = new GridPoint2(playerX + 10, 0);
+//        GridPoint2 maxPos = new GridPoint2(playerX + 40, 0);
+//        GridPoint2 randomPosTwo = RandomUtils.randomX(11, minPos, maxPos);
+//        Entity Range = NPCFactory.createFlyingMonkey(player);
+        GridPoint2 position = new GridPoint2(playerX + 35, 3);
+        Entity spaceship = NPCFactory.createSpaceShip(player);
+        spawnEntityAt(spaceship, position, true, false);
+        System.out.println("spaceship position = " + position);
+//        logger.debug("Spawn a spaceship on position = {}", position);
+    }
 
     private void spawnFirstAid() {
 
         for (int i = 1; i < 31; i++) {
             GridPoint2 position = new GridPoint2(i * 3, 5);
-            Entity firstAid = ItemFactory.createFirstAid(player,pro);
+            Entity firstAid = ItemFactory.createFirstAid(player, pro);
             spawnEntityAt(firstAid, position, false, false);
         }
     }
