@@ -72,14 +72,14 @@ public class WaterDisplay extends UIComponent {
     }
 
     /**
-     * Reduce food when time increase
+     * Reduce water when time increase
      */
     @Override
     public void update() {
         super.update();
         int minutes = countTime.getMinutes();
         int seconds = countTime.getSeconds();
-        int dis = (minutes*60+seconds)/2;
+        int dis = (minutes * 60 + seconds)/ 10;
         if(dis> countWaterSystem.getTimer()){
             countWaterSystem.setDifference(1);
             countWaterSystem.setTimer(dis);

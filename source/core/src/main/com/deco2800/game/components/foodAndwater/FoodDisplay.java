@@ -79,7 +79,7 @@ public class FoodDisplay extends UIComponent {
         super.update();
         int minutes = timeCount.getMinutes();
         int seconds = timeCount.getSeconds();
-        int dis = (minutes * 60 + seconds) / 3;
+        int dis = (minutes * 60 + seconds)/ 15;
         if(dis > countFoodSystem.getTimer()){
             countFoodSystem.setDifference(1);
             countFoodSystem.setTimer(dis);
