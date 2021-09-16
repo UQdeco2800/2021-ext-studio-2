@@ -1,7 +1,6 @@
 package com.deco2800.game.components.achievements;
 
 import com.deco2800.game.components.Component;
-import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.services.ServiceLocator;
@@ -15,7 +14,6 @@ import java.util.stream.Collectors;
  */
 public class AchievementsStatsComponent extends Component {
     private static final List<BaseAchievementConfig> achievements = AchievementFactory.getAchievements();
-    private final ScoringSystemV1 scoringSystemV1;
     private int health;
     private long time;
     private int itemCount;
@@ -28,20 +26,7 @@ public class AchievementsStatsComponent extends Component {
 
 
     public AchievementsStatsComponent() {
-        scoringSystemV1 = new ScoringSystemV1();
-
         initStats();
-    }
-
-    private void initStats(){
-        itemCount = 0;
-        health = 100;
-        time = -1;
-
-        bonusItemSign = false;
-
-        score = 0;
-        firstAids = 0;
     }
 
     /**
@@ -70,6 +55,17 @@ public class AchievementsStatsComponent extends Component {
      */
     public static void resetAchievements() {
         achievements.forEach(achievement -> achievement.unlocked = false);
+    }
+
+    private void initStats() {
+        itemCount = 0;
+        health = 100;
+        time = -1;
+
+        bonusItemSign = false;
+
+        score = 0;
+        firstAids = 0;
     }
 
     @Override
@@ -122,12 +118,12 @@ public class AchievementsStatsComponent extends Component {
         setTime(currentTime);
 
 
-        if(bonusItemSign) {
+        if (bonusItemSign) {
             AchievementsHelper.getInstance().getEvents().trigger("spawnBonusItem");
             bonusItemSign = false;
         }
 
-        setScore(scoringSystemV1.getScore());
+        setScore(ServiceLocator.getScoreService().getScore());
 
     }
 
@@ -150,6 +146,7 @@ public class AchievementsStatsComponent extends Component {
         ++firstAids;
         checkForValidAchievements();
     }
+
     public void setFirstAidByVal(int firstAids) {
         this.firstAids = firstAids;
         checkForValidAchievements();
