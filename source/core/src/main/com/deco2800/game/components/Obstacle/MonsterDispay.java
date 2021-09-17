@@ -4,9 +4,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.services.ServiceLocator;
@@ -41,9 +43,65 @@ public class MonsterDispay extends UIComponent {
         createHistoryScoreBoard();
     }
 
+    /**
+     * Returns an image button to be reused everywhere.
+     * @param path the image path
+     * @return ImageButton to be displayed
+     */
+    private ImageButton getImageButton(String path) {
+        return new ImageButton(new TextureRegionDrawable(new TextureRegion(
+                new Texture(path))));
+    }
+
     private void createHistoryScoreBoard() {
-        // Create components on the score board
+        // Create Button to the monster menu
         TextButton mainMenuButton = new TextButton("Main Menu", skin);
+        ImageButton unlockedChapterImg = getImageButton("images/obstacle_1_new.png");
+        ImageButton unlockedChapterImg2 = getImageButton("images/obstacle2_vision2.png");
+        ImageButton unlockedChapterImg3 = getImageButton("images/stone1.png");
+        ImageButton unlockedChapterImg4 = getImageButton("images/monkey_original.png");
+        ImageButton unlockedChapterImg5 = getImageButton("images/Facehugger.png");
+
+
+
+
+        unlockedChapterImg.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                entity.getEvents().trigger("openDetailPage");
+            }
+        });
+
+        unlockedChapterImg2.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                entity.getEvents().trigger("openDetailPage2");
+            }
+        });
+        unlockedChapterImg3.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                entity.getEvents().trigger("openDetailPage3");
+            }
+        });
+
+        unlockedChapterImg4.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                entity.getEvents().trigger("openDetailPage4");
+            }
+        });
+        unlockedChapterImg5.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                entity.getEvents().trigger("openDetailPage5");
+            }
+        });
+
+
+
+
+
         mainMenuButton.addListener(
                 new ChangeListener() {
                     @Override
@@ -64,10 +122,10 @@ public class MonsterDispay extends UIComponent {
         Label monsterName = new Label("Alien plant", skin,"large");
         Image plantImg = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/obstacle_1_new.png", Texture.class));
-        monster1Table.left().top().padLeft(450).padTop(40);
+        monster1Table.left().top().padLeft(460).padTop(75);
         monster1Table.add(monsterName);
         monster1Table.setFillParent(true);
-        monster1Table.add(plantImg).size(130,130).padLeft(85).padBottom(30);
+        monster1Table.add(unlockedChapterImg).size(100,100).padLeft(85).padBottom(30);
 
 
         monster2Table = new Table();
@@ -78,37 +136,37 @@ public class MonsterDispay extends UIComponent {
         monster2Table.left().top().padLeft(450).padTop(170);
         monster2Table.setFillParent(true);
         monster2Table.add(monster2Name);
-        monster2Table.add(thornImg).size(130,130).padLeft(75).padBottom(30);
+        monster2Table.add(unlockedChapterImg2).size(120,120).padLeft(75).padBottom(30);
 
 
         Monster3Table = new Table();
         Label monster3Name = new Label("Meteorite", skin,"large");
         Image stoneImg = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/stone1.png", Texture.class));
-        Monster3Table.left().top().padLeft(450).padTop(300);
+        Monster3Table.left().top().padLeft(450).padTop(290);
         Monster3Table.setFillParent(true);
         Monster3Table.add(monster3Name);
-        Monster3Table.add(stoneImg).size(120,120).padLeft(110).padBottom(40);
+        Monster3Table.add(unlockedChapterImg3).size(100,100).padLeft(110).padBottom(40);
 
 
         Monster4Table = new Table();
         Label monster4Name = new Label("Alien Monkey", skin,"large");
         Image monkeyImg = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/monkey_original.png", Texture.class));
-        Monster4Table.left().top().padLeft(450).padTop(470);
+        Monster4Table.left().top().padLeft(450).padTop(420);
         Monster4Table.setFillParent(true);
         Monster4Table.add(monster4Name);
-        Monster4Table.add(monkeyImg).size(120,120).padLeft(60);
+        Monster4Table.add(unlockedChapterImg4).size(130,130).padLeft(50);
 
 
         Monster5Table = new Table();
         Label monster5Name = new Label("Face Worm", skin,"large");
         Image bugImg = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/Facehugger.png", Texture.class));
-        Monster5Table.left().top().padLeft(450).padTop(600);
+        Monster5Table.left().top().padLeft(450).padTop(530);
         Monster5Table.setFillParent(true);
         Monster5Table.add(monster5Name);
-        Monster5Table.add(bugImg).size(130,130).padLeft(90);
+        Monster5Table.add(unlockedChapterImg5).size(130,130).padLeft(85);
 
 
 
@@ -127,6 +185,7 @@ public class MonsterDispay extends UIComponent {
 
         buttonTable.setFillParent(true);
         buttonTable.add(mainMenuButton);
+       // buttonTable.add(unlockedChapterImg);
 
         box = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/monster_menu/Monsterbox.jpg", Texture.class));
