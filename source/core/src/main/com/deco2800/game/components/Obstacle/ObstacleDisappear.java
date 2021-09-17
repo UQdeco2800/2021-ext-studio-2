@@ -28,13 +28,14 @@ public class ObstacleDisappear extends Component {
      * The types of obstacles and enemies are used to determine the type of entity that triggers the event.
      */
     public enum ObstacleType {
-        PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm;
+        PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm, spaceship;/////////////////////////////////////////////////////////////////
     }
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleDisappear.class);
     AnimationRenderComponent animator;
     HitboxComponent hitboxComponent;
     ObstacleType obstacleType;
+    private static boolean spaceshipAttack = false;
 
     public ObstacleDisappear(ObstacleType obstacleType) {
         this.obstacleType = obstacleType;
@@ -56,6 +57,9 @@ public class ObstacleDisappear extends Component {
                 break;
             case FaceWorm:
                 entity.getEvents().addListener("collisionStart", this::faceWormDisappear);
+                break;
+            case spaceship:
+                entity.getEvents().addListener("collisionStart", this::spaceShipAttack);
                 break;
             default:
                 logger.error("No corresponding event.");
@@ -134,6 +138,25 @@ public class ObstacleDisappear extends Component {
             animator.getEntity().setDisappearAfterAnimation(1.5f);
         }
 
+    }
+
+    void spaceShipAttack(Fixture me, Fixture other) {
+        if (spaceshipAttack) {
+            return;
+        }
+        if (hitboxComponent.getFixture() != me) {
+            // Not triggered by hitbox, ignore
+            return;
+        }
+
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return;
+        }
+        MainGameScreen.setSpaceshipAttack();
+        System.out.println("spaceShipAttack was triggered.");
+        spaceshipAttack = true;
+        this.entity.setSpaceShipDispose();
     }
 
 }

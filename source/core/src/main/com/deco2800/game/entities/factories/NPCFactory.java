@@ -3,6 +3,7 @@ package com.deco2800.game.entities.factories;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Obstacle.ObstacleDisappear;
@@ -93,6 +94,39 @@ public class NPCFactory {
     Monkey.setScale(2.3f, 2.3f);
     logger.debug("Create a Flying Monkey");
     return Monkey;
+  }
+
+  /**
+   * Create Space Ship
+   */
+  public static Entity createSpaceShip(Entity target) {
+
+    Entity spaceship = new Entity();
+//
+//    AITaskComponent aiComponent =
+//            new AITaskComponent()
+//                    .addTask(new ObstacleAttackTask(target,10,6f));
+//
+//    AnimationRenderComponent animator =
+//            new AnimationRenderComponent(
+//                    ServiceLocator.getResourceService()
+//                            .getAsset("images/monkey.atlas", TextureAtlas.class));
+
+//    animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
+
+    spaceship
+            .addComponent(new TextureRenderComponent("images/ufo.png"))
+            .addComponent(new PhysicsComponent())
+            .addComponent(new PhysicsMovementComponent())
+            .addComponent(new ColliderComponent())
+            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+            .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.spaceship));
+
+    spaceship.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
+//    animator.startAnimation("1m");
+    spaceship.setScale(10f, 10f);
+//    logger.debug("Create a Flying Monkey");
+    return spaceship;
   }
 
 
