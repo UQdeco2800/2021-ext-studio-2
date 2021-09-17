@@ -68,6 +68,7 @@ public class NPCFactory {
     logger.debug("Create a Face Worm");
     return FaceWorm;
   }
+
   /**
    * Create Flying Monkey
    */
@@ -97,7 +98,7 @@ public class NPCFactory {
   }
 
   /**
-   * Create Space Ship
+   * Create Spaceship
    */
   public static Entity createSpaceShip(Entity target) {
 
@@ -120,13 +121,48 @@ public class NPCFactory {
             .addComponent(new PhysicsMovementComponent())
             .addComponent(new ColliderComponent())
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-            .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.spaceship));
+            .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Spaceship));
 
     spaceship.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
 //    animator.startAnimation("1m");
     spaceship.setScale(10f, 10f);
 //    logger.debug("Create a Flying Monkey");
     return spaceship;
+  }
+
+  /**
+   * Create Space Ship
+   */
+  public static Entity createSmallMissile(Entity target) {
+    BaseEntityConfig config = configs.smallMissile;
+    Entity missile = new Entity();
+//
+//    AITaskComponent aiComponent =
+//            new AITaskComponent()
+//                    .addTask(new ObstacleAttackTask(target,10,6f));
+//
+//    AnimationRenderComponent animator =
+//            new AnimationRenderComponent(
+//                    ServiceLocator.getResourceService()
+//                            .getAsset("images/monkey.atlas", TextureAtlas.class));
+
+//    animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
+
+    missile
+            .addComponent(new TextureRenderComponent("images/rocket-ship-launch.png"))
+            .addComponent(new PhysicsComponent())
+            .addComponent(new PhysicsMovementComponent())
+//            .addComponent(new ColliderComponent())
+            .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+            .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+            .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.SmallMissile));
+
+    missile.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.DynamicBody);
+//    animator.startAnimation("1m");
+    missile.setScale(1.5f, 0.75f);
+//    logger.debug("Create a Flying Monkey");
+    return missile;
   }
 
 
@@ -152,6 +188,8 @@ public class NPCFactory {
     PhysicsUtils.setScaledCollider(npc, 0.9f, 0.4f);
     return npc;
   }
+
+
 
   private NPCFactory() {
     throw new IllegalStateException("Instantiating static util class");

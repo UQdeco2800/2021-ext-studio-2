@@ -69,6 +69,7 @@ public class MainGameScreen extends ScreenAdapter {
     public static spaceshipAttack spaceshipState = spaceshipAttack.Before; /////////////////////////////////////////////////////////////////
     private static Vector2 positionHitSpaceship;
     public static float spaceshipTime = 10f;
+    private int counterSmallMissile = 0;
 
     public static enum spaceshipAttack {
         Before, Start, On, Finish;
@@ -77,6 +78,7 @@ public class MainGameScreen extends ScreenAdapter {
     private Entity player;
     private ForestGameArea forestGameArea;
     private int counter = 0;
+
 
     private static boolean slowPlayer = false;
     private static float slowPlayerTime;
@@ -196,9 +198,44 @@ public class MainGameScreen extends ScreenAdapter {
 //                System.out.println("On");
                 player.setPosition((float) (player.getPosition().x - 0.05), player.getPosition().y);
                 spaceshipTime -= ServiceLocator.getTimeSource().getDeltaTime();
+
                 if (spaceshipTime <= 0) {
                     spaceshipState = spaceshipAttack.Finish;
+
+                } else if (spaceshipTime <= 5 && counterSmallMissile%100 == 0) {
+                    System.out.println("Hard counterSmallMissile = " + counterSmallMissile);
+
+                    // 难
+                    switch (counterSmallMissile) {
+                        case 300:
+                            forestGameArea.spawnSmallMissile(new Vector2(85, 5));
+                            forestGameArea.spawnSmallMissile(new Vector2(85, 11));
+                            break;
+                        case 400:
+                            forestGameArea.spawnSmallMissile(new Vector2(85, 8));
+                            forestGameArea.spawnSmallMissile(new Vector2(85, 11));
+                            break;
+                        case 500:
+                            forestGameArea.spawnSmallMissile(new Vector2(85, 5));
+                            forestGameArea.spawnSmallMissile(new Vector2(85, 8));
+                    }
+
+                } else if (spaceshipTime <= 10 && counterSmallMissile%100 == 0) {
+                    System.out.println("Essay counterSmallMissile = " + counterSmallMissile);
+                    // 简单
+                    switch (counterSmallMissile) {
+                        case 0:
+                            forestGameArea.spawnSmallMissile(new Vector2(85, 5f));
+                            break;
+                        case 100:
+                            forestGameArea.spawnSmallMissile(new Vector2(85, 8f));
+                            break;
+                        case 200:
+                            forestGameArea.spawnSmallMissile(new Vector2(85, 11f));
+                    }
                 }
+
+                counterSmallMissile++;
                 break;
             case Finish:
 //                System.out.println("Finish");
