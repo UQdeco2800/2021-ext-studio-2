@@ -18,7 +18,6 @@ public class ScoreService {
         gametime = new GameTime();
         bonus = 0;
     }
-
     /**
      * Add bonus points to the score
      * @param bonus bonus points
