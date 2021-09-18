@@ -171,6 +171,44 @@ public class ObstacleFactory {
         return meteorite;
     }
 
+    /**
+     * Creates a Thorns Obstacle.
+     *
+     * @param target character.
+     * @return the thorns obstacle entity
+     */
+    public static Entity createPortalEntrance(Entity target) {
+
+//        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody);
+
+//        AnimationRenderComponent animator =
+//                new AnimationRenderComponent(
+//                        ServiceLocator.getResourceService()
+//                                .getAsset("images/obstacle_2.atlas", TextureAtlas.class));
+//        animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
+
+        Entity portal =
+                new Entity()
+                .addComponent(new PhysicsComponent())
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+//                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
+
+                .addComponent(new TextureRenderComponent("images/portal.png"))
+//                .addComponent(animator)
+//                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+//                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+                .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Portal));
+
+        PhysicsUtils.setScaledCollider(portal, 2f, 4f);
+        portal.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        portal.setScale(2, 4);
+
+//        logger.debug("Create a Thorns Obstacle");
+
+        return portal;
+    }
+
+
 
     /**
      * Creates an invisible physics wall.

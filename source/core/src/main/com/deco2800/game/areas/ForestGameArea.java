@@ -142,6 +142,7 @@ public class ForestGameArea extends GameArea {
             "images/water1.png",
             "images/ufo.png",
             "images/rocket-ship-launch.png",
+            "images/portal.png",
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas",
@@ -201,6 +202,7 @@ public class ForestGameArea extends GameArea {
         trackAchievements();
         setBonusItems(player);
         player.getEvents().addListener("B pressed", this::InvSys);
+        spawnPortal(new Vector2(10, 10));
     }
 
     public void InvSys() {
@@ -467,6 +469,19 @@ public class ForestGameArea extends GameArea {
         smallMissile.getComponent(PhysicsComponent.class).getBody().setGravityScale(0.3f);
         logger.debug("Spawn a small missile on position = {}", position);
         System.out.println("Spawn a small missile on position = "+ position);
+    }
+
+
+    /**
+     * Generate Small Missile at Spaceship location. Called by render() in MainGameScreen.java
+     *
+     * @param position the location of Spaceship
+     */
+    public void spawnPortal(Vector2 position) {
+        Entity portal = ObstacleFactory.createPortalEntrance(player);
+        spawnEntityAt(portal, position, true, true);
+//        logger.debug("Spawn a small missile on position = {}", position);
+//        System.out.println("Spawn a small missile on position = "+ position);
     }
 
 
