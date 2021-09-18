@@ -89,7 +89,7 @@ public class GameRecords {
         return list;
     }
 
-    public static List<BaseAchievementConfig> getBestRecords() {
+    public static List<BaseAchievementConfig> getAllTimeBestAchievements() {
         Map<String, BaseAchievementConfig> bestAchievementsMap = new LinkedHashMap<>();
 
         // Map of unlocked gold achievements
@@ -123,6 +123,33 @@ public class GameRecords {
         return new LinkedList<>(bestAchievementsMap.values());
     }
 
+    public static List<BaseAchievementConfig> getBestAchievementsByGame(int game) {
+        List<BaseAchievementConfig> achievements = getAchievementsByGame(game);
+
+        Map<String, BaseAchievementConfig> bestAchievements = new LinkedHashMap<>();
+
+        // Add gold achievements to list
+        achievements.forEach(achievement -> {
+            if (achievement.type.equals("GOLD")) {
+                bestAchievements.put(achievement.name, achievement);
+            }
+        });
+        // Add silver achievements to list if gold counterparts are locked
+        achievements.forEach(achievement -> {
+            if (achievement.type.equals("SILVER")) {
+                bestAchievements.putIfAbsent(achievement.name, achievement);
+            }
+        });
+        // Add bronze to list if silver and gold counterparts are locked
+        achievements.forEach(achievement -> {
+            if (achievement.type.equals("BRONZE")) {
+                bestAchievements.putIfAbsent(achievement.name, achievement);
+            }
+        });
+
+        return new LinkedList<>(bestAchievements.values());
+    }
+
     public static Records getRecords() {
         Records records = FileLoader.readClass(Records.class, path, EXTERNAL);
         return records != null ? records : new Records();
@@ -147,7 +174,7 @@ public class GameRecords {
 
         Set<String> nextUnlocks = new LinkedHashSet<>();
 
-        getBestRecords().forEach(achievement -> {
+        getAllTimeBestAchievements().forEach(achievement -> {
             nextUnlocks.add(achievement.name);
         });
 
