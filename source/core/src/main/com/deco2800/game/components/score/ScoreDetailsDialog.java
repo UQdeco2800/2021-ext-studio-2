@@ -1,7 +1,13 @@
 package com.deco2800.game.components.score;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.files.GameRecords.Score;
@@ -34,7 +40,11 @@ public class ScoreDetailsDialog extends UIComponent {
         dialog.setModal(true);
         dialog.setMovable(false);
         dialog.setResizable(true);
+        Image background = new Image(new Texture("images/story/chapterDialog.png"));
+        background.setScaling(Scaling.fit);
+        dialog.setBackground(background.getDrawable());
 
+        dialog.pad(50).padTop(120);
         // Render the date
         String date = DateTimeUtils.getVerboseDate(score.getDateTime());
 
@@ -44,12 +54,25 @@ public class ScoreDetailsDialog extends UIComponent {
         // Render the list of the best achievements with name, asset and bonus
 
         // Render final score
-
+        dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
         // Show dialog on screen
         dialog.show(stage);
     }
 
+    private ImageButton renderCloseButton() {
+        Image crossButtonImg = new Image(new Texture("images/achievements/crossButton.png"));
 
+        ImageButton closeButton = new ImageButton(crossButtonImg.getDrawable());
+
+        closeButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                dialog.hide();
+            }
+        });
+
+        return closeButton;
+    }
     private void closeDialog(){
         dialog.hide();
     }
