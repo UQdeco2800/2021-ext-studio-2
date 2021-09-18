@@ -30,7 +30,7 @@ public class ScoreDetailsDialog extends UIComponent {
 
     private void openDialog(Score score, List<BaseAchievementConfig> bestAchievements) {
         // Display gui
-        dialog = new Dialog("LOL", skin);
+        dialog = new Dialog("", skin);
         dialog.setModal(true);
         dialog.setMovable(false);
         dialog.setResizable(true);
