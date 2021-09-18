@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.tasks.ObstacleAttackTask;
 import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
@@ -31,7 +32,13 @@ public class MonsterDispay extends UIComponent {
     private Table Monster3Table;
     private Table Monster4Table;
     private Table Monster5Table;
+    private Table secretTable;
+    private Table secretTable2;
+    private Table secretTable3;
+    private Table secretTable4;
+    private Table secretTable5;
     private Image box;
+
 
     public MonsterDispay(GdxGame game) {
         this.game = game;
@@ -122,10 +129,10 @@ public class MonsterDispay extends UIComponent {
         Label monsterName = new Label("Alien plant", skin,"large");
         Image plantImg = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/obstacle_1_new.png", Texture.class));
-        monster1Table.left().top().padLeft(460).padTop(75);
+        monster1Table.left().top().padLeft(460).padTop(85);
         monster1Table.add(monsterName);
         monster1Table.setFillParent(true);
-        monster1Table.add(unlockedChapterImg).size(100,100).padLeft(85).padBottom(30);
+        monster1Table.add(unlockedChapterImg).size(90,90).padLeft(85).padBottom(30);
 
 
         monster2Table = new Table();
@@ -200,6 +207,37 @@ public class MonsterDispay extends UIComponent {
         bgTable.setFillParent(true);
         bgTable.add(bgImage).size(1400,1000);
 
+        Image secretImage = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/monster_menu/secret.jpg", Texture.class));
+        secretTable = new Table().padBottom(500);
+        secretTable.setFillParent(true);
+        secretTable.add(secretImage).size(380,105).padRight(20).padBottom(30);
+
+        Image secretImage2 = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/monster_menu/secret.jpg", Texture.class));
+        secretTable2 = new Table().padBottom(250);
+        secretTable2.setFillParent(true);
+        secretTable2.add(secretImage2).size(380,105).padRight(20).padBottom(30);
+
+        Image secretImage3 = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/monster_menu/secret.jpg", Texture.class));
+        secretTable3 = new Table().padBottom(20);
+        secretTable3.setFillParent(true);
+        secretTable3.add(secretImage3).size(380,105).padRight(20).padBottom(30);
+
+        Image secretImage4 = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/monster_menu/secret.jpg", Texture.class));
+        secretTable4 = new Table().padTop(220);
+        secretTable4.setFillParent(true);
+        secretTable4.add(secretImage4).size(380,105).padRight(20).padBottom(30);
+
+        Image secretImage5 = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/monster_menu/secret.jpg", Texture.class));
+        secretTable5 = new Table().padTop(450);
+        secretTable5.setFillParent(true);
+        secretTable5.add(secretImage5).size(380,105).padRight(20).padBottom(30);
+
+
 
         // add the board to the stage first so that its can be under of score data
         stage.addActor(bgTable);
@@ -209,6 +247,27 @@ public class MonsterDispay extends UIComponent {
         stage.addActor(Monster3Table);
         stage.addActor(Monster4Table);
         stage.addActor(Monster5Table);
+        if (ObstacleDisappear.locked){
+            stage.addActor(secretTable);
+        }
+        if (ObstacleDisappear.locked2){
+            stage.addActor(secretTable2);
+        }
+
+        if (ObstacleDisappear.locked3){
+            stage.addActor(secretTable3);
+        }
+
+        if (ObstacleAttackTask.lock_use){
+            stage.addActor(secretTable4);
+        }
+
+        if (ObstacleAttackTask.lock_use){
+            stage.addActor(secretTable5);
+        }
+
+
+
         stage.addActor(buttonTable);
 
 
@@ -216,10 +275,13 @@ public class MonsterDispay extends UIComponent {
 
     }
 
+
+
     @Override
     public void dispose() {
         buttonTable.clear();
         boardTable.clear();
+
         bgTable.clear();
         super.dispose();
     }
