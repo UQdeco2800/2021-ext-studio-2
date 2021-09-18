@@ -36,7 +36,7 @@ public class MonsterDetails extends UIComponent {
         dialog.setModal(true);
         dialog.setMovable(false);
         dialog.setResizable(true);
-
+        Image plantImage = new Image(new Texture("images/story/chapter2art.png"));
         Label heading = new Label("Aline Plant Detail " , new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         Label story = new Label("In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel. The terror begins when the crew encounters a nest of eggs inside the alien ship. An organism from inside an egg leaps out and attaches itself to one of the crew, causing him to fall into a coma.", new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
         heading.setFontScale(2f);
@@ -44,6 +44,7 @@ public class MonsterDetails extends UIComponent {
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
         dialog.getContentTable().add(heading).expandX().row();
+        dialog.getContentTable().add(plantImage).height(122).width(240).row();
         dialog.getContentTable().add(story).width(600).row();
         dialog.getButtonTable().add(renderCloseButton()).size(70, 70).row();
         dialog.show(stage);
@@ -55,7 +56,7 @@ public class MonsterDetails extends UIComponent {
         dialog.setModal(true);
         dialog.setMovable(false);
         dialog.setResizable(true);
-
+        Image thornImage = new Image(new Texture("images/story/chapter2art.png"));
         Label heading = new Label("Aline thorn Detail " , new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         Label story = new Label("In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel. The terror begins when the crew encounters a nest of eggs inside the alien ship. An organism from inside an egg leaps out and attaches itself to one of the crew, causing him to fall into a coma.", new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
         heading.setFontScale(2f);
@@ -63,6 +64,7 @@ public class MonsterDetails extends UIComponent {
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
         dialog.getContentTable().add(heading).expandX().row();
+        dialog.getContentTable().add(thornImage).height(122).width(240).row();
         dialog.getContentTable().add(story).width(600).row();
         dialog.getButtonTable().add(renderCloseButton()).size(70, 70).row();
         dialog.show(stage);
@@ -75,26 +77,27 @@ public class MonsterDetails extends UIComponent {
         dialog.setModal(true);
         dialog.setMovable(false);
         dialog.setResizable(true);
-
+        Image meteoriteImage = new Image(new Texture("images/story/chapter2art.png"));
         Label heading = new Label("meteorite Detail " , new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         Label story = new Label("In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel. The terror begins when the crew encounters a nest of eggs inside the alien ship.", new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
         heading.setFontScale(2f);
         story.setFontScale(1.3f);
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
+        dialog.getButtonTable().add(renderCloseButton()).size(50, 50).top();
         dialog.getContentTable().add(heading).expandX().row();
         dialog.getContentTable().add(story).width(600).row();
-        dialog.getButtonTable().add(renderCloseButton()).size(70, 70).row();
+        dialog.getContentTable().add(meteoriteImage).height(122).width(240).row();
         dialog.show(stage);
     }
 
     private void openDetailPage4() {
         logger.info("open details page4");
-        dialog = new Dialog("meteorite Detail", skin);
+        dialog = new Dialog("Aline Monkey Detail", skin);
         dialog.setModal(true);
         dialog.setMovable(false);
         dialog.setResizable(true);
-
+        Image MonkeyImage = new Image(new Texture("images/story/chapter2art.png"));
         Label heading = new Label("Aline Monkey Detail " , new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         Label story = new Label("In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel. The terror begins when the crew encounters a nest of eggs inside the alien ship.", new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
         heading.setFontScale(2f);
@@ -102,8 +105,9 @@ public class MonsterDetails extends UIComponent {
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
         dialog.getContentTable().add(heading).expandX().row();
+        dialog.getContentTable().add(MonkeyImage).height(122).width(240).row();
         dialog.getContentTable().add(story).width(600).row();
-        dialog.getButtonTable().add(renderCloseButton()).size(70, 70).row();
+        dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
         dialog.show(stage);
 
     }
@@ -114,7 +118,7 @@ public class MonsterDetails extends UIComponent {
         dialog.setModal(true);
         dialog.setMovable(false);
         dialog.setResizable(true);
-
+        Image wormImage = new Image(new Texture("images/story/chapter2art.png"));
         Label heading = new Label("Face Worm Detail" , new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         Label story = new Label("In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel. The terror begins when the crew encounters a nest of eggs inside the alien ship.", new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
         heading.setFontScale(2f);
@@ -122,6 +126,7 @@ public class MonsterDetails extends UIComponent {
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
         dialog.getContentTable().add(heading).expandX().row();
+        dialog.getContentTable().add(wormImage).height(122).width(240).row();
         dialog.getContentTable().add(story).width(600).row();
         dialog.getButtonTable().add(renderCloseButton()).size(70, 70).row();
         dialog.show(stage);
@@ -132,7 +137,7 @@ public class MonsterDetails extends UIComponent {
      * @return closeButton image
      */
     private ImageButton renderCloseButton() {
-        Image crossButtonImg = new Image(new Texture("images/achievements/crossButton.png"));
+        Image crossButtonImg = new Image(new Texture("images/monster_menu/back.png"));
 
         ImageButton closeButton = new ImageButton(crossButtonImg.getDrawable());
 
