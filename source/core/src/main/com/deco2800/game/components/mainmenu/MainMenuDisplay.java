@@ -40,11 +40,9 @@ public class MainMenuDisplay extends UIComponent {
                               .getAsset("images/menu_background/menu_background.png", Texture.class));
 
     TextButton startBtn = new TextButton("Start", skin);
-    TextButton loadBtn = new TextButton("Load", skin);
+
     TextButton settingsBtn = new TextButton("Settings", skin);
     TextButton exitBtn = new TextButton("Exit", skin);
-
-    TextButton gameOverBtn = new TextButton("Game Over", skin);
     //props shop
       TextButton propsShopBtn = new TextButton("Props Shop", skin);
     //Team9 History Scores
@@ -58,15 +56,6 @@ public class MainMenuDisplay extends UIComponent {
           public void changed(ChangeEvent changeEvent, Actor actor) {
             logger.debug("Start button clicked");
             entity.getEvents().trigger("start");
-          }
-        });
-
-    loadBtn.addListener(
-        new ChangeListener() {
-          @Override
-          public void changed(ChangeEvent changeEvent, Actor actor) {
-            logger.debug("Load button clicked");
-            entity.getEvents().trigger("load");
           }
         });
 
@@ -88,14 +77,6 @@ public class MainMenuDisplay extends UIComponent {
             entity.getEvents().trigger("exit");
           }
         });
-
-    gameOverBtn.addListener(new ChangeListener() {
-        @Override
-        public void changed(ChangeEvent event, Actor actor) {
-            logger.debug("Game Over button clicked");
-            entity.getEvents().trigger("gameOver");
-        }
-    });
 
       propsShopBtn.addListener(new ChangeListener() {
           @Override
@@ -127,13 +108,9 @@ public class MainMenuDisplay extends UIComponent {
     table.row();
     table.add(startBtn).padTop(30f);
     table.row();
-    table.add(loadBtn).padTop(15f);
-    table.row();
     table.add(settingsBtn).padTop(15f);
     table.row();
     table.add(exitBtn).padTop(15f);
-    table.row();
-    table.add(gameOverBtn).padTop(15f);
     table.row();
     table.add(propsShopBtn).padTop(15f);
     table.row();
