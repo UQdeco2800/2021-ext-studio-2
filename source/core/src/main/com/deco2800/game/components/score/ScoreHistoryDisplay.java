@@ -4,10 +4,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.files.GameRecords.Score;
 import com.deco2800.game.services.ServiceLocator;
@@ -18,6 +21,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ScoreHistoryDisplay extends UIComponent {
 
@@ -25,6 +30,7 @@ public class ScoreHistoryDisplay extends UIComponent {
     private static final int SCORE_DISPLAY_COUNT = 10;
 
     private final GdxGame game;
+    ImageButton trophyStatus;
     private Table boardTable;
     private Table buttonTable;
     private Table bgTable;
@@ -102,9 +108,12 @@ public class ScoreHistoryDisplay extends UIComponent {
             scoreDataTable.center();
             scoreDataTable.padBottom(padBottomValue).padLeft(300);
             scoreDataTable.setFillParent(true);
-            Label scoreLabel = new Label(score.getScore() + "", skin, "large");
-            scoreDataTable.add(scoreLabel);
+            Label scoreLabel = new Label(score.getScore().toString(), new Label.LabelStyle(new BitmapFont(),
+                    Color.BROWN));
 
+            scoreDataTable.add(scoreLabel);
+            trophyStatus = getStatusButton(score);
+            scoreDataTable.add(trophyStatus).size(25).padLeft(25);
             //date
             Table dateDataTable = new Table();
             dateDataTable.center();
@@ -114,7 +123,7 @@ public class ScoreHistoryDisplay extends UIComponent {
             String dateText = DateTimeUtils.getFormattedDateTime(score.getDateTime());
 
             Label dateLabel =
-                    new Label(dateText, skin, "large");
+                    new Label(dateText, new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
             dateDataTable.add(dateLabel);
 
             //add these two tables to the lists
@@ -146,6 +155,42 @@ public class ScoreHistoryDisplay extends UIComponent {
         gameCount.setFontScale(2f);
         gameCountTable.add(gameCount);
         stage.addActor(gameCountTable);
+    }
+
+    private ImageButton getStatusButton(Score score) {
+        List<BaseAchievementConfig> bestAchievementsByGame = GameRecords.getBestAchievementsByGame(score.game);
+        Set<String> unlockedAchievementTiers = bestAchievementsByGame.stream()
+                .map(achievement -> achievement.type)
+                .collect(Collectors.toSet());
+
+        if (unlockedAchievementTiers.contains("GOLD")) {
+            trophyStatus = getImageButton("images/achievements/achievementStatusGold.png");
+        } else if (unlockedAchievementTiers.contains("SILVER")) {
+            trophyStatus = getImageButton("images/achievements/achievementStatusSilver.png");
+        } else if (unlockedAchievementTiers.contains("BRONZE")) {
+            trophyStatus = getImageButton("images/achievements/achievementStatusBronze.png");
+        } else {
+            trophyStatus = getImageButton("images/achievements/achievementStatusNone.png");
+            trophyStatus.setColor(255f, 255f, 255f, 0.55f);
+        }
+        trophyStatus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                entity.getEvents().trigger("scoreDetailsDialog", score);
+            }
+        });
+        return trophyStatus;
+    }
+
+    /**
+     * Returns an image button to be reused everywhere.
+     *
+     * @param path the image path
+     * @return ImageButton to be displayed
+     */
+    private ImageButton getImageButton(String path) {
+        return new ImageButton(new TextureRegionDrawable(new TextureRegion(
+                new Texture(path))));
     }
 
     @Override
