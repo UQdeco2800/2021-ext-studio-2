@@ -351,7 +351,7 @@ public class ForestGameArea extends GameArea {
             loggerInfo += "Create Plants Obstacle at " + randomPos + "\t";
             loggerInfo += "Create Thorns Obstacle at " + randomPos2 + "\t";
         }
-        logger.info("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}", minPos.x, maxPos.x, randomPoints, loggerInfo);
+        logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}", minPos.x, maxPos.x, randomPoints, loggerInfo);
     }
 
     /**
@@ -454,7 +454,7 @@ public class ForestGameArea extends GameArea {
         GridPoint2 position = new GridPoint2(playerX + 35, 3);
         Entity spaceship = NPCFactory.createSpaceShip(player);
         spawnEntityAt(spaceship, position, true, false);
-        System.out.println("spaceship position = " + position);
+//        System.out.println("spaceship position = " + position);
 //        logger.debug("Spawn a spaceship on position = {}", position);
     }
 
@@ -470,7 +470,7 @@ public class ForestGameArea extends GameArea {
         smallMissile.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0.1f);
         smallMissile.getComponent(PhysicsComponent.class).getBody().setGravityScale(0.3f);
         logger.debug("Spawn a small missile on position = {}", position);
-        System.out.println("Spawn a small missile on position = "+ position);
+//        System.out.println("Spawn a small missile on position = "+ position);
     }
 
 

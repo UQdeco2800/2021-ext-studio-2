@@ -212,7 +212,7 @@ public class MainGameScreen extends ScreenAdapter {
             forestGameArea.spawnPortal(new Vector2(85, 8), ObstacleDisappear.ObstacleType.PortalEntrance);
 
         } else if (spaceshipTime <= 5 && counterSmallMissile % 100 == 0) {
-            System.out.println("Hard counterSmallMissile = " + counterSmallMissile);
+//            System.out.println("Hard counterSmallMissile = " + counterSmallMissile);
 
             // 难
             switch (counterSmallMissile) {
@@ -230,7 +230,7 @@ public class MainGameScreen extends ScreenAdapter {
             }
 
         } else if (spaceshipTime <= 10 && counterSmallMissile % 100 == 0) {
-            System.out.println("Essay counterSmallMissile = " + counterSmallMissile);
+//            System.out.println("Essay counterSmallMissile = " + counterSmallMissile);
             // 简单
             switch (counterSmallMissile) {
                 case 0:
@@ -301,7 +301,7 @@ public class MainGameScreen extends ScreenAdapter {
     private Vector2 changeCameraLens() {
         // Centralize the screen to player
         Vector2 screenVector = player.getPosition();
-        System.out.println("player.getPosition() = " + player.getPosition());
+//        System.out.println("player.getPosition() = " + player.getPosition());
 
         // Update camera position (change based on team6 contribution)
         switch (newMapStatus) {
