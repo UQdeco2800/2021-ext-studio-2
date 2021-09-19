@@ -162,7 +162,7 @@ public class ObstacleDisappear extends Component {
             return;
         }
         MainGameScreen.setSpaceshipAttack();
-        System.out.println("spaceShipAttack was triggered.");
+//        System.out.println("spaceShipAttack was triggered.");
         spaceshipAttack = true;
         this.entity.setSpaceShipDispose();
     }
@@ -178,7 +178,7 @@ public class ObstacleDisappear extends Component {
             return;
         }
 //        MainGameScreen.setSpaceshipAttack();
-        System.out.println("smallMissileAttack was triggered.");
+//        System.out.println("smallMissileAttack was triggered.");
 //        spaceshipAttack = true;
 //        this.entity.setSpaceShipDispose();
         this.entity.setDispose();
@@ -190,7 +190,7 @@ public class ObstacleDisappear extends Component {
             return;
         }
         MainGameScreen.setNewMapStatus(MainGameScreen.newMap.Begin);
-        System.out.println("portalTransfer was triggered.");
+//        System.out.println("portalTransfer was triggered.");
     }
 
 
@@ -200,6 +200,6 @@ public class ObstacleDisappear extends Component {
             return;
         }
         MainGameScreen.setNewMapStatus(MainGameScreen.newMap.Finish);
-        System.out.println("portalTransfer was triggered.");
+//        System.out.println("portalTransfer was triggered.");
     }
 }
