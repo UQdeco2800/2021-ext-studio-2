@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -242,20 +242,42 @@ int&nbsp;smallRandomRange)</code></th>
 </tr>
 <tr class="altColor" id="i8">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnRocksRandomly(int)">spawnRocksRandomly</a></span>&#8203;(int&nbsp;xValue)</code></th>
-<td class="colLast">&nbsp;</td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnPortal(com.badlogic.gdx.math.Vector2,com.deco2800.game.components.Obstacle.ObstacleDisappear.ObstacleType)">spawnPortal</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position,
+<a href="../components/Obstacle/ObstacleDisappear.ObstacleType.html" title="enum in com.deco2800.game.components.Obstacle">ObstacleDisappear.ObstacleType</a>&nbsp;type)</code></th>
+<td class="colLast">
+<div class="block">Generate Small Missile at Spaceship location.</div>
+</td>
 </tr>
 <tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnTerrain()">spawnTerrain</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnRocksRandomly(int)">spawnRocksRandomly</a></span>&#8203;(int&nbsp;xValue)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnSmallMissile(com.badlogic.gdx.math.Vector2)">spawnSmallMissile</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</code></th>
+<td class="colLast">
+<div class="block">Generate Small Missile at Spaceship location.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i11">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnSpaceship()">spawnSpaceship</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Generate Spaceship at fixed location.</div>
+</td>
+</tr>
+<tr class="altColor" id="i12">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnTerrain()">spawnTerrain</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor" id="i13">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnTerrainRandomly(int)">spawnTerrainRandomly</a></span>&#8203;(int&nbsp;xValue)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i11">
+<tr class="altColor" id="i14">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnWoodsRandomly(int)">spawnWoodsRandomly</a></span>&#8203;(int&nbsp;xValue)</code></th>
 <td class="colLast">&nbsp;</td>
@@ -429,6 +451,36 @@ int&nbsp;smallRandomRange)</span></div>
 <dd><code>bigRandomRange</code> - The number of large meteorites that may be randomly generated.</dd>
 <dd><code>midRandomRange</code> - The number of middle meteorites that may be randomly generated.</dd>
 <dd><code>smallRandomRange</code> - The number of small meteorites that may be randomly generated.</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="spawnSpaceship()">spawnSpaceship</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnSpaceship</span>()</div>
+<div class="block">Generate Spaceship at fixed location.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="spawnSmallMissile(com.badlogic.gdx.math.Vector2)">spawnSmallMissile</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnSmallMissile</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</span></div>
+<div class="block">Generate Small Missile at Spaceship location. Called by render() in MainGameScreen.java</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>position</code> - the location of Spaceship</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="spawnPortal(com.badlogic.gdx.math.Vector2,com.deco2800.game.components.Obstacle.ObstacleDisappear.ObstacleType)">spawnPortal</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnPortal</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position,
+<a href="../components/Obstacle/ObstacleDisappear.ObstacleType.html" title="enum in com.deco2800.game.components.Obstacle">ObstacleDisappear.ObstacleType</a>&nbsp;type)</span></div>
+<div class="block">Generate Small Missile at Spaceship location. Called by render() in MainGameScreen.java</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>position</code> - the location of Spaceship</dd>
 </dl>
 </section>
 </li>
