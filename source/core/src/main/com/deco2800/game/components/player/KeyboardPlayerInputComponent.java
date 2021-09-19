@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.input.InputComponent;
+import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.utils.math.Vector2Utils;
 
 /**
@@ -11,6 +12,9 @@ import com.deco2800.game.utils.math.Vector2Utils;
  * This input handler only uses keyboard input.
  */
 public class KeyboardPlayerInputComponent extends InputComponent {
+
+
+
   private final Vector2 walkDirection = Vector2.Zero.cpy();
 
   public KeyboardPlayerInputComponent() {
@@ -33,6 +37,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         return true;
       case Keys.D:
       case Keys.RIGHT:
+        if (MainGameScreen.spaceshipState == MainGameScreen.spaceshipAttack.On) {
+          return false;
+        }
         walkDirection.add(Vector2Utils.RIGHT);
         triggerWalkEvent();
         entity.getEvents().trigger(("walkRight"));
@@ -72,6 +79,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         return true;
       case Keys.D:
       case Keys.RIGHT:
+        if (MainGameScreen.spaceshipState == MainGameScreen.spaceshipAttack.On) {
+          return false;
+        }
         walkDirection.sub(Vector2Utils.RIGHT);
         entity.getEvents().trigger(("stopWalkRight"));
         triggerWalkEvent();
@@ -97,5 +107,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     } else {
       entity.getEvents().trigger("walk", walkDirection);
     }
+  }
+
+  public Vector2 getWalkDirection() {
+    return walkDirection;
   }
 }

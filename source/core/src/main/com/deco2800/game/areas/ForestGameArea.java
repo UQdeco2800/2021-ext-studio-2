@@ -3,8 +3,10 @@ package com.deco2800.game.areas;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.MassData;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.Obstacle.ObstacleDisappear;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.buff.Buff;
 import com.deco2800.game.components.buff.DeBuff;
@@ -12,6 +14,7 @@ import com.deco2800.game.components.items.InventorySystem;
 import com.deco2800.game.components.items.ItemBar;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
+import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.BackgroundRenderComponent;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
@@ -138,7 +141,9 @@ public class ForestGameArea extends GameArea {
             "images/mpc/mpcAnimation.png",
             "images/food1.png",
             "images/water1.png",
-
+            "images/ufo.png",
+            "images/rocket-ship-launch.png",
+            "images/portal.png",
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas",
@@ -198,12 +203,14 @@ public class ForestGameArea extends GameArea {
         trackAchievements();
         setBonusItems(player);
         player.getEvents().addListener("B pressed", this::InvSys);
+        spawnPortal(new Vector2(10, 10), ObstacleDisappear.ObstacleType.PortalEntrance);
+        spawnPortal(new Vector2(50, 55), ObstacleDisappear.ObstacleType.PortalExport);
     }
 
-    public void InvSys()
-    {
+    public void InvSys() {
         pro.pressbutton();
     }
+
     private void showBackground() {
         Entity gameBg = new Entity();
         gameBg.addComponent(new BackgroundRenderComponent("images/background.png"));
@@ -352,7 +359,7 @@ public class ForestGameArea extends GameArea {
      */
     public void spawnFlyingMonkey() {
         int playerX = (int) player.getPosition().x;
-        GridPoint2 minPos = new GridPoint2(playerX + 10, 0);
+        GridPoint2 minPos = new GridPoint2(playerX + 21, 0);
         GridPoint2 maxPos = new GridPoint2(playerX + 40, 0);
         GridPoint2 randomPosTwo = RandomUtils.randomX(11, minPos, maxPos);
         Entity Range = NPCFactory.createFlyingMonkey(player);
@@ -435,12 +442,56 @@ public class ForestGameArea extends GameArea {
                 bigNumRandom, midNumRandom, smallNumRandom, loggerInfo);
     }
 
+    /**
+     * Generate Spaceship at fixed location.
+     */
+    public void spawnSpaceship() {
+        int playerX = (int) player.getPosition().x;
+//        GridPoint2 minPos = new GridPoint2(playerX + 10, 0);
+//        GridPoint2 maxPos = new GridPoint2(playerX + 40, 0);
+//        GridPoint2 randomPosTwo = RandomUtils.randomX(11, minPos, maxPos);
+//        Entity Range = NPCFactory.createFlyingMonkey(player);
+        GridPoint2 position = new GridPoint2(playerX + 35, 3);
+        Entity spaceship = NPCFactory.createSpaceShip(player);
+        spawnEntityAt(spaceship, position, true, false);
+//        System.out.println("spaceship position = " + position);
+//        logger.debug("Spawn a spaceship on position = {}", position);
+    }
+
+    /**
+     * Generate Small Missile at Spaceship location. Called by render() in MainGameScreen.java
+     *
+     * @param position the location of Spaceship
+     */
+    public void spawnSmallMissile(Vector2 position) {
+        Entity smallMissile = NPCFactory.createSmallMissile(player);
+        spawnEntityAt(smallMissile, position, true, true);
+        smallMissile.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(-20,5), position, true);
+        smallMissile.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0.1f);
+        smallMissile.getComponent(PhysicsComponent.class).getBody().setGravityScale(0.3f);
+        logger.debug("Spawn a small missile on position = {}", position);
+//        System.out.println("Spawn a small missile on position = "+ position);
+    }
+
+
+    /**
+     * Generate Small Missile at Spaceship location. Called by render() in MainGameScreen.java
+     *
+     * @param position the location of Spaceship
+     */
+    public void spawnPortal(Vector2 position, ObstacleDisappear.ObstacleType type) {
+        Entity portal = ObstacleFactory.createPortal(player, type);
+        spawnEntityAt(portal, position, true, true);
+//        logger.debug("Spawn a small missile on position = {}", position);
+//        System.out.println("Spawn a small missile on position = "+ position);
+    }
+
 
     private void spawnFirstAid() {
 
         for (int i = 1; i < 31; i++) {
             GridPoint2 position = new GridPoint2(i * 3, 5);
-            Entity firstAid = ItemFactory.createFirstAid(player,pro);
+            Entity firstAid = ItemFactory.createFirstAid(player, pro);
             spawnEntityAt(firstAid, position, false, false);
         }
     }
