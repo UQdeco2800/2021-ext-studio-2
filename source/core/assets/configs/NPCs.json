@@ -14,7 +14,7 @@
   },
   "smallMissile": {
     "health": 100,
-    "baseAttack": 20
+    "baseAttack": 1
   }
 }
 

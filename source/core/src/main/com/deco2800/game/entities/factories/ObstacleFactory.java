@@ -177,7 +177,7 @@ public class ObstacleFactory {
      * @param target character.
      * @return the thorns obstacle entity
      */
-    public static Entity createPortalEntrance(Entity target) {
+    public static Entity createPortal(Entity target, ObstacleDisappear.ObstacleType type) {
 
 //        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody);
 
@@ -197,7 +197,7 @@ public class ObstacleFactory {
 //                .addComponent(animator)
 //                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
 //                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
-                .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Portal));
+                .addComponent(new ObstacleDisappear(type));
 
         PhysicsUtils.setScaledCollider(portal, 2f, 4f);
         portal.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);

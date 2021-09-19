@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.MassData;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.Obstacle.ObstacleDisappear;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.buff.Buff;
 import com.deco2800.game.components.buff.DeBuff;
@@ -202,7 +203,8 @@ public class ForestGameArea extends GameArea {
         trackAchievements();
         setBonusItems(player);
         player.getEvents().addListener("B pressed", this::InvSys);
-        spawnPortal(new Vector2(10, 10));
+        spawnPortal(new Vector2(10, 10), ObstacleDisappear.ObstacleType.PortalEntrance);
+        spawnPortal(new Vector2(50, 55), ObstacleDisappear.ObstacleType.PortalExport);
     }
 
     public void InvSys() {
@@ -477,8 +479,8 @@ public class ForestGameArea extends GameArea {
      *
      * @param position the location of Spaceship
      */
-    public void spawnPortal(Vector2 position) {
-        Entity portal = ObstacleFactory.createPortalEntrance(player);
+    public void spawnPortal(Vector2 position, ObstacleDisappear.ObstacleType type) {
+        Entity portal = ObstacleFactory.createPortal(player, type);
         spawnEntityAt(portal, position, true, true);
 //        logger.debug("Spawn a small missile on position = {}", position);
 //        System.out.println("Spawn a small missile on position = "+ position);

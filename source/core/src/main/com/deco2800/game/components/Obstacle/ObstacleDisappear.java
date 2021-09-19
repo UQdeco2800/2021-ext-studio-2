@@ -28,7 +28,7 @@ public class ObstacleDisappear extends Component {
      * The types of obstacles and enemies are used to determine the type of entity that triggers the event.
      */
     public enum ObstacleType {
-        PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm, Spaceship, SmallMissile, Portal;
+        PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm, Spaceship, SmallMissile, PortalEntrance, PortalExport;
     }
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleDisappear.class);
@@ -64,8 +64,11 @@ public class ObstacleDisappear extends Component {
             case SmallMissile:
                 entity.getEvents().addListener("collisionStart", this::smallMissileAttack);
                 break;
-            case Portal:
-                entity.getEvents().addListener("collisionStart", this::portalTransfer);
+            case PortalEntrance:
+                entity.getEvents().addListener("collisionStart", this::portalEntrance);
+                break;
+            case PortalExport:
+                entity.getEvents().addListener("collisionStart", this::portalExport);
                 break;
             default:
                 logger.error("No corresponding event.");
@@ -182,15 +185,22 @@ public class ObstacleDisappear extends Component {
         this.entity.setDispose();
     }
 
-    void portalTransfer(Fixture me, Fixture other) {
+    void portalEntrance(Fixture me, Fixture other) {
         if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
             return;
         }
-        MainGameScreen.setNewMapStatus(MainGameScreen.newMap.On);
+        MainGameScreen.setNewMapStatus(MainGameScreen.newMap.Begin);
         System.out.println("portalTransfer was triggered.");
-//        spaceshipAttack = true;
-//        this.entity.setSpaceShipDispose();
-//        this.entity.setDispose();
+    }
+
+
+    void portalExport(Fixture me, Fixture other) {
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return;
+        }
+        MainGameScreen.setNewMapStatus(MainGameScreen.newMap.Finish);
+        System.out.println("portalTransfer was triggered.");
     }
 }
