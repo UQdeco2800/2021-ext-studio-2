@@ -23,13 +23,14 @@ public class ObstacleDisappear extends Component {
     public static boolean locked3 = true;
 
     public enum ObstacleType {
-        PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm;
+        PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm, Spaceship, SmallMissile, PortalEntrance, PortalExport;
     }
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleDisappear.class);
     AnimationRenderComponent animator;
     HitboxComponent hitboxComponent;
     ObstacleType obstacleType;
+    private static boolean spaceshipAttack = false;
 
     public ObstacleDisappear(ObstacleType obstacleType) {
         this.obstacleType = obstacleType;
@@ -51,6 +52,18 @@ public class ObstacleDisappear extends Component {
                 break;
             case FaceWorm:
                 entity.getEvents().addListener("collisionStart", this::faceWormDisappear);
+                break;
+            case Spaceship:
+                entity.getEvents().addListener("collisionStart", this::spaceShipAttack);
+                break;
+            case SmallMissile:
+                entity.getEvents().addListener("collisionStart", this::smallMissileAttack);
+                break;
+            case PortalEntrance:
+                entity.getEvents().addListener("collisionStart", this::portalEntrance);
+                break;
+            case PortalExport:
+                entity.getEvents().addListener("collisionStart", this::portalExport);
                 break;
             default:
                 logger.error("No corresponding event.");
@@ -135,4 +148,58 @@ public class ObstacleDisappear extends Component {
 
     }
 
+    void spaceShipAttack(Fixture me, Fixture other) {
+        if (spaceshipAttack) {
+            return;
+        }
+        if (hitboxComponent.getFixture() != me) {
+            // Not triggered by hitbox, ignore
+            return;
+        }
+
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return;
+        }
+        MainGameScreen.setSpaceshipAttack();
+        System.out.println("spaceShipAttack was triggered.");
+        spaceshipAttack = true;
+        this.entity.setSpaceShipDispose();
+    }
+
+    void smallMissileAttack(Fixture me, Fixture other) {
+        if (hitboxComponent.getFixture() != me) {
+            // Not triggered by hitbox, ignore
+            return;
+        }
+
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return;
+        }
+//        MainGameScreen.setSpaceshipAttack();
+        System.out.println("smallMissileAttack was triggered.");
+//        spaceshipAttack = true;
+//        this.entity.setSpaceShipDispose();
+        this.entity.setDispose();
+    }
+
+    void portalEntrance(Fixture me, Fixture other) {
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return;
+        }
+        MainGameScreen.setNewMapStatus(MainGameScreen.newMap.Begin);
+        System.out.println("portalTransfer was triggered.");
+    }
+
+
+    void portalExport(Fixture me, Fixture other) {
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return;
+        }
+        MainGameScreen.setNewMapStatus(MainGameScreen.newMap.Finish);
+        System.out.println("portalTransfer was triggered.");
+    }
 }

@@ -102,7 +102,7 @@ public class AchievementsScreen extends ScreenAdapter {
     private void createUI() {
         logger.debug("Creating achievement screen ui");
 
-        List<BaseAchievementConfig> bestAchievements = GameRecords.getBestRecords();
+        List<BaseAchievementConfig> bestAchievements = GameRecords.getAllTimeBestAchievements();
         Stage stage = ServiceLocator.getRenderService().getStage();
 
         Entity ui = new Entity();

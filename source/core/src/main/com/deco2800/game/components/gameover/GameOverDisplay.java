@@ -1,6 +1,5 @@
 package com.deco2800.game.components.gameover;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -10,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.score.ScoringSystemV1;
+import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
@@ -45,7 +45,7 @@ public class GameOverDisplay extends UIComponent {
 
         table = new Table();
         table.setFillParent(true);
-        points = scoringSystem.getScore();
+        points = GameRecords.getLatestScore().score;
 
         pointText = new TextField(String.valueOf(points), skin);
         pointText.setDisabled(true);

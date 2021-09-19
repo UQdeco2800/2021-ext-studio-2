@@ -9,6 +9,7 @@ import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.events.EventHandler;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
+import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,7 @@ public class Entity {
     private boolean disappear = false;
     private boolean removeTexture = false;
     private boolean dispose = false;
+    private boolean spaceShipDispose = false;
     private float animationTime = 0;
     private boolean created = false;
     private Vector2 position = Vector2.Zero.cpy();
@@ -96,6 +98,15 @@ public class Entity {
         this.dispose = true;
         logger.debug("Setting dispose={} on entity {}", dispose, this);
     }
+
+    /**
+     * Set dispose to true. The code that works subsequently is in update.
+     */
+    public void setSpaceShipDispose(){
+        this.spaceShipDispose = true;
+        logger.debug("Setting dispose={} on entity {}", dispose, this);
+    }
+
 
     public boolean isDisappear() {
         return disappear;
@@ -333,6 +344,13 @@ public class Entity {
         if (dispose) {
             this.dispose();
             return;
+        }
+
+        if (MainGameScreen.spaceshipTime <= 0) {
+            if (spaceShipDispose) {
+                this.dispose();
+                return;
+            }
         }
 
         for (Component component : createdComponents) {

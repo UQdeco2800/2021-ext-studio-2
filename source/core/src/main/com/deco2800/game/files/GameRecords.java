@@ -1,9 +1,9 @@
 package com.deco2800.game.files;
 
 import com.deco2800.game.components.achievements.AchievementsStatsComponent;
-import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.factories.AchievementFactory;
+import com.deco2800.game.services.ServiceLocator;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -32,9 +32,7 @@ public class GameRecords {
         record.achievements = AchievementsStatsComponent.getUnlockedAchievements();
 
         // Fetching the score
-        ScoringSystemV1 scoringSystemV1 = new ScoringSystemV1();
-
-        record.scoreData.score = scoringSystemV1.getScore();
+        record.scoreData.score = ServiceLocator.getScoreService().getScore();
         record.scoreData.game = gameCount;
 
         // Add the record
@@ -91,7 +89,7 @@ public class GameRecords {
         return list;
     }
 
-    public static List<BaseAchievementConfig> getBestRecords() {
+    public static List<BaseAchievementConfig> getAllTimeBestAchievements() {
         Map<String, BaseAchievementConfig> bestAchievementsMap = new LinkedHashMap<>();
 
         // Map of unlocked gold achievements
@@ -125,6 +123,33 @@ public class GameRecords {
         return new LinkedList<>(bestAchievementsMap.values());
     }
 
+    public static List<BaseAchievementConfig> getBestAchievementsByGame(int game) {
+        List<BaseAchievementConfig> achievements = getAchievementsByGame(game);
+
+        Map<String, BaseAchievementConfig> bestAchievements = new LinkedHashMap<>();
+
+        // Add gold achievements to list
+        achievements.forEach(achievement -> {
+            if (achievement.type.equals("GOLD")) {
+                bestAchievements.put(achievement.name, achievement);
+            }
+        });
+        // Add silver achievements to list if gold counterparts are locked
+        achievements.forEach(achievement -> {
+            if (achievement.type.equals("SILVER")) {
+                bestAchievements.putIfAbsent(achievement.name, achievement);
+            }
+        });
+        // Add bronze to list if silver and gold counterparts are locked
+        achievements.forEach(achievement -> {
+            if (achievement.type.equals("BRONZE")) {
+                bestAchievements.putIfAbsent(achievement.name, achievement);
+            }
+        });
+
+        return new LinkedList<>(bestAchievements.values());
+    }
+
     public static Records getRecords() {
         Records records = FileLoader.readClass(Records.class, path, EXTERNAL);
         return records != null ? records : new Records();
@@ -149,7 +174,7 @@ public class GameRecords {
 
         Set<String> nextUnlocks = new LinkedHashSet<>();
 
-        getBestRecords().forEach(achievement -> {
+        getAllTimeBestAchievements().forEach(achievement -> {
             nextUnlocks.add(achievement.name);
         });
 
@@ -181,6 +206,10 @@ public class GameRecords {
         return goldAchievements.size();
     }
 
+    public static Score getLatestScore() {
+        return getScoreByGame(GameInfo.getGameCount());
+    }
+
     /**
      * A mapping of the game number (nth game played) and associated record,
      * i.e, the score and list of unlocked achievements.
@@ -196,7 +225,7 @@ public class GameRecords {
          * @return records of a particular game (null if absent)
          */
         public Record findByGame(int game) {
-            return records.get(game);
+            return records.get(String.valueOf(game));
         }
 
         /**
