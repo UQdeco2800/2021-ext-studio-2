@@ -9,8 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.files.GameRecords;
+import com.deco2800.game.files.GameRecords.Score;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
+import com.deco2800.game.utils.DateTimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +22,8 @@ import java.util.List;
 public class ScoreHistoryDisplay extends UIComponent {
 
     private static final Logger logger = LoggerFactory.getLogger(ScoreHistoryDisplay.class);
+    private static final int SCORE_DISPLAY_COUNT = 10;
+
     private final GdxGame game;
     private Table boardTable;
     private Table buttonTable;
@@ -87,18 +91,18 @@ public class ScoreHistoryDisplay extends UIComponent {
         float padBottomValue = 270;
 
         //prepare the score data.
-        //The Score class contains actual score value and the date that the the score was played.
-        List<GameRecords.Score> pastScores = GameRecords.getHighestScores();
+        //The Score class contains actual score value and the associated date of gameplay.
+        List<Score> pastScores = GameRecords.getHighestScores();
 
         //loop this list to create labels.
-        for (GameRecords.Score score : pastScores) {
-
+        int endIndex = Math.min(pastScores.size(), SCORE_DISPLAY_COUNT);
+        for (Score score : pastScores.subList(0, endIndex)) {
             //score
             Table scoreDataTable = new Table();
             scoreDataTable.center();
             scoreDataTable.padBottom(padBottomValue).padLeft(300);
             scoreDataTable.setFillParent(true);
-            Label scoreLabel = new Label(score.getScore()+"", skin, "large");
+            Label scoreLabel = new Label(score.getScore() + "", skin, "large");
             scoreDataTable.add(scoreLabel);
 
             //date
@@ -106,11 +110,8 @@ public class ScoreHistoryDisplay extends UIComponent {
             dateDataTable.center();
             dateDataTable.padBottom(padBottomValue).padRight(300);
             dateDataTable.setFillParent(true);
-            //The LocalDateTime is this format: 2021-09-13T20:22:55.527317800
-            //split"T" then get the date. split"." get the time (hour and min only) using substring
-            String dateText = String.valueOf(score.getDateTime()).split("T")[0]
-                    + "  " + String.valueOf(score.getDateTime()).split("T")[1].split("\\.")[0]
-                    .substring(0,5);
+            // Format to get the date, along with hours and minutes
+            String dateText = DateTimeUtils.getFormattedDateTime(score.getDateTime());
 
             Label dateLabel =
                     new Label(dateText, skin, "large");

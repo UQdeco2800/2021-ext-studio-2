@@ -3,6 +3,7 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.score.ScoreDetailsDialog;
 import com.deco2800.game.components.score.ScoreHistoryDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
@@ -37,7 +38,9 @@ public class HistoryScoreScreen extends ScreenAdapter {
         Stage stage = ServiceLocator.getRenderService().getStage();
         Entity ui = new Entity();
         scoreHistoryDisplay = new ScoreHistoryDisplay(game);
-        ui.addComponent(scoreHistoryDisplay).addComponent(new InputDecorator(stage, 10));
+        ui.addComponent(scoreHistoryDisplay)
+                .addComponent(new ScoreDetailsDialog())
+                .addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
     }
 
