@@ -108,7 +108,7 @@ public class BackgroundSoundComponent extends Component {
      * Dispose background music
      */
     private void unloadSound() {
-        ServiceLocator.getResourceService().loadSounds(new String[]{backgroundMusic});
+        ServiceLocator.getResourceService().unloadAssets(new String[]{backgroundMusic});
     }
 
 }

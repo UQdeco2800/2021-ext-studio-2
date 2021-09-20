@@ -32,6 +32,7 @@ public class AchievementsScreen extends ScreenAdapter {
     private static final String[] chapterArt = {"images/story/chapter1art.png", "images/story/chapter2art.png"};
     private final GdxGame game;
     private final Renderer renderer;
+    private Entity ui;
 
     public AchievementsScreen(GdxGame game) {
         this.game = game;
@@ -94,6 +95,8 @@ public class AchievementsScreen extends ScreenAdapter {
         renderer.dispose();
         unloadAssets();
 
+        ui.dispose();
+
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
 
@@ -106,7 +109,7 @@ public class AchievementsScreen extends ScreenAdapter {
         List<BaseAchievementConfig> bestAchievements = GameRecords.getAllTimeBestAchievements();
         Stage stage = ServiceLocator.getRenderService().getStage();
 
-        Entity ui = new Entity();
+        ui = new Entity();
         ui.addComponent(new AchievementRecordsDisplay(game, bestAchievements))
                 .addComponent(new BackgroundSoundComponent("sounds/achievementBgm.mp3", 0.5f))
                 .addComponent(new ChapterDisplay())
