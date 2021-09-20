@@ -123,8 +123,19 @@ public class AchievementsDisplay extends UIComponent {
         renderBonus(achievement);
         /* Play achievement sound */
         playAchievementSound();
+        /* Trigger achievement related mid game events */
+        triggerEvents(achievement);
+    }
+
+    /**
+     * Trigger the necessary events which other features have to listen to
+     * @param achievement the unlocked achievement being displayed mid game
+     */
+    private void triggerEvents(BaseAchievementConfig achievement){
         /* Trigger bonus points event */
         AchievementsHelper.getInstance().trackBonusPoints(achievement.bonus);
+        /* Trigger an event when an achievement is being displayed mid game */
+        AchievementsHelper.getInstance().trackAchievementDisplayed(achievement);
     }
 
     private synchronized void clear(){

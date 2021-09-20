@@ -77,9 +77,9 @@ public class AchievementsStatsComponent extends Component {
         resetAchievements();
 
         AchievementsHelper.getInstance().getEvents()
-                .addListener(AchievementsHelper.HEALTH_EVENT, this::setHealth);
+                .addListener(AchievementsHelper.EVENT_HEALTH, this::setHealth);
         AchievementsHelper.getInstance().getEvents()
-                .addListener(AchievementsHelper.ITEM_PICKED_UP_EVENT, this::handleItemPickup);
+                .addListener(AchievementsHelper.EVENT_ITEM_PICKED_UP, this::handleItemPickup);
     }
 
     /**

@@ -9,6 +9,7 @@ import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.Obstacle.ObstacleDisappear;
+import com.deco2800.game.components.achievements.AchievementsHelper;
 import com.deco2800.game.components.items.PropsShopDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.maingame.MainGameDisplay;
@@ -210,6 +211,7 @@ public class MainGameScreen extends ScreenAdapter {
         if (spaceshipTime <= 0) {
             spaceshipState = spaceshipAttack.Finish;
             forestGameArea.spawnPortal(new Vector2(85, 8), ObstacleDisappear.ObstacleType.PortalEntrance);
+            AchievementsHelper.getInstance().trackSpaceshipAvoidSuccess();
 
         } else if (spaceshipTime <= 5 && counterSmallMissile % 100 == 0) {
 //            System.out.println("Hard counterSmallMissile = " + counterSmallMissile);
