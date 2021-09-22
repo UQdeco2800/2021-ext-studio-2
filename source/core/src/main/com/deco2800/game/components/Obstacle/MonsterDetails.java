@@ -44,7 +44,7 @@ public class MonsterDetails extends UIComponent {
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
         dialog.getContentTable().add(heading).expandX().row();
-        dialog.getContentTable().add(plantImage).height(122).width(240).row();
+       // dialog.getContentTable().add(plantImage).height(122).width(240).row();
         dialog.getContentTable().add(story).width(600).row();
         dialog.getButtonTable().add(renderCloseButton()).size(70, 70).row();
         dialog.show(stage);
@@ -64,7 +64,7 @@ public class MonsterDetails extends UIComponent {
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
         dialog.getContentTable().add(heading).expandX().row();
-        dialog.getContentTable().add(thornImage).height(122).width(240).row();
+      //  dialog.getContentTable().add(thornImage).height(122).width(240).row();
         dialog.getContentTable().add(story).width(600).row();
         dialog.getButtonTable().add(renderCloseButton()).size(70, 70).row();
         dialog.show(stage);
@@ -87,7 +87,7 @@ public class MonsterDetails extends UIComponent {
         dialog.getButtonTable().add(renderCloseButton()).size(50, 50).top();
         dialog.getContentTable().add(heading).expandX().row();
         dialog.getContentTable().add(story).width(600).row();
-        dialog.getContentTable().add(meteoriteImage).height(122).width(240).row();
+      //  dialog.getContentTable().add(meteoriteImage).height(122).width(240).row();
         dialog.show(stage);
     }
 
@@ -105,7 +105,7 @@ public class MonsterDetails extends UIComponent {
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
         dialog.getContentTable().add(heading).expandX().row();
-        dialog.getContentTable().add(MonkeyImage).height(122).width(240).row();
+        //dialog.getContentTable().add(MonkeyImage).height(122).width(240).row();
         dialog.getContentTable().add(story).width(600).row();
         dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
         dialog.show(stage);
@@ -126,7 +126,7 @@ public class MonsterDetails extends UIComponent {
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
         dialog.getContentTable().add(heading).expandX().row();
-        dialog.getContentTable().add(wormImage).height(122).width(240).row();
+        //dialog.getContentTable().add(wormImage).height(122).width(240).row();
         dialog.getContentTable().add(story).width(600).row();
         dialog.getButtonTable().add(renderCloseButton()).size(70, 70).row();
         dialog.show(stage);
