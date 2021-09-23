@@ -187,7 +187,8 @@ public class ForestGameArea extends GameArea {
         loadAssets();
         showBackground();
         displayUI();
-        spawnTerrain();
+        spawnTerrain(TerrainType.MUD_ROAD);
+        spawnTerrain(TerrainType.ROCK_ROAD);
 
 //        spawnRocks();
 //        spawnWoods();
@@ -231,9 +232,14 @@ public class ForestGameArea extends GameArea {
         spawnEntity(ui);
     }
 
-    public void spawnTerrain() {
+    public void spawnTerrain(TerrainType terrainType) {
         // Background terrain
-        terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO);
+        if (terrainType == TerrainType.MUD_ROAD) {
+            terrain = terrainFactory.createTerrain(TerrainType.MUD_ROAD);
+        } else if (terrainType == TerrainType.ROCK_ROAD) {
+            terrain = terrainFactory.createTerrain(TerrainType.ROCK_ROAD);
+        }
+
 
         spawnEntity(new Entity().addComponent(terrain));
 
@@ -242,15 +248,15 @@ public class ForestGameArea extends GameArea {
         GridPoint2 tileBounds = terrain.getMapBounds(0);
         Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
 
-        // Left
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
-        // Right
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
-                new GridPoint2(tileBounds.x, 0),
-                false,
-                false);
+//        // Left
+//        spawnEntityAt(
+//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
+//        // Right
+//        spawnEntityAt(
+//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
+//                new GridPoint2(tileBounds.x, 0),
+//                false,
+//                false);
         // Top
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
@@ -263,9 +269,13 @@ public class ForestGameArea extends GameArea {
     }
 
 
-    public void spawnTerrainRandomly(int xValue) {
+    public void spawnTerrainRandomly(int xValue, TerrainType terrainType) {
         // Background terrain
-        terrain = terrainFactory.createTerrainRandomly(TerrainType.FOREST_DEMO, xValue);
+        if (terrainType == TerrainType.MUD_ROAD) {
+            terrain = terrainFactory.createTerrainRandomly(TerrainType.MUD_ROAD, xValue);
+        } else if (terrainType == TerrainType.ROCK_ROAD) {
+            terrain = terrainFactory.createTerrainRandomly(TerrainType.ROCK_ROAD, xValue);
+        }
         spawnEntity(new Entity().addComponent(terrain));
 
         // Terrain walls
@@ -274,14 +284,14 @@ public class ForestGameArea extends GameArea {
         Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
 
         // Left
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
-        // Right
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
-                new GridPoint2(tileBounds.x, 0),
-                false,
-                false);
+//        spawnEntityAt(
+//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
+//        // Right
+//        spawnEntityAt(
+//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
+//                new GridPoint2(tileBounds.x, 0),
+//                false,
+//                false);
         // Top
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
