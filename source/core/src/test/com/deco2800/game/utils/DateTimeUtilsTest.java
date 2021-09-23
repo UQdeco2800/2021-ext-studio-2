@@ -26,9 +26,9 @@ class DateTimeUtilsTest {
         res = DateTimeUtils.getFormattedTime(time);
         assertEquals("07:34:50 PM", res);
 
-        time = LocalDateTime.parse("2018-12-30T23:59:59.63");
+        time = LocalDateTime.parse("2018-12-30T01:59:59.63");
         res = DateTimeUtils.getFormattedTime(time);
-        assertEquals("11:59:59 PM", res);
+        assertEquals("01:59:59 AM", res);
 
         time = LocalDateTime.parse("2018-12-30T23:59:59.63");
         res = DateTimeUtils.getFormattedTime(time);
