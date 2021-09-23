@@ -1,22 +1,13 @@
 package com.deco2800.game.components.Obstacle;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.utils.Null;
 import com.deco2800.game.components.Component;
-import com.deco2800.game.entities.Entity;
-import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
-import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.screens.MainGameScreen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Method;
 //import com.sun.tools.javac.Main;
 
 /**
@@ -27,6 +18,10 @@ public class ObstacleDisappear extends Component {
     /**
      * The types of obstacles and enemies are used to determine the type of entity that triggers the event.
      */
+    public static boolean locked = true;
+    public static boolean locked2 = true;
+    public static boolean locked3 = true;
+
     public enum ObstacleType {
         PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm, Spaceship, SmallMissile, PortalEntrance, PortalExport;
     }
@@ -94,8 +89,10 @@ public class ObstacleDisappear extends Component {
         animator.getEntity().setRemoveTexture();
         animator.startAnimation("obstacles");
         animator.getEntity().setDisappearAfterAnimation(1f);
+        locked = false;
 
     }
+
 
     /**
      * When the monitored event is triggered, play the thorns animation, and disable the
@@ -117,6 +114,7 @@ public class ObstacleDisappear extends Component {
         animator.getEntity().setRemoveTexture();
         animator.startAnimation("obstacle2");
         animator.getEntity().setDisappearAfterAnimation(1f);
+        locked2 = false;
     }
 
     /**
@@ -134,6 +132,7 @@ public class ObstacleDisappear extends Component {
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("stone1");
             animator.getEntity().setDisappearAfterAnimation(0.32f);
+            locked3 = false;
         }
 
     }

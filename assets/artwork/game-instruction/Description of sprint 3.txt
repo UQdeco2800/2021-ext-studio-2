@@ -1,0 +1,14 @@
+Description of contents of the game:
+
+Category Ⅰ: items not to interact with ( blue marks)
+- Health level: It starts from 100 points. Taking a medical box will lead to an increment of 10 points while hitting obstacles and monsters will face decrements. Once it goes down to 0, the game is over.
+- Food and Water level: ???
+- Time: It shows the time since the beginning of the game. The longer you stay, the higher score you will take.
+- Score: This is your current score during the game.
+
+Category Ⅱ: items that you can interact with (red marks)
+- The character: you will control this boy in the game. He can run, jump, squat down and attack the monster.
+- The medical box: to jump and stand on it to catch it.
+- The rock: be care for and try to avoid hitting it, or there will be a decrement in the health level.
+- The gold coin: catch it and use it later in the prop shop.
+- The monster: Try to avoid being hit by them, however, some monsters can be attacked by tapping the space button on the keyboard.

@@ -47,9 +47,14 @@ public class MainMenuDisplay extends UIComponent {
       TextButton propsShopBtn = new TextButton("Props Shop", skin);
     //Team9 History Scores
     TextButton historyScoreBtn = new TextButton("History Score", skin);
+
     TextButton achievementsBtn = new TextButton("Achievements", skin);
 
-    // Triggers an event when the button is pressed
+    //Team8
+    TextButton monsterMenuBtn = new TextButton("Monster Menu", skin);
+
+
+      // Triggers an event when the button is pressed
     startBtn.addListener(
         new ChangeListener() {
           @Override
@@ -58,6 +63,7 @@ public class MainMenuDisplay extends UIComponent {
             entity.getEvents().trigger("start");
           }
         });
+
 
     settingsBtn.addListener(
         new ChangeListener() {
@@ -101,6 +107,15 @@ public class MainMenuDisplay extends UIComponent {
               entity.getEvents().trigger("achievements");
           }
     });
+
+    monsterMenuBtn.addListener(new ChangeListener() {
+        @Override
+        public void changed(ChangeEvent event, Actor actor) {
+            logger.debug("monsterMenu clicked");
+            entity.getEvents().trigger("monsterMenu");
+        }
+    });
+
     Table bgTable = new Table();
     bgTable.setFillParent(true);
     bgTable.add(background);
@@ -118,6 +133,8 @@ public class MainMenuDisplay extends UIComponent {
     table.add(historyScoreBtn).padTop(15f);
     table.row();
     table.add(achievementsBtn).padTop(15f);
+      table.row();
+      table.add(monsterMenuBtn).padTop(15f);
     stage.addActor(bgTable);
     stage.addActor(table);
   }
