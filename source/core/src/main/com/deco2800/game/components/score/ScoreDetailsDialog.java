@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
+import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.files.GameInfo;
 import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.files.GameRecords.Score;
@@ -64,8 +65,7 @@ public class ScoreDetailsDialog extends UIComponent {
 
         // Render the list of the best achievements with name, asset and bonus
         bestAchievements.forEach(achievement -> {
-            table.add(new Image(new Texture("images/achievements/" + "achievementStatus" +
-                    capitalize(achievement.type) + ".png"))).size(45).padTop(5).padBottom(5);
+            table.add(new Image(new Texture(AchievementFactory.getAchievementTrophy(achievement)))).size(45).padTop(5).padBottom(5);
             table.add(new Label(achievement.name, new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY)))
                     .padRight(40).padLeft(25);
             table.add(new Label("+ " + achievement.bonus, new Label.LabelStyle(new BitmapFont(), Color.YELLOW)));

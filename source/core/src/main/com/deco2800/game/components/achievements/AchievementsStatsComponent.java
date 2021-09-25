@@ -23,7 +23,9 @@ public class AchievementsStatsComponent extends Component {
 
     private int score;
     private int firstAids;
+    private int gold;
 
+    /* TO//DO: setup achievement stats as Hashmap <property,value> */
 
     public AchievementsStatsComponent() {
         initStats();
@@ -66,6 +68,7 @@ public class AchievementsStatsComponent extends Component {
 
         score = 0;
         firstAids = 0;
+        gold = 0;
     }
 
     @Override
@@ -137,11 +140,16 @@ public class AchievementsStatsComponent extends Component {
             case AchievementsHelper.ITEM_FIRST_AID:
                 setFirstAid();
                 break;
+            case AchievementsHelper.ITEM_GOLD_COIN:
+                setGold();
             default:
         }
 
     }
 
+    /**
+     * Maintains the count of the number of firstAids picked up
+     */
     private void setFirstAid() {
         ++firstAids;
         checkForValidAchievements();
@@ -149,6 +157,19 @@ public class AchievementsStatsComponent extends Component {
 
     public void setFirstAidByVal(int firstAids) {
         this.firstAids = firstAids;
+        checkForValidAchievements();
+    }
+
+    /**
+     * Maintains the count of the number of gold coins picked up
+     */
+    private void setGold() {
+        ++gold;
+        checkForValidAchievements();
+    }
+
+    public void setGoldByVal(int gold) {
+        this.gold = gold;
         checkForValidAchievements();
     }
 
@@ -177,7 +198,7 @@ public class AchievementsStatsComponent extends Component {
      * Unlocks the achievement if it is valid and triggers an event
      * pertaining to a new unlocked achievement
      *
-     * @param achievement
+     * @param achievement achievement to be validated
      * @return valid returns true if valid, false otherwise
      */
     private boolean isValid(BaseAchievementConfig achievement) {
@@ -215,6 +236,13 @@ public class AchievementsStatsComponent extends Component {
 
         if (achievement.condition.firstAids != -1) {
             valid = achievement.condition.firstAids == firstAids;
+            if (!valid) {
+                return false;
+            }
+        }
+
+        if (achievement.condition.gold != -1) {
+            valid = achievement.condition.gold == gold;
             if (!valid) {
                 return false;
             }
