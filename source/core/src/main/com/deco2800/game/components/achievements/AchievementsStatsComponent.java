@@ -177,7 +177,7 @@ public class AchievementsStatsComponent extends Component {
      * Unlocks the achievement if it is valid and triggers an event
      * pertaining to a new unlocked achievement
      *
-     * @param achievement
+     * @param achievement achievement to be validated
      * @return valid returns true if valid, false otherwise
      */
     private boolean isValid(BaseAchievementConfig achievement) {

@@ -29,6 +29,7 @@ public class AchievementsHelper {
     public static final String EVENT_UNLOCKED_ACHIEVEMENT_DISPLAYED = "unlockedAchievementDisplayed";
 
     public static final String ITEM_FIRST_AID = "firstAid";
+    public static final String ITEM_GOLD_COIN = "goldCoin";
 
     private static AchievementsHelper instance;
     private final EventHandler handler;
