@@ -17,7 +17,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(GameExtension.class)
 public class AchievementStatsComponentTest {
-
+    /**
+     * Method used to emulate achievement configs values (conditions) read from the achievements.json
+     *
+     * @param name      name of the achievement
+     * @param time      time required to be spent in the game
+     * @param health    health required of the mpc
+     * @param itemCount total items required to be picked up in game
+     * @param score     score required during gameplay
+     * @param firstAids first aids required to be in inventory
+     * @param gold      gold coins required to be picked up in game
+     * @return BaseAchievementConfig with values specified
+     */
     private BaseAchievementConfig genAchievement(String name, int time, int health, int itemCount, int score, int firstAids, int gold) {
         BaseAchievementConfig achievement = new BaseAchievementConfig();
         achievement.bonus = 0;
@@ -39,6 +50,11 @@ public class AchievementStatsComponentTest {
         return achievement;
     }
 
+    /**
+     * returns a list for non-item pickup related achievements
+     *
+     * @return BaseAchievementConfig list of achievements
+     */
     private List<BaseAchievementConfig> getList() {
         List<BaseAchievementConfig> achievements = new ArrayList<>();
         achievements.add(genAchievement("Veteran", 10, -1, -1, -1, -1, -1));
@@ -60,6 +76,13 @@ public class AchievementStatsComponentTest {
         return achievementsEntity;
     }
 
+    /**
+     * tests the isValid method's ability to check if achievement is unlocked or not
+     *
+     * @throws NoSuchMethodException     thrown if corresponding method doesn't exist
+     * @throws InvocationTargetException wraps exception thrown by constructor invoked
+     * @throws IllegalAccessException    thrown if access is not allowed for a method
+     */
     @Test
     void shouldCheckIsValid() throws NoSuchMethodException,
             InvocationTargetException, IllegalAccessException {
@@ -77,6 +100,12 @@ public class AchievementStatsComponentTest {
 
     }
 
+    /**
+     * gets the isValid method and sets it up to be accessible
+     *
+     * @return isValid method
+     * @throws NoSuchMethodException thrown if corresponding method doesn't exist
+     */
     private Method getIsValidMethod() throws NoSuchMethodException {
         Method method = AchievementsStatsComponent.class
                 .getDeclaredMethod("isValid",
@@ -85,6 +114,13 @@ public class AchievementStatsComponentTest {
         return method;
     }
 
+    /**
+     * tests if veteran achievements are un-lockable
+     *
+     * @throws NoSuchMethodException     thrown if corresponding method doesn't exist
+     * @throws InvocationTargetException wraps exception thrown by constructor invoked
+     * @throws IllegalAccessException    thrown if access is not allowed for a method
+     */
     @Test
     void shouldCorrectlyValidateVeteranAchievements() throws
             IllegalAccessException,
@@ -107,6 +143,13 @@ public class AchievementStatsComponentTest {
         }
     }
 
+    /**
+     * tests if Tool Master achievements are un-lockable
+     *
+     * @throws NoSuchMethodException     thrown if corresponding method doesn't exist
+     * @throws InvocationTargetException wraps exception thrown by constructor invoked
+     * @throws IllegalAccessException    thrown if access is not allowed for a method
+     */
     @Test
     void shouldCorrectlyValidateToolMasterAchievements() throws
             IllegalAccessException,
@@ -152,6 +195,13 @@ public class AchievementStatsComponentTest {
         assertEquals(method.invoke(component, achievement), false);
     }
 
+    /**
+     * tests if Stranger achievements are un-lockable
+     *
+     * @throws NoSuchMethodException     thrown if corresponding method doesn't exist
+     * @throws InvocationTargetException wraps exception thrown by constructor invoked
+     * @throws IllegalAccessException    thrown if access is not allowed for a method
+     */
     @Test
     void shouldCorrectlyValidateStrangerAchievements() throws
             IllegalAccessException,
@@ -195,6 +245,13 @@ public class AchievementStatsComponentTest {
         assertEquals(method.invoke(component, achievement), false);
     }
 
+    /**
+     * tests if healer achievements are un-lockable
+     *
+     * @throws NoSuchMethodException     thrown if corresponding method doesn't exist
+     * @throws InvocationTargetException wraps exception thrown by constructor invoked
+     * @throws IllegalAccessException    thrown if access is not allowed for a method
+     */
     @Test
     void shouldCorrectlyValidateHealerAchievements() throws
             IllegalAccessException,
@@ -239,6 +296,13 @@ public class AchievementStatsComponentTest {
         assertEquals(method.invoke(component, achievement), false);
     }
 
+    /**
+     * tests if Game Breaker achievements are un-lockable
+     *
+     * @throws NoSuchMethodException     thrown if corresponding method doesn't exist
+     * @throws InvocationTargetException wraps exception thrown by constructor invoked
+     * @throws IllegalAccessException    thrown if access is not allowed for a method
+     */
     @Test
     void shouldCorrectlyValidateGameBreakerAchievements() throws
             IllegalAccessException,
@@ -261,6 +325,13 @@ public class AchievementStatsComponentTest {
         }
     }
 
+    /**
+     * tests if Game Fanatic achievements are un-lockable
+     *
+     * @throws NoSuchMethodException     thrown if corresponding method doesn't exist
+     * @throws InvocationTargetException wraps exception thrown by constructor invoked
+     * @throws IllegalAccessException    thrown if access is not allowed for a method
+     */
     @Test
     void shouldCorrectlyValidateGameFanaticAchievements() throws
             IllegalAccessException,
@@ -268,22 +339,50 @@ public class AchievementStatsComponentTest {
 
         Method method = getIsValidMethod();
 
+
         AchievementsStatsComponent component = generateEntity()
                 .getComponent(AchievementsStatsComponent.class);
 
-        for (BaseAchievementConfig a : getList()) {
-            component.setFirstAidByVal(9999);
-            component.setHealth(100);
+        component.setTime(0);
+        component.setHealth(100);
+        component.setFirstAidByVal(1);
+        BaseAchievementConfig achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 1, -1);
+        assertEquals(method.invoke(component, achievement), true);
+        achievement.unlocked = false;
 
-            if (a.name.equals("Game Fanatic")) {
-                assertEquals(method.invoke(component, a), true);
-            } else {
-                assertEquals(method.invoke(component, a), false);
-            }
-        }
+        component.setFirstAidByVal(2);
+        achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 2, -1);
+        assertEquals(method.invoke(component, achievement), true);
+        achievement.unlocked = false;
+
+        component.setFirstAidByVal(3);
+        achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 3, -1);
+        assertEquals(method.invoke(component, achievement), true);
+        achievement.unlocked = false;
+
+        component.setFirstAidByVal(1);
+        assertEquals(method.invoke(component, achievement), false);
+
+        component.setFirstAidByVal(1);
+        assertEquals(method.invoke(component, achievement), false);
+
+        component.setFirstAidByVal(2);
+        assertEquals(method.invoke(component, achievement), false);
+
+        component.setFirstAidByVal(4);
+        assertEquals(method.invoke(component, achievement), false);
+
+        component.setFirstAidByVal(99);
+        assertEquals(method.invoke(component, achievement), false);
     }
 
-
+    /**
+     * tests if Collector achievements are un-lockable
+     *
+     * @throws NoSuchMethodException     thrown if corresponding method doesn't exist
+     * @throws InvocationTargetException wraps exception thrown by constructor invoked
+     * @throws IllegalAccessException    thrown if access is not allowed for a method
+     */
     @Test
     void shouldCorrectlyValidateCollectorAchievements() throws
             IllegalAccessException,
@@ -298,17 +397,17 @@ public class AchievementStatsComponentTest {
         component.setTime(0);
         component.setHealth(0);
         component.setGoldByVal(1);
-        BaseAchievementConfig achievement = genAchievement("Healer", -1, -1, -1, -1, -1, 1);
+        BaseAchievementConfig achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 1);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setGoldByVal(2);
-        achievement = genAchievement("Healer", -1, -1, -1, -1, -1, 2);
+        achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 2);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setGoldByVal(3);
-        achievement = genAchievement("Healer", -1, -1, -1, -1, -1, 3);
+        achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 3);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
@@ -328,6 +427,13 @@ public class AchievementStatsComponentTest {
         assertEquals(method.invoke(component, achievement), false);
     }
 
+    /**
+     * tests if Master achievements are un-lockable
+     *
+     * @throws NoSuchMethodException     thrown if corresponding method doesn't exist
+     * @throws InvocationTargetException wraps exception thrown by constructor invoked
+     * @throws IllegalAccessException    thrown if access is not allowed for a method
+     */
     @Test
     void shouldCorrectlyValidateMasterAchievements() throws
             NoSuchMethodException,
@@ -348,7 +454,13 @@ public class AchievementStatsComponentTest {
         }
     }
 
-
+    /**
+     * tests if all achievements are un-lockable
+     *
+     * @throws NoSuchMethodException     thrown if corresponding method doesn't exist
+     * @throws InvocationTargetException wraps exception thrown by constructor invoked
+     * @throws IllegalAccessException    thrown if access is not allowed for a method
+     */
     @Test
     void allAchievementsShouldBeValid() throws NoSuchMethodException,
             InvocationTargetException, IllegalAccessException {
@@ -366,6 +478,13 @@ public class AchievementStatsComponentTest {
         }
     }
 
+    /**
+     * tests if none achievements are un-lockable
+     *
+     * @throws NoSuchMethodException     thrown if corresponding method doesn't exist
+     * @throws InvocationTargetException wraps exception thrown by constructor invoked
+     * @throws IllegalAccessException    thrown if access is not allowed for a method
+     */
     @Test
     void noAchievementShouldBeValid() throws NoSuchMethodException,
             InvocationTargetException, IllegalAccessException {
