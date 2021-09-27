@@ -30,7 +30,7 @@ public class ObstacleDisappear extends Component {
     AnimationRenderComponent animator;
     HitboxComponent hitboxComponent;
     ObstacleType obstacleType;
-    private static boolean spaceshipAttack = false;
+    private static boolean spaceshipAttack;
 
     public ObstacleDisappear(ObstacleType obstacleType) {
         this.obstacleType = obstacleType;
@@ -55,6 +55,7 @@ public class ObstacleDisappear extends Component {
                 break;
             case Spaceship:
                 entity.getEvents().addListener("collisionStart", this::spaceShipAttack);
+                spaceshipAttack = false;
                 break;
             case SmallMissile:
                 entity.getEvents().addListener("collisionStart", this::smallMissileAttack);
