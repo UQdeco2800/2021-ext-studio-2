@@ -49,7 +49,7 @@ public class ObstacleFactory {
      */
     public static Entity createPlantsObstacle(Entity target) {
         BaseEntityConfig config = configs.plant;
-        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody);
+        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody, "Plants");
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -81,7 +81,7 @@ public class ObstacleFactory {
      */
     public static Entity createThornsObstacle(Entity target) {
         BaseEntityConfig config = configs.thorn;
-        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody);
+        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody, "Thorns");
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -113,9 +113,9 @@ public class ObstacleFactory {
      * @param bodyType body type, default = dynamic
      * @return obstacle entity
      */
-    private static Entity createBaseObstacle(Entity target, BodyType bodyType) {
+    private static Entity createBaseObstacle(Entity target, BodyType bodyType, String type) {
         Entity obstacle =
-                new Entity()
+                new Entity(type)
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE));
@@ -154,7 +154,7 @@ public class ObstacleFactory {
         animator.addAnimation("stone1", 0.08f, Animation.PlayMode.LOOP);
 
         Entity meteorite =
-                new Entity()
+                new Entity("Meteorite")
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.METEORITE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.METEORITE))
@@ -188,7 +188,7 @@ public class ObstacleFactory {
 //        animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
 
         Entity portal =
-                new Entity()
+                new Entity("Portal")
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
 //                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))

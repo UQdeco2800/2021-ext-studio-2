@@ -465,6 +465,7 @@ public class ForestGameArea extends GameArea {
      */
     public void spawnSmallMissile(Vector2 position) {
         Entity smallMissile = NPCFactory.createSmallMissile(player);
+        smallMissile.setZIndex(1); // Generate missile above spaceship
         spawnEntityAt(smallMissile, position, true, true);
         smallMissile.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(-20,5), position, true);
         smallMissile.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0.1f);

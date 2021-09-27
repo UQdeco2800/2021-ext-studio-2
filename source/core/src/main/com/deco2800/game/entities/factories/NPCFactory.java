@@ -50,7 +50,7 @@ public class NPCFactory {
    * @return entity
    */
   public static Entity createFaceWorm(Entity target) {
-    Entity FaceWorm = createBaseNPC(target);
+    Entity FaceWorm = createBaseNPC(target, "FaceWorm");
     BaseEntityConfig config = configs.faceWorm;
 
     AnimationRenderComponent animator =
@@ -74,7 +74,7 @@ public class NPCFactory {
    */
   public static Entity createFlyingMonkey(Entity target) {
 
-    Entity Monkey = new Entity();
+    Entity Monkey = new Entity("FlyingMonkey");
 
     AITaskComponent aiComponent =
             new AITaskComponent()
@@ -102,7 +102,7 @@ public class NPCFactory {
    */
   public static Entity createSpaceShip(Entity target) {
 
-    Entity spaceship = new Entity();
+    Entity spaceship = new Entity("SpaceShip");
 //
 //    AITaskComponent aiComponent =
 //            new AITaskComponent()
@@ -135,7 +135,7 @@ public class NPCFactory {
    */
   public static Entity createSmallMissile(Entity target) {
     BaseEntityConfig config = configs.smallMissile;
-    Entity missile = new Entity();
+    Entity missile = new Entity("Missile");
 //
 //    AITaskComponent aiComponent =
 //            new AITaskComponent()
@@ -171,13 +171,13 @@ public class NPCFactory {
    *
    * @return entity
    */
-  private static Entity createBaseNPC(Entity target) {
+  private static Entity createBaseNPC(Entity target, String type) {
     AITaskComponent aiComponent =
         new AITaskComponent()
             .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
             .addTask(new ChaseTask(target, 10, 4f, 4f));
     Entity npc =
-        new Entity()
+        new Entity(type)
             .addComponent(new PhysicsComponent())
             .addComponent(new PhysicsMovementComponent())
             .addComponent(new ColliderComponent())

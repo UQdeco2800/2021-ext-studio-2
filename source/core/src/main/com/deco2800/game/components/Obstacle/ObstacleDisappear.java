@@ -15,13 +15,14 @@ import org.slf4j.LoggerFactory;
  */
 public class ObstacleDisappear extends Component {
 
-    /**
-     * The types of obstacles and enemies are used to determine the type of entity that triggers the event.
-     */
+
     public static boolean locked = true;
     public static boolean locked2 = true;
     public static boolean locked3 = true;
 
+    /**
+     * The types of obstacles and enemies are used to determine the type of entity that triggers the event.
+     */
     public enum ObstacleType {
         PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm, Spaceship, SmallMissile, PortalEntrance, PortalExport;
     }
