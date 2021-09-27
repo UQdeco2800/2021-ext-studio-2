@@ -161,6 +161,7 @@ public class NPCFactory {
     missile.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.DynamicBody);
 //    animator.startAnimation("1m");
     missile.setScale(1.5f, 0.75f);
+    missile.setZIndex(1); // Generate missile above spaceship
 //    logger.debug("Create a Flying Monkey");
     return missile;
   }

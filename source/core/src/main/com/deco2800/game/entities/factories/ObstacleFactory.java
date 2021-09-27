@@ -99,7 +99,7 @@ public class ObstacleFactory {
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(obstacle, 0.2f, 0.3f);
         obstacle.setScale(2, 2);
-
+        obstacle.setZIndex(1);
         logger.debug("Create a Thorns Obstacle");
 
         return obstacle;
