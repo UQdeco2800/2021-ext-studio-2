@@ -16,10 +16,7 @@ import com.deco2800.game.components.maingame.MainGameDisplay;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
-import com.deco2800.game.components.score.ScoreDisplay;
-import com.deco2800.game.components.score.ScoringSystem;
-import com.deco2800.game.components.score.ScoringSystemV1;
-import com.deco2800.game.components.score.TimerDisplay;
+import com.deco2800.game.components.score.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -32,10 +29,7 @@ import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
-import com.deco2800.game.services.GameTime;
-import com.deco2800.game.services.ResourceService;
-import com.deco2800.game.services.ScoreService;
-import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.services.*;
 import com.deco2800.game.ui.terminal.Terminal;
 import com.deco2800.game.ui.terminal.TerminalDisplay;
 import com.deco2800.game.components.maingame.MainGameExitDisplay;
@@ -103,6 +97,7 @@ public class MainGameScreen extends ScreenAdapter {
         ServiceLocator.registerTimeSource(new GameTime());
         ServiceLocator.registerScoreService(new ScoreService());
 
+
         PhysicsService physicsService = new PhysicsService();
         ServiceLocator.registerPhysicsService(physicsService);
         physicsEngine = physicsService.getPhysics();
@@ -126,6 +121,8 @@ public class MainGameScreen extends ScreenAdapter {
         forestGameArea.create();
 
         player = forestGameArea.player;
+
+        ServiceLocator.registerDistanceService(new DistanceService(player));
     }
 
     /**
@@ -443,6 +440,7 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(inputComponent)
                 //display the score and the time -- team 9
                 .addComponent(new ScoreDisplay())
+                .addComponent(new DistanceDisplay())
                 .addComponent(new TimerDisplay())
                 .addComponent(new TerminalDisplay())
                 .addComponent(new FoodDisplay())

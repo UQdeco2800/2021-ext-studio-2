@@ -34,6 +34,7 @@ public class GameRecords {
         // Fetching the score
         record.scoreData.score = ServiceLocator.getScoreService().getScore();
         record.scoreData.game = gameCount;
+        record.distanceData.distance=ServiceLocator.getDistanceService().getDistance();
 
         // Add the record
         Records records = getRecords();
@@ -57,6 +58,10 @@ public class GameRecords {
      */
     public static Score getScoreByGame(int game) {
         return getRecords().findByGame(game).scoreData;
+    }
+
+    public static Distance getDistanceByGame(int game) {
+        return getRecords().findByGame(game).distanceData;
     }
 
 
@@ -210,6 +215,10 @@ public class GameRecords {
         return getScoreByGame(GameInfo.getGameCount());
     }
 
+    public static Distance getLatestDistance() {
+        return getDistanceByGame(GameInfo.getGameCount());
+    }
+
     /**
      * A mapping of the game number (nth game played) and associated record,
      * i.e, the score and list of unlocked achievements.
@@ -260,6 +269,10 @@ public class GameRecords {
          * Score details of that particular game
          */
         public Score scoreData = new Score();
+        /**
+         * Distance details of that particular game
+         */
+        public Distance distanceData = new Distance();
     }
 
     public static class Score {
@@ -299,6 +312,46 @@ public class GameRecords {
          */
         public Integer getScore() {
             return score;
+        }
+    }
+
+    public static class Distance {
+        /**
+         * Distance of that particular game
+         **/
+        public double distance = 0;
+        /**
+         * The game number, for ease of access
+         */
+        public int game = 0;
+        /**
+         * Time when the game ended, i.e, the player died.
+         */
+        public String dateTime = LocalDateTime.now().toString();
+
+        /**
+         * Returns local date and time object of when the game ended, i.e,
+         * the time of player's death.
+         * <p>
+         * LocalDateTime objects are easier to work with. Parse the
+         * given dateTime string into a LocalDateTime object.
+         * <p>
+         * Note: This could be mapped to the JSON but the FileLoader
+         * gives SEVERE type errors when reading the file.
+         *
+         * @return LocalDateTime object of the dateTime property
+         */
+        public LocalDateTime getDateTime() {
+            return LocalDateTime.parse(this.dateTime);
+        }
+
+        /**
+         * In game score
+         *
+         * @return the score of the particular game
+         */
+        public double getDistance() {
+            return distance;
         }
     }
 }
