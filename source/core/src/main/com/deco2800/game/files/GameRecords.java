@@ -31,10 +31,10 @@ public class GameRecords {
         // Storing achievements
         record.achievements = AchievementsStatsComponent.getUnlockedAchievements();
 
-        // Fetching the score
+        // Storing score, distance and game count. The latter is for convenient access.
         record.scoreData.score = ServiceLocator.getScoreService().getScore();
+        record.scoreData.distance = ServiceLocator.getDistanceService().getDistance();
         record.scoreData.game = gameCount;
-        record.distanceData.distance=ServiceLocator.getDistanceService().getDistance();
 
         // Add the record
         Records records = getRecords();
@@ -60,8 +60,8 @@ public class GameRecords {
         return getRecords().findByGame(game).scoreData;
     }
 
-    public static Distance getDistanceByGame(int game) {
-        return getRecords().findByGame(game).distanceData;
+    public static double getDistanceByGame(int game) {
+        return getScoreByGame(game).distance;
     }
 
 
@@ -215,8 +215,8 @@ public class GameRecords {
         return getScoreByGame(GameInfo.getGameCount());
     }
 
-    public static Distance getLatestDistance() {
-        return getDistanceByGame(GameInfo.getGameCount());
+    public static double getLatestDistance() {
+        return getScoreByGame(GameInfo.getGameCount()).distance;
     }
 
     /**
@@ -269,10 +269,6 @@ public class GameRecords {
          * Score details of that particular game
          */
         public Score scoreData = new Score();
-        /**
-         * Distance details of that particular game
-         */
-        public Distance distanceData = new Distance();
     }
 
     public static class Score {
@@ -280,42 +276,6 @@ public class GameRecords {
          * Score of that particular game
          **/
         public int score = 0;
-        /**
-         * The game number, for ease of access
-         */
-        public int game = 0;
-        /**
-         * Time when the game ended, i.e, the player died.
-         */
-        public String dateTime = LocalDateTime.now().toString();
-
-        /**
-         * Returns local date and time object of when the game ended, i.e,
-         * the time of player's death.
-         * <p>
-         * LocalDateTime objects are easier to work with. Parse the
-         * given dateTime string into a LocalDateTime object.
-         * <p>
-         * Note: This could be mapped to the JSON but the FileLoader
-         * gives SEVERE type errors when reading the file.
-         *
-         * @return LocalDateTime object of the dateTime property
-         */
-        public LocalDateTime getDateTime() {
-            return LocalDateTime.parse(this.dateTime);
-        }
-
-        /**
-         * In game score
-         *
-         * @return the score of the particular game
-         */
-        public Integer getScore() {
-            return score;
-        }
-    }
-
-    public static class Distance {
         /**
          * Distance of that particular game
          **/
@@ -350,8 +310,8 @@ public class GameRecords {
          *
          * @return the score of the particular game
          */
-        public double getDistance() {
-            return distance;
+        public Integer getScore() {
+            return score;
         }
     }
 }

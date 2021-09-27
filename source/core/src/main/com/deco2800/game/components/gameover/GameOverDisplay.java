@@ -55,7 +55,7 @@ public class GameOverDisplay extends UIComponent {
         pointText.setDisabled(true);
 
         DecimalFormat df =new DecimalFormat("#0.0");
-        distance = GameRecords.getLatestDistance().distance;
+        distance = GameRecords.getLatestDistance();
         distanceText = new TextField(df.format(distance), skin);
         distanceText.setDisabled(true);
 
