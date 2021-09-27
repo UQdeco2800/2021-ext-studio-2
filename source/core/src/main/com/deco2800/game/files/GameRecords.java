@@ -31,8 +31,9 @@ public class GameRecords {
         // Storing achievements
         record.achievements = AchievementsStatsComponent.getUnlockedAchievements();
 
-        // Fetching the score
+        // Storing score, distance and game count. The latter is for convenient access.
         record.scoreData.score = ServiceLocator.getScoreService().getScore();
+        record.scoreData.distance = ServiceLocator.getDistanceService().getDistance();
         record.scoreData.game = gameCount;
 
         // Add the record
@@ -57,6 +58,10 @@ public class GameRecords {
      */
     public static Score getScoreByGame(int game) {
         return getRecords().findByGame(game).scoreData;
+    }
+
+    public static double getDistanceByGame(int game) {
+        return getScoreByGame(game).distance;
     }
 
 
@@ -210,6 +215,10 @@ public class GameRecords {
         return getScoreByGame(GameInfo.getGameCount());
     }
 
+    public static double getLatestDistance() {
+        return getScoreByGame(GameInfo.getGameCount()).distance;
+    }
+
     /**
      * A mapping of the game number (nth game played) and associated record,
      * i.e, the score and list of unlocked achievements.
@@ -267,6 +276,10 @@ public class GameRecords {
          * Score of that particular game
          **/
         public int score = 0;
+        /**
+         * Distance of that particular game
+         **/
+        public double distance = 0;
         /**
          * The game number, for ease of access
          */

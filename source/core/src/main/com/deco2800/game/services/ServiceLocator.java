@@ -24,6 +24,7 @@ public class ServiceLocator {
   private static ResourceService resourceService;
 
   private static ScoreService scoreService;
+  private static DistanceService distanceService;
 
 
   public static EntityService getEntityService() {
@@ -52,6 +53,10 @@ public class ServiceLocator {
 
   public static ScoreService getScoreService() {
     return scoreService;
+  }
+
+  public static DistanceService getDistanceService() {
+    return distanceService;
   }
 
   public static void registerEntityService(EntityService service) {
@@ -89,6 +94,11 @@ public class ServiceLocator {
     scoreService = source;
   }
 
+  public static void registerDistanceService(DistanceService source) {
+    logger.debug("Registering distance service {}", source);
+    distanceService = source;
+  }
+
   public static void clear() {
     entityService = null;
     renderService = null;
@@ -97,6 +107,7 @@ public class ServiceLocator {
     inputService = null;
     resourceService = null;
     scoreService = null;
+    distanceService = null;
   }
 
   private ServiceLocator() {
