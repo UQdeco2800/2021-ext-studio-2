@@ -34,9 +34,10 @@ public class ScoreService {
         return getBaseScore() + bonus;
     }
 
-    /** give score in seconds */
+    /** give score in seconds
+     * also count distance (sprint3)*/
     private int getBaseScore() {
-        return (int) gametime.getTime()/1000;
+        return (int) (gametime.getTime()/1000 + ServiceLocator.getDistanceService().getDistance());
     }
 
     /** save the current score in the score history */

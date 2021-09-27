@@ -54,7 +54,7 @@ public class DistanceDisplay extends UIComponent {
         // Distance Board
         float boardSideLength = 250f;
         distanceBoard = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/scoreboardV2.png", Texture.class));
+                .getAsset("images/distanceboard.png", Texture.class));
 
         // Distance text
         double distance = 0;
