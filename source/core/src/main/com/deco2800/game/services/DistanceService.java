@@ -18,13 +18,7 @@ public class DistanceService {
 
     public double getDistance() {
         Vector2 pos=player.getPosition();
-        System.out.println("playerPostion:  "+pos);
         distance=Math.sqrt(pos.x*pos.x+pos.y+pos.y);
         return distance;
-    }
-
-    /** save the current distance in the score history */
-    public void saveCurrentScoreToHistory() {
-
     }
 }
