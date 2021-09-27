@@ -50,7 +50,7 @@ public class ScoreDisplay extends UIComponent {
         tableForBoard = new Table();
         tableForBoard.bottom().right();
         tableForBoard.setFillParent(true);
-        tableForBoard.padBottom(-35).padRight(-52);
+        tableForBoard.padBottom(-35).padRight(-42);
 
         // Score Board
         float boardSideLength = 250f;

@@ -44,12 +44,12 @@ public class DistanceDisplay extends UIComponent {
         tableForText = new Table();
         tableForText.bottom().left();
         tableForText.setFillParent(true);
-        tableForText.padBottom(60).padLeft(60);
+        tableForText.padBottom(40).padLeft(90);
 
         tableForBoard = new Table();
         tableForBoard.bottom().left();
         tableForBoard.setFillParent(true);
-        tableForBoard.padBottom(-35).padLeft(-52);
+        tableForBoard.padBottom(-35).padLeft(0);
 
         // Distance Board
         float boardSideLength = 250f;
