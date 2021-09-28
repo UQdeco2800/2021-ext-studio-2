@@ -238,7 +238,7 @@ float&nbsp;tileSize)</code></th>
 <td class="colFirst"><code>float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getZIndex()">getZIndex</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Z index controls rendering order within a layer.</div>
+<div class="block">Set the zIndex of the entity according to the y coordinate of the entity and the original zIndex.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i7">
@@ -367,15 +367,20 @@ int&nbsp;y)</span></div>
 <section class="detail">
 <h3><a id="getZIndex()">getZIndex</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">float</span>&nbsp;<span class="memberName">getZIndex</span>()</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../rendering/Renderable.html#getZIndex()">Renderable</a></code></span></div>
-<div class="block">Z index controls rendering order within a layer. Higher Z index is drawn on top.</div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../rendering/RenderComponent.html#getZIndex()">RenderComponent</a></code></span></div>
+<div class="block">Set the zIndex of the entity according to the y coordinate of the entity and the original zIndex.
+
+ If zIndex is not set originally, then The smaller the Y value, the higher the Z index, so that closer entities
+ are drawn in front.
+
+ If zIndex has been set, zIndex will not change.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../rendering/Renderable.html#getZIndex()">getZIndex</a></code>&nbsp;in interface&nbsp;<code><a href="../../rendering/Renderable.html" title="interface in com.deco2800.game.rendering">Renderable</a></code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../../rendering/RenderComponent.html#getZIndex()">getZIndex</a></code>&nbsp;in class&nbsp;<code><a href="../../rendering/RenderComponent.html" title="class in com.deco2800.game.rendering">RenderComponent</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Z index</dd>
+<dd>The drawing priority of the current entity</dd>
 </dl>
 </section>
 </li>
