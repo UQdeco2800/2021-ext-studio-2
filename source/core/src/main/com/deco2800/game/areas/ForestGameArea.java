@@ -260,9 +260,16 @@ public class ForestGameArea extends GameArea {
         // Bottom
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
+
+        spawnInvisibleCeiling(worldBounds, tileBounds);
     }
 
-
+    /**
+     * Generate the continuous terrain after the first set of terrain
+     *
+     * @param xValue control the position of the terrain
+     *
+     */
     public void spawnTerrainRandomly(int xValue) {
         // Background terrain
         terrain = terrainFactory.createTerrainRandomly(TerrainType.FOREST_DEMO, xValue);
@@ -291,7 +298,30 @@ public class ForestGameArea extends GameArea {
         // Bottom
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
+
+
+        spawnInvisibleCeiling(worldBounds, tileBounds);
+
     }
+
+
+    /**
+     * Generate invisible ceiling on top to avoid the character jump out of the map
+     *
+     * @param worldBounds wall position value
+     * @param tileBounds tile position value
+     *
+     */
+    public void spawnInvisibleCeiling(Vector2 worldBounds, GridPoint2 tileBounds) {
+
+        spawnEntityAt(
+                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
+                new GridPoint2(0, tileBounds.y+8),
+                false,
+                false);
+
+    }
+
 
 
     /**
