@@ -16,10 +16,7 @@ import com.deco2800.game.components.maingame.MainGameDisplay;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
-import com.deco2800.game.components.score.ScoreDisplay;
-import com.deco2800.game.components.score.ScoringSystem;
-import com.deco2800.game.components.score.ScoringSystemV1;
-import com.deco2800.game.components.score.TimerDisplay;
+import com.deco2800.game.components.score.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -32,10 +29,7 @@ import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
-import com.deco2800.game.services.GameTime;
-import com.deco2800.game.services.ResourceService;
-import com.deco2800.game.services.ScoreService;
-import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.services.*;
 import com.deco2800.game.ui.terminal.Terminal;
 import com.deco2800.game.ui.terminal.TerminalDisplay;
 import com.deco2800.game.components.maingame.MainGameExitDisplay;
@@ -55,8 +49,10 @@ public class MainGameScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private static final String[] mainGameTextures = {"images/heart.png", "images/clockV2.png",
             "images/scoreboardV2.png", "images/background.png", "images/water1.png", "images/food1.png",
-            "images/Sprint2_Buffs_Debuffs/Poisoning.png", "images/Sprint2_Buffs_Debuffs/decrease_health.png", "images" +
-            "/Sprint2_Buffs_Debuffs/increase_health.png", "images/Sprint2_Buffs_Debuffs/decrease_speed.png"
+            "images/Sprint2_Buffs_Debuffs/Poisoning.png",
+            "images/Sprint2_Buffs_Debuffs/decrease_health.png", "images" +
+            "/Sprint2_Buffs_Debuffs/increase_health.png",
+            "images/Sprint2_Buffs_Debuffs/decrease_speed.png", "images/distanceboard.png"
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 
@@ -104,6 +100,7 @@ public class MainGameScreen extends ScreenAdapter {
         ServiceLocator.registerTimeSource(new GameTime());
         ServiceLocator.registerScoreService(new ScoreService());
 
+
         PhysicsService physicsService = new PhysicsService();
         ServiceLocator.registerPhysicsService(physicsService);
         physicsEngine = physicsService.getPhysics();
@@ -139,14 +136,7 @@ public class MainGameScreen extends ScreenAdapter {
         counterSmallMissile = 0;
         counter = 0;
 
-        System.out.println("Create MainGameScreen");
-        System.out.println("facehuggerPosition = " + facehuggerPosition);
-        System.out.println("spownFacehugger = " + spownFacehugger);
-        System.out.println("spaceshipState = " + spaceshipState);
-        System.out.println("positionHitSpaceship = " + positionHitSpaceship);
-        System.out.println("counterSmallMissile = " + counterSmallMissile);
-        System.out.println("newMapStatus = " + newMapStatus);
-        System.out.println("counter = " + counter);
+        ServiceLocator.registerDistanceService(new DistanceService(player));
     }
 
     /**
@@ -464,6 +454,7 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(inputComponent)
                 //display the score and the time -- team 9
                 .addComponent(new ScoreDisplay())
+                .addComponent(new DistanceDisplay())
                 .addComponent(new TimerDisplay())
                 .addComponent(new TerminalDisplay())
                 .addComponent(new FoodDisplay())
