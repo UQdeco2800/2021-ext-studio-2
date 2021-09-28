@@ -14,6 +14,7 @@ import com.deco2800.game.components.items.InventorySystem;
 import com.deco2800.game.components.items.ItemBar;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
+import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.BackgroundRenderComponent;
 import com.deco2800.game.utils.math.GridPoint2Utils;
@@ -244,22 +245,22 @@ public class ForestGameArea extends GameArea {
 
         // Left
         spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
+                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL), GridPoint2Utils.ZERO, false, false);
         // Right
         spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
+                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL),
                 new GridPoint2(tileBounds.x, 0),
                 false,
                 false);
         // Top
         spawnEntityAt(
-                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
+                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH, PhysicsLayer.WALL),
                 new GridPoint2(0, tileBounds.y),
                 false,
                 false);
         // Bottom
         spawnEntityAt(
-                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
+                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH, PhysicsLayer.WALL), GridPoint2Utils.ZERO, false, false);
 
         spawnInvisibleCeiling(worldBounds, tileBounds);
     }
@@ -282,22 +283,22 @@ public class ForestGameArea extends GameArea {
 
         // Left
         spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
+                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL), GridPoint2Utils.ZERO, false, false);
         // Right
         spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
+                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL),
                 new GridPoint2(tileBounds.x, 0),
                 false,
                 false);
         // Top
         spawnEntityAt(
-                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
+                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH, PhysicsLayer.WALL),
                 new GridPoint2(0, tileBounds.y),
                 false,
                 false);
         // Bottom
         spawnEntityAt(
-                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
+                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH, PhysicsLayer.WALL), GridPoint2Utils.ZERO, false, false);
 
 
         spawnInvisibleCeiling(worldBounds, tileBounds);
@@ -315,11 +316,10 @@ public class ForestGameArea extends GameArea {
     public void spawnInvisibleCeiling(Vector2 worldBounds, GridPoint2 tileBounds) {
 
         spawnEntityAt(
-                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
+                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH, PhysicsLayer.CEILING),
                 new GridPoint2(0, tileBounds.y+8),
                 false,
                 false);
-
     }
 
 

@@ -14,7 +14,6 @@ public abstract class RenderComponent extends Component implements Renderable, D
 
     @Override
     public void create() {
-        System.out.println("create entity: this = " + this);
         ServiceLocator.getRenderService().register(this);
     }
 

@@ -129,7 +129,8 @@ public class ObstacleDisappear extends Component {
             return;
         }
 
-        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
+
+        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE && (other.getFilterData().categoryBits != PhysicsLayer.CEILING)) {
             logger.debug("meteoriteDisappear was triggered.");
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("stone1");
