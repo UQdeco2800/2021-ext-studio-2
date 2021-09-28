@@ -68,6 +68,7 @@ public class MainGameScreen extends ScreenAdapter {
     private static Vector2 positionHitSpaceship;
     public static float spaceshipTime = 10f;
     private int counterSmallMissile = 0;
+
     public static newMap newMapStatus = newMap.Off;
 
     public static enum spaceshipAttack {
@@ -123,6 +124,17 @@ public class MainGameScreen extends ScreenAdapter {
         forestGameArea.create();
 
         player = forestGameArea.player;
+
+        facehuggerPosition = null;
+        spownFacehugger = false;
+
+        newMapStatus = newMap.Off;
+
+        spaceshipState = spaceshipAttack.Off;
+        positionHitSpaceship = null;
+        spaceshipTime = 10f;
+        counterSmallMissile = 0;
+        counter = 0;
 
         ServiceLocator.registerDistanceService(new DistanceService(player));
     }
@@ -251,7 +263,7 @@ public class MainGameScreen extends ScreenAdapter {
     /**
      * Set the position and status of the character according to the state of the spacecraft, which is called by render().
      */
-    private void SpaceshipAttackScene() {
+    private void spaceshipScene() {
         switch (spaceshipState) {
             case Start:
                 spaceshipSceneBegins();
@@ -347,7 +359,7 @@ public class MainGameScreen extends ScreenAdapter {
         }
 
         // Control the position of the character when the spaceship appears
-        SpaceshipAttackScene();
+        spaceshipScene();
         // Transfer the player according to the portal the player enters
         TransferPlayerByMap();
 

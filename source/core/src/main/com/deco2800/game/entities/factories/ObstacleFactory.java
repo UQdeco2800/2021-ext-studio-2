@@ -4,6 +4,8 @@ import com.badlogic.gdx.assets.loaders.SynchronousAssetLoader;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Obstacle.ObstacleDisappear;
@@ -49,7 +51,7 @@ public class ObstacleFactory {
      */
     public static Entity createPlantsObstacle(Entity target) {
         BaseEntityConfig config = configs.plant;
-        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody);
+        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody, "Plants");
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -81,7 +83,7 @@ public class ObstacleFactory {
      */
     public static Entity createThornsObstacle(Entity target) {
         BaseEntityConfig config = configs.thorn;
-        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody);
+        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody, "Thorns");
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -99,7 +101,7 @@ public class ObstacleFactory {
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(obstacle, 0.2f, 0.3f);
         obstacle.setScale(2, 2);
-
+        obstacle.setZIndex(1);
         logger.debug("Create a Thorns Obstacle");
 
         return obstacle;
@@ -113,9 +115,9 @@ public class ObstacleFactory {
      * @param bodyType body type, default = dynamic
      * @return obstacle entity
      */
-    private static Entity createBaseObstacle(Entity target, BodyType bodyType) {
+    private static Entity createBaseObstacle(Entity target, BodyType bodyType, String type) {
         Entity obstacle =
-                new Entity()
+                new Entity(type)
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE));
@@ -154,7 +156,7 @@ public class ObstacleFactory {
         animator.addAnimation("stone1", 0.08f, Animation.PlayMode.LOOP);
 
         Entity meteorite =
-                new Entity()
+                new Entity("Meteorite")
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.METEORITE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.METEORITE))
@@ -188,16 +190,16 @@ public class ObstacleFactory {
 //        animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
 
         Entity portal =
-                new Entity()
+                new Entity("Portal")
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
 //                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
 
-                .addComponent(new TextureRenderComponent("images/portal.png"))
+                        .addComponent(new TextureRenderComponent("images/portal.png"))
 //                .addComponent(animator)
 //                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
 //                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
-                .addComponent(new ObstacleDisappear(type));
+                        .addComponent(new ObstacleDisappear(type));
 
         PhysicsUtils.setScaledCollider(portal, 2f, 4f);
         portal.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
@@ -209,7 +211,6 @@ public class ObstacleFactory {
     }
 
 
-
     /**
      * Creates an invisible physics wall.
      *
@@ -217,11 +218,14 @@ public class ObstacleFactory {
      * @param height Wall height in world units
      * @return Wall entity of given width and height
      */
-    public static Entity createWall(float width, float height) {
+    public static Entity createWall(float width, float height, short layer) {
         Entity wall = new Entity()
                 .addComponent(new PhysicsComponent().setBodyType(BodyType.StaticBody))
-                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.WALL));
+                .addComponent(new ColliderComponent().setLayer(layer));
         wall.setScale(width, height);
+        if (layer == PhysicsLayer.CEILING) {
+            wall.getComponent(ColliderComponent.class).setMaskBits(PhysicsLayer.PLAYERCOLLIDER);
+        }
         return wall;
     }
 

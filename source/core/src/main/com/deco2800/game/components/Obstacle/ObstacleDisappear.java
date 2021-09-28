@@ -15,13 +15,14 @@ import org.slf4j.LoggerFactory;
  */
 public class ObstacleDisappear extends Component {
 
-    /**
-     * The types of obstacles and enemies are used to determine the type of entity that triggers the event.
-     */
+
     public static boolean locked = true;
     public static boolean locked2 = true;
     public static boolean locked3 = true;
 
+    /**
+     * The types of obstacles and enemies are used to determine the type of entity that triggers the event.
+     */
     public enum ObstacleType {
         PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm, Spaceship, SmallMissile, PortalEntrance, PortalExport;
     }
@@ -30,7 +31,7 @@ public class ObstacleDisappear extends Component {
     AnimationRenderComponent animator;
     HitboxComponent hitboxComponent;
     ObstacleType obstacleType;
-    private static boolean spaceshipAttack = false;
+    private static boolean spaceshipAttack;
 
     public ObstacleDisappear(ObstacleType obstacleType) {
         this.obstacleType = obstacleType;
@@ -55,6 +56,7 @@ public class ObstacleDisappear extends Component {
                 break;
             case Spaceship:
                 entity.getEvents().addListener("collisionStart", this::spaceShipAttack);
+                spaceshipAttack = false;
                 break;
             case SmallMissile:
                 entity.getEvents().addListener("collisionStart", this::smallMissileAttack);
@@ -127,7 +129,8 @@ public class ObstacleDisappear extends Component {
             return;
         }
 
-        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
+
+        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE && (other.getFilterData().categoryBits != PhysicsLayer.CEILING)) {
             logger.debug("meteoriteDisappear was triggered.");
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("stone1");
