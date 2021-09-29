@@ -108,25 +108,25 @@ public class NPCFactory {
 //            new AITaskComponent()
 //                    .addTask(new ObstacleAttackTask(target,10,6f));
 //
-//    AnimationRenderComponent animator =
-//            new AnimationRenderComponent(
-//                    ServiceLocator.getResourceService()
-//                            .getAsset("images/monkey.atlas", TextureAtlas.class));
+    AnimationRenderComponent animator =
+            new AnimationRenderComponent(
+                    ServiceLocator.getResourceService()
+                            .getAsset("images/spaceship.atlas", TextureAtlas.class));
 
-//    animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
+    animator.addAnimation("spaceship1", 0.2f, Animation.PlayMode.LOOP);
 
     spaceship
-            .addComponent(new TextureRenderComponent("images/ufo.png"))
+//            .addComponent(new TextureRenderComponent("images/ufo.png"))
             .addComponent(new PhysicsComponent())
             .addComponent(new PhysicsMovementComponent())
             .addComponent(new ColliderComponent())
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-            .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Spaceship));
+            .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Spaceship))
+            .addComponent(animator);
 
     spaceship.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
-//    animator.startAnimation("1m");
+    animator.startAnimation("spaceship1");
     spaceship.setScale(10f, 10f);
-//    logger.debug("Create a Flying Monkey");
     return spaceship;
   }
 

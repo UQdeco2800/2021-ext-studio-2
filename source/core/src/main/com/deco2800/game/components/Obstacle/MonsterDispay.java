@@ -261,37 +261,37 @@ public class MonsterDispay extends UIComponent {
         bgTable.add(bgImage).size(1400,1000);
 
         Image secretImage = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/monster_menu/secret.jpg", Texture.class));
+                .getAsset("images/monster_menu/plant.png", Texture.class));
         secretTable = new Table().padBottom(600);
         secretTable.setFillParent(true);
         secretTable.add(secretImage).size(540,145).padBottom(25);
 
         Image secretImage2 = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/monster_menu/secret.jpg", Texture.class));
+                .getAsset("images/monster_menu/thorns.png", Texture.class));
         secretTable2 = new Table().padBottom(250);
         secretTable2.setFillParent(true);
         secretTable2.add(secretImage2).size(540,145).padBottom(90);
 
         Image secretImage3 = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/monster_menu/secret.jpg", Texture.class));
+                .getAsset("images/monster_menu/stone.png", Texture.class));
         secretTable3 = new Table().padBottom(40);
         secretTable3.setFillParent(true);
         secretTable3.add(secretImage3).size(540,145).padBottom(30);
 
         Image secretImage4 = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/monster_menu/secret.jpg", Texture.class));
+                .getAsset("images/monster_menu/monkey.png", Texture.class));
         secretTable4 = new Table().padTop(220);
         secretTable4.setFillParent(true);
         secretTable4.add(secretImage4).size(540,145).padBottom(30);
 
         Image secretImage5 = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/monster_menu/secret.jpg", Texture.class));
+                .getAsset("images/monster_menu/hugger.png", Texture.class));
         secretTable5 = new Table().padTop(455);
         secretTable5.setFillParent(true);
         secretTable5.add(secretImage5).size(540,145).padBottom(30);
 
         Image secretImage6 = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/monster_menu/secret.jpg", Texture.class));
+                .getAsset("images/monster_menu/hugger.png", Texture.class));
         secretTable6 = new Table().padTop(680);
         secretTable6.setFillParent(true);
         secretTable6.add(secretImage6).size(540,125).padBottom(30);
