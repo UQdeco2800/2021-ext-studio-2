@@ -36,26 +36,55 @@ public class ForestGameArea extends GameArea {
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.randomX(50, minPos, maxPos);
+            GridPoint2 randomPos = new GridPoint2(0, 0);
             Entity rock = ObstacleFactory.createRock();
             spawnEntityAt(rock, randomPos, true, false);
         }
     }
 
+public void spawnRocksone(int xValue) {
 
-    public void spawnRocksRandomly(int xValue) {
-        GridPoint2 minPos = new GridPoint2(xValue + 10, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+    for (int i = 0; i < 5; i++) {
+//        GridPoint2 Pos = (10, 0);
+//        Entity rock = ObstacleFactory.createRock();
+//        spawnEntityAt(rock, Pos, true, false);
+//        GridPoint2 PosTwo = (10, 1);
+//        Entity rockTwo = ObstacleFactory.createRock();
+//        spawnEntityAt(rockTwo, PosTwo, true, false);
+//        GridPoint2 PosThree = (10, 2);
+//        Entity rockTwo = ObstacleFactory.createRock();
+//        spawnEntityAt(rockTwo, PosThree, true, true);
+        GridPoint2 pos = new GridPoint2(xValue + 2 +i, 50);
+        Entity rock = ObstacleFactory.createRock();
+        spawnEntityAt(rock, pos, true, false);
 
-        for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.randomX(50, minPos, maxPos);
-            Entity rock = ObstacleFactory.createRock();
-            spawnEntityAt(rock, randomPos, true, false);
-            GridPoint2 randomPosTwo = RandomUtils.randomX(51, minPos, maxPos);
-            Entity rockTwo = ObstacleFactory.createRock();
-            spawnEntityAt(rockTwo, randomPosTwo, true, false);
-        }
     }
+}
+    // rock pyramid
+
+
+
+
+// public void spawnRocksRandomly(int xValue) {
+//     GridPoint2 minPos = new GridPoint2(xValue + 10, 0);
+//     GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+//
+//     for (int i = 0; i < 5; i++) {
+//         GridPoint2 randomPos = RandomUtils.randomX(50, minPos, maxPos);
+//         Entity rock = ObstacleFactory.createRock();
+//         spawnEntityAt(rock, randomPos, true, false);
+//         GridPoint2 randomPosTwo = RandomUtils.randomX(51, minPos, maxPos);
+//         Entity rockTwo = ObstacleFactory.createRock();
+//         spawnEntityAt(rockTwo, randomPosTwo, true, false);
+//     }
+// }
+
+
+
+
+
+
+
 
     private void spawnWoods() {
         GridPoint2 minPos = new GridPoint2(0, 0);
@@ -63,11 +92,11 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < 5; i++) {
             GridPoint2 randomPos = RandomUtils.randomX(52, minPos, maxPos);
-            Entity rock = ObstacleFactory.createWood();
-            spawnEntityAt(rock, randomPos, true, false);
+            Entity wood = ObstacleFactory.createWood();
+            spawnEntityAt(wood, randomPos, true, false);
             GridPoint2 randomPosTwo = RandomUtils.randomX(54, minPos, maxPos);
-            Entity rockTwo = ObstacleFactory.createWood();
-            spawnEntityAt(rockTwo, randomPosTwo, true, false);
+            Entity woodTwo = ObstacleFactory.createWood();
+            spawnEntityAt(woodTwo, randomPosTwo, true, false);
         }
     }
 
@@ -77,13 +106,25 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < 5; i++) {
             GridPoint2 randomPos = RandomUtils.randomX(52, minPos, maxPos);
-            Entity rock = ObstacleFactory.createWood();
-            spawnEntityAt(rock, randomPos, true, false);
+            Entity wood = ObstacleFactory.createWood();
+            spawnEntityAt(wood, randomPos, true, false);
             GridPoint2 randomPosTwo = RandomUtils.randomX(54, minPos, maxPos);
-            Entity rockTwo = ObstacleFactory.createWood();
-            spawnEntityAt(rockTwo, randomPosTwo, true, false);
+            Entity woodTwo = ObstacleFactory.createWood();
+            spawnEntityAt(woodTwo, randomPosTwo, true, false);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     //  private void spawnTrees() {
     //    GridPoint2 minPos = new GridPoint2(0, 0);
