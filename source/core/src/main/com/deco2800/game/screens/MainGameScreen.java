@@ -372,6 +372,9 @@ public class MainGameScreen extends ScreenAdapter {
                     forestGameArea.spawnRocksone((int) (screenVector.x + 2));
                     forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
                     forestGameArea.spawnRocksthree((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksfour((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksfive((int) (screenVector.x + 2));
+                    forestGameArea.spawnRockssix((int) (screenVector.x + 2));
                     generateObstaclesEnemiesByMapRefresh(counter);
                 }
                 // Generate monster
@@ -389,6 +392,9 @@ public class MainGameScreen extends ScreenAdapter {
                     forestGameArea.spawnRocksone((int) (screenVector.x+2));
                     forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
                     forestGameArea.spawnRocksthree((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksfour((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksfive((int) (screenVector.x + 2));
+                    forestGameArea.spawnRockssix((int) (screenVector.x + 2));
                 }}
 
     }
