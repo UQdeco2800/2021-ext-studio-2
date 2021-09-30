@@ -4,23 +4,33 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.files.GameRecords;
+import com.deco2800.game.files.GameRecords.Score;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
+import com.deco2800.game.utils.DateTimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ScoreHistoryDisplay extends UIComponent {
 
     private static final Logger logger = LoggerFactory.getLogger(ScoreHistoryDisplay.class);
+    private static final int SCORE_DISPLAY_COUNT = 10;
+
     private final GdxGame game;
+    ImageButton trophyStatus;
     private Table boardTable;
     private Table buttonTable;
     private Table bgTable;
@@ -87,33 +97,33 @@ public class ScoreHistoryDisplay extends UIComponent {
         float padBottomValue = 270;
 
         //prepare the score data.
-        //The Score class contains actual score value and the date that the the score was played.
-        List<GameRecords.Score> pastScores = GameRecords.getHighestScores();
+        //The Score class contains actual score value and the associated date of gameplay.
+        List<Score> pastScores = GameRecords.getHighestScores();
 
         //loop this list to create labels.
-        for (GameRecords.Score score : pastScores) {
-
+        int endIndex = Math.min(pastScores.size(), SCORE_DISPLAY_COUNT);
+        for (Score score : pastScores.subList(0, endIndex)) {
             //score
             Table scoreDataTable = new Table();
             scoreDataTable.center();
             scoreDataTable.padBottom(padBottomValue).padLeft(300);
             scoreDataTable.setFillParent(true);
-            Label scoreLabel = new Label(score.getScore()+"", skin, "large");
-            scoreDataTable.add(scoreLabel);
+            Label scoreLabel = new Label(score.getScore().toString(), new Label.LabelStyle(new BitmapFont(),
+                    Color.BROWN));
 
+            scoreDataTable.add(scoreLabel);
+            trophyStatus = getStatusButton(score);
+            scoreDataTable.add(trophyStatus).size(25).padLeft(25);
             //date
             Table dateDataTable = new Table();
             dateDataTable.center();
             dateDataTable.padBottom(padBottomValue).padRight(300);
             dateDataTable.setFillParent(true);
-            //The LocalDateTime is this format: 2021-09-13T20:22:55.527317800
-            //split"T" then get the date. split"." get the time (hour and min only) using substring
-            String dateText = String.valueOf(score.getDateTime()).split("T")[0]
-                    + "  " + String.valueOf(score.getDateTime()).split("T")[1].split("\\.")[0]
-                    .substring(0,5);
+            // Format to get the date, along with hours and minutes
+            String dateText = DateTimeUtils.getFormattedDateTime(score.getDateTime());
 
             Label dateLabel =
-                    new Label(dateText, skin, "large");
+                    new Label(dateText, new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
             dateDataTable.add(dateLabel);
 
             //add these two tables to the lists
@@ -145,6 +155,42 @@ public class ScoreHistoryDisplay extends UIComponent {
         gameCount.setFontScale(2f);
         gameCountTable.add(gameCount);
         stage.addActor(gameCountTable);
+    }
+
+    private ImageButton getStatusButton(Score score) {
+        List<BaseAchievementConfig> bestAchievementsByGame = GameRecords.getBestAchievementsByGame(score.game);
+        Set<String> unlockedAchievementTiers = bestAchievementsByGame.stream()
+                .map(achievement -> achievement.type)
+                .collect(Collectors.toSet());
+
+        if (unlockedAchievementTiers.contains("GOLD")) {
+            trophyStatus = getImageButton("images/achievements/achievementStatusGold.png");
+        } else if (unlockedAchievementTiers.contains("SILVER")) {
+            trophyStatus = getImageButton("images/achievements/achievementStatusSilver.png");
+        } else if (unlockedAchievementTiers.contains("BRONZE")) {
+            trophyStatus = getImageButton("images/achievements/achievementStatusBronze.png");
+        } else {
+            trophyStatus = getImageButton("images/achievements/achievementStatusNone.png");
+            trophyStatus.setColor(255f, 255f, 255f, 0.55f);
+        }
+        trophyStatus.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                entity.getEvents().trigger("scoreDetailsDialog", score);
+            }
+        });
+        return trophyStatus;
+    }
+
+    /**
+     * Returns an image button to be reused everywhere.
+     *
+     * @param path the image path
+     * @return ImageButton to be displayed
+     */
+    private ImageButton getImageButton(String path) {
+        return new ImageButton(new TextureRegionDrawable(new TextureRegion(
+                new Texture(path))));
     }
 
     @Override

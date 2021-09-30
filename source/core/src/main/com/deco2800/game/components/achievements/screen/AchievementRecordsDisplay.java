@@ -164,7 +164,7 @@ public class AchievementRecordsDisplay extends UIComponent {
      * Renders the list of best achievements (the ones with full opacity)
      */
     private void renderBestAchievements() {
-        renderAchievements(GameRecords.getBestRecords(), 1);
+        renderAchievements(GameRecords.getAllTimeBestAchievements(), 1);
     }
 
 

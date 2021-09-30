@@ -11,6 +11,10 @@
   "faceWorm": {
     "health": 100,
     "baseAttack": 5
+  },
+  "smallMissile": {
+    "health": 100,
+    "baseAttack": 1
   }
 }
 

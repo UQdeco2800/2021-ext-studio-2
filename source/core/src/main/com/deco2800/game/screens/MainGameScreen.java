@@ -1,5 +1,6 @@
 package com.deco2800.game.screens;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -7,14 +8,15 @@ import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.areas.terrain.TerrainFactory;
+import com.deco2800.game.components.Obstacle.ObstacleDisappear;
+import com.deco2800.game.components.achievements.AchievementsHelper;
 import com.deco2800.game.components.items.PropsShopDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.maingame.MainGameDisplay;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.score.ScoreDisplay;
-import com.deco2800.game.components.score.ScoringSystem;
-import com.deco2800.game.components.score.ScoringSystemV1;
-import com.deco2800.game.components.score.TimerDisplay;
+import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
+import com.deco2800.game.components.player.PlayerActions;
+import com.deco2800.game.components.score.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -27,14 +29,12 @@ import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
-import com.deco2800.game.services.GameTime;
-import com.deco2800.game.services.ResourceService;
-import com.deco2800.game.services.ScoreService;
-import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.services.*;
 import com.deco2800.game.ui.terminal.Terminal;
 import com.deco2800.game.ui.terminal.TerminalDisplay;
 import com.deco2800.game.components.maingame.MainGameExitDisplay;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
+import com.deco2800.game.utils.math.Vector2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.deco2800.game.components.foodAndwater.FoodDisplay;
@@ -49,8 +49,10 @@ public class MainGameScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private static final String[] mainGameTextures = {"images/heart.png", "images/clockV2.png",
             "images/scoreboardV2.png", "images/background.png", "images/water1.png", "images/food1.png",
-            "images/Sprint2_Buffs_Debuffs/Poisoning.png", "images/Sprint2_Buffs_Debuffs/decrease_health.png", "images" +
-            "/Sprint2_Buffs_Debuffs/increase_health.png", "images/Sprint2_Buffs_Debuffs/decrease_speed.png"
+            "images/Sprint2_Buffs_Debuffs/Poisoning.png",
+            "images/Sprint2_Buffs_Debuffs/decrease_health.png", "images" +
+            "/Sprint2_Buffs_Debuffs/increase_health.png",
+            "images/Sprint2_Buffs_Debuffs/decrease_speed.png", "images/distanceboard.png"
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 
@@ -62,9 +64,31 @@ public class MainGameScreen extends ScreenAdapter {
     private static Vector2 facehuggerPosition;
     private static boolean spownFacehugger;
 
+    public static spaceshipAttack spaceshipState = spaceshipAttack.Off;
+    private static Vector2 positionHitSpaceship;
+    public static float spaceshipTime = 10f;
+    private int counterSmallMissile = 0;
+
+    public static newMap newMapStatus = newMap.Off;
+
+    public static enum spaceshipAttack {
+        Off,
+        Start, // Used once in render
+        On,
+        Finish;
+    }
+
+    public static enum newMap {
+        Off,
+        Begin,  // Used once in render
+        Finish,  // Used once in render
+        On;
+    }
+
     private Entity player;
     private ForestGameArea forestGameArea;
     private int counter = 0;
+
 
     private static boolean slowPlayer = false;
     private static float slowPlayerTime;
@@ -75,6 +99,7 @@ public class MainGameScreen extends ScreenAdapter {
         logger.debug("Initialising main game screen services");
         ServiceLocator.registerTimeSource(new GameTime());
         ServiceLocator.registerScoreService(new ScoreService());
+
 
         PhysicsService physicsService = new PhysicsService();
         ServiceLocator.registerPhysicsService(physicsService);
@@ -99,6 +124,19 @@ public class MainGameScreen extends ScreenAdapter {
         forestGameArea.create();
 
         player = forestGameArea.player;
+
+        facehuggerPosition = null;
+        spownFacehugger = false;
+
+        newMapStatus = newMap.Off;
+
+        spaceshipState = spaceshipAttack.Off;
+        positionHitSpaceship = null;
+        spaceshipTime = 10f;
+        counterSmallMissile = 0;
+        counter = 0;
+
+        ServiceLocator.registerDistanceService(new DistanceService(player));
     }
 
     /**
@@ -157,6 +195,146 @@ public class MainGameScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * Generate monsters based on the position of the enemy monkey, which is called by render().
+     */
+    public static void setSpaceshipAttack() {
+        spaceshipState = spaceshipAttack.Start;
+    }
+
+    private void spaceshipSceneBegins() {
+        //                System.out.println("Start");
+        positionHitSpaceship = player.getPosition();
+        player.setPosition(player.getPosition().x - 8, player.getPosition().y);
+        player.setPosition((float) (player.getPosition().x - 0.05), player.getPosition().y);
+        // If the player is walking, stop
+        if (!player.getComponent(KeyboardPlayerInputComponent.class).getWalkDirection().epsilonEquals(Vector2.Zero)) {
+            player.getComponent(KeyboardPlayerInputComponent.class).keyUp(Input.Keys.D);
+        }
+        spaceshipState = spaceshipAttack.On;
+    }
+
+    private void spaceshipAttackScene() {
+//                System.out.println("On");
+        player.setPosition((float) (player.getPosition().x - 0.05), player.getPosition().y);
+        spaceshipTime -= ServiceLocator.getTimeSource().getDeltaTime();
+
+        if (spaceshipTime <= 0) {
+            spaceshipState = spaceshipAttack.Finish;
+            forestGameArea.spawnPortal(new Vector2(85, 8), ObstacleDisappear.ObstacleType.PortalEntrance);
+            AchievementsHelper.getInstance().trackSpaceshipAvoidSuccess();
+
+        } else if (spaceshipTime <= 5 && counterSmallMissile % 100 == 0) {
+//            System.out.println("Hard counterSmallMissile = " + counterSmallMissile);
+
+            // 难
+            switch (counterSmallMissile) {
+                case 300:
+                    forestGameArea.spawnSmallMissile(new Vector2(85, 5));
+                    forestGameArea.spawnSmallMissile(new Vector2(85, 11));
+                    break;
+                case 400:
+                    forestGameArea.spawnSmallMissile(new Vector2(85, 8));
+                    forestGameArea.spawnSmallMissile(new Vector2(85, 11));
+                    break;
+                case 500:
+                    forestGameArea.spawnSmallMissile(new Vector2(85, 5));
+                    forestGameArea.spawnSmallMissile(new Vector2(85, 8));
+            }
+
+        } else if (spaceshipTime <= 10 && counterSmallMissile % 100 == 0) {
+//            System.out.println("Essay counterSmallMissile = " + counterSmallMissile);
+            // 简单
+            switch (counterSmallMissile) {
+                case 0:
+                    forestGameArea.spawnSmallMissile(new Vector2(85, 5f));
+                    break;
+                case 100:
+                    forestGameArea.spawnSmallMissile(new Vector2(85, 8f));
+                    break;
+                case 200:
+                    forestGameArea.spawnSmallMissile(new Vector2(85, 11f));
+            }
+        }
+
+        counterSmallMissile++;
+    }
+
+    /**
+     * Set the position and status of the character according to the state of the spacecraft, which is called by render().
+     */
+    private void spaceshipScene() {
+        switch (spaceshipState) {
+            case Start:
+                spaceshipSceneBegins();
+                break;
+            case On:
+                spaceshipAttackScene();
+                break;
+            case Finish:
+//                System.out.println("Finish");
+            default:
+        }
+    }
+
+    /**
+     * @param status How many seconds the player slows down.
+     */
+    public static void setNewMapStatus(newMap status) {
+        newMapStatus = status;
+    }
+
+    /**
+     * Slow down the player, called by render().
+     */
+    private void TransferPlayerByMap() {
+        if (newMapStatus == newMap.Begin) {
+            player.setPosition(0, 50);
+            newMapStatus = newMap.On;
+        } else if (newMapStatus == newMap.Finish) {
+            player.setPosition(87, 3);
+            newMapStatus = newMap.Off;
+        }
+    }
+
+    private void generateObstaclesEnemiesByMapRefresh(int counter) {
+        // Control the spawning of spaceships or other obstacles
+        if (counter == 3) {
+            forestGameArea.spawnSpaceship();
+        } else {
+            // Generate obstacles
+            forestGameArea.spawnObstacles();
+            // Generate meteorites
+            forestGameArea.spawnMeteorites(0, 1, 2, 1, 1, 2);
+            // Generate enemies
+            forestGameArea.spawnFlyingMonkey();
+        }
+    }
+
+    private Vector2 changeCameraLens() {
+        // Centralize the screen to player
+        Vector2 screenVector = player.getPosition();
+//        System.out.println("player.getPosition() = " + player.getPosition());
+
+        // Update camera position (change based on team6 contribution)
+        switch (newMapStatus) {
+            case Off:
+                screenVector.y = 7f;
+                if (spaceshipState == spaceshipAttack.On || spaceshipState == spaceshipAttack.Start ||
+                        (spaceshipState == spaceshipAttack.Finish && screenVector.x <= positionHitSpaceship.x)) {
+                    renderer.getCamera().getEntity().setPosition(new Vector2(positionHitSpaceship.x, 7f));
+                } else {
+                    renderer.getCamera().getEntity().setPosition(screenVector);
+                }
+                break;
+            case On:
+                System.out.println("player.getPosition() = " + player.getPosition());
+                screenVector.y = 55f;
+                renderer.getCamera().getEntity().setPosition(screenVector);
+        }
+        return screenVector;
+    }
+
     @Override
     public void render(float delta) {
 
@@ -180,33 +358,35 @@ public class MainGameScreen extends ScreenAdapter {
             return;
         }
 
-        // making player to move constantly
+        // Control the position of the character when the spaceship appears
+        spaceshipScene();
+        // Transfer the player according to the portal the player enters
+        TransferPlayerByMap();
 
+        // making player to move constantly
         player.setPosition((float) (player.getPosition().x + 0.05), player.getPosition().y);
 
-        // Centralize the screen to player
-        Vector2 screenVector = player.getPosition();
-        screenVector.y = 7f;
-        renderer.getCamera().getEntity().setPosition(screenVector);
-        // infinite loop for terrain and obstacles
-        if (screenVector.x > (2 * counter + 1) * 10) {
-            counter += 1;
-            forestGameArea.showScrollingBackground(counter);
-            forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2));
-//      forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
-//      forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
+        Vector2 screenVector = changeCameraLens();
 
-            // Generate obstacles
-            forestGameArea.spawnObstacles();
-            // Generate meteorites
-            forestGameArea.spawnMeteorites(0, 1, 2, 1, 1, 2);
-            // Generate enemies
-            forestGameArea.spawnFlyingMonkey();
+
+        // Generate terrain, obstacle and enemies
+        switch (newMapStatus) {
+            case Off:
+                // infinite loop for terrain and obstacles
+                if (screenVector.x > (2 * counter + 1) * 10) {
+                    counter += 1;
+                    forestGameArea.showScrollingBackground(counter);
+                    forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2));
+                    //      forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
+                    //      forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
+                    generateObstaclesEnemiesByMapRefresh(counter);
+                }
+                // Generate monster
+                spownFacehugger();
+                // Thorns effect trigger
+                slowPlayer();
+                break;
         }
-        // Generate monster
-        spownFacehugger();
-        // Thorns effect trigger
-        slowPlayer();
 
     }
 
@@ -274,6 +454,7 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(inputComponent)
                 //display the score and the time -- team 9
                 .addComponent(new ScoreDisplay())
+                .addComponent(new DistanceDisplay())
                 .addComponent(new TimerDisplay())
                 .addComponent(new TerminalDisplay())
                 .addComponent(new FoodDisplay())

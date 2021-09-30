@@ -1,22 +1,13 @@
 package com.deco2800.game.components.Obstacle;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.utils.Null;
 import com.deco2800.game.components.Component;
-import com.deco2800.game.entities.Entity;
-import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
-import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.screens.MainGameScreen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Method;
 //import com.sun.tools.javac.Main;
 
 /**
@@ -24,17 +15,23 @@ import java.lang.reflect.Method;
  */
 public class ObstacleDisappear extends Component {
 
+
+    public static boolean locked = true;
+    public static boolean locked2 = true;
+    public static boolean locked3 = true;
+
     /**
      * The types of obstacles and enemies are used to determine the type of entity that triggers the event.
      */
     public enum ObstacleType {
-        PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm;
+        PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm, Spaceship, SmallMissile, PortalEntrance, PortalExport;
     }
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleDisappear.class);
     AnimationRenderComponent animator;
     HitboxComponent hitboxComponent;
     ObstacleType obstacleType;
+    private static boolean spaceshipAttack;
 
     public ObstacleDisappear(ObstacleType obstacleType) {
         this.obstacleType = obstacleType;
@@ -56,6 +53,19 @@ public class ObstacleDisappear extends Component {
                 break;
             case FaceWorm:
                 entity.getEvents().addListener("collisionStart", this::faceWormDisappear);
+                break;
+            case Spaceship:
+                entity.getEvents().addListener("collisionStart", this::spaceShipAttack);
+                spaceshipAttack = false;
+                break;
+            case SmallMissile:
+                entity.getEvents().addListener("collisionStart", this::smallMissileAttack);
+                break;
+            case PortalEntrance:
+                entity.getEvents().addListener("collisionStart", this::portalEntrance);
+                break;
+            case PortalExport:
+                entity.getEvents().addListener("collisionStart", this::portalExport);
                 break;
             default:
                 logger.error("No corresponding event.");
@@ -81,8 +91,10 @@ public class ObstacleDisappear extends Component {
         animator.getEntity().setRemoveTexture();
         animator.startAnimation("obstacles");
         animator.getEntity().setDisappearAfterAnimation(1f);
+        locked = false;
 
     }
+
 
     /**
      * When the monitored event is triggered, play the thorns animation, and disable the
@@ -104,6 +116,7 @@ public class ObstacleDisappear extends Component {
         animator.getEntity().setRemoveTexture();
         animator.startAnimation("obstacle2");
         animator.getEntity().setDisappearAfterAnimation(1f);
+        locked2 = false;
     }
 
     /**
@@ -116,11 +129,13 @@ public class ObstacleDisappear extends Component {
             return;
         }
 
-        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
+
+        if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE && (other.getFilterData().categoryBits != PhysicsLayer.CEILING)) {
             logger.debug("meteoriteDisappear was triggered.");
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("stone1");
             animator.getEntity().setDisappearAfterAnimation(0.32f);
+            locked3 = false;
         }
 
     }
@@ -136,4 +151,58 @@ public class ObstacleDisappear extends Component {
 
     }
 
+    void spaceShipAttack(Fixture me, Fixture other) {
+        if (spaceshipAttack) {
+            return;
+        }
+        if (hitboxComponent.getFixture() != me) {
+            // Not triggered by hitbox, ignore
+            return;
+        }
+
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return;
+        }
+        MainGameScreen.setSpaceshipAttack();
+//        System.out.println("spaceShipAttack was triggered.");
+        spaceshipAttack = true;
+        this.entity.setSpaceShipDispose();
+    }
+
+    void smallMissileAttack(Fixture me, Fixture other) {
+        if (hitboxComponent.getFixture() != me) {
+            // Not triggered by hitbox, ignore
+            return;
+        }
+
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return;
+        }
+//        MainGameScreen.setSpaceshipAttack();
+//        System.out.println("smallMissileAttack was triggered.");
+//        spaceshipAttack = true;
+//        this.entity.setSpaceShipDispose();
+        this.entity.setDispose();
+    }
+
+    void portalEntrance(Fixture me, Fixture other) {
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return;
+        }
+        MainGameScreen.setNewMapStatus(MainGameScreen.newMap.Begin);
+//        System.out.println("portalTransfer was triggered.");
+    }
+
+
+    void portalExport(Fixture me, Fixture other) {
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return;
+        }
+        MainGameScreen.setNewMapStatus(MainGameScreen.newMap.Finish);
+//        System.out.println("portalTransfer was triggered.");
+    }
 }

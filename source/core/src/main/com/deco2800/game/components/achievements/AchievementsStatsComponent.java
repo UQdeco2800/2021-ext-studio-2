@@ -1,7 +1,6 @@
 package com.deco2800.game.components.achievements;
 
 import com.deco2800.game.components.Component;
-import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.services.ServiceLocator;
@@ -15,7 +14,6 @@ import java.util.stream.Collectors;
  */
 public class AchievementsStatsComponent extends Component {
     private static final List<BaseAchievementConfig> achievements = AchievementFactory.getAchievements();
-    private final ScoringSystemV1 scoringSystemV1;
     private int health;
     private long time;
     private int itemCount;
@@ -25,23 +23,12 @@ public class AchievementsStatsComponent extends Component {
 
     private int score;
     private int firstAids;
+    private int gold;
 
+    /* TO//DO: setup achievement stats as Hashmap <property,value> */
 
     public AchievementsStatsComponent() {
-        scoringSystemV1 = new ScoringSystemV1();
-
         initStats();
-    }
-
-    private void initStats(){
-        itemCount = 0;
-        health = 100;
-        time = -1;
-
-        bonusItemSign = false;
-
-        score = 0;
-        firstAids = 0;
     }
 
     /**
@@ -72,6 +59,18 @@ public class AchievementsStatsComponent extends Component {
         achievements.forEach(achievement -> achievement.unlocked = false);
     }
 
+    private void initStats() {
+        itemCount = 0;
+        health = 100;
+        time = -1;
+
+        bonusItemSign = false;
+
+        score = 0;
+        firstAids = 0;
+        gold = 0;
+    }
+
     @Override
     public void create() {
         super.create();
@@ -81,9 +80,9 @@ public class AchievementsStatsComponent extends Component {
         resetAchievements();
 
         AchievementsHelper.getInstance().getEvents()
-                .addListener(AchievementsHelper.HEALTH_EVENT, this::setHealth);
+                .addListener(AchievementsHelper.EVENT_HEALTH, this::setHealth);
         AchievementsHelper.getInstance().getEvents()
-                .addListener(AchievementsHelper.ITEM_PICKED_UP_EVENT, this::handleItemPickup);
+                .addListener(AchievementsHelper.EVENT_ITEM_PICKED_UP, this::handleItemPickup);
     }
 
     /**
@@ -122,12 +121,12 @@ public class AchievementsStatsComponent extends Component {
         setTime(currentTime);
 
 
-        if(bonusItemSign) {
+        if (bonusItemSign) {
             AchievementsHelper.getInstance().getEvents().trigger("spawnBonusItem");
             bonusItemSign = false;
         }
 
-        setScore(scoringSystemV1.getScore());
+        setScore(ServiceLocator.getScoreService().getScore());
 
     }
 
@@ -141,17 +140,36 @@ public class AchievementsStatsComponent extends Component {
             case AchievementsHelper.ITEM_FIRST_AID:
                 setFirstAid();
                 break;
+            case AchievementsHelper.ITEM_GOLD_COIN:
+                setGold();
             default:
         }
 
     }
 
+    /**
+     * Maintains the count of the number of firstAids picked up
+     */
     private void setFirstAid() {
         ++firstAids;
         checkForValidAchievements();
     }
+
     public void setFirstAidByVal(int firstAids) {
         this.firstAids = firstAids;
+        checkForValidAchievements();
+    }
+
+    /**
+     * Maintains the count of the number of gold coins picked up
+     */
+    private void setGold() {
+        ++gold;
+        checkForValidAchievements();
+    }
+
+    public void setGoldByVal(int gold) {
+        this.gold = gold;
         checkForValidAchievements();
     }
 
@@ -180,7 +198,7 @@ public class AchievementsStatsComponent extends Component {
      * Unlocks the achievement if it is valid and triggers an event
      * pertaining to a new unlocked achievement
      *
-     * @param achievement
+     * @param achievement achievement to be validated
      * @return valid returns true if valid, false otherwise
      */
     private boolean isValid(BaseAchievementConfig achievement) {
@@ -218,6 +236,13 @@ public class AchievementsStatsComponent extends Component {
 
         if (achievement.condition.firstAids != -1) {
             valid = achievement.condition.firstAids == firstAids;
+            if (!valid) {
+                return false;
+            }
+        }
+
+        if (achievement.condition.gold != -1) {
+            valid = achievement.condition.gold == gold;
             if (!valid) {
                 return false;
             }

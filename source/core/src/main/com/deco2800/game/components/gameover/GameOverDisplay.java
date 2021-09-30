@@ -1,6 +1,5 @@
 package com.deco2800.game.components.gameover;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -10,10 +9,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.score.ScoringSystemV1;
+import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.text.DecimalFormat;
 
 /**
  * Settings menu display and logic. If you bork the settings, they can be changed manually in
@@ -25,7 +27,9 @@ public class GameOverDisplay extends UIComponent {
 
     private Table table;
     private double points = 0.0;
+    private double distance=0.0;
     private TextField pointText;
+    private TextField distanceText;
     private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
 
     public GameOverDisplay(GdxGame game) {
@@ -45,11 +49,15 @@ public class GameOverDisplay extends UIComponent {
 
         table = new Table();
         table.setFillParent(true);
-        points = scoringSystem.getScore();
+        points = GameRecords.getLatestScore().score;
 
         pointText = new TextField(String.valueOf(points), skin);
         pointText.setDisabled(true);
 
+        DecimalFormat df =new DecimalFormat("#0.0");
+        distance = GameRecords.getLatestDistance();
+        distanceText = new TextField(df.format(distance), skin);
+        distanceText.setDisabled(true);
 
 
         Image tittle =
@@ -59,11 +67,21 @@ public class GameOverDisplay extends UIComponent {
 
 
         TextButton pointsLabel = new TextButton("Points: ", skin);
+        TextButton distanceLabel = new TextButton("Distance: ", skin);
         TextButton playAgainButton = new TextButton("Click to play \n again", skin);
         TextButton mainMenuButton = new TextButton("Main Menu", skin);
         TextButton historyScoreButton = new TextButton("History Score", skin);
 
         pointsLabel.addListener(
+                new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent changeEvent, Actor actor) {
+
+
+                    }
+                });
+
+        distanceLabel.addListener(
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -120,6 +138,11 @@ public class GameOverDisplay extends UIComponent {
         table.add(pointText).bottom().padBottom(15f);
 
         table.row();
+        table.add(distanceLabel).bottom();
+        table.row();
+        table.add(distanceText).bottom().padBottom(15f);
+
+        table.row();
         table.add(playAgainButton).bottom().padBottom(15f);
         table.row();
         table.add(mainMenuButton).bottom().padBottom(15f);
@@ -146,5 +169,10 @@ public class GameOverDisplay extends UIComponent {
     public void setPoints(double points) {
         this.points = points;
         this.pointText.setText(String.valueOf(points));
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+        this.distanceText.setText(String.valueOf(distance));
     }
 }

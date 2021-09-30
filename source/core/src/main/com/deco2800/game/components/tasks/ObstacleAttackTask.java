@@ -23,6 +23,7 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     private final PhysicsEngine physics;
     private final DebugRenderer debugRenderer;
     private GameArea gameArea;
+    public static Boolean lock_use = true;
 
     public static Vector2 enemy_posion;
 
@@ -49,6 +50,7 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     public int getPriority() {
         float dst = getDistanceToTarget();
         if (dst < viewDistance) {
+            lock_use = false;
             return priority;
         }
 

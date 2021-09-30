@@ -7,11 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.achievements.AchievementsHelper;
-import com.deco2800.game.components.score.ScoringSystem;
-import com.deco2800.game.components.score.ScoringSystemV1;
-import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
@@ -35,7 +31,7 @@ public class ScoreDisplay extends UIComponent {
         addActors();
         //add achievement score to the score.
         AchievementsHelper.getInstance().getEvents()
-                .addListener(AchievementsHelper.ACHIEVEMENTS_BONUS_POINTS, this::updateScoreByPoints);
+                .addListener(AchievementsHelper.EVENT_ACHIEVEMENT_BONUS_TRIGGERED, this::updateScoreByPoints);
         entity.getEvents().addListener("updateScore", this::updatePlayerScoreUI);
     }
 
@@ -54,7 +50,7 @@ public class ScoreDisplay extends UIComponent {
         tableForBoard = new Table();
         tableForBoard.bottom().right();
         tableForBoard.setFillParent(true);
-        tableForBoard.padBottom(-35).padRight(-52);
+        tableForBoard.padBottom(-35).padRight(-42);
 
         // Score Board
         float boardSideLength = 250f;

@@ -61,7 +61,7 @@ public class GoldComponent extends Component {
         {
             entity.getEvents().trigger("itemPickedUp");
             entity.getEvents().trigger(("itemPickUp"));
-            AchievementsHelper.getInstance().trackItemPickedUpEvent();
+            AchievementsHelper.getInstance().trackItemPickedUpEvent(AchievementsHelper.ITEM_GOLD_COIN);
             this.player.getComponent(InventoryComponent.class).addGold(1);
             Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
             if (physBody.getFixtureList().contains(other, true)) {
