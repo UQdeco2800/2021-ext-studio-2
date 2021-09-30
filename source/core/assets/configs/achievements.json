@@ -274,7 +274,7 @@
       "type": "GOLD",
       "iconPath": "images/achievements/survivalExpertGold.png",
       "message": "Survived for 60m, RUN for your life!!!",
-      "bonus": 50,
+      "bonus": 40,
       "condition": {
         "distance": 60
       }

@@ -17,14 +17,12 @@ public class AchievementsStatsComponent extends Component {
     private int health;
     private long time;
     private int itemCount;
-
     private boolean bonusItemSign;
-
-
     private int score;
     private int firstAids;
     private int gold;
     private boolean spaceshipAvoidSuccess;
+    private double distance;
 
     /* TO//DO: setup achievement stats as Hashmap <property,value> */
 
@@ -71,6 +69,7 @@ public class AchievementsStatsComponent extends Component {
         firstAids = 0;
         gold = 0;
         spaceshipAvoidSuccess = false;
+        distance = 0;
     }
 
     @Override
@@ -94,6 +93,14 @@ public class AchievementsStatsComponent extends Component {
      */
     public void setSpaceshipAvoidSuccess() {
         this.spaceshipAvoidSuccess = true;
+        checkForValidAchievements();
+    }
+
+    /**
+     * Maintains the distance traveled by the main player character in meters
+     */
+    public void setDistance(double distance) {
+        this.distance = distance;
         checkForValidAchievements();
     }
 
@@ -139,6 +146,7 @@ public class AchievementsStatsComponent extends Component {
         }
 
         setScore(ServiceLocator.getScoreService().getScore());
+        setDistance(ServiceLocator.getDistanceService().getDistance());
 
     }
 
@@ -260,10 +268,19 @@ public class AchievementsStatsComponent extends Component {
             }
         }
 
-        if (!achievement.condition.spaceshipAvoidSuccess) {
+        if (achievement.condition.spaceshipAvoidSuccess) {
             valid = spaceshipAvoidSuccess;
+            if (!valid) {
+                return false;
+            }
         }
 
+        if (achievement.condition.distance != -1) {
+            valid = achievement.condition.distance <= distance;
+            if (!valid) {
+                return false;
+            }
+        }
         if (valid) {
             achievement.unlocked = true;
             entity.getEvents().trigger("updateAchievement", achievement);
