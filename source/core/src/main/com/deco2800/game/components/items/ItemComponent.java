@@ -46,28 +46,26 @@ public class ItemComponent extends Component {
      */
     private void onCollisionStart(Fixture me, Fixture other){
 
-       if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) // checking if the collision is done with the player
-       {
-                    callback.accept(target);
-                    entity.getEvents().trigger(("itemPickUp"));
-                    entity.getEvents().trigger("itemPickedUp");
-                    AchievementsHelper.getInstance().trackItemPickedUpEvent();
+        if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+           // checking if the collision is done with the player
+           callback.accept(target);
+           target.getEvents().trigger("itemPickUp");
+           entity.getEvents().trigger("itemPickedUp");
+           AchievementsHelper.getInstance().trackItemPickedUpEvent();
            Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
            if (physBody.getFixtureList().contains(other, true)) {
                physBody.destroyFixture(other);
            }
 
-                    AchievementsHelper.getInstance().trackItemPickedUpEvent(AchievementsHelper.ITEM_FIRST_AID);
+           AchievementsHelper.getInstance().trackItemPickedUpEvent(AchievementsHelper.ITEM_FIRST_AID);
 
-                try {
-                    entity.getComponent(TextureRenderComponent.class).dispose();
-                    ServiceLocator.getEntityService().unregister(entity);
-                }
-                catch (Exception e){
-                    System.out.print(e);
-                }
-
-
+           try {
+               entity.getComponent(TextureRenderComponent.class).dispose();
+               ServiceLocator.getEntityService().unregister(entity);
+           }
+           catch (Exception e){
+               System.out.print(e);
+           }
         }
     }
 }

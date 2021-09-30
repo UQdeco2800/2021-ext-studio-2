@@ -41,6 +41,7 @@ public class PlayerAnimationController extends Component {
     private void animatePickUp() {
         preAnimationCleanUp();
         animator.startAnimation("main_player_pickup");
+
     }
     /**
      * Makes the player crouch.
