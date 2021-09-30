@@ -20,16 +20,18 @@ public class AchievementStatsComponentTest {
     /**
      * Method used to emulate achievement configs values (conditions) read from the achievements.json
      *
-     * @param name      name of the achievement
-     * @param time      time required to be spent in the game
-     * @param health    health required of the mpc
-     * @param itemCount total items required to be picked up in game
-     * @param score     score required during gameplay
-     * @param firstAids first aids required to be in inventory
-     * @param gold      gold coins required to be picked up in game
+     * @param name                  name of the achievement
+     * @param time                  time required to be spent in the game
+     * @param health                health required of the mpc
+     * @param itemCount             total items required to be picked up in game
+     * @param score                 score required during gameplay
+     * @param firstAids             first aids required to be in inventory
+     * @param gold                  gold coins required to be picked up in game
+     * @param distance              distance required to be covered by the mpc in game
+     * @param spaceshipAvoidSuccess successful avoidance of the spaceship in game
      * @return BaseAchievementConfig with values specified
      */
-    private BaseAchievementConfig genAchievement(String name, int time, int health, int itemCount, int score, int firstAids, int gold) {
+    private BaseAchievementConfig genAchievement(String name, int time, int health, int itemCount, int score, int firstAids, int gold, int distance, boolean spaceshipAvoidSuccess) {
         BaseAchievementConfig achievement = new BaseAchievementConfig();
         achievement.bonus = 0;
         achievement.name = name;
@@ -45,7 +47,9 @@ public class AchievementStatsComponentTest {
         condition.score = score;
         condition.firstAids = firstAids;
         achievement.condition = condition;
-        achievement.condition.gold = gold;
+        condition.gold = gold;
+        condition.distance = distance;
+        condition.spaceshipAvoidSuccess = spaceshipAvoidSuccess;
 
         return achievement;
     }
@@ -57,15 +61,20 @@ public class AchievementStatsComponentTest {
      */
     private List<BaseAchievementConfig> getList() {
         List<BaseAchievementConfig> achievements = new ArrayList<>();
-        achievements.add(genAchievement("Veteran", 10, -1, -1, -1, -1, -1));
-        achievements.add(genAchievement("Veteran", 15, -1, -1, -1, -1, -1));
-        achievements.add(genAchievement("Veteran", 20, -1, -1, -1, -1, -1));
-        achievements.add(genAchievement("Game Breaker", 5, 100, -1, -1, -1, -1));
-        achievements.add(genAchievement("Game Breaker", 8, 100, -1, -1, -1, -1));
-        achievements.add(genAchievement("Game Breaker", 10, 100, -1, -1, -1, -1));
-        achievements.add(genAchievement("Master", -1, -1, -1, 50, -1, -1));
-        achievements.add(genAchievement("Master", -1, -1, -1, 100, -1, -1));
-        achievements.add(genAchievement("Master", -1, -1, -1, 150, -1, -1));
+        achievements.add(genAchievement("Veteran", 10, -1, -1, -1, -1, -1, -1, false));
+        achievements.add(genAchievement("Veteran", 15, -1, -1, -1, -1, -1, -1, false));
+        achievements.add(genAchievement("Veteran", 20, -1, -1, -1, -1, -1, -1, false));
+        achievements.add(genAchievement("Game Breaker", 5, 100, -1, -1, -1, -1, -1, false));
+        achievements.add(genAchievement("Game Breaker", 8, 100, -1, -1, -1, -1, -1, false));
+        achievements.add(genAchievement("Game Breaker", 10, 100, -1, -1, -1, -1, -1, false));
+        achievements.add(genAchievement("Master", -1, -1, -1, 50, -1, -1, -1, false));
+        achievements.add(genAchievement("Master", -1, -1, -1, 100, -1, -1, -1, false));
+        achievements.add(genAchievement("Master", -1, -1, -1, 150, -1, -1, -1, false));
+        achievements.add(genAchievement("Survival Expert", -1, -1, -1, -1, -1, -1, 20, false));
+        achievements.add(genAchievement("Survival Expert", -1, -1, -1, -1, -1, -1, 40, false));
+        achievements.add(genAchievement("Survival Expert", -1, -1, -1, -1, -1, -1, 60, false));
+        achievements.add(genAchievement("Alphamineron",-1,-1,-1,-1,-1,-1,-1,true));
+
         return achievements;
     }
 
@@ -87,7 +96,7 @@ public class AchievementStatsComponentTest {
     void shouldCheckIsValid() throws NoSuchMethodException,
             InvocationTargetException, IllegalAccessException {
 
-        BaseAchievementConfig achievement = genAchievement("ignored", 50, -1, 0, -1, -1, -1);
+        BaseAchievementConfig achievement = genAchievement("ignored", 50, -1, 0, -1, -1, -1,-1,false);
 
         AchievementsStatsComponent component = new AchievementsStatsComponent();
 
@@ -144,6 +153,62 @@ public class AchievementStatsComponentTest {
     }
 
     /**
+     * tests if Survival Expert achievements are un-lockable
+     *
+     * @throws NoSuchMethodException     thrown if corresponding method doesn't exist
+     * @throws InvocationTargetException wraps exception thrown by constructor invoked
+     * @throws IllegalAccessException    thrown if access is not allowed for a method
+     */
+    @Test
+    void shouldCorrectlyValidateSurvivalExpertAchievements() throws
+            IllegalAccessException,
+            InvocationTargetException, NoSuchMethodException {
+
+        Method method = getIsValidMethod();
+
+        AchievementsStatsComponent component = generateEntity()
+                .getComponent(AchievementsStatsComponent.class);
+
+        for (BaseAchievementConfig a : getList()) {
+            component.setDistance(99999);
+
+            if (a.name.equals("Survival Expert")) {
+                assertEquals(method.invoke(component, a), true);
+            } else {
+                assertEquals(method.invoke(component, a), false);
+            }
+        }
+    }
+
+    /**
+     * tests if Alphamineron achievement are un-lockable
+     *
+     * @throws NoSuchMethodException     thrown if corresponding method doesn't exist
+     * @throws InvocationTargetException wraps exception thrown by constructor invoked
+     * @throws IllegalAccessException    thrown if access is not allowed for a method
+     */
+    @Test
+    void shouldCorrectlyValidateAlphamineronAchievement() throws
+            IllegalAccessException,
+            InvocationTargetException, NoSuchMethodException {
+
+        Method method = getIsValidMethod();
+
+        AchievementsStatsComponent component = generateEntity()
+                .getComponent(AchievementsStatsComponent.class);
+
+        for (BaseAchievementConfig a : getList()) {
+            component.setSpaceshipAvoidSuccess();
+
+            if (a.name.equals("Alphamineron")) {
+                assertEquals(method.invoke(component, a), true);
+            } else {
+                assertEquals(method.invoke(component, a), false);
+            }
+        }
+    }
+
+    /**
      * tests if Tool Master achievements are un-lockable
      *
      * @throws NoSuchMethodException     thrown if corresponding method doesn't exist
@@ -165,17 +230,17 @@ public class AchievementStatsComponentTest {
         component.setHealth(0);
 
         component.setItemCountByVal(1);
-        BaseAchievementConfig achievement = genAchievement("Tool Master", -1, -1, 1, -1, -1, -1);
+        BaseAchievementConfig achievement = genAchievement("Tool Master", -1, -1, 1, -1, -1, -1,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setItemCountByVal(2);
-        achievement = genAchievement("Tool Master", -1, -1, 2, -1, -1, -1);
+        achievement = genAchievement("Tool Master", -1, -1, 2, -1, -1, -1,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setItemCountByVal(3);
-        achievement = genAchievement("Tool Master", -1, -1, 3, -1, -1, -1);
+        achievement = genAchievement("Tool Master", -1, -1, 3, -1, -1, -1,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
@@ -215,17 +280,17 @@ public class AchievementStatsComponentTest {
 
         component.setTime(999999999);
         component.setItemCountByVal(0);
-        BaseAchievementConfig achievement = genAchievement("Stranger", 10, -1, 0, -1, -1, -1);
+        BaseAchievementConfig achievement = genAchievement("Stranger", 10, -1, 0, -1, -1, -1,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
         component.setTime(999999999);
         component.setItemCountByVal(0);
-        achievement = genAchievement("Stranger", 15, -1, 0, -1, -1, -1);
+        achievement = genAchievement("Stranger", 15, -1, 0, -1, -1, -1,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
         component.setTime(999999999);
         component.setItemCountByVal(0);
-        achievement = genAchievement("Stranger", 20, -1, 0, -1, -1, -1);
+        achievement = genAchievement("Stranger", 20, -1, 0, -1, -1, -1,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
@@ -266,17 +331,17 @@ public class AchievementStatsComponentTest {
         component.setTime(0);
         component.setHealth(0);
         component.setFirstAidByVal(1);
-        BaseAchievementConfig achievement = genAchievement("Healer", -1, -1, -1, -1, 1, -1);
+        BaseAchievementConfig achievement = genAchievement("Healer", -1, -1, -1, -1, 1, -1,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setFirstAidByVal(2);
-        achievement = genAchievement("Healer", -1, -1, -1, -1, 2, -1);
+        achievement = genAchievement("Healer", -1, -1, -1, -1, 2, -1,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setFirstAidByVal(3);
-        achievement = genAchievement("Healer", -1, -1, -1, -1, 3, -1);
+        achievement = genAchievement("Healer", -1, -1, -1, -1, 3, -1,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
@@ -346,17 +411,17 @@ public class AchievementStatsComponentTest {
         component.setTime(0);
         component.setHealth(100);
         component.setFirstAidByVal(1);
-        BaseAchievementConfig achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 1, -1);
+        BaseAchievementConfig achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 1, -1,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setFirstAidByVal(2);
-        achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 2, -1);
+        achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 2, -1,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setFirstAidByVal(3);
-        achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 3, -1);
+        achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 3, -1,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
@@ -397,17 +462,17 @@ public class AchievementStatsComponentTest {
         component.setTime(0);
         component.setHealth(0);
         component.setGoldByVal(1);
-        BaseAchievementConfig achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 1);
+        BaseAchievementConfig achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 1,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setGoldByVal(2);
-        achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 2);
+        achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 2,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setGoldByVal(3);
-        achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 3);
+        achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 3,-1,false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
@@ -474,6 +539,8 @@ public class AchievementStatsComponentTest {
             component.setTime(999999999);
             component.setHealth(100);
             component.setScore(99999);
+            component.setDistance(99999);
+            component.setSpaceshipAvoidSuccess();
             assertEquals(method.invoke(component, a), true);
         }
     }
@@ -497,7 +564,6 @@ public class AchievementStatsComponentTest {
         for (BaseAchievementConfig a : getList()) {
             component.setTime(2);
             component.setHealth(0);
-
             assertEquals(method.invoke(component, a), false);
         }
     }
