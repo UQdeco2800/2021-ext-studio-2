@@ -73,7 +73,7 @@ public class AchievementStatsComponentTest {
         achievements.add(genAchievement("Survival Expert", -1, -1, -1, -1, -1, -1, 20, false));
         achievements.add(genAchievement("Survival Expert", -1, -1, -1, -1, -1, -1, 40, false));
         achievements.add(genAchievement("Survival Expert", -1, -1, -1, -1, -1, -1, 60, false));
-        achievements.add(genAchievement("Alphamineron",-1,-1,-1,-1,-1,-1,-1,true));
+        achievements.add(genAchievement("Alphamineron", -1, -1, -1, -1, -1, -1, -1, true));
 
         return achievements;
     }
@@ -96,7 +96,7 @@ public class AchievementStatsComponentTest {
     void shouldCheckIsValid() throws NoSuchMethodException,
             InvocationTargetException, IllegalAccessException {
 
-        BaseAchievementConfig achievement = genAchievement("ignored", 50, -1, 0, -1, -1, -1,-1,false);
+        BaseAchievementConfig achievement = genAchievement("ignored", 50, -1, 0, -1, -1, -1, -1, false);
 
         AchievementsStatsComponent component = new AchievementsStatsComponent();
 
@@ -230,17 +230,17 @@ public class AchievementStatsComponentTest {
         component.setHealth(0);
 
         component.setItemCountByVal(1);
-        BaseAchievementConfig achievement = genAchievement("Tool Master", -1, -1, 1, -1, -1, -1,-1,false);
+        BaseAchievementConfig achievement = genAchievement("Tool Master", -1, -1, 1, -1, -1, -1, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setItemCountByVal(2);
-        achievement = genAchievement("Tool Master", -1, -1, 2, -1, -1, -1,-1,false);
+        achievement = genAchievement("Tool Master", -1, -1, 2, -1, -1, -1, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setItemCountByVal(3);
-        achievement = genAchievement("Tool Master", -1, -1, 3, -1, -1, -1,-1,false);
+        achievement = genAchievement("Tool Master", -1, -1, 3, -1, -1, -1, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
@@ -280,17 +280,17 @@ public class AchievementStatsComponentTest {
 
         component.setTime(999999999);
         component.setItemCountByVal(0);
-        BaseAchievementConfig achievement = genAchievement("Stranger", 10, -1, 0, -1, -1, -1,-1,false);
+        BaseAchievementConfig achievement = genAchievement("Stranger", 10, -1, 0, -1, -1, -1, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
         component.setTime(999999999);
         component.setItemCountByVal(0);
-        achievement = genAchievement("Stranger", 15, -1, 0, -1, -1, -1,-1,false);
+        achievement = genAchievement("Stranger", 15, -1, 0, -1, -1, -1, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
         component.setTime(999999999);
         component.setItemCountByVal(0);
-        achievement = genAchievement("Stranger", 20, -1, 0, -1, -1, -1,-1,false);
+        achievement = genAchievement("Stranger", 20, -1, 0, -1, -1, -1, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
@@ -331,17 +331,17 @@ public class AchievementStatsComponentTest {
         component.setTime(0);
         component.setHealth(0);
         component.setFirstAidByVal(1);
-        BaseAchievementConfig achievement = genAchievement("Healer", -1, -1, -1, -1, 1, -1,-1,false);
+        BaseAchievementConfig achievement = genAchievement("Healer", -1, -1, -1, -1, 1, -1, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setFirstAidByVal(2);
-        achievement = genAchievement("Healer", -1, -1, -1, -1, 2, -1,-1,false);
+        achievement = genAchievement("Healer", -1, -1, -1, -1, 2, -1, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setFirstAidByVal(3);
-        achievement = genAchievement("Healer", -1, -1, -1, -1, 3, -1,-1,false);
+        achievement = genAchievement("Healer", -1, -1, -1, -1, 3, -1, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
@@ -411,17 +411,17 @@ public class AchievementStatsComponentTest {
         component.setTime(0);
         component.setHealth(100);
         component.setFirstAidByVal(1);
-        BaseAchievementConfig achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 1, -1,-1,false);
+        BaseAchievementConfig achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 1, -1, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setFirstAidByVal(2);
-        achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 2, -1,-1,false);
+        achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 2, -1, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setFirstAidByVal(3);
-        achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 3, -1,-1,false);
+        achievement = genAchievement("Game Fanatic", -1, -1, -1, -1, 3, -1, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
@@ -462,17 +462,17 @@ public class AchievementStatsComponentTest {
         component.setTime(0);
         component.setHealth(0);
         component.setGoldByVal(1);
-        BaseAchievementConfig achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 1,-1,false);
+        BaseAchievementConfig achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 1, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setGoldByVal(2);
-        achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 2,-1,false);
+        achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 2, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
         component.setGoldByVal(3);
-        achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 3,-1,false);
+        achievement = genAchievement("Collector", -1, -1, -1, -1, -1, 3, -1, false);
         assertEquals(method.invoke(component, achievement), true);
         achievement.unlocked = false;
 
