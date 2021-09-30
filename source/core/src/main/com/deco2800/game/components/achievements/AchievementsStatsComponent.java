@@ -24,6 +24,7 @@ public class AchievementsStatsComponent extends Component {
     private int score;
     private int firstAids;
     private int gold;
+    private boolean spaceshipAvoidSuccess;
 
     /* TO//DO: setup achievement stats as Hashmap <property,value> */
 
@@ -69,6 +70,7 @@ public class AchievementsStatsComponent extends Component {
         score = 0;
         firstAids = 0;
         gold = 0;
+        spaceshipAvoidSuccess = false;
     }
 
     @Override
@@ -83,6 +85,16 @@ public class AchievementsStatsComponent extends Component {
                 .addListener(AchievementsHelper.EVENT_HEALTH, this::setHealth);
         AchievementsHelper.getInstance().getEvents()
                 .addListener(AchievementsHelper.EVENT_ITEM_PICKED_UP, this::handleItemPickup);
+        AchievementsHelper.getInstance().getEvents()
+                .addListener(AchievementsHelper.EVENT_SPACESHIP_AVOIDED, this::setSpaceshipAvoidSuccess);
+    }
+
+    /**
+     * Maintains the spaceshipAvoidSuccess status of the player
+     */
+    public void setSpaceshipAvoidSuccess() {
+        this.spaceshipAvoidSuccess = true;
+        checkForValidAchievements();
     }
 
     /**
@@ -246,6 +258,10 @@ public class AchievementsStatsComponent extends Component {
             if (!valid) {
                 return false;
             }
+        }
+
+        if (!achievement.condition.spaceshipAvoidSuccess) {
+            valid = spaceshipAvoidSuccess;
         }
 
         if (valid) {

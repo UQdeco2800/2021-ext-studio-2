@@ -248,6 +248,46 @@
       "condition": {
         "gold": 30
       }
+    },
+    {
+      "name": "Survival Expert",
+      "type": "BRONZE",
+      "iconPath": "images/achievements/survivalExpertBronze.png",
+      "message": "Survived for 20m, RUN for your life!!!",
+      "bonus": 20,
+      "condition": {
+        "distance": 20
+      }
+    },
+    {
+      "name": "Survival Expert",
+      "type": "SILVER",
+      "iconPath": "images/achievements/survivalExpertSilver.png",
+      "message": "Survived for 40m, RUN for your life!!!",
+      "bonus": 30,
+      "condition": {
+        "distance": 40
+      }
+    },
+    {
+      "name": "Survival Expert",
+      "type": "GOLD",
+      "iconPath": "images/achievements/survivalExpertGold.png",
+      "message": "Survived for 60m, RUN for your life!!!",
+      "bonus": 50,
+      "condition": {
+        "distance": 60
+      }
+    },
+    {
+      "name": "Alphamineron",
+      "type": "GOLD",
+      "iconPath": "images/achievements/alphamineronGold.png",
+      "message": "Survived alien spaceship, the world is on your side!!!",
+      "bonus": 50,
+      "condition": {
+        "spaceshipAvoidSuccess": true
+      }
     }
   ]
 }
