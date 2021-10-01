@@ -168,8 +168,8 @@ public class ObstacleDisappear extends Component {
             return;
         }
         MainGameScreen.setSpaceshipAttack();
-        Sound plantsSound = ServiceLocator.getResourceService().getAsset("sounds/spacecraft_floating.mp3", Sound.class);
-        plantsSound.play(0.5f, 1f, 0);
+        Sound floatingSound = ServiceLocator.getResourceService().getAsset("sounds/spacecraft_floating.mp3", Sound.class);
+        floatingSound.play(0.5f, 1f, 0);
 //        System.out.println("spaceShipAttack was triggered.");
         spaceshipAttack = true;
         this.entity.setSpaceShipDispose();
@@ -185,8 +185,8 @@ public class ObstacleDisappear extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
-        Sound plantsSound = ServiceLocator.getResourceService().getAsset("sounds/missile_explosion.mp3", Sound.class);
-        plantsSound.play(0.1f, 1f, 0);
+        Sound missileSound = ServiceLocator.getResourceService().getAsset("sounds/missile_explosion.mp3", Sound.class);
+        missileSound.play(0.3f, 1f, 0);
 //        MainGameScreen.setSpaceshipAttack();
 //        System.out.println("smallMissileAttack was triggered.");
 //        spaceshipAttack = true;

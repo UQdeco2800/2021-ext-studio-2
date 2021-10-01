@@ -161,7 +161,8 @@ public class ForestGameArea extends GameArea {
             "images/food1.png",
             "images/water1.png",
     };
-    private static final String[] forestSounds = {"sounds/Impact4.ogg",
+    private static final String[] forestSounds = {
+            "sounds/Impact4.ogg",
             "sounds/missile_explosion.mp3",
             "sounds/monster_roar.mp3",
             "sounds/spacecraft_floating.mp3"
@@ -351,36 +352,34 @@ public class ForestGameArea extends GameArea {
         logger.debug("player x coordinate: {}", playerX);
 
         if (firstGenerate) {
-            // Temporarily reduce the range of obstacles generated for the first time, leaving enough space for
-            // the item group
-            // minPos = new GridPoint2(playerX, 0);
-            minPos = new GridPoint2(playerX + 25, 0);
-            maxPos = new GridPoint2(playerX + 30, 0);
             firstGenerate = false;
         } else {
             minPos = new GridPoint2(playerX + 21, 0);
             maxPos = new GridPoint2(playerX + 40, 0);
+            for (int i = 0; i < NUM_OBSTACLES; i++) {
+                do {
+                    randomPos = RandomUtils.randomX(3, minPos, maxPos);
+                } while (randomPoints.contains(randomPos));
+                randomPoints.add(randomPos);
+
+                do {
+                    randomPos2 = RandomUtils.randomX(3, minPos, maxPos);
+                } while (randomPoints.contains(randomPos2));
+                randomPoints.add(randomPos2);
+
+                Entity obstacle = ObstacleFactory.createPlantsObstacle(player);
+                Entity obstacle2 = ObstacleFactory.createThornsObstacle(player);
+                spawnEntityAt(obstacle, randomPos, true, false);
+                spawnEntityAt(obstacle2, randomPos2, true, true);
+                loggerInfo += "Create Plants Obstacle at " + randomPos + "\t";
+                loggerInfo += "Create Thorns Obstacle at " + randomPos2 + "\t";
+            }
+            logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}", minPos.x, maxPos.x, randomPoints, loggerInfo);
         }
 
-        for (int i = 0; i < NUM_OBSTACLES; i++) {
-            do {
-                randomPos = RandomUtils.randomX(3, minPos, maxPos);
-            } while (randomPoints.contains(randomPos));
-            randomPoints.add(randomPos);
 
-            do {
-                randomPos2 = RandomUtils.randomX(3, minPos, maxPos);
-            } while (randomPoints.contains(randomPos2));
-            randomPoints.add(randomPos2);
 
-            Entity obstacle = ObstacleFactory.createPlantsObstacle(player);
-            Entity obstacle2 = ObstacleFactory.createThornsObstacle(player);
-            spawnEntityAt(obstacle, randomPos, true, false);
-            spawnEntityAt(obstacle2, randomPos2, true, true);
-            loggerInfo += "Create Plants Obstacle at " + randomPos + "\t";
-            loggerInfo += "Create Thorns Obstacle at " + randomPos2 + "\t";
-        }
-        logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}", minPos.x, maxPos.x, randomPoints, loggerInfo);
+
     }
 
     /**
