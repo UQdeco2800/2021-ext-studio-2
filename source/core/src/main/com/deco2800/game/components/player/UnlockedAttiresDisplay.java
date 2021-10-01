@@ -167,7 +167,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
     }
 
     /**
-     * Utility function to render the given list of achievements
+     * Utility function to render the given list of achievements and corresponding unlocked attires
      * @param achievements list of achievements
      * @param alpha the opacity of each image (low for the ones which are locked)
      */
