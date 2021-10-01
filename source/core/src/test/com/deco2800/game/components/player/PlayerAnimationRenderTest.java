@@ -16,7 +16,6 @@ import static org.mockito.Mockito.*;
 class PlayerAnimationRenderTest {
 
     private Entity player;
-    private PlayerAnimationController animationController;
     private AnimationRenderComponent animator;
     @BeforeEach
     void beforeEach() {
@@ -28,7 +27,8 @@ class PlayerAnimationRenderTest {
         animator = mock(AnimationRenderComponent.class);
         player.addComponent(animator);
 
-        animationController = player.getComponent(PlayerAnimationController.class);
+        PlayerAnimationController animationController =
+                player.getComponent(PlayerAnimationController.class);
         animationController.setTexturePresent(false);
         player.create();
     }
