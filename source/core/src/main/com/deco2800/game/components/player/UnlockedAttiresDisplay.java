@@ -45,7 +45,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
         this.bestAchievements = bestAchievements;
         this.game = game;
         ServiceLocator.registerResourceService(new ResourceService());
-        // loadAssets();
+        loadAssets();
 
     }
 
@@ -138,7 +138,31 @@ public class UnlockedAttiresDisplay extends UIComponent {
      * Renders screens to show zero unlocked attires
      */
     private void renderZeroUnlockedAttiresTable() {
+        Label message1 = new Label("You haven't unlocked any attires yet!",
+                new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        message1.setFontScale(1.5f);
+        table.add(message1).padTop(20f).center();
+        table.row();
+        Label message2 = new Label("Unlock Veteran Silver and Veteran Gold Achievements to access new attires!",
+                new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
+        table.add(message2).padTop(20f).center();
+        table.row();
 
+        Image silverAttire = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/mpc/attires/veteranSilver.png", Texture.class));
+        table.add(silverAttire).center().padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
+        Image silver = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/achievements/veteranSilverTrophy.png", Texture.class));
+        table.add(silver).center().padLeft(10f).padRight(10f).size(120, 50);
+
+        table.row();
+
+        Image goldAttire = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/mpc/attires/veteranGold.png", Texture.class));
+        table.add(goldAttire).center().padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
+        Image gold = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/achievements/veteranGoldTrophy.png", Texture.class));
+        table.add(gold).center().padLeft(10f).padRight(10f).size(120, 50);
     }
 
     /**
