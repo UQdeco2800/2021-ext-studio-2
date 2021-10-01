@@ -9,12 +9,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
+import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.files.GameInfo;
 import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.files.GameRecords.Score;
 import com.deco2800.game.ui.UIComponent;
 import com.deco2800.game.utils.DateTimeUtils;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ScoreDetailsDialog extends UIComponent {
@@ -33,11 +35,6 @@ public class ScoreDetailsDialog extends UIComponent {
             // Open the dialog
             openDialog(score, bestAchievements);
         });
-    }
-
-    public String capitalize(String str) {
-        if (str == null) return str;
-        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
     }
 
     private void openDialog(Score score, List<BaseAchievementConfig> bestAchievements) {
@@ -64,8 +61,7 @@ public class ScoreDetailsDialog extends UIComponent {
 
         // Render the list of the best achievements with name, asset and bonus
         bestAchievements.forEach(achievement -> {
-            table.add(new Image(new Texture("images/achievements/" + "achievementStatus" +
-                    capitalize(achievement.type) + ".png"))).size(45).padTop(5).padBottom(5);
+            table.add(new Image(new Texture(AchievementFactory.getAchievementTrophy(achievement)))).size(45).padTop(5).padBottom(5);
             table.add(new Label(achievement.name, new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY)))
                     .padRight(40).padLeft(25);
             table.add(new Label("+ " + achievement.bonus, new Label.LabelStyle(new BitmapFont(), Color.YELLOW)));
@@ -74,6 +70,11 @@ public class ScoreDetailsDialog extends UIComponent {
 
         dialog.getContentTable().add(table).width(600).row();
         dialog.pad(50).padTop(120);
+        // Render distance travelled, if it exists
+        if (score.distance > 1) {
+            String formattedDistance = new DecimalFormat("#.##").format(score.distance);
+            dialog.getButtonTable().add(new Label("Distance: " + formattedDistance + "m", skin)).row();
+        }
         // Render final score
         dialog.getButtonTable().add(new Label("Score: " + score.getScore().toString(), skin)).row();
         dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
@@ -95,7 +96,7 @@ public class ScoreDetailsDialog extends UIComponent {
         closeButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                dialog.hide();
+                closeDialog();
             }
         });
 

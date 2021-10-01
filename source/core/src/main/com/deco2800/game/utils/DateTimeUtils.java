@@ -37,7 +37,7 @@ public class DateTimeUtils {
      * @return formatted verbose date
      */
     public static String getFormattedDate(LocalDateTime dateTime){
-        String datePattern = "MM/dd/yyyy";
+        String datePattern = "dd/MM/yyyy";
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(datePattern);
         return dateFormat.format(dateTime);
     }

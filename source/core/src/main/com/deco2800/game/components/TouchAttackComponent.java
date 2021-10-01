@@ -22,6 +22,7 @@ public class TouchAttackComponent extends Component {
   private float knockbackForce = 0f;
   private CombatStatsComponent combatStats;
   private HitboxComponent hitboxComponent;
+  private int count;
 
   /**
    * Create a component which attacks entities on collision, without knockback.
@@ -29,6 +30,7 @@ public class TouchAttackComponent extends Component {
    */
   public TouchAttackComponent(short targetLayer) {
     this.targetLayer = targetLayer;
+    this.count = 0;
   }
 
   /**
@@ -62,9 +64,13 @@ public class TouchAttackComponent extends Component {
     // Try to attack target.
     Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
     CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
-    if (targetStats != null) {
-      targetStats.hit(combatStats);
+    if (count == 0) { // Avoid an entity from repeatedly triggering an attack
+      if (targetStats != null) {
+        targetStats.hit(combatStats);
+      }
+      count++;
     }
+
 
     // Apply knockback
     PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);

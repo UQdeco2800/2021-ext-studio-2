@@ -17,13 +17,14 @@ public class AchievementsStatsComponent extends Component {
     private int health;
     private long time;
     private int itemCount;
-
     private boolean bonusItemSign;
-
-
     private int score;
     private int firstAids;
+    private int gold;
+    private boolean spaceshipAvoidSuccess;
+    private double distance;
 
+    /* TO//DO: setup achievement stats as Hashmap <property,value> */
 
     public AchievementsStatsComponent() {
         initStats();
@@ -66,6 +67,9 @@ public class AchievementsStatsComponent extends Component {
 
         score = 0;
         firstAids = 0;
+        gold = 0;
+        spaceshipAvoidSuccess = false;
+        distance = 0;
     }
 
     @Override
@@ -80,6 +84,24 @@ public class AchievementsStatsComponent extends Component {
                 .addListener(AchievementsHelper.EVENT_HEALTH, this::setHealth);
         AchievementsHelper.getInstance().getEvents()
                 .addListener(AchievementsHelper.EVENT_ITEM_PICKED_UP, this::handleItemPickup);
+        AchievementsHelper.getInstance().getEvents()
+                .addListener(AchievementsHelper.EVENT_SPACESHIP_AVOIDED, this::setSpaceshipAvoidSuccess);
+    }
+
+    /**
+     * Maintains the spaceshipAvoidSuccess status of the player
+     */
+    public void setSpaceshipAvoidSuccess() {
+        this.spaceshipAvoidSuccess = true;
+        checkForValidAchievements();
+    }
+
+    /**
+     * Maintains the distance traveled by the main player character in meters
+     */
+    public void setDistance(double distance) {
+        this.distance = distance;
+        checkForValidAchievements();
     }
 
     /**
@@ -124,6 +146,7 @@ public class AchievementsStatsComponent extends Component {
         }
 
         setScore(ServiceLocator.getScoreService().getScore());
+        setDistance(ServiceLocator.getDistanceService().getDistance());
 
     }
 
@@ -137,11 +160,16 @@ public class AchievementsStatsComponent extends Component {
             case AchievementsHelper.ITEM_FIRST_AID:
                 setFirstAid();
                 break;
+            case AchievementsHelper.ITEM_GOLD_COIN:
+                setGold();
             default:
         }
 
     }
 
+    /**
+     * Maintains the count of the number of firstAids picked up
+     */
     private void setFirstAid() {
         ++firstAids;
         checkForValidAchievements();
@@ -149,6 +177,19 @@ public class AchievementsStatsComponent extends Component {
 
     public void setFirstAidByVal(int firstAids) {
         this.firstAids = firstAids;
+        checkForValidAchievements();
+    }
+
+    /**
+     * Maintains the count of the number of gold coins picked up
+     */
+    private void setGold() {
+        ++gold;
+        checkForValidAchievements();
+    }
+
+    public void setGoldByVal(int gold) {
+        this.gold = gold;
         checkForValidAchievements();
     }
 
@@ -177,7 +218,7 @@ public class AchievementsStatsComponent extends Component {
      * Unlocks the achievement if it is valid and triggers an event
      * pertaining to a new unlocked achievement
      *
-     * @param achievement
+     * @param achievement achievement to be validated
      * @return valid returns true if valid, false otherwise
      */
     private boolean isValid(BaseAchievementConfig achievement) {
@@ -220,6 +261,26 @@ public class AchievementsStatsComponent extends Component {
             }
         }
 
+        if (achievement.condition.gold != -1) {
+            valid = achievement.condition.gold == gold;
+            if (!valid) {
+                return false;
+            }
+        }
+
+        if (achievement.condition.spaceshipAvoidSuccess) {
+            valid = spaceshipAvoidSuccess;
+            if (!valid) {
+                return false;
+            }
+        }
+
+        if (achievement.condition.distance != -1) {
+            valid = achievement.condition.distance <= distance;
+            if (!valid) {
+                return false;
+            }
+        }
         if (valid) {
             achievement.unlocked = true;
             entity.getEvents().trigger("updateAchievement", achievement);

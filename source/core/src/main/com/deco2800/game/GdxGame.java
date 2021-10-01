@@ -91,7 +91,7 @@ public class GdxGame extends Game {
             case ACHIEVEMENTS:
                 return new AchievementsScreen(this);
             case MONSTER_MENU:
-                return new monsterMenuScreen(this);
+                return new MonsterMenuScreen(this);
             default:
                 return null;
         }
