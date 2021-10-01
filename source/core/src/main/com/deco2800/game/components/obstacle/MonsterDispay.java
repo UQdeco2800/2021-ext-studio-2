@@ -1,8 +1,6 @@
-package com.deco2800.game.components.Obstacle;
+package com.deco2800.game.components.obstacle;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -11,14 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.tasks.ObstacleAttackTask;
-import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MonsterDispay extends UIComponent {
 
@@ -309,14 +303,14 @@ public class MonsterDispay extends UIComponent {
         stage.addActor(monster3AttributeTable);
         stage.addActor(monster4AttributeTable );
         stage.addActor(monster5AttributeTable);
-        if (ObstacleDisappear.locked){
+        if (ObstacleEventHandler.locked){
             stage.addActor(secretTable);
         }
-        if (ObstacleDisappear.locked2){
+        if (ObstacleEventHandler.locked2){
             stage.addActor(secretTable2);
         }
 
-        if (ObstacleDisappear.locked3){
+        if (ObstacleEventHandler.locked3){
             stage.addActor(secretTable3);
         }
 

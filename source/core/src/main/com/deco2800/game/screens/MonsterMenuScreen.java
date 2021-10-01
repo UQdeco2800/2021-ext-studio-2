@@ -3,9 +3,8 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.components.Obstacle.MonsterDetails;
-import com.deco2800.game.components.Obstacle.MonsterDispay;
-import com.deco2800.game.components.achievements.screen.ChapterDisplay;
+import com.deco2800.game.components.obstacle.MonsterDetails;
+import com.deco2800.game.components.obstacle.MonsterDispay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -18,7 +17,7 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class monsterMenuScreen extends ScreenAdapter {
+public class MonsterMenuScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private final Renderer renderer;
     private final MonsterDispay monsterDispay ;
@@ -36,7 +35,7 @@ public class monsterMenuScreen extends ScreenAdapter {
 
             };
 
-    public monsterMenuScreen(GdxGame game) {
+    public MonsterMenuScreen(GdxGame game) {
         logger.debug("drawing monster menu ui");
         ServiceLocator.registerInputService(new InputService());
         ServiceLocator.registerResourceService(new ResourceService());
