@@ -1,0 +1,20 @@
+
+mpcAttire_b_walk.png
+size: 2048, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+mpcAttire_b_walk
+  rotate: false
+  xy: 2, 2
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+mpcAttire_b_walk
+  rotate: false
+  xy: 545, 2
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
