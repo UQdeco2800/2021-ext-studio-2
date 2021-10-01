@@ -168,6 +168,7 @@ public class ObstacleDisappear extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
+
         SpaceshipAttackController.setSpaceshipAttack();
         Sound floatingSound = ServiceLocator.getResourceService().getAsset("sounds/spacecraft_floating.mp3", Sound.class);
         floatingSound.play(0.5f, 1f, 0);

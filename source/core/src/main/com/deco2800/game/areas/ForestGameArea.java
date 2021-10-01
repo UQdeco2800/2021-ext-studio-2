@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.components.obstacle.ObstacleDisappear;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.buff.Buff;
@@ -390,8 +391,11 @@ public class ForestGameArea extends GameArea {
         GridPoint2 minPos = new GridPoint2(playerX + 21, 0);
         GridPoint2 maxPos = new GridPoint2(playerX + 40, 0);
         GridPoint2 randomPosTwo = RandomUtils.randomX(11, minPos, maxPos);
-        Entity Range = NPCFactory.createFlyingMonkey(player);
-        spawnEntityAt(Range, randomPosTwo, true, true);
+        Entity flyingMonkey = NPCFactory.createFlyingMonkey(player);
+        spawnEntityAt(flyingMonkey, randomPosTwo, true, true);
+
+        flyingMonkey.getEvents().addListener("spawnFaceWorm", this::spawnFaceWorm);
+
         logger.debug("Spawn a flying monkey on position = {}", randomPosTwo);
     }
 
@@ -469,6 +473,8 @@ public class ForestGameArea extends GameArea {
         logger.debug("bigNumRandom = {}, midNumRandom = {}, smallNumRandom = {}, stones points: {}",
                 bigNumRandom, midNumRandom, smallNumRandom, loggerInfo);
     }
+
+
 
     /**
      * Generate Spaceship at fixed location.

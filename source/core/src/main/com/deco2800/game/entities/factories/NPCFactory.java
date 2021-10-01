@@ -74,11 +74,11 @@ public class NPCFactory {
    */
   public static Entity createFlyingMonkey(Entity target) {
 
-    Entity Monkey = new Entity("FlyingMonkey");
+    Entity monkey = new Entity("FlyingMonkey");
 
     AITaskComponent aiComponent =
             new AITaskComponent()
-                    .addTask(new ObstacleAttackTask(target,10,6f));
+                    .addTask(new ObstacleAttackTask(monkey, target,10,6f));
 
     AnimationRenderComponent animator =
             new AnimationRenderComponent(
@@ -87,14 +87,14 @@ public class NPCFactory {
 
     animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
 
-    Monkey
+    monkey
             .addComponent(animator)
             .addComponent(aiComponent);
 
     animator.startAnimation("1m");
-    Monkey.setScale(2.3f, 2.3f);
+    monkey.setScale(2.3f, 2.3f);
     logger.debug("Create a Flying Monkey");
-    return Monkey;
+    return monkey;
   }
 
   /**

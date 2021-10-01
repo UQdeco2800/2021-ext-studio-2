@@ -58,8 +58,8 @@ public class MainGameScreen extends ScreenAdapter {
     private final Renderer renderer;
     private final PhysicsEngine physicsEngine;
 
-    private static Vector2 facehuggerPosition;
-    private static boolean spownFacehugger;
+//    private static Vector2 facehuggerPosition;
+//    private static boolean spownFacehugger;
 
     public static newMap newMapStatus = newMap.Off;
 
@@ -110,38 +110,20 @@ public class MainGameScreen extends ScreenAdapter {
 
         player = forestGameArea.player;
 
-        facehuggerPosition = null;
-        spownFacehugger = false;
-
         newMapStatus = newMap.Off;
-
         counter = 0;
 
         ServiceLocator.registerDistanceService(new DistanceService(player));
+        resetSpaceshipAttackVariable();
+
     }
 
-    /**
-     * Set the location where the monster is spawned, and called by start() in ObstacleAttackTask.java.
-     * The variable is used by the spokenFacehugger(). This function plays a role in render().
-     *
-     * @param position Where the monster spawns.
-     */
-    public static void setSpownFacehugger(Vector2 position) {
-        facehuggerPosition = position;
-        spownFacehugger = true;
-        logger.debug("Set facehuggerPosition = {}, spownFacehugger = {}", facehuggerPosition, spownFacehugger);
+    private void resetSpaceshipAttackVariable() {
+        // reset Spaceship Attack variables
+        SpaceshipAttackController.spaceshipState = SpaceshipAttackController.spaceshipAttack.Off;
+        SpaceshipAttackController.positionHitSpaceship = null;
     }
 
-    /**
-     * Generate monsters based on the position of the enemy monkey, which is called by render().
-     */
-    private void spownFacehugger() {
-        if (spownFacehugger) {
-            forestGameArea.spawnFaceWorm(facehuggerPosition);
-            spownFacehugger = false;
-            logger.debug("Set spownFacehugger = {}", spownFacehugger);
-        }
-    }
 
     /**
      * Set the player deceleration time, the value set in the function is used by slowPlayer(), and the function is
@@ -282,7 +264,7 @@ public class MainGameScreen extends ScreenAdapter {
                     generateObstaclesEnemiesByMapRefresh(counter);
                 }
                 // Generate monster
-                spownFacehugger();
+//                spownFacehugger();
                 // Thorns effect trigger
                 slowPlayer();
                 break;

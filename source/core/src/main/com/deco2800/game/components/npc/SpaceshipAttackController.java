@@ -25,7 +25,8 @@ public class SpaceshipAttackController extends Component {
 
     public static spaceshipAttack spaceshipState = spaceshipAttack.Off;
     public static Vector2 positionHitSpaceship;
-    public static float spaceshipTime = 10f;
+
+    public float spaceshipTime = 10f;
     private int counterSmallMissile = 0;
 
     private Entity player;
@@ -34,8 +35,8 @@ public class SpaceshipAttackController extends Component {
     @Override
     public void create() {
         super.create();
-        spaceshipState = spaceshipAttack.Off;
-        positionHitSpaceship = null;
+
+        // reset variables
         spaceshipTime = 10f;
         counterSmallMissile = 0;
     }
@@ -87,10 +88,6 @@ public class SpaceshipAttackController extends Component {
         super.dispose();
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 
     private void spaceshipSceneBegins() {
         try {
@@ -122,7 +119,6 @@ public class SpaceshipAttackController extends Component {
             this.getEntity().getEvents().trigger("spawnPortalEntrance", new Vector2(85, 8), ObstacleDisappear.ObstacleType.PortalEntrance);
 
             AchievementsHelper.getInstance().trackSpaceshipAvoidSuccess();
-
         } else if (spaceshipTime <= 5 && counterSmallMissile % 100 == 0) {
             // 难
             switch (counterSmallMissile) {

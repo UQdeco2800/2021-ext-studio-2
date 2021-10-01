@@ -21,6 +21,7 @@ import java.io.File;
 
 public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     private final Entity target;
+    private final Entity npc;
     private final int priority;
     private final float viewDistance;
     private final PhysicsEngine physics;
@@ -30,10 +31,11 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
 
     public static Vector2 enemy_posion;
 
-    public ObstacleAttackTask(Entity target, int priority, float viewDistance) {
+    public ObstacleAttackTask(Entity npc, Entity target, int priority, float viewDistance) {
         this.target = target;
         this.priority = priority;
         this.viewDistance = viewDistance;
+        this.npc = npc;
         physics = ServiceLocator.getPhysicsService().getPhysics();
         debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
@@ -42,7 +44,8 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     @Override
     public void start() {
         super.start();
-        MainGameScreen.setSpownFacehugger(enemyCreatePosition());
+
+        npc.getEvents().trigger("spawnFaceWorm", enemyCreatePosition());
 
         Sound roarSound = ServiceLocator.getResourceService().getAsset("sounds/monster_roar.mp3", Sound.class);
         roarSound.play(0.3f, 1f, 0);

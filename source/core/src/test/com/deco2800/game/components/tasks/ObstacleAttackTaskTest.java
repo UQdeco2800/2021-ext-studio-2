@@ -34,11 +34,12 @@ class ObstacleAttackTaskTest {
     @Test
     void shouldGetVector2Position(){
         Entity target = new Entity();
+        Entity npc = new Entity();
         target.setPosition(0f, 6f);
         Entity entity = makePhysicsEntity();
         entity.create();
         entity.setPosition(0f, 4f);
-        ObstacleAttackTask obstacleAttackTask = new ObstacleAttackTask(target,10,6);
+        ObstacleAttackTask obstacleAttackTask = new ObstacleAttackTask(npc, target,10,6);
 
         obstacleAttackTask.create(() -> entity);
 
