@@ -14,7 +14,7 @@ com.deco2800.game.components.items
 com.deco2800.game.components.maingame
 com.deco2800.game.components.mainmenu
 com.deco2800.game.components.npc
-com.deco2800.game.components.Obstacle
+com.deco2800.game.components.obstacle
 com.deco2800.game.components.player
 com.deco2800.game.components.score
 com.deco2800.game.components.settingsmenu
