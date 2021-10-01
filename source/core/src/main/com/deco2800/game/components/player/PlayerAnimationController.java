@@ -101,5 +101,7 @@ public class PlayerAnimationController extends Component {
         animator.stopAnimation();
     }
 
-
+    public void setTexturePresent(boolean texturePresent) {
+        this.texturePresent = texturePresent;
+    }
 }
