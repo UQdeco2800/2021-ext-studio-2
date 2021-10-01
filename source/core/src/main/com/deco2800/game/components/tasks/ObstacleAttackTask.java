@@ -16,6 +16,8 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+
 
 public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     private final Entity target;
@@ -41,8 +43,9 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     public void start() {
         super.start();
         MainGameScreen.setSpownFacehugger(enemyCreatePosition());
-        Sound plantsSound = ServiceLocator.getResourceService().getAsset("sounds/monster_roar.mp3", Sound.class);
-        plantsSound.play(0.3f, 1f, 0);
+
+        Sound roarSound = ServiceLocator.getResourceService().getAsset("sounds/monster_roar.mp3", Sound.class);
+        roarSound.play(0.3f, 1f, 0);
     }
 
 
