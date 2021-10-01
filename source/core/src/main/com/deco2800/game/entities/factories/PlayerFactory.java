@@ -35,6 +35,8 @@ import com.deco2800.game.services.ServiceLocator;
 public class PlayerFactory {
     private static final PlayerConfig stats =
             FileLoader.readClass(PlayerConfig.class, "configs/player.json");
+    private static final String attire = stats.attire;
+
 
     /**
      * Create a player entity.
@@ -45,7 +47,23 @@ public class PlayerFactory {
         InputComponent inputComponent =
                 ServiceLocator.getInputService().getInputFactory().createForPlayer();
 
-        AnimationRenderComponent mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation.atlas");
+        AnimationRenderComponent mpcAnimator;
+        TextureRenderComponent mpcTexture;
+        switch (attire) {
+
+            case "veteranSilver":
+                mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation_2.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/mpc_right_2.png");
+                break;
+            case "veteranGold":
+                mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation_3.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/mpc_right_3.png");
+                break;
+            default:
+                mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/mpc_right.png");
+                break;
+        }
         mpcAnimator.addAnimation("main_player_run", 0.1f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_walk", 0.5f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_front", 1f, Animation.PlayMode.LOOP);
@@ -65,7 +83,7 @@ public class PlayerFactory {
 
         Entity player =
                 new Entity()
-                        .addComponent(new TextureRenderComponent("images/mpc/mpc_right.png"))
+                        .addComponent(mpcTexture)
                         .addComponent(new PlayerAnimationController())
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.PLAYERCOLLIDER))
