@@ -30,9 +30,7 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
     private final GdxGame game;
     private final Renderer renderer;
     private Entity UIEntity;
-//    private static final String[] bgTextures = {"images/menu_background/attires_background.png"};
-//    private static final String[] achievementTextures = {"images/achievements/veteranSilverTrophy.png", "images/achievements/veteranGoldTrophy.png"};
-//    private static final String[] attireTextures = {"images/mpc/attires/veteranSilver.png", "images/mpc/attires/veteranGold.png"};
+
 
 
     public UnlockedAttiresScreen(GdxGame game) {
@@ -56,18 +54,12 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
     private void loadAssets() {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
-//        resourceService.loadTextures(bgTextures);
-//        resourceService.loadTextures(achievementTextures);
-//        resourceService.loadTextures(attireTextures);
         ServiceLocator.getResourceService().loadAll();
     }
 
     private void unloadAssets() {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
-//        resourceService.unloadAssets(attireTextures);
-//        resourceService.unloadAssets(achievementTextures);
-//        resourceService.unloadAssets(bgTextures);
     }
 
     @Override
