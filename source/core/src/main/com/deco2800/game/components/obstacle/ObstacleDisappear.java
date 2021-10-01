@@ -1,11 +1,14 @@
-package com.deco2800.game.components.Obstacle;
+package com.deco2800.game.components.obstacle;
 
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.screens.MainGameScreen;
+import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import com.sun.tools.javac.Main;
@@ -165,6 +168,8 @@ public class ObstacleDisappear extends Component {
             return;
         }
         MainGameScreen.setSpaceshipAttack();
+        Sound plantsSound = ServiceLocator.getResourceService().getAsset("sounds/spacecraft_floating.mp3", Sound.class);
+        plantsSound.play(0.5f, 1f, 0);
 //        System.out.println("spaceShipAttack was triggered.");
         spaceshipAttack = true;
         this.entity.setSpaceShipDispose();
@@ -180,6 +185,8 @@ public class ObstacleDisappear extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
+        Sound plantsSound = ServiceLocator.getResourceService().getAsset("sounds/missile_explosion.mp3", Sound.class);
+        plantsSound.play(0.1f, 1f, 0);
 //        MainGameScreen.setSpaceshipAttack();
 //        System.out.println("smallMissileAttack was triggered.");
 //        spaceshipAttack = true;

@@ -3,13 +3,11 @@ package com.deco2800.game.areas;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.MassData;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
-import com.deco2800.game.components.Obstacle.ObstacleDisappear;
+import com.deco2800.game.components.obstacle.ObstacleDisappear;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.buff.Buff;
-import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.components.items.InventorySystem;
 import com.deco2800.game.components.items.ItemBar;
 import com.deco2800.game.entities.Entity;
@@ -163,7 +161,11 @@ public class ForestGameArea extends GameArea {
             "images/food1.png",
             "images/water1.png",
     };
-    private static final String[] forestSounds = {"sounds/Impact4.ogg"};
+    private static final String[] forestSounds = {"sounds/Impact4.ogg",
+            "sounds/missile_explosion.mp3",
+            "sounds/monster_roar.mp3",
+            "sounds/spacecraft_floating.mp3"
+    };
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
     private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
@@ -269,7 +271,6 @@ public class ForestGameArea extends GameArea {
      * Generate the continuous terrain after the first set of terrain
      *
      * @param xValue control the position of the terrain
-     *
      */
     public void spawnTerrainRandomly(int xValue) {
         // Background terrain
@@ -310,18 +311,16 @@ public class ForestGameArea extends GameArea {
      * Generate invisible ceiling on top to avoid the character jump out of the map
      *
      * @param worldBounds wall position value
-     * @param tileBounds tile position value
-     *
+     * @param tileBounds  tile position value
      */
     public void spawnInvisibleCeiling(Vector2 worldBounds, GridPoint2 tileBounds) {
 
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH, PhysicsLayer.CEILING),
-                new GridPoint2(0, tileBounds.y+8),
+                new GridPoint2(0, tileBounds.y + 8),
                 false,
                 false);
     }
-
 
 
     /**
@@ -496,7 +495,7 @@ public class ForestGameArea extends GameArea {
     public void spawnSmallMissile(Vector2 position) {
         Entity smallMissile = NPCFactory.createSmallMissile(player);
         spawnEntityAt(smallMissile, position, true, true);
-        smallMissile.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(-20,5), position, true);
+        smallMissile.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(-20, 5), position, true);
         smallMissile.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0.1f);
         smallMissile.getComponent(PhysicsComponent.class).getBody().setGravityScale(0.3f);
         logger.debug("Spawn a small missile on position = {}", position);

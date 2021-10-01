@@ -1,19 +1,13 @@
 package com.deco2800.game.entities.factories;
 
-import com.badlogic.gdx.assets.loaders.SynchronousAssetLoader;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.Filter;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.Obstacle.ObstacleDisappear;
+import com.deco2800.game.components.obstacle.ObstacleDisappear;
 import com.deco2800.game.components.TouchAttackComponent;
-import com.deco2800.game.components.tasks.ObstacleAttackTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.BaseEntityConfig;
-import com.deco2800.game.entities.configs.NPCConfigs;
 import com.deco2800.game.entities.configs.ObstaclesConfigs;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;

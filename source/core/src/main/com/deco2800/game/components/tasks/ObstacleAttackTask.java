@@ -1,5 +1,6 @@
 package com.deco2800.game.components.tasks;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
@@ -40,6 +41,8 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     public void start() {
         super.start();
         MainGameScreen.setSpownFacehugger(enemyCreatePosition());
+        Sound plantsSound = ServiceLocator.getResourceService().getAsset("sounds/monster_roar.mp3", Sound.class);
+        plantsSound.play(0.3f, 1f, 0);
     }
 
 
