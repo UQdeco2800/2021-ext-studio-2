@@ -30,10 +30,9 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
     private final GdxGame game;
     private final Renderer renderer;
     private Entity UIEntity;
-    private static final String[] playerAttires = {"images/mpc/veteranSilver.png", "images/mpc/veteranGold.png"};
-    private static final String[] backgroundImages = {"images/achievements/achievementBackground.png"};
-    private static final String[] achievements = {"images/achievements/veteranSilverTrophy.png", "images/achievements/veteranGoldTrophy.png"};
-    private static final String[] mainMenuTextures = {"images/box_boy_title.png","images/menu_background/menu_background.png"};
+    private static final String[] bgTextures = {"images/menu_background/attires_background.png"};
+    private static final String[] achievementTextures = {"images/achievements/veteranSilverTrophy.png", "images/achievements/veteranGoldTrophy.png"};
+    private static final String[] attireTextures = {"images/mpc/attires/veteranSilver.png", "images/mpc/attires/veteranGold.png"};
 
 
     public UnlockedAttiresScreen(GdxGame game) {
@@ -57,20 +56,18 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
     private void loadAssets() {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
-        resourceService.loadTextures(playerAttires);
-        resourceService.loadTextures(backgroundImages);
-        resourceService.loadTextures(achievements);
-        resourceService.loadTextures(mainMenuTextures);
+        resourceService.loadTextures(bgTextures);
+        resourceService.loadTextures(achievementTextures);
+        resourceService.loadTextures(attireTextures);
         ServiceLocator.getResourceService().loadAll();
     }
 
     private void unloadAssets() {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
-        resourceService.unloadAssets(playerAttires);
-        resourceService.unloadAssets(backgroundImages);
-        resourceService.unloadAssets(achievements);
-        resourceService.unloadAssets(mainMenuTextures);
+        resourceService.unloadAssets(attireTextures);
+        resourceService.unloadAssets(achievementTextures);
+        resourceService.unloadAssets(bgTextures);
     }
 
     @Override
