@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
+import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.components.obstacle.ObstacleDisappear;
 import com.deco2800.game.components.achievements.AchievementsHelper;
 import com.deco2800.game.components.maingame.MainGameActions;
@@ -60,23 +61,11 @@ public class MainGameScreen extends ScreenAdapter {
     private static Vector2 facehuggerPosition;
     private static boolean spownFacehugger;
 
-    public static spaceshipAttack spaceshipState = spaceshipAttack.Off;
-    private static Vector2 positionHitSpaceship;
-    public static float spaceshipTime = 10f;
-    private int counterSmallMissile = 0;
-
     public static newMap newMapStatus = newMap.Off;
-
-    public static enum spaceshipAttack {
-        Off,
-        Start, // Used once in render
-        On,
-        Finish;
-    }
 
     public static enum newMap {
         Off,
-        Begin,  // Used once in render
+        Start,  // Used once in render
         Finish,  // Used once in render
         On;
     }
@@ -126,10 +115,6 @@ public class MainGameScreen extends ScreenAdapter {
 
         newMapStatus = newMap.Off;
 
-        spaceshipState = spaceshipAttack.Off;
-        positionHitSpaceship = null;
-        spaceshipTime = 10f;
-        counterSmallMissile = 0;
         counter = 0;
 
         ServiceLocator.registerDistanceService(new DistanceService(player));
@@ -191,87 +176,6 @@ public class MainGameScreen extends ScreenAdapter {
         }
     }
 
-    /**
-     * Generate monsters based on the position of the enemy monkey, which is called by render().
-     */
-    public static void setSpaceshipAttack() {
-        spaceshipState = spaceshipAttack.Start;
-    }
-
-    private void spaceshipSceneBegins() {
-        //                System.out.println("Start");
-        positionHitSpaceship = player.getPosition();
-        player.setPosition(player.getPosition().x - 8, player.getPosition().y);
-        player.setPosition((float) (player.getPosition().x - 0.05), player.getPosition().y);
-        // If the player is walking, stop
-        if (!player.getComponent(KeyboardPlayerInputComponent.class).getWalkDirection().epsilonEquals(Vector2.Zero)) {
-            player.getComponent(KeyboardPlayerInputComponent.class).keyUp(Input.Keys.D);
-        }
-        spaceshipState = spaceshipAttack.On;
-    }
-
-    private void spaceshipAttackScene() {
-//                System.out.println("On");
-        player.setPosition((float) (player.getPosition().x - 0.05), player.getPosition().y);
-        spaceshipTime -= ServiceLocator.getTimeSource().getDeltaTime();
-
-        if (spaceshipTime <= 0) {
-            spaceshipState = spaceshipAttack.Finish;
-            forestGameArea.spawnPortal(new Vector2(85, 8), ObstacleDisappear.ObstacleType.PortalEntrance);
-            AchievementsHelper.getInstance().trackSpaceshipAvoidSuccess();
-
-        } else if (spaceshipTime <= 5 && counterSmallMissile % 100 == 0) {
-//            System.out.println("Hard counterSmallMissile = " + counterSmallMissile);
-
-            // 难
-            switch (counterSmallMissile) {
-                case 300:
-                    forestGameArea.spawnSmallMissile(new Vector2(85, 5));
-                    forestGameArea.spawnSmallMissile(new Vector2(85, 11));
-                    break;
-                case 400:
-                    forestGameArea.spawnSmallMissile(new Vector2(85, 8));
-                    forestGameArea.spawnSmallMissile(new Vector2(85, 11));
-                    break;
-                case 500:
-                    forestGameArea.spawnSmallMissile(new Vector2(85, 5));
-                    forestGameArea.spawnSmallMissile(new Vector2(85, 8));
-            }
-
-        } else if (spaceshipTime <= 10 && counterSmallMissile % 100 == 0) {
-//            System.out.println("Essay counterSmallMissile = " + counterSmallMissile);
-            // 简单
-            switch (counterSmallMissile) {
-                case 0:
-                    forestGameArea.spawnSmallMissile(new Vector2(85, 5f));
-                    break;
-                case 100:
-                    forestGameArea.spawnSmallMissile(new Vector2(85, 8f));
-                    break;
-                case 200:
-                    forestGameArea.spawnSmallMissile(new Vector2(85, 11f));
-            }
-        }
-
-        counterSmallMissile++;
-    }
-
-    /**
-     * Set the position and status of the character according to the state of the spacecraft, which is called by render().
-     */
-    private void spaceshipScene() {
-        switch (spaceshipState) {
-            case Start:
-                spaceshipSceneBegins();
-                break;
-            case On:
-                spaceshipAttackScene();
-                break;
-            case Finish:
-//                System.out.println("Finish");
-            default:
-        }
-    }
 
     /**
      * @param status How many seconds the player slows down.
@@ -284,7 +188,7 @@ public class MainGameScreen extends ScreenAdapter {
      * Slow down the player, called by render().
      */
     private void TransferPlayerByMap() {
-        if (newMapStatus == newMap.Begin) {
+        if (newMapStatus == newMap.Start) {
             player.setPosition(0, 50);
             newMapStatus = newMap.On;
         } else if (newMapStatus == newMap.Finish) {
@@ -310,15 +214,17 @@ public class MainGameScreen extends ScreenAdapter {
     private Vector2 changeCameraLens() {
         // Centralize the screen to player
         Vector2 screenVector = player.getPosition();
+        SpaceshipAttackController.spaceshipAttack spaceshipState = SpaceshipAttackController.spaceshipState;
 //        System.out.println("player.getPosition() = " + player.getPosition());
 
         // Update camera position (change based on team6 contribution)
         switch (newMapStatus) {
             case Off:
                 screenVector.y = 7f;
-                if (spaceshipState == spaceshipAttack.On || spaceshipState == spaceshipAttack.Start ||
-                        (spaceshipState == spaceshipAttack.Finish && screenVector.x <= positionHitSpaceship.x)) {
-                    renderer.getCamera().getEntity().setPosition(new Vector2(positionHitSpaceship.x, 7f));
+
+                if (spaceshipState == SpaceshipAttackController.spaceshipAttack.On || spaceshipState == SpaceshipAttackController.spaceshipAttack.Start ||
+                        (spaceshipState == SpaceshipAttackController.spaceshipAttack.Finish && screenVector.x <= SpaceshipAttackController.positionHitSpaceship.x)) {
+                    renderer.getCamera().getEntity().setPosition(new Vector2(SpaceshipAttackController.positionHitSpaceship.x, 7f));
                 } else {
                     renderer.getCamera().getEntity().setPosition(screenVector);
                 }
@@ -354,8 +260,6 @@ public class MainGameScreen extends ScreenAdapter {
             return;
         }
 
-        // Control the position of the character when the spaceship appears
-        spaceshipScene();
         // Transfer the player according to the portal the player enters
         TransferPlayerByMap();
 

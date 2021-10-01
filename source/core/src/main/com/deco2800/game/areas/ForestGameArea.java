@@ -482,6 +482,9 @@ public class ForestGameArea extends GameArea {
         GridPoint2 position = new GridPoint2(playerX + 35, 3);
         Entity spaceship = NPCFactory.createSpaceShip(player);
         spawnEntityAt(spaceship, position, true, false);
+
+        spaceship.getEvents().addListener("spawnPortalEntrance", this::spawnPortalEntrance);
+        spaceship.getEvents().addListener("spawnSmallMissile", this::spawnSmallMissile);
 //        System.out.println("spaceship position = " + position);
 //        logger.debug("Spawn a spaceship on position = {}", position);
     }
@@ -512,6 +515,10 @@ public class ForestGameArea extends GameArea {
         spawnEntityAt(portal, position, true, true);
 //        logger.debug("Spawn a small missile on position = {}", position);
 //        System.out.println("Spawn a small missile on position = "+ position);
+    }
+
+    private void spawnPortalEntrance(Vector2 position, ObstacleDisappear.ObstacleType type) {
+        spawnPortal(position, type);
     }
 
 

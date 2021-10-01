@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.components.obstacle.ObstacleDisappear;
 import com.deco2800.game.components.npc.EnemyAnimationController;
 import com.deco2800.game.components.TouchAttackComponent;
@@ -120,6 +121,7 @@ public class NPCFactory {
             .addComponent(new PhysicsMovementComponent())
             .addComponent(new ColliderComponent())
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+            .addComponent(new SpaceshipAttackController().setPlayer(target))
             .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Spaceship));
 
     spaceship.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);

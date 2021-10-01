@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
+import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.events.EventHandler;
 import com.deco2800.game.rendering.AnimationRenderComponent;
@@ -114,14 +115,6 @@ public class Entity {
      */
     public void setDispose(){
         this.dispose = true;
-        logger.debug("Setting dispose={} on entity {}", dispose, this);
-    }
-
-    /**
-     * Set dispose to true. The code that works subsequently is in update.
-     */
-    public void setSpaceShipDispose(){
-        this.spaceShipDispose = true;
         logger.debug("Setting dispose={} on entity {}", dispose, this);
     }
 
@@ -382,12 +375,6 @@ public class Entity {
             return;
         }
 
-        if (MainGameScreen.spaceshipTime <= 0) {
-            if (spaceShipDispose) {
-                this.dispose();
-                return;
-            }
-        }
 
         for (Component component : createdComponents) {
             // When texture and animation are given an entity at the same time, the texture needs to disappear when the

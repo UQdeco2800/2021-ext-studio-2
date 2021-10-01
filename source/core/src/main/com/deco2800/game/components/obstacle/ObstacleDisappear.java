@@ -1,9 +1,9 @@
 package com.deco2800.game.components.obstacle;
 
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
@@ -59,6 +59,7 @@ public class ObstacleDisappear extends Component {
                 break;
             case Spaceship:
                 entity.getEvents().addListener("collisionStart", this::spaceShipAttack);
+                entity.getEvents().addListener("spaceshipDispose", this::spaceshipDispose);
                 spaceshipAttack = false;
                 break;
             case SmallMissile:
@@ -167,12 +168,15 @@ public class ObstacleDisappear extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
-        MainGameScreen.setSpaceshipAttack();
+        SpaceshipAttackController.setSpaceshipAttack();
         Sound floatingSound = ServiceLocator.getResourceService().getAsset("sounds/spacecraft_floating.mp3", Sound.class);
         floatingSound.play(0.5f, 1f, 0);
 //        System.out.println("spaceShipAttack was triggered.");
         spaceshipAttack = true;
-        this.entity.setSpaceShipDispose();
+    }
+
+    void spaceshipDispose () {
+        this.entity.setDispose();
     }
 
     void smallMissileAttack(Fixture me, Fixture other) {
@@ -187,7 +191,6 @@ public class ObstacleDisappear extends Component {
         }
         Sound missileSound = ServiceLocator.getResourceService().getAsset("sounds/missile_explosion.mp3", Sound.class);
         missileSound.play(0.3f, 1f, 0);
-//        MainGameScreen.setSpaceshipAttack();
 //        System.out.println("smallMissileAttack was triggered.");
 //        spaceshipAttack = true;
 //        this.entity.setSpaceShipDispose();
@@ -199,7 +202,7 @@ public class ObstacleDisappear extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
-        MainGameScreen.setNewMapStatus(MainGameScreen.newMap.Begin);
+        MainGameScreen.setNewMapStatus(MainGameScreen.newMap.Start);
 //        System.out.println("portalTransfer was triggered.");
     }
 
