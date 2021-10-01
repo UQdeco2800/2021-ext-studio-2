@@ -17,6 +17,7 @@ import com.deco2800.game.GdxGame;
 import com.badlogic.gdx.graphics.Texture;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.files.GameRecords;
+import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
@@ -36,12 +37,35 @@ public class UnlockedAttiresDisplay extends UIComponent {
     private Table crossTable;
     private Table unlockedAttiresTable;
     private int i = 0;
-
+    private static final String[] bgTextures = {"images/menu_background/attires_background.png"};
+    private static final String[] achievementTextures = {"images/achievements/veteranSilverTrophy.png", "images/achievements/veteranGoldTrophy.png"};
+    private static final String[] attireTextures = {"images/mpc/attires/veteranSilver.png", "images/mpc/attires/veteranGold.png"};
 
     public UnlockedAttiresDisplay(GdxGame game, List<BaseAchievementConfig> bestAchievements) {
         this.bestAchievements = bestAchievements;
         this.game = game;
+        ServiceLocator.registerResourceService(new ResourceService());
+        // loadAssets();
 
+    }
+
+    private void loadAssets() {
+        logger.debug("Loading assets");
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.loadTextures(bgTextures);
+        resourceService.loadTextures(achievementTextures);
+        resourceService.loadTextures(attireTextures);
+
+
+        ServiceLocator.getResourceService().loadAll();
+    }
+
+    private void unloadAssets() {
+        logger.debug("Unloading assets");
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.unloadAssets(attireTextures);
+        resourceService.unloadAssets(achievementTextures);
+        resourceService.unloadAssets(bgTextures);
     }
     @Override
     public void create() {
@@ -58,7 +82,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
         Image background =
                 new Image(
                         ServiceLocator.getResourceService()
-                                .getAsset("images/menu_background/menu_background.png", Texture.class));
+                                .getAsset("images/menu_background/attires_background.png", Texture.class));
         ImageButton crossImg = getImageButton("images/achievements/crossButton.png");
         crossImg.addListener(new ChangeListener() {
             @Override
@@ -114,18 +138,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
      * Renders screens to show zero unlocked attires
      */
     private void renderZeroUnlockedAttiresTable() {
-        Label message = new Label("Unlock Veteran Silver and Veteran Gold Achievements to access new attires!",
-                new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        table.add(message);
-        table.row();
-        Image silver = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/achievements/veteranSilverTrophy.png", Texture.class));
-        table.add(silver).center().padLeft(10f).padRight(10f).size(220, 150);
-        table.row();
-        Image gold = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/achievements/veteranGoldTrophy.png", Texture.class));
-        table.add(gold).center().padLeft(10f).padRight(10f).size(220, 150);
-        table.row();
+
     }
 
     /**
