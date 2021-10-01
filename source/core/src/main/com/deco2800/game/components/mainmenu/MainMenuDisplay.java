@@ -50,7 +50,7 @@ public class MainMenuDisplay extends UIComponent {
 
     TextButton achievementsBtn = new TextButton("Achievements", skin);
 
-    TextButton attiresBtn = new TextButton("Unlocked Attires", skin);
+    TextButton attiresBtn = new TextButton("Select Unlocked Attires", skin);
 
     //Team8
     TextButton monsterMenuBtn = new TextButton("Monster Menu", skin);

@@ -138,7 +138,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
      * Renders screens to show zero unlocked attires
      */
     private void renderZeroUnlockedAttiresTable() {
-        Label message1 = new Label("You haven't unlocked any attires yet!",
+        Label message1 = new Label("You haven't unlocked any new attires yet!",
                 new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         message1.setFontScale(3f);
         table.add(message1).padTop(20f).center();
