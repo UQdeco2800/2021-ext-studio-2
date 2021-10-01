@@ -4,9 +4,12 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.player.UnlockedAttiresDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
+import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
@@ -24,13 +27,19 @@ import java.util.List;
  */
 public class UnlockedAttiresScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(UnlockedAttiresScreen.class);
-    private static final String[] playerAttires = {"images/mpc/main_player_attire_a_walk_1.png", "images/mpc/main_player_jump_1.png"};
     private final GdxGame game;
     private final Renderer renderer;
     private Entity UIEntity;
+    private static final String[] playerAttires = {"images/mpc/veteranSilver.png", "images/mpc/veteranGold.png"};
+    private static final String[] backgroundImages = {"images/achievements/achievementBackground.png"};
+    private static final String[] achievements = {"images/achievements/veteranSilverTrophy.png", "images/achievements/veteranGoldTrophy.png"};
+    private static final String[] mainMenuTextures = {"images/box_boy_title.png","images/menu_background/menu_background.png"};
+
 
     public UnlockedAttiresScreen(GdxGame game) {
         this.game = game;
+
+
         logger.debug("Initialising Unlocked Attires screen services");
         ServiceLocator.registerInputService(new InputService());
         ServiceLocator.registerResourceService(new ResourceService());
@@ -49,14 +58,19 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(playerAttires);
-
-        resourceService.loadAll();
+        resourceService.loadTextures(backgroundImages);
+        resourceService.loadTextures(achievements);
+        resourceService.loadTextures(mainMenuTextures);
+        ServiceLocator.getResourceService().loadAll();
     }
 
     private void unloadAssets() {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(playerAttires);
+        resourceService.unloadAssets(backgroundImages);
+        resourceService.unloadAssets(achievements);
+        resourceService.unloadAssets(mainMenuTextures);
     }
 
     @Override
@@ -76,6 +90,7 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
         renderer.dispose();
         unloadAssets();
 
+        UIEntity.dispose();
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
         ServiceLocator.clear();
@@ -83,11 +98,12 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
 
     private void createUI() {
         logger.debug("Creating Unlocked Attires screen UI");
-
+        List<BaseAchievementConfig> bestAchievements= GameRecords.getAllTimeBestAchievements();
         Stage stage = ServiceLocator.getRenderService().getStage();
 
         UIEntity = new Entity();
-        UIEntity.addComponent(new UnlockedAttiresDisplay())
+
+        UIEntity.addComponent(new UnlockedAttiresDisplay(game, bestAchievements))
                 .addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(UIEntity);
     }
