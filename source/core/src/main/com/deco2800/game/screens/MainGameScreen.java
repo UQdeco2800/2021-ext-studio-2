@@ -1,19 +1,14 @@
 package com.deco2800.game.screens;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
-import com.deco2800.game.components.obstacle.ObstacleDisappear;
-import com.deco2800.game.components.achievements.AchievementsHelper;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.score.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
@@ -123,6 +118,21 @@ public class MainGameScreen extends ScreenAdapter {
         SpaceshipAttackController.positionHitSpaceship = null;
     }
 
+    public static boolean isSlowPlayer() {
+        return slowPlayer;
+    }
+
+    public static float getSlowPlayerTime() {
+        return slowPlayerTime;
+    }
+
+    public static void setSlowPlayer(boolean slowPlayer) {
+        MainGameScreen.slowPlayer = slowPlayer;
+    }
+
+    public static void setSlowPlayerTime(float slowPlayerTime) {
+        MainGameScreen.slowPlayerTime = slowPlayerTime;
+    }
 
     /**
      * Set the player deceleration time, the value set in the function is used by slowPlayer(), and the function is

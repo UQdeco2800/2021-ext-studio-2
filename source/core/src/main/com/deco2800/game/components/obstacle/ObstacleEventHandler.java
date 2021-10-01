@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Used to handle collision events between obstacles and enemies
  */
-public class ObstacleDisappear extends Component {
+public class ObstacleEventHandler extends Component {
 
 
     public static boolean locked = true;
@@ -30,14 +30,14 @@ public class ObstacleDisappear extends Component {
         PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm, Spaceship, SmallMissile, PortalEntrance, PortalExport;
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(ObstacleDisappear.class);
+    private static final Logger logger = LoggerFactory.getLogger(ObstacleEventHandler.class);
     AnimationRenderComponent animator;
     HitboxComponent hitboxComponent;
     ObstacleType obstacleType;
     private static boolean spaceshipAttack;
     private int count;
 
-    public ObstacleDisappear(ObstacleType obstacleType) {
+    public ObstacleEventHandler(ObstacleType obstacleType) {
         this.obstacleType = obstacleType;
         this.count = 0;
     }

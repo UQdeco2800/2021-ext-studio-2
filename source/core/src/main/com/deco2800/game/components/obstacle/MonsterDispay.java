@@ -303,14 +303,14 @@ public class MonsterDispay extends UIComponent {
         stage.addActor(monster3AttributeTable);
         stage.addActor(monster4AttributeTable );
         stage.addActor(monster5AttributeTable);
-        if (ObstacleDisappear.locked){
+        if (ObstacleEventHandler.locked){
             stage.addActor(secretTable);
         }
-        if (ObstacleDisappear.locked2){
+        if (ObstacleEventHandler.locked2){
             stage.addActor(secretTable2);
         }
 
-        if (ObstacleDisappear.locked3){
+        if (ObstacleEventHandler.locked3){
             stage.addActor(secretTable3);
         }
 

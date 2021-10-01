@@ -4,9 +4,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.achievements.AchievementsHelper;
-import com.deco2800.game.components.obstacle.ObstacleDisappear;
+import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -114,6 +115,7 @@ public class SpaceshipAttackController extends Component {
         try {
             positionHitSpaceship = player.getPosition();
             player.setPosition(player.getPosition().x - 8, player.getPosition().y);
+            // offset characters automatically advance
             player.setPosition((float) (player.getPosition().x - 0.05), player.getPosition().y);
         } catch (NullPointerException e) {
             logger.error("Need to setPlayer(player).");
@@ -122,6 +124,12 @@ public class SpaceshipAttackController extends Component {
         // If the player is walking, stop
         if (!player.getComponent(KeyboardPlayerInputComponent.class).getWalkDirection().epsilonEquals(Vector2.Zero)) {
             player.getComponent(KeyboardPlayerInputComponent.class).keyUp(Input.Keys.D);
+        }
+
+        // Remove the slowing effect
+        if (MainGameScreen.isSlowPlayer()) {
+            MainGameScreen.setSlowPlayer(false);
+            MainGameScreen.setSlowPlayerTime(0);
         }
         spaceshipState = SpaceshipAttack.On;
     }
@@ -141,7 +149,7 @@ public class SpaceshipAttackController extends Component {
         if (spaceshipTime <= 0) {
             spaceshipState = SpaceshipAttack.Finish;
             this.getEntity().getEvents().trigger("spaceshipDispose");
-            this.getEntity().getEvents().trigger("spawnPortalEntrance", spaceshipPosition.cpy().sub(-5, -5), ObstacleDisappear.ObstacleType.PortalEntrance);
+            this.getEntity().getEvents().trigger("spawnPortalEntrance", spaceshipPosition.cpy().sub(-5, -5), ObstacleEventHandler.ObstacleType.PortalEntrance);
             AchievementsHelper.getInstance().trackSpaceshipAvoidSuccess();
 
         } else if (spaceshipTime <= 10 && (counterSmallMissile % 50 == 0 || counterSmallMissile % 30 == 0)) {
@@ -189,8 +197,6 @@ public class SpaceshipAttackController extends Component {
             case 1080:
             case 1110:
             case 1140:
-            case 1170:
-
                 this.getEntity().getEvents().trigger("spawnSmallMissile", getRandomPosition(spaceshipPosition, playerPosition, null, 2));
                 this.getEntity().getEvents().trigger("spawnSmallMissile", getRandomPosition(spaceshipPosition, playerPosition, AttackType.Player, 2));
                 break;

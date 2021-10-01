@@ -5,8 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
-import com.deco2800.game.components.npc.SpaceshipAttackController;
-import com.deco2800.game.components.obstacle.ObstacleDisappear;
+import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.buff.Buff;
 import com.deco2800.game.components.items.InventorySystem;
@@ -208,8 +207,8 @@ public class ForestGameArea extends GameArea {
         trackAchievements();
         setBonusItems(player);
         player.getEvents().addListener("B pressed", this::InvSys);
-        spawnPortal(new Vector2(10, 10), ObstacleDisappear.ObstacleType.PortalEntrance);
-        spawnPortal(new Vector2(50, 55), ObstacleDisappear.ObstacleType.PortalExport);
+        spawnPortal(new Vector2(10, 10), ObstacleEventHandler.ObstacleType.PortalEntrance);
+        spawnPortal(new Vector2(50, 55), ObstacleEventHandler.ObstacleType.PortalExport);
     }
 
     public void InvSys() {
@@ -516,14 +515,14 @@ public class ForestGameArea extends GameArea {
      *
      * @param position the location of Spaceship
      */
-    public void spawnPortal(Vector2 position, ObstacleDisappear.ObstacleType type) {
+    public void spawnPortal(Vector2 position, ObstacleEventHandler.ObstacleType type) {
         Entity portal = ObstacleFactory.createPortal(player, type);
         spawnEntityAt(portal, position, true, true);
 //        logger.debug("Spawn a small missile on position = {}", position);
 //        System.out.println("Spawn a small missile on position = "+ position);
     }
 
-    private void spawnPortalEntrance(Vector2 position, ObstacleDisappear.ObstacleType type) {
+    private void spawnPortalEntrance(Vector2 position, ObstacleEventHandler.ObstacleType type) {
         spawnPortal(position, type);
     }
 

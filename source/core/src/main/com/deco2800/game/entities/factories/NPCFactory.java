@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
-import com.deco2800.game.components.obstacle.ObstacleDisappear;
+import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.npc.EnemyAnimationController;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.tasks.ChaseTask;
@@ -62,7 +62,7 @@ public class NPCFactory {
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
         .addComponent(animator)
         .addComponent(new EnemyAnimationController())
-        .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.FaceWorm));
+        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.FaceWorm));
 
     FaceWorm.setScale(2.4f,2.4f);
     logger.debug("Create a Face Worm");
@@ -122,7 +122,7 @@ public class NPCFactory {
             .addComponent(new ColliderComponent())
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
             .addComponent(new SpaceshipAttackController().setPlayer(target))
-            .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Spaceship));
+            .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Spaceship));
 
     spaceship.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
 //    animator.startAnimation("1m");
@@ -157,7 +157,7 @@ public class NPCFactory {
             .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
             .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-            .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.SmallMissile));
+            .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SmallMissile));
 
     missile.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.DynamicBody);
 //    animator.startAnimation("1m");
