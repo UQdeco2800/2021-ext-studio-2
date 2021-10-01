@@ -35,9 +35,11 @@ public class ObstacleDisappear extends Component {
     HitboxComponent hitboxComponent;
     ObstacleType obstacleType;
     private static boolean spaceshipAttack;
+    private int count;
 
     public ObstacleDisappear(ObstacleType obstacleType) {
         this.obstacleType = obstacleType;
+        this.count = 0;
     }
 
     public void create() {
@@ -91,12 +93,15 @@ public class ObstacleDisappear extends Component {
             return;
         }
 
-        logger.debug("PlantsDisappearStart was triggered.");
-        animator.getEntity().setRemoveTexture();
-        animator.startAnimation("obstacles");
-        animator.getEntity().setDisappearAfterAnimation(1f);
-        locked = false;
+        if (count == 0) { // Avoid an entity from repeatedly triggering an attack
+            count++;
 
+            logger.debug("PlantsDisappearStart was triggered.");
+            animator.getEntity().setRemoveTexture();
+            animator.startAnimation("obstacles");
+            animator.getEntity().setDisappearAfterAnimation(1f);
+            locked = false;
+        }
     }
 
 
@@ -115,12 +120,16 @@ public class ObstacleDisappear extends Component {
             return;
         }
 
-        MainGameScreen.setSlowPlayer(5f);
-        logger.info("ThornsDisappearStart was triggered.");
-        animator.getEntity().setRemoveTexture();
-        animator.startAnimation("obstacle2");
-        animator.getEntity().setDisappearAfterAnimation(1f);
-        locked2 = false;
+        if (count == 0) { // Avoid an entity from repeatedly triggering an attack
+            count++;
+
+            MainGameScreen.setSlowPlayer(5f);
+            logger.debug("ThornsDisappearStart was triggered.");
+            animator.getEntity().setRemoveTexture();
+            animator.startAnimation("obstacle2");
+            animator.getEntity().setDisappearAfterAnimation(1f);
+            locked2 = false;
+        }
     }
 
     /**
@@ -135,11 +144,15 @@ public class ObstacleDisappear extends Component {
 
 
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE && (other.getFilterData().categoryBits != PhysicsLayer.CEILING)) {
-            logger.debug("meteoriteDisappear was triggered.");
-            animator.getEntity().setRemoveTexture();
-            animator.startAnimation("stone1");
-            animator.getEntity().setDisappearAfterAnimation(0.32f);
-            locked3 = false;
+            if (count == 0) { // Avoid an entity from repeatedly triggering an attack
+                count++;
+
+                logger.debug("meteoriteDisappear was triggered.");
+                animator.getEntity().setRemoveTexture();
+                animator.startAnimation("stone1");
+                animator.getEntity().setDisappearAfterAnimation(0.32f);
+                locked3 = false;
+            }
         }
 
     }
@@ -149,7 +162,7 @@ public class ObstacleDisappear extends Component {
      */
     void faceWormDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-            logger.info("faceWormDisappear was triggered.");
+            logger.debug("faceWormDisappear was triggered.");
             animator.getEntity().setDisappearAfterAnimation(1.5f);
         }
 

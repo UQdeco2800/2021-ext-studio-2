@@ -199,15 +199,15 @@ public class ForestGameArea extends GameArea {
 
         player = spawnPlayer();
         spawnObstacles();
-//        Buff buff = new Buff(player);
-//        buff.addHealth();
-//        pro = new InventorySystem(player);
-//        spawnFirstAid();
-//        spawnGold();
+        Buff buff = new Buff(player);
+        buff.addHealth();
+        pro = new InventorySystem(player);
+        spawnFirstAid();
+        spawnGold();
         playMusic();
         trackAchievements();
-//        setBonusItems(player);
-//        player.getEvents().addListener("B pressed", this::InvSys);
+        setBonusItems(player);
+        player.getEvents().addListener("B pressed", this::InvSys);
         spawnPortal(new Vector2(10, 10), ObstacleDisappear.ObstacleType.PortalEntrance);
         spawnPortal(new Vector2(50, 55), ObstacleDisappear.ObstacleType.PortalExport);
     }
