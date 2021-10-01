@@ -28,6 +28,7 @@ import java.util.List;
  * and the associated locked and unlocked chapters.
  */
 public class AchievementRecordsDisplay extends UIComponent {
+    private static final int CARD_COLUMN_COUNT = 4;
     private final GdxGame game;
     private final List<BaseAchievementConfig> bestAchievements;
     private Table bgTable;
@@ -185,7 +186,7 @@ public class AchievementRecordsDisplay extends UIComponent {
             img.setScaling(Scaling.fit);
             img.setColor(255, 255, 255, alpha);
             achievementsTable.add(img).center().padLeft(10f).padRight(10f).size(220, 150);
-            if (i % 3 == 0) {
+            if (i % CARD_COLUMN_COUNT == 0) {
                 achievementsTable.row();
             }
         }
