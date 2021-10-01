@@ -1,0 +1,33 @@
+daodan.png
+size: 414,1719
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+daodan1
+  rotate: false
+  xy: 198, 0
+  size: 198, 819
+  orig: 198, 819
+  offset: 0, 0
+  index: -1
+daodan1
+  rotate: false
+  xy: 0, 819
+  size: 216, 855
+  orig: 216, 855
+  offset: 0, 0
+  index: -1
+daodan1
+  rotate: false
+  xy: 216, 819
+  size: 198, 900
+  orig: 198, 900
+  offset: 0, 0
+  index: -1
+daodan1
+  rotate: false
+  xy: 0, 0
+  size: 198, 810
+  orig: 198, 810
+  offset: 0, 0
+  index: -1
