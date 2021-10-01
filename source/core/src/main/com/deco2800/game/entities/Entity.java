@@ -37,7 +37,7 @@ public class Entity {
     private final int id;
 
     // Used to adjust, show which category the current entity is. For example, "SpaceShip", etc.
-    private String type = "Undefined";
+    private String type;
 
     private final IntMap<Component> components;
     private final EventHandler eventHandler;
@@ -58,7 +58,7 @@ public class Entity {
     public Entity() {
         id = nextId;
         nextId++;
-
+        type = "Undefined";
         components = new IntMap<>(4);
         eventHandler = new EventHandler();
     }

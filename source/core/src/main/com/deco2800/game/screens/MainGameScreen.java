@@ -58,12 +58,10 @@ public class MainGameScreen extends ScreenAdapter {
     private final Renderer renderer;
     private final PhysicsEngine physicsEngine;
 
-//    private static Vector2 facehuggerPosition;
-//    private static boolean spownFacehugger;
 
-    public static newMap newMapStatus = newMap.Off;
+    public static NewMap newMapStatus = NewMap.Off;
 
-    public static enum newMap {
+    public static enum NewMap {
         Off,
         Start,  // Used once in render
         Finish,  // Used once in render
@@ -110,17 +108,18 @@ public class MainGameScreen extends ScreenAdapter {
 
         player = forestGameArea.player;
 
-        newMapStatus = newMap.Off;
+        newMapStatus = NewMap.Off;
         counter = 0;
 
         ServiceLocator.registerDistanceService(new DistanceService(player));
+
         resetSpaceshipAttackVariable();
 
     }
 
     private void resetSpaceshipAttackVariable() {
         // reset Spaceship Attack variables
-        SpaceshipAttackController.spaceshipState = SpaceshipAttackController.spaceshipAttack.Off;
+        SpaceshipAttackController.spaceshipState = SpaceshipAttackController.SpaceshipAttack.Off;
         SpaceshipAttackController.positionHitSpaceship = null;
     }
 
@@ -162,7 +161,7 @@ public class MainGameScreen extends ScreenAdapter {
     /**
      * @param status How many seconds the player slows down.
      */
-    public static void setNewMapStatus(newMap status) {
+    public static void setNewMapStatus(NewMap status) {
         newMapStatus = status;
     }
 
@@ -170,12 +169,12 @@ public class MainGameScreen extends ScreenAdapter {
      * Slow down the player, called by render().
      */
     private void TransferPlayerByMap() {
-        if (newMapStatus == newMap.Start) {
+        if (newMapStatus == NewMap.Start) {
             player.setPosition(0, 50);
-            newMapStatus = newMap.On;
-        } else if (newMapStatus == newMap.Finish) {
+            newMapStatus = NewMap.On;
+        } else if (newMapStatus == NewMap.Finish) {
             player.setPosition(87, 3);
-            newMapStatus = newMap.Off;
+            newMapStatus = NewMap.Off;
         }
     }
 
@@ -196,7 +195,7 @@ public class MainGameScreen extends ScreenAdapter {
     private Vector2 changeCameraLens() {
         // Centralize the screen to player
         Vector2 screenVector = player.getPosition();
-        SpaceshipAttackController.spaceshipAttack spaceshipState = SpaceshipAttackController.spaceshipState;
+        SpaceshipAttackController.SpaceshipAttack spaceshipState = SpaceshipAttackController.spaceshipState;
 //        System.out.println("player.getPosition() = " + player.getPosition());
 
         // Update camera position (change based on team6 contribution)
@@ -204,8 +203,8 @@ public class MainGameScreen extends ScreenAdapter {
             case Off:
                 screenVector.y = 7f;
 
-                if (spaceshipState == SpaceshipAttackController.spaceshipAttack.On || spaceshipState == SpaceshipAttackController.spaceshipAttack.Start ||
-                        (spaceshipState == SpaceshipAttackController.spaceshipAttack.Finish && screenVector.x <= SpaceshipAttackController.positionHitSpaceship.x)) {
+                if (spaceshipState == SpaceshipAttackController.SpaceshipAttack.On || spaceshipState == SpaceshipAttackController.SpaceshipAttack.Start ||
+                        (spaceshipState == SpaceshipAttackController.SpaceshipAttack.Finish && screenVector.x <= SpaceshipAttackController.positionHitSpaceship.x)) {
                     renderer.getCamera().getEntity().setPosition(new Vector2(SpaceshipAttackController.positionHitSpaceship.x, 7f));
                 } else {
                     renderer.getCamera().getEntity().setPosition(screenVector);

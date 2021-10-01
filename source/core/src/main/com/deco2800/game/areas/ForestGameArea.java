@@ -199,15 +199,15 @@ public class ForestGameArea extends GameArea {
 
         player = spawnPlayer();
         spawnObstacles();
-        Buff buff = new Buff(player);
-        buff.addHealth();
-        pro = new InventorySystem(player);
-        spawnFirstAid();
-        spawnGold();
+//        Buff buff = new Buff(player);
+//        buff.addHealth();
+//        pro = new InventorySystem(player);
+//        spawnFirstAid();
+//        spawnGold();
         playMusic();
         trackAchievements();
-        setBonusItems(player);
-        player.getEvents().addListener("B pressed", this::InvSys);
+//        setBonusItems(player);
+//        player.getEvents().addListener("B pressed", this::InvSys);
         spawnPortal(new Vector2(10, 10), ObstacleDisappear.ObstacleType.PortalEntrance);
         spawnPortal(new Vector2(50, 55), ObstacleDisappear.ObstacleType.PortalExport);
     }
@@ -503,9 +503,9 @@ public class ForestGameArea extends GameArea {
     public void spawnSmallMissile(Vector2 position) {
         Entity smallMissile = NPCFactory.createSmallMissile(player);
         spawnEntityAt(smallMissile, position, true, true);
-        smallMissile.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(-20, 5), position, true);
-        smallMissile.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0.1f);
-        smallMissile.getComponent(PhysicsComponent.class).getBody().setGravityScale(0.3f);
+        smallMissile.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(-10, 2), position, true);
+        smallMissile.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0f);
+        smallMissile.getComponent(PhysicsComponent.class).getBody().setGravityScale(0.1f);
         logger.debug("Spawn a small missile on position = {}", position);
 //        System.out.println("Spawn a small missile on position = "+ position);
     }

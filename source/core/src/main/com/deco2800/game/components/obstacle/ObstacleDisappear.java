@@ -116,7 +116,7 @@ public class ObstacleDisappear extends Component {
         }
 
         MainGameScreen.setSlowPlayer(5f);
-        logger.debug("ThornsDisappearStart was triggered.");
+        logger.info("ThornsDisappearStart was triggered.");
         animator.getEntity().setRemoveTexture();
         animator.startAnimation("obstacle2");
         animator.getEntity().setDisappearAfterAnimation(1f);
@@ -149,7 +149,7 @@ public class ObstacleDisappear extends Component {
      */
     void faceWormDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-            logger.debug("faceWormDisappear was triggered.");
+            logger.info("faceWormDisappear was triggered.");
             animator.getEntity().setDisappearAfterAnimation(1.5f);
         }
 
@@ -203,7 +203,7 @@ public class ObstacleDisappear extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
-        MainGameScreen.setNewMapStatus(MainGameScreen.newMap.Start);
+        MainGameScreen.setNewMapStatus(MainGameScreen.NewMap.Start);
 //        System.out.println("portalTransfer was triggered.");
     }
 
@@ -213,7 +213,7 @@ public class ObstacleDisappear extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
-        MainGameScreen.setNewMapStatus(MainGameScreen.newMap.Finish);
+        MainGameScreen.setNewMapStatus(MainGameScreen.NewMap.Finish);
 //        System.out.println("portalTransfer was triggered.");
     }
 }
