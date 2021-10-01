@@ -104,7 +104,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
         table.setFillParent(true);
 
         Label label = new Label("Unlocked Attires", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        label.setFontScale(2);
+        label.setFontScale(4);
 
         table.center();
         table.add(label);
@@ -140,11 +140,12 @@ public class UnlockedAttiresDisplay extends UIComponent {
     private void renderZeroUnlockedAttiresTable() {
         Label message1 = new Label("You haven't unlocked any attires yet!",
                 new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        message1.setFontScale(1.5f);
+        message1.setFontScale(3f);
         table.add(message1).padTop(20f).center();
         table.row();
         Label message2 = new Label("Unlock Veteran Silver and Veteran Gold Achievements to access new attires!",
                 new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
+        message2.setFontScale(2f);
         table.add(message2).padTop(20f).center();
         table.row();
 
