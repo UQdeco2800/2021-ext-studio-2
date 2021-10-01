@@ -35,6 +35,12 @@ public class MonsterMenuScreen extends ScreenAdapter {
                     "images/monster_menu/monkey.png",
                     "images/monster_menu/stone.png",
                     "images/monster_menu/thorns.png",
+                    "images/monster_menu/box_covered.png",
+                    "images/monster_menu/plant.jpg",
+                    "images/monster_menu/monkey.jpg",
+                    "images/monster_menu/stone.jpg",
+                    "images/monster_menu/hugger.jpg",
+                    "images/monster_menu/thorns.jpg"
 
 
             };

@@ -187,6 +187,7 @@ public class ObstacleEventHandler extends Component {
         floatingSound.play(0.5f, 1f, 0);
 //        System.out.println("spaceShipAttack was triggered.");
         spaceshipAttack = true;
+        animator.startAnimation("daodan1");
     }
 
     void spaceshipDispose () {
