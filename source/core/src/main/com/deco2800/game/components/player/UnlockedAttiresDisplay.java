@@ -32,7 +32,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
     private Table crossTable;
     private Table unlockedAttiresTable;
     private String attire;
-    private String attireType;
+    public String attireType;
     private PlayerConfig stats;
     private Dialog dialog;
     private FileReader fileReader;
@@ -94,7 +94,6 @@ public class UnlockedAttiresDisplay extends UIComponent {
         });
 
         bgTable = new Table();
-        System.out.println(goldAchievements);
         bgTable.setFillParent(true);
         bgTable.add(background);
         crossTable = new Table();
@@ -113,7 +112,9 @@ public class UnlockedAttiresDisplay extends UIComponent {
         table.row();
         unlockedAttiresTable = new Table();
 
-        goldAchievements = 6;
+//      Temporary constant for debugging
+        goldAchievements = 10;
+        
         if (goldAchievements == 0) {
             renderZeroUnlockedAttiresTable();
         } else {
@@ -183,7 +184,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
             table.removeActor(label2);
             Label message1 = new Label("UNLOCK 1 MORE GOLD ACHIEVEMENT TO ACCESS NEW ATTIRES!",
                     new Label.LabelStyle(new BitmapFont(), Color.RED));
-            message1.setFontScale(3f);
+            message1.setFontScale(1.5f);
             table.add(message1).padTop(20f).center();
             table.row();
 

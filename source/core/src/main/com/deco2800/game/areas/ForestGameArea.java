@@ -10,8 +10,10 @@ import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.buff.Buff;
 import com.deco2800.game.components.items.InventorySystem;
 import com.deco2800.game.components.items.ItemBar;
+import com.deco2800.game.components.player.UnlockedAttiresDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
+import com.deco2800.game.files.MPCConfig;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.BackgroundRenderComponent;
@@ -211,7 +213,7 @@ public class ForestGameArea extends GameArea {
 
 //        spawnRocks();
 //        spawnWoods();
-
+        MPCConfig.updateValues();
         player = spawnPlayer();
         spawnObstacles();
         Buff buff = new Buff(player);
@@ -225,6 +227,7 @@ public class ForestGameArea extends GameArea {
         player.getEvents().addListener("B pressed", this::InvSys);
         spawnPortal(new Vector2(10, 10), ObstacleEventHandler.ObstacleType.PortalEntrance);
         spawnPortal(new Vector2(50, 55), ObstacleEventHandler.ObstacleType.PortalExport);
+
     }
 
     public void InvSys() {
