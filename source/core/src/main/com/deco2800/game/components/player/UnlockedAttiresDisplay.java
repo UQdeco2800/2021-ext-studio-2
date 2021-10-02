@@ -25,7 +25,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
 
     private static final Logger logger = LoggerFactory.getLogger(UnlockedAttiresDisplay.class);
     private final GdxGame game;
-    private final int goldAchievements;
+    private int goldAchievements;
     private Table bgTable;
     private Table table;
     private Table crossTable;
@@ -112,6 +112,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
         table.row();
         unlockedAttiresTable = new Table();
 
+        goldAchievements = 40;
         if (goldAchievements == 0) {
             renderZeroUnlockedAttiresTable();
         } else {
@@ -132,7 +133,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
      */
 
     private void renderUnlockedAttiresTable() {
-        renderUnlockedAttires(40, 1);
+        renderUnlockedAttires(goldAchievements, 1);
     }
 
     /**
@@ -140,7 +141,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
      */
     private void renderZeroUnlockedAttiresTable() {
         Label message1 = new Label("You haven't unlocked any new attires yet!",
-                new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+                new Label.LabelStyle(new BitmapFont(), Color.RED));
         message1.setFontScale(3f);
         table.add(message1).padTop(20f).center();
         table.row();
@@ -181,11 +182,11 @@ public class UnlockedAttiresDisplay extends UIComponent {
         unlockedAttiresTable.add(attireImg).left().padLeft(10f).padRight(10f).size(220, 150);
 
         if(goldAchievements == 3) {
-            Label message1 = new Label("Unlock 1 more gold achievement to access a new attire!",
-                    new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
+            Label message1 = new Label("Unlock 1 more Gold achievement to access a new attire!",
+                    new Label.LabelStyle(new BitmapFont(), Color.RED));
             message1.setFontScale(1.5f);
             unlockedAttiresTable.row();
-            unlockedAttiresTable.add(message1).padLeft(10f).padRight(10f).size(120, 50).center();
+            unlockedAttiresTable.add(message1).padLeft(10f).padRight(10f).size(120, 50);
             unlockedAttiresTable.row();
         }
         if (i % 3 == 0) {
@@ -214,8 +215,8 @@ public class UnlockedAttiresDisplay extends UIComponent {
         unlockedAttiresTable.add(attireImg).left().padLeft(10f).padRight(10f).size(220, 150);
 
         if(goldAchievements == 5) {
-            Label message1 = new Label("Unlock 1 more gold achievement to access a new attire!",
-                    new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+            Label message1 = new Label("Unlock 1 more Gold achievement to access a new attire!",
+                    new Label.LabelStyle(new BitmapFont(), Color.RED));
             message1.setFontScale(1.5f);
             unlockedAttiresTable.row();
             unlockedAttiresTable.add(message1).padLeft(10f).padRight(10f).size(120, 50).center();
@@ -238,25 +239,31 @@ public class UnlockedAttiresDisplay extends UIComponent {
         table.row();
 
         if(goldAchievements < 2) {
-            Label message1 = new Label("Unlock 1 more gold achievement to access new attires!",
-                    new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+            table.removeActor(label2);
+            Label message1 = new Label("Unlock 1 more Gold achievement to access new attires!",
+                    new Label.LabelStyle(new BitmapFont(), Color.RED));
             message1.setFontScale(3f);
             table.add(message1).padTop(20f).center();
             table.row();
 
         }
         // Unlock 1 new attire
-        if(goldAchievements < 4) {
+        if(goldAchievements == 2 || goldAchievements == 3) {
             lessThanFour(alpha);
         }
         // Unlock 2 new attires
-        if(goldAchievements < 6) {
+        if(goldAchievements == 4 || goldAchievements == 5) {
             lessThanFour(alpha);
             lessThanSix(alpha);
         }
         // Unlock 3 new attires
         if(goldAchievements >= 6) {
-
+            Label message1 = new Label("You have unlocked all attires for now!",
+                    new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
+            message1.setFontScale(2f);
+            unlockedAttiresTable.add(message1).padTop(20f).padBottom(20f).center();
+            unlockedAttiresTable.row();
+            unlockedAttiresTable.center();
             lessThanFour(alpha);
             lessThanSix(alpha);
 
@@ -281,12 +288,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
             if (i % 3 == 0) {
                 unlockedAttiresTable.row();
             }
-            Label message1 = new Label("You have unlocked all attires for now!",
-                        new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
-            message1.setFontScale(1f);
-            unlockedAttiresTable.add(message1).padTop(20f);
-            unlockedAttiresTable.row();
-            unlockedAttiresTable.center();
+
             }
             if (i % 3 == 0) {
                 unlockedAttiresTable.row();
