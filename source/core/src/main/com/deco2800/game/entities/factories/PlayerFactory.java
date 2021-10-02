@@ -60,21 +60,21 @@ public class PlayerFactory {
         switch (attire) {
 
             case "gold_2":
-                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/mpcAnimation_2.atlas");
-                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/mpc_right_2.png");
+                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/gold_2/mpcAnimation_2.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/gold_2/mpc_right.png");
                 break;
             case "gold_4":
-                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/mpcAnimation_4.atlas");
-                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/mpc_right_4.png");
+                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/gold_4/mpcAnimation_4.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/gold_4/mpc_right.png");
                 break;
             case "gold_6":
-                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/mpcAnimation_6.atlas");
-                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/mpc_right_6.png");
+                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/gold_6/mpcAnimation_6.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/gold_6/mpc_right.png");
                 break;
             case "OG":
             default:
-                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/mpcAnimation.atlas");
-                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/mpc_right.png");
+                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/OG/mpcAnimation.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/OG/mpc_right.png");
                 break;
         }
         mpcAnimator.addAnimation("main_player_run", 0.1f, Animation.PlayMode.LOOP);

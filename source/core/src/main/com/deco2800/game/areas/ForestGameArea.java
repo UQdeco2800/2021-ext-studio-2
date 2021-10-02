@@ -589,7 +589,7 @@ public class ForestGameArea extends GameArea {
         resourceService.loadSounds(jumpSounds);
         resourceService.loadSounds(turnSounds);
         resourceService.loadMusic(forestMusic);
-        resourceService.loadTextureAtlases(mpcTextures);
+        resourceService.loadTextures(mpcTextures);
         resourceService.loadTextureAtlases(mpcTexturesAtlases);
 
         while (!resourceService.loadForMillis(10)) {
