@@ -105,7 +105,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
         table = new Table();
         table.setFillParent(true);
 
-        Label label1 = new Label("Unlocked Attires", new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
+        Label label1 = new Label("UNLOCKED ATTIRES", new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
         label1.setFontScale(4);
 
         table.center();
@@ -141,12 +141,12 @@ public class UnlockedAttiresDisplay extends UIComponent {
      * Renders screens to show zero unlocked attires
      */
     private void renderZeroUnlockedAttiresTable() {
-        Label message1 = new Label("You haven't unlocked any new attires yet!",
+        Label message1 = new Label("YOU HAVEN'T UNLOCKED ANY NEW ATTIRES YET!",
                 new Label.LabelStyle(new BitmapFont(), Color.RED));
         message1.setFontScale(3f);
         table.add(message1).padTop(20f).center();
         table.row();
-        Label message2 = new Label("Unlock more Gold Achievements to access new attires!",
+        Label message2 = new Label("UNLOCK MORE GOLD ACHIEVEMENTS TO ACCESS NEW ATTIRES!",
                 new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
         message2.setFontScale(2f);
         table.add(message2).padTop(20f).center();
@@ -173,7 +173,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
      * @param alpha the opacity of each image (low for the ones which are locked)
      */
     private void renderUnlockedAttires(int goldAchievements, float alpha) {
-        Label label2 = new Label("Select an attire", new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
+        Label label2 = new Label("SELECT AN ATTIRE", new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
         label2.setFontScale(2);
         table.center();
         table.add(label2).padTop(10f).padBottom(10f);
@@ -181,7 +181,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
 
         if(goldAchievements < 2) {
             table.removeActor(label2);
-            Label message1 = new Label("Unlock 1 more Gold achievement to access new attires!",
+            Label message1 = new Label("UNLOCK 1 MORE GOLD ACHIEVEMENT TO ACCESS NEW ATTIRES!",
                     new Label.LabelStyle(new BitmapFont(), Color.RED));
             message1.setFontScale(3f);
             table.add(message1).padTop(20f).center();
@@ -242,7 +242,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
         unlockedAttiresTable.add(achievementImg).right().padTop(10f).padLeft(10f).padRight(10f).size(220, 150);
 
         if(goldAchievements == 3) {
-            Label message1 = new Label("Unlock 1 more Gold achievement to access a new attire!",
+            Label message1 = new Label("UNLOCK 1 MORE GOLD ACHIEVEMENT TO ACCESS A NEW ATTIRE!",
                     new Label.LabelStyle(new BitmapFont(), Color.RED));
             message1.setFontScale(1.5f);
             unlockedAttiresTable.row();
@@ -277,7 +277,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
         unlockedAttiresTable.add(achievementImg).right().padLeft(10f).padTop(10f).padRight(10f).size(220, 150);
 
         if(goldAchievements == 5) {
-            Label message1 = new Label("Unlock 1 more Gold achievement to access a new attire!",
+            Label message1 = new Label("UNLOCK 1 MORE GOLD ACHIEVEMENT TO ACCESS A NEW ATTIRE!",
                     new Label.LabelStyle(new BitmapFont(), Color.RED));
             message1.setFontScale(1.5f);
             unlockedAttiresTable.row();
@@ -290,7 +290,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
     }
 
     private void moreThanSix(float alpha) {
-        Label message1 = new Label("You have unlocked all attires for now!",
+        Label message1 = new Label("YOU HAVE UNLOCKED ALL ATTIRES FOR NOW!",
                 new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
         message1.setFontScale(2f);
         unlockedAttiresTable.add(message1).padTop(20f).padBottom(20f).center();
@@ -330,14 +330,14 @@ public class UnlockedAttiresDisplay extends UIComponent {
 
     private void confirmSelection (String attireType, String attirePath) {
 
-        dialog = new Dialog("You have selected the " + attireType + " attire!", skin);
+        dialog = new Dialog("YOU HAVE SELECTED THE " + attireType + " ATTIRE!", skin);
         dialog.setModal(true);
         dialog.setMovable(false);
         dialog.setResizable(true);
 
         dialog.pad(50).padTop(120);
         Image attire = new Image(new Texture("images/mpc/attires/" + attirePath + ".png"));
-        Label heading = new Label("Attire Selected!", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        Label heading = new Label("ATTIRE SELECTED!", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         heading.setFontScale(2f);
         dialog.getContentTable().add(heading).expandX().row();
         dialog.getContentTable().add(attire);
