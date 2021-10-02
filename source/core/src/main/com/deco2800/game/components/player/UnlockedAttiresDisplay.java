@@ -38,8 +38,8 @@ public class UnlockedAttiresDisplay extends UIComponent {
     private FileReader fileReader;
     private int i = 0;
     private static final String[] bgTextures = {"images/menu_background/attires_background.png"};
-    private static final String[] achievementTextures = {"images/achievements/veteranSilverTrophy.png", "images/achievements/veteranGoldTrophy.png"};
-    private static final String[] attireTextures = {"images/mpc/attires/veteranSilver.png", "images/mpc/attires/veteranGold.png"};
+    private static final String[] achievementTextures = {"images/mpc/attires/trophies_2x.png", "images/mpc/attires/trophies_4x.png", "images/mpc/attires/trophies_6x.png"};
+    private static final String[] attireTextures = {"images/mpc/attires/original.png", "images/mpc/attires/gold_2.png", "images/mpc/attires/gold_4.png", "images/mpc/attires/gold_6.png"};
 
     public UnlockedAttiresDisplay(GdxGame game,int goldAchievements) {
         this.goldAchievements = goldAchievements;
@@ -152,13 +152,17 @@ public class UnlockedAttiresDisplay extends UIComponent {
         table.add(message2).padTop(20f).center();
         table.row();
 
-        Image silverAttire = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/mpc/attires/veteranSilver.png", Texture.class));
-        table.add(silverAttire).center().padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
+        Image gold_2 = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/mpc/attires/gold_2.png", Texture.class));
+        table.add(gold_2).center().padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
 
-        Image goldAttire = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/mpc/attires/veteranGold.png", Texture.class));
-        table.add(goldAttire).center().padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
+        Image gold_4 = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/mpc/attires/gold_4.png", Texture.class));
+        table.add(gold_4).center().padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
+
+        Image gold_6 = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/mpc/attires/gold_6.png", Texture.class));
+        table.add(gold_6).center().padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
 
     }
 
@@ -204,17 +208,17 @@ public class UnlockedAttiresDisplay extends UIComponent {
     private void lessThanFour(float alpha) {
 
         Image achievementImg = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/achievements/veteranGoldTrophy.png", Texture.class));
+                .getAsset("images/mpc/attires/trophies_2x.png", Texture.class));
         achievementImg.setScaling(Scaling.fit);
         achievementImg.setColor(255, 255, 255, alpha);
 
-        ImageButton attireImg = getImageButton("images/mpc/attires/veteranSilver.png");
+        ImageButton attireImg = getImageButton("images/mpc/attires/gold_2.png");
         attireImg.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 attireType = "gold_2";
                 MPCConfig.updateAttire(attireType);
-                confirmSelection("Veteran Silver", "veteranSilver");
+                confirmSelection("GOLD_2", "gold_2");
 
             }
         });
@@ -238,17 +242,17 @@ public class UnlockedAttiresDisplay extends UIComponent {
     private void lessThanSix(float alpha) {
 
         Image achievementImg = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/achievements/veteranGoldTrophy.png", Texture.class));
+                .getAsset("images/mpc/attires/trophies_4x.png", Texture.class));
         achievementImg.setScaling(Scaling.fit);
         achievementImg.setColor(255, 255, 255, alpha);
 
-        ImageButton attireImg = getImageButton("images/mpc/attires/veteranGold.png");
+        ImageButton attireImg = getImageButton("images/mpc/attires/gold_4.png");
         attireImg.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 attireType = "gold_4";
                 MPCConfig.updateAttire(attireType);
-                confirmSelection("Veteran Gold", "veteranGold");
+                confirmSelection("GOLD_4", "gold_4");
 
             }
         });
@@ -281,17 +285,17 @@ public class UnlockedAttiresDisplay extends UIComponent {
         lessThanSix(alpha);
 
         Image achievementImg = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/achievements/veteranGoldTrophy.png", Texture.class));
+                .getAsset("images/mpc/attires/trophies_6x.png", Texture.class));
         achievementImg.setScaling(Scaling.fit);
         achievementImg.setColor(255, 255, 255, alpha);
 
-        ImageButton attireImg = getImageButton("images/mpc/attires/veteranGold.png");
+        ImageButton attireImg = getImageButton("images/mpc/attires/gold_6.png");
         attireImg.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 attireType = "gold_6";
                 MPCConfig.updateAttire(attireType);
-                confirmSelection("Veteran Gold", "veteranGold");
+                confirmSelection("GOLD_6", "gold_6");
 
             }
         });
