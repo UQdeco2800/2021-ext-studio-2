@@ -1,11 +1,14 @@
-package com.deco2800.game.components.Obstacle;
+package com.deco2800.game.components.obstacle;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.screens.MainGameScreen;
+import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import com.sun.tools.javac.Main;
@@ -13,7 +16,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Used to handle collision events between obstacles and enemies
  */
-public class ObstacleDisappear extends Component {
+public class ObstacleEventHandler extends Component {
 
 
     public static boolean locked = true;
@@ -27,14 +30,16 @@ public class ObstacleDisappear extends Component {
         PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm, Spaceship, SmallMissile, PortalEntrance, PortalExport;
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(ObstacleDisappear.class);
+    private static final Logger logger = LoggerFactory.getLogger(ObstacleEventHandler.class);
     AnimationRenderComponent animator;
     HitboxComponent hitboxComponent;
     ObstacleType obstacleType;
     private static boolean spaceshipAttack;
+    private int count;
 
-    public ObstacleDisappear(ObstacleType obstacleType) {
+    public ObstacleEventHandler(ObstacleType obstacleType) {
         this.obstacleType = obstacleType;
+        this.count = 0;
     }
 
     public void create() {
@@ -56,6 +61,7 @@ public class ObstacleDisappear extends Component {
                 break;
             case Spaceship:
                 entity.getEvents().addListener("collisionStart", this::spaceShipAttack);
+                entity.getEvents().addListener("spaceshipDispose", this::spaceshipDispose);
                 spaceshipAttack = false;
                 break;
             case SmallMissile:
@@ -87,12 +93,15 @@ public class ObstacleDisappear extends Component {
             return;
         }
 
-        logger.debug("PlantsDisappearStart was triggered.");
-        animator.getEntity().setRemoveTexture();
-        animator.startAnimation("obstacles");
-        animator.getEntity().setDisappearAfterAnimation(1f);
-        locked = false;
+        if (count == 0) { // Avoid an entity from repeatedly triggering an attack
+            count++;
 
+            logger.debug("PlantsDisappearStart was triggered.");
+            animator.getEntity().setRemoveTexture();
+            animator.startAnimation("obstacles");
+            animator.getEntity().setDisappearAfterAnimation(1f);
+            locked = false;
+        }
     }
 
 
@@ -111,12 +120,16 @@ public class ObstacleDisappear extends Component {
             return;
         }
 
-        MainGameScreen.setSlowPlayer(5f);
-        logger.debug("ThornsDisappearStart was triggered.");
-        animator.getEntity().setRemoveTexture();
-        animator.startAnimation("obstacle2");
-        animator.getEntity().setDisappearAfterAnimation(1f);
-        locked2 = false;
+        if (count == 0) { // Avoid an entity from repeatedly triggering an attack
+            count++;
+
+            MainGameScreen.setSlowPlayer(5f);
+            logger.debug("ThornsDisappearStart was triggered.");
+            animator.getEntity().setRemoveTexture();
+            animator.startAnimation("obstacle2");
+            animator.getEntity().setDisappearAfterAnimation(1f);
+            locked2 = false;
+        }
     }
 
     /**
@@ -131,11 +144,15 @@ public class ObstacleDisappear extends Component {
 
 
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE && (other.getFilterData().categoryBits != PhysicsLayer.CEILING)) {
-            logger.debug("meteoriteDisappear was triggered.");
-            animator.getEntity().setRemoveTexture();
-            animator.startAnimation("stone1");
-            animator.getEntity().setDisappearAfterAnimation(0.32f);
-            locked3 = false;
+            if (count == 0) { // Avoid an entity from repeatedly triggering an attack
+                count++;
+
+                logger.debug("meteoriteDisappear was triggered.");
+                animator.getEntity().setRemoveTexture();
+                animator.startAnimation("stone1");
+                animator.getEntity().setDisappearAfterAnimation(0.32f);
+                locked3 = false;
+            }
         }
 
     }
@@ -164,10 +181,16 @@ public class ObstacleDisappear extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
-        MainGameScreen.setSpaceshipAttack();
+
+        SpaceshipAttackController.setSpaceshipAttack();
+        Sound floatingSound = ServiceLocator.getResourceService().getAsset("sounds/spacecraft_floating.mp3", Sound.class);
+        floatingSound.play(0.5f, 1f, 0);
 //        System.out.println("spaceShipAttack was triggered.");
         spaceshipAttack = true;
-        this.entity.setSpaceShipDispose();
+    }
+
+    void spaceshipDispose () {
+        this.entity.setDispose();
     }
 
     void smallMissileAttack(Fixture me, Fixture other) {
@@ -180,7 +203,8 @@ public class ObstacleDisappear extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
-//        MainGameScreen.setSpaceshipAttack();
+        Sound missileSound = ServiceLocator.getResourceService().getAsset("sounds/missile_explosion.mp3", Sound.class);
+        missileSound.play(0.3f, 1f, 0);
 //        System.out.println("smallMissileAttack was triggered.");
 //        spaceshipAttack = true;
 //        this.entity.setSpaceShipDispose();
@@ -192,7 +216,7 @@ public class ObstacleDisappear extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
-        MainGameScreen.setNewMapStatus(MainGameScreen.newMap.Begin);
+        MainGameScreen.setNewMapStatus(MainGameScreen.NewMap.Start);
 //        System.out.println("portalTransfer was triggered.");
     }
 
@@ -202,7 +226,7 @@ public class ObstacleDisappear extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
-        MainGameScreen.setNewMapStatus(MainGameScreen.newMap.Finish);
+        MainGameScreen.setNewMapStatus(MainGameScreen.NewMap.Finish);
 //        System.out.println("portalTransfer was triggered.");
     }
 }

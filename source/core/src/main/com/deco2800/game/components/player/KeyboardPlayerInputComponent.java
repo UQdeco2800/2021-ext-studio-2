@@ -3,6 +3,7 @@ package com.deco2800.game.components.player;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.utils.math.Vector2Utils;
@@ -37,7 +38,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         return true;
       case Keys.D:
       case Keys.RIGHT:
-        if (MainGameScreen.spaceshipState == MainGameScreen.spaceshipAttack.On) {
+        if (SpaceshipAttackController.spaceshipState == SpaceshipAttackController.SpaceshipAttack.On) {
           return false;
         }
         walkDirection.add(Vector2Utils.RIGHT);
@@ -79,7 +80,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         return true;
       case Keys.D:
       case Keys.RIGHT:
-        if (MainGameScreen.spaceshipState == MainGameScreen.spaceshipAttack.On) {
+        if (SpaceshipAttackController.spaceshipState == SpaceshipAttackController.SpaceshipAttack.On) {
           return false;
         }
         walkDirection.sub(Vector2Utils.RIGHT);

@@ -6,7 +6,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.Obstacle.ObstacleDisappear;
+import com.deco2800.game.components.npc.SpaceshipAttackController;
+import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.npc.EnemyAnimationController;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.tasks.ChaseTask;
@@ -14,7 +15,6 @@ import com.deco2800.game.components.tasks.ObstacleAttackTask;
 import com.deco2800.game.components.tasks.WanderTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.BaseEntityConfig;
-import com.deco2800.game.entities.configs.GhostKingConfig;
 import com.deco2800.game.entities.configs.NPCConfigs;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -62,7 +62,7 @@ public class NPCFactory {
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
         .addComponent(animator)
         .addComponent(new EnemyAnimationController())
-        .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.FaceWorm));
+        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.FaceWorm));
 
     FaceWorm.setScale(2.4f,2.4f);
     logger.debug("Create a Face Worm");
@@ -74,11 +74,11 @@ public class NPCFactory {
    */
   public static Entity createFlyingMonkey(Entity target) {
 
-    Entity Monkey = new Entity("FlyingMonkey");
+    Entity monkey = new Entity("FlyingMonkey");
 
     AITaskComponent aiComponent =
             new AITaskComponent()
-                    .addTask(new ObstacleAttackTask(target,10,6f));
+                    .addTask(new ObstacleAttackTask(monkey, target,10,6f));
 
     AnimationRenderComponent animator =
             new AnimationRenderComponent(
@@ -87,14 +87,14 @@ public class NPCFactory {
 
     animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
 
-    Monkey
+    monkey
             .addComponent(animator)
             .addComponent(aiComponent);
 
     animator.startAnimation("1m");
-    Monkey.setScale(2.3f, 2.3f);
+    monkey.setScale(2.3f, 2.3f);
     logger.debug("Create a Flying Monkey");
-    return Monkey;
+    return monkey;
   }
 
   /**
@@ -121,7 +121,8 @@ public class NPCFactory {
             .addComponent(new PhysicsMovementComponent())
             .addComponent(new ColliderComponent())
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-            .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Spaceship));
+            .addComponent(new SpaceshipAttackController().setPlayer(target))
+            .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Spaceship));
 
     spaceship.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
 //    animator.startAnimation("1m");
@@ -156,7 +157,7 @@ public class NPCFactory {
             .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
             .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-            .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.SmallMissile));
+            .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SmallMissile));
 
     missile.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.DynamicBody);
 //    animator.startAnimation("1m");

@@ -1,4 +1,4 @@
-package com.deco2800.game;
+Spackage com.deco2800.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -94,8 +94,7 @@ public class GdxGame extends Game {
             case UNLOCKED_ATTIRES:
                 return new UnlockedAttiresScreen(this);
             case MONSTER_MENU:
-                return new monsterMenuScreen(this);
-
+                return new MonsterMenuScreen(this);
             default:
                 return null;
         }

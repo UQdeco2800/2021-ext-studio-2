@@ -7,12 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.components.Obstacle.ObstacleDisappear;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -21,14 +19,12 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(GameExtension.class)
-class ObstacleDisappearTest {
+class ObstacleEventHandlerTest {
 
     @BeforeEach
     void beforeEach() {
@@ -139,7 +135,7 @@ class ObstacleDisappearTest {
         Entity entity =
                 new Entity()
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.Meteorite))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Meteorite))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.METEORITE));
 
         return entity;
@@ -149,7 +145,7 @@ class ObstacleDisappearTest {
         Entity entity =
                 new Entity()
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.ThornsObstacle))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.ThornsObstacle))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE));
 
         return entity;
@@ -159,7 +155,7 @@ class ObstacleDisappearTest {
         Entity entity =
                 new Entity()
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.PlantsObstacle))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PlantsObstacle))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE));
 
         return entity;
@@ -169,7 +165,7 @@ class ObstacleDisappearTest {
         Entity entity =
                 new Entity()
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ObstacleDisappear(ObstacleDisappear.ObstacleType.FaceWorm))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.FaceWorm))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
 
         return entity;
