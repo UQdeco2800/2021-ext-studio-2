@@ -210,7 +210,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
         attireImg.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                attireType = "original";
+                attireType = "OG";
                 MPCConfig.updateAttire(attireType);
                 confirmSelection("ORIGINAL", "original");
 

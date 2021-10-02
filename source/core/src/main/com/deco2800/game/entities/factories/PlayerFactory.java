@@ -71,6 +71,7 @@ public class PlayerFactory {
                 mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation_6.atlas");
                 mpcTexture = new TextureRenderComponent("images/mpc/mpc_right_6.png");
                 break;
+            case "OG":
             default:
                 mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation.atlas");
                 mpcTexture = new TextureRenderComponent("images/mpc/mpc_right.png");
