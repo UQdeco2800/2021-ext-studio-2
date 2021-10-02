@@ -21,7 +21,16 @@ public class MPCConfig {
         PlayerConfig values = getValues();
     }
 
-    
+    public static void updateAttire(String attireType) {
+        PlayerConfig values = getValues();
+        values.attire = attireType;
+
+        updateValues(values);
+    }
+    public static void updateValues(PlayerConfig values) {
+
+        FileLoader.writeClass(values, path, EXTERNAL);
+    }
 
     public static PlayerConfig getValues() {
         PlayerConfig values =  FileLoader.readClass(PlayerConfig.class, path, EXTERNAL);
