@@ -1,0 +1,24 @@
+{
+  "props": [
+{
+  "id": 1,
+  "name": "Health",
+  "desc": "buying this will increase your maximum health to 105",
+  "path": "images/heart.png",
+  "price": 2,
+  "property": {
+    "health": 105
+  }
+},
+{
+  "id": 2,
+  "name": "Food",
+  "desc": "buying this will increase your Food",
+  "path": "images/Items/props/add_food.png",
+  "price": 2,
+  "property": {
+    "food": 5
+  }
+}
+  ]
+}
