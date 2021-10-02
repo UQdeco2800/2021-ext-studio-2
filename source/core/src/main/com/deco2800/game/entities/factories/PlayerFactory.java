@@ -33,18 +33,6 @@ public class PlayerFactory {
     private static final PlayerConfig stats =
             FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
-    private static final String ROOT_DIR = "DECO2800Game";
-    private static final String CONFIG_FILE = "mpc.json";
-    private static final String path = ROOT_DIR + File.separator + CONFIG_FILE;
-    private static final PlayerConfig config =
-            FileLoader.readClass(PlayerConfig.class, path, FileLoader.Location.EXTERNAL);
-    private static final String attire;
-
-    static {
-        assert config != null;
-        attire = config.attire;
-    }
-
 
     /**
      * Create a player entity.
@@ -52,11 +40,15 @@ public class PlayerFactory {
      * @return entity
      */
     public static Entity createPlayer() {
+
+       String attire = updateAttireConfig();
+
         InputComponent inputComponent =
                 ServiceLocator.getInputService().getInputFactory().createForPlayer();
 
         AnimationRenderComponent mpcAnimator;
         TextureRenderComponent mpcTexture;
+        System.out.println("Loading attire: "+ attire);
         switch (attire) {
 
             case "gold_2":
@@ -79,20 +71,17 @@ public class PlayerFactory {
         }
         mpcAnimator.addAnimation("main_player_run", 0.1f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_walk", 0.5f, Animation.PlayMode.LOOP);
-        mpcAnimator.addAnimation("main_player_front", 1f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_jump", 2.5f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_attack", 1f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_crouch", 1f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_right", 1f, Animation.PlayMode.LOOP);
         mpcAnimator.addAnimation("main_player_pickup",0.125f,Animation.PlayMode.LOOP);
 
-        AnimationRenderComponent buffAnimator = createAnimationComponent("images/buff.atlas");
-        buffAnimator.addAnimation("buffIncrease", 0.1f, Animation.PlayMode.LOOP);
-
-        AnimationRenderComponent deBuffAnimator = createAnimationComponent("images/debuff.atlas");
-        deBuffAnimator.addAnimation("debuffDecrease", 0.1f, Animation.PlayMode.LOOP);
-
-        System.out.println("Read "+ attire);
+//        AnimationRenderComponent buffAnimator = createAnimationComponent("images/buff.atlas");
+//        buffAnimator.addAnimation("buffIncrease", 0.1f, Animation.PlayMode.LOOP);
+//
+//        AnimationRenderComponent deBuffAnimator = createAnimationComponent("images/debuff.atlas");
+//        deBuffAnimator.addAnimation("debuffDecrease", 0.1f, Animation.PlayMode.LOOP);
 
 
 
@@ -109,8 +98,8 @@ public class PlayerFactory {
                         .addComponent(inputComponent)
                         .addComponent(new PlayerStatsDisplay())
                         .addComponent(mpcAnimator)
-                        .addComponent(buffAnimator)
-                        .addComponent(deBuffAnimator)
+//                        .addComponent(buffAnimator)
+//                        .addComponent(deBuffAnimator)
                         .addComponent(new BuffAnimationController());
 
 
@@ -123,6 +112,18 @@ public class PlayerFactory {
 
     private PlayerFactory() {
         throw new IllegalStateException("Instantiating static util class");
+    }
+
+    private static String updateAttireConfig() {
+        final String ROOT_DIR = "DECO2800Game";
+        final String CONFIG_FILE = "mpc.json";
+        final String path = ROOT_DIR + File.separator + CONFIG_FILE;
+        final PlayerConfig config =
+                FileLoader.readClass(PlayerConfig.class, path, FileLoader.Location.EXTERNAL);
+        String attire;
+        assert config != null;
+        attire = config.attire;
+        return attire;
     }
 
     private static AnimationRenderComponent createAnimationComponent(String atlasPath) {
