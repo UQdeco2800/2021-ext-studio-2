@@ -284,15 +284,8 @@ public class UnlockedAttiresDisplay extends UIComponent {
 
             unlockedAttiresTable.add(achievementImg).right().padLeft(10f).padRight(10f).size(220, 150);
             unlockedAttiresTable.add(attireImg).left().padLeft(10f).padRight(10f).size(220, 150);
+        }
 
-            if (i % 3 == 0) {
-                unlockedAttiresTable.row();
-            }
-
-            }
-            if (i % 3 == 0) {
-                unlockedAttiresTable.row();
-            }
     }
 
 
