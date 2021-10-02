@@ -22,6 +22,7 @@ public class ObstacleEventHandler extends Component {
     public static boolean locked = true;
     public static boolean locked2 = true;
     public static boolean locked3 = true;
+    public static boolean locked_ufo = true;
 
     /**
      * The types of obstacles and enemies are used to determine the type of entity that triggers the event.
@@ -187,6 +188,7 @@ public class ObstacleEventHandler extends Component {
         floatingSound.play(0.5f, 1f, 0);
 //        System.out.println("spaceShipAttack was triggered.");
         spaceshipAttack = true;
+        locked_ufo = false;
 //        animator.startAnimation("daodan1");
     }
 
@@ -212,8 +214,10 @@ public class ObstacleEventHandler extends Component {
 //        animator.startAnimation("baozha");
 //        animator.getEntity().setDisappearAfterAnimation(0.32f);
 
+        animator.getEntity().setRemoveTexture();
+        animator.startAnimation("bomb");
+        animator.getEntity().setDisappearAfterAnimation(0.4f);
 
-        this.entity.setDispose();
     }
 
     void portalEntrance(Fixture me, Fixture other) {

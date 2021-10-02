@@ -27,6 +27,8 @@ public class MonsterDetails extends UIComponent {
         entity.getEvents().addListener("openDetailPage3", this::openDetailPage3);
         entity.getEvents().addListener("openDetailPage4", this::openDetailPage4);
         entity.getEvents().addListener("openDetailPage5", this::openDetailPage5);
+        entity.getEvents().addListener("openDetailPage6", this::openDetailPage6);
+        entity.getEvents().addListener("openDetailPage7", this::openDetailPage7);
     }
 
     private void openDetailPage1() {
@@ -35,7 +37,7 @@ public class MonsterDetails extends UIComponent {
         dialog.setModal(true);
         dialog.setMovable(false);
         dialog.setResizable(true);
-        Image plantImage = new Image(new Texture("images/story/chapter2art.png"));
+        Image plantImage = new Image(new Texture("images/monster_menu/plant_img.png"));
         Label heading = new Label("Aline Plant Detail " , new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         Label story = new Label("In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel. The terror begins when the crew encounters a nest of eggs inside the alien ship. An organism from inside an egg leaps out and attaches itself to one of the crew, causing him to fall into a coma.", new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
         heading.setFontScale(2f);
@@ -43,9 +45,9 @@ public class MonsterDetails extends UIComponent {
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
         dialog.getContentTable().add(heading).expandX().row();
-       // dialog.getContentTable().add(plantImage).height(122).width(240).row();
+        dialog.getContentTable().add(plantImage).height(122).width(240).row();
         dialog.getContentTable().add(story).width(600).row();
-        dialog.getButtonTable().add(renderCloseButton()).size(70, 70).row();
+        dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
         dialog.show(stage);
     }
 
@@ -55,7 +57,7 @@ public class MonsterDetails extends UIComponent {
         dialog.setModal(true);
         dialog.setMovable(false);
         dialog.setResizable(true);
-        Image thornImage = new Image(new Texture("images/story/chapter2art.png"));
+        Image thornImage = new Image(new Texture("images/monster_menu/plant_img.png"));
         Label heading = new Label("Aline thorn Detail " , new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         Label story = new Label("In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel. The terror begins when the crew encounters a nest of eggs inside the alien ship. An organism from inside an egg leaps out and attaches itself to one of the crew, causing him to fall into a coma.", new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
         heading.setFontScale(2f);
@@ -63,9 +65,9 @@ public class MonsterDetails extends UIComponent {
         story.setWrap(true);
         story.setAlignment(Align.topLeft);
         dialog.getContentTable().add(heading).expandX().row();
-      //  dialog.getContentTable().add(thornImage).height(122).width(240).row();
+        dialog.getContentTable().add(thornImage).height(122).width(240).row();
         dialog.getContentTable().add(story).width(600).row();
-        dialog.getButtonTable().add(renderCloseButton()).size(70, 70).row();
+        dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
         dialog.show(stage);
     }
 
@@ -127,7 +129,47 @@ public class MonsterDetails extends UIComponent {
         dialog.getContentTable().add(heading).expandX().row();
         //dialog.getContentTable().add(wormImage).height(122).width(240).row();
         dialog.getContentTable().add(story).width(600).row();
-        dialog.getButtonTable().add(renderCloseButton()).size(70, 70).row();
+        dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
+        dialog.show(stage);
+    }
+
+    private void openDetailPage6() {
+        logger.info("open details page6");
+        dialog = new Dialog("Spaceship Detail", skin);
+        dialog.setModal(true);
+        dialog.setMovable(false);
+        dialog.setResizable(true);
+        Image wormImage = new Image(new Texture("images/story/chapter2art.png"));
+        Label heading = new Label("Spaceship Detail" , new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        Label story = new Label("In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel. The terror begins when the crew encounters a nest of eggs inside the alien ship.", new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
+        heading.setFontScale(2f);
+        story.setFontScale(1.3f);
+        story.setWrap(true);
+        story.setAlignment(Align.topLeft);
+        dialog.getContentTable().add(heading).expandX().row();
+        //dialog.getContentTable().add(wormImage).height(122).width(240).row();
+        dialog.getContentTable().add(story).width(600).row();
+        dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
+        dialog.show(stage);
+    }
+
+    private void openDetailPage7() {
+        logger.info("open details page7");
+        dialog = new Dialog("Missile Detail", skin);
+        dialog.setModal(true);
+        dialog.setMovable(false);
+        dialog.setResizable(true);
+        Image wormImage = new Image(new Texture("images/story/chapter2art.png"));
+        Label heading = new Label("Missile Detail" , new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        Label story = new Label("In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel. The terror begins when the crew encounters a nest of eggs inside the alien ship.", new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
+        heading.setFontScale(2f);
+        story.setFontScale(1.3f);
+        story.setWrap(true);
+        story.setAlignment(Align.topLeft);
+        dialog.getContentTable().add(heading).expandX().row();
+        //dialog.getContentTable().add(wormImage).height(122).width(240).row();
+        dialog.getContentTable().add(story).width(600).row();
+        dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
         dialog.show(stage);
     }
 

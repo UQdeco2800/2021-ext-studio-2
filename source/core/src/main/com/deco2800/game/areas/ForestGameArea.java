@@ -144,7 +144,7 @@ public class ForestGameArea extends GameArea {
             "images/rocket-ship-launch.png",
             "images/portal.png",
             "images/missile.png",
-            "images/baozha.png"
+
 
     };
     private static final String[] forestTextureAtlases = {
@@ -165,7 +165,6 @@ public class ForestGameArea extends GameArea {
             "images/food1.png",
             "images/water1.png",
             "images/missile.atlas",
-            "images/explode.atlas",
             "images/portal.atlas"
 
     };

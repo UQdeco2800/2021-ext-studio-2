@@ -151,7 +151,8 @@ public class NPCFactory {
                             .getAsset("images/missile.atlas", TextureAtlas.class));
 
     // 奇怪的bug。。。
-    animator.addAnimation("daodan1", 0.2f, Animation.PlayMode.LOOP);
+    animator.addAnimation("missile1", 0.2f, Animation.PlayMode.LOOP);
+    animator.addAnimation("bomb", 0.1f, Animation.PlayMode.LOOP);
 
     missile
             .addComponent(animator)
@@ -165,10 +166,10 @@ public class NPCFactory {
             .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SmallMissile));
 
     missile.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.DynamicBody);
-    missile.setScale(1.5f, 0.75f);
+    missile.setScale(3.5f, 3.5f);
     missile.setZIndex(1); // Generate missile above spaceship
 
-    animator.startAnimation("daodan1");
+    animator.startAnimation("missile1");
 
 //    logger.debug("Create a Flying Monkey");
     return missile;
