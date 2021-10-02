@@ -33,6 +33,12 @@ public class PropStoreRecord {
         setGold(gold);
     }
 
+    public static boolean hasEnoughGold(int amount){
+        int gold = getGold();
+        return (gold >= amount);
+
+    }
+
     public static class Gold {
         int gold = 0;
 

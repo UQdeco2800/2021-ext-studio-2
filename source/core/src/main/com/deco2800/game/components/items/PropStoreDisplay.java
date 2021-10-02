@@ -5,10 +5,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.Component;
@@ -37,12 +39,8 @@ public class PropStoreDisplay extends UIComponent {
 
     private void addActors() {
 
-        Table exitTable = createExitButton();
-        stage.addActor(exitTable);
+        stage.addActor(createExitButton());
         stage.addActor(createItemTable());
-
-
-
 
     }
 
@@ -75,12 +73,22 @@ public class PropStoreDisplay extends UIComponent {
         PropStoreFactory.getPropStoreItems().forEach(item -> {
             Label price = new Label("Gold $: " + item.price, new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
             price.setFontScale(2f);
+            TextButton button = new TextButton("View",skin);
+            button.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    entity.getEvents().trigger("openItem", item);
+                }
+            });
+            button.setColor(Color.RED);
             Image img = new Image(ServiceLocator.getResourceService().getAsset(item.path, Texture.class));
             Table itemTable = new Table();
             itemTable.add(img);
             itemTable.row();
             itemTable.add(price);
             itemTable.padLeft(20f).padRight(20f);
+            itemTable.row();
+            itemTable.add(button);
             table.add(itemTable);
 
 
