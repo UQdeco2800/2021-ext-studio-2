@@ -59,13 +59,17 @@ public class PlayerFactory {
         TextureRenderComponent mpcTexture;
         switch (attire) {
 
-            case "veteranSilver":
+            case "gold_2":
                 mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation_2.atlas");
                 mpcTexture = new TextureRenderComponent("images/mpc/mpc_right_2.png");
                 break;
-            case "veteranGold":
-                mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation_3.atlas");
-                mpcTexture = new TextureRenderComponent("images/mpc/mpc_right_3.png");
+            case "gold_4":
+                mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation_4.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/mpc_right_4.png");
+                break;
+            case "gold_6":
+                mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation_6.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/mpc_right_6.png");
                 break;
             default:
                 mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation.atlas");
