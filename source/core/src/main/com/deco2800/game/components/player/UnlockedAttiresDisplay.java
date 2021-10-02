@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.entities.configs.PlayerConfig;
 import com.deco2800.game.files.FileLoader;
+import com.deco2800.game.files.MPCConfig;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
@@ -112,7 +113,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
         table.row();
         unlockedAttiresTable = new Table();
 
-        goldAchievements = 40;
+        goldAchievements = 2;
         if (goldAchievements == 0) {
             renderZeroUnlockedAttiresTable();
         } else {
@@ -162,70 +163,6 @@ public class UnlockedAttiresDisplay extends UIComponent {
     }
 
 
-
-    private void lessThanFour(float alpha) {
-        Image achievementImg = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/achievements/veteranGoldTrophy.png", Texture.class));
-        achievementImg.setScaling(Scaling.fit);
-        achievementImg.setColor(255, 255, 255, alpha);
-
-        ImageButton attireImg = getImageButton("images/mpc/attires/veteranSilver.png");
-        attireImg.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                
-                confirmSelection("Veteran Silver", "veteranSilver");
-
-            }
-        });
-        unlockedAttiresTable.add(achievementImg).right().padLeft(10f).padRight(10f).size(220, 150);
-        unlockedAttiresTable.add(attireImg).left().padLeft(10f).padRight(10f).size(220, 150);
-
-        if(goldAchievements == 3) {
-            Label message1 = new Label("Unlock 1 more Gold achievement to access a new attire!",
-                    new Label.LabelStyle(new BitmapFont(), Color.RED));
-            message1.setFontScale(1.5f);
-            unlockedAttiresTable.row();
-            unlockedAttiresTable.add(message1).padLeft(10f).padRight(10f).size(120, 50);
-            unlockedAttiresTable.row();
-        }
-        if (i % 3 == 0) {
-            unlockedAttiresTable.row();
-        }
-
-    }
-
-    private void lessThanSix(float alpha) {
-        Image achievementImg = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/achievements/veteranGoldTrophy.png", Texture.class));
-        achievementImg.setScaling(Scaling.fit);
-        achievementImg.setColor(255, 255, 255, alpha);
-
-        ImageButton attireImg = getImageButton("images/mpc/attires/veteranGold.png");
-        attireImg.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                
-                confirmSelection("Veteran Gold", "veteranGold");
-
-            }
-        });
-
-        unlockedAttiresTable.add(achievementImg).right().padLeft(10f).padRight(10f).size(220, 150);
-        unlockedAttiresTable.add(attireImg).left().padLeft(10f).padRight(10f).size(220, 150);
-
-        if(goldAchievements == 5) {
-            Label message1 = new Label("Unlock 1 more Gold achievement to access a new attire!",
-                    new Label.LabelStyle(new BitmapFont(), Color.RED));
-            message1.setFontScale(1.5f);
-            unlockedAttiresTable.row();
-            unlockedAttiresTable.add(message1).padLeft(10f).padRight(10f).size(120, 50).center();
-            unlockedAttiresTable.row();
-        }
-        if (i % 3 == 0) {
-            unlockedAttiresTable.row();
-        }
-    }
     /**
      * Utility function to render the given list of achievements and corresponding unlocked attires
      * @param goldAchievements number of gold achievements
@@ -258,38 +195,110 @@ public class UnlockedAttiresDisplay extends UIComponent {
         }
         // Unlock 3 new attires
         if(goldAchievements >= 6) {
-            Label message1 = new Label("You have unlocked all attires for now!",
-                    new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
-            message1.setFontScale(2f);
-            unlockedAttiresTable.add(message1).padTop(20f).padBottom(20f).center();
-            unlockedAttiresTable.row();
-            unlockedAttiresTable.center();
-            lessThanFour(alpha);
-            lessThanSix(alpha);
+            morethanSix(alpha);
 
-            Image achievementImg = new Image(ServiceLocator.getResourceService()
-                    .getAsset("images/achievements/veteranGoldTrophy.png", Texture.class));
-            achievementImg.setScaling(Scaling.fit);
-            achievementImg.setColor(255, 255, 255, alpha);
-
-            ImageButton attireImg = getImageButton("images/mpc/attires/veteranGold.png");
-            attireImg.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    
-                    confirmSelection("Veteran Gold", "veteranGold");
-
-                }
-            });
-
-            unlockedAttiresTable.add(achievementImg).right().padLeft(10f).padRight(10f).size(220, 150);
-            unlockedAttiresTable.add(attireImg).left().padLeft(10f).padRight(10f).size(220, 150);
         }
 
     }
 
+    private void lessThanFour(float alpha) {
 
+        Image achievementImg = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/achievements/veteranGoldTrophy.png", Texture.class));
+        achievementImg.setScaling(Scaling.fit);
+        achievementImg.setColor(255, 255, 255, alpha);
 
+        ImageButton attireImg = getImageButton("images/mpc/attires/veteranSilver.png");
+        attireImg.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                attireType = "gold_2";
+                MPCConfig.updateAttire(attireType);
+                confirmSelection("Veteran Silver", "veteranSilver");
+
+            }
+        });
+        unlockedAttiresTable.add(achievementImg).right().padLeft(10f).padRight(10f).size(220, 150);
+        unlockedAttiresTable.add(attireImg).left().padLeft(10f).padRight(10f).size(220, 150);
+
+        if(goldAchievements == 3) {
+            Label message1 = new Label("Unlock 1 more Gold achievement to access a new attire!",
+                    new Label.LabelStyle(new BitmapFont(), Color.RED));
+            message1.setFontScale(1.5f);
+            unlockedAttiresTable.row();
+            unlockedAttiresTable.add(message1).padLeft(10f).padRight(10f).size(120, 50);
+            unlockedAttiresTable.row();
+        }
+        if (i % 3 == 0) {
+            unlockedAttiresTable.row();
+        }
+
+    }
+
+    private void lessThanSix(float alpha) {
+
+        Image achievementImg = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/achievements/veteranGoldTrophy.png", Texture.class));
+        achievementImg.setScaling(Scaling.fit);
+        achievementImg.setColor(255, 255, 255, alpha);
+
+        ImageButton attireImg = getImageButton("images/mpc/attires/veteranGold.png");
+        attireImg.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                attireType = "gold_4";
+                MPCConfig.updateAttire(attireType);
+                confirmSelection("Veteran Gold", "veteranGold");
+
+            }
+        });
+
+        unlockedAttiresTable.add(achievementImg).right().padLeft(10f).padRight(10f).size(220, 150);
+        unlockedAttiresTable.add(attireImg).left().padLeft(10f).padRight(10f).size(220, 150);
+
+        if(goldAchievements == 5) {
+            Label message1 = new Label("Unlock 1 more Gold achievement to access a new attire!",
+                    new Label.LabelStyle(new BitmapFont(), Color.RED));
+            message1.setFontScale(1.5f);
+            unlockedAttiresTable.row();
+            unlockedAttiresTable.add(message1).padLeft(10f).padRight(10f).size(120, 50).center();
+            unlockedAttiresTable.row();
+        }
+        if (i % 3 == 0) {
+            unlockedAttiresTable.row();
+        }
+    }
+
+    private void morethanSix(float alpha) {
+
+        Label message1 = new Label("You have unlocked all attires for now!",
+                new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
+        message1.setFontScale(2f);
+        unlockedAttiresTable.add(message1).padTop(20f).padBottom(20f).center();
+        unlockedAttiresTable.row();
+        unlockedAttiresTable.center();
+        lessThanFour(alpha);
+        lessThanSix(alpha);
+
+        Image achievementImg = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/achievements/veteranGoldTrophy.png", Texture.class));
+        achievementImg.setScaling(Scaling.fit);
+        achievementImg.setColor(255, 255, 255, alpha);
+
+        ImageButton attireImg = getImageButton("images/mpc/attires/veteranGold.png");
+        attireImg.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                attireType = "gold_6";
+                MPCConfig.updateAttire(attireType);
+                confirmSelection("Veteran Gold", "veteranGold");
+
+            }
+        });
+
+        unlockedAttiresTable.add(achievementImg).right().padLeft(10f).padRight(10f).size(220, 150);
+        unlockedAttiresTable.add(attireImg).left().padLeft(10f).padRight(10f).size(220, 150);
+    }
 
     @Override
     public void dispose() {
