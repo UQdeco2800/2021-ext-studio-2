@@ -60,21 +60,21 @@ public class PlayerFactory {
         switch (attire) {
 
             case "gold_2":
-                mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation_2.atlas");
-                mpcTexture = new TextureRenderComponent("images/mpc/mpc_right_2.png");
+                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/mpcAnimation_2.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/mpc_right_2.png");
                 break;
             case "gold_4":
-                mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation_4.atlas");
-                mpcTexture = new TextureRenderComponent("images/mpc/mpc_right_4.png");
+                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/mpcAnimation_4.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/mpc_right_4.png");
                 break;
             case "gold_6":
-                mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation_6.atlas");
-                mpcTexture = new TextureRenderComponent("images/mpc/mpc_right_6.png");
+                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/mpcAnimation_6.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/mpc_right_6.png");
                 break;
             case "OG":
             default:
-                mpcAnimator = createAnimationComponent("images/mpc/mpcAnimation.atlas");
-                mpcTexture = new TextureRenderComponent("images/mpc/mpc_right.png");
+                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/mpcAnimation.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/mpc_right.png");
                 break;
         }
         mpcAnimator.addAnimation("main_player_run", 0.1f, Animation.PlayMode.LOOP);

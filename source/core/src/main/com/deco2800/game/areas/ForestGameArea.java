@@ -118,7 +118,6 @@ public class ForestGameArea extends GameArea {
             "images/iso_grass_1.png",
             "images/iso_grass_2.png",
             "images/iso_grass_3.png",
-            "images/mpc/mpc_right.png",
             "images/road.png",
             "images/water.png",
             "images/rock.jpg",
@@ -137,7 +136,6 @@ public class ForestGameArea extends GameArea {
             "images/monkey_original.png",
             "images/Facehugger.png",
             "images/stone1.png",
-            "images/mpc/mpcAnimation.png",
             "images/food1.png",
             "images/water1.png",
             "images/ufo.png",
@@ -157,7 +155,6 @@ public class ForestGameArea extends GameArea {
             "images/monkey.atlas",
             "images/Facehugger.atlas",
             "images/obstacle_Meteorite.atlas",
-            "images/mpc/mpcAnimation.atlas",
             "images/food1.png",
             "images/water1.png",
     };
@@ -166,6 +163,25 @@ public class ForestGameArea extends GameArea {
             "sounds/missile_explosion.mp3",
             "sounds/monster_roar.mp3",
             "sounds/spacecraft_floating.mp3"
+    };
+
+    private static final String[] mpcTextures = {
+            "images/mpc/finalAtlas/OG/mpcAnimation.png",
+            "images/mpc/finalAtlas/gold_2/mpcAnimation_2.png",
+            "images/mpc/finalAtlas/gold_4/mpcAnimation_4.png",
+            "images/mpc/finalAtlas/gold_6/mpcAnimation_6.png",
+            "images/mpc/finalAtlas/OG/mpc_right.png",
+            "images/mpc/finalAtlas/gold_2/mpc_right.png",
+            "images/mpc/finalAtlas/gold_4/mpc_right.png",
+            "images/mpc/finalAtlas/gold_6/mpc_right.png",
+
+    };
+    private static final String[] mpcTexturesAtlases = {
+            "images/mpc/finalAtlas/OG/mpcAnimation.atlas",
+            "images/mpc/finalAtlas/gold_2/mpcAnimation_2.atlas",
+            "images/mpc/finalAtlas/gold_4/mpcAnimation_4.atlas",
+            "images/mpc/finalAtlas/gold_6/mpcAnimation_6.atlas",
+
     };
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
@@ -573,6 +589,8 @@ public class ForestGameArea extends GameArea {
         resourceService.loadSounds(jumpSounds);
         resourceService.loadSounds(turnSounds);
         resourceService.loadMusic(forestMusic);
+        resourceService.loadTextureAtlases(mpcTextures);
+        resourceService.loadTextureAtlases(mpcTexturesAtlases);
 
         while (!resourceService.loadForMillis(10)) {
             // This could be upgraded to a loading screen
@@ -589,6 +607,8 @@ public class ForestGameArea extends GameArea {
         resourceService.unloadAssets(jumpSounds);
         resourceService.unloadAssets(turnSounds);
         resourceService.unloadAssets(forestMusic);
+        resourceService.unloadAssets(mpcTextures);
+        resourceService.unloadAssets(mpcTexturesAtlases);
     }
 
     @Override
