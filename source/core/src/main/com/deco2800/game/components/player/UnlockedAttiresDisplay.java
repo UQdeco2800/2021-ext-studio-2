@@ -113,7 +113,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
         table.row();
         unlockedAttiresTable = new Table();
 
-        goldAchievements = 2;
+        goldAchievements = 6;
         if (goldAchievements == 0) {
             renderZeroUnlockedAttiresTable();
         } else {
@@ -154,16 +154,16 @@ public class UnlockedAttiresDisplay extends UIComponent {
 
         Image gold_2 = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/mpc/attires/gold_2.png", Texture.class));
-        table.add(gold_2).center().padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
-
+        table.add(gold_2).padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
+        table.row();
         Image gold_4 = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/mpc/attires/gold_4.png", Texture.class));
-        table.add(gold_4).center().padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
-
+        table.add(gold_4).padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
+        table.row();
         Image gold_6 = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/mpc/attires/gold_6.png", Texture.class));
-        table.add(gold_6).center().padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
-
+        table.add(gold_6).padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
+        table.row();
     }
 
 
@@ -199,14 +199,30 @@ public class UnlockedAttiresDisplay extends UIComponent {
         }
         // Unlock 3 new attires
         if(goldAchievements >= 6) {
-            morethanSix(alpha);
+            moreThanSix(alpha);
 
         }
 
     }
+    private void renderOriginalAttire() {
 
+        ImageButton attireImg = getImageButton("images/mpc/attires/original.png");
+        attireImg.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                attireType = "original";
+                MPCConfig.updateAttire(attireType);
+                confirmSelection("ORIGINAL", "original");
+
+            }
+        });
+        unlockedAttiresTable.add(attireImg).left().padLeft(10f).padRight(10f).size(220, 150);
+        unlockedAttiresTable.center();
+        unlockedAttiresTable.row();
+        
+    }
     private void lessThanFour(float alpha) {
-
+        renderOriginalAttire();
         Image achievementImg = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/mpc/attires/trophies_2x.png", Texture.class));
         achievementImg.setScaling(Scaling.fit);
@@ -222,8 +238,8 @@ public class UnlockedAttiresDisplay extends UIComponent {
 
             }
         });
-        unlockedAttiresTable.add(achievementImg).right().padLeft(10f).padRight(10f).size(220, 150);
-        unlockedAttiresTable.add(attireImg).left().padLeft(10f).padRight(10f).size(220, 150);
+        unlockedAttiresTable.add(attireImg).left().padTop(10f).padLeft(10f).padRight(10f).size(220, 150);
+        unlockedAttiresTable.add(achievementImg).right().padTop(10f).padLeft(10f).padRight(10f).size(220, 150);
 
         if(goldAchievements == 3) {
             Label message1 = new Label("Unlock 1 more Gold achievement to access a new attire!",
@@ -240,7 +256,6 @@ public class UnlockedAttiresDisplay extends UIComponent {
     }
 
     private void lessThanSix(float alpha) {
-
         Image achievementImg = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/mpc/attires/trophies_4x.png", Texture.class));
         achievementImg.setScaling(Scaling.fit);
@@ -257,8 +272,9 @@ public class UnlockedAttiresDisplay extends UIComponent {
             }
         });
 
-        unlockedAttiresTable.add(achievementImg).right().padLeft(10f).padRight(10f).size(220, 150);
-        unlockedAttiresTable.add(attireImg).left().padLeft(10f).padRight(10f).size(220, 150);
+
+        unlockedAttiresTable.add(attireImg).left().padLeft(10f).padTop(10f).padRight(10f).size(220, 150);
+        unlockedAttiresTable.add(achievementImg).right().padLeft(10f).padTop(10f).padRight(10f).size(220, 150);
 
         if(goldAchievements == 5) {
             Label message1 = new Label("Unlock 1 more Gold achievement to access a new attire!",
@@ -273,8 +289,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
         }
     }
 
-    private void morethanSix(float alpha) {
-
+    private void moreThanSix(float alpha) {
         Label message1 = new Label("You have unlocked all attires for now!",
                 new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
         message1.setFontScale(2f);
@@ -300,8 +315,9 @@ public class UnlockedAttiresDisplay extends UIComponent {
             }
         });
 
-        unlockedAttiresTable.add(achievementImg).right().padLeft(10f).padRight(10f).size(220, 150);
-        unlockedAttiresTable.add(attireImg).left().padLeft(10f).padRight(10f).size(220, 150);
+
+        unlockedAttiresTable.add(attireImg).left().padLeft(10f).padTop(10f).padRight(10f).size(220, 150);
+        unlockedAttiresTable.add(achievementImg).right().padLeft(10f).padTop(10f).padRight(10f).size(220, 150);
     }
 
     @Override

@@ -63,7 +63,7 @@ public class ItemComponent extends Component {
                entity.getComponent(TextureRenderComponent.class).dispose();
                ServiceLocator.getEntityService().unregister(entity);
                // after 1.5s stop the item pickUp animation
-               Thread.sleep(1500);
+              // Thread.sleep(1500);
                target.getEvents().trigger("stopPickUp");
            }
            catch (Exception e){
