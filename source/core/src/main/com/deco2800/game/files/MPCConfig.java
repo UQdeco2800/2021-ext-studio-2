@@ -29,7 +29,11 @@ public class MPCConfig {
 
         FileLoader.writeClass(values, path, EXTERNAL);
     }
-
+    public static void setDefaultAttire() {
+        PlayerConfig values = getValues();
+        values.attire = "OG";
+        updateValues(values);
+    }
     public static PlayerConfig getValues() {
         PlayerConfig values =  FileLoader.readClass(PlayerConfig.class, path, EXTERNAL);
         return values != null ? values : new PlayerConfig();
