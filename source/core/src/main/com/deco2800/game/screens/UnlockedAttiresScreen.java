@@ -87,12 +87,12 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
 
     private void createUI() {
         logger.debug("Creating Unlocked Attires screen UI");
-        List<BaseAchievementConfig> bestAchievements= GameRecords.getAllTimeBestAchievements();
+        int goldAchievements = GameRecords.getGoldAchievementsCount();
         Stage stage = ServiceLocator.getRenderService().getStage();
 
         UIEntity = new Entity();
 
-        UIEntity.addComponent(new UnlockedAttiresDisplay(game, bestAchievements))
+        UIEntity.addComponent(new UnlockedAttiresDisplay(game, goldAchievements))
                 .addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(UIEntity);
     }
