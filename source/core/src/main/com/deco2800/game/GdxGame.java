@@ -1,4 +1,4 @@
-Spackage com.deco2800.game;
+package com.deco2800.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
