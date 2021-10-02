@@ -2,6 +2,7 @@ package com.deco2800.game.components.items;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.achievements.AchievementsHelper;
@@ -58,13 +59,18 @@ public class ItemComponent extends Component {
            }
 
            AchievementsHelper.getInstance().trackItemPickedUpEvent(AchievementsHelper.ITEM_FIRST_AID);
-
            try {
                entity.getComponent(TextureRenderComponent.class).dispose();
                ServiceLocator.getEntityService().unregister(entity);
-               // after 1.5s stop the item pickUp animation
-              // Thread.sleep(1500);
-               target.getEvents().trigger("stopPickUp");
+               // after 1s stop the item pickUp animation
+               Timer timer=new Timer();
+               timer.scheduleTask(new Timer.Task() {
+                   @Override
+                   public void run() {
+                       target.getEvents().trigger("stopPickUp");
+                       timer.stop();
+                   }
+               },1);
            }
            catch (Exception e){
                System.out.print(e);
