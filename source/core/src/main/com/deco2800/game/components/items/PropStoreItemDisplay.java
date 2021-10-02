@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.entities.configs.propStore.PropItemConfig;
+import com.deco2800.game.files.PropStoreRecord;
 import com.deco2800.game.ui.UIComponent;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -35,7 +36,7 @@ public class PropStoreItemDisplay extends UIComponent {
         dialog.setMovable(false);
         dialog.setResizable(true);
         Image img = new Image(new Texture(item.path));
-       // Image background = new Image(new Texture("images/story/chapterDialog.png"));
+        // Image background = new Image(new Texture("images/story/chapterDialog.png"));
         //background.setScaling(Scaling.fit);
         //dialog.setBackground(background.getDrawable());
         dialog.pad(50).padTop(120);
@@ -48,15 +49,14 @@ public class PropStoreItemDisplay extends UIComponent {
         price.setFontScale(1.5f);
         price.setWrap(true);
         price.setAlignment(Align.center);
-        TextButton buyButton = new TextButton("Buy for " + item.price + " gold" , skin);
-        buyButton.setColor(Color.ROYAL);
+
+       // buyButton.setDisabled(true);
         dialog.getContentTable().add(img).height(122).width(240).row();
         dialog.getContentTable().add(desc).width(600).row();
         dialog.getContentTable().add(price).width(600).row();
-        dialog.getButtonTable().add(buyButton).size(600,100).row();
+        dialog.getButtonTable().add(renderButton(item)).size(600,100).row();
         dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
         dialog.show(stage);
-
 
     }
 
@@ -73,6 +73,35 @@ public class PropStoreItemDisplay extends UIComponent {
         });
 
         return closeButton;
+    }
+
+    private TextButton renderButton(PropItemConfig item){
+        if(PropStoreRecord.isItemBought(item)){
+            TextButton buyButton = new TextButton("Bought!", skin);
+            buyButton.setColor(Color.LIME);
+            buyButton.setDisabled(true);
+            return buyButton;
+        }
+        if(PropStoreRecord.hasEnoughGold(item.price)) {
+            TextButton buyButton = new TextButton("Buy for " + item.price + " gold", skin);
+            buyButton.setColor(Color.ROYAL);
+            buyButton.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    PropStoreRecord.buyItem(item);
+                    entity.getEvents().trigger("GoldUpdate");
+                    buyButton.setText("Bought!");
+                    buyButton.setColor(Color.LIME);
+                    buyButton.setDisabled(true);
+                }
+            });
+            return buyButton;
+        }else{
+            TextButton buyButton = new TextButton("You do not have enough Gold", skin);
+            buyButton.setColor(Color.BLACK);
+            buyButton.setDisabled(true);
+            return buyButton;
+        }
     }
     @Override
     protected void draw(SpriteBatch batch) {

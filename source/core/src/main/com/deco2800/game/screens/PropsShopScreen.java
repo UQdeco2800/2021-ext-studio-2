@@ -4,6 +4,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.items.PropStoreDisplay;
+import com.deco2800.game.components.items.PropStoreGoldDisplay;
 import com.deco2800.game.components.items.PropStoreItemDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
@@ -42,6 +43,7 @@ public class PropsShopScreen extends ScreenAdapter {
         Entity ui = new Entity();
         PropStoreDisplay propStoreDisplay = new PropStoreDisplay(game);
         ui.addComponent(new PropStoreItemDisplay());
+        ui.addComponent(new PropStoreGoldDisplay());
         ui.addComponent(propStoreDisplay).addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
 
