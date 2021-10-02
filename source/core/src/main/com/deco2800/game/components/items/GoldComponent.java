@@ -7,6 +7,7 @@ import com.deco2800.game.components.Component;
 import com.deco2800.game.components.achievements.AchievementsHelper;
 import com.deco2800.game.components.player.InventoryComponent;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.files.PropStoreRecord;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
@@ -82,12 +83,15 @@ public class GoldComponent extends Component {
      * @param  gold the amount of goldCoin got from the player character in the current game round
      */
     private void recordGold(int gold) {
+        PropStoreRecord.setGold(gold);
         try{
             String goldAmountLastRound = Integer.toString(gold);
 
             fileWriter.write(goldAmountLastRound);
             fileWriter.flush();
             fileWriter.close();
+
+
         }catch(IOException e){
             e.printStackTrace();
         }
