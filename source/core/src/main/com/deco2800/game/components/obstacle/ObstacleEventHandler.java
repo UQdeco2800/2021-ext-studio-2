@@ -187,7 +187,7 @@ public class ObstacleEventHandler extends Component {
         floatingSound.play(0.5f, 1f, 0);
 //        System.out.println("spaceShipAttack was triggered.");
         spaceshipAttack = true;
-        animator.startAnimation("daodan1");
+//        animator.startAnimation("daodan1");
     }
 
     void spaceshipDispose () {
@@ -207,8 +207,12 @@ public class ObstacleEventHandler extends Component {
         Sound missileSound = ServiceLocator.getResourceService().getAsset("sounds/missile_explosion.mp3", Sound.class);
         missileSound.play(0.3f, 1f, 0);
 //        System.out.println("smallMissileAttack was triggered.");
-//        spaceshipAttack = true;
 //        this.entity.setSpaceShipDispose();
+//        animator.stopAnimation();
+//        animator.startAnimation("baozha");
+//        animator.getEntity().setDisappearAfterAnimation(0.32f);
+
+
         this.entity.setDispose();
     }
 
