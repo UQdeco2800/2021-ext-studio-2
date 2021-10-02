@@ -3,12 +3,7 @@ package com.deco2800.game.entities.factories;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.achievements.AchievementsDisplay;
-import com.deco2800.game.components.achievements.AchievementsStatsComponent;
-import com.deco2800.game.components.buff.Buff;
 import com.deco2800.game.components.buff.BuffAnimationController;
-//import com.deco2800.game.components.npc.GhostAnimationController;
-import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.components.player.InventoryComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.player.PlayerAnimationController;
@@ -26,6 +21,8 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
+import java.io.File;
+
 /**
  * Factory to create a player entity.
  *
@@ -35,7 +32,18 @@ import com.deco2800.game.services.ServiceLocator;
 public class PlayerFactory {
     private static final PlayerConfig stats =
             FileLoader.readClass(PlayerConfig.class, "configs/player.json");
-    private static final String attire = stats.attire;
+
+    private static final String ROOT_DIR = "DECO2800Game";
+    private static final String CONFIG_FILE = "mpc.json";
+    private static final String path = ROOT_DIR + File.separator + CONFIG_FILE;
+    private static final PlayerConfig config =
+            FileLoader.readClass(PlayerConfig.class, path, FileLoader.Location.EXTERNAL);
+    private static final String attire;
+
+    static {
+        assert config != null;
+        attire = config.attire;
+    }
 
 
     /**
@@ -78,6 +86,8 @@ public class PlayerFactory {
 
         AnimationRenderComponent deBuffAnimator = createAnimationComponent("images/debuff.atlas");
         deBuffAnimator.addAnimation("debuffDecrease", 0.1f, Animation.PlayMode.LOOP);
+
+        System.out.println("Read "+ attire);
 
 
 
