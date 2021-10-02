@@ -4,7 +4,7 @@
   "id": 1,
   "name": "Health",
   "desc": "buying this will increase your maximum health to 105",
-  "path": "images/heart.png",
+  "path": "images/Items/props/add_health.png",
   "price": 2,
   "property": {
     "health": 105
