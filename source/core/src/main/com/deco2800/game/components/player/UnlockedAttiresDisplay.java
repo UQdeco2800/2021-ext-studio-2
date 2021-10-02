@@ -143,7 +143,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
         message1.setFontScale(3f);
         table.add(message1).padTop(20f).center();
         table.row();
-        Label message2 = new Label("Unlock Veteran Silver and Veteran Gold Achievements to access new attires!",
+        Label message2 = new Label("Unlock more Gold Achievements to access new attires!",
                 new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
         message2.setFontScale(2f);
         table.add(message2).padTop(20f).center();
@@ -152,18 +152,11 @@ public class UnlockedAttiresDisplay extends UIComponent {
         Image silverAttire = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/mpc/attires/veteranSilver.png", Texture.class));
         table.add(silverAttire).center().padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
-        Image silver = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/achievements/veteranSilverTrophy.png", Texture.class));
-        table.add(silver).center().padLeft(10f).padRight(10f).size(120, 50);
-
-        table.row();
 
         Image goldAttire = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/mpc/attires/veteranGold.png", Texture.class));
         table.add(goldAttire).center().padLeft(10f).padRight(10f).padTop(20f).size(220, 150);
-        Image gold = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/achievements/veteranGoldTrophy.png", Texture.class));
-        table.add(gold).center().padLeft(10f).padRight(10f).size(120, 50);
+
     }
 
     /**
