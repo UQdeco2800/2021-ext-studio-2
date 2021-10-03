@@ -267,9 +267,16 @@ public class MainGameScreen extends ScreenAdapter {
                 if (screenVector.x > (2 * counter + 1) * 10) {
                     counter += 1;
                     forestGameArea.showScrollingBackground(counter);
-                    forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2));
-                    //      forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
-                    //      forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
+                    forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.MUD_ROAD);
+                    forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
+ //                   forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
+                    forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
+                    forestGameArea.spawnRocksone((int) (screenVector.x + 2));
+                    forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksthree((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksfour((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksfive((int) (screenVector.x + 2));
+                    forestGameArea.spawnRockssix((int) (screenVector.x + 2));
                     generateObstaclesEnemiesByMapRefresh(counter);
                 }
                 // Generate monster
@@ -277,7 +284,20 @@ public class MainGameScreen extends ScreenAdapter {
                 // Thorns effect trigger
                 slowPlayer();
                 break;
-        }
+            case On:
+                // Render terrains on new map
+                if (screenVector.x > (2 * counter + 1) * 10) {
+                    counter += 1;
+                    forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
+  //                  forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
+                    forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
+                    forestGameArea.spawnRocksone((int) (screenVector.x+2));
+                    forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksthree((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksfour((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksfive((int) (screenVector.x + 2));
+                    forestGameArea.spawnRockssix((int) (screenVector.x + 2));
+                }}
 
     }
 
