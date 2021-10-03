@@ -1,5 +1,5 @@
 
-mpcAttire_a.png
+mpcAnimation_6.png
 size: 4096, 2048
 format: RGBA8888
 filter: Nearest, Nearest
@@ -13,28 +13,28 @@ main_player_attack
   index: 1
 main_player_attack
   rotate: false
-  xy: 1088, 2
+  xy: 1631, 1088
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 3
 main_player_attack
   rotate: false
-  xy: 2717, 545
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_crouch
-  rotate: false
-  xy: 1631, 1088
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_crouch
-  rotate: false
   xy: 2174, 2
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_crouch
+  rotate: false
+  xy: 1088, 545
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_crouch
+  rotate: false
+  xy: 2717, 1088
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -60,65 +60,65 @@ main_player_jump
   orig: 541, 541
   offset: 0, 0
   index: 3
-main_player_pick
+main_player_pickup
   rotate: false
   xy: 2, 1088
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
-  index: 4
-main_player_pick
-  rotate: false
-  xy: 545, 1088
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
   index: 1
-main_player_pick
-  rotate: false
-  xy: 545, 2
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_pick
-  rotate: false
-  xy: 1631, 2
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_right
-  rotate: false
-  xy: 2174, 545
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_run
-  rotate: false
-  xy: 1088, 545
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_run
-  rotate: false
-  xy: 2717, 1088
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_walk
+main_player_pickup
   rotate: false
   xy: 2, 2
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
+  index: 3
+main_player_pickup
+  rotate: false
+  xy: 1631, 545
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_pickup
+  rotate: false
+  xy: 2174, 545
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 4
+main_player_right
+  rotate: false
+  xy: 2717, 545
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: -1
+main_player_run
+  rotate: false
+  xy: 545, 2
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_run
+  rotate: false
+  xy: 1631, 2
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_walk
+  rotate: false
+  xy: 545, 1088
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
   index: 2
 main_player_walk
   rotate: false
-  xy: 1631, 545
+  xy: 1088, 2
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
