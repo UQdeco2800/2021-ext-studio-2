@@ -393,6 +393,7 @@ public void spawnRockstwo(int xValue) {
         pro = new InventorySystem(player);
         spawnFirstAid();
         spawnGold();
+        spawnGoldNewMap();
         playMusic();
         trackAchievements();
         setBonusItems(player);
@@ -759,6 +760,23 @@ public void spawnRockstwo(int xValue) {
         int k = 0;
         for (int i = 0; i < 20; i++) {
             GridPoint2 position = new GridPoint2(20 + k++, 40);
+            Entity gold = ItemFactory.createGold(player);
+            spawnEntityAt(gold, position, false, false);
+        }
+    }
+
+    private void spawnGoldNewMap() {
+        int k = 0;
+        for (int i = 0; i < 30; i++) {
+            GridPoint2 position = new GridPoint2(k++, 70);
+            Entity gold = ItemFactory.createGold(player);
+            spawnEntityAt(gold, position, false, false);
+        }
+    }
+
+    public void spawnGoldNewMapRandomly(int x) {
+        for (int i = 0; i < 30; i++) {
+            GridPoint2 position = new GridPoint2(10 + x++, 70);
             Entity gold = ItemFactory.createGold(player);
             spawnEntityAt(gold, position, false, false);
         }
