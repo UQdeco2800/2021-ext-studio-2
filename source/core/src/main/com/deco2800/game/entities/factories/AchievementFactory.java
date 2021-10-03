@@ -47,6 +47,17 @@ public class AchievementFactory {
                 .toArray(new String[configs.achievements.size()]);
     }
 
+    public static String[] getTrophyTextures() {
+        return configs.achievements
+                .stream().map(AchievementFactory::getAchievementTrophy).collect(Collectors.toList())
+                .toArray(new String[configs.achievements.size()]);
+    }
+
+    public static String getAchievementTrophy(BaseAchievementConfig achievement) {
+        return achievement.iconPath.replace(".png", "Trophy.png");
+    }
+
+
     public static BaseAchievementConfig getAchievementByNameAndType(String name, String type) {
         BaseAchievementConfig achievement = new BaseAchievementConfig();
 

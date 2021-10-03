@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
+import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.events.EventHandler;
 import com.deco2800.game.rendering.AnimationRenderComponent;
@@ -34,6 +35,10 @@ public class Entity {
     private static final String EVT_NAME_POS = "setPosition";
 
     private final int id;
+
+    // Used to adjust, show which category the current entity is. For example, "SpaceShip", etc.
+    private String type;
+
     private final IntMap<Component> components;
     private final EventHandler eventHandler;
     private boolean enabled = true;
@@ -44,6 +49,8 @@ public class Entity {
     private float animationTime = 0;
     private boolean created = false;
     private Vector2 position = Vector2.Zero.cpy();
+
+    private int zIndex = 0;
     private Vector2 scale = new Vector2(1, 1);
     private Array<Component> createdComponents;
 
@@ -51,7 +58,19 @@ public class Entity {
     public Entity() {
         id = nextId;
         nextId++;
+        type = "Undefined";
+        components = new IntMap<>(4);
+        eventHandler = new EventHandler();
+    }
 
+    /**
+     * Create an entity with category information. This will display the category when printing
+     * @param type which category the current entity is. For example, "SpaceShip", etc.
+     */
+    public Entity(String type) {
+        id = nextId;
+        nextId++;
+        this.type = type;
         components = new IntMap<>(4);
         eventHandler = new EventHandler();
     }
@@ -96,14 +115,6 @@ public class Entity {
      */
     public void setDispose(){
         this.dispose = true;
-        logger.debug("Setting dispose={} on entity {}", dispose, this);
-    }
-
-    /**
-     * Set dispose to true. The code that works subsequently is in update.
-     */
-    public void setSpaceShipDispose(){
-        this.spaceShipDispose = true;
         logger.debug("Setting dispose={} on entity {}", dispose, this);
     }
 
@@ -155,6 +166,7 @@ public class Entity {
         getEvents().trigger(EVT_NAME_POS, position.cpy());
     }
 
+
     /**
      * Set the entity's game position and optionally notifies listeners.
      *
@@ -186,6 +198,23 @@ public class Entity {
         this.scale = scale.cpy();
     }
 
+    /**
+     * Set the entity's zIndex.
+     *
+     * @param zIndex Draw priority of the current entity
+     */
+    public void setZIndex(int zIndex) {
+        this.zIndex = zIndex;
+    }
+
+    /**
+     * Get the entity's zIndex. This is not the final drawing priority. Called by "getZIndex()" in RenderComponent.java.
+     *
+     * @return Current zIndex value
+     */
+    public int getZIndex() {
+        return zIndex;
+    }
     /**
      * Set the entity's scale.
      *
@@ -346,12 +375,6 @@ public class Entity {
             return;
         }
 
-        if (MainGameScreen.spaceshipTime <= 0) {
-            if (spaceShipDispose) {
-                this.dispose();
-                return;
-            }
-        }
 
         for (Component component : createdComponents) {
             // When texture and animation are given an entity at the same time, the texture needs to disappear when the
@@ -401,6 +424,6 @@ public class Entity {
 
     @Override
     public String toString() {
-        return String.format("Entity{id=%d}", id);
+        return String.format("Entity{id=%d, type=%s}", id, type);
     }
 }

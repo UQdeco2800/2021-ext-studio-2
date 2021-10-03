@@ -25,7 +25,8 @@ public class GdxGame extends Game {
     public enum ScreenType {
 
         MAIN_MENU, MAIN_GAME, SETTINGS, GAME_OVER, PROPS_SHOP, HISTORY_SCORES,
-        ACHIEVEMENTS,MONSTER_MENU
+        ACHIEVEMENTS,MONSTER_MENU, UNLOCKED_ATTIRES;
+
     }
 
     @Override
@@ -90,8 +91,10 @@ public class GdxGame extends Game {
                 return new HistoryScoreScreen(this);
             case ACHIEVEMENTS:
                 return new AchievementsScreen(this);
+            case UNLOCKED_ATTIRES:
+                return new UnlockedAttiresScreen(this);
             case MONSTER_MENU:
-                return new monsterMenuScreen(this);
+                return new MonsterMenuScreen(this);
             default:
                 return null;
         }

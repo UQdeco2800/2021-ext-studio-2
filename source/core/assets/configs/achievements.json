@@ -185,6 +185,109 @@
       "condition": {
         "score": 150
       }
+    },
+    {
+      "name": "Game Fanatic",
+      "type": "BRONZE",
+      "iconPath": "images/achievements/gameFanaticBronze.png",
+      "message": "Picked up 10 First Aids with full health, You don't need em!",
+      "bonus": 15,
+      "condition": {
+        "health": 100,
+        "firstAids": 10
+      }
+    },
+    {
+      "name": "Game Fanatic",
+      "type": "SILVER",
+      "iconPath": "images/achievements/gameFanaticSilver.png",
+      "message": "Picked up 20 First Aids with full health, You don't need em!",
+      "bonus": 25,
+      "condition": {
+        "health": 100,
+        "firstAids": 20
+      }
+    },
+    {
+      "name": "Game Fanatic",
+      "type": "GOLD",
+      "iconPath": "images/achievements/gameFanaticGold.png",
+      "message": "Picked up 30 First Aids with full health, You don't need em!",
+      "bonus": 40,
+      "condition": {
+        "health": 100,
+        "firstAids": 30
+      }
+    },
+    {
+      "name": "Collector",
+      "type": "BRONZE",
+      "iconPath": "images/achievements/collectorBronze.png",
+      "message": "GG! you've collected 10 coins",
+      "bonus": 10,
+      "condition": {
+        "gold": 10
+      }
+    },
+    {
+      "name": "Collector",
+      "type": "SILVER",
+      "iconPath": "images/achievements/collectorSilver.png",
+      "message": "GG! you've collected 20 coins",
+      "bonus": 15,
+      "condition": {
+        "gold": 20
+      }
+    },
+    {
+      "name": "Collector",
+      "type": "GOLD",
+      "iconPath": "images/achievements/collectorGold.png",
+      "message": "GG! you've collected 30 coins",
+      "bonus": 20,
+      "condition": {
+        "gold": 30
+      }
+    },
+    {
+      "name": "Survival Expert",
+      "type": "BRONZE",
+      "iconPath": "images/achievements/survivalExpertBronze.png",
+      "message": "Survived for 20m, RUN for your life!!!",
+      "bonus": 20,
+      "condition": {
+        "distance": 20
+      }
+    },
+    {
+      "name": "Survival Expert",
+      "type": "SILVER",
+      "iconPath": "images/achievements/survivalExpertSilver.png",
+      "message": "Survived for 40m, RUN for your life!!!",
+      "bonus": 30,
+      "condition": {
+        "distance": 40
+      }
+    },
+    {
+      "name": "Survival Expert",
+      "type": "GOLD",
+      "iconPath": "images/achievements/survivalExpertGold.png",
+      "message": "Survived for 60m, RUN for your life!!!",
+      "bonus": 40,
+      "condition": {
+        "distance": 60
+      }
+    },
+    {
+      "name": "Alphamineron",
+      "type": "GOLD",
+      "iconPath": "images/achievements/alphamineronGold.png",
+      "message": "Survived alien spaceship, the world is on your side!!!",
+      "bonus": 50,
+      "condition": {
+        "spaceshipAvoidSuccess": true
+      }
     }
   ]
 }

@@ -205,6 +205,23 @@ public class ColliderComponent extends Component {
     return fixture.getFilterData().categoryBits;
   }
 
+
+  /**
+   * Set the collider maskBits, used in collision logic
+   * @param layerMask maskBits of {@link PhysicsLayer} this collider belongs to
+   * @return self
+   */
+  public ColliderComponent setMaskBits(short layerMask) {
+    if (fixture == null) {
+      fixtureDef.filter.maskBits = layerMask;
+    } else {
+      Filter filter = fixture.getFilterData();
+      filter.maskBits = layerMask;
+      fixture.setFilterData(filter);
+    }
+    return this;
+  }
+
   @Override
   public void dispose() {
     super.dispose();

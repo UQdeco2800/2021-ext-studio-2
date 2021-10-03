@@ -3,10 +3,12 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.score.ScoreDetailsDialog;
 import com.deco2800.game.components.score.ScoreHistoryDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
+import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
@@ -24,6 +26,8 @@ public class HistoryScoreScreen extends ScreenAdapter {
     private final ScoreHistoryDisplay scoreHistoryDisplay;
     private static final String[] historyScoreTextures =
             {"images/historyScoreBoard.png", "images/historyScoreBg.png", "images/achievements/trophyDialogSilver.png"};
+    private static final String[] trophyTextures = AchievementFactory.getTrophyTextures();
+    private Entity ui;
 
 
     public HistoryScoreScreen(GdxGame game) {
@@ -36,10 +40,11 @@ public class HistoryScoreScreen extends ScreenAdapter {
         renderer.getCamera().getEntity().setPosition(2f, 1f);
         loadAssets();
         Stage stage = ServiceLocator.getRenderService().getStage();
-        Entity ui = new Entity();
+        ui = new Entity();
         scoreHistoryDisplay = new ScoreHistoryDisplay(game);
         ui.addComponent(scoreHistoryDisplay)
                 .addComponent(new ScoreDetailsDialog())
+                .addComponent(new BackgroundSoundComponent("sounds/History_Score_bgm.mp3", 0.5f))
                 .addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
     }
@@ -60,12 +65,14 @@ public class HistoryScoreScreen extends ScreenAdapter {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(historyScoreTextures);
+        resourceService.loadTextures(trophyTextures);
         ServiceLocator.getResourceService().loadAll();
     }
 
     private void unloadAssets() {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.unloadAssets(trophyTextures);
         resourceService.unloadAssets(historyScoreTextures);
     }
 
@@ -73,6 +80,7 @@ public class HistoryScoreScreen extends ScreenAdapter {
     public void dispose() {
         renderer.dispose();
         unloadAssets();
+        ui.dispose();
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
         ServiceLocator.clear();
