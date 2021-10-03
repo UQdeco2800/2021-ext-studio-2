@@ -19,7 +19,6 @@ public class DistanceDisplay extends UIComponent {
     //    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
     private Image distanceBoard;
 
-
     /**
      * Creates reusable ui styles and adds actors to the stage.
      * And starts the timer.
