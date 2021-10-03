@@ -1,9 +1,7 @@
 package com.deco2800.game.utils;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 public class DateTimeUtils {
     /**
@@ -13,7 +11,7 @@ public class DateTimeUtils {
      * @param dateTime a LocalDateTime object
      * @return formatted time
      */
-    public static String getFormattedTime(LocalDateTime dateTime){
+    public static String getFormattedTime(LocalDateTime dateTime) {
         String timePattern = "hh:mm:ss a";
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern(timePattern);
         return timeFormat.format(dateTime);
@@ -39,7 +37,7 @@ public class DateTimeUtils {
      * @param dateTime a LocalDateTime object
      * @return formatted verbose date
      */
-    public static String getFormattedDate(LocalDateTime dateTime){
+    public static String getFormattedDate(LocalDateTime dateTime) {
         String datePattern = "dd/MM/yyyy";
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(datePattern);
         return dateFormat.format(dateTime);
@@ -52,7 +50,7 @@ public class DateTimeUtils {
      * @param dateTime a LocalDateTime object
      * @return formatted concise date and time
      */
-    public static String getFormattedDateTime(LocalDateTime dateTime){
+    public static String getFormattedDateTime(LocalDateTime dateTime) {
         String dateTimePattern = "yyyy-MM-dd hh:mm a";
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(dateTimePattern);
         return dateTimeFormat.format(dateTime);
@@ -64,7 +62,7 @@ public class DateTimeUtils {
      *
      * @return LocalDateTime object
      */
-    public static LocalDateTime getCurrentDateTime(){
+    public static LocalDateTime getCurrentDateTime() {
         return LocalDateTime.now();
     }
 
