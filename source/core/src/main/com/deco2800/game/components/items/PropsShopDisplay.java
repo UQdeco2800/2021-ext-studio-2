@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.entities.factories.PropStoreFactory;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
@@ -39,7 +38,6 @@ public class PropsShopDisplay extends UIComponent {
     public void create() {
         super.create();
         createPropsShopBoard(0);
-        PropStoreFactory.getPropStoreItems().forEach(item -> System.out.println(item.name));
     }
 
     public void update() {

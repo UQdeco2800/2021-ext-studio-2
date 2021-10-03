@@ -3,11 +3,9 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.items.PropsShopDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
-import com.deco2800.game.entities.factories.PropStoreFactory;
 import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
@@ -27,7 +25,6 @@ public class PropsShopScreen extends ScreenAdapter {
     private final Renderer renderer;
     private final PropsShopDisplay propsShopDisplay;
     private static final String[] mainGameTextures = {"images/heart.png","images/Items/props/add_food.png","images/Items/props/add_health.png","images/Items/props/add_water.png","images/Items/props/shield.png"};
-    private Entity ui;
 
     public PropsShopScreen(GdxGame game){
         logger.debug("drawing props shop ui");
@@ -39,11 +36,9 @@ public class PropsShopScreen extends ScreenAdapter {
         renderer.getCamera().getEntity().setPosition(2f, 1f);
         Stage stage = ServiceLocator.getRenderService().getStage();
         loadAssets();
-
-        ui = new Entity();
+        Entity ui = new Entity();
         propsShopDisplay = new PropsShopDisplay(game);
-        ui.addComponent(propsShopDisplay).addComponent(new InputDecorator(stage, 10))
-                .addComponent(new BackgroundSoundComponent("sounds/History_Score_bgm.mp3", 0.5f));
+        ui.addComponent(propsShopDisplay).addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
     }
 
@@ -76,7 +71,6 @@ public class PropsShopScreen extends ScreenAdapter {
     public void dispose() {
         renderer.dispose();
         unloadAssets();
-        ui.dispose();
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
         ServiceLocator.clear();

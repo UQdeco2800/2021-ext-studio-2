@@ -221,7 +221,7 @@ public class MainGameScreen extends ScreenAdapter {
                 }
                 break;
             case On:
-                //System.out.println("player.getPosition() = " + player.getPosition());
+                System.out.println("player.getPosition() = " + player.getPosition());
                 screenVector.y = 55f;
                 renderer.getCamera().getEntity().setPosition(screenVector);
         }

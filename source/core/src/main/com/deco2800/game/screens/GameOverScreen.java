@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.input.InputDecorator;
@@ -25,7 +24,7 @@ public class GameOverScreen extends ScreenAdapter {
     private final Renderer renderer;
     private final GameOverDisplay gomd;
     private static final String[] gameOverTextures = {"images/gameOver.png", "images/background.png"};
-    private Entity ui;
+
 
     public GameOverScreen(GdxGame game) {
         logger.debug("drawing game over ui");
@@ -36,11 +35,10 @@ public class GameOverScreen extends ScreenAdapter {
         renderer = RenderFactory.createRenderer();
         renderer.getCamera().getEntity().setPosition(2f, 1f);
         Stage stage = ServiceLocator.getRenderService().getStage();
-        ui = new Entity();
+        Entity ui = new Entity();
         loadAssets();
         gomd = new GameOverDisplay(game);
-        ui.addComponent(gomd).addComponent(new InputDecorator(stage, 10))
-                .addComponent(new BackgroundSoundComponent("sounds/GameOver_bgm_final.mp3", 0.5f));
+        ui.addComponent(gomd).addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
 
 
@@ -65,7 +63,6 @@ public class GameOverScreen extends ScreenAdapter {
     @Override
     public void dispose() {
         renderer.dispose();
-        ui.dispose();
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
         ServiceLocator.clear();

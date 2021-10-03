@@ -3,7 +3,6 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.settingsmenu.SettingsMenuDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
@@ -24,7 +23,6 @@ public class SettingsScreen extends ScreenAdapter {
 
   private final GdxGame game;
   private final Renderer renderer;
-  private Entity ui;
 
   public SettingsScreen(GdxGame game) {
     this.game = game;
@@ -56,7 +54,6 @@ public class SettingsScreen extends ScreenAdapter {
   @Override
   public void dispose() {
     renderer.dispose();
-    ui.dispose();
     ServiceLocator.getRenderService().dispose();
     ServiceLocator.getEntityService().dispose();
 
@@ -70,9 +67,8 @@ public class SettingsScreen extends ScreenAdapter {
   private void createUI() {
     logger.debug("Creating ui");
     Stage stage = ServiceLocator.getRenderService().getStage();
-    ui = new Entity();
-    ui.addComponent(new SettingsMenuDisplay(game)).addComponent(new InputDecorator(stage, 10))
-            .addComponent(new BackgroundSoundComponent("sounds/mainmenu_bgm.mp3", 0.5f));
+    Entity ui = new Entity();
+    ui.addComponent(new SettingsMenuDisplay(game)).addComponent(new InputDecorator(stage, 10));
     ServiceLocator.getEntityService().register(ui);
   }
 }
