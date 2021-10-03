@@ -3,6 +3,7 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.obstacle.MonsterDetails;
 import com.deco2800.game.components.obstacle.MonsterDispay;
 import com.deco2800.game.entities.Entity;
@@ -34,6 +35,7 @@ public class MonsterMenuScreen extends ScreenAdapter {
 
 
             };
+    private Entity ui;
 
     public MonsterMenuScreen(GdxGame game) {
         logger.debug("drawing monster menu ui");
@@ -45,10 +47,11 @@ public class MonsterMenuScreen extends ScreenAdapter {
         renderer.getCamera().getEntity().setPosition(2f, 1f);
         loadAssets();
         Stage stage = ServiceLocator.getRenderService().getStage();
-        Entity ui = new Entity();
+        ui = new Entity();
         monsterDispay = new MonsterDispay(game);
         ui.addComponent(monsterDispay).addComponent(new InputDecorator(stage, 10))
-                .addComponent(new MonsterDetails());
+                .addComponent(new MonsterDetails())
+                .addComponent(new BackgroundSoundComponent("sounds/mainmenu_bgm.mp3", 0.5f));
         ServiceLocator.getEntityService().register(ui);
     }
 
@@ -80,6 +83,7 @@ public class MonsterMenuScreen extends ScreenAdapter {
     public void dispose() {
         renderer.dispose();
         unloadAssets();
+        ui.dispose();
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
         ServiceLocator.clear();

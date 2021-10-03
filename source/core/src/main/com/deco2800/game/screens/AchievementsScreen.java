@@ -117,5 +117,4 @@ public class AchievementsScreen extends ScreenAdapter {
         ServiceLocator.getEntityService().register(ui);
     }
 
-
 }

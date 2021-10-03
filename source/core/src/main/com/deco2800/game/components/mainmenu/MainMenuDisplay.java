@@ -1,12 +1,16 @@
 package com.deco2800.game.components.mainmenu;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
@@ -32,28 +36,93 @@ public class MainMenuDisplay extends UIComponent {
     Image title =
         new Image(
             ServiceLocator.getResourceService()
-                .getAsset("images/box_boy_title.png", Texture.class));
+                .getAsset("images/new_menu_title.png", Texture.class));
 
-      Image background =
-              new Image(
-                      ServiceLocator.getResourceService()
-                              .getAsset("images/menu_background/menu_background.png", Texture.class));
+    Image background =
+        new Image(
+            ServiceLocator.getResourceService()
+                .getAsset("images/menu_background/menu_background.png", Texture.class));
 
-    TextButton startBtn = new TextButton("Start", skin);
+    /** build new start button */
+    Button.ButtonStyle start = new Button.ButtonStyle();
+    start.up= new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/start1.png"))));
+    start.over= new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/start2.png"))));
+    Button startBtn = new Button(start);
 
-    TextButton settingsBtn = new TextButton("Settings", skin);
-    TextButton exitBtn = new TextButton("Exit", skin);
+    /** build select unlocked attire button */
+    Button.ButtonStyle attires = new Button.ButtonStyle();
+    attires.up = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/select1.png"))));
+    attires.over = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/select2.png"))));
+    Button attiresBtn = new Button(attires);
+
+    /** build new setting button */
+    Button.ButtonStyle setting = new Button.ButtonStyle();
+    setting.up = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/setting1.png"))));
+    setting.over = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/setting2.png"))));
+    Button settingBtn = new Button(setting);
+
+    /** build new exit button */
+    Button.ButtonStyle exit = new Button.ButtonStyle();
+    exit.up = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/exit1.png"))));
+    exit.over = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/exit2.png"))));
+    Button exitBtn = new Button(exit);
+
+    /** build new prop shop button */
+    Button.ButtonStyle propShop = new Button.ButtonStyle();
+    propShop.up = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/shop1.png"))));
+    propShop.over = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/shop2.png"))));
+    Button shopBtn = new Button(propShop);
+    shopBtn.setPosition(820,650);
+
+    /** build new score button */
+    Button.ButtonStyle score = new Button.ButtonStyle();
+    score.up = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/score1.png"))));
+    score.over = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/score2.png"))));
+    Button scoreBtn = new Button(score);
+    scoreBtn.setPosition(960,685);
+
+    /** build new achievement button */
+    Button.ButtonStyle achievement = new Button.ButtonStyle();
+    achievement.up = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/achievement1.png"))));
+    achievement.over = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/achievement2.png"))));
+    Button achievementBtn = new Button(achievement);
+    achievementBtn.setPosition(1100,682);
+
+    /** build new monster button */
+    Button.ButtonStyle monster = new Button.ButtonStyle();
+    monster.up = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/monster1.png"))));
+    monster.over = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/monster2.png"))));
+    Button monsterBtn = new Button(monster);
+    monsterBtn.setPosition(1120,40);
+
+
+    //TextButton startBtn = new TextButton("Start", skin);
+    //TextButton settingsBtn = new TextButton("Settings", skin);
+    //TextButton exitBtn = new TextButton("Exit", skin);
     //props shop
-      TextButton propsShopBtn = new TextButton("Props Shop", skin);
+    //TextButton propsShopBtn = new TextButton("Props Shop", skin);
     //Team9 History Scores
-    TextButton historyScoreBtn = new TextButton("History Score", skin);
-
-    TextButton achievementsBtn = new TextButton("Achievements", skin);
-
-    TextButton attiresBtn = new TextButton("Select Unlocked Attires", skin);
-
+    //TextButton historyScoreBtn = new TextButton("History Score", skin);
+    //TextButton achievementsBtn = new TextButton("Achievements", skin);
+    //TextButton attiresBtn = new TextButton("Select Unlocked Attires", skin);
     //Team8
-    TextButton monsterMenuBtn = new TextButton("Monster Menu", skin);
+    //TextButton monsterMenuBtn = new TextButton("Monster Menu", skin);
 
 
       // Triggers an event when the button is pressed
@@ -67,7 +136,7 @@ public class MainMenuDisplay extends UIComponent {
         });
 
 
-    settingsBtn.addListener(
+    settingBtn.addListener(
         new ChangeListener() {
           @Override
           public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -86,7 +155,7 @@ public class MainMenuDisplay extends UIComponent {
           }
         });
 
-      propsShopBtn.addListener(new ChangeListener() {
+      shopBtn.addListener(new ChangeListener() {
           @Override
           public void changed(ChangeEvent event, Actor actor) {
               logger.debug("History Score clicked");
@@ -94,7 +163,7 @@ public class MainMenuDisplay extends UIComponent {
           }
       });
 
-    historyScoreBtn.addListener(new ChangeListener() {
+    scoreBtn.addListener(new ChangeListener() {
         @Override
         public void changed(ChangeEvent event, Actor actor) {
             logger.debug("History Score clicked");
@@ -102,7 +171,7 @@ public class MainMenuDisplay extends UIComponent {
         }
     });
 
-    achievementsBtn.addListener(new ChangeListener() {
+    achievementBtn.addListener(new ChangeListener() {
           @Override
           public void changed(ChangeEvent event, Actor actor) {
               logger.debug("Achievements clicked");
@@ -118,7 +187,7 @@ public class MainMenuDisplay extends UIComponent {
           }
       });
 
-    monsterMenuBtn.addListener(new ChangeListener() {
+    monsterBtn.addListener(new ChangeListener() {
         @Override
         public void changed(ChangeEvent event, Actor actor) {
             logger.debug("monsterMenu clicked");
@@ -128,27 +197,22 @@ public class MainMenuDisplay extends UIComponent {
 
     Table bgTable = new Table();
     bgTable.setFillParent(true);
-    bgTable.add(background);
     table.add(title);
     table.row();
     table.add(startBtn).padTop(30f);
     table.row();
-    table.add(settingsBtn).padTop(15f);
+    table.add(attiresBtn).padTop(30f);
     table.row();
-    table.add(exitBtn).padTop(15f);
+    table.add(settingBtn).padTop(30f);
     table.row();
-    table.add(propsShopBtn).padTop(15f);
-    table.row();
-
-    table.add(historyScoreBtn).padTop(15f);
-    table.row();
-    table.add(achievementsBtn).padTop(15f);
-      table.row();
-    table.add(attiresBtn).padTop(15f);
-    table.row();
-    table.add(monsterMenuBtn).padTop(15f);
+    table.add(exitBtn).padTop(30f);
     stage.addActor(bgTable);
     stage.addActor(table);
+    stage.addActor(shopBtn);
+    stage.addActor(scoreBtn);
+    stage.addActor(achievementBtn);
+    stage.addActor(monsterBtn);
+    bgTable.add(background).size(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
   }
 
   @Override
