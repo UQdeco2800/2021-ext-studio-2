@@ -208,13 +208,6 @@ public class ObstacleEventHandler extends Component {
         }
         Sound missileSound = ServiceLocator.getResourceService().getAsset("sounds/missile_explosion.mp3", Sound.class);
         missileSound.play(0.3f, 1f, 0);
-//        System.out.println("smallMissileAttack was triggered.");
-//        this.entity.setSpaceShipDispose();
-//        animator.stopAnimation();
-//        animator.startAnimation("baozha");
-//        animator.getEntity().setDisappearAfterAnimation(0.32f);
-
-        animator.getEntity().setRemoveTexture();
         animator.startAnimation("bomb");
         animator.getEntity().setDisappearAfterAnimation(0.4f);
 
