@@ -70,6 +70,10 @@ class DateTimeUtilsTest {
         res = DateTimeUtils.getVerboseDate(time);
         assertEquals("Sunday, December 30, 2018", res);
 
+        time = LocalDateTime.parse("2018-12-03T11:59:59.63");
+        res = DateTimeUtils.getVerboseDate(time);
+        assertEquals("Monday, December 3, 2018", res);
+
         // Testing the logic for current time
         time = LocalDateTime.now();
         res = DateTimeUtils.getVerboseDate(time);

@@ -1,5 +1,6 @@
 package com.deco2800.game.utils;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -26,7 +27,9 @@ public class DateTimeUtils {
      * @return formatted verbose date
      */
     public static String getVerboseDate(LocalDateTime dateTime) {
-        return DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(dateTime);
+        String datePattern = "EEEE, MMMM d, yyyy";
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(datePattern);
+        return dateFormat.format(dateTime);
     }
 
     /**
