@@ -3,8 +3,9 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.components.BackgroundSoundComponent;
-import com.deco2800.game.components.items.PropsShopDisplay;
+import com.deco2800.game.components.items.PropStoreDisplay;
+import com.deco2800.game.components.items.PropStoreGoldDisplay;
+import com.deco2800.game.components.items.PropStoreItemDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.PropStoreFactory;
@@ -25,9 +26,8 @@ import org.slf4j.LoggerFactory;
 public class PropsShopScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private final Renderer renderer;
-    private final PropsShopDisplay propsShopDisplay;
-    private static final String[] mainGameTextures = {"images/heart.png","images/Items/props/add_food.png","images/Items/props/add_health.png","images/Items/props/add_water.png","images/Items/props/shield.png"};
-    private Entity ui;
+    private static final String[] mainGameTextures = {"images/heart.png","images/Items/props/add_food.png","images/Items/props/add_health.png","images/Items/props/add_water.png","images/Items/props/shield.png","images/achievements/crossButton.png"};
+    private static final String[] itemTextures = PropStoreFactory.getPropTextures();
 
     public PropsShopScreen(GdxGame game){
         logger.debug("drawing props shop ui");
@@ -40,11 +40,13 @@ public class PropsShopScreen extends ScreenAdapter {
         Stage stage = ServiceLocator.getRenderService().getStage();
         loadAssets();
 
-        ui = new Entity();
-        propsShopDisplay = new PropsShopDisplay(game);
-        ui.addComponent(propsShopDisplay).addComponent(new InputDecorator(stage, 10))
-                .addComponent(new BackgroundSoundComponent("sounds/History_Score_bgm.mp3", 0.5f));
+        Entity ui = new Entity();
+        PropStoreDisplay propStoreDisplay = new PropStoreDisplay(game);
+        ui.addComponent(new PropStoreItemDisplay());
+        ui.addComponent(new PropStoreGoldDisplay());
+        ui.addComponent(propStoreDisplay).addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
+
     }
 
     @Override
@@ -63,6 +65,7 @@ public class PropsShopScreen extends ScreenAdapter {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(mainGameTextures);
+        resourceService.loadTextures(itemTextures);
         ServiceLocator.getResourceService().loadAll();
     }
 
@@ -70,13 +73,13 @@ public class PropsShopScreen extends ScreenAdapter {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(mainGameTextures);
+        resourceService.loadTextures(itemTextures);
     }
 
     @Override
     public void dispose() {
         renderer.dispose();
         unloadAssets();
-        ui.dispose();
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
         ServiceLocator.clear();
