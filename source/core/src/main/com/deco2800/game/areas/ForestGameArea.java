@@ -171,18 +171,18 @@ public class ForestGameArea extends GameArea {
             "images/mpc/finalAtlas/OG/mpcAnimation.png",
             "images/mpc/finalAtlas/gold_2/mpcAnimation_2.png",
             "images/mpc/finalAtlas/gold_4/mpcAnimation_4.png",
-            "images/mpc/finalAtlas/gold_6/mpcAnimation_6.png",
+            "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.png",
             "images/mpc/finalAtlas/OG/mpc_right.png",
             "images/mpc/finalAtlas/gold_2/mpc_right.png",
             "images/mpc/finalAtlas/gold_4/mpc_right.png",
-            "images/mpc/finalAtlas/gold_6/mpc_right.png",
+            "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpc_right.png",
 
     };
     private static final String[] mpcTexturesAtlases = {
             "images/mpc/finalAtlas/OG/mpcAnimation.atlas",
             "images/mpc/finalAtlas/gold_2/mpcAnimation_2.atlas",
             "images/mpc/finalAtlas/gold_4/mpcAnimation_4.atlas",
-            "images/mpc/finalAtlas/gold_6/mpcAnimation_6.atlas",
+            "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.atlas",
 
     };
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
