@@ -1,5 +1,6 @@
 package com.deco2800.game.components.obstacle;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -54,30 +55,42 @@ public class MonsterDispay extends UIComponent {
     @Override
     public void create() {
         super.create();
-        createHistoryScoreBoard();
+        createMonsterMenuBoard();
     }
 
     /**
      * Returns an image button to be reused everywhere.
-     * @param path the image path
+     *
+     * @param upPath   the image path
+     * @param overPath the image path
      * @return ImageButton to be displayed
      */
+    private ImageButton getImageButton(String upPath, String overPath) {
+        ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle();
+        style.up = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal(upPath))));
+        style.over = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal(overPath))));
+        ImageButton button = new ImageButton(style);
+        return button;
+    }
+
+
     private ImageButton getImageButton(String path) {
         return new ImageButton(new TextureRegionDrawable(new TextureRegion(
                 new Texture(path))));
     }
 
-    private void createHistoryScoreBoard() {
+    private void createMonsterMenuBoard() {
         // Create Button to the monster menu
         TextButton mainMenuButton = new TextButton("Main Menu", skin);
-        ImageButton unlockedChapterImg = getImageButton("images/obstacle_1_new.png");
-        ImageButton unlockedChapterImg2 = getImageButton("images/obstacle2_vision2.png");
-        ImageButton unlockedChapterImg3 = getImageButton("images/stone1.png");
-        ImageButton unlockedChapterImg4 = getImageButton("images/monkey_original.png");
-        ImageButton unlockedChapterImg5 = getImageButton("images/Facehugger.png");
-        ImageButton unlockedChapterImg6 = getImageButton("images/ufo.png");
-        ImageButton unlockedChapterImg7 = getImageButton("images/missile.png");
-
+        ImageButton unlockedChapterImg = getImageButton("images/obstacle_1_new.png", "images/monster_menu/plant_over.png");
+        ImageButton unlockedChapterImg2 = getImageButton("images/obstacle2_vision2.png", "images/monster_menu/thorns_over.png");
+        ImageButton unlockedChapterImg3 = getImageButton("images/stone1.png", "images/monster_menu/stone_over.png");
+        ImageButton unlockedChapterImg4 = getImageButton("images/monkey_original.png", "images/monster_menu/monkey_original_over.png");
+        ImageButton unlockedChapterImg5 = getImageButton("images/Facehugger.png", "images/monster_menu/Facehugger_over.png");
+        ImageButton unlockedChapterImg6 = getImageButton("images/ufo.png", "images/monster_menu/ufo_over.png");
+        ImageButton unlockedChapterImg7 = getImageButton("images/missile.png", "images/monster_menu/missile_over.png");
 
 
         unlockedChapterImg.addListener(new ChangeListener() {
@@ -127,9 +140,6 @@ public class MonsterDispay extends UIComponent {
         });
 
 
-
-
-
         mainMenuButton.addListener(
                 new ChangeListener() {
                     @Override
@@ -151,19 +161,17 @@ public class MonsterDispay extends UIComponent {
         monsterName.setFontScale(1f);
         monster1Table.left().top().padLeft(480).padTop(25);
         monster1Table.setFillParent(true);
-        monster1Table.add(unlockedChapterImg).size(60,60).padBottom(20);
+        monster1Table.add(unlockedChapterImg).size(60, 60).padBottom(20);
         monster1Table.add(monsterName).padLeft(55).padBottom(45);
-
 
 
         monster1AttributeTable = new Table();
         Label monsterAttributes = new Label("attack: 3\nhealth: 100", skin);
-        monsterAttributes.setColor(255,255,255,0.5f);
+        monsterAttributes.setColor(255, 255, 255, 0.5f);
         monsterAttributes.setFontScale(0.8f);
         monster1AttributeTable.left().top().padLeft(600).padTop(55);
         monster1AttributeTable.setFillParent(true);
         monster1AttributeTable.add(monsterAttributes);
-
 
 
         monster2Table = new Table();
@@ -172,13 +180,13 @@ public class MonsterDispay extends UIComponent {
         monster2Name.setFontScale(1f);
         monster2Table.left().top().padLeft(460).padTop(120);
         monster2Table.setFillParent(true);
-        monster2Table.add(unlockedChapterImg2).size(80,80).padLeft(15).padBottom(30);
+        monster2Table.add(unlockedChapterImg2).size(80, 80).padLeft(15).padBottom(30);
         monster2Table.add(monster2Name).padLeft(40).padBottom(35);
 
 
         monster2AttributeTable = new Table();
         Label monster2Attributes = new Label("attack: 3\nhealth: 100", skin);
-        monster2Attributes.setColor(255,255,255,0.5f);
+        monster2Attributes.setColor(255, 255, 255, 0.5f);
         monster2Attributes.setFontScale(0.8f);
         monster2AttributeTable.left().top().padLeft(600).padTop(173);
         monster2AttributeTable.setFillParent(true);
@@ -190,32 +198,31 @@ public class MonsterDispay extends UIComponent {
         monster3Name.setFontScale(1f);
         Monster3Table.left().top().padLeft(480).padTop(245);
         Monster3Table.setFillParent(true);
-        Monster3Table.add(unlockedChapterImg3).size(60,60).padLeft(10).padBottom(40);
+        Monster3Table.add(unlockedChapterImg3).size(60, 60).padLeft(10).padBottom(40);
         Monster3Table.add(monster3Name).padLeft(50).padBottom(35);
 
         monster3AttributeTable = new Table();
         Label monster3Attributes = new Label("attack: 3\nhealth: 100", skin);
-        monster3Attributes.setColor(255,255,255,0.5f);
+        monster3Attributes.setColor(255, 255, 255, 0.5f);
         monster3Attributes.setFontScale(0.8f);
         monster3AttributeTable.left().top().padLeft(600).padTop(290);
         monster3AttributeTable.setFillParent(true);
         monster3AttributeTable.add(monster3Attributes);
 
 
-
         Monster4Table = new Table();
         Label monster4Name = new Label("Alien Monkey", skin);
         monster4Name.setFontScale(1f);
-        Monster4Table.left().top().padLeft(455).padTop(350);
+        Monster4Table.left().top().padLeft(480).padTop(380);
         Monster4Table.setFillParent(true);
-        Monster4Table.add(unlockedChapterImg4).size(130,130);
-        Monster4Table.add(monster4Name).padBottom(55).padLeft(15);
+        Monster4Table.add(unlockedChapterImg4).size(60, 60).padLeft(10).padBottom(0);
+        Monster4Table.add(monster4Name).padLeft(40).padBottom(35);
 
         monster4AttributeTable = new Table();
         Label monster4Attributes = new Label("attack: 3\nhealth: 100", skin);
-        monster4Attributes.setColor(255,255,255,0.5f);
+        monster4Attributes.setColor(255, 255, 255, 0.5f);
         monster4Attributes.setFontScale(0.8f);
-        monster4AttributeTable.left().top().padLeft(600).padTop(405);
+        monster4AttributeTable.left().top().padLeft(605).padTop(405);
         monster4AttributeTable.setFillParent(true);
         monster4AttributeTable.add(monster4Attributes);
 
@@ -225,12 +232,12 @@ public class MonsterDispay extends UIComponent {
         monster5Name.setFontScale(1f);
         Monster5Table.left().top().padLeft(460).padTop(490);
         Monster5Table.setFillParent(true);
-        Monster5Table.add(unlockedChapterImg5).size(80,80).padLeft(15);
+        Monster5Table.add(unlockedChapterImg5).size(80, 80).padLeft(15);
         Monster5Table.add(monster5Name).padLeft(45).padBottom(40);
 
         monster5AttributeTable = new Table();
         Label monster5Attributes = new Label("attack: 3\nhealth: 100", skin);
-        monster5Attributes.setColor(255,255,255,0.5f);
+        monster5Attributes.setColor(255, 255, 255, 0.5f);
         monster5Attributes.setFontScale(0.8f);
         monster5AttributeTable.left().top().padLeft(610).padTop(525);
         monster5AttributeTable.setFillParent(true);
@@ -243,12 +250,12 @@ public class MonsterDispay extends UIComponent {
 
         Monster6Table.left().top().padLeft(465).padTop(610);
         Monster6Table.setFillParent(true);
-        Monster6Table.add(unlockedChapterImg6).size(80,80).padLeft(15);
+        Monster6Table.add(unlockedChapterImg6).size(80, 80).padLeft(15);
         Monster6Table.add(monster6Name).padLeft(45).padBottom(40);
 
         monster6AttributeTable = new Table();
         Label monster6Attributes = new Label("attack: 3\nhealth: 100", skin);
-        monster6Attributes.setColor(255,255,255,0.5f);
+        monster6Attributes.setColor(255, 255, 255, 0.5f);
         monster6Attributes.setFontScale(0.8f);
         monster6AttributeTable.left().top().padLeft(610).padTop(645);
         monster6AttributeTable.setFillParent(true);
@@ -261,12 +268,12 @@ public class MonsterDispay extends UIComponent {
 
         Monster7Table.left().top().padLeft(465).padTop(720);
         Monster7Table.setFillParent(true);
-        Monster7Table.add(unlockedChapterImg7).size(80,80).padLeft(15);
+        Monster7Table.add(unlockedChapterImg7).size(80, 80).padLeft(15);
         Monster7Table.add(monster7Name).padLeft(50).padBottom(40);
 
         monster7AttributeTable = new Table();
         Label monster7Attributes = new Label("attack: 3\nhealth: 100", skin);
-        monster7Attributes.setColor(255,255,255,0.5f);
+        monster7Attributes.setColor(255, 255, 255, 0.5f);
         monster7Attributes.setFontScale(0.8f);
         monster7AttributeTable.left().top().padLeft(615).padTop(755);
         monster7AttributeTable.setFillParent(true);
@@ -281,62 +288,62 @@ public class MonsterDispay extends UIComponent {
 
         buttonTable.setFillParent(true);
         buttonTable.add(mainMenuButton);
-       // buttonTable.add(unlockedChapterImg);
+        // buttonTable.add(unlockedChapterImg);
 
         box = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/monster_menu/box_covered.png", Texture.class));
 
 
-        boardTable.add(box).size(700,900);
+        boardTable.add(box).size(700, 900);
 
         //this table contains the background image
         Image bgImage = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/monster_menu/background.png", Texture.class));
         bgTable = new Table();
         bgTable.setFillParent(true);
-        bgTable.add(bgImage).size(1400,880);
+        bgTable.add(bgImage).size(1400, 880);
 
         Image secretImage = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/monster_menu/plant.jpg", Texture.class));
         secretTable = new Table().padBottom(650);
         secretTable.setFillParent(true);
-        secretTable.add(secretImage).size(540,125).padBottom(25);
+        secretTable.add(secretImage).size(540, 125).padBottom(25);
 
         Image secretImage2 = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/monster_menu/thorns.jpg", Texture.class));
         secretTable2 = new Table().padBottom(350);
         secretTable2.setFillParent(true);
-        secretTable2.add(secretImage2).size(540,125).padBottom(90);
+        secretTable2.add(secretImage2).size(540, 125).padBottom(90);
 
         Image secretImage3 = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/monster_menu/stone.jpg", Texture.class));
         secretTable3 = new Table().padBottom(160);
         secretTable3.setFillParent(true);
-        secretTable3.add(secretImage3).size(540,125).padBottom(30);
+        secretTable3.add(secretImage3).size(540, 125).padBottom(30);
 
         Image secretImage4 = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/monster_menu/monkey.jpg", Texture.class));
         secretTable4 = new Table().padTop(90);
         secretTable4.setFillParent(true);
-        secretTable4.add(secretImage4).size(540,125).padBottom(30);
+        secretTable4.add(secretImage4).size(540, 125).padBottom(30);
 
         Image secretImage5 = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/monster_menu/hugger.jpg", Texture.class));
         secretTable5 = new Table().padTop(330);
         secretTable5.setFillParent(true);
-        secretTable5.add(secretImage5).size(540,125).padBottom(30);
+        secretTable5.add(secretImage5).size(540, 125).padBottom(30);
 
         Image secretImage6 = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/monster_menu/ship.jpg", Texture.class));
         secretTable6 = new Table().padTop(570);
         secretTable6.setFillParent(true);
-        secretTable6.add(secretImage6).size(540,115).padBottom(30);
+        secretTable6.add(secretImage6).size(540, 115).padBottom(30);
 
         Image secretImage7 = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/monster_menu/hugger.jpg", Texture.class));
         secretTable7 = new Table().padTop(780);
         secretTable7.setFillParent(true);
-        secretTable7.add(secretImage7).size(540,95).padBottom(30);
+        secretTable7.add(secretImage7).size(540, 95).padBottom(30);
 
         // add the board to the stage first so that its can be under of score data
         stage.addActor(bgTable);
@@ -351,35 +358,33 @@ public class MonsterDispay extends UIComponent {
         stage.addActor(monster1AttributeTable);
         stage.addActor(monster2AttributeTable);
         stage.addActor(monster3AttributeTable);
-        stage.addActor(monster4AttributeTable );
+        stage.addActor(monster4AttributeTable);
         stage.addActor(monster5AttributeTable);
         stage.addActor(monster6AttributeTable);
         stage.addActor(monster7AttributeTable);
-        if (ObstacleEventHandler.locked){
-           stage.addActor(secretTable);
+        if (ObstacleEventHandler.locked) {
+            stage.addActor(secretTable);
         }
-        if (ObstacleEventHandler.locked2){
+        if (ObstacleEventHandler.locked2) {
             stage.addActor(secretTable2);
         }
 
-        if (ObstacleEventHandler.locked3){
+        if (ObstacleEventHandler.locked3) {
             stage.addActor(secretTable3);
         }
 
-        if (ObstacleAttackTask.lock_use){
+        if (ObstacleAttackTask.lock_use) {
             stage.addActor(secretTable4);
         }
 
-        if (ObstacleAttackTask.lock_use){
+        if (ObstacleAttackTask.lock_use) {
             stage.addActor(secretTable5);
         }
 
-        if (ObstacleEventHandler.locked_ufo){
+        if (ObstacleEventHandler.locked_ufo) {
             stage.addActor(secretTable6);
             stage.addActor(secretTable7);
         }
-
-
 
 
         stage.addActor(buttonTable);
@@ -388,7 +393,6 @@ public class MonsterDispay extends UIComponent {
         //prepare the data tables
 
     }
-
 
 
     @Override

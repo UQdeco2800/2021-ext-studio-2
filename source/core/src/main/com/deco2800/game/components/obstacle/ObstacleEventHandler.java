@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
  */
 public class ObstacleEventHandler extends Component {
 
-
     public static boolean locked = true;
     public static boolean locked2 = true;
     public static boolean locked3 = true;
