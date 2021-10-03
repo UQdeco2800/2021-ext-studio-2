@@ -300,6 +300,7 @@ public void spawnRockstwo(int xValue) {
             "images/obstacle2_vision2.png",
             "images/stone.png",
             "images/background.png",
+            "images/background_2.png",
             "images/monkey_original.png",
             "images/Facehugger.png",
             "images/stone1.png",
@@ -353,7 +354,9 @@ public void spawnRockstwo(int xValue) {
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
     private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
+    private static final String NEWMAP_BACKGROUNDMUSIC = "sounds/newmap_background.mp3";
     private static final String[] forestMusic = {BACKGROUNDMUSIC};
+    private static final String[] newMapMusic = {NEWMAP_BACKGROUNDMUSIC};
     private boolean firstGenerate = true;
 
     private final TerrainFactory terrainFactory;
@@ -373,6 +376,7 @@ public void spawnRockstwo(int xValue) {
     public void create() {
         loadAssets();
         showBackground();
+        showNewMapBackground();
         displayUI();
         spawnTerrain(TerrainType.MUD_ROAD);
         spawnTerrain(TerrainType.ROCK_ROAD);
@@ -408,9 +412,26 @@ public void spawnRockstwo(int xValue) {
         spawnEntity(gameBg);
     }
 
+    private void showNewMapBackground() {
+        Entity gameBg = new Entity();
+        BackgroundRenderComponent newBg = new BackgroundRenderComponent("images/background_2.png");
+        newBg.setVertical(47);
+        gameBg.addComponent(newBg);
+        spawnEntity(gameBg);
+    }
+
     public void showScrollingBackground(int counter) {
         Entity gameBg = new Entity();
         BackgroundRenderComponent newBg = new BackgroundRenderComponent("images/background.png");
+        newBg.setHorizontal(30f * counter);
+        gameBg.addComponent(newBg);
+        spawnEntity(gameBg);
+    }
+
+    public void showNewMapScrollingBackground(int counter, float vertical) {
+        Entity gameBg = new Entity();
+        BackgroundRenderComponent newBg = new BackgroundRenderComponent("images/background_2.png");
+        newBg.setVertical(vertical);
         newBg.setHorizontal(30f * counter);
         gameBg.addComponent(newBg);
         spawnEntity(gameBg);
@@ -755,11 +776,26 @@ public void spawnRockstwo(int xValue) {
     }
 
 
-    private void playMusic() {
+    public void playMusic() {
         Music music = ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class);
         music.setLooping(true);
         music.setVolume(0.3f);
         music.play();
+    }
+
+    public void playNewMapMusic() {
+        Music newMusic = ServiceLocator.getResourceService().getAsset(NEWMAP_BACKGROUNDMUSIC, Music.class);
+        newMusic.setLooping(true);
+        newMusic.setVolume(0.3f);
+        newMusic.play();
+    }
+
+    public void stopMusic() {
+        ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class).stop();
+    }
+
+    public void stopNewMapMusic() {
+        ServiceLocator.getResourceService().getAsset(NEWMAP_BACKGROUNDMUSIC, Music.class).stop();
     }
 
     private void loadAssets() {
@@ -771,6 +807,7 @@ public void spawnRockstwo(int xValue) {
         resourceService.loadSounds(jumpSounds);
         resourceService.loadSounds(turnSounds);
         resourceService.loadMusic(forestMusic);
+        resourceService.loadMusic(newMapMusic);
         resourceService.loadTextures(mpcTextures);
         resourceService.loadTextureAtlases(mpcTexturesAtlases);
 
@@ -789,6 +826,7 @@ public void spawnRockstwo(int xValue) {
         resourceService.unloadAssets(jumpSounds);
         resourceService.unloadAssets(turnSounds);
         resourceService.unloadAssets(forestMusic);
+        resourceService.unloadAssets(newMapMusic);
         resourceService.unloadAssets(mpcTextures);
         resourceService.unloadAssets(mpcTexturesAtlases);
     }

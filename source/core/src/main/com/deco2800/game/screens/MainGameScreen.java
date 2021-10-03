@@ -263,6 +263,8 @@ public class MainGameScreen extends ScreenAdapter {
         // Generate terrain, obstacle and enemies
         switch (newMapStatus) {
             case Off:
+                forestGameArea.stopNewMapMusic();
+                forestGameArea.playMusic();
                 // infinite loop for terrain and obstacles
                 if (screenVector.x > (2 * counter + 1) * 10) {
                     counter += 1;
@@ -285,9 +287,12 @@ public class MainGameScreen extends ScreenAdapter {
                 slowPlayer();
                 break;
             case On:
+                forestGameArea.stopMusic();
+                forestGameArea.playNewMapMusic();
                 // Render terrains on new map
                 if (screenVector.x > (2 * counter + 1) * 10) {
                     counter += 1;
+                    forestGameArea.showNewMapScrollingBackground(counter, 47);
                     forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
   //                  forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
                     forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
