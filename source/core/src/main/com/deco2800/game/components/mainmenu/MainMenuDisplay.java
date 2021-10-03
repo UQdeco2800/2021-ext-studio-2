@@ -50,6 +50,8 @@ public class MainMenuDisplay extends UIComponent {
 
     TextButton achievementsBtn = new TextButton("Achievements", skin);
 
+    TextButton attiresBtn = new TextButton("Select Unlocked Attires", skin);
+
     //Team8
     TextButton monsterMenuBtn = new TextButton("Monster Menu", skin);
 
@@ -108,6 +110,14 @@ public class MainMenuDisplay extends UIComponent {
           }
     });
 
+    attiresBtn.addListener(new ChangeListener() {
+          @Override
+          public void changed(ChangeEvent event, Actor actor) {
+              logger.debug("Unlocked Attires clicked");
+              entity.getEvents().trigger("unlockedAttires");
+          }
+      });
+
     monsterMenuBtn.addListener(new ChangeListener() {
         @Override
         public void changed(ChangeEvent event, Actor actor) {
@@ -134,7 +144,9 @@ public class MainMenuDisplay extends UIComponent {
     table.row();
     table.add(achievementsBtn).padTop(15f);
       table.row();
-      table.add(monsterMenuBtn).padTop(15f);
+    table.add(attiresBtn).padTop(15f);
+    table.row();
+    table.add(monsterMenuBtn).padTop(15f);
     stage.addActor(bgTable);
     stage.addActor(table);
   }
