@@ -121,8 +121,6 @@ public class NPCFactory {
             .addComponent(new PhysicsMovementComponent())
             .addComponent(new ColliderComponent())
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-
-
             .addComponent(animator)
             .addComponent(new SpaceshipAttackController().setPlayer(target))
             .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Spaceship));
@@ -166,7 +164,10 @@ public class NPCFactory {
             .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SmallMissile));
 
     missile.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.DynamicBody);
+
     missile.setScale(3.5f, 3.5f);
+
+    
     missile.setZIndex(1); // Generate missile above spaceship
 
     animator.startAnimation("missile1");

@@ -191,6 +191,7 @@ public class ObstacleFactory {
 
 //                        .addComponent(new TextureRenderComponent("images/portal.png"))
                     .addComponent(animator)
+
 //                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
 //                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
                         .addComponent(new ObstacleEventHandler(type));

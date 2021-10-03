@@ -28,6 +28,7 @@ public class MainMenuActions extends Component {
     entity.getEvents().addListener("displayPropsShop", this::onDisplayPropsShop);
     entity.getEvents().addListener("displayHistoryScores", this::onDisplayHistoryScores);
     entity.getEvents().addListener("achievements", this::onAchievements);
+    entity.getEvents().addListener("unlockedAttires", this::onUnlockedAttires);
     entity.getEvents().addListener("monsterMenu", this::onDisplayMonsterMenu);
   }
 
@@ -84,6 +85,11 @@ public class MainMenuActions extends Component {
   private void onAchievements(){
     logger.info("Launching Achievements screen");
     game.setScreen(GdxGame.ScreenType.ACHIEVEMENTS);
+  }
+
+  private void onUnlockedAttires(){
+    logger.info("Launching Unlocked Attires screen");
+    game.setScreen(GdxGame.ScreenType.UNLOCKED_ATTIRES);
   }
 
   private void onDisplayMonsterMenu() {

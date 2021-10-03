@@ -41,6 +41,7 @@ public class PlayerAnimationController extends Component {
     private void animatePickUp() {
         preAnimationCleanUp();
         animator.startAnimation("main_player_pickup");
+
     }
     /**
      * Makes the player crouch.
@@ -100,5 +101,7 @@ public class PlayerAnimationController extends Component {
         animator.stopAnimation();
     }
 
-
+    public void setTexturePresent(boolean texturePresent) {
+        this.texturePresent = texturePresent;
+    }
 }

@@ -10,8 +10,10 @@ import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.buff.Buff;
 import com.deco2800.game.components.items.InventorySystem;
 import com.deco2800.game.components.items.ItemBar;
+import com.deco2800.game.components.player.UnlockedAttiresDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
+import com.deco2800.game.files.MPCConfig;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.BackgroundRenderComponent;
@@ -118,7 +120,6 @@ public class ForestGameArea extends GameArea {
             "images/iso_grass_1.png",
             "images/iso_grass_2.png",
             "images/iso_grass_3.png",
-            "images/mpc/mpc_right.png",
             "images/road.png",
             "images/water.png",
             "images/rock.jpg",
@@ -137,7 +138,6 @@ public class ForestGameArea extends GameArea {
             "images/monkey_original.png",
             "images/Facehugger.png",
             "images/stone1.png",
-            "images/mpc/mpcAnimation.png",
             "images/food1.png",
             "images/water1.png",
             "images/ufo.png",
@@ -162,6 +162,7 @@ public class ForestGameArea extends GameArea {
             "images/obstacle_Meteorite.atlas",
             "images/mpc/mpcAnimation.atlas",
             "images/spaceship.atlas",
+
             "images/food1.png",
             "images/water1.png",
             "images/missile.atlas",
@@ -174,6 +175,26 @@ public class ForestGameArea extends GameArea {
             "sounds/monster_roar.mp3",
             "sounds/spacecraft_floating.mp3"
     };
+
+    private static final String[] mpcTextures = {
+            "images/mpc/finalAtlas/OG/mpcAnimation.png",
+            "images/mpc/finalAtlas/gold_2/mpcAnimation_2.png",
+            "images/mpc/finalAtlas/gold_4/mpcAnimation_4.png",
+            "images/mpc/finalAtlas/gold_6/mpcAnimation_6.png",
+            "images/mpc/finalAtlas/OG/mpc_right.png",
+            "images/mpc/finalAtlas/gold_2/mpc_right.png",
+            "images/mpc/finalAtlas/gold_4/mpc_right.png",
+            "images/mpc/finalAtlas/gold_6/mpc_right.png",
+
+    };
+    private static final String[] mpcTexturesAtlases = {
+            "images/mpc/finalAtlas/OG/mpcAnimation.atlas",
+            "images/mpc/finalAtlas/gold_2/mpcAnimation_2.atlas",
+            "images/mpc/finalAtlas/gold_4/mpcAnimation_4.atlas",
+            "images/mpc/finalAtlas/gold_6/mpcAnimation_6.atlas",
+
+    };
+
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
     private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
@@ -202,7 +223,7 @@ public class ForestGameArea extends GameArea {
 
 //        spawnRocks();
 //        spawnWoods();
-
+        MPCConfig.updateValues();
         player = spawnPlayer();
         spawnObstacles();
         Buff buff = new Buff(player);
@@ -580,6 +601,8 @@ public class ForestGameArea extends GameArea {
         resourceService.loadSounds(jumpSounds);
         resourceService.loadSounds(turnSounds);
         resourceService.loadMusic(forestMusic);
+        resourceService.loadTextures(mpcTextures);
+        resourceService.loadTextureAtlases(mpcTexturesAtlases);
 
         while (!resourceService.loadForMillis(10)) {
             // This could be upgraded to a loading screen
@@ -596,6 +619,8 @@ public class ForestGameArea extends GameArea {
         resourceService.unloadAssets(jumpSounds);
         resourceService.unloadAssets(turnSounds);
         resourceService.unloadAssets(forestMusic);
+        resourceService.unloadAssets(mpcTextures);
+        resourceService.unloadAssets(mpcTexturesAtlases);
     }
 
     @Override
