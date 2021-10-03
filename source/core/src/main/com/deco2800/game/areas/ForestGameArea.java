@@ -300,6 +300,7 @@ public void spawnRockstwo(int xValue) {
             "images/obstacle2_vision2.png",
             "images/stone.png",
             "images/background.png",
+            "images/background_2.png",
             "images/monkey_original.png",
             "images/Facehugger.png",
             "images/stone1.png",
@@ -373,6 +374,7 @@ public void spawnRockstwo(int xValue) {
     public void create() {
         loadAssets();
         showBackground();
+        showNewMapBackground();
         displayUI();
         spawnTerrain(TerrainType.MUD_ROAD);
         spawnTerrain(TerrainType.ROCK_ROAD);
@@ -408,10 +410,27 @@ public void spawnRockstwo(int xValue) {
         spawnEntity(gameBg);
     }
 
+    private void showNewMapBackground() {
+        Entity gameBg = new Entity();
+        BackgroundRenderComponent newBg = new BackgroundRenderComponent("images/background_2.png");
+        newBg.setVertical(47);
+        gameBg.addComponent(newBg);
+        spawnEntity(gameBg);
+    }
+
     public void showScrollingBackground(int counter) {
         Entity gameBg = new Entity();
         BackgroundRenderComponent newBg = new BackgroundRenderComponent("images/background.png");
         newBg.setHorizontal(30f * counter);
+        gameBg.addComponent(newBg);
+        spawnEntity(gameBg);
+    }
+
+    public void showNewMapScrollingBackground(int counter, float vertical) {
+        Entity gameBg = new Entity();
+        BackgroundRenderComponent newBg = new BackgroundRenderComponent("images/background_2.png");
+        newBg.setHorizontal(30f * counter);
+        newBg.setVertical(vertical);
         gameBg.addComponent(newBg);
         spawnEntity(gameBg);
     }
