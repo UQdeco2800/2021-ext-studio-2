@@ -288,6 +288,7 @@ public void spawnRockstwo(int xValue) {
             "images/water.png",
             "images/rock.jpg",
             "images/wood.jpg",
+            "images/terrain2.png",
             "images/Items/first_aid_kit.png",
             "images/Items/food.png",
             "images/Items/water.png",
@@ -437,15 +438,15 @@ public void spawnRockstwo(int xValue) {
         GridPoint2 tileBounds = terrain.getMapBounds(0);
         Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
 
-        // Left
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL), GridPoint2Utils.ZERO, false, false);
-        // Right
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL),
-                new GridPoint2(tileBounds.x, 0),
-                false,
-                false);
+//        // Left
+//        spawnEntityAt(
+//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL), GridPoint2Utils.ZERO, false, false);
+//        // Right
+//        spawnEntityAt(
+//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL),
+//                new GridPoint2(tileBounds.x, 0),
+//                false,
+//                false);
 
         // Top
         spawnEntityAt(
@@ -479,15 +480,15 @@ public void spawnRockstwo(int xValue) {
         GridPoint2 tileBounds = terrain.getMapBounds(0);
         Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
 
-        // Left
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL), GridPoint2Utils.ZERO, false, false);
-        // Right
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL),
-                new GridPoint2(tileBounds.x, 0),
-                false,
-                false);
+//        // Left
+//        spawnEntityAt(
+//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL), GridPoint2Utils.ZERO, false, false);
+//        // Right
+//        spawnEntityAt(
+//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL),
+//                new GridPoint2(tileBounds.x, 0),
+//                false,
+//                false);
 
         // Top
         spawnEntityAt(

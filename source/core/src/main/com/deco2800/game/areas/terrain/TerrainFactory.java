@@ -70,7 +70,7 @@ public class TerrainFactory {
         return createMudRoadTerrain(1, mudRoad);
       case ROCK_ROAD:
         TextureRegion rockRoad =
-                new TextureRegion(resourceService.getAsset("images/rock.jpg", Texture.class));
+                new TextureRegion(resourceService.getAsset("images/terrain2.png", Texture.class));
         return createRockRoadTerrain(1, rockRoad);
       default:
         return null;
@@ -167,7 +167,7 @@ public class TerrainFactory {
         return createMudRoadTerrainRandomly(1, mudRoad, xValue);
       case ROCK_ROAD:
         TextureRegion rockRoad =
-                new TextureRegion(resourceService.getAsset("images/rock.jpg", Texture.class));
+                new TextureRegion(resourceService.getAsset("images/terrain2.png", Texture.class));
         return createRockRoadTerrainRandomly(1, rockRoad, xValue);
       default:
         return null;
