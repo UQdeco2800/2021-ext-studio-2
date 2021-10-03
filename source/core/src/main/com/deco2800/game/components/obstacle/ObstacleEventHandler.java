@@ -184,9 +184,13 @@ public class ObstacleEventHandler extends Component {
 
         SpaceshipAttackController.setSpaceshipAttack();
         Sound floatingSound = ServiceLocator.getResourceService().getAsset("sounds/spacecraft_floating.mp3", Sound.class);
-        floatingSound.play(0.5f, 1f, 0);
+        floatingSound.play(0.8f, 0.6f, 0);
 //        System.out.println("spaceShipAttack was triggered.");
         spaceshipAttack = true;
+<<<<<<< Updated upstream
+=======
+        locked_ufo = false;
+>>>>>>> Stashed changes
     }
 
     void spaceshipDispose () {
