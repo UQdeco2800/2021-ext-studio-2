@@ -7,6 +7,7 @@ import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.items.PropsShopDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
+import com.deco2800.game.entities.factories.PropStoreFactory;
 import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
@@ -38,6 +39,7 @@ public class PropsShopScreen extends ScreenAdapter {
         renderer.getCamera().getEntity().setPosition(2f, 1f);
         Stage stage = ServiceLocator.getRenderService().getStage();
         loadAssets();
+
         ui = new Entity();
         propsShopDisplay = new PropsShopDisplay(game);
         ui.addComponent(propsShopDisplay).addComponent(new InputDecorator(stage, 10))
