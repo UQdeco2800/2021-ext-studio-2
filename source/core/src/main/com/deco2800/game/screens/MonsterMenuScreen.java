@@ -18,6 +18,9 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * A screen for monster manual.
+ */
 public class MonsterMenuScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private final Renderer renderer;
@@ -57,6 +60,10 @@ public class MonsterMenuScreen extends ScreenAdapter {
             };
     private Entity ui;
 
+    /**
+     * Generate a monster manual UI.
+     * @param game this game
+     */
     public MonsterMenuScreen(GdxGame game) {
         logger.debug("drawing monster menu ui");
         ServiceLocator.registerInputService(new InputService());

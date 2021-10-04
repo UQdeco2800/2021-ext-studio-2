@@ -19,6 +19,10 @@ import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Display all monsters, It is locked by default, and will only be unlocked when the character encounters this
+ * type of monster.
+ */
 public class MonsterDispay extends UIComponent {
     private static final NPCConfigs configs =
             FileLoader.readClass(NPCConfigs.class, "configs/NPCs.json");
@@ -99,6 +103,7 @@ public class MonsterDispay extends UIComponent {
         unlockedImg.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                logger.info("Plant button clicked");
                 entity.getEvents().trigger("openDetailPage");
             }
         });
@@ -106,12 +111,14 @@ public class MonsterDispay extends UIComponent {
         unlockedImg2.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                logger.info("Thorns button clicked");
                 entity.getEvents().trigger("openDetailPage2");
             }
         });
         unlockedImg3.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                logger.info("Meteorite button clicked");
                 entity.getEvents().trigger("openDetailPage3");
             }
         });
@@ -119,18 +126,21 @@ public class MonsterDispay extends UIComponent {
         unlockedImg4.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                logger.info("Monkey button clicked");
                 entity.getEvents().trigger("openDetailPage4");
             }
         });
         unlockedImg5.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                logger.info("Face Worm button clicked");
                 entity.getEvents().trigger("openDetailPage5");
             }
         });
         unlockedImg6.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                logger.info("Spaceship button clicked");
                 entity.getEvents().trigger("openDetailPage6");
             }
         });
@@ -147,7 +157,7 @@ public class MonsterDispay extends UIComponent {
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("return menu button clicked");
+                        logger.info("Menu button clicked");
                         game.setScreen(GdxGame.ScreenType.MAIN_MENU);
                     }
                 });
@@ -359,31 +369,31 @@ public class MonsterDispay extends UIComponent {
 
         if (ObstacleEventHandler.locked) {
             stage.addActor(secretTable);
-            logger.info("return secretTable1 locked");
+            logger.info("Alien Plant Detail Page Locked");
         }
         if (ObstacleEventHandler.locked2) {
             stage.addActor(secretTable2);
-            logger.info("return secretTable2 locked");
+            logger.info("Aline thorn Detail Page Locked");
         }
 
         if (ObstacleEventHandler.locked3) {
             stage.addActor(secretTable3);
-            logger.info("return secretTable3 locked");
+            logger.info("Meteorite Detail Page Locked");
         }
 
         if (ObstacleAttackTask.lock_use) {
             stage.addActor(secretTable4);
-            logger.info("return secretTable4 locked");
+            logger.info("Aline Monkey Detail Page Locked");
         }
 
         if (ObstacleAttackTask.lock_use) {
             stage.addActor(secretTable5);
-            logger.info("return secretTable5 locked");
+            logger.info("Face Worm Detail Page Locked");
         }
 
         if (ObstacleEventHandler.locked_ufo) {
             stage.addActor(secretTable6);
-            logger.info("return secretTable6 locked");
+            logger.info("Spaceship Detail Page Locked");
 
         }
 

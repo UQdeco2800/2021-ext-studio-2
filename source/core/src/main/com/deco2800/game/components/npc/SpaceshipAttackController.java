@@ -17,11 +17,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This class deals with the scene of the spaceship attack. Control character position and provide global variables to
+ * MainGameScreen.java to control camera movement.
+ */
 public class SpaceshipAttackController extends Component {
     private static final Logger logger = LoggerFactory.getLogger(SpaceshipAttackController.class);
     protected Entity entity;
-    protected boolean enabled = true;
 
+    /**
+     * Spaceship attack state
+     */
     public enum SpaceshipAttack {
         Off,
         Start, // Used once in render
@@ -29,6 +35,9 @@ public class SpaceshipAttackController extends Component {
         Finish;
     }
 
+    /**
+     * Spaceship attack type
+     */
     public enum AttackType {
         Low,
         Middle,
@@ -45,12 +54,16 @@ public class SpaceshipAttackController extends Component {
         }
     }
 
+    /* Spaceship attack state */
     public static SpaceshipAttack spaceshipState = SpaceshipAttack.Off;
+
+    /* The position where the character just hit the spaceship */
     public static Vector2 positionHitSpaceship;
 
+    /* Spaceship attack time */
     public float spaceshipTime;
-    private int counterSmallMissile;
 
+    private int counterSmallMissile;
     private Entity player;
 
 
@@ -84,12 +97,18 @@ public class SpaceshipAttackController extends Component {
 
     /**
      * Get spaceshipState, used for test.
+     *
      * @return the current state of spaceship attack.
      */
     public static SpaceshipAttack getSpaceshipState() {
         return spaceshipState;
     }
 
+    /**
+     * Set the state of the spacecraft, use it when testing
+     *
+     * @param spaceshipState the state of the spaceship attack
+     */
     public static void setSpaceshipState(SpaceshipAttack spaceshipState) {
         SpaceshipAttackController.spaceshipState = spaceshipState;
     }
@@ -113,6 +132,10 @@ public class SpaceshipAttackController extends Component {
     }
 
 
+    /**
+     * Set the attack start, character position, keyboard key state, character deceleration state.
+     * Set attack state to on.
+     */
     void spaceshipSceneBegins() {
         try {
             positionHitSpaceship = player.getPosition();
@@ -133,9 +156,15 @@ public class SpaceshipAttackController extends Component {
             MainGameScreen.setSlowPlayer(false);
             MainGameScreen.setSlowPlayerTime(0);
         }
+
         spaceshipState = SpaceshipAttack.On;
+
+        logger.info("Spaceship attack begins");
     }
 
+    /**
+     * The scene when the spacecraft attacked. Set the remaining time of the attack and launch the missile.
+     */
     void spaceshipAttackScene() {
         // set player position
         player.setPosition((float) (player.getPosition().x - 0.05), player.getPosition().y);
@@ -147,16 +176,17 @@ public class SpaceshipAttackController extends Component {
         Vector2 spaceshipPosition = this.getEntity().getPosition();
         Vector2 playerPosition = this.player.getPosition();
 
-        // attack or stop
+        // stop attack
         if (spaceshipTime <= 0) {
             spaceshipState = SpaceshipAttack.Finish;
+            logger.info("Spaceship attack finish");
             this.getEntity().getEvents().trigger("spaceshipDispose");
             this.getEntity().getEvents().trigger("spawnPortalEntrance", spaceshipPosition.cpy().sub(-5, -5), ObstacleEventHandler.ObstacleType.PortalEntrance);
             AchievementsHelper.getInstance().trackSpaceshipAvoidSuccess();
-
+            // hard attack
         } else if (spaceshipTime <= 10 && (counterSmallMissile % 50 == 0 || counterSmallMissile % 30 == 0)) {
             hardAttack(counterSmallMissile, spaceshipPosition, playerPosition);
-
+            // easy attack
         } else if (spaceshipTime <= 20 && (counterSmallMissile % 50 == 0 || counterSmallMissile % 30 == 0)) {
             easyAttack(counterSmallMissile, spaceshipPosition, playerPosition);
         }
@@ -169,7 +199,8 @@ public class SpaceshipAttackController extends Component {
             case 100:
             case 200:
             case 300:
-                this.getEntity().getEvents().trigger("spawnSmallMissile", getRandomPosition(spaceshipPosition, playerPosition, null, 1));
+                this.getEntity().getEvents().trigger("spawnSmallMissile", getRandomPosition(spaceshipPosition,
+                        playerPosition, null, 1));
                 break;
             case 330:
             case 360:
@@ -179,7 +210,8 @@ public class SpaceshipAttackController extends Component {
             case 480:
             case 510:
             case 540:
-                this.getEntity().getEvents().trigger("spawnSmallMissile", getRandomPosition(spaceshipPosition, playerPosition, AttackType.Player, 1));
+                this.getEntity().getEvents().trigger("spawnSmallMissile", getRandomPosition(spaceshipPosition,
+                        playerPosition, AttackType.Player, 1));
                 break;
         }
     }
@@ -199,8 +231,10 @@ public class SpaceshipAttackController extends Component {
             case 1080:
             case 1110:
             case 1140:
-                this.getEntity().getEvents().trigger("spawnSmallMissile", getRandomPosition(spaceshipPosition, playerPosition, null, 2));
-                this.getEntity().getEvents().trigger("spawnSmallMissile", getRandomPosition(spaceshipPosition, playerPosition, AttackType.Player, 2));
+                this.getEntity().getEvents().trigger("spawnSmallMissile", getRandomPosition(spaceshipPosition,
+                        playerPosition, null, 2));
+                this.getEntity().getEvents().trigger("spawnSmallMissile", getRandomPosition(spaceshipPosition,
+                        playerPosition, AttackType.Player, 2));
                 break;
         }
     }
@@ -237,6 +271,12 @@ public class SpaceshipAttackController extends Component {
                     randomPosition = null;
             }
         } while (level == 2 && type == null && Math.abs(randomPosition.cpy().sub(playerPosition).y) < 2);
+
+        if (level == 1) {
+            logger.debug("Easy missile attack: attackType = {}, position = {}", attackType, randomPosition);
+        } else if (level == 2) {
+            logger.debug("Hard missile attack: attackType = {}, position = {}", attackType, randomPosition);
+        }
 
         return randomPosition;
     }

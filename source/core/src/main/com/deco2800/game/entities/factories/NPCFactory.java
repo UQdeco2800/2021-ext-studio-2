@@ -58,7 +58,8 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/Facehugger.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/Facehugger.atlas",
+                                TextureAtlas.class));
         animator.addAnimation("baolian1", 0.1f, Animation.PlayMode.LOOP);
 
         FaceWorm
@@ -93,7 +94,8 @@ public class NPCFactory {
         monkey
                 .addComponent(animator)
                 .addComponent(aiComponent)
-                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.FlyingMonkey, "sounds/monster_roar.mp3"));
+                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.FlyingMonkey,
+                        "sounds/monster_roar.mp3"));
 
         animator.startAnimation("1m");
         monkey.setScale(2.3f, 2.3f);
@@ -103,6 +105,9 @@ public class NPCFactory {
 
     /**
      * Create Spaceship
+     *
+     * @param target the player entity
+     * @return this spaceship entity
      */
     public static Entity createSpaceShip(Entity target) {
 
@@ -123,22 +128,28 @@ public class NPCFactory {
                 .addComponent(animator)
                 .addComponent(new SpaceshipAttackController().setPlayer(target))
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Spaceship))
-                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.Spaceship, "sounds/spacecraft_floating.mp3"));
+                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.Spaceship,
+                        "sounds/spacecraft_floating.mp3"));
 
 
         spaceship.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
         animator.startAnimation("spaceship1");
         spaceship.setScale(10f, 10f);
+
+        logger.debug("Create a spaceship");
+
         return spaceship;
     }
 
     /**
-     * Create Space Ship
+     * Create a missile
+     * @param target the player entity
+     * @return this missile entity
      */
     public static Entity createSmallMissile(Entity target) {
         BaseEntityConfig config = configs.smallMissile;
         Entity missile = new Entity("Missile");
-//
+
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService()
@@ -155,7 +166,8 @@ public class NPCFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SmallMissile))
-                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.SmallMissile,"sounds/missile_explosion.mp3"));
+                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.SmallMissile,
+                        "sounds/missile_explosion.mp3"));
 
         missile.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.DynamicBody);
 
@@ -168,7 +180,7 @@ public class NPCFactory {
 
         animator.startAnimation("missile1");
 
-//    logger.debug("Create a Flying Monkey");
+        logger.debug("Create a missile");
         return missile;
     }
 

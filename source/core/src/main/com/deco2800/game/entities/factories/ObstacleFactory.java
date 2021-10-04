@@ -31,6 +31,9 @@ public class ObstacleFactory {
             FileLoader.readClass(ObstaclesConfigs.class, "configs/obstacles.json");
     private static final Logger logger = LoggerFactory.getLogger(ObstacleFactory.class);
 
+    /**
+     * Type of Meteorite, different type means different size. more detail see spawnMeteorites() in ForestGameArea.java
+     */
     public enum MeteoriteType {
         SmallMeteorite, MiddleMeteorite, BigMeteorite;
     }
@@ -193,7 +196,7 @@ public class ObstacleFactory {
         animator.startAnimation("portal_1");
         portal.setScale(2, 4);
 
-//        logger.debug("Create a Thorns Obstacle");
+        logger.debug("Create a {}", type);
 
         return portal;
     }
