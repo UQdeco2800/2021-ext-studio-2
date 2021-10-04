@@ -18,6 +18,9 @@ import com.deco2800.game.entities.factories.PropStoreFactory;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
+/**
+ * A ui component for displaying the props shop.
+ */
 public class PropStoreDisplay extends UIComponent {
     private final GdxGame game;
     private static final int ITEM_COLUMN_COUNT = 3;

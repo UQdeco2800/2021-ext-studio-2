@@ -22,6 +22,7 @@ public class PropShopHelper {
 
         }
     public static void usePropHealth(Entity target, int health){
+            target.getComponent(CombatStatsComponent.class).setHealthMax(health);
         target.getComponent(CombatStatsComponent.class).setHealth(health);
     }
 }

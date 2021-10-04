@@ -8,6 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.files.PropStoreRecord;
 import com.deco2800.game.ui.UIComponent;
 
+/**
+ * A ui component for displaying the props shop gold .
+ */
 public class PropStoreGoldDisplay extends UIComponent {
     Label gold;
     @Override
