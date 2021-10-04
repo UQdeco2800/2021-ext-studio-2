@@ -1,5 +1,6 @@
 package com.deco2800.game.components.buff;
 
+import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.concurrency.AsyncTaskQueue;
@@ -27,6 +28,7 @@ public class Buff {
         if (playerComponent != null) {
             playerComponent.addIncreaseHealthImage();
         }
+
         CombatStatsComponent combatStatsComponent = this.player.getComponent(CombatStatsComponent.class);
         if (combatStatsComponent.getHealth() + 10 > 100) {
             component.addHealth(100 - combatStatsComponent.getHealth());
@@ -51,6 +53,7 @@ public class Buff {
         if (playerComponent != null) {
             playerComponent.addAddMaxHealthImage();
         }
+        player.getEvents().trigger("health_limit_up");
         component.setHealthMax(component.getHealthMax() + 20);
         AsyncTaskQueue.enqueueTask(() -> {
             try {
@@ -62,6 +65,14 @@ public class Buff {
                 e.printStackTrace();
             }
         });
+        Timer timer=new Timer();
+        timer.scheduleTask(new Timer.Task() {
+            @Override
+            public void run() {
+                player.getEvents().trigger("stopBuffDebuff");
+                timer.stop();
+            }
+        },1);
     }
 
 }

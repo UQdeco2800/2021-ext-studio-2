@@ -1,11 +1,13 @@
 package com.deco2800.game.entities.factories;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.SoundComponent;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.npc.EnemyAnimationController;
@@ -40,160 +42,174 @@ import org.slf4j.LoggerFactory;
  * similar characteristics.
  */
 public class NPCFactory {
-  private static final NPCConfigs configs =
-      FileLoader.readClass(NPCConfigs.class, "configs/NPCs.json");
-  private static final Logger logger = LoggerFactory.getLogger(NPCConfigs.class);
-  /**
-   * Creates a Face Worm.
-   *
-   * @param target entity to chase
-   * @return entity
-   */
-  public static Entity createFaceWorm(Entity target) {
-    Entity FaceWorm = createBaseNPC(target, "FaceWorm");
-    BaseEntityConfig config = configs.faceWorm;
+    private static final NPCConfigs configs =
+            FileLoader.readClass(NPCConfigs.class, "configs/NPCs.json");
+    private static final Logger logger = LoggerFactory.getLogger(NPCConfigs.class);
 
-    AnimationRenderComponent animator =
-        new AnimationRenderComponent(
-            ServiceLocator.getResourceService().getAsset("images/Facehugger.atlas", TextureAtlas.class));
-    animator.addAnimation("baolian1", 0.1f, Animation.PlayMode.LOOP);
+    /**
+     * Creates a Face Worm.
+     *
+     * @param target entity to chase
+     * @return entity
+     */
+    public static Entity createFaceWorm(Entity target) {
+        Entity FaceWorm = createBaseNPC(target, "FaceWorm");
+        BaseEntityConfig config = configs.faceWorm;
 
-    FaceWorm
-        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-        .addComponent(animator)
-        .addComponent(new EnemyAnimationController())
-        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.FaceWorm));
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/Facehugger.atlas",
+                                TextureAtlas.class));
+        animator.addAnimation("baolian1", 0.1f, Animation.PlayMode.LOOP);
 
-    FaceWorm.setScale(2.4f,2.4f);
-    logger.debug("Create a Face Worm");
-    return FaceWorm;
-  }
+        FaceWorm
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(new EnemyAnimationController())
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.FaceWorm));
 
-  /**
-   * Create Flying Monkey
-   */
-  public static Entity createFlyingMonkey(Entity target) {
+        FaceWorm.setScale(2.4f, 2.4f);
+        logger.debug("Create a Face Worm");
+        return FaceWorm;
+    }
 
-    Entity monkey = new Entity("FlyingMonkey");
+    /**
+     * Create Flying Monkey
+     */
+    public static Entity createFlyingMonkey(Entity target) {
 
-    AITaskComponent aiComponent =
-            new AITaskComponent()
-                    .addTask(new ObstacleAttackTask(monkey, target,10,6f));
+        Entity monkey = new Entity("FlyingMonkey");
 
-    AnimationRenderComponent animator =
-            new AnimationRenderComponent(
-                    ServiceLocator.getResourceService()
-                            .getAsset("images/monkey.atlas", TextureAtlas.class));
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new ObstacleAttackTask(monkey, target, 10, 6f));
 
-    animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService()
+                                .getAsset("images/monkey.atlas", TextureAtlas.class));
 
-    monkey
-            .addComponent(animator)
-            .addComponent(aiComponent);
+        animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
 
-    animator.startAnimation("1m");
-    monkey.setScale(2.3f, 2.3f);
-    logger.debug("Create a Flying Monkey");
-    return monkey;
-  }
+        monkey
+                .addComponent(animator)
+                .addComponent(aiComponent)
+                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.FlyingMonkey,
+                        "sounds/monster_roar.mp3"));
 
-  /**
-   * Create Spaceship
-   */
-  public static Entity createSpaceShip(Entity target) {
+        animator.startAnimation("1m");
+        monkey.setScale(2.3f, 2.3f);
+        logger.debug("Create a Flying Monkey");
+        return monkey;
+    }
 
-    Entity spaceship = new Entity("SpaceShip");
-//
-//    AITaskComponent aiComponent =
-//            new AITaskComponent()
-//                    .addTask(new ObstacleAttackTask(target,10,6f));
-//
-//    AnimationRenderComponent animator =
-//            new AnimationRenderComponent(
-//                    ServiceLocator.getResourceService()
-//                            .getAsset("images/monkey.atlas", TextureAtlas.class));
+    /**
+     * Create Spaceship
+     *
+     * @param target the player entity
+     * @return this spaceship entity
+     */
+    public static Entity createSpaceShip(Entity target) {
 
-//    animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
+        Entity spaceship = new Entity("SpaceShip");
 
-    spaceship
-            .addComponent(new TextureRenderComponent("images/ufo.png"))
-            .addComponent(new PhysicsComponent())
-            .addComponent(new PhysicsMovementComponent())
-            .addComponent(new ColliderComponent())
-            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-            .addComponent(new SpaceshipAttackController().setPlayer(target))
-            .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Spaceship));
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService()
+                                .getAsset("images/spaceship.atlas", TextureAtlas.class));
 
-    spaceship.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
-//    animator.startAnimation("1m");
-    spaceship.setScale(10f, 10f);
-//    logger.debug("Create a Flying Monkey");
-    return spaceship;
-  }
+        animator.addAnimation("spaceship1", 0.2f, Animation.PlayMode.LOOP);
 
-  /**
-   * Create Space Ship
-   */
-  public static Entity createSmallMissile(Entity target) {
-    BaseEntityConfig config = configs.smallMissile;
-    Entity missile = new Entity("Missile");
-//
-//    AITaskComponent aiComponent =
-//            new AITaskComponent()
-//                    .addTask(new ObstacleAttackTask(target,10,6f));
-//
-//    AnimationRenderComponent animator =
-//            new AnimationRenderComponent(
-//                    ServiceLocator.getResourceService()
-//                            .getAsset("images/monkey.atlas", TextureAtlas.class));
-
-//    animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
-
-    missile
-            .addComponent(new TextureRenderComponent("images/rocket-ship-launch.png"))
-            .addComponent(new PhysicsComponent())
-            .addComponent(new PhysicsMovementComponent())
-//            .addComponent(new ColliderComponent())
-            .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
-            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-            .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-            .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SmallMissile));
-
-    missile.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.DynamicBody);
-//    animator.startAnimation("1m");
-    missile.setScale(1.5f, 0.75f);
-    missile.setZIndex(1); // Generate missile above spaceship
-//    logger.debug("Create a Flying Monkey");
-    return missile;
-  }
+        spaceship
+                .addComponent(new PhysicsComponent())
+                .addComponent(new PhysicsMovementComponent())
+                .addComponent(new ColliderComponent())
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+                .addComponent(animator)
+                .addComponent(new SpaceshipAttackController().setPlayer(target))
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Spaceship))
+                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.Spaceship,
+                        "sounds/spacecraft_floating.mp3"));
 
 
-  /**
-   * Creates a generic NPC to be used as a base entity by more specific NPC creation methods.
-   *
-   * @return entity
-   */
-  private static Entity createBaseNPC(Entity target, String type) {
-    AITaskComponent aiComponent =
-        new AITaskComponent()
-            .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-            .addTask(new ChaseTask(target, 10, 4f, 4f));
-    Entity npc =
-        new Entity(type)
-            .addComponent(new PhysicsComponent())
-            .addComponent(new PhysicsMovementComponent())
-            .addComponent(new ColliderComponent())
-            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-            .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1.5f))
-            .addComponent(aiComponent);
+        spaceship.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
+        animator.startAnimation("spaceship1");
+        spaceship.setScale(10f, 10f);
 
-    PhysicsUtils.setScaledCollider(npc, 0.9f, 0.4f);
-    return npc;
-  }
+        logger.debug("Create a spaceship");
+
+        return spaceship;
+    }
+
+    /**
+     * Create a missile
+     * @param target the player entity
+     * @return this missile entity
+     */
+    public static Entity createSmallMissile(Entity target) {
+        BaseEntityConfig config = configs.smallMissile;
+        Entity missile = new Entity("Missile");
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService()
+                                .getAsset("images/missile.atlas", TextureAtlas.class));
+
+        animator.addAnimation("missile1", 0.2f, Animation.PlayMode.LOOP);
+        animator.addAnimation("bomb", 0.1f, Animation.PlayMode.LOOP);
+
+        missile
+                .addComponent(animator)
+                .addComponent(new PhysicsComponent())
+                .addComponent(new PhysicsMovementComponent())
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SmallMissile))
+                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.SmallMissile,
+                        "sounds/missile_explosion.mp3"));
+
+        missile.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.DynamicBody);
+
+        missile.setScale(3.5f, 3.5f);
+
+        Vector2 boundingBox = missile.getScale().cpy().scl(0.5f, 0.3f);
+        missile.getComponent(HitboxComponent.class).setAsBoxAligned(
+                boundingBox, PhysicsComponent.AlignX.LEFT, PhysicsComponent.AlignY.CENTER);
+        missile.setZIndex(1); // Generate missile above spaceship
+
+        animator.startAnimation("missile1");
+
+        logger.debug("Create a missile");
+        return missile;
+    }
 
 
+    /**
+     * Creates a generic NPC to be used as a base entity by more specific NPC creation methods.
+     *
+     * @return entity
+     */
+    private static Entity createBaseNPC(Entity target, String type) {
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new ChaseTask(target, 10, 4f, 4f));
+        Entity npc =
+                new Entity(type)
+                        .addComponent(new PhysicsComponent())
+                        .addComponent(new PhysicsMovementComponent())
+                        .addComponent(new ColliderComponent())
+                        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+                        .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1.5f))
+                        .addComponent(aiComponent);
 
-  private NPCFactory() {
-    throw new IllegalStateException("Instantiating static util class");
-  }
+        PhysicsUtils.setScaledCollider(npc, 0.9f, 0.4f);
+        return npc;
+    }
+
+
+    private NPCFactory() {
+        throw new IllegalStateException("Instantiating static util class");
+    }
 }

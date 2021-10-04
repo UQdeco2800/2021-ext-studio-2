@@ -115,12 +115,12 @@ public class MainMenuDisplay extends UIComponent {
 
   Button.ButtonStyle buff = new Button.ButtonStyle();
       buff.up = new TextureRegionDrawable(new TextureRegion(
-          new Texture(Gdx.files.internal("button/monster1.png"))));
+          new Texture(Gdx.files.internal("button/buff1.png"))));
       buff.over = new TextureRegionDrawable(new TextureRegion(
-          new Texture(Gdx.files.internal("button/monster2.png"))));
+          new Texture(Gdx.files.internal("button/buff2.png"))));
 
   Button buffBtn = new Button(buff);
-      buffBtn.setPosition(1120,200);
+      buffBtn.setPosition(1120,170);
 
 
       //TextButton startBtn = new TextButton("Start", skin);

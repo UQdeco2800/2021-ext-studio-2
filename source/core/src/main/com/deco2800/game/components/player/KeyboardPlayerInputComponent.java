@@ -3,10 +3,17 @@ package com.deco2800.game.components.player;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.components.foodAndwater.RecycleDisplay;
+import com.deco2800.game.components.items.TestBuffForItem;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.utils.math.Vector2Utils;
+import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.ItemBar.newItembar;
+import com.deco2800.game.components.foodAndwater.FoodDisplay;
+import com.deco2800.game.components.foodAndwater.WaterDisplay;
+
 
 /**
  * Input handler for the player for keyboard and touch (mouse) input.
@@ -59,6 +66,51 @@ public class KeyboardPlayerInputComponent extends InputComponent {
       case Keys.X:
         entity.getEvents().trigger("itemPickUp");
 
+        return true;
+      case Keys.J:
+        newItembar.usekit();
+        if(entity.getComponent(CombatStatsComponent.class).getHealth() < 100){
+          entity.getComponent(CombatStatsComponent.class).addHealth(10);
+        }
+        return true;
+
+      case Keys.L:
+        newItembar.usefood();
+        FoodDisplay.addOrRemoveImage(1);
+        return true;
+
+      case Keys.K:
+        newItembar.usewater();
+        WaterDisplay.addOrRemoveImage(1);
+        return true;
+
+      case Keys.NUM_4://consume recovers
+        RecycleDisplay.isKey =false;
+        if(RecycleDisplay.recycleNumber ==1){
+          if(!RecycleDisplay.isKey){
+            TestBuffForItem.countNumber=0;
+            RecycleDisplay.recycleNumber =0;
+            RecycleDisplay.isKey =true;
+            if(RecycleDisplay.recycleState == RecycleDisplay.recycleState.hp){//add health
+              MainGameScreen.players.getComponent(CombatStatsComponent.class).setHealth(
+                      MainGameScreen.players.getComponent(CombatStatsComponent.class).getHealth()+10
+              );
+            }else if(RecycleDisplay.recycleState == RecycleDisplay.recycleState.food){//add food
+              FoodDisplay.addOrRemoveImage(1);
+            }else {//add water
+              WaterDisplay.addOrRemoveImage(1);
+            }
+          }
+        }
+        return true;
+      case Keys.NUM_5://change recover icon to food
+        RecycleDisplay.recycleState = RecycleDisplay.recycleState.food;
+        return true;
+      case Keys.NUM_6://change recover icon to water
+        RecycleDisplay.recycleState = RecycleDisplay.recycleState.water;
+        return true;
+      case Keys.NUM_7://change recover icon to hp
+        RecycleDisplay.recycleState = RecycleDisplay.recycleState.hp;
         return true;
       default:
         return false;

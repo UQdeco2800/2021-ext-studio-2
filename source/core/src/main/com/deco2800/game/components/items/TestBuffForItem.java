@@ -1,11 +1,15 @@
 package com.deco2800.game.components.items;
 
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.ItemBar.ItemBarDisplay;
+import com.deco2800.game.components.ItemBar.newItembar;
 import com.deco2800.game.entities.Entity;
 
 public class TestBuffForItem {
+    public static int countNumber = 0;
     private int health;
     private Entity target;
+
 
 
     public void increaseHealth(Entity target){
@@ -16,6 +20,11 @@ public class TestBuffForItem {
         health = target.getComponent(CombatStatsComponent.class).getHealth();
         if(health < 100) {
             target.getComponent(CombatStatsComponent.class).addHealth(10);
+        }
+        /*ItemBarDisplay.addorremove("kit",1);*/
+        newItembar.addkit();
+        if(countNumber < 3){
+            countNumber++;
         }
     }
 }
