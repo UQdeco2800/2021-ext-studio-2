@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5881539c-4f80-4adb-8a5f-f42d90b3ee2c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/core/src/main/com/deco2800/game/areas/ForestGameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/core/src/main/com/deco2800/game/areas/ForestGameArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/core/src/main/com/deco2800/game/components/items/TestBuffForItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/core/src/main/com/deco2800/game/components/items/TestBuffForItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/core/src/main/com/deco2800/game/components/player/KeyboardPlayerInputComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/core/src/main/com/deco2800/game/components/player/KeyboardPlayerInputComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/core/src/main/com/deco2800/game/screens/MainGameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/core/src/main/com/deco2800/game/screens/MainGameScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/core/src/test/com/deco2800/game/components/ItemBar/newItembarTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/core/src/test/com/deco2800/game/components/ItemBar/newItembarTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,8 +15,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../更新/KeyboardPlayerInputComponent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
+            <state relative-caret-position="1728">
+              <caret line="85" selection-start-line="85" selection-end-line="85" />
             </state>
           </provider>
         </entry>
@@ -28,7 +24,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/core/src/main/com/deco2800/game/components/player/KeyboardPlayerInputComponent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
+            <state relative-caret-position="1656">
               <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
             </state>
           </provider>
@@ -43,11 +39,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/core/src/main/com/deco2800/game/screens/MainGameScreen.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="312">
-              <caret line="43" column="57" lean-forward="true" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
+              <caret line="43" column="57" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/source/core/src/test/com/deco2800/game/components/ItemBar/newItembarTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="672">
+              <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -66,6 +71,7 @@
         <option value="$PROJECT_DIR$/source/core/src/main/com/deco2800/game/components/player/KeyboardPlayerInputComponent.java" />
         <option value="$PROJECT_DIR$/../更新/MainGameScreen.java" />
         <option value="$PROJECT_DIR$/source/core/src/main/com/deco2800/game/screens/MainGameScreen.java" />
+        <option value="$PROJECT_DIR$/source/core/src/test/com/deco2800/game/components/ItemBar/newItembarTest.java" />
       </list>
     </option>
   </component>
@@ -192,14 +198,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../更新/KeyboardPlayerInputComponent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
+        <state relative-caret-position="1728">
+          <caret line="85" selection-start-line="85" selection-end-line="85" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/source/core/src/main/com/deco2800/game/components/player/KeyboardPlayerInputComponent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
+        <state relative-caret-position="1656">
           <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
         </state>
       </provider>
@@ -214,7 +220,14 @@
     <entry file="file://$PROJECT_DIR$/source/core/src/main/com/deco2800/game/screens/MainGameScreen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
-          <caret line="43" column="57" lean-forward="true" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
+          <caret line="43" column="57" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/core/src/test/com/deco2800/game/components/ItemBar/newItembarTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
         </state>
       </provider>
     </entry>

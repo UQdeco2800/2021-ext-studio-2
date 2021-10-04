@@ -12,7 +12,7 @@ class newItembarTest {
     @Test
     void addwater() {
         newItembar bar = spy(newItembar.class);
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 80; i++) {
             bar.addwater();
         }
         assertEquals(10,bar.getwater());
@@ -21,7 +21,7 @@ class newItembarTest {
     @Test
     void addfood() {
         newItembar bar = spy(newItembar.class);
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 80; i++) {
             bar.addfood();
         }
         assertEquals(10,bar.getfood());
@@ -30,7 +30,7 @@ class newItembarTest {
     @Test
     void addkit() {
         newItembar bar = spy(newItembar.class);
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 80; i++) {
             bar.addkit();
         }
         assertEquals(10,bar.getkit());
