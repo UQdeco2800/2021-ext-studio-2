@@ -18,6 +18,6 @@ public class TestBuffForItem {
         if(health < 100) {
             target.getComponent(CombatStatsComponent.class).addHealth(10);
         }
-        ItemBarDisplay.addorremove("kit",1);
+/*        ItemBarDisplay.addorremove("kit",1);*/
     }
 }
