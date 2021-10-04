@@ -5,8 +5,11 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.input.InputComponent;
-import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.utils.math.Vector2Utils;
+import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.ItemBar.newItembar;
+import com.deco2800.game.components.foodAndwater.FoodDisplay;
+import com.deco2800.game.components.foodAndwater.WaterDisplay;
 
 /**
  * Input handler for the player for keyboard and touch (mouse) input.
