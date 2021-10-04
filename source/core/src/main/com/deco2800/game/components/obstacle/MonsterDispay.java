@@ -83,11 +83,6 @@ public class MonsterDispay extends UIComponent {
     }
 
 
-    private ImageButton getImageButton(String path) {
-        return new ImageButton(new TextureRegionDrawable(new TextureRegion(
-                new Texture(path))));
-    }
-
     private void createMonsterMenuBoard() {
         // Create Button to the monster menu
         TextButton mainMenuButton = new TextButton("Main Menu", skin);
@@ -280,9 +275,7 @@ public class MonsterDispay extends UIComponent {
 
         //this table contains the button back to main menu
         buttonTable = new Table();
-        buttonTable.bottom().right();
-        buttonTable.padBottom(50f).padRight(80f);
-        buttonTable.center();
+        buttonTable.center().padLeft(1100).padTop(700);
 
         buttonTable.setFillParent(true);
         buttonTable.add(mainMenuButton);
