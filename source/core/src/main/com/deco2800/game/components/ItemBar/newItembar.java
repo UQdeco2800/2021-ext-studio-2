@@ -11,7 +11,7 @@ public class newItembar extends Component{
     /**
      * item bar capacity, each item has a upper limit of 10
      */
-    private int capacity = 10;
+    private static int capacity = 10;
     /**
      * waters stored in item bar
      */
@@ -63,7 +63,7 @@ public class newItembar extends Component{
     /**
      * kit number plus one
      */
-    public void addkit(){
+    public static void addkit(){
         if(kits.size()<capacity){
             kits.add("kit");
         }

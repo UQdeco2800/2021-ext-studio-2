@@ -3,10 +3,17 @@ package com.deco2800.game.components.player;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.components.foodAndwater.RecoverDisplay;
+import com.deco2800.game.components.items.TestBuffForItem;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.utils.math.Vector2Utils;
+import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.ItemBar.newItembar;
+import com.deco2800.game.components.foodAndwater.FoodDisplay;
+import com.deco2800.game.components.foodAndwater.WaterDisplay;
+
 
 /**
  * Input handler for the player for keyboard and touch (mouse) input.
@@ -75,6 +82,35 @@ public class KeyboardPlayerInputComponent extends InputComponent {
       case Keys.K:
         newItembar.usewater();
         WaterDisplay.addOrRemoveImage(1);
+        return true;
+
+      case Keys.NUM_4://consume recovers
+        RecoverDisplay.iskey=false;
+        if(RecoverDisplay.recovernum==1){
+          if(!RecoverDisplay.iskey){
+            TestBuffForItem.countNumber=0;
+            RecoverDisplay.recovernum=0;
+            RecoverDisplay.iskey=true;
+            if(RecoverDisplay.recoverstate== RecoverDisplay.recoverstate.hp){//add health
+              MainGameScreen.players.getComponent(CombatStatsComponent.class).setHealth(
+                      MainGameScreen.players.getComponent(CombatStatsComponent.class).getHealth()+10
+              );
+            }else if(RecoverDisplay.recoverstate== RecoverDisplay.recoverstate.food){//add food
+              FoodDisplay.addOrRemoveImage(1);
+            }else {//add water
+              WaterDisplay.addOrRemoveImage(1);
+            }
+          }
+        }
+        return true;
+      case Keys.NUM_5://change recover icon to food
+        RecoverDisplay.recoverstate= RecoverDisplay.recoverstate.food;
+        return true;
+      case Keys.NUM_6://change recover icon to water
+        RecoverDisplay.recoverstate= RecoverDisplay.recoverstate.water;
+        return true;
+      case Keys.NUM_7://change recover icon to hp
+        RecoverDisplay.recoverstate= RecoverDisplay.recoverstate.hp;
         return true;
       default:
         return false;
