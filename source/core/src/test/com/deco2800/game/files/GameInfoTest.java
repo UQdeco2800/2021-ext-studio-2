@@ -45,7 +45,7 @@ public class GameInfoTest {
     @BeforeEach
     void beforeEach() throws Exception {
         // Changing the JSON file path so that the original game is not affected
-        setFinalStatic(GameInfo.class.getDeclaredField("path"),
+        setFinalStatic(GameInfo.class.getDeclaredField("PATH"),
                 "test/files/gameInfoTest.json");
         // Changing the JSON file path so that the original game is not affected
         setFinalStatic(GameInfo.class.getDeclaredField("location"), FileLoader.Location.LOCAL);
@@ -72,7 +72,7 @@ public class GameInfoTest {
     void returnsZeroGameCountsIfNoPrevious() {
         try {
             // The game count should be zero by default, or if the JSON file is missing
-            setFinalStatic(GameInfo.class.getDeclaredField("path"),
+            setFinalStatic(GameInfo.class.getDeclaredField("PATH"),
                     "test/files/missingGameCount.json");
             assertEquals(GameInfo.getGameCount(), 0);
         } catch (Exception ignored){

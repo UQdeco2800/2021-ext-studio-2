@@ -15,7 +15,7 @@ import static com.deco2800.game.files.FileLoader.Location.EXTERNAL;
 public class GameRecords {
     private static final String ROOT_DIR = "DECO2800Game";
     private static final String RECORDS_FILE = "gameRecords.json";
-    private static final String path = ROOT_DIR + File.separator + RECORDS_FILE;
+    private static final String PATH = ROOT_DIR + File.separator + RECORDS_FILE;
 
     /**
      * Stores the records of the most recent game played into a JSON file
@@ -156,7 +156,7 @@ public class GameRecords {
     }
 
     public static Records getRecords() {
-        Records records = FileLoader.readClass(Records.class, path, EXTERNAL);
+        Records records = FileLoader.readClass(Records.class, PATH, EXTERNAL);
         return records != null ? records : new Records();
     }
 
@@ -166,7 +166,7 @@ public class GameRecords {
      * @param records new records
      */
     public static void setRecords(Records records) {
-        FileLoader.writeClass(records, path, EXTERNAL);
+        FileLoader.writeClass(records, PATH, EXTERNAL);
     }
 
     /**

@@ -34,7 +34,6 @@ public class ScoreHistoryDisplay extends UIComponent {
     private Table boardTable;
     private Table buttonTable;
     private Table bgTable;
-    private Image board;
 
     public ScoreHistoryDisplay(GdxGame game) {
         this.game = game;
@@ -71,7 +70,7 @@ public class ScoreHistoryDisplay extends UIComponent {
         buttonTable.padBottom(35f).padRight(52f);
         buttonTable.setFillParent(true);
 
-        board = new Image(ServiceLocator.getResourceService()
+        Image board = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/historyScoreBoard.png", Texture.class));
 
         float boardSideLength = 850f;
@@ -203,6 +202,8 @@ public class ScoreHistoryDisplay extends UIComponent {
 
     @Override
     protected void draw(SpriteBatch batch) {
-
+        // This is empty because LibGDX tables provide an easier
+        // interface to implement GUI. Also, draw is handled
+        // by the stage.
     }
 }

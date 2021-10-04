@@ -109,6 +109,8 @@ public class ScoreDetailsDialog extends UIComponent {
 
     @Override
     protected void draw(SpriteBatch batch) {
-
+        // This is empty because LibGDX tables provide an easier
+        // interface to implement GUI. Also, draw is handled
+        // by the stage.
     }
 }
