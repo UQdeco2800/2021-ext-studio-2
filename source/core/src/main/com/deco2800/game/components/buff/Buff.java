@@ -25,19 +25,10 @@ public class Buff  {
     public void addHealth(){
 
         PlayerStatsDisplay playerComponent = this.player.getComponent(PlayerStatsDisplay.class);
-        player.getEvents().trigger("healthUp");
         if (playerComponent!=null){
             playerComponent.addIncreaseHealthImage();
         }
         component.addHealth(10);
-        Timer timer=new Timer();
-        timer.scheduleTask(new Timer.Task() {
-            @Override
-            public void run() {
-                player.getEvents().trigger("stopBuffDebuff");
-                timer.stop();
-            }
-        },1);
     }
 
     public void increaseHealthLimit(){

@@ -204,6 +204,7 @@ public class PlayerAnimationController extends Component {
      */
     private void animateHealthUP() {
         animationName = animator.getCurrentAnimation();
+        System.out.println("Starting Animation: "+ animationName);
         preAnimationCleanUp();
         switch (animationName) {
             case "main_player_run":
