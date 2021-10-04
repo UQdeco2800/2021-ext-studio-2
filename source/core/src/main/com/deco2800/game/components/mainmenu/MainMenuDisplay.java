@@ -51,6 +51,14 @@ public class MainMenuDisplay extends UIComponent {
             new Texture(Gdx.files.internal("button/start2.png"))));
     Button startBtn = new Button(start);
 
+    /** build select unlocked attire button */
+    Button.ButtonStyle attires = new Button.ButtonStyle();
+    attires.up = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/select1.png"))));
+    attires.over = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("button/select2.png"))));
+    Button attiresBtn = new Button(attires);
+
     /** build new setting button */
     Button.ButtonStyle setting = new Button.ButtonStyle();
     setting.up = new TextureRegionDrawable(new TextureRegion(
@@ -103,6 +111,7 @@ public class MainMenuDisplay extends UIComponent {
     Button monsterBtn = new Button(monster);
     monsterBtn.setPosition(1120,40);
 
+
     //TextButton startBtn = new TextButton("Start", skin);
     //TextButton settingsBtn = new TextButton("Settings", skin);
     //TextButton exitBtn = new TextButton("Exit", skin);
@@ -111,7 +120,7 @@ public class MainMenuDisplay extends UIComponent {
     //Team9 History Scores
     //TextButton historyScoreBtn = new TextButton("History Score", skin);
     //TextButton achievementsBtn = new TextButton("Achievements", skin);
-    TextButton attiresBtn = new TextButton("Select Unlocked Attires", skin);
+    //TextButton attiresBtn = new TextButton("Select Unlocked Attires", skin);
     //Team8
     //TextButton monsterMenuBtn = new TextButton("Monster Menu", skin);
 
@@ -192,11 +201,11 @@ public class MainMenuDisplay extends UIComponent {
     table.row();
     table.add(startBtn).padTop(30f);
     table.row();
+    table.add(attiresBtn).padTop(30f);
+    table.row();
     table.add(settingBtn).padTop(30f);
     table.row();
     table.add(exitBtn).padTop(30f);
-    table.row();
-    table.add(attiresBtn).padTop(30f);
     stage.addActor(bgTable);
     stage.addActor(table);
     stage.addActor(shopBtn);
