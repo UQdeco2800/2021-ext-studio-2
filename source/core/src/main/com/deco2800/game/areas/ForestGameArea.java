@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.items.PropShopHelper;
 import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.buff.Buff;
@@ -398,6 +399,7 @@ public void spawnRockstwo(int xValue) {
         trackAchievements();
         trackBuffDescription();
         setBonusItems(player);
+        PropShopHelper.useProps(player);
         player.getEvents().addListener("B pressed", this::InvSys);
         spawnPortal(new Vector2(10, 10), ObstacleEventHandler.ObstacleType.PortalEntrance);
         spawnPortal(new Vector2(50, 55), ObstacleEventHandler.ObstacleType.PortalExport);

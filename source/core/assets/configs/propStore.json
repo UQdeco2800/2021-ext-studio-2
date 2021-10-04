@@ -3,11 +3,11 @@
 {
   "id": 1,
   "name": "Health",
-  "desc": "buying this will increase your maximum health to 105",
+  "desc": "buying this will increase your maximum health to 170",
   "path": "images/Items/props/add_health.png",
   "price": 5,
   "property": {
-    "health": 105
+    "health": 170
   }
 },
 {
