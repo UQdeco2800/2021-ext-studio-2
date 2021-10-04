@@ -389,13 +389,15 @@ public void spawnRockstwo(int xValue) {
 
         player = spawnPlayer();
         spawnObstacles();
-        Buff buff = new Buff(player);
-        buff.addHealth();
+        //Buff buff = new Buff(player);
+        //buff.addHealth();
         pro = new InventorySystem(player);
         spawnFirstAid();
         spawnGold();
+        spawnGoldNewMap();
         playMusic();
         trackAchievements();
+        trackBuffDescription();
         setBonusItems(player);
         PropShopHelper.useProps(player);
         player.getEvents().addListener("B pressed", this::InvSys);
@@ -766,6 +768,23 @@ public void spawnRockstwo(int xValue) {
         }
     }
 
+    private void spawnGoldNewMap() {
+        int k = 0;
+        for (int i = 0; i < 30; i++) {
+            GridPoint2 position = new GridPoint2(k++, 70);
+            Entity gold = ItemFactory.createGold(player);
+            spawnEntityAt(gold, position, false, false);
+        }
+    }
+
+    public void spawnGoldNewMapRandomly(int x) {
+        for (int i = 0; i < 30; i++) {
+            GridPoint2 position = new GridPoint2(10 + x++, 70);
+            Entity gold = ItemFactory.createGold(player);
+            spawnEntityAt(gold, position, false, false);
+        }
+    }
+
     private Entity spawnPlayer() {
         Entity newPlayer = PlayerFactory.createPlayer();
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
@@ -848,4 +867,7 @@ public void spawnRockstwo(int xValue) {
         spawnEntity(AchievementFactory.createAchievementEntity());
     }
 
+    private void trackBuffDescription() {
+        spawnEntity(BuffDescriptionFactory.createBuffDescriptionEntity());
+    }
 }

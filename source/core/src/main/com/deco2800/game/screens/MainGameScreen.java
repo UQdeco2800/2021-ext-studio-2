@@ -42,7 +42,9 @@ public class MainGameScreen extends ScreenAdapter {
     private static final String[] mainGameTextures = {"images/heart.png", "images/clockV2.png",
             "images/scoreboardV2.png", "images/background.png", "images/water1.png", "images/food1.png",
             "images/Sprint2_Buffs_Debuffs/Poisoning.png",
-            "images/Sprint2_Buffs_Debuffs/decrease_health.png", "images" +
+            "images/Sprint2_Buffs_Debuffs/decrease_health.png",
+            "images/Sprint2_Buffs_Debuffs/increase_health_limit.png",
+            "images" +
             "/Sprint2_Buffs_Debuffs/increase_health.png",
             "images/Sprint2_Buffs_Debuffs/decrease_speed.png", "images/distanceboard.png"
     };
@@ -302,6 +304,7 @@ public class MainGameScreen extends ScreenAdapter {
                     forestGameArea.spawnRocksfour((int) (screenVector.x + 2));
                     forestGameArea.spawnRocksfive((int) (screenVector.x + 2));
                     forestGameArea.spawnRockssix((int) (screenVector.x + 2));
+                    forestGameArea.spawnGoldNewMapRandomly((int) (screenVector.x + 2));
                 }}
 
     }
