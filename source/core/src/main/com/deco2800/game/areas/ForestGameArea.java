@@ -388,14 +388,15 @@ public void spawnRockstwo(int xValue) {
 
         player = spawnPlayer();
         spawnObstacles();
-        Buff buff = new Buff(player);
-        buff.addHealth();
+        //Buff buff = new Buff(player);
+        //buff.addHealth();
         pro = new InventorySystem(player);
         spawnFirstAid();
         spawnGold();
         spawnGoldNewMap();
         playMusic();
         trackAchievements();
+        trackBuffDescription();
         setBonusItems(player);
         player.getEvents().addListener("B pressed", this::InvSys);
         spawnPortal(new Vector2(10, 10), ObstacleEventHandler.ObstacleType.PortalEntrance);
@@ -864,4 +865,7 @@ public void spawnRockstwo(int xValue) {
         spawnEntity(AchievementFactory.createAchievementEntity());
     }
 
+    private void trackBuffDescription() {
+        spawnEntity(BuffDescriptionFactory.createBuffDescriptionEntity());
+    }
 }

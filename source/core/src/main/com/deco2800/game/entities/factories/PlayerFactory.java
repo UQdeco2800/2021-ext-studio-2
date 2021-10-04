@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.buff.BuffAnimationController;
+import com.deco2800.game.components.buff.BuffDescriptionDisplay;
 import com.deco2800.game.components.player.InventoryComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.player.PlayerAnimationController;
@@ -86,7 +87,7 @@ public class PlayerFactory {
 
 
         Entity player =
-                new Entity()
+                new Entity("Player")
                         .addComponent(mpcTexture)
                         .addComponent(new PlayerAnimationController())
                         .addComponent(new PhysicsComponent())
@@ -97,6 +98,7 @@ public class PlayerFactory {
                         .addComponent(new InventoryComponent(stats.gold))
                         .addComponent(inputComponent)
                         .addComponent(new PlayerStatsDisplay())
+                        .addComponent(new BuffDescriptionDisplay())
                         .addComponent(mpcAnimator)
 //                        .addComponent(buffAnimator)
 //                        .addComponent(deBuffAnimator)

@@ -75,7 +75,6 @@ public class DistanceDisplay extends UIComponent {
     @Override
     public void update() {
         super.update();
-        //System.out.println("playerPostion:  "+entity.getPosition());
         entity.getEvents().trigger("updateDistance",
                 ServiceLocator.getDistanceService().getDistance());
     }
