@@ -10,7 +10,7 @@ public class SoundComponent extends Component {
     private Sound sound;
     ObstacleEventHandler.ObstacleType obstacleType;
     private static final Logger logger = LoggerFactory.getLogger(SoundComponent.class);
-public static int test = 0;
+
     /**
      * Create a component for sound play
      * @param soundPath file path of specific sound
@@ -50,13 +50,11 @@ public static int test = 0;
 
     public void spaceshipSound() {
         sound.play(1f, 0.6f, 0);
-        test = 1;
         logger.debug("Floating sound for spaceship start to play");
     }
 
     public void missileSound() {
         sound.play(0.3f, 1f, 0);
-        test = 1;
         logger.debug("Floating sound for spaceship start to play");
     }
     public void roarSound() {
