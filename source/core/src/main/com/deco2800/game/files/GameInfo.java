@@ -8,7 +8,7 @@ import java.io.File;
 public class GameInfo {
     private static final String ROOT_DIR = "DECO2800Game";
     private static final String GAME_INFO_FILE = "gameInfo.json";
-    private static final String path = ROOT_DIR + File.separator + GAME_INFO_FILE;
+    private static final String PATH = ROOT_DIR + File.separator + GAME_INFO_FILE;
     private static final FileLoader.Location location = FileLoader.Location.EXTERNAL;
 
     /**
@@ -37,7 +37,7 @@ public class GameInfo {
      * @param info the game metadata to persist in local storage
      */
     public static void setGameMetadata(GameMetadata info){
-        FileLoader.writeClass(info, path, location);
+        FileLoader.writeClass(info, PATH, location);
     }
 
     /**
@@ -45,7 +45,7 @@ public class GameInfo {
      * @return latest metadata stored in local storage
      */
     public static GameMetadata getGameMetadata(){
-        GameMetadata info = FileLoader.readClass(GameMetadata.class, path, location);
+        GameMetadata info = FileLoader.readClass(GameMetadata.class, PATH, location);
         return info != null ? info : new GameMetadata();
     }
 

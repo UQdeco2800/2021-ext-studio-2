@@ -192,10 +192,6 @@ public class AchievementRecordsDisplay extends UIComponent {
         }
     }
 
-    @Override
-    protected void draw(SpriteBatch batch) {
-
-    }
 
     @Override
     public void dispose() {
@@ -203,5 +199,12 @@ public class AchievementRecordsDisplay extends UIComponent {
         crossTable.clear();
         table.clear();
         bgTable.clear();
+    }
+
+    @Override
+    protected void draw(SpriteBatch batch) {
+        // This is empty because LibGDX tables provide an easier
+        // interface to implement GUI. Also, draw is handled
+        // by the stage.
     }
 }
