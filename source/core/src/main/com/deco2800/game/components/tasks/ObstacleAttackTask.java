@@ -28,7 +28,6 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     private final DebugRenderer debugRenderer;
     private GameArea gameArea;
     public static Boolean lock_use = true;
-
     public static Vector2 enemy_posion;
 
     public ObstacleAttackTask(Entity npc, Entity target, int priority, float viewDistance) {

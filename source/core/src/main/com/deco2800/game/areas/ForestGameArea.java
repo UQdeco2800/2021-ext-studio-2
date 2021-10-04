@@ -309,6 +309,9 @@ public void spawnRockstwo(int xValue) {
             "images/ufo.png",
             "images/rocket-ship-launch.png",
             "images/portal.png",
+            "images/missile.png",
+
+
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas",
@@ -323,8 +326,14 @@ public void spawnRockstwo(int xValue) {
             "images/monkey.atlas",
             "images/Facehugger.atlas",
             "images/obstacle_Meteorite.atlas",
+            "images/mpc/mpcAnimation.atlas",
+            "images/spaceship.atlas",
+
             "images/food1.png",
             "images/water1.png",
+            "images/missile.atlas",
+            "images/portal.atlas"
+
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg",
@@ -351,6 +360,7 @@ public void spawnRockstwo(int xValue) {
             "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.atlas",
 
     };
+
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
     private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
@@ -400,7 +410,6 @@ public void spawnRockstwo(int xValue) {
         player.getEvents().addListener("B pressed", this::InvSys);
         spawnPortal(new Vector2(10, 10), ObstacleEventHandler.ObstacleType.PortalEntrance);
         spawnPortal(new Vector2(50, 55), ObstacleEventHandler.ObstacleType.PortalExport);
-
     }
 
     public void InvSys() {

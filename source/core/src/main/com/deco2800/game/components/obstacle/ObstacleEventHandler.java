@@ -18,11 +18,11 @@ import org.slf4j.LoggerFactory;
  */
 public class ObstacleEventHandler extends Component {
 
-
     public static boolean locked = true;
     public static boolean locked2 = true;
     public static boolean locked3 = true;
     public static boolean locked_ufo = true;
+
     /**
      * The types of obstacles and enemies are used to determine the type of entity that triggers the event.
      */
@@ -206,10 +206,9 @@ public class ObstacleEventHandler extends Component {
         }
         Sound missileSound = ServiceLocator.getResourceService().getAsset("sounds/missile_explosion.mp3", Sound.class);
         missileSound.play(0.3f, 1f, 0);
-//        System.out.println("smallMissileAttack was triggered.");
-//        spaceshipAttack = true;
-//        this.entity.setSpaceShipDispose();
-        this.entity.setDispose();
+        animator.startAnimation("bomb");
+        animator.getEntity().setDisappearAfterAnimation(0.4f);
+
     }
 
     void portalEntrance(Fixture me, Fixture other) {

@@ -108,26 +108,27 @@ public class NPCFactory {
 //            new AITaskComponent()
 //                    .addTask(new ObstacleAttackTask(target,10,6f));
 //
-//    AnimationRenderComponent animator =
-//            new AnimationRenderComponent(
-//                    ServiceLocator.getResourceService()
-//                            .getAsset("images/monkey.atlas", TextureAtlas.class));
+    AnimationRenderComponent animator =
+            new AnimationRenderComponent(
+                    ServiceLocator.getResourceService()
+                            .getAsset("images/spaceship.atlas", TextureAtlas.class));
 
-//    animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
+    animator.addAnimation("spaceship1", 0.2f, Animation.PlayMode.LOOP);
 
     spaceship
-            .addComponent(new TextureRenderComponent("images/ufo.png"))
+//            .addComponent(new TextureRenderComponent("images/ufo.png"))
             .addComponent(new PhysicsComponent())
             .addComponent(new PhysicsMovementComponent())
             .addComponent(new ColliderComponent())
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+            .addComponent(animator)
             .addComponent(new SpaceshipAttackController().setPlayer(target))
             .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Spaceship));
 
+
     spaceship.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
-//    animator.startAnimation("1m");
+    animator.startAnimation("spaceship1");
     spaceship.setScale(10f, 10f);
-//    logger.debug("Create a Flying Monkey");
     return spaceship;
   }
 
@@ -142,15 +143,18 @@ public class NPCFactory {
 //            new AITaskComponent()
 //                    .addTask(new ObstacleAttackTask(target,10,6f));
 //
-//    AnimationRenderComponent animator =
-//            new AnimationRenderComponent(
-//                    ServiceLocator.getResourceService()
-//                            .getAsset("images/monkey.atlas", TextureAtlas.class));
+    AnimationRenderComponent animator =
+            new AnimationRenderComponent(
+                    ServiceLocator.getResourceService()
+                            .getAsset("images/missile.atlas", TextureAtlas.class));
 
-//    animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
+    // 奇怪的bug。。。
+    animator.addAnimation("missile1", 0.2f, Animation.PlayMode.LOOP);
+    animator.addAnimation("bomb", 0.1f, Animation.PlayMode.LOOP);
 
     missile
-            .addComponent(new TextureRenderComponent("images/rocket-ship-launch.png"))
+            .addComponent(animator)
+//            .addComponent(new TextureRenderComponent("images/missile.png"))
             .addComponent(new PhysicsComponent())
             .addComponent(new PhysicsMovementComponent())
 //            .addComponent(new ColliderComponent())
@@ -160,9 +164,16 @@ public class NPCFactory {
             .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SmallMissile));
 
     missile.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.DynamicBody);
-//    animator.startAnimation("1m");
-    missile.setScale(1.5f, 0.75f);
+
+    missile.setScale(3.5f, 3.5f);
+
+    Vector2 boundingBox = missile.getScale().cpy().scl(0.5f, 0.3f);
+    missile.getComponent(HitboxComponent.class).setAsBoxAligned(
+                    boundingBox, PhysicsComponent.AlignX.LEFT, PhysicsComponent.AlignY.CENTER);
     missile.setZIndex(1); // Generate missile above spaceship
+
+    animator.startAnimation("missile1");
+
 //    logger.debug("Create a Flying Monkey");
     return missile;
   }
