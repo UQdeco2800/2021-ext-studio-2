@@ -44,7 +44,10 @@ public class MainGameScreen extends ScreenAdapter {
             "images/Sprint2_Buffs_Debuffs/Poisoning.png",
             "images/Sprint2_Buffs_Debuffs/decrease_health.png", "images" +
             "/Sprint2_Buffs_Debuffs/increase_health.png",
-            "images/Sprint2_Buffs_Debuffs/decrease_speed.png", "images/distanceboard.png"
+            "images/Sprint2_Buffs_Debuffs/decrease_speed.png", "images/distanceboard.png",
+            "images/itembar/item/itembar-blood.png",
+            "images/itembar/item/itembar-water.png",
+            "images/itembar/item/itembar-leg.png",
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 

@@ -60,6 +60,22 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         entity.getEvents().trigger("itemPickUp");
 
         return true;
+      case Keys.J:
+        newItembar.usekit();
+        if(entity.getComponent(CombatStatsComponent.class).getHealth() < 100){
+          entity.getComponent(CombatStatsComponent.class).addHealth(10);
+        }
+        return true;
+
+      case Keys.L:
+        newItembar.usefood();
+        FoodDisplay.addOrRemoveImage(1);
+        return true;
+
+      case Keys.K:
+        newItembar.usewater();
+        WaterDisplay.addOrRemoveImage(1);
+        return true;
       default:
         return false;
     }
