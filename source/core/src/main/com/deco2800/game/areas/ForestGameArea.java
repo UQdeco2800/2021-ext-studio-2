@@ -44,6 +44,14 @@ public class ForestGameArea extends GameArea {
     }
 
 // line 5 rocks
+    /**
+     * Create the game "rock" obstacle
+     * a row of 5 rocks in a straight line suspended in the air
+     * At coordinates y= 50, the rocks will be on the ground, so at position y=55, the rocks will appear in the air and become an obstacle when the character moves.
+     * Create a loop to create x-coordinates for 5 consecutive stones standing next to each other.
+     *The spawnRocksone function will be called at MainGameScreen.java and will appear when switching to a new map.
+     * spawnEntityAt function helps us choose the coordinate position of the center of the rock, from there using rock.png and will scale the size of the rock horizontally and vertically.
+     */
 public void spawnRocksone(int xValue) {
 
     for (int i = 0; i < 5; i++) {
@@ -56,7 +64,7 @@ public void spawnRocksone(int xValue) {
 //        GridPoint2 PosThree = (10, 2);
 //        Entity rockTwo = ObstacleFactory.createRock();
 //        spawnEntityAt(rockTwo, PosThree, true, true);
-        GridPoint2 pos = new GridPoint2(xValue + 2 +i, 50);
+        GridPoint2 pos = new GridPoint2(xValue + 2 +i, 55);
         Entity rock = ObstacleFactory.createRock();
         spawnEntityAt(rock, pos, true, false);
 
@@ -66,6 +74,14 @@ public void spawnRocksone(int xValue) {
 //      N
 //     NN
 //    NNN
+    /**
+     * Create the game "rock" obstacle
+     * Form a rocks pyramid with six rocks stacked on top of each other, a total of 6 rocks needed
+     * Since the pyramid consists of three floors from the ground, the y coordinate of the rocks will be from 50 to 52, since y=50 the co-ordinate of the rocks will be on the ground
+     * The x coordinate will depend on the location of the rocks.
+     *The spawnRockstwo function will be called at MainGameScreen.java and will appear when switching to a new map.
+     *spawnEntityAt function helps us choose the coordinate position of the center of the rock, from there using rock.png and will scale the size of the rock horizontally and vertically.
+     */
 public void spawnRockstwo(int xValue) {
 
 
@@ -98,6 +114,14 @@ public void spawnRockstwo(int xValue) {
 //      N
 //      NN
 //      NNN
+    /**
+     * Create the game "rock" obstacle
+     * Form a rocks pyramid with six rocks stacked on top of each other, a total of 6 rocks needed
+     * Since the pyramid consists of three floors from the ground, the y coordinate of the rocks will be from 50 to 52, since y=50 the co-ordinate of the rocks will be on the ground
+     * The x coordinate will depend on the location of the rocks.
+     *The spawnRocksthree function will be called at MainGameScreen.java and will appear when switching to a new map.
+     *spawnEntityAt function helps us choose the coordinate position of the center of the rock, from there using rock.png and will scale the size of the rock horizontally and vertically.
+     */
     public void spawnRocksthree(int xValue) {
 
 
@@ -123,7 +147,14 @@ public void spawnRockstwo(int xValue) {
 
     }
 
-
+    /**
+     * Create the game "rock" obstacle
+     * a row of 5 rocks in a straight line suspended in the air
+     * Since it is a column, the x coordinate will stay the same, so we set x=18
+     * Loop the y coordinate to form 5 rock stacked on top of each other forming a straight column, with y= 50 rock will be on the ground facing up
+     *The spawnRocksfour function will be called at MainGameScreen.java and will appear when switching to a new map.
+     * spawnEntityAt function helps us choose the coordinate position of the center of the rock, from there using rock.png and will scale the size of the rock horizontally and vertically.
+     */
 // 5 rocks collum from the ground up
     public void spawnRocksfour(int xValue) {
 
@@ -135,7 +166,14 @@ public void spawnRockstwo(int xValue) {
 
         }
     }
-
+    /**
+     * Create the game "rock" obstacle
+     * a row of 5 rocks in a straight line suspended in the air
+     * Since it is a column, the x coordinate will stay the same, so we set x=20
+     * Loop the y coordinate to form 5 rock stacked on top of each other forming a straight column, with y start from 57
+     *The spawnRocksfive function will be called at MainGameScreen.java and will appear when switching to a new map.
+     * spawnEntityAt function helps us choose the coordinate position of the center of the rock, from there using rock.png and will scale the size of the rock horizontally and vertically.
+     */
     // 5 rocks collum from the sky down
     public void spawnRocksfive(int xValue) {
 
@@ -153,6 +191,14 @@ public void spawnRockstwo(int xValue) {
 //      NN
 //      NNN
 //      NNNN
+    /**
+     * Create the game "rock" obstacle
+     * Form a rocks larger pyramid with ten rocks stacked on top of each other, a total of 6 rocks needed
+     * Since the pyramid consists of four floors from the ground, the y coordinate of the rocks will be from 50 to 53, since y=50 the co-ordinate of the rocks will be on the ground
+     * The x coordinate will depend on the location of the rocks.
+     *The spawnRocksssixfunction will be called at MainGameScreen.java and will appear when switching to a new map.
+     *spawnEntityAt function helps us choose the coordinate position of the center of the rock, from there using rock.png and will scale the size of the rock horizontally and vertically.
+     */
     public void spawnRockssix(int xValue) {
 
         GridPoint2 Pos = new GridPoint2 ( xValue + 22, 53);
