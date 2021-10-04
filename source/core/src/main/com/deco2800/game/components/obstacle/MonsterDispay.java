@@ -35,6 +35,7 @@ public class MonsterDispay extends UIComponent {
     private Table Monster4Table;
     private Table Monster5Table;
     private Table Monster6Table;
+    private Table MonsterTitle;
     private Table Monster7Table;
     private Table secretTable;
     private Table secretTable2;
@@ -248,6 +249,12 @@ public class MonsterDispay extends UIComponent {
         monster5AttributeTable.setFillParent(true);
         monster5AttributeTable.add(monster5Attributes);
 
+        MonsterTitle = new Table();
+        Label bossTitle = new Label("-----------BOSS---------", skin);
+        bossTitle.setFontScale(1.5f);
+        MonsterTitle.center().padTop(560);
+        MonsterTitle.setFillParent(true);
+        MonsterTitle.add(bossTitle).padBottom(120);
 
         Monster6Table = new Table();
         BaseEntityConfig config_spaceship = configs.smallMissile;
@@ -256,14 +263,15 @@ public class MonsterDispay extends UIComponent {
 
         Monster6Table.center().padTop(600);
         Monster6Table.setFillParent(true);
-        Monster6Table.add(unlockedImg6).size(160, 160).padRight(20);
-        Monster6Table.add(monster6Name).padBottom(40).padRight(100);
+        Monster6Table.add(unlockedImg6).size(160, 160).padRight(40);
+        Monster6Table.add(monster6Name).padBottom(40).padLeft(30);
+
 
         monster6AttributeTable = new Table();
         Label monster6Attributes = new Label("attack:" + config_spaceship.baseAttack + "\nhealth:" + config_spaceship.health, skin);
         monster6Attributes.setColor(255, 255, 255, 0.5f);
         monster6Attributes.setFontScale(0.8f);
-        monster6AttributeTable.center().padLeft(100).padTop(630);
+        monster6AttributeTable.center().padLeft(230).padTop(630);
         monster6AttributeTable.setFillParent(true);
         monster6AttributeTable.add(monster6Attributes);
 
@@ -328,7 +336,7 @@ public class MonsterDispay extends UIComponent {
                 .getAsset("images/monster_menu/ship.jpg", Texture.class));
         secretTable6 = new Table().padTop(677);
         secretTable6.setFillParent(true);
-        secretTable6.add(secretImage6).size(540, 220).padBottom(30);
+        secretTable6.add(secretImage6).size(540, 160).padBottom(100);
 
 
 
@@ -341,6 +349,7 @@ public class MonsterDispay extends UIComponent {
         stage.addActor(Monster4Table);
         stage.addActor(Monster5Table);
         stage.addActor(Monster6Table);
+        stage.addActor(MonsterTitle);
         stage.addActor(monster1AttributeTable);
         stage.addActor(monster2AttributeTable);
         stage.addActor(monster3AttributeTable);
