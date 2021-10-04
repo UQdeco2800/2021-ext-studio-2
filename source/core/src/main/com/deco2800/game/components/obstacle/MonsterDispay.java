@@ -83,11 +83,6 @@ public class MonsterDispay extends UIComponent {
     }
 
 
-    private ImageButton getImageButton(String path) {
-        return new ImageButton(new TextureRegionDrawable(new TextureRegion(
-                new Texture(path))));
-    }
-
     private void createMonsterMenuBoard() {
         // Create Button to the monster menu
         TextButton mainMenuButton = new TextButton("Main Menu", skin);
@@ -277,29 +272,14 @@ public class MonsterDispay extends UIComponent {
         Label monster7Name = new Label("missile", skin);
         monster7Name.setFontScale(1f);
 
-//        Monster7Table.center().padTop(740).padRight(40);
-//        Monster7Table.setFillParent(true);
-//        Monster7Table.add(unlockedChapterImg7).size(80, 80).padLeft(15);
-//        Monster7Table.add(monster7Name).padLeft(30).padBottom(40);
-//
-//        monster7AttributeTable = new Table();
-//        Label monster7Attributes = new Label("attack: 3\nhealth: 100", skin);
-//        monster7Attributes.setColor(255, 255, 255, 0.5f);
-//        monster7Attributes.setFontScale(0.8f);
-//        monster7AttributeTable.center().padTop(765).padLeft(110);
-//        monster7AttributeTable.setFillParent(true);
-//        monster7AttributeTable.add(monster7Attributes);
-
 
         //this table contains the button back to main menu
         buttonTable = new Table();
-        buttonTable.bottom().right();
-        buttonTable.padBottom(50f).padRight(80f);
-//        buttonTable.center();
+        buttonTable.center().padLeft(1100).padTop(700);
 
         buttonTable.setFillParent(true);
         buttonTable.add(mainMenuButton);
-        // buttonTable.add(unlockedChapterImg);
+
 
         box = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/monster_menu/box_covered.png", Texture.class));
@@ -313,7 +293,7 @@ public class MonsterDispay extends UIComponent {
         bgTable = new Table();
         bgTable.setFillParent(true);
         bgTable.add(bgImage);
-
+         // this table contains the secretImage
         Image secretImage = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/monster_menu/plant.jpg", Texture.class));
         secretTable = new Table().padBottom(650);
@@ -350,11 +330,7 @@ public class MonsterDispay extends UIComponent {
         secretTable6.setFillParent(true);
         secretTable6.add(secretImage6).size(540, 220).padBottom(30);
 
-//        Image secretImage7 = new Image(ServiceLocator.getResourceService()
-//                .getAsset("images/monster_menu/hugger.jpg", Texture.class));
-//        secretTable7 = new Table().padTop(780);
-//        secretTable7.setFillParent(true);
-//        secretTable7.add(secretImage7).size(540, 115).padBottom(30);
+
 
         // add the board to the stage first so that its can be under of score data
         stage.addActor(bgTable);
@@ -365,43 +341,47 @@ public class MonsterDispay extends UIComponent {
         stage.addActor(Monster4Table);
         stage.addActor(Monster5Table);
         stage.addActor(Monster6Table);
-      //  stage.addActor(Monster7Table);
         stage.addActor(monster1AttributeTable);
         stage.addActor(monster2AttributeTable);
         stage.addActor(monster3AttributeTable);
         stage.addActor(monster4AttributeTable);
         stage.addActor(monster5AttributeTable);
         stage.addActor(monster6AttributeTable);
-       // stage.addActor(monster7AttributeTable);
+
         if (ObstacleEventHandler.locked) {
             stage.addActor(secretTable);
+            logger.info("return secretTable1 locked");
         }
         if (ObstacleEventHandler.locked2) {
             stage.addActor(secretTable2);
+            logger.info("return secretTable2 locked");
         }
 
         if (ObstacleEventHandler.locked3) {
             stage.addActor(secretTable3);
+            logger.info("return secretTable3 locked");
         }
 
         if (ObstacleAttackTask.lock_use) {
             stage.addActor(secretTable4);
+            logger.info("return secretTable4 locked");
         }
 
         if (ObstacleAttackTask.lock_use) {
             stage.addActor(secretTable5);
+            logger.info("return secretTable5 locked");
         }
 
         if (ObstacleEventHandler.locked_ufo) {
             stage.addActor(secretTable6);
-            //stage.addActor(secretTable7);
+            logger.info("return secretTable6 locked");
+
         }
 
 
         stage.addActor(buttonTable);
 
 
-        //prepare the data tables
 
     }
 
