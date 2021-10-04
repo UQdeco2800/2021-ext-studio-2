@@ -100,7 +100,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">ObstacleEventHandler</span>
 extends <a href="../Component.html" title="class in com.deco2800.game.components">Component</a></pre>
-<div class="block">Used to handle collision events between obstacles and enemies</div>
+<div class="block">Used to handle events of obstacles and enemies</div>
 </section>
 <section class="summary">
 <ul class="blockList">
@@ -198,7 +198,9 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <tbody>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.deco2800.game.components.obstacle.ObstacleEventHandler.ObstacleType)">ObstacleEventHandler</a></span>&#8203;(<a href="ObstacleEventHandler.ObstacleType.html" title="enum in com.deco2800.game.components.obstacle">ObstacleEventHandler.ObstacleType</a>&nbsp;obstacleType)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Construct an ObstacleEventHandler and register the corresponding event according to the obstacleType.</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -233,38 +235,50 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCount()">getCount</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">getter method for count</div>
+</td>
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isLocked()">isLocked</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">getter method for locked</div>
+</td>
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isLocked_ufo()">isLocked_ufo</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">getter method for locked_ufo</div>
+</td>
 </tr>
 <tr class="altColor" id="i4">
 <td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isLocked2()">isLocked2</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">getter method for locked2</div>
+</td>
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isLocked3()">isLocked3</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">getter method for locked3</div>
+</td>
 </tr>
 <tr class="altColor" id="i6">
 <td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isSpaceshipAttack()">isSpaceshipAttack</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">getter method for spaceshipAttack</div>
+</td>
 </tr>
 <tr class="rowColor" id="i7">
 <td class="colFirst"><code>static void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSpaceshipAttack(boolean)">setSpaceshipAttack</a></span>&#8203;(boolean&nbsp;spaceshipAttack)</code></th>
 <td class="colLast">
-<div class="block">Setter for spaceshipAttack, only used for test.</div>
+<div class="block">Setter for spaceshipAttack, used for test.</div>
 </td>
 </tr>
 </tbody>
@@ -332,6 +346,11 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <section class="detail">
 <h3><a id="&lt;init&gt;(com.deco2800.game.components.obstacle.ObstacleEventHandler.ObstacleType)">ObstacleEventHandler</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">ObstacleEventHandler</span>&#8203;(<span class="arguments"><a href="ObstacleEventHandler.ObstacleType.html" title="enum in com.deco2800.game.components.obstacle">ObstacleEventHandler.ObstacleType</a>&nbsp;obstacleType)</span></div>
+<div class="block">Construct an ObstacleEventHandler and register the corresponding event according to the obstacleType.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>obstacleType</code> - The types of obstacles.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -361,7 +380,7 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <section class="detail">
 <h3><a id="setSpaceshipAttack(boolean)">setSpaceshipAttack</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setSpaceshipAttack</span>&#8203;(<span class="arguments">boolean&nbsp;spaceshipAttack)</span></div>
-<div class="block">Setter for spaceshipAttack, only used for test.</div>
+<div class="block">Setter for spaceshipAttack, used for test.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>spaceshipAttack</code> - </dd>
@@ -372,36 +391,66 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <section class="detail">
 <h3><a id="isLocked()">isLocked</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isLocked</span>()</div>
+<div class="block">getter method for locked</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>if the plant is locked</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="isLocked2()">isLocked2</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isLocked2</span>()</div>
+<div class="block">getter method for locked2</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>if the thorns is locked</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="isLocked3()">isLocked3</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isLocked3</span>()</div>
+<div class="block">getter method for locked3</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>if the meteorite is locked</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="isLocked_ufo()">isLocked_ufo</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isLocked_ufo</span>()</div>
+<div class="block">getter method for locked_ufo</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>if the spaceship is locked</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="isSpaceshipAttack()">isSpaceshipAttack</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isSpaceshipAttack</span>()</div>
+<div class="block">getter method for spaceshipAttack</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>if the spaceshipAttack is attack</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getCount()">getCount</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">int</span>&nbsp;<span class="memberName">getCount</span>()</div>
+<div class="block">getter method for count</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>how many times the event was triggered</dd>
+</dl>
 </section>
 </li>
 </ul>

@@ -524,8 +524,7 @@ float&nbsp;vertical)</span></div>
  obstacles is 0-30.  The second call to the player's x position is 10, and the x range for
  generating obstacles is 31-50.
  <p>
- Note: Temporarily reduce the range of obstacles generated for the first time, new range (25-30) units,
- leaving enough space for the item group</div>
+ Note: Reduce the range of obstacles generated for the first time, leaving enough space for the item group</div>
 </section>
 </li>
 <li class="blockList">
@@ -555,8 +554,8 @@ int&nbsp;smallNum,
 int&nbsp;bigRandomRange,
 int&nbsp;midRandomRange,
 int&nbsp;smallRandomRange)</span></div>
-<div class="block">Generate a certain number of meteorites, called by render() in MainGameScreen.java. The final number of meteorites
- is the sum of all parameters.
+<div class="block">Generate a certain number of meteorites, called by render() in MainGameScreen.java. The final number of
+ meteorites is the sum of all parameters.
  <p>
  Big size meteorites: 1.5 - 2 times of the multiples of meteorites texture,
  total number is bigNum(+bigRandomRange), the values in parentheses are random.
@@ -604,6 +603,7 @@ int&nbsp;smallRandomRange)</span></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>position</code> - the location of Spaceship</dd>
+<dd><code>type</code> - ObstacleType category</dd>
 </dl>
 </section>
 </li>
