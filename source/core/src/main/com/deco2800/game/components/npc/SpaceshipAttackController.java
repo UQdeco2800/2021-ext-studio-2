@@ -82,6 +82,13 @@ public class SpaceshipAttackController extends Component {
         spaceshipState = SpaceshipAttack.Start;
     }
 
+    /**
+     * Get spaceshipState, used for test.
+     * @return the current state of spaceship attack.
+     */
+    public static SpaceshipAttack getSpaceshipState() {
+        return spaceshipState;
+    }
 
     @Override
     public void update() {

@@ -167,6 +167,9 @@ public class MainGameScreen extends ScreenAdapter {
         }
     }
 
+    public static NewMap getNewMapStatus() {
+        return newMapStatus;
+    }
 
     /**
      * @param status How many seconds the player slows down.

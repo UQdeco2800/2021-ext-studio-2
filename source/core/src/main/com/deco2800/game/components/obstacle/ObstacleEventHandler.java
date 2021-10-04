@@ -27,7 +27,7 @@ public class ObstacleEventHandler extends Component {
      * The types of obstacles and enemies are used to determine the type of entity that triggers the event.
      */
     public enum ObstacleType {
-        PlantsObstacle, ThornsObstacle, Meteorite, FaceWorm, Spaceship, SmallMissile, PortalEntrance, PortalExport;
+        PlantsObstacle, ThornsObstacle, Meteorite, FlyingMonkey, FaceWorm, Spaceship, SmallMissile, PortalEntrance, PortalExport;
     }
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleEventHandler.class);
@@ -78,6 +78,13 @@ public class ObstacleEventHandler extends Component {
         }
     }
 
+    /**
+     * Setter for spaceshipAttack, only used for test.
+     * @param spaceshipAttack
+     */
+    public static void setSpaceshipAttack(boolean spaceshipAttack) {
+        ObstacleEventHandler.spaceshipAttack = spaceshipAttack;
+    }
 
     /**
      * When the monitored event is triggered, play the plants explosion animation, and disable the
@@ -183,8 +190,8 @@ public class ObstacleEventHandler extends Component {
         }
 
         SpaceshipAttackController.setSpaceshipAttack();
-        Sound floatingSound = ServiceLocator.getResourceService().getAsset("sounds/spacecraft_floating.mp3", Sound.class);
-        floatingSound.play(0.8f, 0.6f, 0);
+        entity.getEvents().trigger("spaceshipSound");
+
 //        System.out.println("spaceShipAttack was triggered.");
         spaceshipAttack = true;
         locked_ufo = false;
@@ -204,8 +211,7 @@ public class ObstacleEventHandler extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
-        Sound missileSound = ServiceLocator.getResourceService().getAsset("sounds/missile_explosion.mp3", Sound.class);
-        missileSound.play(0.3f, 1f, 0);
+        entity.getEvents().trigger("missileSound");
         animator.startAnimation("bomb");
         animator.getEntity().setDisappearAfterAnimation(0.4f);
 
@@ -228,5 +234,29 @@ public class ObstacleEventHandler extends Component {
         }
         MainGameScreen.setNewMapStatus(MainGameScreen.NewMap.Finish);
 //        System.out.println("portalTransfer was triggered.");
+    }
+
+    public static boolean isLocked() {
+        return locked;
+    }
+
+    public static boolean isLocked2() {
+        return locked2;
+    }
+
+    public static boolean isLocked3() {
+        return locked3;
+    }
+
+    public static boolean isLocked_ufo() {
+        return locked_ufo;
+    }
+
+    public static boolean isSpaceshipAttack() {
+        return spaceshipAttack;
+    }
+
+    public int getCount() {
+        return count;
     }
 }
