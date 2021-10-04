@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.items.PropShopHelper;
 import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.buff.Buff;
@@ -310,7 +311,19 @@ public void spawnRockstwo(int xValue) {
             "images/rocket-ship-launch.png",
             "images/portal.png",
             "images/missile.png",
-
+            "images/itembar/item/itembar-blood.png",
+            "images/itembar/item/itembar-water.png",
+            "images/itembar/item/itembar-leg.png",
+            "images/itembar/recycle/recycle-256px-bb1.png",
+            "images/itembar/recycle/recycle-256px-bb2.png",
+            "images/itembar/recycle/recycle-256px-bb3.png",
+            "images/itembar/recycle/recycle-256px-default.png",
+            "images/itembar/recycle/recycle-256px-leg1.png",
+            "images/itembar/recycle/recycle-256px-leg2.png",
+            "images/itembar/recycle/recycle-256px-leg3.png",
+            "images/itembar/recycle/recycle-256px-water1.png",
+            "images/itembar/recycle/recycle-256px-water2.png",
+            "images/itembar/recycle/recycle-256px-water3.png",
 
     };
     private static final String[] forestTextureAtlases = {
@@ -332,7 +345,20 @@ public void spawnRockstwo(int xValue) {
             "images/food1.png",
             "images/water1.png",
             "images/missile.atlas",
-            "images/portal.atlas"
+            "images/portal.atlas",
+            "images/itembar/item/itembar-blood.png",
+            "images/itembar/item/itembar-water.png",
+            "images/itembar/item/itembar-leg.png",
+            "images/itembar/recycle/recycle-256px-bb1.png",
+            "images/itembar/recycle/recycle-256px-bb2.png",
+            "images/itembar/recycle/recycle-256px-bb3.png",
+            "images/itembar/recycle/recycle-256px-default.png",
+            "images/itembar/recycle/recycle-256px-leg1.png",
+            "images/itembar/recycle/recycle-256px-leg2.png",
+            "images/itembar/recycle/recycle-256px-leg3.png",
+            "images/itembar/recycle/recycle-256px-water1.png",
+            "images/itembar/recycle/recycle-256px-water2.png",
+            "images/itembar/recycle/recycle-256px-water3.png",
 
     };
     private static final String[] forestSounds = {
@@ -343,20 +369,20 @@ public void spawnRockstwo(int xValue) {
     };
 
     private static final String[] mpcTextures = {
-            "images/mpc/finalAtlas/OG/mpcAnimation.png",
+            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpcAnimation.png",
             "images/mpc/finalAtlas/gold_2/mpcAnimation_2.png",
-            "images/mpc/finalAtlas/gold_4/mpcAnimation_4.png",
+            "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpcAnimation_4.png",
             "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.png",
-            "images/mpc/finalAtlas/OG/mpc_right.png",
+            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpc_right.png",
             "images/mpc/finalAtlas/gold_2/mpc_right.png",
-            "images/mpc/finalAtlas/gold_4/mpc_right.png",
+            "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpc_right.png",
             "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpc_right.png",
 
     };
     private static final String[] mpcTexturesAtlases = {
-            "images/mpc/finalAtlas/OG/mpcAnimation.atlas",
+            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpcAnimation.atlas",
             "images/mpc/finalAtlas/gold_2/mpcAnimation_2.atlas",
-            "images/mpc/finalAtlas/gold_4/mpcAnimation_4.atlas",
+            "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpcAnimation_4.atlas",
             "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.atlas",
 
     };
@@ -398,15 +424,17 @@ public void spawnRockstwo(int xValue) {
 
         player = spawnPlayer();
         spawnObstacles();
-        Buff buff = new Buff(player);
-        buff.addHealth();
+        //Buff buff = new Buff(player);
+        //buff.addHealth();
         pro = new InventorySystem(player);
         spawnFirstAid();
         spawnGold();
         spawnGoldNewMap();
         playMusic();
         trackAchievements();
+        trackBuffDescription();
         setBonusItems(player);
+        PropShopHelper.useProps(player);
         player.getEvents().addListener("B pressed", this::InvSys);
         spawnPortal(new Vector2(50, 55), ObstacleEventHandler.ObstacleType.PortalExport);
     }
@@ -872,4 +900,7 @@ public void spawnRockstwo(int xValue) {
         spawnEntity(AchievementFactory.createAchievementEntity());
     }
 
+    private void trackBuffDescription() {
+        spawnEntity(BuffDescriptionFactory.createBuffDescriptionEntity());
+    }
 }

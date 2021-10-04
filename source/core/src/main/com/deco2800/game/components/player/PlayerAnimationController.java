@@ -44,6 +44,7 @@ public class PlayerAnimationController extends Component {
         entity.getEvents().addListener("thirsty", this::animateThirsty);
         entity.getEvents().addListener("stopBuffDebuff", this::animateWalk);
     }
+
     /**
      *  Activate the hungry animation debuff
      */
@@ -204,7 +205,6 @@ public class PlayerAnimationController extends Component {
      */
     private void animateHealthUP() {
         animationName = animator.getCurrentAnimation();
-        System.out.println("Starting Animation: "+ animationName);
         preAnimationCleanUp();
         switch (animationName) {
             case "main_player_run":

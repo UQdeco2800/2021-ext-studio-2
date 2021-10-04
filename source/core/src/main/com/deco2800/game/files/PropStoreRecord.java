@@ -71,6 +71,12 @@ public class PropStoreRecord {
         return false;
     }
 
+    public static void removeItem(PropItemConfig item){
+        BoughtProps record = getBoughtProps();
+        record.removeItemById(item.id);
+        setBoughtProps(record);
+    }
+
     public static BoughtProps getBoughtProps(){
         BoughtProps record = FileLoader.readClass(BoughtProps.class, propStorePath, location);
         return record != null ? record : new BoughtProps();
@@ -79,12 +85,16 @@ public class PropStoreRecord {
         boughtProps.game = GameInfo.getGameCount();
         FileLoader.writeClass(boughtProps, propStorePath, location);
     }
+
     public static class BoughtProps{
         int game = -1;
         public String id = UUID.randomUUID().toString();
         public Map<Integer,PropItemConfig> items = new LinkedHashMap();
         private PropItemConfig getBoughtItemById(int id){
          return items.get(String.valueOf(id));
+        }
+        private PropItemConfig removeItemById(int id){
+            return items.remove(String.valueOf(id));
         }
         private boolean containsItem(int id){
             return items.containsKey(String.valueOf(id));

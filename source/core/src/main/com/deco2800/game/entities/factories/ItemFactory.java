@@ -17,7 +17,7 @@ public  class ItemFactory {
          * @return entity
          */
 
-        Entity firstAid = new Entity()
+        Entity firstAid = new Entity("FirstAid")
                 .addComponent(new TextureRenderComponent("images/Items/first_aid_kit.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
@@ -33,7 +33,7 @@ public  class ItemFactory {
          * @param target The entity which is passed on to the first Aid component
          * @return entity
          */
-        Entity apple = new Entity()
+        Entity apple = new Entity("Apple")
                 .addComponent(new TextureRenderComponent("images/Items/food.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
@@ -48,7 +48,7 @@ public  class ItemFactory {
          * @param target The entity which is passed on to the first Aid component
          * @return entity
          */
-        Entity water = new Entity()
+        Entity water = new Entity("Water")
                 .addComponent(new TextureRenderComponent("images/Items/water.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
@@ -63,7 +63,7 @@ public  class ItemFactory {
          * @param target The entity which is passed on to the first Aid component
          * @return entity
          */
-        Entity magicPotion = new Entity()
+        Entity magicPotion = new Entity("MagicPotion")
                 .addComponent(new TextureRenderComponent("images/Items/magic_potion.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
@@ -78,7 +78,7 @@ public  class ItemFactory {
          * @param target The entity which is passed on to the first Aid component
          * @return entity
          */
-        Entity syringe = new Entity()
+        Entity syringe = new Entity("Syringe")
                 .addComponent(new TextureRenderComponent("images/Items/syringe.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
@@ -93,7 +93,7 @@ public  class ItemFactory {
          * @param target The entity which is passed on to the first Aid component
          * @return entity
          */
-        Entity bandage = new Entity()
+        Entity bandage = new Entity("Bandage")
                 .addComponent(new TextureRenderComponent("images/Items/bandage.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
@@ -108,7 +108,7 @@ public  class ItemFactory {
          * @param target The entity which is passed on to the gold component
          * @return entity
          */
-        Entity gold = new Entity()
+        Entity gold = new Entity("Gold")
                 .addComponent(new TextureRenderComponent("images/Items/goldCoin.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())

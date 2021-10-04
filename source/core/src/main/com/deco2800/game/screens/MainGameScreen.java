@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
+import com.deco2800.game.components.ItemBar.ItemBarDisplay;
+import com.deco2800.game.components.foodAndwater.RecoverDisplay;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.CombatStatsComponent;
@@ -31,6 +33,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.deco2800.game.components.foodAndwater.FoodDisplay;
 import com.deco2800.game.components.foodAndwater.WaterDisplay;
+import com.deco2800.game.components.score.ScoreDisplay;
+import com.deco2800.game.components.score.ScoringSystemV1;
+import com.deco2800.game.components.score.TimerDisplay;
+import com.deco2800.game.services.GameTime;
+import com.deco2800.game.services.ResourceService;
+import com.deco2800.game.services.ScoreService;
+import com.deco2800.game.services.ServiceLocator;
 
 /**
  * The game screen containing the main game.
@@ -42,9 +51,24 @@ public class MainGameScreen extends ScreenAdapter {
     private static final String[] mainGameTextures = {"images/heart.png", "images/clockV2.png",
             "images/scoreboardV2.png", "images/background.png", "images/water1.png", "images/food1.png",
             "images/Sprint2_Buffs_Debuffs/Poisoning.png",
-            "images/Sprint2_Buffs_Debuffs/decrease_health.png", "images" +
+            "images/Sprint2_Buffs_Debuffs/decrease_health.png",
+            "images/Sprint2_Buffs_Debuffs/increase_health_limit.png",
+            "images" +
             "/Sprint2_Buffs_Debuffs/increase_health.png",
-            "images/Sprint2_Buffs_Debuffs/decrease_speed.png", "images/distanceboard.png"
+            "images/Sprint2_Buffs_Debuffs/decrease_speed.png", "images/distanceboard.png",
+            "images/itembar/item/itembar-blood.png",
+            "images/itembar/item/itembar-water.png",
+            "images/itembar/item/itembar-leg.png",
+            "images/itembar/recycle/recycle-256px-bb1.png",
+            "images/itembar/recycle/recycle-256px-bb2.png",
+            "images/itembar/recycle/recycle-256px-bb3.png",
+            "images/itembar/recycle/recycle-256px-default.png",
+            "images/itembar/recycle/recycle-256px-leg1.png",
+            "images/itembar/recycle/recycle-256px-leg2.png",
+            "images/itembar/recycle/recycle-256px-leg3.png",
+            "images/itembar/recycle/recycle-256px-water1.png",
+            "images/itembar/recycle/recycle-256px-water2.png",
+            "images/itembar/recycle/recycle-256px-water3.png",
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 
@@ -62,7 +86,7 @@ public class MainGameScreen extends ScreenAdapter {
         Finish,  // Used once in render
         On;
     }
-
+    public static Entity players;
     private Entity player;
     private ForestGameArea forestGameArea;
     private int counter = 0;
@@ -378,6 +402,8 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new TimerDisplay())
                 .addComponent(new TerminalDisplay())
                 .addComponent(new FoodDisplay())
+                .addComponent(new ItemBarDisplay())
+                .addComponent(new RecoverDisplay())
                 .addComponent(new WaterDisplay());
 
 

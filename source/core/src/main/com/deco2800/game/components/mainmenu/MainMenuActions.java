@@ -30,6 +30,7 @@ public class MainMenuActions extends Component {
     entity.getEvents().addListener("achievements", this::onAchievements);
     entity.getEvents().addListener("unlockedAttires", this::onUnlockedAttires);
     entity.getEvents().addListener("monsterMenu", this::onDisplayMonsterMenu);
+    entity.getEvents().addListener("buffMenu", this::onDisplayBuffManualMenu);
   }
 
   /**
@@ -95,5 +96,9 @@ public class MainMenuActions extends Component {
   private void onDisplayMonsterMenu() {
     //logger.info("Open the history scores board");
     game.setScreen(GdxGame.ScreenType.MONSTER_MENU);
+  }
+
+  private void onDisplayBuffManualMenu() {
+    game.setScreen(GdxGame.ScreenType.BUFF_MENU);
   }
 }

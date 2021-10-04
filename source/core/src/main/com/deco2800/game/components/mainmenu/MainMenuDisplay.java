@@ -108,11 +108,22 @@ public class MainMenuDisplay extends UIComponent {
             new Texture(Gdx.files.internal("button/monster1.png"))));
     monster.over = new TextureRegionDrawable(new TextureRegion(
             new Texture(Gdx.files.internal("button/monster2.png"))));
+
     Button monsterBtn = new Button(monster);
     monsterBtn.setPosition(1120,40);
 
 
-    //TextButton startBtn = new TextButton("Start", skin);
+  Button.ButtonStyle buff = new Button.ButtonStyle();
+      buff.up = new TextureRegionDrawable(new TextureRegion(
+          new Texture(Gdx.files.internal("button/buff1.png"))));
+      buff.over = new TextureRegionDrawable(new TextureRegion(
+          new Texture(Gdx.files.internal("button/buff2.png"))));
+
+  Button buffBtn = new Button(buff);
+      buffBtn.setPosition(1120,170);
+
+
+      //TextButton startBtn = new TextButton("Start", skin);
     //TextButton settingsBtn = new TextButton("Settings", skin);
     //TextButton exitBtn = new TextButton("Exit", skin);
     //props shop
@@ -195,6 +206,14 @@ public class MainMenuDisplay extends UIComponent {
         }
     });
 
+    buffBtn.addListener(new ChangeListener() {
+          @Override
+          public void changed(ChangeEvent event, Actor actor) {
+              logger.debug("buff manual Menu clicked");
+              entity.getEvents().trigger("buffMenu");
+          }
+      });
+
     Table bgTable = new Table();
     bgTable.setFillParent(true);
     table.add(title);
@@ -212,6 +231,7 @@ public class MainMenuDisplay extends UIComponent {
     stage.addActor(scoreBtn);
     stage.addActor(achievementBtn);
     stage.addActor(monsterBtn);
+    stage.addActor(buffBtn);
     bgTable.add(background).size(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
   }
 

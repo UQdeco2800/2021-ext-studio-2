@@ -19,31 +19,21 @@ public class DeBuff{
      */
     private CombatStatsComponent component;
     public DeBuff(Entity player){
-
         this.player = player;
         component = this.player.getComponent(CombatStatsComponent.class);
-
     }
 
     /**
      * Decreasing HEALTH
      */
     public void decreaseHealth(){
-
         component.addHealth(-10);
         player.getEvents().trigger("healthDown");
         PlayerStatsDisplay playerComponent = this.player.getComponent(PlayerStatsDisplay.class);
         if (playerComponent!=null){
             playerComponent.addDecreaseHealthImage();
         }
-        Timer timer=new Timer();
-        timer.scheduleTask(new Timer.Task() {
-            @Override
-            public void run() {
-                player.getEvents().trigger("stopBuffDebuff");
-                timer.stop();
-            }
-        },1);
+        removeBUff_DeBuff();
     }
 
     /**
@@ -63,22 +53,14 @@ public class DeBuff{
                 Thread.sleep(500);
             }
         }
-        Timer timer=new Timer();
-        timer.scheduleTask(new Timer.Task() {
-            @Override
-            public void run() {
-                player.getEvents().trigger("stopBuffDebuff");
-                timer.stop();
-            }
-        },1);
         if (playerComponent!=null){
             playerComponent.removePoisoningImage();
         }
-
-
+        removeBUff_DeBuff();
     }
 
     public void removePoisoning()   {
+        player.getEvents().trigger("stopBuffDebuff");
         this.stopFlag = true;
     }
 
@@ -94,6 +76,12 @@ public class DeBuff{
         //reducing speed
         player.updateSpeed(new Vector2(2,8));
 
+        removeBUff_DeBuff();
+    }
+
+    //removing buff/debuff after 1s
+
+    public void removeBUff_DeBuff() {
         Timer timer=new Timer();
         timer.scheduleTask(new Timer.Task() {
             @Override
@@ -103,7 +91,6 @@ public class DeBuff{
             }
         },1);
     }
-
     public void removeSlowSpeed()   {
         player.updateSpeed(new Vector2(4,8));
     }
@@ -116,14 +103,7 @@ public class DeBuff{
         if(FoodDisplay.isHunger()){
             slowSpeed();
         }
-        Timer timer=new Timer();
-        timer.scheduleTask(new Timer.Task() {
-            @Override
-            public void run() {
-                player.getEvents().trigger("stopBuffDebuff");
-                timer.stop();
-            }
-        },1);
+        removeBUff_DeBuff();
     }
 
     /**
@@ -134,13 +114,6 @@ public class DeBuff{
         if(WaterDisplay.isThirst()){
             decreaseHealth();
         }
-        Timer timer=new Timer();
-        timer.scheduleTask(new Timer.Task() {
-            @Override
-            public void run() {
-                player.getEvents().trigger("stopBuffDebuff");
-                timer.stop();
-            }
-        },1);
+        removeBUff_DeBuff();
     }
 }
