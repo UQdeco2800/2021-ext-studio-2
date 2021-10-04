@@ -221,7 +221,7 @@ public class MainGameScreen extends ScreenAdapter {
                 }
                 break;
             case On:
-                System.out.println("player.getPosition() = " + player.getPosition());
+                //System.out.println("player.getPosition() = " + player.getPosition());
                 screenVector.y = 55f;
                 renderer.getCamera().getEntity().setPosition(screenVector);
         }
@@ -263,13 +263,22 @@ public class MainGameScreen extends ScreenAdapter {
         // Generate terrain, obstacle and enemies
         switch (newMapStatus) {
             case Off:
+                forestGameArea.stopNewMapMusic();
+                forestGameArea.playMusic();
                 // infinite loop for terrain and obstacles
                 if (screenVector.x > (2 * counter + 1) * 10) {
                     counter += 1;
                     forestGameArea.showScrollingBackground(counter);
-                    forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2));
-                    //      forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
-                    //      forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
+                    forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.MUD_ROAD);
+                    forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
+ //                   forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
+                    forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
+                    forestGameArea.spawnRocksone((int) (screenVector.x + 2));
+                    forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksthree((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksfour((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksfive((int) (screenVector.x + 2));
+                    forestGameArea.spawnRockssix((int) (screenVector.x + 2));
                     generateObstaclesEnemiesByMapRefresh(counter);
                 }
                 // Generate monster
@@ -277,7 +286,24 @@ public class MainGameScreen extends ScreenAdapter {
                 // Thorns effect trigger
                 slowPlayer();
                 break;
-        }
+            case On:
+                forestGameArea.stopMusic();
+                forestGameArea.playNewMapMusic();
+                // Render terrains on new map
+                if (screenVector.x > (2 * counter + 1) * 10) {
+                    counter += 1;
+                    forestGameArea.showNewMapScrollingBackground(counter, 47);
+                    forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
+  //                  forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
+                    forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
+                    forestGameArea.spawnRocksone((int) (screenVector.x+2));
+                    forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksthree((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksfour((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksfive((int) (screenVector.x + 2));
+                    forestGameArea.spawnRockssix((int) (screenVector.x + 2));
+                    forestGameArea.spawnGoldNewMapRandomly((int) (screenVector.x + 2));
+                }}
 
     }
 
