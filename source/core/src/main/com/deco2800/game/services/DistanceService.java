@@ -18,7 +18,7 @@ public class DistanceService {
 
     public double getDistance() {
         Vector2 pos=player.getPosition();
-        distance=Math.sqrt(pos.x*pos.x+pos.y+pos.y);
+        distance=Math.sqrt(pos.x*pos.x+pos.y*pos.y);
         return distance;
     }
 }
