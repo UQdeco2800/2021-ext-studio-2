@@ -7,6 +7,7 @@ import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.ItemBar.ItemBarDisplay;
+import com.deco2800.game.components.foodAndwater.RecoverDisplay;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.CombatStatsComponent;
@@ -83,7 +84,7 @@ public class MainGameScreen extends ScreenAdapter {
         Finish,  // Used once in render
         On;
     }
-
+    public static Entity players;
     private Entity player;
     private ForestGameArea forestGameArea;
     private int counter = 0;
@@ -371,6 +372,7 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new TerminalDisplay())
                 .addComponent(new FoodDisplay())
                 .addComponent(new ItemBarDisplay())
+                .addComponent(new RecoverDisplay())
                 .addComponent(new WaterDisplay());
 
 
