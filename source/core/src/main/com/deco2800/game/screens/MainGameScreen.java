@@ -56,6 +56,16 @@ public class MainGameScreen extends ScreenAdapter {
             "images/itembar/item/itembar-blood.png",
             "images/itembar/item/itembar-water.png",
             "images/itembar/item/itembar-leg.png",
+            "images/itembar/recycle/recycle-256px-bb1.png",
+            "images/itembar/recycle/recycle-256px-bb2.png",
+            "images/itembar/recycle/recycle-256px-bb3.png",
+            "images/itembar/recycle/recycle-256px-default.png",
+            "images/itembar/recycle/recycle-256px-leg1.png",
+            "images/itembar/recycle/recycle-256px-leg2.png",
+            "images/itembar/recycle/recycle-256px-leg3.png",
+            "images/itembar/recycle/recycle-256px-water1.png",
+            "images/itembar/recycle/recycle-256px-water2.png",
+            "images/itembar/recycle/recycle-256px-water3.png",
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 
