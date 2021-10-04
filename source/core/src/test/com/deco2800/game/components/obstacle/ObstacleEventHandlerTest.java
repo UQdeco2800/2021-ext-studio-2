@@ -122,6 +122,27 @@ class ObstacleEventHandlerTest {
         assertEquals(true, faceWorm.isDisappear());
     }
 
+//    @Test
+//    void shouldBeginSpaceshipAttack() {
+//        Entity player = createEntity1();
+//        Entity spaceship = createFaceWorm();
+//
+//        player.getComponent(HitboxComponent.class).setLayer(PhysicsLayer.PLAYER);
+//
+//        AnimationRenderComponent animator = mock(AnimationRenderComponent.class);
+//        faceWorm.addComponent(animator);
+//        when(animator.getEntity()).thenReturn(faceWorm);
+//
+//        player.create();
+//        faceWorm.create();
+//
+//        Fixture obstacleFixture = player.getComponent(HitboxComponent.class).getFixture();
+//        Fixture meteoriteFixture = faceWorm.getComponent(HitboxComponent.class).getFixture();
+//        faceWorm.getEvents().trigger("collisionStart", meteoriteFixture, obstacleFixture);
+//
+//        assertEquals(true, faceWorm.isDisappear());
+//    }
+
 
     Entity createEntity1() {
         Entity entity =
