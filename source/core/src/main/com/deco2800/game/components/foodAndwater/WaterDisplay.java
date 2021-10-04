@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.score.ScoringSystemV1;
+import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import java.util.ArrayList;
@@ -17,9 +19,10 @@ public class WaterDisplay extends UIComponent {
     static Table table;
     private Label timeLabel;
     private final CountWaterSystem countWaterSystem = new CountWaterSystem();
+    private final CountWaterSystem countWaterSystem1 = new CountWaterSystem();
     private final ScoringSystemV1 countTime = new ScoringSystemV1();
     public static ArrayList<Image> waterImage = new ArrayList<>();
-
+    private int dis1 = 0;
 
     public WaterDisplay() { }
 
@@ -32,6 +35,7 @@ public class WaterDisplay extends UIComponent {
         super.create();
         addActors();
         entity.getEvents().addListener("updateWater", this::updatePlayerTimerUI);
+        entity.getEvents().addListener("updateHealth", this::updatePlayerHealth);
     }
 
     /**
@@ -79,28 +83,49 @@ public class WaterDisplay extends UIComponent {
         super.update();
         int minutes = countTime.getMinutes();
         int seconds = countTime.getSeconds();
-        int dis = (minutes * 60 + seconds)/ 10;
-        if(dis> countWaterSystem.getTimer()){
+        int dis = (minutes * 60 + seconds)/ 2;
+        dis1 = (minutes * 60 + seconds)/ 5;//it is reduce health value when every five second
+        if(dis > countWaterSystem.getTimer()){
             countWaterSystem.setDifference(1);
             countWaterSystem.setTimer(dis);
         }else {
             countWaterSystem.setDifference(0);
         }
+        if(dis1 > countWaterSystem1.getTimer()){
+            countWaterSystem1.setDifference(2);
+            countWaterSystem1.setTimer(dis1);
+        }else {
+            countWaterSystem1.setDifference(0);
+        }
         //update the water regularly
         entity.getEvents().trigger("updateWater", countWaterSystem.getDifference());
+        entity.getEvents().trigger("updateHealth", countWaterSystem1.getDifference());
+    }
+
+    public void updatePlayerHealth(int dis){
+        if(dis == 2){
+            if(waterImage.size() <= 0){
+                //if water icon count less than 0, then it will be into that codes to run. it reduce player health value.
+                //reduce player health value
+                MainGameScreen.players.getComponent(CombatStatsComponent.class).setHealth(
+                        MainGameScreen.players.getComponent(CombatStatsComponent.class).getHealth() - 10
+                );
+            }
+        }
     }
 
     /**
      * Updates the water ui time by time increase.
      */
     public void updatePlayerTimerUI(int dis) {
-        if(dis > 0){
+        if(dis == 1){
             if(waterImage.size() > 0){
                 table.reset();
                 table.top().left();
                 table.setFillParent(true);
                 table.padTop(150f).padLeft(10f);
                 waterImage.remove(waterImage.size() - 1);
+
                 for (Image ima: waterImage) {
                     table.add(ima).size(30f).pad(3);
                 }
