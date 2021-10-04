@@ -354,7 +354,7 @@ public void spawnRockstwo(int xValue) {
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
     private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
-    private static final String NEWMAP_BACKGROUNDMUSIC = "sounds/newmap_background.mp3";
+    private static final String NEWMAP_BACKGROUNDMUSIC = "sounds/track2.mp3";
     private static final String[] forestMusic = {BACKGROUNDMUSIC};
     private static final String[] newMapMusic = {NEWMAP_BACKGROUNDMUSIC};
     private boolean firstGenerate = true;
