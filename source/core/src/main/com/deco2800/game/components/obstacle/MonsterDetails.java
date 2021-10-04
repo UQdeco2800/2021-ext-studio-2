@@ -16,8 +16,11 @@ import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * To show the details of every monster when click image.
+ */
 public class MonsterDetails extends UIComponent {
-    private static final Logger logger = LoggerFactory.getLogger(MonsterDispay.class);
+    private static final Logger logger = LoggerFactory.getLogger(MonsterDetails.class);
     private Dialog dialog;
     @Override
     public void create() {
@@ -33,7 +36,7 @@ public class MonsterDetails extends UIComponent {
     }
 
     private void openDetailPage1() {
-        logger.info("open details page");
+        logger.info("Alien Plant Detail Page");
         dialog = new Dialog("Alien Plant Detail", skin);
         dialog.setModal(true);
         dialog.setMovable(false);
@@ -56,7 +59,7 @@ public class MonsterDetails extends UIComponent {
     }
 
     private void openDetailPage2() {
-        logger.info("open details page2");
+        logger.info("Aline thorn Detail Page");
         dialog = new Dialog("Aline thorn Detail", skin);
         dialog.setModal(true);
         dialog.setMovable(false);
@@ -80,7 +83,7 @@ public class MonsterDetails extends UIComponent {
 
 
     private void openDetailPage3() {
-        logger.info("open details page3");
+        logger.info("Meteorite Detail Page");
         dialog = new Dialog("meteorite Detail", skin);
         dialog.setModal(true);
         dialog.setMovable(false);
@@ -103,7 +106,7 @@ public class MonsterDetails extends UIComponent {
     }
 
     private void openDetailPage4() {
-        logger.info("open details page4");
+        logger.info("Aline Monkey Detail Page");
         dialog = new Dialog("Aline Monkey Detail", skin);
         dialog.setModal(true);
         dialog.setMovable(false);
@@ -127,7 +130,7 @@ public class MonsterDetails extends UIComponent {
     }
 
     private void openDetailPage5() {
-        logger.info("open details page5");
+        logger.info("Face Worm Detail Page");
         dialog = new Dialog("Face Worm Detail", skin);
         dialog.setModal(true);
         dialog.setMovable(false);
@@ -150,7 +153,7 @@ public class MonsterDetails extends UIComponent {
     }
 
     private void openDetailPage6() {
-        logger.info("open details page6");
+        logger.info("Spaceship Detail Page");
         dialog = new Dialog("Spaceship Detail", skin);
         dialog.setModal(true);
         dialog.setMovable(false);

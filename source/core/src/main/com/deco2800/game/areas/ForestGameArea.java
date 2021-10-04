@@ -44,10 +44,10 @@ public class ForestGameArea extends GameArea {
         }
     }
 
-// line 5 rocks
-public void spawnRocksone(int xValue) {
+    // line 5 rocks
+    public void spawnRocksone(int xValue) {
 
-    for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
 //        GridPoint2 Pos = (10, 0);
 //        Entity rock = ObstacleFactory.createRock();
 //        spawnEntityAt(rock, Pos, true, false);
@@ -57,42 +57,43 @@ public void spawnRocksone(int xValue) {
 //        GridPoint2 PosThree = (10, 2);
 //        Entity rockTwo = ObstacleFactory.createRock();
 //        spawnEntityAt(rockTwo, PosThree, true, true);
-        GridPoint2 pos = new GridPoint2(xValue + 2 +i, 50);
-        Entity rock = ObstacleFactory.createRock();
-        spawnEntityAt(rock, pos, true, false);
+            GridPoint2 pos = new GridPoint2(xValue + 2 + i, 50);
+            Entity rock = ObstacleFactory.createRock();
+            spawnEntityAt(rock, pos, true, false);
 
+        }
     }
-}
-// rock pyramid
+
+    // rock pyramid
 //      N
 //     NN
 //    NNN
-public void spawnRockstwo(int xValue) {
+    public void spawnRockstwo(int xValue) {
 
 
-        GridPoint2 Pos = new GridPoint2 ( xValue + 10, 50);
+        GridPoint2 Pos = new GridPoint2(xValue + 10, 50);
         Entity rock = ObstacleFactory.createRock();
         spawnEntityAt(rock, Pos, true, false);
-        GridPoint2 PosTwo = new GridPoint2 ( xValue + 11, 51);
+        GridPoint2 PosTwo = new GridPoint2(xValue + 11, 51);
         Entity rockTwo = ObstacleFactory.createRock();
         spawnEntityAt(rockTwo, PosTwo, true, false);
-        GridPoint2 PosThree = new GridPoint2 ( xValue + 12, 52);
+        GridPoint2 PosThree = new GridPoint2(xValue + 12, 52);
         Entity rockThree = ObstacleFactory.createRock();
         spawnEntityAt(rockThree, PosThree, true, false);
-        GridPoint2 PosFour = new GridPoint2 ( xValue + 12, 51);
+        GridPoint2 PosFour = new GridPoint2(xValue + 12, 51);
         Entity rockFour = ObstacleFactory.createRock();
         spawnEntityAt(rockFour, PosFour, true, false);
-        GridPoint2 PosFive = new GridPoint2 ( xValue + 12, 50);
+        GridPoint2 PosFive = new GridPoint2(xValue + 12, 50);
         Entity rockFive = ObstacleFactory.createRock();
         spawnEntityAt(rockFive, PosFive, true, false);
-        GridPoint2 PosSix = new GridPoint2 ( xValue + 11, 50);
+        GridPoint2 PosSix = new GridPoint2(xValue + 11, 50);
         Entity rockSix = ObstacleFactory.createRock();
         spawnEntityAt(rockSix, PosSix, true, false);
 //        GridPoint2 PosSeven = new GridPoint2 ( xValue + 11, 50);
 //        Entity rockSeven = ObstacleFactory.createRock();
 //        spawnEntityAt(rockSeven, PosSeven, true, false);
 
-}
+    }
 
 
     // rock pyramid oposite
@@ -102,22 +103,22 @@ public void spawnRockstwo(int xValue) {
     public void spawnRocksthree(int xValue) {
 
 
-        GridPoint2 Pos = new GridPoint2 ( xValue + 14, 52);
+        GridPoint2 Pos = new GridPoint2(xValue + 14, 52);
         Entity rock = ObstacleFactory.createRock();
         spawnEntityAt(rock, Pos, true, false);
-        GridPoint2 PosTwo = new GridPoint2 ( xValue + 14, 51);
+        GridPoint2 PosTwo = new GridPoint2(xValue + 14, 51);
         Entity rockTwo = ObstacleFactory.createRock();
         spawnEntityAt(rockTwo, PosTwo, true, false);
-        GridPoint2 PosThree = new GridPoint2 ( xValue + 14, 50);
+        GridPoint2 PosThree = new GridPoint2(xValue + 14, 50);
         Entity rockThree = ObstacleFactory.createRock();
         spawnEntityAt(rockThree, PosThree, true, false);
-        GridPoint2 PosFour = new GridPoint2 ( xValue + 15, 51);
+        GridPoint2 PosFour = new GridPoint2(xValue + 15, 51);
         Entity rockFour = ObstacleFactory.createRock();
         spawnEntityAt(rockFour, PosFour, true, false);
-        GridPoint2 PosFive = new GridPoint2 ( xValue + 15, 50);
+        GridPoint2 PosFive = new GridPoint2(xValue + 15, 50);
         Entity rockFive = ObstacleFactory.createRock();
         spawnEntityAt(rockFive, PosFive, true, false);
-        GridPoint2 PosSix = new GridPoint2 ( xValue + 16, 50);
+        GridPoint2 PosSix = new GridPoint2(xValue + 16, 50);
         Entity rockSix = ObstacleFactory.createRock();
         spawnEntityAt(rockSix, PosSix, true, false);
 
@@ -125,12 +126,12 @@ public void spawnRockstwo(int xValue) {
     }
 
 
-// 5 rocks collum from the ground up
+    // 5 rocks collum from the ground up
     public void spawnRocksfour(int xValue) {
 
         for (int i = 0; i < 5; i++) {
 
-            GridPoint2 pos = new GridPoint2(xValue + 18, 50+i);
+            GridPoint2 pos = new GridPoint2(xValue + 18, 50 + i);
             Entity rock = ObstacleFactory.createRock();
             spawnEntityAt(rock, pos, true, false);
 
@@ -142,7 +143,7 @@ public void spawnRockstwo(int xValue) {
 
         for (int i = 0; i < 4; i++) {
 
-            GridPoint2 pos = new GridPoint2(xValue + 20, 57+i);
+            GridPoint2 pos = new GridPoint2(xValue + 20, 57 + i);
             Entity rock = ObstacleFactory.createRock();
             spawnEntityAt(rock, pos, true, false);
 
@@ -156,34 +157,34 @@ public void spawnRockstwo(int xValue) {
 //      NNNN
     public void spawnRockssix(int xValue) {
 
-        GridPoint2 Pos = new GridPoint2 ( xValue + 22, 53);
+        GridPoint2 Pos = new GridPoint2(xValue + 22, 53);
         Entity rock = ObstacleFactory.createRock();
         spawnEntityAt(rock, Pos, true, false);
-        GridPoint2 PosTwo = new GridPoint2 ( xValue + 22, 52);
+        GridPoint2 PosTwo = new GridPoint2(xValue + 22, 52);
         Entity rockTwo = ObstacleFactory.createRock();
         spawnEntityAt(rockTwo, PosTwo, true, false);
-        GridPoint2 PosThree = new GridPoint2 ( xValue + 22, 51);
+        GridPoint2 PosThree = new GridPoint2(xValue + 22, 51);
         Entity rockThree = ObstacleFactory.createRock();
         spawnEntityAt(rockThree, PosThree, true, false);
-        GridPoint2 PosFour = new GridPoint2 ( xValue + 22, 50);
+        GridPoint2 PosFour = new GridPoint2(xValue + 22, 50);
         Entity rockFour = ObstacleFactory.createRock();
         spawnEntityAt(rockFour, PosFour, true, false);
-        GridPoint2 PosFive = new GridPoint2 ( xValue + 23, 52);
+        GridPoint2 PosFive = new GridPoint2(xValue + 23, 52);
         Entity rockFive = ObstacleFactory.createRock();
         spawnEntityAt(rockFive, PosFive, true, false);
-        GridPoint2 PosSix = new GridPoint2 ( xValue + 23, 51);
+        GridPoint2 PosSix = new GridPoint2(xValue + 23, 51);
         Entity rockSix = ObstacleFactory.createRock();
         spawnEntityAt(rockSix, PosSix, true, false);
-        GridPoint2 PosSeven = new GridPoint2 ( xValue + 23, 50);
+        GridPoint2 PosSeven = new GridPoint2(xValue + 23, 50);
         Entity rockSeven = ObstacleFactory.createRock();
         spawnEntityAt(rockSeven, PosSeven, true, false);
-        GridPoint2 PosEight = new GridPoint2 ( xValue + 24, 51);
+        GridPoint2 PosEight = new GridPoint2(xValue + 24, 51);
         Entity rockEight = ObstacleFactory.createRock();
         spawnEntityAt(rockEight, PosEight, true, false);
-        GridPoint2 PosNine = new GridPoint2 ( xValue + 24, 50);
+        GridPoint2 PosNine = new GridPoint2(xValue + 24, 50);
         Entity rockNine = ObstacleFactory.createRock();
         spawnEntityAt(rockNine, PosNine, true, false);
-        GridPoint2 PosTen = new GridPoint2 ( xValue + 25, 50);
+        GridPoint2 PosTen = new GridPoint2(xValue + 25, 50);
         Entity rockTen = ObstacleFactory.createRock();
         spawnEntityAt(rockTen, PosTen, true, false);
 
@@ -203,12 +204,6 @@ public void spawnRockstwo(int xValue) {
 //         spawnEntityAt(rockTwo, randomPosTwo, true, false);
 //     }
 // }
-
-
-
-
-
-
 
 
     private void spawnWoods() {
@@ -238,17 +233,6 @@ public void spawnRockstwo(int xValue) {
             spawnEntityAt(woodTwo, randomPosTwo, true, false);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
     //  private void spawnTrees() {
@@ -590,8 +574,7 @@ public void spawnRockstwo(int xValue) {
      * obstacles is 0-30.  The second call to the player's x position is 10, and the x range for
      * generating obstacles is 31-50.
      * <p>
-     * Note: Temporarily reduce the range of obstacles generated for the first time, new range (25-30) units,
-     * leaving enough space for the item group
+     * Note: Reduce the range of obstacles generated for the first time, leaving enough space for the item group
      */
     public void spawnObstacles() {
         GridPoint2 minPos;
@@ -630,10 +613,9 @@ public void spawnRockstwo(int xValue) {
                 loggerInfo += "Create Plants Obstacle at " + randomPos + "\t";
                 loggerInfo += "Create Thorns Obstacle at " + randomPos2 + "\t";
             }
-            logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}", minPos.x, maxPos.x, randomPoints, loggerInfo);
+            logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}",
+                    minPos.x, maxPos.x, randomPoints, loggerInfo);
         }
-
-
 
 
     }
@@ -667,8 +649,8 @@ public void spawnRockstwo(int xValue) {
 
 
     /**
-     * Generate a certain number of meteorites, called by render() in MainGameScreen.java. The final number of meteorites
-     * is the sum of all parameters.
+     * Generate a certain number of meteorites, called by render() in MainGameScreen.java. The final number of
+     * meteorites is the sum of all parameters.
      * <p>
      * Big size meteorites: 1.5 - 2 times of the multiples of meteorites texture,
      * total number is bigNum(+bigRandomRange), the values in parentheses are random.
@@ -712,13 +694,16 @@ public void spawnRockstwo(int xValue) {
             Entity stone;
 
             if (i < bigNumRandom) { // must have a big meteorites
-                stone = ObstacleFactory.createMeteorite(player, (float) bigSize, ObstacleFactory.MeteoriteType.BigMeteorite);
+                stone = ObstacleFactory.createMeteorite(player,
+                        (float) bigSize, ObstacleFactory.MeteoriteType.BigMeteorite);
                 loggerInfo += "Big stone = " + point + "\t";
             } else if (i < bigNumRandom + midNumRandom) {
-                stone = ObstacleFactory.createMeteorite(player, (float) midSize, ObstacleFactory.MeteoriteType.MiddleMeteorite);
+                stone = ObstacleFactory.createMeteorite(player,
+                        (float) midSize, ObstacleFactory.MeteoriteType.MiddleMeteorite);
                 loggerInfo += "Mid stone = " + point + "\t";
             } else {
-                stone = ObstacleFactory.createMeteorite(player, (float) smallSize, ObstacleFactory.MeteoriteType.SmallMeteorite);
+                stone = ObstacleFactory.createMeteorite(player,
+                        (float) smallSize, ObstacleFactory.MeteoriteType.SmallMeteorite);
                 loggerInfo += "Small stone = " + point + "\t";
             }
 
@@ -730,24 +715,19 @@ public void spawnRockstwo(int xValue) {
     }
 
 
-
     /**
      * Generate Spaceship at fixed location.
      */
     public void spawnSpaceship() {
         int playerX = (int) player.getPosition().x;
-//        GridPoint2 minPos = new GridPoint2(playerX + 10, 0);
-//        GridPoint2 maxPos = new GridPoint2(playerX + 40, 0);
-//        GridPoint2 randomPosTwo = RandomUtils.randomX(11, minPos, maxPos);
-//        Entity Range = NPCFactory.createFlyingMonkey(player);
         GridPoint2 position = new GridPoint2(playerX + 35, 3);
         Entity spaceship = NPCFactory.createSpaceShip(player);
         spawnEntityAt(spaceship, position, true, false);
 
         spaceship.getEvents().addListener("spawnPortalEntrance", this::spawnPortalEntrance);
         spaceship.getEvents().addListener("spawnSmallMissile", this::spawnSmallMissile);
-//        System.out.println("spaceship position = " + position);
-//        logger.debug("Spawn a spaceship on position = {}", position);
+
+        logger.debug("Spawn a spaceship on position = {}", position);
     }
 
     /**
@@ -758,11 +738,11 @@ public void spawnRockstwo(int xValue) {
     public void spawnSmallMissile(Vector2 position) {
         Entity smallMissile = NPCFactory.createSmallMissile(player);
         spawnEntityAt(smallMissile, position, true, true);
-        smallMissile.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(-10, 2), position, true);
+        smallMissile.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(-10, 2),
+                position, true);
         smallMissile.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0f);
         smallMissile.getComponent(PhysicsComponent.class).getBody().setGravityScale(0.1f);
         logger.debug("Spawn a small missile on position = {}", position);
-//        System.out.println("Spawn a small missile on position = "+ position);
     }
 
 
@@ -770,14 +750,20 @@ public void spawnRockstwo(int xValue) {
      * Generate Small Missile at Spaceship location. Called by render() in MainGameScreen.java
      *
      * @param position the location of Spaceship
+     * @param type     ObstacleType category
      */
     public void spawnPortal(Vector2 position, ObstacleEventHandler.ObstacleType type) {
         Entity portal = ObstacleFactory.createPortal(player, type);
         spawnEntityAt(portal, position, true, true);
-//        logger.debug("Spawn a small missile on position = {}", position);
-//        System.out.println("Spawn a small missile on position = "+ position);
+        logger.debug("Spawn a portal on position = {}", position);
     }
 
+    /**
+     * Called by the listening event "spawnPortalEntrance" of spawnSpaceship().
+     *
+     * @param position position the location of Spaceship
+     * @param type     ObstacleType category
+     */
     private void spawnPortalEntrance(Vector2 position, ObstacleEventHandler.ObstacleType type) {
         spawnPortal(position, type);
     }

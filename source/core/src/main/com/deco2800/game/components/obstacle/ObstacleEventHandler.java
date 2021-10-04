@@ -14,13 +14,20 @@ import org.slf4j.LoggerFactory;
 //import com.sun.tools.javac.Main;
 
 /**
- * Used to handle collision events between obstacles and enemies
+ * Used to handle events of obstacles and enemies
  */
 public class ObstacleEventHandler extends Component {
 
+    /* Plant lock status for monster manual */
     public static boolean locked = true;
+
+    /* Thorns lock status for monster manual */
     public static boolean locked2 = true;
+
+    /* Meteorite lock status for monster manual */
     public static boolean locked3 = true;
+
+    /* Spaceship lock status for monster manual */
     public static boolean locked_ufo = true;
 
     /**
@@ -37,11 +44,16 @@ public class ObstacleEventHandler extends Component {
     private static boolean spaceshipAttack;
     private int count;
 
+    /**
+     * Construct an ObstacleEventHandler and register the corresponding event according to the obstacleType.
+     * @param obstacleType The types of obstacles.
+     */
     public ObstacleEventHandler(ObstacleType obstacleType) {
         this.obstacleType = obstacleType;
         this.count = 0;
     }
 
+    @Override
     public void create() {
         hitboxComponent = this.entity.getComponent(HitboxComponent.class);
         animator = this.entity.getComponent(AnimationRenderComponent.class);
@@ -79,7 +91,7 @@ public class ObstacleEventHandler extends Component {
     }
 
     /**
-     * Setter for spaceshipAttack, only used for test.
+     * Setter for spaceshipAttack, used for test.
      * @param spaceshipAttack
      */
     public static void setSpaceshipAttack(boolean spaceshipAttack) {
@@ -103,7 +115,7 @@ public class ObstacleEventHandler extends Component {
         if (count == 0) { // Avoid an entity from repeatedly triggering an attack
             count++;
 
-            logger.debug("PlantsDisappearStart was triggered.");
+            logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacles");
             animator.getEntity().setDisappearAfterAnimation(1f);
@@ -131,7 +143,7 @@ public class ObstacleEventHandler extends Component {
             count++;
 
             MainGameScreen.setSlowPlayer(5f);
-            logger.debug("ThornsDisappearStart was triggered.");
+            logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacle2");
             animator.getEntity().setDisappearAfterAnimation(1f);
@@ -154,7 +166,7 @@ public class ObstacleEventHandler extends Component {
             if (count == 0) { // Avoid an entity from repeatedly triggering an attack
                 count++;
 
-                logger.debug("meteoriteDisappear was triggered.");
+                logger.debug("collisionStart event for {} was triggered.", entity.toString());
                 animator.getEntity().setRemoveTexture();
                 animator.startAnimation("stone1");
                 animator.getEntity().setDisappearAfterAnimation(0.32f);
@@ -169,12 +181,18 @@ public class ObstacleEventHandler extends Component {
      */
     void faceWormDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-            logger.debug("faceWormDisappear was triggered.");
+            logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setDisappearAfterAnimation(1.5f);
         }
 
     }
 
+    /**
+     * This function is triggered when the spacecraft collides. Set spaceship to start attack state. Trigger the
+     * floating sound of the spacecraft and unlock the monster manual.
+     * @param me self fixture
+     * @param other The fixture of the entity that started the collision
+     */
     void spaceShipAttack(Fixture me, Fixture other) {
         if (spaceshipAttack) {
             return;
@@ -192,15 +210,26 @@ public class ObstacleEventHandler extends Component {
         SpaceshipAttackController.setSpaceshipAttack();
         entity.getEvents().trigger("spaceshipSound");
 
-//        System.out.println("spaceShipAttack was triggered.");
+        logger.debug("collisionStart event for {} was triggered.", entity.toString());
         spaceshipAttack = true;
         locked_ufo = false;
     }
 
-    void spaceshipDispose () {
+    /**
+     * When the remaining time of the spaceship attack is 0, the spaceship disappearance event will be triggered.
+     */
+    void spaceshipDispose() {
+        logger.debug("spaceshipDispose event was triggered.");
         this.entity.setDispose();
     }
 
+    /**
+     * When the missile encounters a character, it triggers an explosion sound, an animation, and then the
+     * missile disappears.
+     *
+     * @param me self fixture
+     * @param other The fixture of the entity that started the collision
+     */
     void smallMissileAttack(Fixture me, Fixture other) {
         if (hitboxComponent.getFixture() != me) {
             // Not triggered by hitbox, ignore
@@ -211,51 +240,85 @@ public class ObstacleEventHandler extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
+        logger.debug("collisionStart event for {} was triggered.", entity.toString());
         entity.getEvents().trigger("missileSound");
         animator.startAnimation("bomb");
         animator.getEntity().setDisappearAfterAnimation(0.4f);
 
     }
 
+    /**
+     * Triggered when the character touches the entrance of a new map.
+     * @param me self fixture
+     * @param other The fixture of the entity that started the collision
+     */
     void portalEntrance(Fixture me, Fixture other) {
         if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
             return;
         }
         MainGameScreen.setNewMapStatus(MainGameScreen.NewMap.Start);
-//        System.out.println("portalTransfer was triggered.");
+        logger.debug("collisionStart event for {} was triggered.", entity.toString());
     }
 
-
+    /**
+     * Triggered when the character encounters a new map exit.
+     * @param me self fixture
+     * @param other The fixture of the entity that started the collision
+     */
     void portalExport(Fixture me, Fixture other) {
         if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
             return;
         }
         MainGameScreen.setNewMapStatus(MainGameScreen.NewMap.Finish);
-//        System.out.println("portalTransfer was triggered.");
+        logger.debug("collisionStart event for {} was triggered.", entity.toString());
     }
 
+    /**
+     * getter method for locked
+     * @return if the plant is locked
+     */
     public static boolean isLocked() {
         return locked;
     }
 
+    /**
+     * getter method for locked2
+     * @return if the thorns is locked
+     */
     public static boolean isLocked2() {
         return locked2;
     }
 
+    /**
+     * getter method for locked3
+     * @return if the meteorite is locked
+     */
     public static boolean isLocked3() {
         return locked3;
     }
 
+    /**
+     * getter method for locked_ufo
+     * @return if the spaceship is locked
+     */
     public static boolean isLocked_ufo() {
         return locked_ufo;
     }
 
+    /**
+     * getter method for spaceshipAttack
+     * @return if the spaceshipAttack is attack
+     */
     public static boolean isSpaceshipAttack() {
         return spaceshipAttack;
     }
 
+    /**
+     * getter method for count
+     * @return how many times the event was triggered
+     */
     public int getCount() {
         return count;
     }
