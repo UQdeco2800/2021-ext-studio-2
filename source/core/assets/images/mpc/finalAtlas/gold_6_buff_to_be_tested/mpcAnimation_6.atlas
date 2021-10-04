@@ -6,21 +6,21 @@ filter: Nearest, Nearest
 repeat: none
 main_player_attack
   rotate: false
-  xy: 3260, 5433
+  xy: 2717, 4890
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 1
 main_player_attack
   rotate: false
-  xy: 3803, 4347
+  xy: 7063, 7605
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 3
 main_player_attack
   rotate: false
-  xy: 3803, 1632
+  xy: 4346, 2175
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -32,20 +32,20 @@ main_player_attack_dizzy
   orig: 541, 541
   offset: 0, 0
   index: 1
-main_player_attack_dizzy_2.png
+main_player_attack_dizzy
   rotate: false
-  xy: 2717, 5976
+  xy: 1088, 2718
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
-  index: -1
-main_player_attack_dizzy_3.png
+  index: 3
+main_player_attack_dizzy
   rotate: false
-  xy: 2, 2
+  xy: 2174, 1089
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
-  index: -1
+  index: 2
 main_player_attack_health-down
   rotate: false
   xy: 2, 5975
@@ -55,14 +55,14 @@ main_player_attack_health-down
   index: 1
 main_player_attack_health-down
   rotate: false
-  xy: 4348, 7605
+  xy: 3804, 7062
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 3
 main_player_attack_health-down
   rotate: false
-  xy: 2174, 2175
+  xy: 1631, 1632
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -104,21 +104,21 @@ main_player_attack_health-up
   index: 1
 main_player_attack_health-up
   rotate: false
-  xy: 1631, 546
+  xy: 1088, 3
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 3
 main_player_attack_hungry
   rotate: false
-  xy: 2, 2717
+  xy: 3260, 6519
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_attack_hungry
   rotate: false
-  xy: 2717, 2718
+  xy: 1088, 1089
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -146,7 +146,7 @@ main_player_attack_poisoned
   index: 1
 main_player_attack_poisoned
   rotate: false
-  xy: 6518, 5976
+  xy: 5975, 5433
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -160,7 +160,7 @@ main_player_attack_recovered
   index: 3
 main_player_attack_recovered
   rotate: false
-  xy: 4346, 4890
+  xy: 3803, 4347
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -195,7 +195,7 @@ main_player_attack_speed-down
   index: 1
 main_player_attack_thirsty
   rotate: false
-  xy: 1088, 6519
+  xy: 545, 5976
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -209,7 +209,7 @@ main_player_attack_thirsty
   index: 1
 main_player_attack_thirsty
   rotate: false
-  xy: 7606, 7605
+  xy: 5975, 5976
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -223,7 +223,7 @@ main_player_crouch
   index: 2
 main_player_crouch
   rotate: false
-  xy: 4346, 2718
+  xy: 4889, 3261
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -272,14 +272,14 @@ main_player_crouch_health-limit-up
   index: 1
 main_player_crouch_health-up
   rotate: false
-  xy: 1631, 4347
+  xy: 1088, 3804
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_crouch_health-up
   rotate: false
-  xy: 4346, 4347
+  xy: 3803, 3804
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -307,7 +307,7 @@ main_player_crouch_poisoned
   index: 1
 main_player_crouch_poisoned
   rotate: false
-  xy: 2174, 1089
+  xy: 1631, 546
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -321,7 +321,7 @@ main_player_crouch_recovered
   index: 2
 main_player_crouch_recovered
   rotate: false
-  xy: 5432, 5976
+  xy: 4346, 4890
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -349,7 +349,7 @@ main_player_crouch_thirsty
   index: 2
 main_player_crouch_thirsty
   rotate: false
-  xy: 545, 1632
+  xy: 5977, 7605
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -370,7 +370,7 @@ main_player_jump
   index: 1
 main_player_jump
   rotate: false
-  xy: 1088, 546
+  xy: 545, 3
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -391,7 +391,7 @@ main_player_jump_dizzy
   index: 1
 main_player_jump_dizzy
   rotate: false
-  xy: 2717, 2175
+  xy: 2174, 1632
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -419,7 +419,7 @@ main_player_jump_health-down
   index: 2
 main_player_jump_health-limit-up
   rotate: false
-  xy: 1088, 3261
+  xy: 545, 2718
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -440,14 +440,14 @@ main_player_jump_health-limit-up
   index: 2
 main_player_jump_health-up
   rotate: false
-  xy: 1088, 3804
+  xy: 545, 3261
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_jump_health-up
   rotate: false
-  xy: 4889, 4890
+  xy: 4346, 4347
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -468,14 +468,14 @@ main_player_jump_hungry
   index: 1
 main_player_jump_hungry
   rotate: false
-  xy: 545, 3261
+  xy: 4348, 7605
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 3
 main_player_jump_hungry
   rotate: false
-  xy: 3260, 3261
+  xy: 2174, 2175
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -489,14 +489,14 @@ main_player_jump_poisoned
   index: 1
 main_player_jump_poisoned
   rotate: false
-  xy: 5434, 7605
+  xy: 4890, 7062
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 3
 main_player_jump_poisoned
   rotate: false
-  xy: 7061, 6519
+  xy: 6518, 5976
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -510,21 +510,21 @@ main_player_jump_recovered
   index: 2
 main_player_jump_recovered
   rotate: false
-  xy: 7063, 7605
+  xy: 5432, 5976
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 1
 main_player_jump_recovered
   rotate: false
-  xy: 7605, 7062
+  xy: 7061, 6519
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 3
 main_player_jump_speed-down
   rotate: false
-  xy: 3803, 6519
+  xy: 2717, 5433
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -538,7 +538,7 @@ main_player_jump_speed-down
   index: 3
 main_player_jump_speed-down
   rotate: false
-  xy: 4889, 3261
+  xy: 3803, 2175
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -552,7 +552,7 @@ main_player_jump_thirsty
   index: 3
 main_player_jump_thirsty
   rotate: false
-  xy: 1088, 2718
+  xy: 545, 2175
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -566,28 +566,28 @@ main_player_jump_thirsty
   index: 1
 main_player_pickup
   rotate: false
-  xy: 545, 5976
+  xy: 1088, 6519
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 1
 main_player_pickup
   rotate: false
-  xy: 2174, 4890
+  xy: 3260, 5976
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 3
 main_player_pickup
   rotate: false
-  xy: 5432, 5433
+  xy: 7062, 7062
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_pickup
   rotate: false
-  xy: 2717, 1089
+  xy: 5975, 4347
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -601,21 +601,21 @@ main_player_pickup_dizzy
   index: 1
 main_player_pickup_dizzy
   rotate: false
-  xy: 4346, 6519
+  xy: 3803, 5976
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 3
 main_player_pickup_dizzy
   rotate: false
-  xy: 5432, 4890
+  xy: 4889, 4347
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_pickup_dizzy
   rotate: false
-  xy: 5975, 3804
+  xy: 5432, 3261
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -629,7 +629,7 @@ main_player_pickup_health-down
   index: 2
 main_player_pickup_health-down
   rotate: false
-  xy: 2, 1631
+  xy: 5434, 7605
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -643,7 +643,7 @@ main_player_pickup_health-down
   index: 1
 main_player_pickup_health-down
   rotate: false
-  xy: 1088, 3
+  xy: 7605, 7062
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -678,7 +678,7 @@ main_player_pickup_health-limit-up
   index: 1
 main_player_pickup_health-up
   rotate: false
-  xy: 1631, 3804
+  xy: 1088, 3261
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -692,7 +692,7 @@ main_player_pickup_health-up
   index: 4
 main_player_pickup_health-up
   rotate: false
-  xy: 3260, 2718
+  xy: 2717, 2175
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -713,21 +713,21 @@ main_player_pickup_hungry
   index: 1
 main_player_pickup_hungry
   rotate: false
-  xy: 3260, 5976
+  xy: 1631, 4347
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 3
 main_player_pickup_hungry
   rotate: false
-  xy: 6518, 6519
+  xy: 4889, 4890
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_pickup_hungry
   rotate: false
-  xy: 3803, 2175
+  xy: 2174, 546
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -741,7 +741,7 @@ main_player_pickup_poisoned
   index: 2
 main_player_pickup_poisoned
   rotate: false
-  xy: 3803, 5976
+  xy: 3260, 5433
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -755,7 +755,7 @@ main_player_pickup_poisoned
   index: 1
 main_player_pickup_poisoned
   rotate: false
-  xy: 4889, 4347
+  xy: 4346, 3804
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -769,21 +769,21 @@ main_player_pickup_recovered
   index: 1
 main_player_pickup_recovered
   rotate: false
-  xy: 2717, 4890
+  xy: 2174, 4347
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 3
 main_player_pickup_recovered
   rotate: false
-  xy: 4346, 3804
+  xy: 3803, 3261
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_pickup_recovered
   rotate: false
-  xy: 4346, 2175
+  xy: 3803, 1632
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -797,7 +797,7 @@ main_player_pickup_speed-down
   index: 2
 main_player_pickup_speed-down
   rotate: false
-  xy: 4891, 7605
+  xy: 4347, 7062
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -811,7 +811,7 @@ main_player_pickup_speed-down
   index: 1
 main_player_pickup_speed-down
   rotate: false
-  xy: 2174, 1632
+  xy: 1631, 1089
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -825,14 +825,14 @@ main_player_pickup_thirsty
   index: 3
 main_player_pickup_thirsty
   rotate: false
-  xy: 545, 2175
+  xy: 2, 1631
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_pickup_thirsty
   rotate: false
-  xy: 3803, 3804
+  xy: 3260, 3261
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -860,7 +860,7 @@ main_player_right_dizzy
   index: -1
 main_player_right_health-down
   rotate: false
-  xy: 545, 3
+  xy: 7606, 7605
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -874,35 +874,35 @@ main_player_right_health-limit-up
   index: -1
 main_player_right_health-up
   rotate: false
-  xy: 4347, 7062
+  xy: 3803, 6519
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: -1
 main_player_right_hungry
   rotate: false
-  xy: 2174, 546
+  xy: 2717, 1089
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: -1
 main_player_right_poisoned
   rotate: false
-  xy: 545, 2718
+  xy: 2, 2174
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: -1
 main_player_right_recovered
   rotate: false
-  xy: 7061, 5976
+  xy: 6518, 5433
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: -1
 main_player_right_speed-down
   rotate: false
-  xy: 545, 546
+  xy: 2, 2
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -916,14 +916,14 @@ main_player_right_thirsty
   index: -1
 main_player_run
   rotate: false
-  xy: 5977, 7605
+  xy: 545, 1632
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_run
   rotate: false
-  xy: 6518, 5433
+  xy: 7061, 5976
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -944,28 +944,28 @@ main_player_run_dizzy
   index: 1
 main_player_run_health-down
   rotate: false
-  xy: 2717, 5433
+  xy: 2174, 4890
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_run_health-down
   rotate: false
-  xy: 5975, 5976
+  xy: 5432, 5433
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 1
 main_player_run_health-limit-up
   rotate: false
-  xy: 3260, 6519
+  xy: 2717, 5976
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_run_health-limit-up
   rotate: false
-  xy: 1088, 1089
+  xy: 545, 546
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -993,7 +993,7 @@ main_player_run_hungry
   index: 2
 main_player_run_hungry
   rotate: false
-  xy: 5432, 3261
+  xy: 5975, 3804
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -1007,7 +1007,7 @@ main_player_run_poisoned
   index: 1
 main_player_run_poisoned
   rotate: false
-  xy: 5975, 5433
+  xy: 5432, 4890
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -1035,14 +1035,14 @@ main_player_run_speed-down
   index: 2
 main_player_run_speed-down
   rotate: false
-  xy: 5975, 4347
+  xy: 4346, 2718
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 1
 main_player_run_thirsty
   rotate: false
-  xy: 2174, 4347
+  xy: 1631, 3804
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -1056,14 +1056,14 @@ main_player_run_thirsty
   index: 2
 main_player_walk
   rotate: false
-  xy: 3804, 7062
+  xy: 2, 2717
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_walk
   rotate: false
-  xy: 1631, 1632
+  xy: 2717, 2718
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -1119,21 +1119,21 @@ main_player_walk_health-up
   index: 1
 main_player_walk_health-up
   rotate: false
-  xy: 3803, 3261
+  xy: 3260, 2718
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_walk_hungry
   rotate: false
-  xy: 2, 2174
+  xy: 4891, 7605
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_walk_hungry
   rotate: false
-  xy: 1631, 1089
+  xy: 1088, 546
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -1175,7 +1175,7 @@ main_player_walk_speed-down
   index: 1
 main_player_walk_speed-down
   rotate: false
-  xy: 7062, 7062
+  xy: 6518, 6519
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
@@ -1189,7 +1189,7 @@ main_player_walk_thirsty
   index: 2
 main_player_walk_thirsty
   rotate: false
-  xy: 4890, 7062
+  xy: 4346, 6519
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
