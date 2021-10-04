@@ -11,13 +11,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(GameExtension.class)
-class ScoreServiceTest {
+class DistanceServiceTest {
+
     private static Logger logger = LoggerFactory.getLogger(ScoreServiceTest.class);
     ScoreService scoreService;
     DistanceService distanceService;
@@ -35,11 +35,11 @@ class ScoreServiceTest {
         distanceService = new DistanceService(player);
     }
 
-   // @Test
-    //void shouldAddToScoreAndGetCorrectScore() {
-    //    scoreService.addToScore(10);
-    //      assertEquals(10, scoreService.getScore());
-    //}
+     @Test
+    void shouldAddToScoreAndGetCorrectScore() {
+        scoreService.addToScore(10);
+         assertEquals(10, scoreService.getScore());
+    }
 
     @Test
     void saveCurrentScoreToHistory() {
@@ -48,4 +48,5 @@ class ScoreServiceTest {
     @AfterEach
     void tearDown() {
     }
+
 }
