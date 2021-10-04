@@ -335,18 +335,18 @@ public void spawnRockstwo(int xValue) {
     };
 
     private static final String[] mpcTextures = {
-            "images/mpc/finalAtlas/OG/mpcAnimation.png",
+            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpcAnimation.png",
             "images/mpc/finalAtlas/gold_2/mpcAnimation_2.png",
             "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpcAnimation_4.png",
             "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.png",
-            "images/mpc/finalAtlas/OG/mpc_right.png",
+            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpc_right.png",
             "images/mpc/finalAtlas/gold_2/mpc_right.png",
             "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpc_right.png",
             "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpc_right.png",
 
     };
     private static final String[] mpcTexturesAtlases = {
-            "images/mpc/finalAtlas/OG/mpcAnimation.atlas",
+            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpcAnimation.atlas",
             "images/mpc/finalAtlas/gold_2/mpcAnimation_2.atlas",
             "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpcAnimation_4.atlas",
             "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.atlas",
