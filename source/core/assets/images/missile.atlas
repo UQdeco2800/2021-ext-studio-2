@@ -1,0 +1,61 @@
+missiles.png
+size: 3348, 3102
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bomb
+  rotate: false
+  xy: 0, 0
+  size: 1116, 1034
+  orig: 1116, 1034
+  offset: 0, 0
+  index: -1
+bomb
+  rotate: false
+  xy: 1116, 0
+  size: 1116, 1034
+  orig: 1116, 1034
+  offset: 0, 0
+  index: -1
+bomb
+  rotate: false
+  xy: 2232, 0
+  size: 1116, 1034
+  orig: 1116, 1034
+  offset: 0, 0
+  index: -1
+bomb
+  rotate: false
+  xy: 0, 1034
+  size: 1116, 1034
+  orig: 1116, 1034
+  offset: 0, 0
+  index: -1
+missile1
+  rotate: false
+  xy: 1116, 1034
+  size: 1116, 1034
+  orig: 1116, 1034
+  offset: 0, 0
+  index: -1
+missile1
+  rotate: false
+  xy: 2232, 1034
+  size: 1116, 1034
+  orig: 1116, 1034
+  offset: 0, 0
+  index: -1
+missile1
+  rotate: false
+  xy: 0, 2068
+  size: 1116, 1034
+  orig: 1116, 1034
+  offset: 0, 0
+  index: -1
+missile1
+  rotate: false
+  xy: 1116, 2068
+  size: 1116, 1034
+  orig: 1116, 1034
+  offset: 0, 0
+  index: -1

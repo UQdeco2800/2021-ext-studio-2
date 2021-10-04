@@ -46,26 +46,26 @@ class ObstacleAttackTaskTest {
         assertEquals(entity.getPosition(), obstacleAttackTask.enemyCreatePosition());
     }
 
-//    @Test
-//    void shouldDrawEntityInDistance() {
-//        Entity target = new Entity();
-//        target.setPosition(0f, 6f);
-//        Entity entity = makePhysicsEntity();
-//        entity.create();
-//        entity.setPosition(0f, 0f);
-//        ObstacleAttackTask obstacleAttackTask = new ObstacleAttackTask(target,10,6);
-//        obstacleAttackTask.create(() -> entity);
-//
-//        // When active, should draw enemy if within view distance
-//        obstacleAttackTask.start();
-//        target.setPosition(0f, 5f);
-//        assertEquals(10, obstacleAttackTask.getPriority());
-//
-//        //should not draw enemy outside view distance
-//        target.setPosition(0f, 12f);
-//        assertTrue(obstacleAttackTask.getPriority() < 0);
-//
-//    }
+    @Test
+    void shouldDrawEntityInDistance() {
+        Entity target = new Entity();
+        target.setPosition(0f, 6f);
+        Entity entity = makePhysicsEntity();
+        entity.create();
+        entity.setPosition(0f, 0f);
+        ObstacleAttackTask obstacleAttackTask = new ObstacleAttackTask(entity, target,10,6);
+        obstacleAttackTask.create(() -> entity);
+
+        // When active, should draw enemy if within view distance
+        obstacleAttackTask.start();
+        target.setPosition(0f, 5f);
+        assertEquals(10, obstacleAttackTask.getPriority());
+
+        //should not draw enemy outside view distance
+        target.setPosition(0f, 12f);
+        assertTrue(obstacleAttackTask.getPriority() < 0);
+
+    }
 
 
    

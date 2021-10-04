@@ -28,7 +28,6 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     private final DebugRenderer debugRenderer;
     private GameArea gameArea;
     public static Boolean lock_use = true;
-
     public static Vector2 enemy_posion;
 
     public ObstacleAttackTask(Entity npc, Entity target, int priority, float viewDistance) {
@@ -46,9 +45,8 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
         super.start();
 
         npc.getEvents().trigger("spawnFaceWorm", enemyCreatePosition());
+        npc.getEvents().trigger("roarSound");
 
-        Sound roarSound = ServiceLocator.getResourceService().getAsset("sounds/monster_roar.mp3", Sound.class);
-        roarSound.play(0.3f, 1f, 0);
     }
 
 

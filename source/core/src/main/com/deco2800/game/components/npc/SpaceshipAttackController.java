@@ -82,6 +82,17 @@ public class SpaceshipAttackController extends Component {
         spaceshipState = SpaceshipAttack.Start;
     }
 
+    /**
+     * Get spaceshipState, used for test.
+     * @return the current state of spaceship attack.
+     */
+    public static SpaceshipAttack getSpaceshipState() {
+        return spaceshipState;
+    }
+
+    public static void setSpaceshipState(SpaceshipAttack spaceshipState) {
+        SpaceshipAttackController.spaceshipState = spaceshipState;
+    }
 
     @Override
     public void update() {
@@ -102,23 +113,14 @@ public class SpaceshipAttackController extends Component {
     }
 
 
-    /**
-     * Called when the component is disposed. Dispose of any internal resources here.
-     */
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
-
-
-    private void spaceshipSceneBegins() {
+    void spaceshipSceneBegins() {
         try {
             positionHitSpaceship = player.getPosition();
             player.setPosition(player.getPosition().x - 8, player.getPosition().y);
             // offset characters automatically advance
             player.setPosition((float) (player.getPosition().x - 0.05), player.getPosition().y);
         } catch (NullPointerException e) {
-            logger.error("Need to setPlayer(player).");
+            throw new NullPointerException("Need to setPlayer(player) when using SpaceshipAttackController");
         }
 
         // If the player is walking, stop
@@ -134,7 +136,7 @@ public class SpaceshipAttackController extends Component {
         spaceshipState = SpaceshipAttack.On;
     }
 
-    private void spaceshipAttackScene() {
+    void spaceshipAttackScene() {
         // set player position
         player.setPosition((float) (player.getPosition().x - 0.05), player.getPosition().y);
 

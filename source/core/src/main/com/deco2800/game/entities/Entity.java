@@ -45,7 +45,6 @@ public class Entity {
     private boolean disappear = false;
     private boolean removeTexture = false;
     private boolean dispose = false;
-    private boolean spaceShipDispose = false;
     private float animationTime = 0;
     private boolean created = false;
     private Vector2 position = Vector2.Zero.cpy();
@@ -124,19 +123,31 @@ public class Entity {
         logger.debug("Setting dispose={} on entity {}", dispose, this);
     }
 
-
+    /**
+     * Get method of disappear.
+     */
     public boolean isDisappear() {
         return disappear;
     }
 
+    /**
+     * Get method of removeTexture.
+     */
     public boolean isRemoveTexture() {
         return removeTexture;
     }
 
+    /**
+     * Get method of dispose.
+     */
     public boolean isDispose() {
         return dispose;
     }
 
+    /**
+     * Get method of animationTime.
+     * @return How long the animation will disappear after playing
+     */
     public float getAnimationTime() {
         return animationTime;
     }
@@ -381,7 +392,6 @@ public class Entity {
             this.dispose();
             return;
         }
-
 
         for (Component component : createdComponents) {
             // When texture and animation are given an entity at the same time, the texture needs to disappear when the
