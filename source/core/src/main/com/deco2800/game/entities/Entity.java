@@ -65,6 +65,7 @@ public class Entity {
 
     /**
      * Create an entity with category information. This will display the category when printing
+     *
      * @param type which category the current entity is. For example, "SpaceShip", etc.
      */
     public Entity(String type) {
@@ -87,13 +88,18 @@ public class Entity {
     }
 
 
-    public void updateSpeed(Vector2 speed){
+    public String getType() {
+        return this.type;
+    }
+
+    public void updateSpeed(Vector2 speed) {
         PlayerActions component = this.getComponent(PlayerActions.class);
         component.changeCurrentSpeed(speed);
     }
 
     /**
      * Set disappear to true. These variables play a role in removeAfterAnimation() and update().
+     *
      * @param animationTime Set how long the animation will disappear after playing
      */
     public void setDisappearAfterAnimation(float animationTime) {
@@ -113,7 +119,7 @@ public class Entity {
     /**
      * Set dispose to true. The code that works subsequently is in update.
      */
-    public void setDispose(){
+    public void setDispose() {
         this.dispose = true;
         logger.debug("Setting dispose={} on entity {}", dispose, this);
     }
@@ -215,6 +221,7 @@ public class Entity {
     public int getZIndex() {
         return zIndex;
     }
+
     /**
      * Set the entity's scale.
      *
@@ -307,7 +314,7 @@ public class Entity {
 
     /**
      * Let the obstacles disappear after playing the animation for animationTime second. Is called by update().
-     *
+     * <p>
      * The purpose of setting this method: When dispose() is used for animation components, all entities that use the
      * same animation become black boxes. Therefore, this method is currently used to make obstacles disappear.
      */
@@ -316,18 +323,18 @@ public class Entity {
         if (this.getComponent(AnimationRenderComponent.class).getAnimationPlayTime() > animationTime) {
             for (Component component : createdComponents) {
                 if (component.getClass().equals(AnimationRenderComponent.class)) {
-                    loggerInfo += "\t"+component.getClass().getSimpleName() + " stopped on entity " + this +"\n";
+                    loggerInfo += "\t" + component.getClass().getSimpleName() + " stopped on entity " + this + "\n";
                     ((AnimationRenderComponent) component).stopAnimation();
                 } else {
-                    loggerInfo += "\t"+component.getClass().getSimpleName() + " disposed on entity " + this +"\n";
+                    loggerInfo += "\t" + component.getClass().getSimpleName() + " disposed on entity " + this + "\n";
                     component.dispose();
                 }
             }
             ServiceLocator.getEntityService().unregister(this);
         }
-       if (loggerInfo.strip() != "") {
-           logger.debug(loggerInfo.strip());
-       }
+        if (loggerInfo.strip() != "") {
+            logger.debug(loggerInfo.strip());
+        }
     }
 
     /**
