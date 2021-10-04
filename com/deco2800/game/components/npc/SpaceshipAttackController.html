@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":10};
+<script type="text/javascript">var data = {"i0":10,"i1":9,"i2":10,"i3":9,"i4":9,"i5":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -233,10 +233,10 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 </td>
 </tr>
 <tr class="rowColor" id="i1">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#dispose()">dispose</a></span>()</code></th>
+<td class="colFirst"><code>static <a href="SpaceshipAttackController.SpaceshipAttack.html" title="enum in com.deco2800.game.components.npc">SpaceshipAttackController.SpaceshipAttack</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSpaceshipState()">getSpaceshipState</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Called when the component is disposed.</div>
+<div class="block">Get spaceshipState, used for test.</div>
 </td>
 </tr>
 <tr class="altColor" id="i2">
@@ -254,6 +254,11 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 </td>
 </tr>
 <tr class="altColor" id="i4">
+<td class="colFirst"><code>static void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSpaceshipState(com.deco2800.game.components.npc.SpaceshipAttackController.SpaceshipAttack)">setSpaceshipState</a></span>&#8203;(<a href="SpaceshipAttackController.SpaceshipAttack.html" title="enum in com.deco2800.game.components.npc">SpaceshipAttackController.SpaceshipAttack</a>&nbsp;spaceshipState)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
@@ -268,7 +273,7 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <h3>Methods inherited from class&nbsp;com.deco2800.game.components.<a href="../Component.html" title="class in com.deco2800.game.components">Component</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.components.Component">
 <!--   -->
-</a><code><a href="../Component.html#earlyUpdate()">earlyUpdate</a>, <a href="../Component.html#getEntity()">getEntity</a>, <a href="../Component.html#setEnabled(boolean)">setEnabled</a>, <a href="../Component.html#setEntity(com.deco2800.game.entities.Entity)">setEntity</a>, <a href="../Component.html#toString()">toString</a>, <a href="../Component.html#triggerEarlyUpdate()">triggerEarlyUpdate</a>, <a href="../Component.html#triggerUpdate()">triggerUpdate</a></code></div>
+</a><code><a href="../Component.html#dispose()">dispose</a>, <a href="../Component.html#earlyUpdate()">earlyUpdate</a>, <a href="../Component.html#getEntity()">getEntity</a>, <a href="../Component.html#setEnabled(boolean)">setEnabled</a>, <a href="../Component.html#setEntity(com.deco2800.game.entities.Entity)">setEntity</a>, <a href="../Component.html#toString()">toString</a>, <a href="../Component.html#triggerEarlyUpdate()">triggerEarlyUpdate</a>, <a href="../Component.html#triggerUpdate()">triggerUpdate</a></code></div>
 <div class="inheritedList">
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <a id="methods.inherited.from.class.java.lang.Object">
@@ -378,6 +383,23 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="getSpaceshipState()">getSpaceshipState</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="SpaceshipAttackController.SpaceshipAttack.html" title="enum in com.deco2800.game.components.npc">SpaceshipAttackController.SpaceshipAttack</a></span>&nbsp;<span class="memberName">getSpaceshipState</span>()</div>
+<div class="block">Get spaceshipState, used for test.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the current state of spaceship attack.</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setSpaceshipState(com.deco2800.game.components.npc.SpaceshipAttackController.SpaceshipAttack)">setSpaceshipState</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setSpaceshipState</span>&#8203;(<span class="arguments"><a href="SpaceshipAttackController.SpaceshipAttack.html" title="enum in com.deco2800.game.components.npc">SpaceshipAttackController.SpaceshipAttack</a>&nbsp;spaceshipState)</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="update()">update</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">update</span>()</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../Component.html#update()">Component</a></code></span></div>
@@ -386,17 +408,6 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../Component.html#update()">update</a></code>&nbsp;in class&nbsp;<code><a href="../Component.html" title="class in com.deco2800.game.components">Component</a></code></dd>
-</dl>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="dispose()">dispose</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">dispose</span>()</div>
-<div class="block">Called when the component is disposed. Dispose of any internal resources here.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../Component.html#dispose()">dispose</a></code>&nbsp;in class&nbsp;<code><a href="../Component.html" title="class in com.deco2800.game.components">Component</a></code></dd>
 </dl>
 </section>
 </li>
