@@ -51,19 +51,9 @@ public class ForestGameArea extends GameArea {
     public void spawnRocksone(int xValue) {
 
         for (int i = 0; i < 5; i++) {
-    //        GridPoint2 Pos = (10, 0);
-    //        Entity rock = ObstacleFactory.createRock();
-    //        spawnEntityAt(rock, Pos, true, false);
-    //        GridPoint2 PosTwo = (10, 1);
-    //        Entity rockTwo = ObstacleFactory.createRock();
-    //        spawnEntityAt(rockTwo, PosTwo, true, false);
-    //        GridPoint2 PosThree = (10, 2);
-    //        Entity rockTwo = ObstacleFactory.createRock();
-    //        spawnEntityAt(rockTwo, PosThree, true, true);
             GridPoint2 pos = new GridPoint2(xValue + 2 +i, 50);
             Entity rock = ObstacleFactory.createRock();
             spawnEntityAt(rock, pos, true, false);
-
         }
     }
 
@@ -148,6 +138,7 @@ public class ForestGameArea extends GameArea {
      * Generate 5 rocks column from the sky down
      * @param xValue horizontal start point
      */
+
     public void spawnRocksfive(int xValue) {
 
         for (int i = 0; i < 4; i++) {
