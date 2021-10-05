@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.entities.factories.PropStoreFactory;
@@ -41,10 +42,9 @@ public class PropStoreDisplay extends UIComponent {
     }
 
     private void addActors() {
-
+        stage.addActor(createBackground());
         stage.addActor(createExitButton());
         stage.addActor(createItemTable());
-
     }
 
     @Override
@@ -98,8 +98,17 @@ public class PropStoreDisplay extends UIComponent {
 
         });
 
+
         return table;
 
+    }
+    private Table createBackground(){
+        Table background = new Table();
+        background.setFillParent(true);
+        Image bg = new Image(new Texture("images/Items/props/background_image_prop.png"));
+        bg.setScaling(Scaling.fit);
+        background.background(bg.getDrawable());
+        return background;
     }
 
 }
