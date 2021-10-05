@@ -16,6 +16,8 @@ import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
+
 /**
  * A ui component for displaying the Main menu.
  */
@@ -122,6 +124,18 @@ public class MainMenuDisplay extends UIComponent {
   Button buffBtn = new Button(buff);
       buffBtn.setPosition(1120,170);
 
+      Button.ButtonStyle tutorial = new Button.ButtonStyle();
+      tutorial.up = new TextureRegionDrawable(new TextureRegion(
+              new Texture(Gdx.files.internal("button/tutorial1.png"))));
+      tutorial.over = new TextureRegionDrawable(new TextureRegion(
+              new Texture(Gdx.files.internal("button/tutorial2.png"))));
+
+
+      Button tutorialBtn = new Button(tutorial);
+
+
+
+
 
       //TextButton startBtn = new TextButton("Start", skin);
     //TextButton settingsBtn = new TextButton("Settings", skin);
@@ -214,6 +228,17 @@ public class MainMenuDisplay extends UIComponent {
           }
       });
 
+      tutorialBtn.addListener(new ChangeListener() {
+          @Override
+          public void changed(ChangeEvent event, Actor actor) {
+              logger.debug("game instructions clicked");
+              entity.getEvents().trigger("GameTutorial");
+          }
+      });
+
+
+
+
     Table bgTable = new Table();
     bgTable.setFillParent(true);
     table.add(title);
@@ -225,6 +250,8 @@ public class MainMenuDisplay extends UIComponent {
     table.add(settingBtn).padTop(30f);
     table.row();
     table.add(exitBtn).padTop(30f);
+    table.row();
+      table.add(tutorialBtn).padTop(30f);
     stage.addActor(bgTable);
     stage.addActor(table);
     stage.addActor(shopBtn);
