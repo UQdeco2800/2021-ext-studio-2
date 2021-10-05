@@ -238,17 +238,17 @@ public class BuffDisplay extends UIComponent {
         // buttonTable.add(unlockedChapterImg);
 
         box = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/monster_menu/Monsterbox.jpg", Texture.class));
+                .getAsset("buff-debuff-manual/manual-box.png", Texture.class));
 
 
         boardTable.add(box).size(700, 900);
 
         //this table contains the background image
         Image bgImage = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/monster_menu/background.png", Texture.class));
+                .getAsset("buff-debuff-manual/manual-backgorund.png", Texture.class));
         bgTable = new Table();
         bgTable.setFillParent(true);
-        bgTable.add(bgImage).size(1400, 1000);
+        bgTable.add(bgImage).size(1280, 800);
         // add the board to the stage first so that its can be under of score data
         stage.addActor(bgTable);
         stage.addActor(boardTable);
