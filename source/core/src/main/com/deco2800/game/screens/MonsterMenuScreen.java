@@ -25,7 +25,7 @@ public class MonsterMenuScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private final Renderer renderer;
     private final MonsterDispay monsterDispay ;
-    private static final String[] historyScoreTextures =
+    private static final String[] MonsterMenuTextures =
             {"images/monster_menu/Monsterbox.jpg",
                     "images/monster_menu/background.png",
             "images/obstacle_1_new.png",
@@ -85,7 +85,7 @@ public class MonsterMenuScreen extends ScreenAdapter {
     private void loadAssets() {
 
         ResourceService resourceService = ServiceLocator.getResourceService();
-        resourceService.loadTextures(historyScoreTextures);
+        resourceService.loadTextures(MonsterMenuTextures);
         ServiceLocator.getResourceService().loadAll();
     }
 
@@ -104,7 +104,7 @@ public class MonsterMenuScreen extends ScreenAdapter {
     private void unloadAssets() {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
-        resourceService.unloadAssets(historyScoreTextures);
+        resourceService.unloadAssets(MonsterMenuTextures);
     }
     @Override
     public void dispose() {
