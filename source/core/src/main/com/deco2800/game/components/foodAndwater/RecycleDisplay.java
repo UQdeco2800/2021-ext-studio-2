@@ -11,30 +11,25 @@ import com.deco2800.game.ui.UIComponent;
 import java.util.ArrayList;
 
 /**
- * A ui component for displaying food system. Player lose a chicken for 3 sec
+ * A ui component for displaying recycle system.
  */
 public class RecycleDisplay extends UIComponent {
-
     public static RecycleDisplay.recycleState recycleState = RecycleDisplay.recycleState.hp;
-
     public enum recycleState {
         food,
         water,
         hp
     }
 
-
     public static Table table;
     public static ArrayList<Image> recycleIcon = new ArrayList<>();
-
     public static int recycleNumber = 0;
     public static boolean isKey =false;
 
 
     public RecycleDisplay() { }
-
     /**
-     * Creates reusable food ui styles and adds actors to the stage.
+     * Creates reusable recycle ui styles and adds actors to the stage.
      * And starts the counting the time.
      */
     @Override
@@ -43,22 +38,19 @@ public class RecycleDisplay extends UIComponent {
         TestBuffForItem.countNumber = 0;
         addActors();
         entity.getEvents().addListener("updateRecover", this::updateRecyleIconUI);
-
     }
 
 
     /**
      * Creates actors, add images into list, and positions them on the stage using a table.
-     * @see Table for positioning options
      */
     private void addActors() {
         table = new Table();
         table.bottom().right();
         table.setFillParent(true);
-        table.padBottom(65).padRight(450);
+        table.padBottom(50).padRight(400);
 
         float iconLength = 60f;
-
         if(TestBuffForItem.countNumber >= 0){
             {
                 switch (TestBuffForItem.countNumber){
@@ -145,9 +137,9 @@ public class RecycleDisplay extends UIComponent {
 
             table.bottom().right();
             table.setFillParent(true);
-            table.padBottom(60).padRight(450);
+            table.padBottom(50).padRight(400);
 
-            float iconLength = 30f;
+            float iconLength = 60f;
             if(TestBuffForItem.countNumber >= 0){
                 {
                     switch (TestBuffForItem.countNumber){
