@@ -24,8 +24,8 @@ public class BuffManualMenuScreen extends ScreenAdapter {
     private final Renderer renderer;
     private final BuffDisplay buffDisplay ;
     private static final String[] buffTextures =
-            {"images/monster_menu/Monsterbox.jpg",
-                    "images/monster_menu/background.png",
+            {"buff-debuff-manual/manual-box.png",
+                    "buff-debuff-manual/manual-backgorund.png",
                     "images/monster_menu/secret.jpg",
                     "buff-debuff-manual/decrease_health1.png",
                     "buff-debuff-manual/decrease_speed1.png",
