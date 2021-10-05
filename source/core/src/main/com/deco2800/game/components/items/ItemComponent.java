@@ -56,23 +56,10 @@ public class ItemComponent extends Component {
             callback.accept(target);
             target.getEvents().trigger("itemPickUp");
             entity.getEvents().trigger("itemPickedUp");
-            Buff buff = new Buff(target);
-            System.out.println(entity.getType());
-            switch (entity.getType()) {
-                case "FirstAid":
-                    buff.addHealth();
-                    break;
-                case "Bandage":
-                    buff.increaseHealthLimit();
-                    break;
-            }
             //PlayerStatsDisplay playerComponent = target.getComponent(PlayerStatsDisplay.class);
             //if (playerComponent!=null){
             //    playerComponent.addIncreaseHealthImage();
             //}
-            target.getEvents().trigger("updateBuffDescription",
-                    new BuffDescriptionConfig(entity.getType(), "get item:" + entity.getType()));
-            // show text description
             AchievementsHelper.getInstance().trackItemPickedUpEvent();
             Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
             if (physBody.getFixtureList().contains(other, true)) {
@@ -83,6 +70,7 @@ public class ItemComponent extends Component {
             try {
                 entity.getComponent(TextureRenderComponent.class).dispose();
                 ServiceLocator.getEntityService().unregister(entity);
+                callback.accept(target);
                 // after 1s stop the item pickUp animation
                 Timer timer = new Timer();
                 timer.scheduleTask(new Timer.Task() {

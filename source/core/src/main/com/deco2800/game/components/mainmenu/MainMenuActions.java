@@ -31,6 +31,8 @@ public class MainMenuActions extends Component {
     entity.getEvents().addListener("unlockedAttires", this::onUnlockedAttires);
     entity.getEvents().addListener("monsterMenu", this::onDisplayMonsterMenu);
     entity.getEvents().addListener("buffMenu", this::onDisplayBuffManualMenu);
+    entity.getEvents().addListener("GameTutorial", this::onDisplayInstructions);
+
   }
 
   /**
@@ -101,4 +103,10 @@ public class MainMenuActions extends Component {
   private void onDisplayBuffManualMenu() {
     game.setScreen(GdxGame.ScreenType.BUFF_MENU);
   }
+
+  private void onDisplayInstructions() {
+    System.out.println("check 1");
+    game.setScreen(GdxGame.ScreenType.INSTRUCTIONS);
+  }
+
 }

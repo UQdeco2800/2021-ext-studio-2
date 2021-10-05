@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.items.PropShopHelper;
 import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.buff.Buff;
@@ -66,7 +67,6 @@ public class ForestGameArea extends GameArea {
      */
     public void spawnRockstwo(int xValue) {
 
-
             GridPoint2 Pos = new GridPoint2 ( xValue + 10, 50);
             Entity rock = ObstacleFactory.createRock();
             spawnEntityAt(rock, Pos, true, false);
@@ -97,22 +97,22 @@ public class ForestGameArea extends GameArea {
     public void spawnRocksthree(int xValue) {
 
 
-        GridPoint2 Pos = new GridPoint2 ( xValue + 14, 52);
+        GridPoint2 Pos = new GridPoint2(xValue + 14, 52);
         Entity rock = ObstacleFactory.createRock();
         spawnEntityAt(rock, Pos, true, false);
-        GridPoint2 PosTwo = new GridPoint2 ( xValue + 14, 51);
+        GridPoint2 PosTwo = new GridPoint2(xValue + 14, 51);
         Entity rockTwo = ObstacleFactory.createRock();
         spawnEntityAt(rockTwo, PosTwo, true, false);
-        GridPoint2 PosThree = new GridPoint2 ( xValue + 14, 50);
+        GridPoint2 PosThree = new GridPoint2(xValue + 14, 50);
         Entity rockThree = ObstacleFactory.createRock();
         spawnEntityAt(rockThree, PosThree, true, false);
-        GridPoint2 PosFour = new GridPoint2 ( xValue + 15, 51);
+        GridPoint2 PosFour = new GridPoint2(xValue + 15, 51);
         Entity rockFour = ObstacleFactory.createRock();
         spawnEntityAt(rockFour, PosFour, true, false);
-        GridPoint2 PosFive = new GridPoint2 ( xValue + 15, 50);
+        GridPoint2 PosFive = new GridPoint2(xValue + 15, 50);
         Entity rockFive = ObstacleFactory.createRock();
         spawnEntityAt(rockFive, PosFive, true, false);
-        GridPoint2 PosSix = new GridPoint2 ( xValue + 16, 50);
+        GridPoint2 PosSix = new GridPoint2(xValue + 16, 50);
         Entity rockSix = ObstacleFactory.createRock();
         spawnEntityAt(rockSix, PosSix, true, false);
 
@@ -127,7 +127,7 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < 5; i++) {
 
-            GridPoint2 pos = new GridPoint2(xValue + 18, 50+i);
+            GridPoint2 pos = new GridPoint2(xValue + 18, 50 + i);
             Entity rock = ObstacleFactory.createRock();
             spawnEntityAt(rock, pos, true, false);
 
@@ -143,7 +143,7 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < 4; i++) {
 
-            GridPoint2 pos = new GridPoint2(xValue + 20, 57+i);
+            GridPoint2 pos = new GridPoint2(xValue + 20, 57 + i);
             Entity rock = ObstacleFactory.createRock();
             spawnEntityAt(rock, pos, true, false);
 
@@ -160,34 +160,34 @@ public class ForestGameArea extends GameArea {
      */
     public void spawnRockssix(int xValue) {
 
-        GridPoint2 Pos = new GridPoint2 ( xValue + 22, 53);
+        GridPoint2 Pos = new GridPoint2(xValue + 22, 53);
         Entity rock = ObstacleFactory.createRock();
         spawnEntityAt(rock, Pos, true, false);
-        GridPoint2 PosTwo = new GridPoint2 ( xValue + 22, 52);
+        GridPoint2 PosTwo = new GridPoint2(xValue + 22, 52);
         Entity rockTwo = ObstacleFactory.createRock();
         spawnEntityAt(rockTwo, PosTwo, true, false);
-        GridPoint2 PosThree = new GridPoint2 ( xValue + 22, 51);
+        GridPoint2 PosThree = new GridPoint2(xValue + 22, 51);
         Entity rockThree = ObstacleFactory.createRock();
         spawnEntityAt(rockThree, PosThree, true, false);
-        GridPoint2 PosFour = new GridPoint2 ( xValue + 22, 50);
+        GridPoint2 PosFour = new GridPoint2(xValue + 22, 50);
         Entity rockFour = ObstacleFactory.createRock();
         spawnEntityAt(rockFour, PosFour, true, false);
-        GridPoint2 PosFive = new GridPoint2 ( xValue + 23, 52);
+        GridPoint2 PosFive = new GridPoint2(xValue + 23, 52);
         Entity rockFive = ObstacleFactory.createRock();
         spawnEntityAt(rockFive, PosFive, true, false);
-        GridPoint2 PosSix = new GridPoint2 ( xValue + 23, 51);
+        GridPoint2 PosSix = new GridPoint2(xValue + 23, 51);
         Entity rockSix = ObstacleFactory.createRock();
         spawnEntityAt(rockSix, PosSix, true, false);
-        GridPoint2 PosSeven = new GridPoint2 ( xValue + 23, 50);
+        GridPoint2 PosSeven = new GridPoint2(xValue + 23, 50);
         Entity rockSeven = ObstacleFactory.createRock();
         spawnEntityAt(rockSeven, PosSeven, true, false);
-        GridPoint2 PosEight = new GridPoint2 ( xValue + 24, 51);
+        GridPoint2 PosEight = new GridPoint2(xValue + 24, 51);
         Entity rockEight = ObstacleFactory.createRock();
         spawnEntityAt(rockEight, PosEight, true, false);
-        GridPoint2 PosNine = new GridPoint2 ( xValue + 24, 50);
+        GridPoint2 PosNine = new GridPoint2(xValue + 24, 50);
         Entity rockNine = ObstacleFactory.createRock();
         spawnEntityAt(rockNine, PosNine, true, false);
-        GridPoint2 PosTen = new GridPoint2 ( xValue + 25, 50);
+        GridPoint2 PosTen = new GridPoint2(xValue + 25, 50);
         Entity rockTen = ObstacleFactory.createRock();
         spawnEntityAt(rockTen, PosTen, true, false);
 
@@ -278,6 +278,21 @@ public class ForestGameArea extends GameArea {
             "images/ufo.png",
             "images/rocket-ship-launch.png",
             "images/portal.png",
+            "images/missile.png",
+            "images/itembar/item/itembar-blood.png",
+            "images/itembar/item/itembar-water.png",
+            "images/itembar/item/itembar-leg.png",
+            "images/itembar/recycle/recycle-256px-bb1.png",
+            "images/itembar/recycle/recycle-256px-bb2.png",
+            "images/itembar/recycle/recycle-256px-bb3.png",
+            "images/itembar/recycle/recycle-256px-default.png",
+            "images/itembar/recycle/recycle-256px-leg1.png",
+            "images/itembar/recycle/recycle-256px-leg2.png",
+            "images/itembar/recycle/recycle-256px-leg3.png",
+            "images/itembar/recycle/recycle-256px-water1.png",
+            "images/itembar/recycle/recycle-256px-water2.png",
+            "images/itembar/recycle/recycle-256px-water3.png",
+
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas",
@@ -292,8 +307,27 @@ public class ForestGameArea extends GameArea {
             "images/monkey.atlas",
             "images/Facehugger.atlas",
             "images/obstacle_Meteorite.atlas",
+            "images/mpc/mpcAnimation.atlas",
+            "images/spaceship.atlas",
+
             "images/food1.png",
             "images/water1.png",
+            "images/missile.atlas",
+            "images/portal.atlas",
+            "images/itembar/item/itembar-blood.png",
+            "images/itembar/item/itembar-water.png",
+            "images/itembar/item/itembar-leg.png",
+            "images/itembar/recycle/recycle-256px-bb1.png",
+            "images/itembar/recycle/recycle-256px-bb2.png",
+            "images/itembar/recycle/recycle-256px-bb3.png",
+            "images/itembar/recycle/recycle-256px-default.png",
+            "images/itembar/recycle/recycle-256px-leg1.png",
+            "images/itembar/recycle/recycle-256px-leg2.png",
+            "images/itembar/recycle/recycle-256px-leg3.png",
+            "images/itembar/recycle/recycle-256px-water1.png",
+            "images/itembar/recycle/recycle-256px-water2.png",
+            "images/itembar/recycle/recycle-256px-water3.png",
+
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg",
@@ -303,23 +337,24 @@ public class ForestGameArea extends GameArea {
     };
 
     private static final String[] mpcTextures = {
-            "images/mpc/finalAtlas/OG/mpcAnimation.png",
+            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpcAnimation.png",
             "images/mpc/finalAtlas/gold_2/mpcAnimation_2.png",
-            "images/mpc/finalAtlas/gold_4/mpcAnimation_4.png",
-            "images/mpc/finalAtlas/gold_6/mpcAnimation_6.png",
-            "images/mpc/finalAtlas/OG/mpc_right.png",
+            "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpcAnimation_4.png",
+            "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.png",
+            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpc_right.png",
             "images/mpc/finalAtlas/gold_2/mpc_right.png",
-            "images/mpc/finalAtlas/gold_4/mpc_right.png",
-            "images/mpc/finalAtlas/gold_6/mpc_right.png",
+            "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpc_right.png",
+            "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpc_right.png",
 
     };
     private static final String[] mpcTexturesAtlases = {
-            "images/mpc/finalAtlas/OG/mpcAnimation.atlas",
+            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpcAnimation.atlas",
             "images/mpc/finalAtlas/gold_2/mpcAnimation_2.atlas",
-            "images/mpc/finalAtlas/gold_4/mpcAnimation_4.atlas",
-            "images/mpc/finalAtlas/gold_6/mpcAnimation_6.atlas",
+            "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpcAnimation_4.atlas",
+            "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.atlas",
 
     };
+
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
     private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
@@ -367,10 +402,9 @@ public class ForestGameArea extends GameArea {
         trackAchievements();
         trackBuffDescription();
         setBonusItems(player);
+        PropShopHelper.useProps(player);
         player.getEvents().addListener("B pressed", this::InvSys);
-        spawnPortal(new Vector2(10, 10), ObstacleEventHandler.ObstacleType.PortalEntrance);
         spawnPortal(new Vector2(50, 55), ObstacleEventHandler.ObstacleType.PortalExport);
-
     }
 
     public void InvSys() {
@@ -544,8 +578,7 @@ public class ForestGameArea extends GameArea {
      * obstacles is 0-30.  The second call to the player's x position is 10, and the x range for
      * generating obstacles is 31-50.
      * <p>
-     * Note: Temporarily reduce the range of obstacles generated for the first time, new range (25-30) units,
-     * leaving enough space for the item group
+     * Note: Reduce the range of obstacles generated for the first time, leaving enough space for the item group
      */
     public void spawnObstacles() {
         GridPoint2 minPos;
@@ -584,10 +617,9 @@ public class ForestGameArea extends GameArea {
                 loggerInfo += "Create Plants Obstacle at " + randomPos + "\t";
                 loggerInfo += "Create Thorns Obstacle at " + randomPos2 + "\t";
             }
-            logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}", minPos.x, maxPos.x, randomPoints, loggerInfo);
+            logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}",
+                    minPos.x, maxPos.x, randomPoints, loggerInfo);
         }
-
-
 
 
     }
@@ -621,8 +653,8 @@ public class ForestGameArea extends GameArea {
 
 
     /**
-     * Generate a certain number of meteorites, called by render() in MainGameScreen.java. The final number of meteorites
-     * is the sum of all parameters.
+     * Generate a certain number of meteorites, called by render() in MainGameScreen.java. The final number of
+     * meteorites is the sum of all parameters.
      * <p>
      * Big size meteorites: 1.5 - 2 times of the multiples of meteorites texture,
      * total number is bigNum(+bigRandomRange), the values in parentheses are random.
@@ -666,13 +698,16 @@ public class ForestGameArea extends GameArea {
             Entity stone;
 
             if (i < bigNumRandom) { // must have a big meteorites
-                stone = ObstacleFactory.createMeteorite(player, (float) bigSize, ObstacleFactory.MeteoriteType.BigMeteorite);
+                stone = ObstacleFactory.createMeteorite(player,
+                        (float) bigSize, ObstacleFactory.MeteoriteType.BigMeteorite);
                 loggerInfo += "Big stone = " + point + "\t";
             } else if (i < bigNumRandom + midNumRandom) {
-                stone = ObstacleFactory.createMeteorite(player, (float) midSize, ObstacleFactory.MeteoriteType.MiddleMeteorite);
+                stone = ObstacleFactory.createMeteorite(player,
+                        (float) midSize, ObstacleFactory.MeteoriteType.MiddleMeteorite);
                 loggerInfo += "Mid stone = " + point + "\t";
             } else {
-                stone = ObstacleFactory.createMeteorite(player, (float) smallSize, ObstacleFactory.MeteoriteType.SmallMeteorite);
+                stone = ObstacleFactory.createMeteorite(player,
+                        (float) smallSize, ObstacleFactory.MeteoriteType.SmallMeteorite);
                 loggerInfo += "Small stone = " + point + "\t";
             }
 
@@ -684,24 +719,19 @@ public class ForestGameArea extends GameArea {
     }
 
 
-
     /**
      * Generate Spaceship at fixed location.
      */
     public void spawnSpaceship() {
         int playerX = (int) player.getPosition().x;
-//        GridPoint2 minPos = new GridPoint2(playerX + 10, 0);
-//        GridPoint2 maxPos = new GridPoint2(playerX + 40, 0);
-//        GridPoint2 randomPosTwo = RandomUtils.randomX(11, minPos, maxPos);
-//        Entity Range = NPCFactory.createFlyingMonkey(player);
         GridPoint2 position = new GridPoint2(playerX + 35, 3);
         Entity spaceship = NPCFactory.createSpaceShip(player);
         spawnEntityAt(spaceship, position, true, false);
 
         spaceship.getEvents().addListener("spawnPortalEntrance", this::spawnPortalEntrance);
         spaceship.getEvents().addListener("spawnSmallMissile", this::spawnSmallMissile);
-//        System.out.println("spaceship position = " + position);
-//        logger.debug("Spawn a spaceship on position = {}", position);
+
+        logger.debug("Spawn a spaceship on position = {}", position);
     }
 
     /**
@@ -712,11 +742,11 @@ public class ForestGameArea extends GameArea {
     public void spawnSmallMissile(Vector2 position) {
         Entity smallMissile = NPCFactory.createSmallMissile(player);
         spawnEntityAt(smallMissile, position, true, true);
-        smallMissile.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(-10, 2), position, true);
+        smallMissile.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(-10, 2),
+                position, true);
         smallMissile.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0f);
         smallMissile.getComponent(PhysicsComponent.class).getBody().setGravityScale(0.1f);
         logger.debug("Spawn a small missile on position = {}", position);
-//        System.out.println("Spawn a small missile on position = "+ position);
     }
 
 
@@ -724,14 +754,20 @@ public class ForestGameArea extends GameArea {
      * Generate Small Missile at Spaceship location. Called by render() in MainGameScreen.java
      *
      * @param position the location of Spaceship
+     * @param type     ObstacleType category
      */
     public void spawnPortal(Vector2 position, ObstacleEventHandler.ObstacleType type) {
         Entity portal = ObstacleFactory.createPortal(player, type);
         spawnEntityAt(portal, position, true, true);
-//        logger.debug("Spawn a small missile on position = {}", position);
-//        System.out.println("Spawn a small missile on position = "+ position);
+        logger.debug("Spawn a portal on position = {}", position);
     }
 
+    /**
+     * Called by the listening event "spawnPortalEntrance" of spawnSpaceship().
+     *
+     * @param position position the location of Spaceship
+     * @param type     ObstacleType category
+     */
     private void spawnPortalEntrance(Vector2 position, ObstacleEventHandler.ObstacleType type) {
         spawnPortal(position, type);
     }

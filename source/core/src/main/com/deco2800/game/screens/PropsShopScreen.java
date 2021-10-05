@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 public class PropsShopScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private final Renderer renderer;
-    private static final String[] mainGameTextures = {"images/heart.png","images/Items/props/add_food.png","images/Items/props/add_health.png","images/Items/props/add_water.png","images/Items/props/shield.png","images/achievements/crossButton.png"};
+    private static final String[] mainGameTextures = {"images/heart.png","images/Items/props/add_food.png","images/Items/props/add_health.png","images/Items/props/add_water.png","images/Items/props/shield.png","images/achievements/crossButton.png","images/Items/props/background_image_prop.png"};
     private static final String[] itemTextures = PropStoreFactory.getPropTextures();
 
     public PropsShopScreen(GdxGame game){

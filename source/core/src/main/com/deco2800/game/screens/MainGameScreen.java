@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
+import com.deco2800.game.components.ItemBar.ItemBarDisplay;
+import com.deco2800.game.components.foodAndwater.RecycleDisplay;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.CombatStatsComponent;
@@ -31,6 +33,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.deco2800.game.components.foodAndwater.FoodDisplay;
 import com.deco2800.game.components.foodAndwater.WaterDisplay;
+import com.deco2800.game.components.score.ScoreDisplay;
+import com.deco2800.game.components.score.ScoringSystemV1;
+import com.deco2800.game.components.score.TimerDisplay;
+import com.deco2800.game.services.GameTime;
+import com.deco2800.game.services.ResourceService;
+import com.deco2800.game.services.ScoreService;
+import com.deco2800.game.services.ServiceLocator;
 
 /**
  * The game screen containing the main game.
@@ -45,8 +54,21 @@ public class MainGameScreen extends ScreenAdapter {
             "images/Sprint2_Buffs_Debuffs/decrease_health.png",
             "images/Sprint2_Buffs_Debuffs/increase_health_limit.png",
             "images" +
-            "/Sprint2_Buffs_Debuffs/increase_health.png",
-            "images/Sprint2_Buffs_Debuffs/decrease_speed.png", "images/distanceboard.png"
+                    "/Sprint2_Buffs_Debuffs/increase_health.png",
+            "images/Sprint2_Buffs_Debuffs/decrease_speed.png", "images/distanceboard.png",
+            "images/itembar/item/itembar-blood.png",
+            "images/itembar/item/itembar-water.png",
+            "images/itembar/item/itembar-leg.png",
+            "images/itembar/recycle/recycle-256px-bb1.png",
+            "images/itembar/recycle/recycle-256px-bb2.png",
+            "images/itembar/recycle/recycle-256px-bb3.png",
+            "images/itembar/recycle/recycle-256px-default.png",
+            "images/itembar/recycle/recycle-256px-leg1.png",
+            "images/itembar/recycle/recycle-256px-leg2.png",
+            "images/itembar/recycle/recycle-256px-leg3.png",
+            "images/itembar/recycle/recycle-256px-water1.png",
+            "images/itembar/recycle/recycle-256px-water2.png",
+            "images/itembar/recycle/recycle-256px-water3.png",
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 
@@ -55,9 +77,12 @@ public class MainGameScreen extends ScreenAdapter {
     private final Renderer renderer;
     private final PhysicsEngine physicsEngine;
 
-
+    /* new map status, to control if the player into/out the new map*/
     public static NewMap newMapStatus = NewMap.Off;
 
+    /**
+     * all status of new map
+     */
     public static enum NewMap {
         Off,
         Start,  // Used once in render
@@ -65,10 +90,10 @@ public class MainGameScreen extends ScreenAdapter {
         On;
     }
 
+    public static Entity players;
     private Entity player;
     private ForestGameArea forestGameArea;
     private int counter = 0;
-
 
     private static boolean slowPlayer = false;
     private static float slowPlayerTime;
@@ -104,7 +129,7 @@ public class MainGameScreen extends ScreenAdapter {
         forestGameArea.create();
 
         player = forestGameArea.player;
-
+        players = player;
         newMapStatus = NewMap.Off;
         counter = 0;
 
@@ -120,18 +145,34 @@ public class MainGameScreen extends ScreenAdapter {
         SpaceshipAttackController.positionHitSpaceship = null;
     }
 
+    /**
+     * getter method of slowPlayer
+     * @return if the player is slow status
+     */
     public static boolean isSlowPlayer() {
         return slowPlayer;
     }
 
+    /**
+     * getter method of slowPlayerTime
+     * @return time remain of player slow time
+     */
     public static float getSlowPlayerTime() {
         return slowPlayerTime;
     }
 
+    /**
+     * setter method of slowPlayer
+     * @param slowPlayer if the player is on a slow status
+     */
     public static void setSlowPlayer(boolean slowPlayer) {
         MainGameScreen.slowPlayer = slowPlayer;
     }
 
+    /**
+     * setter method of slowPlayerTime
+     * @param slowPlayerTime how may time the player will on slow status
+     */
     public static void setSlowPlayerTime(float slowPlayerTime) {
         MainGameScreen.slowPlayerTime = slowPlayerTime;
     }
@@ -169,9 +210,17 @@ public class MainGameScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * getter method of newMapStatus
+     * @return the status of mew map
+     */
+    public static NewMap getNewMapStatus() {
+        return newMapStatus;
+    }
 
     /**
-     * @param status How many seconds the player slows down.
+     * setter method of newMapStatus
+     * @param status the status of mew map
      */
     public static void setNewMapStatus(NewMap status) {
         newMapStatus = status;
@@ -183,9 +232,11 @@ public class MainGameScreen extends ScreenAdapter {
     private void TransferPlayerByMap() {
         if (newMapStatus == NewMap.Start) {
             player.setPosition(0, 50);
+            logger.info("New map start.");
             newMapStatus = NewMap.On;
         } else if (newMapStatus == NewMap.Finish) {
             player.setPosition(87, 3);
+            logger.info("New map finish.");
             newMapStatus = NewMap.Off;
         }
     }
@@ -208,16 +259,18 @@ public class MainGameScreen extends ScreenAdapter {
         // Centralize the screen to player
         Vector2 screenVector = player.getPosition();
         SpaceshipAttackController.SpaceshipAttack spaceshipState = SpaceshipAttackController.spaceshipState;
-//        System.out.println("player.getPosition() = " + player.getPosition());
 
         // Update camera position (change based on team6 contribution)
         switch (newMapStatus) {
             case Off:
                 screenVector.y = 7f;
 
-                if (spaceshipState == SpaceshipAttackController.SpaceshipAttack.On || spaceshipState == SpaceshipAttackController.SpaceshipAttack.Start ||
-                        (spaceshipState == SpaceshipAttackController.SpaceshipAttack.Finish && screenVector.x <= SpaceshipAttackController.positionHitSpaceship.x)) {
-                    renderer.getCamera().getEntity().setPosition(new Vector2(SpaceshipAttackController.positionHitSpaceship.x, 7f));
+                if (spaceshipState == SpaceshipAttackController.SpaceshipAttack.On ||
+                        spaceshipState == SpaceshipAttackController.SpaceshipAttack.Start ||
+                        (spaceshipState == SpaceshipAttackController.SpaceshipAttack.Finish &&
+                                screenVector.x <= SpaceshipAttackController.positionHitSpaceship.x)) {
+                    renderer.getCamera().getEntity().
+                            setPosition(new Vector2(SpaceshipAttackController.positionHitSpaceship.x, 7f));
                 } else {
                     renderer.getCamera().getEntity().setPosition(screenVector);
                 }
@@ -273,8 +326,8 @@ public class MainGameScreen extends ScreenAdapter {
                     forestGameArea.showScrollingBackground(counter);
                     forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.MUD_ROAD);
                     forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
- //                   forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
-                    forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
+                    //                   forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
+                    forestGameArea.spawnWoodsRandomly((int) (screenVector.x + 2));
                     forestGameArea.spawnRocksone((int) (screenVector.x + 2));
                     forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
                     forestGameArea.spawnRocksthree((int) (screenVector.x + 2));
@@ -283,9 +336,7 @@ public class MainGameScreen extends ScreenAdapter {
                     forestGameArea.spawnRockssix((int) (screenVector.x + 2));
                     generateObstaclesEnemiesByMapRefresh(counter);
                 }
-                // Generate monster
-//                spownFacehugger();
-                // Thorns effect trigger
+
                 slowPlayer();
                 break;
             case On:
@@ -296,16 +347,17 @@ public class MainGameScreen extends ScreenAdapter {
                     counter += 1;
                     forestGameArea.showNewMapScrollingBackground(counter, 47);
                     forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
-  //                  forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
-                    forestGameArea.spawnWoodsRandomly((int) (screenVector.x+2));
-                    forestGameArea.spawnRocksone((int) (screenVector.x+2));
+                    //                  forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
+                    forestGameArea.spawnWoodsRandomly((int) (screenVector.x + 2));
+                    forestGameArea.spawnRocksone((int) (screenVector.x + 2));
                     forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
                     forestGameArea.spawnRocksthree((int) (screenVector.x + 2));
                     forestGameArea.spawnRocksfour((int) (screenVector.x + 2));
                     forestGameArea.spawnRocksfive((int) (screenVector.x + 2));
                     forestGameArea.spawnRockssix((int) (screenVector.x + 2));
                     forestGameArea.spawnGoldNewMapRandomly((int) (screenVector.x + 2));
-                }}
+                }
+        }
 
     }
 
@@ -377,6 +429,8 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new TimerDisplay())
                 .addComponent(new TerminalDisplay())
                 .addComponent(new FoodDisplay())
+                .addComponent(new ItemBarDisplay())
+                .addComponent(new RecycleDisplay())
                 .addComponent(new WaterDisplay());
 
 

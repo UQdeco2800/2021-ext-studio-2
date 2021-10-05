@@ -18,6 +18,9 @@ import com.deco2800.game.ui.UIComponent;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 
+/**
+ * A ui component for displaying the props shop items.
+ */
 public class PropStoreItemDisplay extends UIComponent {
     private Dialog dialog;
 

@@ -31,6 +31,9 @@ public class ObstacleFactory {
             FileLoader.readClass(ObstaclesConfigs.class, "configs/obstacles.json");
     private static final Logger logger = LoggerFactory.getLogger(ObstacleFactory.class);
 
+    /**
+     * Type of Meteorite, different type means different size. more detail see spawnMeteorites() in ForestGameArea.java
+     */
     public enum MeteoriteType {
         SmallMeteorite, MiddleMeteorite, BigMeteorite;
     }
@@ -175,31 +178,25 @@ public class ObstacleFactory {
      */
     public static Entity createPortal(Entity target, ObstacleEventHandler.ObstacleType type) {
 
-//        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody);
-
-//        AnimationRenderComponent animator =
-//                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService()
-//                                .getAsset("images/obstacle_2.atlas", TextureAtlas.class));
-//        animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService()
+                                .getAsset("images/portal.atlas", TextureAtlas.class));
+        animator.addAnimation("portal_1", 0.2f, Animation.PlayMode.LOOP);
 
         Entity portal =
                 new Entity("Portal")
-                .addComponent(new PhysicsComponent())
-                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-//                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
-
-                        .addComponent(new TextureRenderComponent("images/portal.png"))
-//                .addComponent(animator)
-//                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-//                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+                        .addComponent(new PhysicsComponent())
+                        .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+                        .addComponent(animator)
                         .addComponent(new ObstacleEventHandler(type));
 
         PhysicsUtils.setScaledCollider(portal, 2f, 4f);
         portal.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        animator.startAnimation("portal_1");
         portal.setScale(2, 4);
 
-//        logger.debug("Create a Thorns Obstacle");
+        logger.debug("Create a {}", type);
 
         return portal;
     }

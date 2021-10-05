@@ -1,0 +1,33 @@
+spaceships.png
+size: 2500, 2500
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+spaceship1
+  rotate: false
+  xy: 0, 0
+  size: 1250, 1250
+  orig: 1250, 1250
+  offset: 0, 0
+  index: -1
+spaceship1
+  rotate: false
+  xy: 1250, 0
+  size: 1250, 1250
+  orig: 1250, 1250
+  offset: 0, 0
+  index: -1
+spaceship1
+  rotate: false
+  xy: 0, 1250
+  size: 1250, 1250
+  orig: 1250, 1250
+  offset: 0, 0
+  index: -1
+spaceship1
+  rotate: false
+  xy: 1250, 1250
+  size: 1250, 1250
+  orig: 1250, 1250
+  offset: 0, 0
+  index: -1
