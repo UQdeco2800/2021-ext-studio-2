@@ -84,7 +84,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         WaterDisplay.addOrRemoveImage(1);
         return true;
 
-      case Keys.NUM_4://consume recovers
+      case Keys.NUM_4://consume recycle :add chicken/water/health
         RecycleDisplay.isKey =false;
         if(RecycleDisplay.recycleNumber ==1){
           if(!RecycleDisplay.isKey){
@@ -103,12 +103,15 @@ public class KeyboardPlayerInputComponent extends InputComponent {
           }
         }
         return true;
+
       case Keys.NUM_5://change recover icon to food
         RecycleDisplay.recycleState = RecycleDisplay.recycleState.food;
         return true;
+
       case Keys.NUM_6://change recover icon to water
         RecycleDisplay.recycleState = RecycleDisplay.recycleState.water;
         return true;
+
       case Keys.NUM_7://change recover icon to hp
         RecycleDisplay.recycleState = RecycleDisplay.recycleState.hp;
         return true;

@@ -125,16 +125,15 @@ public class RecycleDisplay extends UIComponent {
     }
 
     /**
-     * Updates the Chicken ui time by time increase.
+     * Updates the recycle ui time by time conditions, pick up an item.
      */
     public void updateRecyleIconUI(int dis) {
         if(dis > 0){
-            for(int i=recycleIcon.size()-1; i>=0; --i){
+            for(int i = recycleIcon.size() - 1; i >= 0; --i){
                 table.removeActor(recycleIcon.get(i));
                 recycleIcon.remove(recycleIcon.get(i));
             }
             table.reset();
-
             table.bottom().right();
             table.setFillParent(true);
             table.padBottom(50).padRight(400);
@@ -197,7 +196,6 @@ public class RecycleDisplay extends UIComponent {
             stage.addActor(table);
         }
     }
-
     /**
      * remove recycleIcon by useing a for loop
      */
