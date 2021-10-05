@@ -83,8 +83,8 @@ public class WaterDisplay extends UIComponent {
         super.update();
         int minutes = countTime.getMinutes();
         int seconds = countTime.getSeconds();
-        int dis = (minutes * 60 + seconds)/ 2;
-        dis1 = (minutes * 60 + seconds)/ 5;//it is reduce health value when every five second
+        int dis = (minutes * 60 + seconds)/ 10;
+        dis1 = (minutes * 60 + seconds)/ 1;//it is reduce health value when every five second
         if(dis > countWaterSystem.getTimer()){
             countWaterSystem.setDifference(1);
             countWaterSystem.setTimer(dis);
@@ -108,7 +108,7 @@ public class WaterDisplay extends UIComponent {
                 //if water icon count less than 0, then it will be into that codes to run. it reduce player health value.
                 //reduce player health value
                 MainGameScreen.players.getComponent(CombatStatsComponent.class).setHealth(
-                        MainGameScreen.players.getComponent(CombatStatsComponent.class).getHealth() - 10
+                        MainGameScreen.players.getComponent(CombatStatsComponent.class).getHealth() - 1
                 );
             }
         }
