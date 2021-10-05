@@ -3,7 +3,7 @@ package com.deco2800.game.components.player;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.components.foodAndwater.RecoverDisplay;
+import com.deco2800.game.components.foodAndwater.RecycleDisplay;
 import com.deco2800.game.components.items.TestBuffForItem;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.input.InputComponent;
@@ -85,17 +85,17 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         return true;
 
       case Keys.NUM_4://consume recovers
-        RecoverDisplay.iskey=false;
-        if(RecoverDisplay.recovernum==1){
-          if(!RecoverDisplay.iskey){
+        RecycleDisplay.isKey =false;
+        if(RecycleDisplay.recycleNumber ==1){
+          if(!RecycleDisplay.isKey){
             TestBuffForItem.countNumber=0;
-            RecoverDisplay.recovernum=0;
-            RecoverDisplay.iskey=true;
-            if(RecoverDisplay.recoverstate== RecoverDisplay.recoverstate.hp){//add health
+            RecycleDisplay.recycleNumber =0;
+            RecycleDisplay.isKey =true;
+            if(RecycleDisplay.recycleState == RecycleDisplay.recycleState.hp){//add health
               MainGameScreen.players.getComponent(CombatStatsComponent.class).setHealth(
                       MainGameScreen.players.getComponent(CombatStatsComponent.class).getHealth()+10
               );
-            }else if(RecoverDisplay.recoverstate== RecoverDisplay.recoverstate.food){//add food
+            }else if(RecycleDisplay.recycleState == RecycleDisplay.recycleState.food){//add food
               FoodDisplay.addOrRemoveImage(1);
             }else {//add water
               WaterDisplay.addOrRemoveImage(1);
@@ -104,13 +104,13 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         }
         return true;
       case Keys.NUM_5://change recover icon to food
-        RecoverDisplay.recoverstate= RecoverDisplay.recoverstate.food;
+        RecycleDisplay.recycleState = RecycleDisplay.recycleState.food;
         return true;
       case Keys.NUM_6://change recover icon to water
-        RecoverDisplay.recoverstate= RecoverDisplay.recoverstate.water;
+        RecycleDisplay.recycleState = RecycleDisplay.recycleState.water;
         return true;
       case Keys.NUM_7://change recover icon to hp
-        RecoverDisplay.recoverstate= RecoverDisplay.recoverstate.hp;
+        RecycleDisplay.recycleState = RecycleDisplay.recycleState.hp;
         return true;
       default:
         return false;

@@ -86,11 +86,11 @@ public class ChapterDisplay extends UIComponent {
 
     @Override
     protected void draw(SpriteBatch batch) {
-
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
+        // This is empty because LibGDX tables provide an easier
+        // interface to implement GUI. Also, draw is handled
+        // by the stage.
+        // Also, the dialog is painted on an event and not when
+        // the component is mounted. The painting on event trigger is
+        // handled by the stage, as mentioned.
     }
 }

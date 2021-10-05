@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.components.items.TestBuffForItem;
-import com.deco2800.game.events.listeners.EventListener0;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
@@ -14,11 +13,11 @@ import java.util.ArrayList;
 /**
  * A ui component for displaying food system. Player lose a chicken for 3 sec
  */
-public class RecoverDisplay extends UIComponent {
+public class RecycleDisplay extends UIComponent {
 
-    public static RecoverDisplay.recoverstate recoverstate = RecoverDisplay.recoverstate.hp;
+    public static RecycleDisplay.recycleState recycleState = RecycleDisplay.recycleState.hp;
 
-    public enum recoverstate{
+    public enum recycleState {
         food,
         water,
         hp
@@ -28,11 +27,11 @@ public class RecoverDisplay extends UIComponent {
     public static Table table;
     public static ArrayList<Image> recycleIcon = new ArrayList<>();
 
-    public static int recovernum=0;
-    public static boolean iskey=false;
+    public static int recycleNumber = 0;
+    public static boolean isKey =false;
 
 
-    public RecoverDisplay() { }
+    public RecycleDisplay() { }
 
     /**
      * Creates reusable food ui styles and adds actors to the stage.
@@ -41,7 +40,7 @@ public class RecoverDisplay extends UIComponent {
     @Override
     public void create() {
         super.create();
-        TestBuffForItem.countNumber=0;
+        TestBuffForItem.countNumber = 0;
         addActors();
         entity.getEvents().addListener("updateRecover", this::updateRecyleIconUI);
 
@@ -69,10 +68,10 @@ public class RecoverDisplay extends UIComponent {
                         table.add(recycleIcon.get(0)).size(iconLength).pad(20);
                     }break;
                     case 1:{
-                        if(recoverstate== RecoverDisplay.recoverstate.hp){
+                        if(recycleState == RecycleDisplay.recycleState.hp){
                             recycleIcon.add(new Image(ServiceLocator.getResourceService()
                                     .getAsset("images/itembar/recycle/recycle-256px-bb1.png", Texture.class)));
-                        }else if(recoverstate== RecoverDisplay.recoverstate.food){
+                        }else if(recycleState == RecycleDisplay.recycleState.food){
                             recycleIcon.add(new Image(ServiceLocator.getResourceService()
                                     .getAsset("images/itembar/recycle/recycle-256px-leg1.png", Texture.class)));
                         }else {
@@ -83,10 +82,10 @@ public class RecoverDisplay extends UIComponent {
                         table.add(recycleIcon.get(0)).size(iconLength).pad(20);
                     }break;
                     case 2:{
-                        if(recoverstate== RecoverDisplay.recoverstate.hp){
+                        if(recycleState == RecycleDisplay.recycleState.hp){
                             recycleIcon.add(new Image(ServiceLocator.getResourceService()
                                     .getAsset("images/itembar/recycle/recycle-256px-bb2.png", Texture.class)));
-                        }else if(recoverstate== RecoverDisplay.recoverstate.food){
+                        }else if(recycleState == RecycleDisplay.recycleState.food){
                             recycleIcon.add(new Image(ServiceLocator.getResourceService()
                                     .getAsset("images/itembar/recycle/recycle-256px-leg2.png", Texture.class)));
                         }else {
@@ -97,10 +96,10 @@ public class RecoverDisplay extends UIComponent {
                         table.add(recycleIcon.get(0)).size(iconLength).pad(20);
                     }break;
                     case 3:{
-                        if(recoverstate == RecoverDisplay.recoverstate.hp){
+                        if(recycleState == RecycleDisplay.recycleState.hp){
                             recycleIcon.add(new Image(ServiceLocator.getResourceService()
                                     .getAsset("images/itembar/recycle/recycle-256px-bb3.png", Texture.class)));
-                        }else if(recoverstate== RecoverDisplay.recoverstate.food){
+                        }else if(recycleState == RecycleDisplay.recycleState.food){
                             recycleIcon.add(new Image(ServiceLocator.getResourceService()
                                     .getAsset("images/itembar/recycle/recycle-256px-leg3.png", Texture.class)));
                         }else {
@@ -109,12 +108,12 @@ public class RecoverDisplay extends UIComponent {
                         }
 
                         table.add(recycleIcon.get(0)).size(iconLength).pad(20);
-                        RecoverDisplay.recovernum = 1;
+                        RecycleDisplay.recycleNumber = 1;
                     }
                 }
             }
         }
-        
+
         //add images into the screen
 
         stage.addActor(table);
@@ -124,7 +123,7 @@ public class RecoverDisplay extends UIComponent {
     public void draw(SpriteBatch batch) {
         // draw is handled by the stage
     }
-    
+
     @Override
     public void update() {
         super.update();
@@ -158,10 +157,10 @@ public class RecoverDisplay extends UIComponent {
                             table.add(recycleIcon.get(0)).size(iconLength).pad(20);
                         }break;
                         case 1:{
-                            if(recoverstate== RecoverDisplay.recoverstate.hp){
+                            if(recycleState == RecycleDisplay.recycleState.hp){
                                 recycleIcon.add(new Image(ServiceLocator.getResourceService()
                                         .getAsset("images/itembar/recycle/recycle-256px-bb1.png", Texture.class)));
-                            }else if(recoverstate== RecoverDisplay.recoverstate.food){
+                            }else if(recycleState == RecycleDisplay.recycleState.food){
                                 recycleIcon.add(new Image(ServiceLocator.getResourceService()
                                         .getAsset("images/itembar/recycle/recycle-256px-leg1.png", Texture.class)));
                             }else {
@@ -172,10 +171,10 @@ public class RecoverDisplay extends UIComponent {
                             table.add(recycleIcon.get(0)).size(iconLength).pad(20);
                         }break;
                         case 2:{
-                            if(recoverstate== RecoverDisplay.recoverstate.hp){
+                            if(recycleState == RecycleDisplay.recycleState.hp){
                                 recycleIcon.add(new Image(ServiceLocator.getResourceService()
                                         .getAsset("images/itembar/recycle/recycle-256px-bb2.png", Texture.class)));
-                            }else if(recoverstate== RecoverDisplay.recoverstate.food){
+                            }else if(recycleState == RecycleDisplay.recycleState.food){
                                 recycleIcon.add(new Image(ServiceLocator.getResourceService()
                                         .getAsset("images/itembar/recycle/recycle-256px-leg2.png", Texture.class)));
                             }else {
@@ -186,10 +185,10 @@ public class RecoverDisplay extends UIComponent {
                             table.add(recycleIcon.get(0)).size(iconLength).pad(20);
                         }break;
                         case 3:{
-                            if(recoverstate== RecoverDisplay.recoverstate.hp){
+                            if(recycleState == RecycleDisplay.recycleState.hp){
                                 recycleIcon.add(new Image(ServiceLocator.getResourceService()
                                         .getAsset("images/itembar/recycle/recycle-256px-bb3.png", Texture.class)));
-                            }else if(recoverstate== RecoverDisplay.recoverstate.food){
+                            }else if(recycleState == RecycleDisplay.recycleState.food){
                                 recycleIcon.add(new Image(ServiceLocator.getResourceService()
                                         .getAsset("images/itembar/recycle/recycle-256px-leg3.png", Texture.class)));
                             }else {
@@ -197,7 +196,7 @@ public class RecoverDisplay extends UIComponent {
                                         .getAsset("images/itembar/recycle/recycle-256px-water3.png", Texture.class)));
                             }
                             table.add(recycleIcon.get(0)).size(iconLength).pad(20);
-                            RecoverDisplay.recovernum=1;
+                            RecycleDisplay.recycleNumber =1;
                         }
                     }
                 }

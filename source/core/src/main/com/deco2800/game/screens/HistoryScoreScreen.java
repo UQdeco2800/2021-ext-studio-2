@@ -21,13 +21,13 @@ import org.slf4j.LoggerFactory;
 
 public class HistoryScoreScreen extends ScreenAdapter {
 
-    private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-    private final Renderer renderer;
-    private final ScoreHistoryDisplay scoreHistoryDisplay;
+    private static final Logger logger = LoggerFactory.getLogger(HistoryScoreScreen.class);
     private static final String[] historyScoreTextures =
             {"images/historyScoreBoard.png", "images/historyScoreBg.png", "images/achievements/trophyDialogSilver.png"};
     private static final String[] trophyTextures = AchievementFactory.getTrophyTextures();
-    private Entity ui;
+    private final Renderer renderer;
+    private final ScoreHistoryDisplay scoreHistoryDisplay;
+    private final Entity ui;
 
 
     public HistoryScoreScreen(GdxGame game) {
