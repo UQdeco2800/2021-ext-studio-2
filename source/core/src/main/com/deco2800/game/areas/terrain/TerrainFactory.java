@@ -77,6 +77,12 @@ public class TerrainFactory {
     }
   }
 
+  /**
+   * Create a terrain of the mud road
+   * @param tileWorldSize size of one tile
+   * @param road textureRegion represents the mud road
+   * @return a terrain of the mud road
+   */
   private TerrainComponent createMudRoadTerrain(
       float tileWorldSize, TextureRegion road) {
     GridPoint2 tilePixelSize = new GridPoint2(road.getRegionWidth(), road.getRegionHeight());
@@ -85,6 +91,12 @@ public class TerrainFactory {
     return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
   }
 
+  /**
+   * Create a terrain of the rock road
+   * @param tileWorldSize size of one tile
+   * @param road textureRegion represents the rock road
+   * @return a terrain of the rock road
+   */
   private TerrainComponent createRockRoadTerrain(
           float tileWorldSize, TextureRegion road) {
     GridPoint2 tilePixelSize = new GridPoint2(road.getRegionWidth(), road.getRegionHeight());
@@ -112,11 +124,8 @@ public class TerrainFactory {
     TerrainTile grassTile = new TerrainTile(road);
     TiledMapTileLayer layer = new TiledMapTileLayer(MAP_SIZE.x, MAP_SIZE.y, tileSize.x, tileSize.y);
 
-    // Create base grass
+    // Create base mud road
     fillTiles(layer, MAP_SIZE, grassTile, 1);
-
-    // Add some grass and rocks
-    // fillTilesAtRandom(layer, MAP_SIZE, grassTuftTile, TUFT_TILE_COUNT);
 
     tiledMap.getLayers().add(layer);
     //tiledMap.getLayers().add(newLayer);
