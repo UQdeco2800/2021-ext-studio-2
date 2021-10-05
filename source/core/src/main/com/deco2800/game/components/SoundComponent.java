@@ -6,6 +6,9 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * sound component for entity, play sound by triggering event
+ */
 public class SoundComponent extends Component {
     private Sound sound;
     ObstacleEventHandler.ObstacleType obstacleType;
@@ -47,16 +50,25 @@ public class SoundComponent extends Component {
 
     }
 
-
+    /**
+     * Play sound for spaceship
+     */
     public void spaceshipSound() {
         sound.play(1f, 0.6f, 0);
         logger.debug("Floating sound for spaceship start to play");
     }
 
+    /**
+     * Play sound for missile
+     */
     public void missileSound() {
         sound.play(0.3f, 1f, 0);
         logger.debug("Floating sound for spaceship start to play");
     }
+
+    /**
+     * play sound for flying monkey
+     */
     public void roarSound() {
         sound.play(0.3f, 1f, 0);
         logger.debug("Floating sound for spaceship start to play");
