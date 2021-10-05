@@ -137,9 +137,10 @@ public class SpaceshipAttackController extends Component {
      * Set attack state to on.
      */
     void spaceshipSceneBegins() {
+
         try {
             positionHitSpaceship = player.getPosition();
-            player.setPosition(player.getPosition().x - 8, player.getPosition().y);
+            player.setPosition(positionHitSpaceship.x - 8, player.getPosition().y);
             // offset characters automatically advance
             player.setPosition((float) (player.getPosition().x - 0.05), player.getPosition().y);
         } catch (NullPointerException e) {
@@ -151,12 +152,6 @@ public class SpaceshipAttackController extends Component {
             player.getComponent(KeyboardPlayerInputComponent.class).keyUp(Input.Keys.D);
         }
 
-        // Remove the slowing effect
-        if (MainGameScreen.isSlowPlayer()) {
-            MainGameScreen.setSlowPlayer(false);
-            MainGameScreen.setSlowPlayerTime(0);
-        }
-
         spaceshipState = SpaceshipAttack.On;
 
         logger.info("Spaceship attack begins");
@@ -166,7 +161,14 @@ public class SpaceshipAttackController extends Component {
      * The scene when the spacecraft attacked. Set the remaining time of the attack and launch the missile.
      */
     void spaceshipAttackScene() {
+        // Remove the slowing effect
+        if (MainGameScreen.isSlowPlayer()) {
+            MainGameScreen.setSlowPlayer(false);
+            MainGameScreen.setSlowPlayerTime(0);
+        }
+
         // set player position
+        player.setPosition(positionHitSpaceship.x - 8, player.getPosition().y); // for fix plant bounce bug
         player.setPosition((float) (player.getPosition().x - 0.05), player.getPosition().y);
 
         // update remain time
@@ -255,16 +257,28 @@ public class SpaceshipAttackController extends Component {
 
             switch (attackType) {
                 case Low:
-                    randomPosition = spaceshipPosition.cpy().sub(0, -1.5f);
+                    // for small player
+                    randomPosition = spaceshipPosition.cpy().sub(0, -0.5f);
+                    // for big player
+//                    randomPosition = spaceshipPosition.cpy().sub(0, -1.5f);
                     break;
                 case Middle:
-                    randomPosition = spaceshipPosition.cpy().sub(0, -4.5f);
+                    // for small player
+                    randomPosition = spaceshipPosition.cpy().sub(0, -3.5f);
+                    // for big player
+//                    randomPosition = spaceshipPosition.cpy().sub(0, -4.5f);
                     break;
                 case High:
-                    randomPosition = spaceshipPosition.cpy().sub(0, -7.5f);
+                    // for small player
+                    randomPosition = spaceshipPosition.cpy().sub(0, -6.5f);
+                    // for big player
+//                    randomPosition = spaceshipPosition.cpy().sub(0, -7.5f);
                     break;
                 case Player:
-                    randomPosition = new Vector2(spaceshipPosition.x, playerPosition.y + 1.5f);
+                    // for small player
+                    randomPosition = new Vector2(spaceshipPosition.x, playerPosition.y + 0.5f);
+                    // for big player
+//                    randomPosition = new Vector2(spaceshipPosition.x, playerPosition.y + 1.5f);
                     break;
                 default:
                     logger.error("No such type spaceship attack");
