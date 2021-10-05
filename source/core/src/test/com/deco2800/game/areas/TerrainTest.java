@@ -9,9 +9,12 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.extensions.GameExtension;
+import com.deco2800.game.physics.PhysicsService;
+import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import com.badlogic.gdx.graphics.Texture;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
@@ -47,33 +50,37 @@ import java.util.ArrayList;
 
 
 public class TerrainTest extends GameArea {
+    private static final String[] forestTextures = {"images/rock.jpg", "images/wood.jpg"};
+
     @Test
-    void shouldSpawnRock(int xValue)  {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+    void shouldSpawnRock()  {
 
         GameArea gameArea =
                 new GameArea() {
                     @Override
-                    public void create() {}
+                    public void create() {
+                    }
                 };
 
-        ServiceLocator.registerEntityService(new EntityService());
-        GridPoint2 Pos = new GridPoint2 ( xValue + 10, 50);
-        Entity rock = ObstacleFactory.createRock();
-        spawnEntityAt(rock, Pos, true, false);
 
-        gameArea.spawnEntity(rock);
-        verify(rock).create();
+        ServiceLocator.registerPhysicsService(new PhysicsService());
+        ServiceLocator.registerEntityService(new EntityService());
+        ServiceLocator.registerRenderService(new RenderService());
+        ResourceService resourceService = new ResourceService();
+        resourceService.loadTextures(forestTextures);
+        resourceService.loadAll();
+        ServiceLocator.registerResourceService(resourceService);
+        Entity rockMock = mock(ObstacleFactory.createRock().getClass());
+
+        gameArea.spawnEntity(rockMock);
+        verify(rockMock).create();
 
         gameArea.dispose();
-        verify(rock).dispose();
+        verify(rockMock).dispose();
     }
 
     @Test
-    void shouldSpawnWoods(int xValue) {
-        GridPoint2 minPos = new GridPoint2(xValue + 10, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+    void shouldSpawnWoods() {
 
         GameArea gameArea =
                 new GameArea() {
@@ -81,16 +88,20 @@ public class TerrainTest extends GameArea {
                     public void create() {}
                 };
 
+        ServiceLocator.registerPhysicsService(new PhysicsService());
         ServiceLocator.registerEntityService(new EntityService());
-        GridPoint2 PosTwo = new GridPoint2 ( xValue + 10, 50);
-        Entity wood = ObstacleFactory.createWood();
-        spawnEntityAt(wood, PosTwo, true, false);
+        ServiceLocator.registerRenderService(new RenderService());
+        ResourceService resourceService = new ResourceService();
+        resourceService.loadTextures(forestTextures);
+        resourceService.loadAll();
+        ServiceLocator.registerResourceService(resourceService);
+        Entity woodMock = mock(ObstacleFactory.createWood().getClass());
 
-        gameArea.spawnEntity(wood);
-        verify(wood).create();
+        gameArea.spawnEntity(woodMock);
+        verify(woodMock).create();
 
         gameArea.dispose();
-        verify(wood).dispose();
+        verify(woodMock).dispose();
     }
 
     @Override
