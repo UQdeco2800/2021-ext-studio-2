@@ -324,6 +324,7 @@ public class MainGameScreen extends ScreenAdapter {
                 if (screenVector.x > (2 * counter + 1) * 10) {
                     counter += 1;
                     forestGameArea.showScrollingBackground(counter);
+                    forestGameArea.showNewMapScrollingBackground(counter, 47);
                     forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.MUD_ROAD);
                     forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
                     //                   forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
@@ -345,7 +346,7 @@ public class MainGameScreen extends ScreenAdapter {
                 // Render terrains on new map
                 if (screenVector.x > (2 * counter + 1) * 10) {
                     counter += 1;
-                    forestGameArea.showNewMapScrollingBackground(counter, 47);
+//                    forestGameArea.showNewMapScrollingBackground(counter, 47);
                     forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
                     //                  forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
                     forestGameArea.spawnWoodsRandomly((int) (screenVector.x + 2));
