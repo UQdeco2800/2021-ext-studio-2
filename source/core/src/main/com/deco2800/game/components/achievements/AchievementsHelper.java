@@ -27,6 +27,8 @@ public class AchievementsHelper {
     public static final String EVENT_ACHIEVEMENT_BONUS_TRIGGERED = "updateBonusPoints";
     public static final String EVENT_SPACESHIP_AVOIDED = "spaceshipAvoided";
     public static final String EVENT_UNLOCKED_ACHIEVEMENT_DISPLAYED = "unlockedAchievementDisplayed";
+    public static final String EVENT_UNLOCKED_ACHIEVEMENT_DISPOSE = "unlockedAchievementNotDisplayed";
+    public static final String EVENT_ADD_BONUS_GOLD = "addBonusGold";
 
     public static final String ITEM_FIRST_AID = "firstAid";
     public static final String ITEM_GOLD_COIN = "goldCoin";
@@ -112,5 +114,40 @@ public class AchievementsHelper {
      */
     public void trackSpaceshipAvoidSuccess() {
         handler.trigger(EVENT_SPACESHIP_AVOIDED);
+    }
+
+    /**
+     * Triggers an event when the bonus gold needs to be added
+     */
+    public void trackAddBonusGold(BaseAchievementConfig achievement){
+        int goldToAdd;
+        switch (achievement.type) {
+            case "GOLD":
+                goldToAdd = 10;
+                break;
+            case "SILVER":
+                goldToAdd = 5;
+                break;
+            case "BRONZE":
+                goldToAdd = 2;
+                break;
+            default:
+                return;
+        }
+        handler.trigger(EVENT_ADD_BONUS_GOLD, goldToAdd);
+    }
+
+    /**
+     * Triggers an event when the bonus gold needs to be added
+     */
+    public void trackAddBonusGold(int gold){
+        handler.trigger(EVENT_ADD_BONUS_GOLD, gold);
+    }
+
+    /**
+     * Triggers an event when an achievement being displayed mid game is being disposed
+     */
+    public void trackUnlockedAchievementDisposed(){
+        handler.trigger(EVENT_UNLOCKED_ACHIEVEMENT_DISPOSE);
     }
 }

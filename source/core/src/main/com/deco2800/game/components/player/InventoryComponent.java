@@ -1,6 +1,7 @@
 package com.deco2800.game.components.player;
 
 import com.deco2800.game.components.Component;
+import com.deco2800.game.components.achievements.AchievementsHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +17,13 @@ public class InventoryComponent extends Component {
 
   public InventoryComponent(int gold) {
     setGold(gold);
+  }
+
+  @Override
+  public void create() {
+    super.create();
+
+    AchievementsHelper.getInstance().getEvents().addListener(AchievementsHelper.EVENT_ADD_BONUS_GOLD, this::addToGold);
   }
 
   /**
@@ -52,6 +60,15 @@ public class InventoryComponent extends Component {
       entity.getEvents().trigger("updateGold", this.gold);
     }
     logger.debug("Setting gold to {}", this.gold);
+  }
+
+  /**
+   * Add to the player's existing gold
+   *
+   * @param amount gold to be added
+   */
+  public void addToGold(int amount){
+    setGold(getGold() + amount);
   }
 
   /**
