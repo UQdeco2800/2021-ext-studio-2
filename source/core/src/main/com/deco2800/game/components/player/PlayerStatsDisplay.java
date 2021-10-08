@@ -1,14 +1,14 @@
 package com.deco2800.game.components.player;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.achievements.AchievementsHelper;
-import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
@@ -17,8 +17,11 @@ import com.deco2800.game.ui.UIComponent;
  * A ui component for displaying player stats, e.g. health.
  */
 public class PlayerStatsDisplay extends UIComponent {
+    private final float buffSideLength = 80f;
     Table table;
     Table goldTable;
+    // import here for implementing the clock
+    ScoringSystemV1 clock = new ScoringSystemV1();
     private Image heartImage;
     private Image poisoningImage;
     private Image decreaseSpeedImage;
@@ -27,11 +30,8 @@ public class PlayerStatsDisplay extends UIComponent {
     private Image addMaxHealthImage;
     private Label healthLabel;
     private Image goldImage;
+    private Label bonusGoldLabel;
     private Label goldLabel;
-    private float buffSideLength = 80f;
-
-    // import here for implementing the clock
-    ScoringSystemV1 clock = new ScoringSystemV1();
 
     /**
      * Creates reusable ui styles and adds actors to the stage.
@@ -43,7 +43,28 @@ public class PlayerStatsDisplay extends UIComponent {
         addActors();
         entity.getEvents().addListener("updateHealth", this::updatePlayerHealthUI);
         entity.getEvents().addListener("updateGold", this::updatePlayerGold);
+
+        bonusGoldLabel = new Label("", new Label.LabelStyle(new BitmapFont(), Color.GOLD));
+        bonusGoldLabel.setFontScale(1.3f);
+
+        AchievementsHelper.getInstance()
+                .getEvents()
+                .addListener(AchievementsHelper.EVENT_ADD_BONUS_GOLD, this::displayBonusGold);
+        AchievementsHelper.getInstance()
+                .getEvents()
+                .addListener(AchievementsHelper.EVENT_UNLOCKED_ACHIEVEMENT_DISPOSE, this::clearBonusGold);
+
         clock.startGameClock();
+    }
+
+    private void displayBonusGold(int gold) {
+        bonusGoldLabel.setText("  + " + gold);
+        bonusGoldLabel.setVisible(true);
+        table.add(bonusGoldLabel);
+    }
+
+    private void clearBonusGold() {
+        bonusGoldLabel.remove();
     }
 
     /**
@@ -97,7 +118,6 @@ public class PlayerStatsDisplay extends UIComponent {
         table.add(goldImage).size(goldSideLength).pad(5);
         table.add(goldLabel);
         stage.addActor(goldTable);
-
     }
 
     @Override
@@ -128,6 +148,7 @@ public class PlayerStatsDisplay extends UIComponent {
         table.add(poisoningImage).size(buffSideLength).pad(5);
         stage.addActor(table);
     }
+
     public void removePoisoningImage() {
         poisoningImage.remove();
     }
@@ -135,6 +156,7 @@ public class PlayerStatsDisplay extends UIComponent {
     public void addDecreaseSpeedImage() {
         table.add(decreaseSpeedImage).size(buffSideLength).pad(5);
     }
+
     public void removeDecreaseSpeedImage() {
         decreaseSpeedImage.remove();
     }
@@ -146,14 +168,15 @@ public class PlayerStatsDisplay extends UIComponent {
     public void removeDecreaseHealthImage() {
         decreaseHealthImage.remove();
     }
+
     public void addIncreaseHealthImage() {
-        if (table.getCell(increaseHealthImage)==null){
+        if (table.getCell(increaseHealthImage) == null) {
             table.add(increaseHealthImage).size(buffSideLength).pad(5);
         }
     }
 
     public void addAddMaxHealthImage() {
-        if (table.getCell(addMaxHealthImage)==null){
+        if (table.getCell(addMaxHealthImage) == null) {
             table.add(addMaxHealthImage).size(buffSideLength).pad(5);
         }
     }
@@ -162,12 +185,13 @@ public class PlayerStatsDisplay extends UIComponent {
         table.reset();
         addActors();
     }
+
     public void removeIncreaseHealthImage() {
         table.reset();
         addActors();
     }
 
-    public void removeAllBuff(){
+    public void removeAllBuff() {
         poisoningImage.remove();
         decreaseSpeedImage.remove();
         decreaseHealthImage.remove();
