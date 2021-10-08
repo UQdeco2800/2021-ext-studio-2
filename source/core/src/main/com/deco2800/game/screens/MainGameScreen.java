@@ -202,7 +202,7 @@ public class MainGameScreen extends ScreenAdapter {
             slowPlayerTime -= ServiceLocator.getTimeSource().getDeltaTime();
             if (slowPlayerTime > 0) {
                 logger.debug("Slow player remain time = {}", slowPlayerTime);
-                player.setPosition((float) (player.getPosition().x - 0.06), player.getPosition().y);
+                player.setPosition((float) (player.getPosition().x - 0.04), player.getPosition().y);
             } else {
                 slowPlayer = false;
                 logger.debug("End of slow player");
