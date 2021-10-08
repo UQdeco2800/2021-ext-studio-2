@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":9,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
+<script type="text/javascript">var data = {"i0":10,"i1":9,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -141,22 +141,32 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#EVENT_HEALTH">EVENT_HEALTH</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#EVENT_ADD_BONUS_GOLD">EVENT_ADD_BONUS_GOLD</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#EVENT_ITEM_PICKED_UP">EVENT_ITEM_PICKED_UP</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#EVENT_HEALTH">EVENT_HEALTH</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#EVENT_SPACESHIP_AVOIDED">EVENT_SPACESHIP_AVOIDED</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#EVENT_ITEM_PICKED_UP">EVENT_ITEM_PICKED_UP</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#EVENT_SPACESHIP_AVOIDED">EVENT_SPACESHIP_AVOIDED</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#EVENT_UNLOCKED_ACHIEVEMENT_DISPLAYED">EVENT_UNLOCKED_ACHIEVEMENT_DISPLAYED</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#EVENT_UNLOCKED_ACHIEVEMENT_DISPOSE">EVENT_UNLOCKED_ACHIEVEMENT_DISPOSE</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -215,12 +225,26 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#trackAddBonusGold(int)">trackAddBonusGold</a></span>&#8203;(int&nbsp;gold)</code></th>
+<td class="colLast">
+<div class="block">Triggers an event when the bonus gold needs to be added</div>
+</td>
+</tr>
+<tr class="altColor" id="i4">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#trackAddBonusGold(com.deco2800.game.entities.configs.achievements.BaseAchievementConfig)">trackAddBonusGold</a></span>&#8203;(<a href="../../entities/configs/achievements/BaseAchievementConfig.html" title="class in com.deco2800.game.entities.configs.achievements">BaseAchievementConfig</a>&nbsp;achievement)</code></th>
+<td class="colLast">
+<div class="block">Triggers an event when the bonus gold needs to be added</div>
+</td>
+</tr>
+<tr class="rowColor" id="i5">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#trackBonusPoints(int)">trackBonusPoints</a></span>&#8203;(int&nbsp;bonusPoints)</code></th>
 <td class="colLast">
 <div class="block">Triggers an event when a new bonus point event is encountered</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#trackHealthEvent(int)">trackHealthEvent</a></span>&#8203;(int&nbsp;health)</code></th>
 <td class="colLast">
@@ -228,7 +252,7 @@ extends java.lang.Object</pre>
  and triggers an event for the achievements system</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#trackItemPickedUpEvent()">trackItemPickedUpEvent</a></span>()</code></th>
 <td class="colLast">
@@ -236,18 +260,25 @@ extends java.lang.Object</pre>
  the achievements system</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="altColor" id="i8">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#trackItemPickedUpEvent(java.lang.String)">trackItemPickedUpEvent</a></span>&#8203;(java.lang.String&nbsp;itemName)</code></th>
 <td class="colLast">
 <div class="block">Triggers an event when a first aid item is picked up by the player</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#trackSpaceshipAvoidSuccess()">trackSpaceshipAvoidSuccess</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Triggers an event when the spaceship boss was avoided with success</div>
+</td>
+</tr>
+<tr class="altColor" id="i10">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#trackUnlockedAchievementDisposed()">trackUnlockedAchievementDisposed</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Triggers an event when an achievement being displayed mid game is being disposed</div>
 </td>
 </tr>
 </tbody>
@@ -319,6 +350,26 @@ extends java.lang.Object</pre>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../constant-values.html#com.deco2800.game.components.achievements.AchievementsHelper.EVENT_UNLOCKED_ACHIEVEMENT_DISPLAYED">Constant Field Values</a></dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="EVENT_UNLOCKED_ACHIEVEMENT_DISPOSE">EVENT_UNLOCKED_ACHIEVEMENT_DISPOSE</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType">java.lang.String</span>&nbsp;<span class="memberName">EVENT_UNLOCKED_ACHIEVEMENT_DISPOSE</span></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../constant-values.html#com.deco2800.game.components.achievements.AchievementsHelper.EVENT_UNLOCKED_ACHIEVEMENT_DISPOSE">Constant Field Values</a></dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="EVENT_ADD_BONUS_GOLD">EVENT_ADD_BONUS_GOLD</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType">java.lang.String</span>&nbsp;<span class="memberName">EVENT_ADD_BONUS_GOLD</span></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../constant-values.html#com.deco2800.game.components.achievements.AchievementsHelper.EVENT_ADD_BONUS_GOLD">Constant Field Values</a></dd>
 </dl>
 </section>
 </li>
@@ -435,6 +486,27 @@ extends java.lang.Object</pre>
 <h3><a id="trackSpaceshipAvoidSuccess()">trackSpaceshipAvoidSuccess</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">trackSpaceshipAvoidSuccess</span>()</div>
 <div class="block">Triggers an event when the spaceship boss was avoided with success</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="trackAddBonusGold(com.deco2800.game.entities.configs.achievements.BaseAchievementConfig)">trackAddBonusGold</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">trackAddBonusGold</span>&#8203;(<span class="arguments"><a href="../../entities/configs/achievements/BaseAchievementConfig.html" title="class in com.deco2800.game.entities.configs.achievements">BaseAchievementConfig</a>&nbsp;achievement)</span></div>
+<div class="block">Triggers an event when the bonus gold needs to be added</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="trackAddBonusGold(int)">trackAddBonusGold</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">trackAddBonusGold</span>&#8203;(<span class="arguments">int&nbsp;gold)</span></div>
+<div class="block">Triggers an event when the bonus gold needs to be added</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="trackUnlockedAchievementDisposed()">trackUnlockedAchievementDisposed</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">trackUnlockedAchievementDisposed</span>()</div>
+<div class="block">Triggers an event when an achievement being displayed mid game is being disposed</div>
 </section>
 </li>
 </ul>
