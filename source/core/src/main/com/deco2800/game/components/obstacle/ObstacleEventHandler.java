@@ -7,6 +7,7 @@ import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.ParticleRenderComponent;
 import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
@@ -39,6 +40,7 @@ public class ObstacleEventHandler extends Component {
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleEventHandler.class);
     AnimationRenderComponent animator;
+    ParticleRenderComponent particle;
     HitboxComponent hitboxComponent;
     ObstacleType obstacleType;
     private static boolean spaceshipAttack;
@@ -57,7 +59,7 @@ public class ObstacleEventHandler extends Component {
     public void create() {
         hitboxComponent = this.entity.getComponent(HitboxComponent.class);
         animator = this.entity.getComponent(AnimationRenderComponent.class);
-
+        particle =  this.entity.getComponent(ParticleRenderComponent.class);
         switch (obstacleType) {
             case PlantsObstacle:
                 entity.getEvents().addListener("collisionStart", this::plantsDisappear);
@@ -114,13 +116,15 @@ public class ObstacleEventHandler extends Component {
 
         if (count == 0) { // Avoid an entity from repeatedly triggering an attack
             count++;
-
+            particle.startEffect();
             logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacles");
             animator.getEntity().setDisappearAfterAnimation(1f);
             locked = false;
         }
+
+
     }
 
 

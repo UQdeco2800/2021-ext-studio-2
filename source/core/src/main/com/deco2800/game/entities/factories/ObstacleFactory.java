@@ -16,6 +16,7 @@ import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.ParticleRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
@@ -30,7 +31,7 @@ public class ObstacleFactory {
     private static final ObstaclesConfigs configs =
             FileLoader.readClass(ObstaclesConfigs.class, "configs/obstacles.json");
     private static final Logger logger = LoggerFactory.getLogger(ObstacleFactory.class);
-
+    ParticleRenderComponent particle;
     /**
      * Type of Meteorite, different type means different size. more detail see spawnMeteorites() in ForestGameArea.java
      */
@@ -56,11 +57,16 @@ public class ObstacleFactory {
                                 .getAsset("images/obstacle_1.atlas", TextureAtlas.class));
         animator.addAnimation("obstacles", 0.2f, Animation.PlayMode.LOOP);
 
+       ParticleRenderComponent particle =
+               new ParticleRenderComponent("images/particle/test.party");
+
+//       particle.startEffect();
         obstacle
                 .addComponent(new TextureRenderComponent("images/obstacle_1_new.png"))
                 .addComponent(animator)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 10f))
+                .addComponent(particle)
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PlantsObstacle));
 
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
@@ -93,6 +99,7 @@ public class ObstacleFactory {
                 .addComponent(animator)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+//                .addComponent(new ParticleRenderComponent("test.party"))
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.ThornsObstacle));
 
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
