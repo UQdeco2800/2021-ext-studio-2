@@ -32,6 +32,7 @@ public class ObstacleFactory {
             FileLoader.readClass(ObstaclesConfigs.class, "configs/obstacles.json");
     private static final Logger logger = LoggerFactory.getLogger(ObstacleFactory.class);
     ParticleRenderComponent particle;
+
     /**
      * Type of Meteorite, different type means different size. more detail see spawnMeteorites() in ForestGameArea.java
      */
@@ -57,8 +58,8 @@ public class ObstacleFactory {
                                 .getAsset("images/obstacle_1.atlas", TextureAtlas.class));
         animator.addAnimation("obstacles", 0.2f, Animation.PlayMode.LOOP);
 
-       ParticleRenderComponent particle =
-               new ParticleRenderComponent("images/particle/test.party");
+        ParticleRenderComponent particle =
+                new ParticleRenderComponent("images/particle/test.party");
 
 //       particle.startEffect();
         obstacle
@@ -109,6 +110,42 @@ public class ObstacleFactory {
         logger.debug("Create a Thorns Obstacle");
 
         return obstacle;
+    }
+
+    /**
+     * Creates a Thorns Obstacle.
+     *
+//     * @param target character.
+     * @return the thorns obstacle entity
+     */
+    public static Entity createWeapon() {
+//        BaseEntityConfig config = configs.thorn;
+//        Entity weapon = createBaseObstacle(target, BodyType.DynamicBody, "weapon");
+
+//        AnimationRenderComponent animator =
+//                new AnimationRenderComponent(
+//                        ServiceLocator.getResourceService()
+//                                .getAsset("images/obstacle_2.atlas", TextureAtlas.class));
+//        animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
+
+        Entity weapon = new Entity("weapon")
+                .addComponent(new PhysicsComponent())
+//                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.PLAYERCOLLIDER))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.WEAPON))
+                .addComponent(new TextureRenderComponent("images/Items/3.png"))
+//                .addComponent(animator)
+//                .addComponent(new CombatStatsComponent(0, 0))
+//                .addComponent(new TouchAttackComponent(PhysicsLayer.OBSTACLE, 0f))
+//                .addComponent(new ParticleRenderComponent("test.party"))
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Weapon));
+
+        weapon.getComponent(TextureRenderComponent.class).scaleEntity();
+//        PhysicsUtils.setScaledCollider(obstacle, 0.2f, 0.3f);
+        weapon.setScale(0.5f, 0.5f);
+        weapon.setZIndex(1);
+//        logger.debug("Create a Thorns Obstacle");
+
+        return weapon;
     }
 
 

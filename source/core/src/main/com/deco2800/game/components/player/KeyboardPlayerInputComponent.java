@@ -54,6 +54,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         return true;
       case Keys.SPACE:
         entity.getEvents().trigger("attack");
+        entity.getEvents().trigger("useWeapon", entity.getPosition());
         return true;
       case Keys.W:
       case Keys.UP:

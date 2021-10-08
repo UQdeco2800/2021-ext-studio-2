@@ -13,6 +13,7 @@ public class PhysicsLayer {
   public static final short WALL = (1 << 5); // 32
   public static final short CEILING = (1 << 6);
   public static final short PLAYERCOLLIDER = (1 << 7);
+  public static final short WEAPON = (1 << 8);
   public static final short ALL = ~0;
 
   public static boolean contains(short filterBits, short layer) {
