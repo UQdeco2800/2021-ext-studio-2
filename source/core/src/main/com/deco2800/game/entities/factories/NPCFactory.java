@@ -82,7 +82,7 @@ public class NPCFactory {
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
-                        .addTask(new ObstacleAttackTask(monkey, target, 10, 6f));
+                        .addTask(new ObstacleAttackTask(monkey, target, 10, 4f));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -194,7 +194,7 @@ public class NPCFactory {
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ChaseTask(target, 10, 4f, 4f));
+                        .addTask(new ChaseTask(target, 10, 6f, 4f));
         Entity npc =
                 new Entity(type)
                         .addComponent(new PhysicsComponent())

@@ -22,6 +22,7 @@ import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.ParticleRenderComponent;
 import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
@@ -94,6 +95,9 @@ class ObstacleEventHandlerTest {
         AnimationRenderComponent animator = mock(AnimationRenderComponent.class);
         plants.addComponent(animator);
         when(animator.getEntity()).thenReturn(plants);
+
+        ParticleRenderComponent particleRenderComponent = mock(ParticleRenderComponent.class);
+        plants.addComponent(particleRenderComponent);
 
         player.create();
         plants.create();
