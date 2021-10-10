@@ -1,0 +1,28 @@
+{
+  "buffs": [
+    {
+      "name": "FirstAid",
+      "description": "increase the health of the character"
+    },
+    {
+      "name": "Water",
+      "description": "increase the water of the character"
+    },
+    {
+      "name": "MagicPotion",
+      "description": "magic Potion's description"
+    },
+    {
+      "name": "Syringe",
+      "description": "Syringe's description"
+    },
+    {
+      "name": "Gold",
+      "description": "Gold's description"
+    },
+    {
+      "name": "Bandage",
+      "description": "Bandage's description"
+    }
+  ]
+}

@@ -5,12 +5,11 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.items.PropShopHelper;
 import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
-import com.deco2800.game.components.buff.Buff;
 import com.deco2800.game.components.items.InventorySystem;
 import com.deco2800.game.components.items.ItemBar;
-import com.deco2800.game.components.player.UnlockedAttiresDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
 import com.deco2800.game.files.MPCConfig;
@@ -32,70 +31,201 @@ import java.util.ArrayList;
  */
 public class ForestGameArea extends GameArea {
 
-    private void spawnRocks() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+//    private void spawnRocks() {
+//        GridPoint2 minPos = new GridPoint2(0, 0);
+//        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+//
+//        for (int i = 0; i < 5; i++) {
+//            GridPoint2 randomPos = new GridPoint2(0, 0);
+//            Entity rock = ObstacleFactory.createRock();
+//            spawnEntityAt(rock, randomPos, true, false);
+//        }
+//    }
+
+    /**
+     * Generate line 5 rocks in the new map
+     * @param xValue horizontal start point
+     */
+    public void spawnRocksone(int xValue) {
 
         for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.randomX(4, minPos, maxPos);
+            GridPoint2 pos = new GridPoint2(xValue + 2 +i, 50);
             Entity rock = ObstacleFactory.createRock();
-            spawnEntityAt(rock, randomPos, true, false);
+            spawnEntityAt(rock, pos, true, false);
         }
     }
 
+    /**
+     * Generate rocks pyramid
+     *     N
+     *    NN
+     *   NNN
+     * @param xValue horizontal start point
+     */
+    public void spawnRockstwo(int xValue) {
 
-    public void spawnRocksRandomly(int xValue) {
-        GridPoint2 minPos = new GridPoint2(xValue + 10, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
+            GridPoint2 Pos = new GridPoint2 ( xValue + 10, 50);
             Entity rock = ObstacleFactory.createRock();
-            spawnEntityAt(rock, randomPos, true, false);
-            GridPoint2 randomPosTwo = RandomUtils.randomX(4, minPos, maxPos);
+            spawnEntityAt(rock, Pos, true, false);
+            GridPoint2 PosTwo = new GridPoint2 ( xValue + 11, 51);
             Entity rockTwo = ObstacleFactory.createRock();
-            spawnEntityAt(rockTwo, randomPosTwo, true, false);
+            spawnEntityAt(rockTwo, PosTwo, true, false);
+            GridPoint2 PosThree = new GridPoint2 ( xValue + 12, 52);
+            Entity rockThree = ObstacleFactory.createRock();
+            spawnEntityAt(rockThree, PosThree, true, false);
+            GridPoint2 PosFour = new GridPoint2 ( xValue + 12, 51);
+            Entity rockFour = ObstacleFactory.createRock();
+            spawnEntityAt(rockFour, PosFour, true, false);
+            GridPoint2 PosFive = new GridPoint2 ( xValue + 12, 50);
+            Entity rockFive = ObstacleFactory.createRock();
+            spawnEntityAt(rockFive, PosFive, true, false);
+            GridPoint2 PosSix = new GridPoint2 ( xValue + 11, 50);
+            Entity rockSix = ObstacleFactory.createRock();
+            spawnEntityAt(rockSix, PosSix, true, false);
+    }
+
+    /**
+     * Generate opposite rocks pyramid
+     *    N
+     *    NN
+     *    NNN
+     * @param xValue horizontal start point
+     */
+    public void spawnRocksthree(int xValue) {
+
+
+        GridPoint2 Pos = new GridPoint2(xValue + 14, 52);
+        Entity rock = ObstacleFactory.createRock();
+        spawnEntityAt(rock, Pos, true, false);
+        GridPoint2 PosTwo = new GridPoint2(xValue + 14, 51);
+        Entity rockTwo = ObstacleFactory.createRock();
+        spawnEntityAt(rockTwo, PosTwo, true, false);
+        GridPoint2 PosThree = new GridPoint2(xValue + 14, 50);
+        Entity rockThree = ObstacleFactory.createRock();
+        spawnEntityAt(rockThree, PosThree, true, false);
+        GridPoint2 PosFour = new GridPoint2(xValue + 15, 51);
+        Entity rockFour = ObstacleFactory.createRock();
+        spawnEntityAt(rockFour, PosFour, true, false);
+        GridPoint2 PosFive = new GridPoint2(xValue + 15, 50);
+        Entity rockFive = ObstacleFactory.createRock();
+        spawnEntityAt(rockFive, PosFive, true, false);
+        GridPoint2 PosSix = new GridPoint2(xValue + 16, 50);
+        Entity rockSix = ObstacleFactory.createRock();
+        spawnEntityAt(rockSix, PosSix, true, false);
+
+
+    }
+
+    /**
+     * Generate 5 rocks column from the ground up
+     * @param xValue horizontal start point
+     */
+    public void spawnRocksfour(int xValue) {
+
+        for (int i = 0; i < 5; i++) {
+
+            GridPoint2 pos = new GridPoint2(xValue + 18, 50 + i);
+            Entity rock = ObstacleFactory.createRock();
+            spawnEntityAt(rock, pos, true, false);
+
         }
     }
 
+    /**
+     * Generate 5 rocks column from the sky down
+     * @param xValue horizontal start point
+     */
+
+    public void spawnRocksfive(int xValue) {
+
+        for (int i = 0; i < 4; i++) {
+
+            GridPoint2 pos = new GridPoint2(xValue + 20, 57 + i);
+            Entity rock = ObstacleFactory.createRock();
+            spawnEntityAt(rock, pos, true, false);
+
+        }
+    }
+
+    /**
+     * Genrate large rock pyramid
+     *    N
+     *    NN
+     *    NNN
+     *    NNNN
+     * @param xValue horizontal start point
+     */
+    public void spawnRockssix(int xValue) {
+
+        GridPoint2 Pos = new GridPoint2(xValue + 22, 53);
+        Entity rock = ObstacleFactory.createRock();
+        spawnEntityAt(rock, Pos, true, false);
+        GridPoint2 PosTwo = new GridPoint2(xValue + 22, 52);
+        Entity rockTwo = ObstacleFactory.createRock();
+        spawnEntityAt(rockTwo, PosTwo, true, false);
+        GridPoint2 PosThree = new GridPoint2(xValue + 22, 51);
+        Entity rockThree = ObstacleFactory.createRock();
+        spawnEntityAt(rockThree, PosThree, true, false);
+        GridPoint2 PosFour = new GridPoint2(xValue + 22, 50);
+        Entity rockFour = ObstacleFactory.createRock();
+        spawnEntityAt(rockFour, PosFour, true, false);
+        GridPoint2 PosFive = new GridPoint2(xValue + 23, 52);
+        Entity rockFive = ObstacleFactory.createRock();
+        spawnEntityAt(rockFive, PosFive, true, false);
+        GridPoint2 PosSix = new GridPoint2(xValue + 23, 51);
+        Entity rockSix = ObstacleFactory.createRock();
+        spawnEntityAt(rockSix, PosSix, true, false);
+        GridPoint2 PosSeven = new GridPoint2(xValue + 23, 50);
+        Entity rockSeven = ObstacleFactory.createRock();
+        spawnEntityAt(rockSeven, PosSeven, true, false);
+        GridPoint2 PosEight = new GridPoint2(xValue + 24, 51);
+        Entity rockEight = ObstacleFactory.createRock();
+        spawnEntityAt(rockEight, PosEight, true, false);
+        GridPoint2 PosNine = new GridPoint2(xValue + 24, 50);
+        Entity rockNine = ObstacleFactory.createRock();
+        spawnEntityAt(rockNine, PosNine, true, false);
+        GridPoint2 PosTen = new GridPoint2(xValue + 25, 50);
+        Entity rockTen = ObstacleFactory.createRock();
+        spawnEntityAt(rockTen, PosTen, true, false);
+
+
+    }
+
+    /**
+     * Gennerate 5 wood randomly in the 52f and 54f height
+     */
     private void spawnWoods() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.randomX(6, minPos, maxPos);
-            Entity rock = ObstacleFactory.createWood();
-            spawnEntityAt(rock, randomPos, true, false);
-            GridPoint2 randomPosTwo = RandomUtils.randomX(8, minPos, maxPos);
-            Entity rockTwo = ObstacleFactory.createWood();
-            spawnEntityAt(rockTwo, randomPosTwo, true, false);
+            GridPoint2 randomPos = RandomUtils.randomX(52, minPos, maxPos);
+            Entity wood = ObstacleFactory.createWood();
+            spawnEntityAt(wood, randomPos, true, false);
+            GridPoint2 randomPosTwo = RandomUtils.randomX(54, minPos, maxPos);
+            Entity woodTwo = ObstacleFactory.createWood();
+            spawnEntityAt(woodTwo, randomPosTwo, true, false);
         }
     }
 
+    /**
+     * Generate 5 wood randomly in the 52f and 54f height and given horizontal start point
+     * @param xValue horizontal start point
+     */
     public void spawnWoodsRandomly(int xValue) {
         GridPoint2 minPos = new GridPoint2(xValue + 10, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.randomX(6, minPos, maxPos);
-            Entity rock = ObstacleFactory.createWood();
-            spawnEntityAt(rock, randomPos, true, false);
-            GridPoint2 randomPosTwo = RandomUtils.randomX(8, minPos, maxPos);
-            Entity rockTwo = ObstacleFactory.createWood();
-            spawnEntityAt(rockTwo, randomPosTwo, true, false);
+            GridPoint2 randomPos = RandomUtils.randomX(52, minPos, maxPos);
+            Entity wood = ObstacleFactory.createWood();
+            spawnEntityAt(wood, randomPos, true, false);
+            GridPoint2 randomPosTwo = RandomUtils.randomX(54, minPos, maxPos);
+            Entity woodTwo = ObstacleFactory.createWood();
+            spawnEntityAt(woodTwo, randomPosTwo, true, false);
         }
     }
-
-    //  private void spawnTrees() {
-    //    GridPoint2 minPos = new GridPoint2(0, 0);
-    //    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-    //
-    //    for (int i = 0; i < NUM_TREES; i++) {
-    //      GridPoint2 randomPos = RandomUtils.randomX(3, minPos, maxPos);
-    //      Entity tree = ObstacleFactory.createTree(player);
-    //      spawnEntityAt(tree, randomPos, true, false);
-    //    }
-    //  }
 
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
     /* The number of each type of obstacle. Note: total obstacles cannot be greater than 20 (range of loading map)*/
@@ -124,6 +254,7 @@ public class ForestGameArea extends GameArea {
             "images/water.png",
             "images/rock.jpg",
             "images/wood.jpg",
+            "images/terrain2.png",
             "images/Items/first_aid_kit.png",
             "images/Items/food.png",
             "images/Items/water.png",
@@ -135,6 +266,8 @@ public class ForestGameArea extends GameArea {
             "images/obstacle2_vision2.png",
             "images/stone.png",
             "images/background.png",
+            "images/background_2.png",
+            "images/background_2.JPG",
             "images/monkey_original.png",
             "images/Facehugger.png",
             "images/stone1.png",
@@ -143,6 +276,7 @@ public class ForestGameArea extends GameArea {
             "images/ufo.png",
             "images/rocket-ship-launch.png",
             "images/portal.png",
+            "images/missile.png",
             "images/itembar/item/itembar-blood.png",
             "images/itembar/item/itembar-water.png",
             "images/itembar/item/itembar-leg.png",
@@ -156,6 +290,8 @@ public class ForestGameArea extends GameArea {
             "images/itembar/recycle/recycle-256px-water1.png",
             "images/itembar/recycle/recycle-256px-water2.png",
             "images/itembar/recycle/recycle-256px-water3.png",
+            "images/pao.png",
+
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas",
@@ -170,8 +306,13 @@ public class ForestGameArea extends GameArea {
             "images/monkey.atlas",
             "images/Facehugger.atlas",
             "images/obstacle_Meteorite.atlas",
+            "images/mpc/mpcAnimation.atlas",
+            "images/spaceship.atlas",
+
             "images/food1.png",
             "images/water1.png",
+            "images/missile.atlas",
+            "images/portal.atlas",
             "images/itembar/item/itembar-blood.png",
             "images/itembar/item/itembar-water.png",
             "images/itembar/item/itembar-leg.png",
@@ -185,6 +326,8 @@ public class ForestGameArea extends GameArea {
             "images/itembar/recycle/recycle-256px-water1.png",
             "images/itembar/recycle/recycle-256px-water2.png",
             "images/itembar/recycle/recycle-256px-water3.png",
+            "images/pao.png"
+
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg",
@@ -194,27 +337,33 @@ public class ForestGameArea extends GameArea {
     };
 
     private static final String[] mpcTextures = {
-            "images/mpc/finalAtlas/OG/mpcAnimation.png",
+            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpcAnimation.png",
             "images/mpc/finalAtlas/gold_2/mpcAnimation_2.png",
-            "images/mpc/finalAtlas/gold_4/mpcAnimation_4.png",
-            "images/mpc/finalAtlas/gold_6/mpcAnimation_6.png",
-            "images/mpc/finalAtlas/OG/mpc_right.png",
+            "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpcAnimation_4.png",
+            "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.png",
+            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpc_right.png",
             "images/mpc/finalAtlas/gold_2/mpc_right.png",
-            "images/mpc/finalAtlas/gold_4/mpc_right.png",
-            "images/mpc/finalAtlas/gold_6/mpc_right.png",
+            "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpc_right.png",
+            "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpc_right.png",
+            "images/Items/3.png"
 
     };
     private static final String[] mpcTexturesAtlases = {
-            "images/mpc/finalAtlas/OG/mpcAnimation.atlas",
+            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpcAnimation.atlas",
             "images/mpc/finalAtlas/gold_2/mpcAnimation_2.atlas",
-            "images/mpc/finalAtlas/gold_4/mpcAnimation_4.atlas",
-            "images/mpc/finalAtlas/gold_6/mpcAnimation_6.atlas",
+            "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpcAnimation_4.atlas",
+            "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.atlas",
 
     };
+
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
+    private static final String itemSounds = "sounds/itembar/item-use.mp3";
+    private static final String[] itemMusic = {itemSounds};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
     private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
+    private static final String NEWMAP_BACKGROUNDMUSIC = "sounds/track2.mp3";
     private static final String[] forestMusic = {BACKGROUNDMUSIC};
+    private static final String[] newMapMusic = {NEWMAP_BACKGROUNDMUSIC};
     private boolean firstGenerate = true;
 
     private final TerrainFactory terrainFactory;
@@ -234,41 +383,78 @@ public class ForestGameArea extends GameArea {
     public void create() {
         loadAssets();
         showBackground();
+        showNewMapBackground();
         displayUI();
-        spawnTerrain();
+        spawnTerrain(TerrainType.MUD_ROAD);
+        spawnTerrain(TerrainType.ROCK_ROAD);
 
 //        spawnRocks();
-//        spawnWoods();
+        spawnWoods();
+
         MPCConfig.updateValues();
+
         player = spawnPlayer();
         spawnObstacles();
-        Buff buff = new Buff(player);
-        buff.addHealth();
+        //Buff buff = new Buff(player);
+        //buff.addHealth();
         pro = new InventorySystem(player);
         spawnFirstAid();
         spawnGold();
+        spawnGoldNewMap();
         playMusic();
         trackAchievements();
+        trackBuffDescription();
         setBonusItems(player);
+        PropShopHelper.useProps(player);
         player.getEvents().addListener("B pressed", this::InvSys);
-        spawnPortal(new Vector2(10, 10), ObstacleEventHandler.ObstacleType.PortalEntrance);
         spawnPortal(new Vector2(50, 55), ObstacleEventHandler.ObstacleType.PortalExport);
-
     }
 
     public void InvSys() {
         pro.pressbutton();
     }
 
+    /**
+     * Show regular map background
+     */
     private void showBackground() {
         Entity gameBg = new Entity();
         gameBg.addComponent(new BackgroundRenderComponent("images/background.png"));
         spawnEntity(gameBg);
     }
 
+    /**
+     * Show background in the new map
+     */
+    private void showNewMapBackground() {
+        Entity gameBg = new Entity();
+        BackgroundRenderComponent newBg = new BackgroundRenderComponent("images/background_2.JPG");
+        newBg.setVertical(47);
+        gameBg.addComponent(newBg);
+        spawnEntity(gameBg);
+    }
+
+    /**
+     * Show background in the regular map according to the given counter
+     * @param counter change the horizontal start point of the background
+     */
     public void showScrollingBackground(int counter) {
         Entity gameBg = new Entity();
         BackgroundRenderComponent newBg = new BackgroundRenderComponent("images/background.png");
+        newBg.setHorizontal(30f * counter);
+        gameBg.addComponent(newBg);
+        spawnEntity(gameBg);
+    }
+
+    /**
+     * Show background in the new map according to the given horizontal and vertical start point
+     * @param counter change the horizontal start point
+     * @param vertical change the vertical start point
+     */
+    public void showNewMapScrollingBackground(int counter, float vertical) {
+        Entity gameBg = new Entity();
+        BackgroundRenderComponent newBg = new BackgroundRenderComponent("images/background_2.JPG");
+        newBg.setVertical(vertical);
         newBg.setHorizontal(30f * counter);
         gameBg.addComponent(newBg);
         spawnEntity(gameBg);
@@ -280,9 +466,18 @@ public class ForestGameArea extends GameArea {
         spawnEntity(ui);
     }
 
-    public void spawnTerrain() {
+    /**
+     * Generate the first set of terrain
+     * @param terrainType change the type of the terrain
+     */
+    public void spawnTerrain(TerrainType terrainType) {
         // Background terrain
-        terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO);
+        if (terrainType == TerrainType.MUD_ROAD) {
+            terrain = terrainFactory.createTerrain(TerrainType.MUD_ROAD);
+        } else if (terrainType == TerrainType.ROCK_ROAD) {
+            terrain = terrainFactory.createTerrain(TerrainType.ROCK_ROAD);
+        }
+
 
         spawnEntity(new Entity().addComponent(terrain));
 
@@ -291,15 +486,16 @@ public class ForestGameArea extends GameArea {
         GridPoint2 tileBounds = terrain.getMapBounds(0);
         Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
 
-        // Left
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL), GridPoint2Utils.ZERO, false, false);
-        // Right
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL),
-                new GridPoint2(tileBounds.x, 0),
-                false,
-                false);
+//        // Left
+//        spawnEntityAt(
+//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL), GridPoint2Utils.ZERO, false, false);
+//        // Right
+//        spawnEntityAt(
+//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL),
+//                new GridPoint2(tileBounds.x, 0),
+//                false,
+//                false);
+
         // Top
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH, PhysicsLayer.WALL),
@@ -317,10 +513,15 @@ public class ForestGameArea extends GameArea {
      * Generate the continuous terrain after the first set of terrain
      *
      * @param xValue control the position of the terrain
+     * @param terrainType change the type of the terrain
      */
-    public void spawnTerrainRandomly(int xValue) {
+    public void spawnTerrainRandomly(int xValue, TerrainType terrainType) {
         // Background terrain
-        terrain = terrainFactory.createTerrainRandomly(TerrainType.FOREST_DEMO, xValue);
+        if (terrainType == TerrainType.MUD_ROAD) {
+            terrain = terrainFactory.createTerrainRandomly(TerrainType.MUD_ROAD, xValue);
+        } else if (terrainType == TerrainType.ROCK_ROAD) {
+            terrain = terrainFactory.createTerrainRandomly(TerrainType.ROCK_ROAD, xValue);
+        }
         spawnEntity(new Entity().addComponent(terrain));
 
         // Terrain walls
@@ -328,15 +529,16 @@ public class ForestGameArea extends GameArea {
         GridPoint2 tileBounds = terrain.getMapBounds(0);
         Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
 
-        // Left
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL), GridPoint2Utils.ZERO, false, false);
-        // Right
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL),
-                new GridPoint2(tileBounds.x, 0),
-                false,
-                false);
+//        // Left
+//        spawnEntityAt(
+//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL), GridPoint2Utils.ZERO, false, false);
+//        // Right
+//        spawnEntityAt(
+//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL),
+//                new GridPoint2(tileBounds.x, 0),
+//                false,
+//                false);
+
         // Top
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH, PhysicsLayer.WALL),
@@ -379,8 +581,7 @@ public class ForestGameArea extends GameArea {
      * obstacles is 0-30.  The second call to the player's x position is 10, and the x range for
      * generating obstacles is 31-50.
      * <p>
-     * Note: Temporarily reduce the range of obstacles generated for the first time, new range (25-30) units,
-     * leaving enough space for the item group
+     * Note: Reduce the range of obstacles generated for the first time, leaving enough space for the item group
      */
     public void spawnObstacles() {
         GridPoint2 minPos;
@@ -419,10 +620,9 @@ public class ForestGameArea extends GameArea {
                 loggerInfo += "Create Plants Obstacle at " + randomPos + "\t";
                 loggerInfo += "Create Thorns Obstacle at " + randomPos2 + "\t";
             }
-            logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}", minPos.x, maxPos.x, randomPoints, loggerInfo);
+            logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}",
+                    minPos.x, maxPos.x, randomPoints, loggerInfo);
         }
-
-
 
 
     }
@@ -456,8 +656,8 @@ public class ForestGameArea extends GameArea {
 
 
     /**
-     * Generate a certain number of meteorites, called by render() in MainGameScreen.java. The final number of meteorites
-     * is the sum of all parameters.
+     * Generate a certain number of meteorites, called by render() in MainGameScreen.java. The final number of
+     * meteorites is the sum of all parameters.
      * <p>
      * Big size meteorites: 1.5 - 2 times of the multiples of meteorites texture,
      * total number is bigNum(+bigRandomRange), the values in parentheses are random.
@@ -501,13 +701,16 @@ public class ForestGameArea extends GameArea {
             Entity stone;
 
             if (i < bigNumRandom) { // must have a big meteorites
-                stone = ObstacleFactory.createMeteorite(player, (float) bigSize, ObstacleFactory.MeteoriteType.BigMeteorite);
+                stone = ObstacleFactory.createMeteorite(player,
+                        (float) bigSize, ObstacleFactory.MeteoriteType.BigMeteorite);
                 loggerInfo += "Big stone = " + point + "\t";
             } else if (i < bigNumRandom + midNumRandom) {
-                stone = ObstacleFactory.createMeteorite(player, (float) midSize, ObstacleFactory.MeteoriteType.MiddleMeteorite);
+                stone = ObstacleFactory.createMeteorite(player,
+                        (float) midSize, ObstacleFactory.MeteoriteType.MiddleMeteorite);
                 loggerInfo += "Mid stone = " + point + "\t";
             } else {
-                stone = ObstacleFactory.createMeteorite(player, (float) smallSize, ObstacleFactory.MeteoriteType.SmallMeteorite);
+                stone = ObstacleFactory.createMeteorite(player,
+                        (float) smallSize, ObstacleFactory.MeteoriteType.SmallMeteorite);
                 loggerInfo += "Small stone = " + point + "\t";
             }
 
@@ -519,24 +722,19 @@ public class ForestGameArea extends GameArea {
     }
 
 
-
     /**
      * Generate Spaceship at fixed location.
      */
     public void spawnSpaceship() {
         int playerX = (int) player.getPosition().x;
-//        GridPoint2 minPos = new GridPoint2(playerX + 10, 0);
-//        GridPoint2 maxPos = new GridPoint2(playerX + 40, 0);
-//        GridPoint2 randomPosTwo = RandomUtils.randomX(11, minPos, maxPos);
-//        Entity Range = NPCFactory.createFlyingMonkey(player);
         GridPoint2 position = new GridPoint2(playerX + 35, 3);
         Entity spaceship = NPCFactory.createSpaceShip(player);
         spawnEntityAt(spaceship, position, true, false);
 
         spaceship.getEvents().addListener("spawnPortalEntrance", this::spawnPortalEntrance);
         spaceship.getEvents().addListener("spawnSmallMissile", this::spawnSmallMissile);
-//        System.out.println("spaceship position = " + position);
-//        logger.debug("Spawn a spaceship on position = {}", position);
+
+        logger.debug("Spawn a spaceship on position = {}", position);
     }
 
     /**
@@ -547,11 +745,11 @@ public class ForestGameArea extends GameArea {
     public void spawnSmallMissile(Vector2 position) {
         Entity smallMissile = NPCFactory.createSmallMissile(player);
         spawnEntityAt(smallMissile, position, true, true);
-        smallMissile.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(-10, 2), position, true);
+        smallMissile.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(-10, 2),
+                position, true);
         smallMissile.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0f);
         smallMissile.getComponent(PhysicsComponent.class).getBody().setGravityScale(0.1f);
         logger.debug("Spawn a small missile on position = {}", position);
-//        System.out.println("Spawn a small missile on position = "+ position);
     }
 
 
@@ -559,14 +757,20 @@ public class ForestGameArea extends GameArea {
      * Generate Small Missile at Spaceship location. Called by render() in MainGameScreen.java
      *
      * @param position the location of Spaceship
+     * @param type     ObstacleType category
      */
     public void spawnPortal(Vector2 position, ObstacleEventHandler.ObstacleType type) {
         Entity portal = ObstacleFactory.createPortal(player, type);
         spawnEntityAt(portal, position, true, true);
-//        logger.debug("Spawn a small missile on position = {}", position);
-//        System.out.println("Spawn a small missile on position = "+ position);
+        logger.debug("Spawn a portal on position = {}", position);
     }
 
+    /**
+     * Called by the listening event "spawnPortalEntrance" of spawnSpaceship().
+     *
+     * @param position position the location of Spaceship
+     * @param type     ObstacleType category
+     */
     private void spawnPortalEntrance(Vector2 position, ObstacleEventHandler.ObstacleType type) {
         spawnPortal(position, type);
     }
@@ -590,10 +794,46 @@ public class ForestGameArea extends GameArea {
         }
     }
 
+    /**
+     * Generate the first set of gold in the new map
+     */
+    private void spawnGoldNewMap() {
+        int k = 0;
+        for (int i = 0; i < 30; i++) {
+            GridPoint2 position = new GridPoint2(k++, 70);
+            Entity gold = ItemFactory.createGold(player);
+            spawnEntityAt(gold, position, false, false);
+        }
+    }
+
+    /**
+     * Generate another set of gold from the given horizontal start point in the new map
+     * @param x horizontal start point
+     */
+    public void spawnGoldNewMapRandomly(int x) {
+        for (int i = 0; i < 30; i++) {
+            GridPoint2 position = new GridPoint2(10 + x++, 70);
+            Entity gold = ItemFactory.createGold(player);
+            spawnEntityAt(gold, position, false, false);
+        }
+    }
+
     private Entity spawnPlayer() {
         Entity newPlayer = PlayerFactory.createPlayer();
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
+        newPlayer.getEvents().addListener("useWeapon", this::spawnWeapon);
         return newPlayer;
+    }
+
+    private void spawnWeapon(Vector2 position) {
+        Entity weapon = ObstacleFactory.createWeapon();
+
+        weapon.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(20, 2),
+                position, true);
+        weapon.getComponent(PhysicsComponent.class).getBody().setLinearDamping(1.7f);
+        weapon.getComponent(PhysicsComponent.class).getBody().setGravityScale(0.2f);
+
+        spawnEntityAt(weapon, position, true, true);
     }
 
     private void setBonusItems(Entity player) {
@@ -601,12 +841,43 @@ public class ForestGameArea extends GameArea {
         bonusItems.setBonusItem();
     }
 
-
-    private void playMusic() {
+    /**
+     * Play the regular map bgm
+     */
+    public void playMusic() {
         Music music = ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class);
         music.setLooping(true);
         music.setVolume(0.3f);
         music.play();
+    }
+
+    public static void playitemMusic() {
+        Music music = ServiceLocator.getResourceService().getAsset(itemSounds, Music.class);
+        music.setVolume(0.3f);
+        music.play();
+    }
+    /**
+     * Play the new map bgm
+     */
+    public void playNewMapMusic() {
+        Music newMusic = ServiceLocator.getResourceService().getAsset(NEWMAP_BACKGROUNDMUSIC, Music.class);
+        newMusic.setLooping(true);
+        newMusic.setVolume(0.3f);
+        newMusic.play();
+    }
+
+    /**
+     * Stop the regular map bgm
+     */
+    public void stopMusic() {
+        ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class).stop();
+    }
+
+    /**
+     * Stop the new map bgm
+     */
+    public void stopNewMapMusic() {
+        ServiceLocator.getResourceService().getAsset(NEWMAP_BACKGROUNDMUSIC, Music.class).stop();
     }
 
     private void loadAssets() {
@@ -618,6 +889,8 @@ public class ForestGameArea extends GameArea {
         resourceService.loadSounds(jumpSounds);
         resourceService.loadSounds(turnSounds);
         resourceService.loadMusic(forestMusic);
+        resourceService.loadMusic(itemMusic);
+        resourceService.loadMusic(newMapMusic);
         resourceService.loadTextures(mpcTextures);
         resourceService.loadTextureAtlases(mpcTexturesAtlases);
 
@@ -636,6 +909,8 @@ public class ForestGameArea extends GameArea {
         resourceService.unloadAssets(jumpSounds);
         resourceService.unloadAssets(turnSounds);
         resourceService.unloadAssets(forestMusic);
+        resourceService.unloadAssets(itemMusic);
+        resourceService.unloadAssets(newMapMusic);
         resourceService.unloadAssets(mpcTextures);
         resourceService.unloadAssets(mpcTexturesAtlases);
     }
@@ -655,4 +930,7 @@ public class ForestGameArea extends GameArea {
         spawnEntity(AchievementFactory.createAchievementEntity());
     }
 
+    private void trackBuffDescription() {
+        spawnEntity(BuffDescriptionFactory.createBuffDescriptionEntity());
+    }
 }

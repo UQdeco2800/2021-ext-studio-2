@@ -36,10 +36,10 @@ class ScoreServiceTest {
     }
 
    // @Test
-   // void shouldAddToScoreAndGetCorrectScore() {
-   //     scoreService.addToScore(10);
-   //       assertEquals(10, scoreService.getScore());
-   // }
+    //void shouldAddToScoreAndGetCorrectScore() {
+    //    scoreService.addToScore(10);
+    //      assertEquals(10, scoreService.getScore());
+    //}
 
     @Test
     void saveCurrentScoreToHistory() {

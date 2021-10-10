@@ -13,6 +13,7 @@ public class BackgroundRenderComponent extends RenderComponent {
     private Texture texture;
     private String texturePath;
     private float horizontal = 0;
+    private float vertical = 0;
 
     public BackgroundRenderComponent(String texturePath) {
         this.texturePath = texturePath;
@@ -26,8 +27,8 @@ public class BackgroundRenderComponent extends RenderComponent {
 
     @Override
     public void draw(SpriteBatch batch) {
-        batch.draw(texture, -30, 0, 30, 15);
-        batch.draw(texture, horizontal, 0, 30, 15);
+        batch.draw(texture, -30, vertical, 30, 15);
+        batch.draw(texture, horizontal, vertical, 30, 15);
     }
 
     @Override
@@ -46,5 +47,13 @@ public class BackgroundRenderComponent extends RenderComponent {
      */
     public void setHorizontal(float x) {
         horizontal = x;
+    }
+
+    /**
+     * Set the vertical start point for the background texture
+     * @param y vertical value
+     */
+    public void setVertical(float y) {
+        vertical = y;
     }
 }

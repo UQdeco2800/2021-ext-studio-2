@@ -36,15 +36,16 @@ public class ItemBarDisplay extends UIComponent {
         itembartable = new Table();
         itembartable.bottom();
         itembartable.setFillParent(true);
-        itembartable.padBottom(50).padRight(40);
+        itembartable.padBottom(50).padRight(60);
 
         counttable = new Table();
         counttable.bottom().right();
         counttable.setFillParent(true);
-        counttable.padBottom(60).padRight(545);
+        counttable.padBottom(60).padRight(505);
 
-        CharSequence countText = (CharSequence)counts;
-        countlabel = new Label(countText, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+//        CharSequence countText = (CharSequence)counts;
+//        countlabel = new Label(countText, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        countlabel = new Label((CharSequence) bar.getcounts(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         countlabel.setFontScale(2f);
 
         float itemLength = 60f;
@@ -55,10 +56,13 @@ public class ItemBarDisplay extends UIComponent {
                 .getAsset("images/itembar/item/itembar-water.png", Texture.class)));
         itemImage.add(new Image(ServiceLocator.getResourceService()
                 .getAsset("images/itembar/item/itembar-leg.png", Texture.class)));
+        itemImage.add(new Image(ServiceLocator.getResourceService()
+                .getAsset("images/pao.png", Texture.class)));
 
         itembartable.add(itemImage.get(0)).size(itemLength).pad(16);
         itembartable.add(itemImage.get(1)).size(itemLength).pad(16);
         itembartable.add(itemImage.get(2)).size(itemLength).pad(16);
+        itembartable.add(itemImage.get(3)).size(itemLength).pad(16);
 
         counttable.add(countlabel);
         stage.addActor(itembartable);
@@ -101,8 +105,8 @@ public class ItemBarDisplay extends UIComponent {
         counttable.reset();
         counttable.bottom().right();
         counttable.setFillParent(true);
-        counttable.padBottom(60).padRight(545);
-        countlabel = new Label((CharSequence) bar.getcounts(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        counttable.padBottom(60).padRight(490);
+        countlabel = new Label((CharSequence) bar.getcounts()+" ", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         countlabel.setFontScale(2f);
         counttable.add(countlabel);
     }

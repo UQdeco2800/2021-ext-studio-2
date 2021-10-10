@@ -3,6 +3,7 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.score.ScoreDetailsDialog;
 import com.deco2800.game.components.score.ScoreHistoryDisplay;
 import com.deco2800.game.entities.Entity;
@@ -20,12 +21,14 @@ import org.slf4j.LoggerFactory;
 
 public class HistoryScoreScreen extends ScreenAdapter {
 
-    private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-    private final Renderer renderer;
-    private final ScoreHistoryDisplay scoreHistoryDisplay;
+    private static final Logger logger = LoggerFactory.getLogger(HistoryScoreScreen.class);
     private static final String[] historyScoreTextures =
             {"images/historyScoreBoard.png", "images/historyScoreBg.png", "images/achievements/trophyDialogSilver.png"};
     private static final String[] trophyTextures = AchievementFactory.getTrophyTextures();
+    private final Renderer renderer;
+    private final ScoreHistoryDisplay scoreHistoryDisplay;
+    private final Entity ui;
+
 
     public HistoryScoreScreen(GdxGame game) {
         logger.debug("drawing history score board ui");
@@ -37,10 +40,11 @@ public class HistoryScoreScreen extends ScreenAdapter {
         renderer.getCamera().getEntity().setPosition(2f, 1f);
         loadAssets();
         Stage stage = ServiceLocator.getRenderService().getStage();
-        Entity ui = new Entity();
+        ui = new Entity();
         scoreHistoryDisplay = new ScoreHistoryDisplay(game);
         ui.addComponent(scoreHistoryDisplay)
                 .addComponent(new ScoreDetailsDialog())
+                .addComponent(new BackgroundSoundComponent("sounds/History_Score_bgm.mp3", 0.5f))
                 .addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
     }
@@ -76,6 +80,7 @@ public class HistoryScoreScreen extends ScreenAdapter {
     public void dispose() {
         renderer.dispose();
         unloadAssets();
+        ui.dispose();
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
         ServiceLocator.clear();

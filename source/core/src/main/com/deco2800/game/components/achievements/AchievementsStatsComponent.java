@@ -162,6 +162,7 @@ public class AchievementsStatsComponent extends Component {
                 break;
             case AchievementsHelper.ITEM_GOLD_COIN:
                 setGold();
+                break;
             default:
         }
 

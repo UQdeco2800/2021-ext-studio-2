@@ -2,6 +2,7 @@ package com.deco2800.game.components.player;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -23,6 +24,7 @@ public class PlayerStatsDisplay extends UIComponent {
     private Image decreaseSpeedImage;
     private Image decreaseHealthImage;
     private Image increaseHealthImage;
+    private Image addMaxHealthImage;
     private Label healthLabel;
     private Image goldImage;
     private Label goldLabel;
@@ -63,6 +65,8 @@ public class PlayerStatsDisplay extends UIComponent {
         decreaseSpeedImage = new Image(ServiceLocator.getResourceService().getAsset("images/Sprint2_Buffs_Debuffs" +
                 "/decrease_speed.png", Texture.class));
         increaseHealthImage = new Image(ServiceLocator.getResourceService().getAsset("images/Sprint2_Buffs_Debuffs/increase_health.png",
+                Texture.class));
+        addMaxHealthImage = new Image(ServiceLocator.getResourceService().getAsset("images/Sprint2_Buffs_Debuffs/increase_health_limit.png",
                 Texture.class));
         decreaseHealthImage = new Image(ServiceLocator.getResourceService().getAsset("images/Sprint2_Buffs_Debuffs/decrease_health.png",
                 Texture.class));
@@ -138,14 +142,29 @@ public class PlayerStatsDisplay extends UIComponent {
     public void addDecreaseHealthImage() {
         table.add(decreaseHealthImage).size(buffSideLength).pad(5);
     }
+
     public void removeDecreaseHealthImage() {
         decreaseHealthImage.remove();
     }
     public void addIncreaseHealthImage() {
-        table.add(increaseHealthImage).size(buffSideLength).pad(5);
+        if (table.getCell(increaseHealthImage)==null){
+            table.add(increaseHealthImage).size(buffSideLength).pad(5);
+        }
+    }
+
+    public void addAddMaxHealthImage() {
+        if (table.getCell(addMaxHealthImage)==null){
+            table.add(addMaxHealthImage).size(buffSideLength).pad(5);
+        }
+    }
+
+    public void removeAddMaxHealthImage() {
+        table.reset();
+        addActors();
     }
     public void removeIncreaseHealthImage() {
-        increaseHealthImage.remove();
+        table.reset();
+        addActors();
     }
 
     public void removeAllBuff(){
@@ -153,6 +172,8 @@ public class PlayerStatsDisplay extends UIComponent {
         decreaseSpeedImage.remove();
         decreaseHealthImage.remove();
         increaseHealthImage.remove();
+        table.reset();
+        addActors();
     }
 
     public void updatePlayerGold(int gold) {

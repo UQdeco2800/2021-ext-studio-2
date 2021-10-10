@@ -19,7 +19,6 @@ public class DistanceDisplay extends UIComponent {
     //    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
     private Image distanceBoard;
 
-
     /**
      * Creates reusable ui styles and adds actors to the stage.
      * And starts the timer.
@@ -76,7 +75,6 @@ public class DistanceDisplay extends UIComponent {
     @Override
     public void update() {
         super.update();
-        //System.out.println("playerPostion:  "+entity.getPosition());
         entity.getEvents().trigger("updateDistance",
                 ServiceLocator.getDistanceService().getDistance());
     }

@@ -3,6 +3,7 @@ package com.deco2800.game.components.Items;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.items.ItemComponent;
+import com.deco2800.game.components.items.PropShopHelper;
 import com.deco2800.game.components.items.TestBuffForItem;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
@@ -53,11 +54,12 @@ public class ItemComponentTest {
     Entity createTarget() {
         Entity target =
                 new Entity()
-                        .addComponent(new CombatStatsComponent(100, 0))
+                        .addComponent(new CombatStatsComponent(90, 0))
                         .addComponent(new PhysicsComponent())
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER));
         target.create();
         return target;
     }
+
 
 }

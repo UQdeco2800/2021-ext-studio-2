@@ -70,6 +70,28 @@ class DateTimeUtilsTest {
         res = DateTimeUtils.getVerboseDate(time);
         assertEquals("Sunday, December 30, 2018", res);
 
+        // Test for one digit date
+        time = LocalDateTime.parse("2018-12-03T11:59:59.63");
+        res = DateTimeUtils.getVerboseDate(time);
+        assertEquals("Monday, December 3, 2018", res);
+
+        // Test for 5 letter months
+        time = LocalDateTime.parse("2018-03-03T11:59:59.63");
+        res = DateTimeUtils.getVerboseDate(time);
+        assertEquals("Saturday, March 3, 2018", res);
+        time = LocalDateTime.parse("2018-04-03T11:59:59.63");
+        res = DateTimeUtils.getVerboseDate(time);
+        assertEquals("Tuesday, April 3, 2018", res);
+
+        // Test for 3 letter month
+        time = LocalDateTime.parse("2018-05-01T11:59:59.63");
+        res = DateTimeUtils.getVerboseDate(time);
+        assertEquals("Tuesday, May 1, 2018", res);
+        // Test for 4 letter month
+        time = LocalDateTime.parse("2018-06-30T11:59:59.63");
+        res = DateTimeUtils.getVerboseDate(time);
+        assertEquals("Saturday, June 30, 2018", res);
+
         // Testing the logic for current time
         time = LocalDateTime.now();
         res = DateTimeUtils.getVerboseDate(time);

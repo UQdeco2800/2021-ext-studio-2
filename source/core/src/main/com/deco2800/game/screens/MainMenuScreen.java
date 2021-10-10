@@ -3,6 +3,7 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.mainmenu.MainMenuActions;
 import com.deco2800.game.components.mainmenu.MainMenuDisplay;
 import com.deco2800.game.entities.Entity;
@@ -24,7 +25,8 @@ public class MainMenuScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainMenuScreen.class);
   private final GdxGame game;
   private final Renderer renderer;
-  private static final String[] mainMenuTextures = {"images/box_boy_title.png","images/menu_background/menu_background.png"};
+  private static final String[] mainMenuTextures = {"images/new_menu_title.png","images/menu_background/menu_background.png"};
+  private Entity ui;
 
   public MainMenuScreen(GdxGame game) {
     this.game = game;
@@ -69,6 +71,8 @@ public class MainMenuScreen extends ScreenAdapter {
 
     renderer.dispose();
     unloadAssets();
+    ui.dispose();
+
     ServiceLocator.getRenderService().dispose();
     ServiceLocator.getEntityService().dispose();
 
@@ -95,8 +99,10 @@ public class MainMenuScreen extends ScreenAdapter {
   private void createUI() {
     logger.debug("Creating ui");
     Stage stage = ServiceLocator.getRenderService().getStage();
-    Entity ui = new Entity();
+    //set ui as global variable so that the bgm will be stopped when close the screen
+    ui = new Entity();
     ui.addComponent(new MainMenuDisplay())
+        .addComponent(new BackgroundSoundComponent("sounds/mainmenu_bgm.mp3", 0.5f))
         .addComponent(new InputDecorator(stage, 10))
         .addComponent(new MainMenuActions(game));
     ServiceLocator.getEntityService().register(ui);

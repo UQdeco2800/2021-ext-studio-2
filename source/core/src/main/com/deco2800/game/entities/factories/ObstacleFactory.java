@@ -16,6 +16,7 @@ import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.ParticleRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
@@ -30,7 +31,11 @@ public class ObstacleFactory {
     private static final ObstaclesConfigs configs =
             FileLoader.readClass(ObstaclesConfigs.class, "configs/obstacles.json");
     private static final Logger logger = LoggerFactory.getLogger(ObstacleFactory.class);
+    ParticleRenderComponent particle;
 
+    /**
+     * Type of Meteorite, different type means different size. more detail see spawnMeteorites() in ForestGameArea.java
+     */
     public enum MeteoriteType {
         SmallMeteorite, MiddleMeteorite, BigMeteorite;
     }
@@ -53,11 +58,16 @@ public class ObstacleFactory {
                                 .getAsset("images/obstacle_1.atlas", TextureAtlas.class));
         animator.addAnimation("obstacles", 0.2f, Animation.PlayMode.LOOP);
 
+        ParticleRenderComponent particle =
+                new ParticleRenderComponent("images/particle/test.party");
+
+//       particle.startEffect();
         obstacle
                 .addComponent(new TextureRenderComponent("images/obstacle_1_new.png"))
                 .addComponent(animator)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 10f))
+                .addComponent(particle)
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PlantsObstacle));
 
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
@@ -90,6 +100,7 @@ public class ObstacleFactory {
                 .addComponent(animator)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+//                .addComponent(new ParticleRenderComponent("test.party"))
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.ThornsObstacle));
 
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
@@ -99,6 +110,42 @@ public class ObstacleFactory {
         logger.debug("Create a Thorns Obstacle");
 
         return obstacle;
+    }
+
+    /**
+     * Creates a Thorns Obstacle.
+     *
+//     * @param target character.
+     * @return the thorns obstacle entity
+     */
+    public static Entity createWeapon() {
+//        BaseEntityConfig config = configs.thorn;
+//        Entity weapon = createBaseObstacle(target, BodyType.DynamicBody, "weapon");
+
+//        AnimationRenderComponent animator =
+//                new AnimationRenderComponent(
+//                        ServiceLocator.getResourceService()
+//                                .getAsset("images/obstacle_2.atlas", TextureAtlas.class));
+//        animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
+
+        Entity weapon = new Entity("weapon")
+                .addComponent(new PhysicsComponent())
+//                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.PLAYERCOLLIDER))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.WEAPON))
+                .addComponent(new TextureRenderComponent("images/Items/3.png"))
+//                .addComponent(animator)
+//                .addComponent(new CombatStatsComponent(0, 0))
+//                .addComponent(new TouchAttackComponent(PhysicsLayer.OBSTACLE, 0f))
+//                .addComponent(new ParticleRenderComponent("test.party"))
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Weapon));
+
+        weapon.getComponent(TextureRenderComponent.class).scaleEntity();
+//        PhysicsUtils.setScaledCollider(obstacle, 0.2f, 0.3f);
+        weapon.setScale(0.5f, 0.5f);
+        weapon.setZIndex(1);
+//        logger.debug("Create a Thorns Obstacle");
+
+        return weapon;
     }
 
 
@@ -175,31 +222,25 @@ public class ObstacleFactory {
      */
     public static Entity createPortal(Entity target, ObstacleEventHandler.ObstacleType type) {
 
-//        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody);
-
-//        AnimationRenderComponent animator =
-//                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService()
-//                                .getAsset("images/obstacle_2.atlas", TextureAtlas.class));
-//        animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService()
+                                .getAsset("images/portal.atlas", TextureAtlas.class));
+        animator.addAnimation("portal_1", 0.2f, Animation.PlayMode.LOOP);
 
         Entity portal =
                 new Entity("Portal")
-                .addComponent(new PhysicsComponent())
-                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-//                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
-
-                        .addComponent(new TextureRenderComponent("images/portal.png"))
-//                .addComponent(animator)
-//                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-//                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+                        .addComponent(new PhysicsComponent())
+                        .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+                        .addComponent(animator)
                         .addComponent(new ObstacleEventHandler(type));
 
         PhysicsUtils.setScaledCollider(portal, 2f, 4f);
         portal.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        animator.startAnimation("portal_1");
         portal.setScale(2, 4);
 
-//        logger.debug("Create a Thorns Obstacle");
+        logger.debug("Create a {}", type);
 
         return portal;
     }
