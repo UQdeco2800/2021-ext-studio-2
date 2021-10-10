@@ -6,7 +6,7 @@ import com.deco2800.game.components.ItemBar.newItembar;
 import com.deco2800.game.entities.Entity;
 
 public class TestBuffForItem {
-    public static int countNumber = 0;
+    public static double countNumber = 0;
     private int health;
     private Entity target;
 
@@ -24,7 +24,7 @@ public class TestBuffForItem {
         /*ItemBarDisplay.addorremove("kit",1);*/
         newItembar.addkit();
         if(countNumber < 3){
-            countNumber++;
+            countNumber+=0.5;
         }
     }
 }

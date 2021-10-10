@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -170,13 +171,14 @@ public class PlayerStatsDisplay extends UIComponent {
     }
 
     public void addIncreaseHealthImage() {
-        if (table.getCell(increaseHealthImage) == null) {
+        if (table.getCell(increaseHealthImage)==null){
+
             table.add(increaseHealthImage).size(buffSideLength).pad(5);
         }
     }
 
     public void addAddMaxHealthImage() {
-        if (table.getCell(addMaxHealthImage) == null) {
+        if (table.getCell(addMaxHealthImage)==null){
             table.add(addMaxHealthImage).size(buffSideLength).pad(5);
         }
     }
@@ -184,6 +186,7 @@ public class PlayerStatsDisplay extends UIComponent {
     public void removeAddMaxHealthImage() {
         table.reset();
         addActors();
+
     }
 
     public void removeIncreaseHealthImage() {

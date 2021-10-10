@@ -8,10 +8,8 @@ import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.items.PropShopHelper;
 import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
-import com.deco2800.game.components.buff.Buff;
 import com.deco2800.game.components.items.InventorySystem;
 import com.deco2800.game.components.items.ItemBar;
-import com.deco2800.game.components.player.UnlockedAttiresDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
 import com.deco2800.game.files.MPCConfig;
@@ -292,6 +290,8 @@ public class ForestGameArea extends GameArea {
             "images/itembar/recycle/recycle-256px-water1.png",
             "images/itembar/recycle/recycle-256px-water2.png",
             "images/itembar/recycle/recycle-256px-water3.png",
+            "images/pao.png",
+
 
     };
     private static final String[] forestTextureAtlases = {
@@ -327,6 +327,8 @@ public class ForestGameArea extends GameArea {
             "images/itembar/recycle/recycle-256px-water1.png",
             "images/itembar/recycle/recycle-256px-water2.png",
             "images/itembar/recycle/recycle-256px-water3.png",
+            "images/pao.png"
+
 
     };
     private static final String[] forestSounds = {
@@ -345,6 +347,8 @@ public class ForestGameArea extends GameArea {
             "images/mpc/finalAtlas/gold_2/mpc_right.png",
             "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpc_right.png",
             "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpc_right.png",
+            "images/Items/3.png"
+
 
     };
     private static final String[] mpcTexturesAtlases = {
@@ -356,6 +360,8 @@ public class ForestGameArea extends GameArea {
     };
 
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
+    private static final String itemSounds = "sounds/itembar/item-use.mp3";
+    private static final String[] itemMusic = {itemSounds};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
     private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
     private static final String NEWMAP_BACKGROUNDMUSIC = "sounds/track2.mp3";
@@ -818,7 +824,19 @@ public class ForestGameArea extends GameArea {
     private Entity spawnPlayer() {
         Entity newPlayer = PlayerFactory.createPlayer();
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
+        newPlayer.getEvents().addListener("useWeapon", this::spawnWeapon);
         return newPlayer;
+    }
+
+    private void spawnWeapon(Vector2 position) {
+        Entity weapon = ObstacleFactory.createWeapon();
+
+        weapon.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(20, 2),
+                position, true);
+        weapon.getComponent(PhysicsComponent.class).getBody().setLinearDamping(1.7f);
+        weapon.getComponent(PhysicsComponent.class).getBody().setGravityScale(0.2f);
+
+        spawnEntityAt(weapon, position, true, true);
     }
 
     private void setBonusItems(Entity player) {
@@ -832,6 +850,12 @@ public class ForestGameArea extends GameArea {
     public void playMusic() {
         Music music = ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class);
         music.setLooping(true);
+        music.setVolume(0.3f);
+        music.play();
+    }
+
+    public static void playitemMusic() {
+        Music music = ServiceLocator.getResourceService().getAsset(itemSounds, Music.class);
         music.setVolume(0.3f);
         music.play();
     }
@@ -869,6 +893,8 @@ public class ForestGameArea extends GameArea {
         resourceService.loadSounds(jumpSounds);
         resourceService.loadSounds(turnSounds);
         resourceService.loadMusic(forestMusic);
+        resourceService.loadMusic(itemMusic);
+
         resourceService.loadMusic(newMapMusic);
         resourceService.loadTextures(mpcTextures);
         resourceService.loadTextureAtlases(mpcTexturesAtlases);
@@ -888,6 +914,8 @@ public class ForestGameArea extends GameArea {
         resourceService.unloadAssets(jumpSounds);
         resourceService.unloadAssets(turnSounds);
         resourceService.unloadAssets(forestMusic);
+        resourceService.unloadAssets(itemMusic);
+
         resourceService.unloadAssets(newMapMusic);
         resourceService.unloadAssets(mpcTextures);
         resourceService.unloadAssets(mpcTexturesAtlases);
