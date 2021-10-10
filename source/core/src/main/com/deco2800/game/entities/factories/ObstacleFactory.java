@@ -61,6 +61,7 @@ public class ObstacleFactory {
         ParticleRenderComponent particle =
                 new ParticleRenderComponent("images/particle/test.party");
 
+
 //       particle.startEffect();
         obstacle
                 .addComponent(new TextureRenderComponent("images/obstacle_1_new.png"))

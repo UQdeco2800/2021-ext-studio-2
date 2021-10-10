@@ -36,6 +36,7 @@ public class ObstacleEventHandler extends Component {
      */
     public enum ObstacleType {
         PlantsObstacle, ThornsObstacle, Meteorite, FlyingMonkey, FaceWorm, Spaceship, SmallMissile, PortalEntrance, PortalExport, Weapon;
+
     }
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleEventHandler.class);
@@ -49,6 +50,7 @@ public class ObstacleEventHandler extends Component {
     /**
      * Construct an ObstacleEventHandler and register the corresponding event according to the obstacleType.
      *
+
      * @param obstacleType The types of obstacles.
      */
     public ObstacleEventHandler(ObstacleType obstacleType) {
@@ -61,6 +63,7 @@ public class ObstacleEventHandler extends Component {
         hitboxComponent = this.entity.getComponent(HitboxComponent.class);
         animator = this.entity.getComponent(AnimationRenderComponent.class);
         particle = this.entity.getComponent(ParticleRenderComponent.class);
+
         switch (obstacleType) {
             case PlantsObstacle:
                 entity.getEvents().addListener("collisionStart", this::plantsDisappear);
@@ -99,6 +102,7 @@ public class ObstacleEventHandler extends Component {
     /**
      * Setter for spaceshipAttack, used for test.
      *
+
      * @param spaceshipAttack
      */
     public static void setSpaceshipAttack(boolean spaceshipAttack) {
@@ -153,6 +157,7 @@ public class ObstacleEventHandler extends Component {
             if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
                 MainGameScreen.setSlowPlayer(5f);
             }
+
             logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacle2");
@@ -206,6 +211,7 @@ public class ObstacleEventHandler extends Component {
      * floating sound of the spacecraft and unlock the monster manual.
      *
      * @param me    self fixture
+
      * @param other The fixture of the entity that started the collision
      */
     void spaceShipAttack(Fixture me, Fixture other) {
@@ -243,6 +249,7 @@ public class ObstacleEventHandler extends Component {
      * missile disappears.
      *
      * @param me    self fixture
+
      * @param other The fixture of the entity that started the collision
      */
     void smallMissileAttack(Fixture me, Fixture other) {
@@ -266,6 +273,7 @@ public class ObstacleEventHandler extends Component {
      * Triggered when the character touches the entrance of a new map.
      *
      * @param me    self fixture
+
      * @param other The fixture of the entity that started the collision
      */
     void portalEntrance(Fixture me, Fixture other) {
@@ -281,6 +289,7 @@ public class ObstacleEventHandler extends Component {
      * Triggered when the character encounters a new map exit.
      *
      * @param me    self fixture
+
      * @param other The fixture of the entity that started the collision
      */
     void portalExport(Fixture me, Fixture other) {
@@ -325,6 +334,7 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for locked2
      *
+
      * @return if the thorns is locked
      */
     public static boolean isLocked2() {
@@ -334,6 +344,7 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for locked3
      *
+
      * @return if the meteorite is locked
      */
     public static boolean isLocked3() {
@@ -343,6 +354,7 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for locked_ufo
      *
+
      * @return if the spaceship is locked
      */
     public static boolean isLocked_ufo() {
@@ -352,6 +364,7 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for spaceshipAttack
      *
+
      * @return if the spaceshipAttack is attack
      */
     public static boolean isSpaceshipAttack() {
@@ -361,6 +374,7 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for count
      *
+
      * @return how many times the event was triggered
      */
     public int getCount() {

@@ -292,6 +292,7 @@ public class ForestGameArea extends GameArea {
             "images/itembar/recycle/recycle-256px-water3.png",
             "images/pao.png",
 
+
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas",
@@ -328,6 +329,7 @@ public class ForestGameArea extends GameArea {
             "images/itembar/recycle/recycle-256px-water3.png",
             "images/pao.png"
 
+
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg",
@@ -346,6 +348,7 @@ public class ForestGameArea extends GameArea {
             "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpc_right.png",
             "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpc_right.png",
             "images/Items/3.png"
+
 
     };
     private static final String[] mpcTexturesAtlases = {
@@ -856,6 +859,7 @@ public class ForestGameArea extends GameArea {
         music.setVolume(0.3f);
         music.play();
     }
+
     /**
      * Play the new map bgm
      */
@@ -890,6 +894,7 @@ public class ForestGameArea extends GameArea {
         resourceService.loadSounds(turnSounds);
         resourceService.loadMusic(forestMusic);
         resourceService.loadMusic(itemMusic);
+
         resourceService.loadMusic(newMapMusic);
         resourceService.loadTextures(mpcTextures);
         resourceService.loadTextureAtlases(mpcTexturesAtlases);
@@ -910,6 +915,7 @@ public class ForestGameArea extends GameArea {
         resourceService.unloadAssets(turnSounds);
         resourceService.unloadAssets(forestMusic);
         resourceService.unloadAssets(itemMusic);
+
         resourceService.unloadAssets(newMapMusic);
         resourceService.unloadAssets(mpcTextures);
         resourceService.unloadAssets(mpcTexturesAtlases);
