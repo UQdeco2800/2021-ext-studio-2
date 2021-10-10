@@ -53,7 +53,8 @@ public class RecycleDisplay extends UIComponent {
         float iconLength = 60f;
         if(TestBuffForItem.countNumber >= 0){
             {
-                switch (TestBuffForItem.countNumber){
+                switch ((int)TestBuffForItem.countNumber){
+
                     case 0:{
                         recycleIcon.add(new Image(ServiceLocator.getResourceService()
                                 .getAsset("images/itembar/recycle/recycle-256px-default.png", Texture.class)));
@@ -141,7 +142,8 @@ public class RecycleDisplay extends UIComponent {
             float iconLength = 60f;
             if(TestBuffForItem.countNumber >= 0){
                 {
-                    switch (TestBuffForItem.countNumber){
+                    switch ((int)TestBuffForItem.countNumber){
+
                         case 0:{
                             recycleIcon.add(new Image(ServiceLocator.getResourceService()
                                     .getAsset("images/itembar/recycle/recycle-256px-default.png", Texture.class)));

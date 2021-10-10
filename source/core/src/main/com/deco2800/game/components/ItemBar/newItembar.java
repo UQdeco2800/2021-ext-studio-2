@@ -23,22 +23,21 @@ public class newItembar extends Component{
     /**
      * kits stored in item bar
      */
-    private static ArrayList<String> kits;
-//    private ArrayList<ArrayList<String>> items;
+//    private static ArrayList<String> kits;
+    private static double kits;
+
+    private static int pao=9;
 
     public newItembar() {
-       waters = new ArrayList<>();
-       foods = new ArrayList<>();
-       kits = new ArrayList<>();
-//       items = new ArrayList<>();
+        waters = new ArrayList<>();
+        foods = new ArrayList<>();
+//       kits = new ArrayList<>();
+        kits = 3;
         for (int i = 0; i < 3; i++) {
             waters.add("water");
             foods.add("food");
-            kits.add("kit");
+//            kits.add("kit");
         }
-//        items.add(kits);
-//        items.add(foods);
-//        items.add(waters);
     }
 
     /**
@@ -50,7 +49,13 @@ public class newItembar extends Component{
         }
     }
 
+    public static int getpao(){
+        return pao;
+    }
 
+    public static void usepao(){
+        if (pao > 0) pao -= 1;
+    }
     /**
      * food number plus one
      */
@@ -64,9 +69,10 @@ public class newItembar extends Component{
      * kit number plus one
      */
     public static void addkit(){
-        if(kits.size()<capacity){
-            kits.add("kit");
-        }
+//        if(kits.size()<capacity){
+//            kits.add("kit");
+//        }
+        if (kits < capacity) kits += 0.5;
     }
 
     /**
@@ -74,7 +80,7 @@ public class newItembar extends Component{
      */
     public static void usewater(){
         if (waters.size()>0) waters.remove(waters.size()-1);
-        
+
     }
 
     /**
@@ -88,11 +94,11 @@ public class newItembar extends Component{
      * if the kit number is greater than one, kit number minus one
      */
     public static void usekit(){
-        if (kits.size()>0)
-        {
-            kits.remove(kits.size()-1);
-        }
-
+//        if (kits.size()>0)
+//        {
+//            kits.remove(kits.size()-1);
+//        }
+        if (kits > 0) {kits -= 1;}
     }
 
     /**
@@ -113,12 +119,13 @@ public class newItembar extends Component{
      * @return kit number
      */
     public int getkit(){
-        return kits.size();
+//        return kits.size();
+        return (int)kits;
     }
 
     /**
      * @return a string containing kit, water and food numbers
      */
-    public String getcounts(){return getkit() +"         " + getwater() + "         " + getfood();}
+    public String getcounts(){return getkit() +"          " + getwater() + "         " + getfood()+ "          " + getpao();}
 
 }

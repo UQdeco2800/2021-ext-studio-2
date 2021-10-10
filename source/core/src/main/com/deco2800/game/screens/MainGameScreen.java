@@ -69,6 +69,7 @@ public class MainGameScreen extends ScreenAdapter {
             "images/itembar/recycle/recycle-256px-water1.png",
             "images/itembar/recycle/recycle-256px-water2.png",
             "images/itembar/recycle/recycle-256px-water3.png",
+            "images/pao.png",
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
 

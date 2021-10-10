@@ -290,6 +290,8 @@ public class ForestGameArea extends GameArea {
             "images/itembar/recycle/recycle-256px-water1.png",
             "images/itembar/recycle/recycle-256px-water2.png",
             "images/itembar/recycle/recycle-256px-water3.png",
+            "images/pao.png",
+
 
     };
     private static final String[] forestTextureAtlases = {
@@ -325,6 +327,8 @@ public class ForestGameArea extends GameArea {
             "images/itembar/recycle/recycle-256px-water1.png",
             "images/itembar/recycle/recycle-256px-water2.png",
             "images/itembar/recycle/recycle-256px-water3.png",
+            "images/pao.png"
+
 
     };
     private static final String[] forestSounds = {
@@ -355,6 +359,8 @@ public class ForestGameArea extends GameArea {
     };
 
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
+    private static final String itemSounds = "sounds/itembar/item-use.mp3";
+    private static final String[] itemMusic = {itemSounds};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
     private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
     private static final String NEWMAP_BACKGROUNDMUSIC = "sounds/track2.mp3";
@@ -847,6 +853,12 @@ public class ForestGameArea extends GameArea {
         music.play();
     }
 
+    public static void playitemMusic() {
+        Music music = ServiceLocator.getResourceService().getAsset(itemSounds, Music.class);
+        music.setVolume(0.3f);
+        music.play();
+    }
+
     /**
      * Play the new map bgm
      */
@@ -880,6 +892,8 @@ public class ForestGameArea extends GameArea {
         resourceService.loadSounds(jumpSounds);
         resourceService.loadSounds(turnSounds);
         resourceService.loadMusic(forestMusic);
+        resourceService.loadMusic(itemMusic);
+
         resourceService.loadMusic(newMapMusic);
         resourceService.loadTextures(mpcTextures);
         resourceService.loadTextureAtlases(mpcTexturesAtlases);
@@ -899,6 +913,8 @@ public class ForestGameArea extends GameArea {
         resourceService.unloadAssets(jumpSounds);
         resourceService.unloadAssets(turnSounds);
         resourceService.unloadAssets(forestMusic);
+        resourceService.unloadAssets(itemMusic);
+
         resourceService.unloadAssets(newMapMusic);
         resourceService.unloadAssets(mpcTextures);
         resourceService.unloadAssets(mpcTexturesAtlases);

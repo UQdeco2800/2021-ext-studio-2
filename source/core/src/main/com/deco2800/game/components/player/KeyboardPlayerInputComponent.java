@@ -3,6 +3,8 @@ package com.deco2800.game.components.player;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.areas.ForestGameArea;
+
 import com.deco2800.game.components.foodAndwater.RecycleDisplay;
 import com.deco2800.game.components.items.TestBuffForItem;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
@@ -14,6 +16,11 @@ import com.deco2800.game.components.ItemBar.newItembar;
 import com.deco2800.game.components.foodAndwater.FoodDisplay;
 import com.deco2800.game.components.foodAndwater.WaterDisplay;
 
+import javax.sound.sampled.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 /**
  * Input handler for the player for keyboard and touch (mouse) input.
@@ -54,7 +61,10 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         return true;
       case Keys.SPACE:
         entity.getEvents().trigger("attack");
-        entity.getEvents().trigger("useWeapon", entity.getPosition());
+        if(newItembar.getpao()>0){
+          entity.getEvents().trigger("useWeapon", entity.getPosition());
+          newItembar.usepao();
+        }
         return true;
       case Keys.W:
       case Keys.UP:
@@ -69,20 +79,23 @@ public class KeyboardPlayerInputComponent extends InputComponent {
 
         return true;
       case Keys.J:
-        newItembar.usekit();
         if(entity.getComponent(CombatStatsComponent.class).getHealth() < 100){
+          newItembar.usekit();
           entity.getComponent(CombatStatsComponent.class).addHealth(10);
+          ForestGameArea.playitemMusic();
         }
         return true;
 
       case Keys.L:
         newItembar.usefood();
         FoodDisplay.addOrRemoveImage(1);
+        ForestGameArea.playitemMusic();
         return true;
 
       case Keys.K:
         newItembar.usewater();
         WaterDisplay.addOrRemoveImage(1);
+        ForestGameArea.playitemMusic();
         return true;
 
       case Keys.NUM_4://consume recycle:add chicken/water/health depends on the state of recycle system

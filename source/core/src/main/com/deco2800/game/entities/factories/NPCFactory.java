@@ -84,6 +84,7 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new ObstacleAttackTask(monkey, target, 10, 6f));
 
+
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService()
@@ -195,6 +196,7 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(target, 10, 4f, 4f));
+
         Entity npc =
                 new Entity(type)
                         .addComponent(new PhysicsComponent())

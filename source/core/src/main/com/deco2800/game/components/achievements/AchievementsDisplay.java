@@ -134,11 +134,15 @@ public class AchievementsDisplay extends UIComponent {
     private void triggerEvents(BaseAchievementConfig achievement){
         /* Trigger bonus points event */
         AchievementsHelper.getInstance().trackBonusPoints(achievement.bonus);
-        /* Trigger an event when an achievement is being displayed mid game */
+        /* Trigger an event when an achievement is being displayed mid-game */
         AchievementsHelper.getInstance().trackAchievementDisplayed(achievement);
+        /* Add bonus gold when achievement is being displayed mid-game */
+        AchievementsHelper.getInstance().trackAddBonusGold(achievement);
     }
 
     private synchronized void clear(){
+        /* Trigger an event when the achievement is being disposed */
+        AchievementsHelper.getInstance().trackUnlockedAchievementDisposed();
         /* Remove card from screen */
         table.clear();
         /* Remove bonus UI From screen */
