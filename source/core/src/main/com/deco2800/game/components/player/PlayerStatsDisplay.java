@@ -189,11 +189,6 @@ public class PlayerStatsDisplay extends UIComponent {
 
     }
 
-    public void removeAddMaxHealthImage() {
-        table.reset();
-        addActors();
-    }
-
     public void removeIncreaseHealthImage() {
         table.reset();
         addActors();
