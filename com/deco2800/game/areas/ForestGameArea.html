@@ -19,8 +19,8 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -172,7 +172,7 @@ extends <a href="GameArea.html" title="class in com.deco2800.game.areas">GameAre
 </a>
 <h2>Method Summary</h2>
 <div class="memberSummary">
-<div role="tablist" aria-orientation="horizontal"><button role="tab" aria-selected="true" aria-controls="memberSummary_tabpanel" tabindex="0" onkeydown="switchTab(event)" id="t0" class="activeTableTab">All Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t2" class="tableTab" onclick="show(2);">Instance Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t4" class="tableTab" onclick="show(8);">Concrete Methods</button></div>
+<div role="tablist" aria-orientation="horizontal"><button role="tab" aria-selected="true" aria-controls="memberSummary_tabpanel" tabindex="0" onkeydown="switchTab(event)" id="t0" class="activeTableTab">All Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t1" class="tableTab" onclick="show(1);">Static Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t2" class="tableTab" onclick="show(2);">Instance Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t4" class="tableTab" onclick="show(8);">Concrete Methods</button></div>
 <div id="memberSummary_tabpanel" role="tabpanel">
 <table aria-labelledby="t0">
 <thead>
@@ -203,20 +203,25 @@ extends <a href="GameArea.html" title="class in com.deco2800.game.areas">GameAre
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i3">
+<td class="colFirst"><code>static void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#playitemMusic()">playitemMusic</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#playMusic()">playMusic</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Play the regular map bgm</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#playNewMapMusic()">playNewMapMusic</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Play the new map bgm</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#showNewMapScrollingBackground(int,float)">showNewMapScrollingBackground</a></span>&#8203;(int&nbsp;counter,
 float&nbsp;vertical)</code></th>
@@ -224,35 +229,35 @@ float&nbsp;vertical)</code></th>
 <div class="block">Show background in the new map according to the given horizontal and vertical start point</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#showScrollingBackground(int)">showScrollingBackground</a></span>&#8203;(int&nbsp;counter)</code></th>
 <td class="colLast">
 <div class="block">Show background in the regular map according to the given counter</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="altColor" id="i8">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnFaceWorm(com.badlogic.gdx.math.Vector2)">spawnFaceWorm</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</code></th>
 <td class="colLast">
 <div class="block">Generate Face Worm at current Flying Monkeys location.</div>
 </td>
 </tr>
-<tr class="altColor" id="i8">
+<tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnFlyingMonkey()">spawnFlyingMonkey</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Generate Flying Monkeys at random locations.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i9">
+<tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnGoldNewMapRandomly(int)">spawnGoldNewMapRandomly</a></span>&#8203;(int&nbsp;x)</code></th>
 <td class="colLast">
 <div class="block">Generate another set of gold from the given horizontal start point in the new map</div>
 </td>
 </tr>
-<tr class="altColor" id="i10">
+<tr class="rowColor" id="i11">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnInvisibleCeiling(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.GridPoint2)">spawnInvisibleCeiling</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;worldBounds,
 <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/GridPoint2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">GridPoint2</a>&nbsp;tileBounds)</code></th>
@@ -260,7 +265,7 @@ float&nbsp;vertical)</code></th>
 <div class="block">Generate invisible ceiling on top to avoid the character jump out of the map</div>
 </td>
 </tr>
-<tr class="rowColor" id="i11">
+<tr class="altColor" id="i12">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnMeteorites(int,int,int,int,int,int)">spawnMeteorites</a></span>&#8203;(int&nbsp;bigNum,
 int&nbsp;middleNum,
@@ -272,14 +277,14 @@ int&nbsp;smallRandomRange)</code></th>
 <div class="block">Generate a certain number of meteorites, called by render() in MainGameScreen.java.</div>
 </td>
 </tr>
-<tr class="altColor" id="i12">
+<tr class="rowColor" id="i13">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnObstacles()">spawnObstacles</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Obstacles are randomly generated according to the position of the character.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i13">
+<tr class="altColor" id="i14">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnPortal(com.badlogic.gdx.math.Vector2,com.deco2800.game.components.obstacle.ObstacleEventHandler.ObstacleType)">spawnPortal</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position,
 <a href="../components/obstacle/ObstacleEventHandler.ObstacleType.html" title="enum in com.deco2800.game.components.obstacle">ObstacleEventHandler.ObstacleType</a>&nbsp;type)</code></th>
@@ -287,28 +292,28 @@ int&nbsp;smallRandomRange)</code></th>
 <div class="block">Generate Small Missile at Spaceship location.</div>
 </td>
 </tr>
-<tr class="altColor" id="i14">
+<tr class="rowColor" id="i15">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnRocksfive(int)">spawnRocksfive</a></span>&#8203;(int&nbsp;xValue)</code></th>
 <td class="colLast">
 <div class="block">Generate 5 rocks column from the sky down</div>
 </td>
 </tr>
-<tr class="rowColor" id="i15">
+<tr class="altColor" id="i16">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnRocksfour(int)">spawnRocksfour</a></span>&#8203;(int&nbsp;xValue)</code></th>
 <td class="colLast">
 <div class="block">Generate 5 rocks column from the ground up</div>
 </td>
 </tr>
-<tr class="altColor" id="i16">
+<tr class="rowColor" id="i17">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnRocksone(int)">spawnRocksone</a></span>&#8203;(int&nbsp;xValue)</code></th>
 <td class="colLast">
 <div class="block">Generate line 5 rocks in the new map</div>
 </td>
 </tr>
-<tr class="rowColor" id="i17">
+<tr class="altColor" id="i18">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnRockssix(int)">spawnRockssix</a></span>&#8203;(int&nbsp;xValue)</code></th>
 <td class="colLast">
@@ -319,7 +324,7 @@ int&nbsp;smallRandomRange)</code></th>
     NNNN</div>
 </td>
 </tr>
-<tr class="altColor" id="i18">
+<tr class="rowColor" id="i19">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnRocksthree(int)">spawnRocksthree</a></span>&#8203;(int&nbsp;xValue)</code></th>
 <td class="colLast">
@@ -329,7 +334,7 @@ int&nbsp;smallRandomRange)</code></th>
     NNN</div>
 </td>
 </tr>
-<tr class="rowColor" id="i19">
+<tr class="altColor" id="i20">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnRockstwo(int)">spawnRockstwo</a></span>&#8203;(int&nbsp;xValue)</code></th>
 <td class="colLast">
@@ -339,28 +344,28 @@ int&nbsp;smallRandomRange)</code></th>
    NNN</div>
 </td>
 </tr>
-<tr class="altColor" id="i20">
+<tr class="rowColor" id="i21">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnSmallMissile(com.badlogic.gdx.math.Vector2)">spawnSmallMissile</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</code></th>
 <td class="colLast">
 <div class="block">Generate Small Missile at Spaceship location.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i21">
+<tr class="altColor" id="i22">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnSpaceship()">spawnSpaceship</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Generate Spaceship at fixed location.</div>
 </td>
 </tr>
-<tr class="altColor" id="i22">
+<tr class="rowColor" id="i23">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnTerrain(com.deco2800.game.areas.terrain.TerrainFactory.TerrainType)">spawnTerrain</a></span>&#8203;(<a href="terrain/TerrainFactory.TerrainType.html" title="enum in com.deco2800.game.areas.terrain">TerrainFactory.TerrainType</a>&nbsp;terrainType)</code></th>
 <td class="colLast">
 <div class="block">Generate the first set of terrain</div>
 </td>
 </tr>
-<tr class="rowColor" id="i23">
+<tr class="altColor" id="i24">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnTerrainRandomly(int,com.deco2800.game.areas.terrain.TerrainFactory.TerrainType)">spawnTerrainRandomly</a></span>&#8203;(int&nbsp;xValue,
 <a href="terrain/TerrainFactory.TerrainType.html" title="enum in com.deco2800.game.areas.terrain">TerrainFactory.TerrainType</a>&nbsp;terrainType)</code></th>
@@ -368,21 +373,21 @@ int&nbsp;smallRandomRange)</code></th>
 <div class="block">Generate the continuous terrain after the first set of terrain</div>
 </td>
 </tr>
-<tr class="altColor" id="i24">
+<tr class="rowColor" id="i25">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnWoodsRandomly(int)">spawnWoodsRandomly</a></span>&#8203;(int&nbsp;xValue)</code></th>
 <td class="colLast">
 <div class="block">Generate 5 wood randomly in the 52f and 54f height and given horizontal start point</div>
 </td>
 </tr>
-<tr class="rowColor" id="i25">
+<tr class="altColor" id="i26">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stopMusic()">stopMusic</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Stop the regular map bgm</div>
 </td>
 </tr>
-<tr class="altColor" id="i26">
+<tr class="rowColor" id="i27">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stopNewMapMusic()">stopNewMapMusic</a></span>()</code></th>
 <td class="colLast">
@@ -725,6 +730,12 @@ int&nbsp;smallRandomRange)</span></div>
 <h3><a id="playMusic()">playMusic</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">playMusic</span>()</div>
 <div class="block">Play the regular map bgm</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="playitemMusic()">playitemMusic</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">playitemMusic</span>()</div>
 </section>
 </li>
 <li class="blockList">
