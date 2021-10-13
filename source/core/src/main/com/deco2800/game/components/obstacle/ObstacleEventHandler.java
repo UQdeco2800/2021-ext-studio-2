@@ -162,6 +162,7 @@ public class ObstacleEventHandler extends Component {
             }
             logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setRemoveTexture();
+            particle.startEffect();
             animator.startAnimation("obstacle2");
             animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked2 = false;

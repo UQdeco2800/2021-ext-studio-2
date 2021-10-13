@@ -26,6 +26,7 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.ParticleRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
@@ -92,13 +93,18 @@ public class NPCFactory {
 
         animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
 
+        ParticleRenderComponent particle =
+                new ParticleRenderComponent("images/particle/monkey.party");
+
         monkey
                 .addComponent(animator)
                 .addComponent(aiComponent)
+                .addComponent(particle)
                 .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.FlyingMonkey,
                         "sounds/monster_roar.mp3"));
 
         animator.startAnimation("1m");
+        particle.startEffect();
         monkey.setScale(2.3f, 2.3f);
         logger.debug("Create a Flying Monkey");
         return monkey;

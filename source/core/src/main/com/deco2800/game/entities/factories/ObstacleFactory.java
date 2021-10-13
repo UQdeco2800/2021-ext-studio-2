@@ -94,11 +94,16 @@ public class ObstacleFactory {
                                 .getAsset("images/obstacle_2.atlas", TextureAtlas.class));
         animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
 
+        ParticleRenderComponent particle =
+                new ParticleRenderComponent("images/particle/thron.party");
+
+
         obstacle
                 .addComponent(new TextureRenderComponent("images/obstacle2_vision2.png"))
                 .addComponent(animator)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+                .addComponent(particle)
 //                .addComponent(new ParticleRenderComponent("test.party"))
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.ThornsObstacle));
 
