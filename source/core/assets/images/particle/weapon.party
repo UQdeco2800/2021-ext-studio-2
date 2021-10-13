@@ -6,17 +6,21 @@ lowMin: 2000.0
 lowMax: 2000.0
 - Count - 
 min: 0
-max: 500
+max: 400
 - Emission - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 300.0
-highMax: 300.0
+highMin: 200.0
+highMax: 200.0
 relative: false
-scalingCount: 1
+scalingCount: 3
 scaling0: 1.0
-timelineCount: 1
+scaling1: 0.18181819
+scaling2: 0.0
+timelineCount: 3
 timeline0: 0.0
+timeline1: 0.15753424
+timeline2: 0.9931507
 - Life - 
 lowMin: 0.0
 lowMax: 0.0
@@ -82,8 +86,8 @@ timeline0: 0.0
 - X Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 0.3
-highMax: 0.3
+highMin: 0.4
+highMax: 0.4
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -96,7 +100,7 @@ active: true
 lowMin: 0.0
 lowMax: 0.0
 highMin: 0.0
-highMax: 3.0
+highMax: 6.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -106,19 +110,28 @@ timeline0: 0.0
 active: true
 lowMin: 180.0
 lowMax: 180.0
-highMin: 135.0
-highMax: 225.0
+highMin: 115.0
+highMax: 255.0
 relative: false
 scalingCount: 3
 scaling0: 1.0
-scaling1: 0.8181818
+scaling1: 1.0
 scaling2: 0.0
 timelineCount: 3
 timeline0: 0.0
-timeline1: 0.6164383
-timeline2: 1.0
+timeline1: 0.9853014
+timeline2: 0.98630136
 - Rotation - 
-active: false
+active: true
+lowMin: 0.0
+lowMax: 0.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Wind - 
 active: false
 - Gravity - 
@@ -126,7 +139,7 @@ active: false
 - Tint - 
 colorsCount: 3
 colors0: 1.0
-colors1: 0.72156864
+colors1: 0.7490196
 colors2: 0.0
 timelineCount: 1
 timeline0: 0.0
@@ -139,12 +152,12 @@ relative: false
 scalingCount: 4
 scaling0: 0.0
 scaling1: 1.0
-scaling2: 0.75
+scaling2: 0.71929824
 scaling3: 0.0
 timelineCount: 4
 timeline0: 0.0
-timeline1: 0.2
-timeline2: 0.8
+timeline1: 0.10273973
+timeline2: 0.56164384
 timeline3: 1.0
 - Options - 
 attached: false
@@ -155,5 +168,5 @@ behind: false
 premultipliedAlpha: false
 spriteMode: single
 - Image Paths -
-badlogic.jpg
+test.jpg
 
