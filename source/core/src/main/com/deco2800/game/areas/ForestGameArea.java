@@ -399,16 +399,16 @@ public class ForestGameArea extends GameArea {
         spawnObstacles();
         //Buff buff = new Buff(player);
         //buff.addHealth();
-//        pro = new InventorySystem(player);
-//        spawnFirstAid();
-//        spawnGold();
-//        spawnGoldNewMap();
+        pro = new InventorySystem(player);
+        spawnFirstAid();
+        spawnGold();
+        spawnGoldNewMap();
         playMusic();
-//        trackAchievements();
-//        trackBuffDescription();
-//        setBonusItems(player);
-//        PropShopHelper.useProps(player);
-//        player.getEvents().addListener("B pressed", this::InvSys);
+        trackAchievements();
+        trackBuffDescription();
+        setBonusItems(player);
+        PropShopHelper.useProps(player);
+        player.getEvents().addListener("B pressed", this::InvSys);
         spawnPortal(new Vector2(50, 55), ObstacleEventHandler.ObstacleType.PortalExport);
     }
 
