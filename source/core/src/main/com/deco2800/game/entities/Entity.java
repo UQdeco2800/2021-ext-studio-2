@@ -140,8 +140,10 @@ public class Entity {
         logger.debug("Setting removeTexture={} on entity {}", removeTexture, this);
     }
 
+    /**
+     * Set removeCollision to true. The code that works subsequently is in update.
+     */
     public void setRemoveCollision() {
-        System.out.println("setRemoveCollision");
         this.removeCollision = true;
         logger.debug("Setting removeCollision={} on entity {}", removeCollision, this);
     }
@@ -385,7 +387,7 @@ public class Entity {
      */
     public void removeAfterParticle() {
         String loggerInfo = "";
-        if (this.getComponent(ParticleRenderComponent.class).getAnimationPlayTime() > particleTime) {
+        if (this.getComponent(ParticleRenderComponent.class).getParticlePlayTime() > particleTime) {
 
             for (Component component : createdComponents) {
                 loggerInfo += "\t" + component.getClass().getSimpleName() + " disposed on entity " + this + "\n";

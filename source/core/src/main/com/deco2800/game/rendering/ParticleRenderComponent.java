@@ -13,7 +13,7 @@ public class ParticleRenderComponent extends RenderComponent{
     private String texturePath;
     private ParticleEffect pe;
     private boolean EffectStart = false;
-    private float animationPlayTime;
+    private float particlePlayTime;
     private final GameTime timeSource;
 
 
@@ -25,13 +25,25 @@ public class ParticleRenderComponent extends RenderComponent{
     @Override
     public void create() {
         super.create();
-//        texture = ServiceLocator.getResourceService().getAsset(texturePath, Texture.class);
         Vector2 pos = entity.getPosition();
         pe = new ParticleEffect();
         pe.load(Gdx.files.internal(texturePath),Gdx.files.internal("images/particle"));
-        //     pe.setPosition(pos.x,pos.y);
-//        pe.start();
 
+    }
+
+    /**
+     * Set the zIndex of the entity according to the y coordinate of the entity and the original zIndex.
+     * <p>
+     * If zIndex is not set originally, then The smaller the Y value, the higher the Z index, so that closer entities
+     * are drawn in front.
+     * <p>
+     * If zIndex has been set, zIndex will not change.
+     *
+     * @return The drawing priority of the current entity
+     */
+    @Override
+    public float getZIndex() {
+        return 1;
     }
 
     public void startEffect(){
@@ -48,7 +60,7 @@ public class ParticleRenderComponent extends RenderComponent{
             if (pe.isComplete()){
                 pe.reset();
             }
-            animationPlayTime += timeSource.getDeltaTime();
+            particlePlayTime += timeSource.getDeltaTime();
         }
     }
 
@@ -56,8 +68,8 @@ public class ParticleRenderComponent extends RenderComponent{
      * Get the playing time of the animation
      * @return float The time the animation has been played (seconds).
      */
-    public float getAnimationPlayTime() {
-        return this.animationPlayTime;
+    public float getParticlePlayTime() {
+        return this.particlePlayTime;
     }
 
 
