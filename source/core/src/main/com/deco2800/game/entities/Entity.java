@@ -3,12 +3,18 @@ package com.deco2800.game.entities;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
+import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.events.EventHandler;
+import com.deco2800.game.physics.components.ColliderComponent;
+import com.deco2800.game.physics.components.HitboxComponent;
+import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.ParticleRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
@@ -43,9 +49,15 @@ public class Entity {
     private final EventHandler eventHandler;
     private boolean enabled = true;
     private boolean disappear = false;
+    public enum DisappearType {
+        ANIMATION, PARTICLE
+    }
+    private DisappearType disappearType = null;
     private boolean removeTexture = false;
+    private boolean removeCollision = false;
     private boolean dispose = false;
     private float animationTime = 0;
+    private float particleTime = 0;
     private boolean created = false;
     private Vector2 position = Vector2.Zero.cpy();
 
@@ -101,9 +113,22 @@ public class Entity {
      *
      * @param animationTime Set how long the animation will disappear after playing
      */
-    public void setDisappearAfterAnimation(float animationTime) {
+    public void setDisappearAfterAnimation(float animationTime, DisappearType disappearType) {
         this.disappear = true;
         this.animationTime = animationTime;
+        this.disappearType = disappearType;
+        logger.debug("Setting disappear={} on entity {}", disappear, this);
+    }
+
+    /**
+     * Set disappear to true. These variables play a role in removeAfterParticle() and update().
+     *
+     * @param particleTime Set how long the animation will disappear after playing
+     */
+    public void setDisappearAfterParticle(float particleTime, DisappearType disappearType) {
+        this.disappear = true;
+        this.particleTime = particleTime;
+        this.disappearType = disappearType;
         logger.debug("Setting disappear={} on entity {}", disappear, this);
     }
 
@@ -113,6 +138,14 @@ public class Entity {
     public void setRemoveTexture() {
         this.removeTexture = true;
         logger.debug("Setting removeTexture={} on entity {}", removeTexture, this);
+    }
+
+    /**
+     * Set removeCollision to true. The code that works subsequently is in update.
+     */
+    public void setRemoveCollision() {
+        this.removeCollision = true;
+        logger.debug("Setting removeCollision={} on entity {}", removeCollision, this);
     }
 
     /**
@@ -146,6 +179,7 @@ public class Entity {
 
     /**
      * Get method of animationTime.
+     *
      * @return How long the animation will disappear after playing
      */
     public float getAnimationTime() {
@@ -349,6 +383,24 @@ public class Entity {
     }
 
     /**
+     * Let the obstacles disappear after playing the particle for particleTime second. Is called by update().
+     */
+    public void removeAfterParticle() {
+        String loggerInfo = "";
+        if (this.getComponent(ParticleRenderComponent.class).getParticlePlayTime() > particleTime) {
+
+            for (Component component : createdComponents) {
+                loggerInfo += "\t" + component.getClass().getSimpleName() + " disposed on entity " + this + "\n";
+                component.dispose();
+            }
+            ServiceLocator.getEntityService().unregister(this);
+        }
+        if (loggerInfo.strip() != "") {
+            logger.debug(loggerInfo.strip());
+        }
+    }
+
+    /**
      * Create the entity and start running. This is called when the entity is registered in the world,
      * and should not be called manually.
      */
@@ -400,13 +452,32 @@ public class Entity {
                 if (component.getClass().equals(TextureRenderComponent.class)) {
                     logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
                     component.dispose();
+                    removeTexture=false;
+                }
+            }
+
+            if (removeCollision) {
+                if (component.getClass().equals(HitboxComponent.class) || component.getClass().equals(ColliderComponent.class)) {
+                    logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
+                    component.dispose();
                 }
             }
             component.triggerUpdate();
         }
+        removeCollision = false;
+
         if (disappear) {
-            this.removeAfterAnimation();
-            return;
+
+            if (disappearType == DisappearType.ANIMATION) {
+                this.removeAfterAnimation();
+                return;
+            } else if (disappearType == DisappearType.PARTICLE) {
+                this.removeAfterParticle();
+                return;
+            } else {
+
+            }
+
         }
     }
 
