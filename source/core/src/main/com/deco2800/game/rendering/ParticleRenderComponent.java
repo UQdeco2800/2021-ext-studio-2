@@ -26,7 +26,7 @@ public class ParticleRenderComponent extends RenderComponent{
         pe = new ParticleEffect();
         pe.load(Gdx.files.internal(texturePath),Gdx.files.internal("images/particle"));
         //     pe.setPosition(pos.x,pos.y);
-        pe.start();
+//        pe.start();
 
     }
 
