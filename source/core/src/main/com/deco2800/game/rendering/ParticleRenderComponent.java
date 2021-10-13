@@ -25,7 +25,7 @@ public class ParticleRenderComponent extends RenderComponent{
         Vector2 pos = entity.getPosition();
         pe = new ParticleEffect();
         pe.load(Gdx.files.internal(texturePath),Gdx.files.internal("images/particle"));
-        pe.setPosition(pos.x,pos.y);
+        //     pe.setPosition(pos.x,pos.y);
         pe.start();
 
     }
@@ -37,8 +37,9 @@ public class ParticleRenderComponent extends RenderComponent{
     @Override
     protected void draw(SpriteBatch batch) {
         if (EffectStart){
-
+            Vector2 pos = entity.getPosition();
             pe.update(Gdx.graphics.getDeltaTime());
+            pe.setPosition(pos.x,pos.y);
             pe.draw(batch);
             if (pe.isComplete()){
                 pe.reset();

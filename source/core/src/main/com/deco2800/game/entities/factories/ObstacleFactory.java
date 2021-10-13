@@ -64,11 +64,11 @@ public class ObstacleFactory {
 
 //       particle.startEffect();
         obstacle
+                .addComponent(particle)
                 .addComponent(new TextureRenderComponent("images/obstacle_1_new.png"))
                 .addComponent(animator)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 10f))
-                .addComponent(particle)
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PlantsObstacle));
 
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
@@ -116,7 +116,7 @@ public class ObstacleFactory {
     /**
      * Creates a Thorns Obstacle.
      *
-//     * @param target character.
+     //     * @param target character.
      * @return the thorns obstacle entity
      */
     public static Entity createWeapon() {
@@ -128,6 +128,10 @@ public class ObstacleFactory {
 //                        ServiceLocator.getResourceService()
 //                                .getAsset("images/obstacle_2.atlas", TextureAtlas.class));
 //        animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
+        ParticleRenderComponent particle =
+                new ParticleRenderComponent("images/particle/weapon.party");
+
+
 
         Entity weapon = new Entity("weapon")
                 .addComponent(new PhysicsComponent())
@@ -137,7 +141,7 @@ public class ObstacleFactory {
 //                .addComponent(animator)
 //                .addComponent(new CombatStatsComponent(0, 0))
 //                .addComponent(new TouchAttackComponent(PhysicsLayer.OBSTACLE, 0f))
-//                .addComponent(new ParticleRenderComponent("test.party"))
+                .addComponent(particle)
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Weapon));
 
         weapon.getComponent(TextureRenderComponent.class).scaleEntity();
@@ -145,6 +149,8 @@ public class ObstacleFactory {
         weapon.setScale(0.5f, 0.5f);
         weapon.setZIndex(1);
 //        logger.debug("Create a Thorns Obstacle");
+        particle.startEffect();
+
 
         return weapon;
     }
