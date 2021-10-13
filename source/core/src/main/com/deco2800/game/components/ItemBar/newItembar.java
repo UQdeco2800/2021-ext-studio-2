@@ -104,14 +104,14 @@ public class newItembar extends Component{
     /**
      * @return food number
      */
-    public int getfood(){
+    public static int getfood(){
         return foods.size();
     }
 
     /**
      * @return water number
      */
-    public int getwater(){
+    public static int getwater(){
         return waters.size();
     }
 

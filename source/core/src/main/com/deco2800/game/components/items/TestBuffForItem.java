@@ -1,5 +1,6 @@
 package com.deco2800.game.components.items;
 
+import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.ItemBar.ItemBarDisplay;
 import com.deco2800.game.components.ItemBar.newItembar;
@@ -18,13 +19,14 @@ public class TestBuffForItem {
          * @param target entity of which the health needs to be updated
          */
         health = target.getComponent(CombatStatsComponent.class).getHealth();
-        if(health < 100) {
-            target.getComponent(CombatStatsComponent.class).addHealth(10);
-        }
+//        if(health < 100) {
+//            target.getComponent(CombatStatsComponent.class).addHealth(10);
+//        }
         /*ItemBarDisplay.addorremove("kit",1);*/
         newItembar.addkit();
         if(countNumber < 3){
             countNumber+=0.5;
         }
+        ForestGameArea.playpickupMusic();
     }
 }
