@@ -41,7 +41,7 @@ public class BackgroundSelectionComponent extends UIComponent {
         musicSelectionTable = new Table();
         musicSelectionTable.setFillParent(true);
         musicSelectionTable.bottom().right();
-        musicSelectionTable.add(musicImgBtn);
+        musicSelectionTable.add(musicImgBtn).size(120, 120);
 
         stage.addActor(musicSelectionTable);
     }
