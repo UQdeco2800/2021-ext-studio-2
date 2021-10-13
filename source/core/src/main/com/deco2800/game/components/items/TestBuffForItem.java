@@ -19,10 +19,9 @@ public class TestBuffForItem {
          * @param target entity of which the health needs to be updated
          */
         health = target.getComponent(CombatStatsComponent.class).getHealth();
-//        if(health < 100) {
-//            target.getComponent(CombatStatsComponent.class).addHealth(10);
-//        }
-        /*ItemBarDisplay.addorremove("kit",1);*/
+        if(health < 100) {
+            target.getComponent(CombatStatsComponent.class).addHealth(0);
+        }
         newItembar.addkit();
         if(countNumber < 3){
             countNumber+=0.5;
