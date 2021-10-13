@@ -26,6 +26,5 @@ public class TestBuffForItem {
         if(countNumber < 3){
             countNumber+=0.5;
         }
-        ForestGameArea.playpickupMusic();
     }
 }
