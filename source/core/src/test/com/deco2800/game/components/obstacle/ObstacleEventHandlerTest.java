@@ -72,6 +72,9 @@ class ObstacleEventHandlerTest {
         thorns.addComponent(animator);
         when(animator.getEntity()).thenReturn(thorns);
 
+        ParticleRenderComponent particleRenderComponent = mock(ParticleRenderComponent.class);
+        thorns.addComponent(particleRenderComponent);
+
         player.create();
         thorns.create();
 
