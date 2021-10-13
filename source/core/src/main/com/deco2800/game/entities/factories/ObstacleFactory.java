@@ -137,19 +137,20 @@ public class ObstacleFactory {
                 .addComponent(new PhysicsComponent())
 //                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.PLAYERCOLLIDER))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.WEAPON))
-                .addComponent(new TextureRenderComponent("images/Items/3.png"))
+//                .addComponent(new TextureRenderComponent("images/Items/3.png"))
 //                .addComponent(animator)
 //                .addComponent(new CombatStatsComponent(0, 0))
 //                .addComponent(new TouchAttackComponent(PhysicsLayer.OBSTACLE, 0f))
                 .addComponent(particle)
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Weapon));
 
-        weapon.getComponent(TextureRenderComponent.class).scaleEntity();
+//        weapon.getComponent(TextureRenderComponent.class).scaleEntity();
 //        PhysicsUtils.setScaledCollider(obstacle, 0.2f, 0.3f);
         weapon.setScale(0.5f, 0.5f);
         weapon.setZIndex(1);
 //        logger.debug("Create a Thorns Obstacle");
         particle.startEffect();
+        weapon.setDisappearAfterParticle(2f, Entity.DisappearType.PARTICLE);
 
 
         return weapon;

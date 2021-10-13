@@ -4,6 +4,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
+import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
@@ -130,7 +131,7 @@ public class ObstacleEventHandler extends Component {
             logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacles");
-            animator.getEntity().setDisappearAfterAnimation(1f);
+            animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked = false;
         }
 
@@ -161,7 +162,7 @@ public class ObstacleEventHandler extends Component {
             logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacle2");
-            animator.getEntity().setDisappearAfterAnimation(1f);
+            animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked2 = false;
         }
 
@@ -188,7 +189,7 @@ public class ObstacleEventHandler extends Component {
                 logger.debug("collisionStart event for {} was triggered.", entity.toString());
                 animator.getEntity().setRemoveTexture();
                 animator.startAnimation("stone1");
-                animator.getEntity().setDisappearAfterAnimation(0.32f);
+                animator.getEntity().setDisappearAfterAnimation(0.32f, Entity.DisappearType.ANIMATION);
                 locked3 = false;
             }
         }
@@ -201,7 +202,7 @@ public class ObstacleEventHandler extends Component {
     void faceWormDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
             logger.debug("collisionStart event for {} was triggered.", entity.toString());
-            animator.getEntity().setDisappearAfterAnimation(1.5f);
+            animator.getEntity().setDisappearAfterAnimation(1.5f, Entity.DisappearType.ANIMATION);
         }
 
     }
@@ -271,7 +272,7 @@ public class ObstacleEventHandler extends Component {
         logger.debug("collisionStart event for {} was triggered.", entity.toString());
         entity.getEvents().trigger("missileSound");
         animator.startAnimation("bomb");
-        animator.getEntity().setDisappearAfterAnimation(0.4f);
+        animator.getEntity().setDisappearAfterAnimation(0.4f, Entity.DisappearType.ANIMATION);
 
     }
 

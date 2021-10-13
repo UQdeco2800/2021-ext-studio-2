@@ -830,10 +830,10 @@ public class ForestGameArea extends GameArea {
     private void spawnWeapon(Vector2 position) {
         Entity weapon = ObstacleFactory.createWeapon();
 
-        weapon.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(20, 2),
+        weapon.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(10, 0),
                 position, true);
-        weapon.getComponent(PhysicsComponent.class).getBody().setLinearDamping(1.7f);
-        weapon.getComponent(PhysicsComponent.class).getBody().setGravityScale(0.2f);
+        weapon.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0.5f);
+        weapon.getComponent(PhysicsComponent.class).getBody().setGravityScale(0f);
 
         spawnEntityAt(weapon, position, true, true);
     }

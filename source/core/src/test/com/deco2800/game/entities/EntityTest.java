@@ -194,10 +194,11 @@ class EntityTest {
         EntityService entityService = mock(EntityService.class);
         ServiceLocator.registerEntityService(entityService);
 
-        entity.setDisappearAfterAnimation(1f);
+        entity.setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
         when(animator.getAnimationPlayTime()).thenReturn(1.1f);
 
         entity.update();
+
         verify(animator).stopAnimation();
         verify(component).dispose();
     }
@@ -217,7 +218,7 @@ class EntityTest {
         EntityService entityService = mock(EntityService.class);
         ServiceLocator.registerEntityService(entityService);
 
-        entity.setDisappearAfterAnimation(1f);
+        entity.setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
         when(animator.getAnimationPlayTime()).thenReturn(1f);
 
         entity.update();

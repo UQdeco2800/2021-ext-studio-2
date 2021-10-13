@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 
 public class ParticleRenderComponent extends RenderComponent{
@@ -12,10 +13,13 @@ public class ParticleRenderComponent extends RenderComponent{
     private String texturePath;
     private ParticleEffect pe;
     private boolean EffectStart = false;
+    private float animationPlayTime;
+    private final GameTime timeSource;
 
 
     public ParticleRenderComponent(String texturePath) {
         this.texturePath = texturePath;
+        timeSource = ServiceLocator.getTimeSource();
     }
 
     @Override
@@ -44,9 +48,16 @@ public class ParticleRenderComponent extends RenderComponent{
             if (pe.isComplete()){
                 pe.reset();
             }
-
+            animationPlayTime += timeSource.getDeltaTime();
         }
+    }
 
+    /**
+     * Get the playing time of the animation
+     * @return float The time the animation has been played (seconds).
+     */
+    public float getAnimationPlayTime() {
+        return this.animationPlayTime;
     }
 
 
