@@ -60,8 +60,8 @@ public class PlayerFactory {
                 mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/gold_4_buff_to_be_test/mpc_right.png");
                 break;
             case "gold_6":
-                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.atlas");
-                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpc_right.png");
+                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/gold_6/mpcAnimation_6.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/gold_6/mpc_right.png");
                 break;
             case "OG":
             default:
