@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10,"i35":10,"i36":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -55,7 +55,7 @@ loadScripts(document, 'script');</script>
 <div>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
@@ -113,6 +113,33 @@ extends java.lang.Object</pre>
 </section>
 <section class="summary">
 <ul class="blockList">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<li class="blockList">
+<section class="nestedClassSummary"><a id="nested.class.summary">
+<!--   -->
+</a>
+<h2>Nested Class Summary</h2>
+<div class="memberSummary">
+<table>
+<caption><span>Nested Classes</span><span class="tabEnd">&nbsp;</span></caption>
+<thead>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Class</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code>static class&nbsp;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Entity.DisappearType.html" title="enum in com.deco2800.game.entities">Entity.DisappearType</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li class="blockList">
 <section class="constructorSummary"><a id="constructor.summary">
@@ -291,40 +318,56 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="rowColor" id="i19">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeAfterParticle()">removeAfterParticle</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Let the obstacles disappear after playing the particle for particleTime second.</div>
+</td>
+</tr>
+<tr class="altColor" id="i20">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#scaleHeight(float)">scaleHeight</a></span>&#8203;(float&nbsp;y)</code></th>
 <td class="colLast">
 <div class="block">Set the entity's height and scale the width to maintain aspect ratio.</div>
 </td>
 </tr>
-<tr class="altColor" id="i20">
+<tr class="rowColor" id="i21">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#scaleWidth(float)">scaleWidth</a></span>&#8203;(float&nbsp;x)</code></th>
 <td class="colLast">
 <div class="block">Set the entity's width and scale the height to maintain aspect ratio.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i21">
+<tr class="altColor" id="i22">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDisappearAfterAnimation(float)">setDisappearAfterAnimation</a></span>&#8203;(float&nbsp;animationTime)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDisappearAfterAnimation(float,com.deco2800.game.entities.Entity.DisappearType)">setDisappearAfterAnimation</a></span>&#8203;(float&nbsp;animationTime,
+<a href="Entity.DisappearType.html" title="enum in com.deco2800.game.entities">Entity.DisappearType</a>&nbsp;disappearType)</code></th>
 <td class="colLast">
 <div class="block">Set disappear to true.</div>
 </td>
 </tr>
-<tr class="altColor" id="i22">
+<tr class="rowColor" id="i23">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDisappearAfterParticle(float,com.deco2800.game.entities.Entity.DisappearType)">setDisappearAfterParticle</a></span>&#8203;(float&nbsp;particleTime,
+<a href="Entity.DisappearType.html" title="enum in com.deco2800.game.entities">Entity.DisappearType</a>&nbsp;disappearType)</code></th>
+<td class="colLast">
+<div class="block">Set disappear to true.</div>
+</td>
+</tr>
+<tr class="altColor" id="i24">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDispose()">setDispose</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Set dispose to true.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i23">
+<tr class="rowColor" id="i25">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setEnabled(boolean)">setEnabled</a></span>&#8203;(boolean&nbsp;enabled)</code></th>
 <td class="colLast">
 <div class="block">Enable or disable an entity.</div>
 </td>
 </tr>
-<tr class="altColor" id="i24">
+<tr class="altColor" id="i26">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPosition(float,float)">setPosition</a></span>&#8203;(float&nbsp;x,
 float&nbsp;y)</code></th>
@@ -332,14 +375,14 @@ float&nbsp;y)</code></th>
 <div class="block">Set the entity's game position.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i25">
+<tr class="rowColor" id="i27">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPosition(com.badlogic.gdx.math.Vector2)">setPosition</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</code></th>
 <td class="colLast">
 <div class="block">Set the entity's game position.</div>
 </td>
 </tr>
-<tr class="altColor" id="i26">
+<tr class="altColor" id="i28">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPosition(com.badlogic.gdx.math.Vector2,boolean)">setPosition</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position,
 boolean&nbsp;notify)</code></th>
@@ -347,14 +390,21 @@ boolean&nbsp;notify)</code></th>
 <div class="block">Set the entity's game position and optionally notifies listeners.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i27">
+<tr class="rowColor" id="i29">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setRemoveCollision()">setRemoveCollision</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Set removeCollision to true.</div>
+</td>
+</tr>
+<tr class="altColor" id="i30">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setRemoveTexture()">setRemoveTexture</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Set removeTexture to true.</div>
 </td>
 </tr>
-<tr class="altColor" id="i28">
+<tr class="rowColor" id="i31">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScale(float,float)">setScale</a></span>&#8203;(float&nbsp;x,
 float&nbsp;y)</code></th>
@@ -362,33 +412,33 @@ float&nbsp;y)</code></th>
 <div class="block">Set the entity's scale.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i29">
+<tr class="altColor" id="i32">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScale(com.badlogic.gdx.math.Vector2)">setScale</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;scale)</code></th>
 <td class="colLast">
 <div class="block">Set the entity's scale.</div>
 </td>
 </tr>
-<tr class="altColor" id="i30">
+<tr class="rowColor" id="i33">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setZIndex(int)">setZIndex</a></span>&#8203;(int&nbsp;zIndex)</code></th>
 <td class="colLast">
 <div class="block">Set the entity's zIndex.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i31">
+<tr class="altColor" id="i34">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i32">
+<tr class="rowColor" id="i35">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Perform an update on all components.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i33">
+<tr class="altColor" id="i36">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updateSpeed(com.badlogic.gdx.math.Vector2)">updateSpeed</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;speed)</code></th>
 <td class="colLast">&nbsp;</td>
@@ -468,8 +518,9 @@ float&nbsp;y)</code></th>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="setDisappearAfterAnimation(float)">setDisappearAfterAnimation</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setDisappearAfterAnimation</span>&#8203;(<span class="arguments">float&nbsp;animationTime)</span></div>
+<h3><a id="setDisappearAfterAnimation(float,com.deco2800.game.entities.Entity.DisappearType)">setDisappearAfterAnimation</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setDisappearAfterAnimation</span>&#8203;(<span class="arguments">float&nbsp;animationTime,
+<a href="Entity.DisappearType.html" title="enum in com.deco2800.game.entities">Entity.DisappearType</a>&nbsp;disappearType)</span></div>
 <div class="block">Set disappear to true. These variables play a role in removeAfterAnimation() and update().</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -479,9 +530,28 @@ float&nbsp;y)</code></th>
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="setDisappearAfterParticle(float,com.deco2800.game.entities.Entity.DisappearType)">setDisappearAfterParticle</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setDisappearAfterParticle</span>&#8203;(<span class="arguments">float&nbsp;particleTime,
+<a href="Entity.DisappearType.html" title="enum in com.deco2800.game.entities">Entity.DisappearType</a>&nbsp;disappearType)</span></div>
+<div class="block">Set disappear to true. These variables play a role in removeAfterParticle() and update().</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>particleTime</code> - Set how long the animation will disappear after playing</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="setRemoveTexture()">setRemoveTexture</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setRemoveTexture</span>()</div>
 <div class="block">Set removeTexture to true. The code that works subsequently is in update.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setRemoveCollision()">setRemoveCollision</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setRemoveCollision</span>()</div>
+<div class="block">Set removeCollision to true. The code that works subsequently is in update.</div>
 </section>
 </li>
 <li class="blockList">
@@ -708,6 +778,13 @@ float&nbsp;y)</span></div>
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="removeAfterParticle()">removeAfterParticle</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">removeAfterParticle</span>()</div>
+<div class="block">Let the obstacles disappear after playing the particle for particleTime second. Is called by update().</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="create()">create</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">create</span>()</div>
 <div class="block">Create the entity and start running. This is called when the entity is registered in the world,
@@ -815,7 +892,7 @@ float&nbsp;y)</span></div>
 <div>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
