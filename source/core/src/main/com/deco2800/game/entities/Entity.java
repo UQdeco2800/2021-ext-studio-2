@@ -3,11 +3,16 @@ package com.deco2800.game.entities;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
+import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.events.EventHandler;
+import com.deco2800.game.physics.components.ColliderComponent;
+import com.deco2800.game.physics.components.HitboxComponent;
+import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.ParticleRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
@@ -49,6 +54,7 @@ public class Entity {
     }
     private DisappearType disappearType = null;
     private boolean removeTexture = false;
+    private boolean removeCollision = false;
     private boolean dispose = false;
     private float animationTime = 0;
     private float particleTime = 0;
@@ -132,6 +138,12 @@ public class Entity {
     public void setRemoveTexture() {
         this.removeTexture = true;
         logger.debug("Setting removeTexture={} on entity {}", removeTexture, this);
+    }
+
+    public void setRemoveCollision() {
+        System.out.println("setRemoveCollision");
+        this.removeCollision = true;
+        logger.debug("Setting removeCollision={} on entity {}", removeCollision, this);
     }
 
     /**
@@ -438,10 +450,20 @@ public class Entity {
                 if (component.getClass().equals(TextureRenderComponent.class)) {
                     logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
                     component.dispose();
+                    removeTexture=false;
+                }
+            }
+
+            if (removeCollision) {
+                if (component.getClass().equals(HitboxComponent.class) || component.getClass().equals(ColliderComponent.class)) {
+                    logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
+                    component.dispose();
                 }
             }
             component.triggerUpdate();
         }
+        removeCollision = false;
+
         if (disappear) {
 
             if (disappearType == DisappearType.ANIMATION) {

@@ -50,10 +50,6 @@ public class ObstacleEventHandler extends Component {
     /**
      * Construct an ObstacleEventHandler and register the corresponding event according to the obstacleType.
      *
-<<<<<<< HEAD
-=======
-
->>>>>>> team5_itembar
      * @param obstacleType The types of obstacles.
      */
     public ObstacleEventHandler(ObstacleType obstacleType) {
@@ -127,12 +123,17 @@ public class ObstacleEventHandler extends Component {
 
         if (count == 0) { // Avoid an entity from repeatedly triggering an attack
             count++;
+
             particle.startEffect();
             logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacles");
             animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked = false;
+            if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
+                this.entity.setRemoveCollision();
+            }
+
         }
 
 
@@ -164,6 +165,9 @@ public class ObstacleEventHandler extends Component {
             animator.startAnimation("obstacle2");
             animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked2 = false;
+            if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
+                this.entity.setRemoveCollision();
+            }
         }
 
 
@@ -212,10 +216,6 @@ public class ObstacleEventHandler extends Component {
      * floating sound of the spacecraft and unlock the monster manual.
      *
      * @param me    self fixture
-<<<<<<< HEAD
-=======
-
->>>>>>> team5_itembar
      * @param other The fixture of the entity that started the collision
      */
     void spaceShipAttack(Fixture me, Fixture other) {
@@ -253,10 +253,6 @@ public class ObstacleEventHandler extends Component {
      * missile disappears.
      *
      * @param me    self fixture
-<<<<<<< HEAD
-=======
-
->>>>>>> team5_itembar
      * @param other The fixture of the entity that started the collision
      */
     void smallMissileAttack(Fixture me, Fixture other) {
@@ -280,10 +276,6 @@ public class ObstacleEventHandler extends Component {
      * Triggered when the character touches the entrance of a new map.
      *
      * @param me    self fixture
-<<<<<<< HEAD
-=======
-
->>>>>>> team5_itembar
      * @param other The fixture of the entity that started the collision
      */
     void portalEntrance(Fixture me, Fixture other) {
@@ -299,10 +291,6 @@ public class ObstacleEventHandler extends Component {
      * Triggered when the character encounters a new map exit.
      *
      * @param me    self fixture
-<<<<<<< HEAD
-=======
-
->>>>>>> team5_itembar
      * @param other The fixture of the entity that started the collision
      */
     void portalExport(Fixture me, Fixture other) {
@@ -347,10 +335,6 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for locked2
      *
-<<<<<<< HEAD
-=======
-
->>>>>>> team5_itembar
      * @return if the thorns is locked
      */
     public static boolean isLocked2() {
@@ -360,10 +344,6 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for locked3
      *
-<<<<<<< HEAD
-=======
-
->>>>>>> team5_itembar
      * @return if the meteorite is locked
      */
     public static boolean isLocked3() {
@@ -373,10 +353,6 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for locked_ufo
      *
-<<<<<<< HEAD
-=======
-
->>>>>>> team5_itembar
      * @return if the spaceship is locked
      */
     public static boolean isLocked_ufo() {
@@ -386,10 +362,6 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for spaceshipAttack
      *
-<<<<<<< HEAD
-=======
-
->>>>>>> team5_itembar
      * @return if the spaceshipAttack is attack
      */
     public static boolean isSpaceshipAttack() {
@@ -399,10 +371,6 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for count
      *
-<<<<<<< HEAD
-=======
-
->>>>>>> team5_itembar
      * @return how many times the event was triggered
      */
     public int getCount() {

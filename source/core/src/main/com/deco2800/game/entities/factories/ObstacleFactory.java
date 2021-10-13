@@ -62,7 +62,6 @@ public class ObstacleFactory {
                 new ParticleRenderComponent("images/particle/test.party");
 
 
-//       particle.startEffect();
         obstacle
                 .addComponent(particle)
                 .addComponent(new TextureRenderComponent("images/obstacle_1_new.png"))
@@ -120,38 +119,21 @@ public class ObstacleFactory {
      * @return the thorns obstacle entity
      */
     public static Entity createWeapon() {
-//        BaseEntityConfig config = configs.thorn;
-//        Entity weapon = createBaseObstacle(target, BodyType.DynamicBody, "weapon");
 
-//        AnimationRenderComponent animator =
-//                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService()
-//                                .getAsset("images/obstacle_2.atlas", TextureAtlas.class));
-//        animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
         ParticleRenderComponent particle =
                 new ParticleRenderComponent("images/particle/weapon.party");
 
-
-
         Entity weapon = new Entity("weapon")
                 .addComponent(new PhysicsComponent())
-//                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.PLAYERCOLLIDER))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.WEAPON))
-//                .addComponent(new TextureRenderComponent("images/Items/3.png"))
-//                .addComponent(animator)
-//                .addComponent(new CombatStatsComponent(0, 0))
-//                .addComponent(new TouchAttackComponent(PhysicsLayer.OBSTACLE, 0f))
                 .addComponent(particle)
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Weapon));
 
-//        weapon.getComponent(TextureRenderComponent.class).scaleEntity();
-//        PhysicsUtils.setScaledCollider(obstacle, 0.2f, 0.3f);
         weapon.setScale(0.5f, 0.5f);
         weapon.setZIndex(1);
 //        logger.debug("Create a Thorns Obstacle");
         particle.startEffect();
         weapon.setDisappearAfterParticle(2f, Entity.DisappearType.PARTICLE);
-
 
         return weapon;
     }
