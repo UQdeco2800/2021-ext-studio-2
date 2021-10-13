@@ -10,6 +10,7 @@ import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.items.InventorySystem;
 import com.deco2800.game.components.items.ItemBar;
+import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
 import com.deco2800.game.files.MPCConfig;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
  * Forest area for the demo game with trees, a player, and some enemies.
  */
 public class ForestGameArea extends GameArea {
+    private boolean wake;
 
 
 //    private void spawnRocks() {
@@ -45,12 +47,13 @@ public class ForestGameArea extends GameArea {
 
     /**
      * Generate line 5 rocks in the new map
+     *
      * @param xValue horizontal start point
      */
     public void spawnRocksone(int xValue) {
 
         for (int i = 0; i < 5; i++) {
-            GridPoint2 pos = new GridPoint2(xValue + 2 +i, 50);
+            GridPoint2 pos = new GridPoint2(xValue + 2 + i, 50);
             Entity rock = ObstacleFactory.createRock();
             spawnEntityAt(rock, pos, true, false);
         }
@@ -58,38 +61,40 @@ public class ForestGameArea extends GameArea {
 
     /**
      * Generate rocks pyramid
-     *     N
-     *    NN
-     *   NNN
+     * N
+     * NN
+     * NNN
+     *
      * @param xValue horizontal start point
      */
     public void spawnRockstwo(int xValue) {
 
-            GridPoint2 Pos = new GridPoint2 ( xValue + 10, 50);
-            Entity rock = ObstacleFactory.createRock();
-            spawnEntityAt(rock, Pos, true, false);
-            GridPoint2 PosTwo = new GridPoint2 ( xValue + 11, 51);
-            Entity rockTwo = ObstacleFactory.createRock();
-            spawnEntityAt(rockTwo, PosTwo, true, false);
-            GridPoint2 PosThree = new GridPoint2 ( xValue + 12, 52);
-            Entity rockThree = ObstacleFactory.createRock();
-            spawnEntityAt(rockThree, PosThree, true, false);
-            GridPoint2 PosFour = new GridPoint2 ( xValue + 12, 51);
-            Entity rockFour = ObstacleFactory.createRock();
-            spawnEntityAt(rockFour, PosFour, true, false);
-            GridPoint2 PosFive = new GridPoint2 ( xValue + 12, 50);
-            Entity rockFive = ObstacleFactory.createRock();
-            spawnEntityAt(rockFive, PosFive, true, false);
-            GridPoint2 PosSix = new GridPoint2 ( xValue + 11, 50);
-            Entity rockSix = ObstacleFactory.createRock();
-            spawnEntityAt(rockSix, PosSix, true, false);
+        GridPoint2 Pos = new GridPoint2(xValue + 10, 50);
+        Entity rock = ObstacleFactory.createRock();
+        spawnEntityAt(rock, Pos, true, false);
+        GridPoint2 PosTwo = new GridPoint2(xValue + 11, 51);
+        Entity rockTwo = ObstacleFactory.createRock();
+        spawnEntityAt(rockTwo, PosTwo, true, false);
+        GridPoint2 PosThree = new GridPoint2(xValue + 12, 52);
+        Entity rockThree = ObstacleFactory.createRock();
+        spawnEntityAt(rockThree, PosThree, true, false);
+        GridPoint2 PosFour = new GridPoint2(xValue + 12, 51);
+        Entity rockFour = ObstacleFactory.createRock();
+        spawnEntityAt(rockFour, PosFour, true, false);
+        GridPoint2 PosFive = new GridPoint2(xValue + 12, 50);
+        Entity rockFive = ObstacleFactory.createRock();
+        spawnEntityAt(rockFive, PosFive, true, false);
+        GridPoint2 PosSix = new GridPoint2(xValue + 11, 50);
+        Entity rockSix = ObstacleFactory.createRock();
+        spawnEntityAt(rockSix, PosSix, true, false);
     }
 
     /**
      * Generate opposite rocks pyramid
-     *    N
-     *    NN
-     *    NNN
+     * N
+     * NN
+     * NNN
+     *
      * @param xValue horizontal start point
      */
     public void spawnRocksthree(int xValue) {
@@ -119,6 +124,7 @@ public class ForestGameArea extends GameArea {
 
     /**
      * Generate 5 rocks column from the ground up
+     *
      * @param xValue horizontal start point
      */
     public void spawnRocksfour(int xValue) {
@@ -134,6 +140,7 @@ public class ForestGameArea extends GameArea {
 
     /**
      * Generate 5 rocks column from the sky down
+     *
      * @param xValue horizontal start point
      */
 
@@ -150,10 +157,11 @@ public class ForestGameArea extends GameArea {
 
     /**
      * Genrate large rock pyramid
-     *    N
-     *    NN
-     *    NNN
-     *    NNNN
+     * N
+     * NN
+     * NNN
+     * NNNN
+     *
      * @param xValue horizontal start point
      */
     public void spawnRockssix(int xValue) {
@@ -211,6 +219,7 @@ public class ForestGameArea extends GameArea {
 
     /**
      * Generate 5 wood randomly in the 52f and 54f height and given horizontal start point
+     *
      * @param xValue horizontal start point
      */
     public void spawnWoodsRandomly(int xValue) {
@@ -438,6 +447,7 @@ public class ForestGameArea extends GameArea {
 
     /**
      * Show background in the regular map according to the given counter
+     *
      * @param counter change the horizontal start point of the background
      */
     public void showScrollingBackground(int counter) {
@@ -450,7 +460,8 @@ public class ForestGameArea extends GameArea {
 
     /**
      * Show background in the new map according to the given horizontal and vertical start point
-     * @param counter change the horizontal start point
+     *
+     * @param counter  change the horizontal start point
      * @param vertical change the vertical start point
      */
     public void showNewMapScrollingBackground(int counter, float vertical) {
@@ -470,6 +481,7 @@ public class ForestGameArea extends GameArea {
 
     /**
      * Generate the first set of terrain
+     *
      * @param terrainType change the type of the terrain
      */
     public void spawnTerrain(TerrainType terrainType) {
@@ -514,7 +526,7 @@ public class ForestGameArea extends GameArea {
     /**
      * Generate the continuous terrain after the first set of terrain
      *
-     * @param xValue control the position of the terrain
+     * @param xValue      control the position of the terrain
      * @param terrainType change the type of the terrain
      */
     public void spawnTerrainRandomly(int xValue, TerrainType terrainType) {
@@ -810,6 +822,7 @@ public class ForestGameArea extends GameArea {
 
     /**
      * Generate another set of gold from the given horizontal start point in the new map
+     *
      * @param x horizontal start point
      */
     public void spawnGoldNewMapRandomly(int x) {
@@ -829,9 +842,9 @@ public class ForestGameArea extends GameArea {
 
     private void spawnWeapon(Vector2 position) {
         Entity weapon = ObstacleFactory.createWeapon();
-
-        weapon.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(10, 0),
-                position, true);
+        float x = player.getComponent(PlayerActions.class).getWalkDirection().x;
+        weapon.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(3 * x + 10, 0),
+                position, wake);
         weapon.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0.5f);
         weapon.getComponent(PhysicsComponent.class).getBody().setGravityScale(0f);
 

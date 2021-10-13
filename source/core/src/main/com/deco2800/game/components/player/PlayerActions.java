@@ -41,7 +41,9 @@ public class PlayerActions extends Component {
     entity.getEvents().addListener("crouch", this::crouch);
   }
 
-
+  public Vector2 getWalkDirection() {
+    return walkDirection;
+  }
 
   public void changeCurrentSpeed(Vector2 currentSpeed) {
     Body body = physicsComponent.getBody();
