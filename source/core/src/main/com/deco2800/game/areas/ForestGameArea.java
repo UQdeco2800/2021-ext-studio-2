@@ -181,6 +181,16 @@ public class ForestGameArea extends GameArea {
             Entity rockSix = ObstacleFactory.createRock();
             spawnEntityAt(rockSix, PosSix, true, false);
     }
+    public void spawnFireRocksthree(int xValue) {
+
+        GridPoint2 Pos = new GridPoint2(xValue -5, 53);
+        Entity rock = ObstacleFactory.createFirerock();
+        spawnEntityAt(rock, Pos, true, false);
+        GridPoint2 PosTwo = new GridPoint2(xValue -6, 53);
+        Entity rockTwo = ObstacleFactory.createFirerock();
+        spawnEntityAt(rockTwo, PosTwo, true, false);
+
+    }
 
     /**
      * Generate opposite rocks pyramid
