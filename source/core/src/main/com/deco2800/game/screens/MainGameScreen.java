@@ -337,6 +337,7 @@ public class MainGameScreen extends ScreenAdapter {
 
                     forestGameArea.spawnFireRocksone((int) (screenVector.x + 2));
                     forestGameArea.spawnFireRockstwo((int) (screenVector.x + 2));
+                    forestGameArea.spawnFireRocksthree((int) (screenVector.x + 2));
                     forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
  //                   forestGameArea.spawnRocksthree((int) (screenVector.x + 2));
 //                    forestGameArea.spawnRocksfour((int) (screenVector.x + 2));
@@ -368,6 +369,7 @@ public class MainGameScreen extends ScreenAdapter {
 
                     forestGameArea.spawnFireRocksone((int) (screenVector.x + 2));
                     forestGameArea.spawnFireRockstwo((int) (screenVector.x + 2));
+                    forestGameArea.spawnFireRocksthree((int) (screenVector.x + 2));
                     forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
  //                   forestGameArea.spawnRocksthree((int) (screenVector.x + 2));
 //                    forestGameArea.spawnRocksfour((int) (screenVector.x + 2));
