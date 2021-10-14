@@ -43,10 +43,34 @@ public class ForestGameArea extends GameArea {
 //        }
 //    }
 
+// nail
+
+//public void spawnNailsRandomly(int xValue) {
+ //   for (int i = 0; i < 5; i++) {
+//        GridPoint2 pos = new GridPoint2(xValue + 2 +i, 53);
+//        Entity rock = ObstacleFactory.createNail();
+//        spawnEntityAt(rock, pos, true, false);
+//    }
+//}
+
+    private void spawnNails() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < 5; i++) {
+            GridPoint2 randomPos = RandomUtils.randomX(52, minPos, maxPos);
+            Entity nail = ObstacleFactory.createNail();
+            spawnEntityAt(nail, randomPos, true, false);
+            GridPoint2 randomPosTwo = RandomUtils.randomX(54, minPos, maxPos);
+            Entity nailTwo = ObstacleFactory.createWood();
+            spawnEntityAt(nailTwo, randomPosTwo, true, false);
+        }
+    }
+
     /**
      * Generate line 5 rocks in the new map
      * @param xValue horizontal start point
-     */
+    */
     public void spawnRocksone(int xValue) {
 
         for (int i = 0; i < 5; i++) {
@@ -236,6 +260,8 @@ public class ForestGameArea extends GameArea {
     private static final float WALL_WIDTH = 0.1f;
     private ItemBar itembar;
     private static final String[] forestTextures = {
+            "images/firerock.jpg",
+            "images/nail.jpg",
             "images/box_boy_leaf.png",
             "images/images.jpg",
             "images/ghost_king.png",
@@ -392,7 +418,9 @@ public class ForestGameArea extends GameArea {
         spawnTerrain(TerrainType.ROCK_ROAD);
 
 //        spawnRocks();
-        spawnWoods();
+//         spawnWoods();
+        spawnNails();
+
 
         MPCConfig.updateValues();
 
