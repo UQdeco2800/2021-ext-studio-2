@@ -260,43 +260,43 @@ public class ForestGameArea extends GameArea {
      * @param xValue horizontal start point
      */
 
-    /*
-    public void spawnRockssix(int xValue) {
 
-        GridPoint2 Pos = new GridPoint2(xValue + 22, 53);
-        Entity rock = ObstacleFactory.createRock();
+    public void spawnFireRockstwo(int xValue) {
+
+        GridPoint2 Pos = new GridPoint2(xValue + 22, 50);
+        Entity rock = ObstacleFactory.createFirerock();
         spawnEntityAt(rock, Pos, true, false);
-        GridPoint2 PosTwo = new GridPoint2(xValue + 22, 52);
-        Entity rockTwo = ObstacleFactory.createRock();
+        GridPoint2 PosTwo = new GridPoint2(xValue + 23, 50);
+        Entity rockTwo = ObstacleFactory.createFirerock();
         spawnEntityAt(rockTwo, PosTwo, true, false);
-        GridPoint2 PosThree = new GridPoint2(xValue + 22, 51);
-        Entity rockThree = ObstacleFactory.createRock();
+        GridPoint2 PosThree = new GridPoint2(xValue + 23, 51);
+        Entity rockThree = ObstacleFactory.createFirerock();
         spawnEntityAt(rockThree, PosThree, true, false);
-        GridPoint2 PosFour = new GridPoint2(xValue + 22, 50);
-        Entity rockFour = ObstacleFactory.createRock();
+        GridPoint2 PosFour = new GridPoint2(xValue + 24, 50);
+        Entity rockFour = ObstacleFactory.createFirerock();
         spawnEntityAt(rockFour, PosFour, true, false);
-        GridPoint2 PosFive = new GridPoint2(xValue + 23, 52);
-        Entity rockFive = ObstacleFactory.createRock();
+        GridPoint2 PosFive = new GridPoint2(xValue + 24, 51);
+        Entity rockFive = ObstacleFactory.createFirerock();
         spawnEntityAt(rockFive, PosFive, true, false);
-        GridPoint2 PosSix = new GridPoint2(xValue + 23, 51);
-        Entity rockSix = ObstacleFactory.createRock();
+        GridPoint2 PosSix = new GridPoint2(xValue + 24, 52);
+        Entity rockSix = ObstacleFactory.createFirerock();
         spawnEntityAt(rockSix, PosSix, true, false);
-        GridPoint2 PosSeven = new GridPoint2(xValue + 23, 50);
-        Entity rockSeven = ObstacleFactory.createRock();
+        GridPoint2 PosSeven = new GridPoint2(xValue + 25, 50);
+        Entity rockSeven = ObstacleFactory.createFirerock();
         spawnEntityAt(rockSeven, PosSeven, true, false);
-        GridPoint2 PosEight = new GridPoint2(xValue + 24, 51);
-        Entity rockEight = ObstacleFactory.createRock();
+        GridPoint2 PosEight = new GridPoint2(xValue + 25, 51);
+        Entity rockEight = ObstacleFactory.createFirerock();
         spawnEntityAt(rockEight, PosEight, true, false);
-        GridPoint2 PosNine = new GridPoint2(xValue + 24, 50);
-        Entity rockNine = ObstacleFactory.createRock();
+        GridPoint2 PosNine = new GridPoint2(xValue + 25, 52);
+        Entity rockNine = ObstacleFactory.createFirerock();
         spawnEntityAt(rockNine, PosNine, true, false);
-        GridPoint2 PosTen = new GridPoint2(xValue + 25, 50);
-        Entity rockTen = ObstacleFactory.createRock();
+        GridPoint2 PosTen = new GridPoint2(xValue + 25, 53);
+        Entity rockTen = ObstacleFactory.createFirerock();
         spawnEntityAt(rockTen, PosTen, true, false);
 
 
     }
- */
+
 
     /**
      * Gennerate 5 wood randomly in the 52f and 54f height
