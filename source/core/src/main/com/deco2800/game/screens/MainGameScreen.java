@@ -232,10 +232,12 @@ public class MainGameScreen extends ScreenAdapter {
      */
     private void TransferPlayerByMap() {
         if (newMapStatus == NewMap.Start) {
+            DistanceService.setPreDistance(player.getPosition().x);//get the last map distance of player
             player.setPosition(0, 50);
             logger.info("New map start.");
             newMapStatus = NewMap.On;
         } else if (newMapStatus == NewMap.Finish) {
+            DistanceService.setPreDistance(player.getPosition().x);//get the last map distance of player
             player.setPosition(87, 3);
             logger.info("New map finish.");
             newMapStatus = NewMap.Off;
