@@ -146,7 +146,12 @@ extends <a href="../ui/UIComponent.html" title="class in com.deco2800.game.ui">U
 </thead>
 <tbody>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">BackgroundSelectionComponent</a></span>()</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String)">BackgroundSelectionComponent</a></span>&#8203;(java.lang.String&nbsp;screenName)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,java.lang.String)">BackgroundSelectionComponent</a></span>&#8203;(java.lang.String&nbsp;screenName,
+java.lang.String&nbsp;iconPosition)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -242,8 +247,28 @@ extends <a href="../ui/UIComponent.html" title="class in com.deco2800.game.ui">U
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="&lt;init&gt;()">BackgroundSelectionComponent</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">BackgroundSelectionComponent</span>()</div>
+<h3><a id="&lt;init&gt;(java.lang.String)">BackgroundSelectionComponent</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">BackgroundSelectionComponent</span>&#8203;(<span class="arguments">java.lang.String&nbsp;screenName)</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>screenName</code> - name of the screen
+                   The position of the icon defaults to the bottom right unless specified in the
+                   second argument of this contructor.</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="&lt;init&gt;(java.lang.String,java.lang.String)">BackgroundSelectionComponent</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">BackgroundSelectionComponent</span>&#8203;(<span class="arguments">java.lang.String&nbsp;screenName,
+java.lang.String&nbsp;iconPosition)</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>screenName</code> - name of the screen</dd>
+<dd><code>iconPosition</code> - Four positions are accepted: 'tl', 'tr', 'bl', 'br'.
+                     These are abbreviations for the four corners of the screen. Position if not specified
+                     defaults to the bottom right.</dd>
+</dl>
 </section>
 </li>
 </ul>
