@@ -1,0 +1,104 @@
+
+manualBackground.png
+size: 4096, 8192
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+manaulsBackground
+  rotate: false
+  xy: 2, 6494
+  size: 1921, 1080
+  orig: 1921, 1080
+  offset: 0, 0
+  index: 6
+manaulsBackground
+  rotate: false
+  xy: 2, 5412
+  size: 1921, 1080
+  orig: 1921, 1080
+  offset: 0, 0
+  index: 8
+manaulsBackground
+  rotate: false
+  xy: 1925, 6494
+  size: 1921, 1080
+  orig: 1921, 1080
+  offset: 0, 0
+  index: 2
+manaulsBackground
+  rotate: false
+  xy: 2, 4330
+  size: 1921, 1080
+  orig: 1921, 1080
+  offset: 0, 0
+  index: 4
+manaulsBackground
+  rotate: false
+  xy: 1925, 5412
+  size: 1921, 1080
+  orig: 1921, 1080
+  offset: 0, 0
+  index: 13
+manaulsBackground
+  rotate: false
+  xy: 2, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 10
+manaulsBackground
+  rotate: false
+  xy: 1925, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 3
+manaulsBackground
+  rotate: false
+  xy: 2, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 12
+manaulsBackground
+  rotate: false
+  xy: 1924, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 5
+manaulsBackground
+  rotate: false
+  xy: 2, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 14
+manaulsBackground
+  rotate: false
+  xy: 1924, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 11
+manaulsBackground
+  rotate: false
+  xy: 2, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 7
+manaulsBackground
+  rotate: false
+  xy: 1924, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 9
+manaulsBackground
+  rotate: false
+  xy: 1924, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 1
