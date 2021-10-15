@@ -13,29 +13,28 @@ import com.deco2800.game.ui.UIComponent;
 public class BackgroundSelectionComponent extends UIComponent {
     private final String[] textures = {"images/settings/musicSelectionDialog.png",
             "images/settings/musicSelectionButton.png", "images/settings/radioButtonOn.png", "images/settings/radioButtonOff.png"};
-    private Table musicSelectionTable;
-    private Dialog dialog;
     private final String screenName;
     private final String iconPosition;
+    private Table musicSelectionTable;
+    private Dialog dialog;
 
     /**
      * @param screenName name of the screen
-     * The position of the icon defaults to the bottom right unless specified in the
-     * second argument of this contructor.
+     *                   The position of the icon defaults to the bottom right unless specified in the
+     *                   second argument of this contructor.
      */
-    public BackgroundSelectionComponent(String screenName){
+    public BackgroundSelectionComponent(String screenName) {
         this.screenName = screenName;
         iconPosition = "tr";
     }
 
     /**
-     * @param screenName name of the screen
+     * @param screenName   name of the screen
      * @param iconPosition Four positions are accepted: 'tl', 'tr', 'bl', 'br'.
-     * These are abbreviations for the four corners of the screen. Position if not specified
-     * defaults to the bottom right.
-     *
+     *                     These are abbreviations for the four corners of the screen. Position if not specified
+     *                     defaults to the bottom right.
      */
-    public BackgroundSelectionComponent(String screenName, String iconPosition){
+    public BackgroundSelectionComponent(String screenName, String iconPosition) {
         this.screenName = screenName;
         this.iconPosition = iconPosition;
     }
@@ -67,7 +66,7 @@ public class BackgroundSelectionComponent extends UIComponent {
         musicSelectionTable = new Table();
         musicSelectionTable.setFillParent(true);
 
-        switch (iconPosition){
+        switch (iconPosition) {
             case "tl":
                 musicSelectionTable.top().left();
                 break;
@@ -105,14 +104,14 @@ public class BackgroundSelectionComponent extends UIComponent {
         dialog.show(stage);
     }
 
-    private void renderTracks(){
+    private void renderTracks() {
         Label heading = new Label("Select background music for " + screenName, skin);
         heading.setFontScale(1.5f);
         dialog.getContentTable().add(heading).expandX().row();
 
         String chosenTrack = BackgroundMusic.getSelectedMusic(screenName);
         for (String trackPath : BackgroundMusic.getAllMusicByScreen(screenName)) {
-            if(trackPath.equals(chosenTrack)){
+            if (trackPath.equals(chosenTrack)) {
                 dialog.getContentTable().add(getTrackTable(trackPath, true)).padTop(30).row();
             } else {
                 dialog.getContentTable().add(getTrackTable(trackPath, false)).padTop(30).row();
@@ -120,7 +119,7 @@ public class BackgroundSelectionComponent extends UIComponent {
         }
     }
 
-    private String getSongName(String trackPath){
+    private String getSongName(String trackPath) {
         return trackPath.replace("sounds/customBgm/", "").trim();
     }
 
@@ -191,10 +190,5 @@ public class BackgroundSelectionComponent extends UIComponent {
     public void dispose() {
         super.dispose();
         musicSelectionTable.clear();
-        unloadAssets();
-    }
-
-    private void unloadAssets() {
-        ServiceLocator.getResourceService().unloadAssets(textures);
     }
 }

@@ -113,9 +113,9 @@ public class AchievementsScreen extends ScreenAdapter {
 
         ui = new Entity();
         ui.addComponent(new AchievementRecordsDisplay(game, bestAchievements))
+                .addComponent(new ChapterDisplay())
                 .addComponent(new BackgroundSelectionComponent("Achievements", "br"))
                 .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("Achievements"), 0.5f))
-                .addComponent(new ChapterDisplay())
                 .addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
     }
