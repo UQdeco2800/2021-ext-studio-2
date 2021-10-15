@@ -11,7 +11,7 @@ import com.deco2800.game.services.ServiceLocator;
  */
 public class BackgroundSoundComponent extends Component {
 
-    private final String backgroundMusic;
+    private String backgroundMusic;
     private final float volume;
     private final boolean looping;
 
@@ -77,6 +77,14 @@ public class BackgroundSoundComponent extends Component {
     public void create() {
         super.create();
         playSound();
+
+        entity.getEvents().addListener("changeSong", (String newMusic) -> {
+            stopSound();
+            unloadSound();
+            backgroundMusic = newMusic;
+            loadSound();
+            playSound();
+        });
     }
 
     /**

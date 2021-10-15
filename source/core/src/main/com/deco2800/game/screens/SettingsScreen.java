@@ -3,11 +3,13 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.BackgroundSelectionComponent;
 import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.settingsmenu.SettingsMenuDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.files.BackgroundMusic;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
@@ -72,7 +74,8 @@ public class SettingsScreen extends ScreenAdapter {
     Stage stage = ServiceLocator.getRenderService().getStage();
     ui = new Entity();
     ui.addComponent(new SettingsMenuDisplay(game)).addComponent(new InputDecorator(stage, 10))
-            .addComponent(new BackgroundSoundComponent("sounds/mainmenu_bgm.mp3", 0.5f));
+            .addComponent(new BackgroundSelectionComponent("Settings"))
+            .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("Settings"), 0.5f));
     ServiceLocator.getEntityService().register(ui);
   }
 }

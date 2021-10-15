@@ -3,12 +3,14 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.BackgroundSelectionComponent;
 import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.obstacle.MonsterDetails;
 import com.deco2800.game.components.obstacle.MonsterDispay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.files.BackgroundMusic;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
@@ -78,7 +80,8 @@ public class MonsterMenuScreen extends ScreenAdapter {
         monsterDispay = new MonsterDispay(game);
         ui.addComponent(monsterDispay).addComponent(new InputDecorator(stage, 10))
                 .addComponent(new MonsterDetails())
-                .addComponent(new BackgroundSoundComponent("sounds/mainmenu_bgm.mp3", 0.5f));
+                .addComponent(new BackgroundSelectionComponent("MonsterMenu"))
+                .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("MonsterMenu"), 0.5f));
         ServiceLocator.getEntityService().register(ui);
     }
 
