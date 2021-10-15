@@ -33,7 +33,6 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
     private Entity UIEntity;
 
 
-
     public UnlockedAttiresScreen(GdxGame game) {
         this.game = game;
 

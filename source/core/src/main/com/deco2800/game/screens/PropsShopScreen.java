@@ -28,11 +28,11 @@ import org.slf4j.LoggerFactory;
  */
 public class PropsShopScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-    private final Renderer renderer;
-    private static final String[] mainGameTextures = {"images/heart.png","images/Items/props/add_food.png","images/Items/props/add_health.png","images/Items/props/add_water.png","images/Items/props/shield.png","images/achievements/crossButton.png","images/Items/props/background_image_prop.png"};
+    private static final String[] mainGameTextures = {"images/heart.png", "images/Items/props/add_food.png", "images/Items/props/add_health.png", "images/Items/props/add_water.png", "images/Items/props/shield.png", "images/achievements/crossButton.png", "images/Items/props/background_image_prop.png"};
     private static final String[] itemTextures = PropStoreFactory.getPropTextures();
+    private final Renderer renderer;
 
-    public PropsShopScreen(GdxGame game){
+    public PropsShopScreen(GdxGame game) {
         logger.debug("drawing props shop ui");
         ServiceLocator.registerInputService(new InputService());
         ServiceLocator.registerResourceService(new ResourceService());
@@ -49,7 +49,7 @@ public class PropsShopScreen extends ScreenAdapter {
         ui.addComponent(new PropStoreGoldDisplay());
         ui.addComponent(propStoreDisplay).addComponent(new InputDecorator(stage, 10));
         ui.addComponent(new BackgroundSelectionComponent("PropsShop", "br"))
-          .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("PropsShop"), 0.5f));
+                .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("PropsShop"), 0.5f));
         ServiceLocator.getEntityService().register(ui);
 
     }
