@@ -72,6 +72,10 @@ public class ParticleRenderComponent extends RenderComponent{
         return this.particlePlayTime;
     }
 
-
+    @Override
+    public void dispose() {
+        pe.dispose();
+        super.dispose();
+    }
 
 }

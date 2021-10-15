@@ -59,7 +59,7 @@ public class ObstacleFactory {
         animator.addAnimation("obstacles", 0.2f, Animation.PlayMode.LOOP);
 
         ParticleRenderComponent particle =
-                new ParticleRenderComponent("images/particle/test.party");
+                new ParticleRenderComponent("images/particle/plant2.party");
 
         obstacle
                 .addComponent(particle)
@@ -95,7 +95,7 @@ public class ObstacleFactory {
         animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
 
         ParticleRenderComponent particle =
-                new ParticleRenderComponent("images/particle/thron.party");
+                new ParticleRenderComponent("images/particle/thron2.party");
 
 
         obstacle
@@ -168,16 +168,19 @@ public class ObstacleFactory {
      */
     public static Entity createMeteorite(Entity target, float size, MeteoriteType meteoriteType) {
         BaseEntityConfig config = null;
-
+        ParticleRenderComponent particle = null;
         switch (meteoriteType) {
             case BigMeteorite:
                 config = configs.bigMeteorite;
+                particle = new ParticleRenderComponent("images/particle/stoneBig.party");
                 break;
             case MiddleMeteorite:
                 config = configs.middleMeteorite;
+                particle = new ParticleRenderComponent("images/particle/stoneMid.party");
                 break;
             case SmallMeteorite:
                 config = configs.smallMeteorite;
+                particle = new ParticleRenderComponent("images/particle/stoneSmall.party");
                 break;
             default:
                 logger.error("Don't have this meteorite type");
@@ -190,6 +193,8 @@ public class ObstacleFactory {
 
         animator.addAnimation("stone1", 0.08f, Animation.PlayMode.LOOP);
 
+
+
         Entity meteorite =
                 new Entity("Meteorite")
                         .addComponent(new PhysicsComponent())
@@ -199,7 +204,9 @@ public class ObstacleFactory {
                         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                         .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
                         .addComponent(animator)
-                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Meteorite));
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Meteorite))
+                        .addComponent(particle);
+
         meteorite.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(meteorite, 1f, 1f);
         meteorite.setScale(size, size);
@@ -222,15 +229,20 @@ public class ObstacleFactory {
                                 .getAsset("images/portal.atlas", TextureAtlas.class));
         animator.addAnimation("portal_1", 0.2f, Animation.PlayMode.LOOP);
 
+        ParticleRenderComponent particle =
+                new ParticleRenderComponent("images/particle/portal.party");
+
         Entity portal =
                 new Entity("Portal")
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(animator)
-                        .addComponent(new ObstacleEventHandler(type));
+                        .addComponent(new ObstacleEventHandler(type))
+                        .addComponent(particle);
 
         PhysicsUtils.setScaledCollider(portal, 2f, 4f);
         portal.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        particle.startEffect();
         animator.startAnimation("portal_1");
         portal.setScale(2, 4);
 

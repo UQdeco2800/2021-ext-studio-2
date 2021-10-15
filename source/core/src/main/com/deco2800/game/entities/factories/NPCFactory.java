@@ -165,6 +165,9 @@ public class NPCFactory {
         animator.addAnimation("missile1", 0.2f, Animation.PlayMode.LOOP);
         animator.addAnimation("bomb", 0.1f, Animation.PlayMode.LOOP);
 
+        ParticleRenderComponent particle =
+                new ParticleRenderComponent("images/particle/missile.party");
+
         missile
                 .addComponent(animator)
                 .addComponent(new PhysicsComponent())
@@ -174,7 +177,8 @@ public class NPCFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SmallMissile))
                 .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.SmallMissile,
-                        "sounds/missile_explosion.mp3"));
+                        "sounds/missile_explosion.mp3"))
+                .addComponent(particle);
 
         missile.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.DynamicBody);
 

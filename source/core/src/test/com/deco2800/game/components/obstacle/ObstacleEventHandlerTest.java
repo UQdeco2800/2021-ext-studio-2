@@ -48,6 +48,9 @@ class ObstacleEventHandlerTest {
         meteorite.addComponent(animator);
         when(animator.getEntity()).thenReturn(meteorite);
 
+        ParticleRenderComponent particleRenderComponent = mock(ParticleRenderComponent.class);
+        meteorite.addComponent(particleRenderComponent);
+
         obstacle.create();
         meteorite.create();
 
@@ -57,6 +60,7 @@ class ObstacleEventHandlerTest {
 
         assertEquals(true,meteorite.isRemoveTexture());
         verify(animator).startAnimation("stone1");
+        verify(particleRenderComponent).startEffect();
         assertEquals(true, meteorite.isDisappear());
         assertEquals(false, meteorite.getComponent(ObstacleEventHandler.class).isLocked3());
     }
@@ -84,6 +88,7 @@ class ObstacleEventHandlerTest {
 
         assertEquals(true,thorns.isRemoveTexture());
         verify(animator).startAnimation("obstacle2");
+        verify(particleRenderComponent).startEffect();
         assertEquals(true, thorns.isDisappear());
         assertEquals(false, thorns.getComponent(ObstacleEventHandler.class).isLocked2());
     }
@@ -111,6 +116,7 @@ class ObstacleEventHandlerTest {
 
         assertEquals(true,plants.isRemoveTexture());
         verify(animator).startAnimation("obstacles");
+        verify(particleRenderComponent).startEffect();
         assertEquals(true, plants.isDisappear());
         assertEquals(false, plants.getComponent(ObstacleEventHandler.class).isLocked());
     }
@@ -184,6 +190,9 @@ class ObstacleEventHandlerTest {
         missile.addComponent(animator);
         when(animator.getEntity()).thenReturn(missile);
 
+        ParticleRenderComponent particleRenderComponent = mock(ParticleRenderComponent.class);
+        missile.addComponent(particleRenderComponent);
+
         player.create();
         missile.create();
 
@@ -192,6 +201,7 @@ class ObstacleEventHandlerTest {
         missile.getEvents().trigger("collisionStart", missileFixture, obstacleFixture);
 
         verify(animator).startAnimation("bomb");
+        verify(particleRenderComponent).startEffect();
         assertEquals(true, missile.isDisappear());
 
     }
