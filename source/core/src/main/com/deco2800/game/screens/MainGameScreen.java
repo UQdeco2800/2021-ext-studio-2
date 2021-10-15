@@ -237,7 +237,7 @@ public class MainGameScreen extends ScreenAdapter {
             logger.info("New map start.");
             newMapStatus = NewMap.On;
         } else if (newMapStatus == NewMap.Finish) {
-            DistanceService.setPreDistance(player.getPosition().x);//get the last map distance of player
+            DistanceService.setPreDistance(player.getPosition().x - 87);//get the last map distance of player
             player.setPosition(87, 3);
             logger.info("New map finish.");
             newMapStatus = NewMap.Off;
