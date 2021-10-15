@@ -3,12 +3,13 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.BackgroundSelectionComponent;
 import com.deco2800.game.components.BackgroundSoundComponent;
-import com.deco2800.game.components.buff.BuffDisplay;
 import com.deco2800.game.components.buff.InstructionsDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.files.BackgroundMusic;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
@@ -21,12 +22,13 @@ import org.slf4j.LoggerFactory;
 
 public class InstructionsScreen extends ScreenAdapter {
 
-    private InstructionsDisplay instructionsDisplay;
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-    private Renderer renderer;
     private static final String[] InstructionTextures =
             {"images/TutorialScreen1.png"};
-    private Entity ui;
+    private final InstructionsDisplay instructionsDisplay;
+    private final Renderer renderer;
+    private final Entity ui;
+
     public InstructionsScreen(GdxGame game) {
         ui = new Entity();
         instructionsDisplay = new InstructionsDisplay(game);
@@ -38,11 +40,16 @@ public class InstructionsScreen extends ScreenAdapter {
         renderer = RenderFactory.createRenderer();
         renderer.getCamera().getEntity().setPosition(2f, 1f);
         Stage stage = ServiceLocator.getRenderService().getStage();
-        ui.addComponent(instructionsDisplay).addComponent(new InputDecorator(stage, 10))
-                .addComponent(new BackgroundSoundComponent("sounds/mainmenu_bgm.mp3", 0.5f));
+        ui
+                .addComponent(instructionsDisplay)
+                .addComponent(new BackgroundSelectionComponent("Instructions", "br"))
+                .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("Instructions"), 0.5f))
+                .addComponent(new InputDecorator(stage, 10));
+
         loadAssets();
         ServiceLocator.getEntityService().register(ui);
     }
+
     private void loadAssets() {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(InstructionTextures);
@@ -66,6 +73,7 @@ public class InstructionsScreen extends ScreenAdapter {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(InstructionTextures);
     }
+
     @Override
     public void dispose() {
         renderer.dispose();

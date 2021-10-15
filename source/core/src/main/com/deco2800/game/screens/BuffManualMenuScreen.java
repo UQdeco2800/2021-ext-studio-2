@@ -3,13 +3,13 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.BackgroundSelectionComponent;
 import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.buff.BuffDisplay;
-import com.deco2800.game.components.obstacle.MonsterDetails;
-import com.deco2800.game.components.obstacle.MonsterDispay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.files.BackgroundMusic;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
@@ -21,8 +21,6 @@ import org.slf4j.LoggerFactory;
 
 public class BuffManualMenuScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-    private final Renderer renderer;
-    private final BuffDisplay buffDisplay ;
     private static final String[] buffTextures =
             {"buff-debuff-manual/manual-box.png",
                     "buff-debuff-manual/manual-backgorund.png",
@@ -37,7 +35,9 @@ public class BuffManualMenuScreen extends ScreenAdapter {
                     "buff-debuff-manual/poisoning1.png",
                     "buff-debuff-manual/recovery.png",
             };
-    private Entity ui;
+    private final Renderer renderer;
+    private final BuffDisplay buffDisplay;
+    private final Entity ui;
 
     public BuffManualMenuScreen(GdxGame game) {
         logger.debug("drawing monster menu ui");
@@ -52,7 +52,8 @@ public class BuffManualMenuScreen extends ScreenAdapter {
         ui = new Entity();
         buffDisplay = new BuffDisplay(game);
         ui.addComponent(buffDisplay).addComponent(new InputDecorator(stage, 10))
-                .addComponent(new BackgroundSoundComponent("sounds/mainmenu_bgm.mp3", 0.5f));
+                .addComponent(new BackgroundSelectionComponent("BuffManual"))
+                .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("BuffManual"), 0.5f));
         ServiceLocator.getEntityService().register(ui);
     }
 
@@ -79,6 +80,7 @@ public class BuffManualMenuScreen extends ScreenAdapter {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(buffTextures);
     }
+
     @Override
     public void dispose() {
         renderer.dispose();

@@ -1,31 +1,30 @@
 package com.deco2800.game.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.BackgroundSelectionComponent;
 import com.deco2800.game.components.BackgroundSoundComponent;
+import com.deco2800.game.components.gameover.GameOverDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
+import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.files.BackgroundMusic;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.ResourceService;
+import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.deco2800.game.GdxGame;
-import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.components.gameover.GameOverDisplay;
 
 public class GameOverScreen extends ScreenAdapter {
-
-    private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameOverScreen.class);
+    private static final String[] gameOverTextures = {"images/gameOver.png", "images/background.png"};
     private final Renderer renderer;
     private final GameOverDisplay gomd;
-    private static final String[] gameOverTextures = {"images/gameOver.png", "images/background.png"};
-    private Entity ui;
+    private final Entity ui;
 
     public GameOverScreen(GdxGame game) {
         logger.debug("drawing game over ui");
@@ -39,14 +38,16 @@ public class GameOverScreen extends ScreenAdapter {
         ui = new Entity();
         loadAssets();
         gomd = new GameOverDisplay(game);
-        ui.addComponent(gomd).addComponent(new InputDecorator(stage, 10))
-                .addComponent(new BackgroundSoundComponent("sounds/GameOver_bgm_final.mp3", 0.5f));
+        ui.addComponent(new BackgroundSelectionComponent("GameOver"))
+                .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("GameOver"), 0.5f))
+                .addComponent(gomd).addComponent(new InputDecorator(stage, 10));
+
         ServiceLocator.getEntityService().register(ui);
 
 
     }
 
-    public void setPoints(double points){
+    public void setPoints(double points) {
         this.gomd.setPoints(points);
     }
 
