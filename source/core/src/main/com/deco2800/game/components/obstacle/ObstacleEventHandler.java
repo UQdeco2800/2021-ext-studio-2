@@ -273,7 +273,7 @@ public class ObstacleEventHandler extends Component {
         entity.getEvents().trigger("missileSound");
         animator.startAnimation("bomb");
         particle.startEffect();
-        animator.getEntity().setParticleTime(1.0f);
+        animator.getEntity().setParticleTime(1f);
         animator.getEntity().setDisappearAfterAnimation(0.4f, Entity.DisappearType.ANIMATION);
         if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
             this.entity.setRemoveCollision();

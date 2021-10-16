@@ -184,9 +184,9 @@ public class NPCFactory {
 
         missile.setScale(3.5f, 3.5f);
 
-        Vector2 boundingBox = missile.getScale().cpy().scl(0.5f, 0.3f);
+        Vector2 boundingBox = missile.getScale().cpy().scl(0.5f, 0.2f);
         missile.getComponent(HitboxComponent.class).setAsBoxAligned(
-                boundingBox, PhysicsComponent.AlignX.LEFT, PhysicsComponent.AlignY.CENTER);
+                boundingBox, PhysicsComponent.AlignX.CENTER, PhysicsComponent.AlignY.CENTER);
         missile.setZIndex(1); // Generate missile above spaceship
 
         animator.startAnimation("missile1");
