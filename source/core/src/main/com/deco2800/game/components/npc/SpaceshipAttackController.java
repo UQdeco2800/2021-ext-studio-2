@@ -72,7 +72,7 @@ public class SpaceshipAttackController extends Component {
         super.create();
 
         // reset variables
-        spaceshipTime = 22f;
+        spaceshipTime = 22f; // the last 2s for spaceship disappear animation
         counterSmallMissile = 0;
     }
 
@@ -239,7 +239,10 @@ public class SpaceshipAttackController extends Component {
                 this.getEntity().getEvents().trigger("spawnSmallMissile", getRandomPosition(spaceshipPosition,
                         playerPosition, AttackType.Player, 2));
                 break;
-//            case
+            case 1290:
+                
+                break;
+
         }
     }
 
