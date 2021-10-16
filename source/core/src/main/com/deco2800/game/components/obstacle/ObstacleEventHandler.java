@@ -132,6 +132,7 @@ public class ObstacleEventHandler extends Component {
             animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked = false;
             if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
+                System.out.println("setRemoveCollision");
                 this.entity.setRemoveCollision();
             }
 

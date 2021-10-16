@@ -72,7 +72,7 @@ public class SpaceshipAttackController extends Component {
         super.create();
 
         // reset variables
-        spaceshipTime = 20f;
+        spaceshipTime = 22f;
         counterSmallMissile = 0;
     }
 
@@ -191,7 +191,7 @@ public class SpaceshipAttackController extends Component {
             // easy attack
         } else if (spaceshipTime <= 20 && (counterSmallMissile % 50 == 0 || counterSmallMissile % 30 == 0)) {
             easyAttack(counterSmallMissile, spaceshipPosition, playerPosition);
-        }
+        } 
         counterSmallMissile++;
     }
 
@@ -219,6 +219,7 @@ public class SpaceshipAttackController extends Component {
     }
 
     private void hardAttack(int counterSmallMissile, Vector2 spaceshipPosition, Vector2 playerPosition) {
+        System.out.println("counterSmallMissile = " + counterSmallMissile);
         switch (counterSmallMissile) {
             case 600:
             case 700:
@@ -238,6 +239,7 @@ public class SpaceshipAttackController extends Component {
                 this.getEntity().getEvents().trigger("spawnSmallMissile", getRandomPosition(spaceshipPosition,
                         playerPosition, AttackType.Player, 2));
                 break;
+//            case
         }
     }
 

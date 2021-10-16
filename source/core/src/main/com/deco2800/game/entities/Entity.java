@@ -459,23 +459,26 @@ public class Entity {
             return;
         }
 
-        for (Component component : createdComponents) {
+        Iterator<Component> i = createdComponents.iterator();
+        while (i.hasNext()) {
+            Component component = i.next();
             // When texture and animation are given an entity at the same time, the texture needs to disappear when the
             // animation is played to avoid the conflict between the texture and the animation.
             if (removeTexture) {
                 if (component.getClass().equals(TextureRenderComponent.class)) {
-                    createdComponents.removeValue(component, true);
-                    logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
                     component.dispose();
+                    i.remove();
+                    logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
                     removeTexture = false;
                 }
             }
 
             if (removeCollision) {
                 if (component.getClass().equals(HitboxComponent.class) || component.getClass().equals(ColliderComponent.class)) {
-                    createdComponents.removeValue(component, true);
-                    logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
                     component.dispose();
+                    i.remove();
+                    logger.info("Remove {} on entity{}", component.getClass().getSimpleName(), this);
+
                 }
             }
             component.triggerUpdate();
