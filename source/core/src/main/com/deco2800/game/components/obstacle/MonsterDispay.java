@@ -293,7 +293,7 @@ public class MonsterDispay extends UIComponent {
 
         //this table contains the button back to main menu
         buttonTable = new Table();
-        buttonTable.center().padLeft(1100).padTop(700);
+        buttonTable.bottom().left().padLeft(50).padBottom(50);
 
         buttonTable.setFillParent(true);
         buttonTable.add(mainMenuButton);

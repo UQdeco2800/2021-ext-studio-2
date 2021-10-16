@@ -125,7 +125,8 @@ public class NPCFactory {
                         ServiceLocator.getResourceService()
                                 .getAsset("images/spaceship.atlas", TextureAtlas.class));
 
-        animator.addAnimation("spaceship1", 0.2f, Animation.PlayMode.LOOP);
+        animator.addAnimation("spaceship", 0.2f, Animation.PlayMode.LOOP);
+        animator.addAnimation("spaceship_disappear", 2f, Animation.PlayMode.LOOP);
 
         spaceship
                 .addComponent(new PhysicsComponent())
@@ -140,7 +141,7 @@ public class NPCFactory {
 
 
         spaceship.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
-        animator.startAnimation("spaceship1");
+        animator.startAnimation("spaceship");
         spaceship.setScale(10f, 10f);
 
         logger.debug("Create a spaceship");

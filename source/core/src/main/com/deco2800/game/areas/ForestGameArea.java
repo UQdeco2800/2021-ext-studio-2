@@ -437,6 +437,7 @@ public class ForestGameArea extends GameArea {
             "images/obstacle_Meteorite.atlas",
             "images/mpc/mpcAnimation.atlas",
             "images/spaceship.atlas",
+            "images/spaceship_disappear.atlas",
 
             "images/food1.png",
             "images/water1.png",
