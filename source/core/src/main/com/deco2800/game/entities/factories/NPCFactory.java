@@ -26,6 +26,7 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.ParticleRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
@@ -92,13 +93,18 @@ public class NPCFactory {
 
         animator.addAnimation("1m", 0.2f, Animation.PlayMode.LOOP);
 
+        ParticleRenderComponent particle =
+                new ParticleRenderComponent("images/particle/monkey.party");
+
         monkey
                 .addComponent(animator)
                 .addComponent(aiComponent)
+                .addComponent(particle)
                 .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.FlyingMonkey,
                         "sounds/monster_roar.mp3"));
 
         animator.startAnimation("1m");
+        particle.startEffect();
         monkey.setScale(2.3f, 2.3f);
         logger.debug("Create a Flying Monkey");
         return monkey;
@@ -159,6 +165,9 @@ public class NPCFactory {
         animator.addAnimation("missile1", 0.2f, Animation.PlayMode.LOOP);
         animator.addAnimation("bomb", 0.1f, Animation.PlayMode.LOOP);
 
+        ParticleRenderComponent particle =
+                new ParticleRenderComponent("images/particle/missile.party");
+
         missile
                 .addComponent(animator)
                 .addComponent(new PhysicsComponent())
@@ -168,15 +177,16 @@ public class NPCFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SmallMissile))
                 .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.SmallMissile,
-                        "sounds/missile_explosion.mp3"));
+                        "sounds/missile_explosion.mp3"))
+                .addComponent(particle);
 
         missile.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.DynamicBody);
 
         missile.setScale(3.5f, 3.5f);
 
-        Vector2 boundingBox = missile.getScale().cpy().scl(0.5f, 0.3f);
+        Vector2 boundingBox = missile.getScale().cpy().scl(0.5f, 0.2f);
         missile.getComponent(HitboxComponent.class).setAsBoxAligned(
-                boundingBox, PhysicsComponent.AlignX.LEFT, PhysicsComponent.AlignY.CENTER);
+                boundingBox, PhysicsComponent.AlignX.CENTER, PhysicsComponent.AlignY.CENTER);
         missile.setZIndex(1); // Generate missile above spaceship
 
         animator.startAnimation("missile1");
@@ -195,7 +205,7 @@ public class NPCFactory {
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ChaseTask(target, 10, 4f, 4f));
+                        .addTask(new ChaseTask(target, 10, 10f, 10f));
 
         Entity npc =
                 new Entity(type)

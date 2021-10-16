@@ -1,51 +1,73 @@
-Untitled
+o
 - Delay -
-active: false
+active: true
+lowMin: 0.0
+lowMax: 0.0
 - Duration - 
-lowMin: 2000.0
-lowMax: 2000.0
+lowMin: 60000.0
+lowMax: 60000.0
 - Count - 
 min: 0
-max: 300
+max: 1000
 - Emission - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 200.0
-highMax: 200.0
+highMin: 500.0
+highMax: 300.0
 relative: false
-scalingCount: 1
+scalingCount: 2
 scaling0: 1.0
-timelineCount: 1
+scaling1: 1.0
+timelineCount: 2
 timeline0: 0.0
+timeline1: 1.0
 - Life - 
 lowMin: 0.0
 lowMax: 0.0
 highMin: 500.0
 highMax: 1000.0
 relative: false
-scalingCount: 3
+scalingCount: 2
 scaling0: 1.0
-scaling1: 1.0
-scaling2: 0.0
-timelineCount: 3
+scaling1: 0.0
+timelineCount: 2
 timeline0: 0.0
-timeline1: 0.30821916
-timeline2: 1.0
+timeline1: 1.0
 independent: false
 - Life Offset - 
 active: false
 independent: false
 - X Offset - 
-active: false
+active: true
+lowMin: 1.0
+lowMax: 1.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Y Offset - 
-active: false
+active: true
+lowMin: 2.0
+lowMax: 2.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Spawn Shape - 
-shape: point
+shape: ellipse
+edges: true
+side: both
 - Spawn Width - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 0.0
-highMax: 0.0
+highMin: 1.0
+highMax: 1.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -54,8 +76,8 @@ timeline0: 0.0
 - Spawn Height - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 0.0
-highMax: 0.0
+highMin: 3.0
+highMax: 3.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -64,41 +86,34 @@ timeline0: 0.0
 - X Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 0.3
-highMax: 0.3
+highMin: 0.4
+highMax: 0.4
 relative: false
-scalingCount: 1
+scalingCount: 2
 scaling0: 1.0
-timelineCount: 1
+scaling1: 1.0
+timelineCount: 2
 timeline0: 0.0
+timeline1: 1.0
 - Y Scale - 
 active: false
 - Velocity - 
 active: true
 lowMin: 0.0
 lowMax: 0.0
-highMin: 0.0
-highMax: 5.0
-relative: false
-scalingCount: 1
-scaling0: 1.0
-timelineCount: 1
-timeline0: 0.0
-- Angle - 
-active: true
-lowMin: 180.0
-lowMax: 180.0
-highMin: 135.0
-highMax: 225.0
+highMin: 2.0
+highMax: 1.0
 relative: false
 scalingCount: 3
 scaling0: 1.0
-scaling1: 0.0
+scaling1: 1.0
 scaling2: 0.0
 timelineCount: 3
 timeline0: 0.0
-timeline1: 0.5
+timeline1: 0.001
 timeline2: 1.0
+- Angle - 
+active: false
 - Rotation - 
 active: false
 - Wind - 
@@ -107,9 +122,9 @@ active: false
 active: false
 - Tint - 
 colorsCount: 3
-colors0: 1.0
-colors1: 0.3764706
-colors2: 0.12941177
+colors0: 0.5529412
+colors1: 0.8509804
+colors2: 0.0
 timelineCount: 1
 timeline0: 0.0
 - Transparency - 
@@ -120,13 +135,13 @@ highMax: 1.0
 relative: false
 scalingCount: 4
 scaling0: 0.0
-scaling1: 0.98245615
-scaling2: 0.21052632
+scaling1: 0.10526316
+scaling2: 0.0877193
 scaling3: 0.0
 timelineCount: 4
 timeline0: 0.0
-timeline1: 0.17123288
-timeline2: 0.58219177
+timeline1: 0.28767124
+timeline2: 0.5890411
 timeline3: 1.0
 - Options - 
 attached: false
@@ -137,61 +152,79 @@ behind: false
 premultipliedAlpha: false
 spriteMode: single
 - Image Paths -
-test.jpg
+smallerP.png
 
 
-Untitled
+o
 - Delay -
-active: false
+active: true
+lowMin: 0.0
+lowMax: 0.0
 - Duration - 
-lowMin: 2000.0
-lowMax: 2000.0
+lowMin: 60000.0
+lowMax: 60000.0
 - Count - 
 min: 0
-max: 400
+max: 1000
 - Emission - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 300.0
+highMin: 500.0
 highMax: 300.0
 relative: false
-scalingCount: 3
+scalingCount: 2
 scaling0: 1.0
 scaling1: 1.0
-scaling2: 1.0
-timelineCount: 3
+timelineCount: 2
 timeline0: 0.0
-timeline1: 0.5068493
-timeline2: 0.82191783
+timeline1: 1.0
 - Life - 
 lowMin: 0.0
 lowMax: 0.0
 highMin: 500.0
 highMax: 1000.0
 relative: false
-scalingCount: 3
+scalingCount: 2
 scaling0: 1.0
-scaling1: 1.0
-scaling2: 0.0
-timelineCount: 3
+scaling1: 0.0
+timelineCount: 2
 timeline0: 0.0
-timeline1: 0.41095892
-timeline2: 0.98630136
+timeline1: 1.0
 independent: false
 - Life Offset - 
 active: false
 independent: false
 - X Offset - 
-active: false
+active: true
+lowMin: 1.0
+lowMax: 1.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Y Offset - 
-active: false
+active: true
+lowMin: 2.0
+lowMax: 2.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Spawn Shape - 
-shape: point
+shape: ellipse
+edges: true
+side: both
 - Spawn Width - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 0.0
-highMax: 0.0
+highMin: 0.5
+highMax: 0.5
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -200,8 +233,8 @@ timeline0: 0.0
 - Spawn Height - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 0.0
-highMax: 0.0
+highMin: 3.0
+highMax: 3.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -210,41 +243,34 @@ timeline0: 0.0
 - X Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 0.3
-highMax: 0.3
+highMin: 0.4
+highMax: 0.4
 relative: false
-scalingCount: 1
+scalingCount: 2
 scaling0: 1.0
-timelineCount: 1
+scaling1: 1.0
+timelineCount: 2
 timeline0: 0.0
+timeline1: 1.0
 - Y Scale - 
 active: false
 - Velocity - 
 active: true
 lowMin: 0.0
 lowMax: 0.0
-highMin: 0.0
-highMax: 5.0
-relative: false
-scalingCount: 1
-scaling0: 1.0
-timelineCount: 1
-timeline0: 0.0
-- Angle - 
-active: true
-lowMin: 180.0
-lowMax: 180.0
-highMin: 135.0
-highMax: 225.0
+highMin: 2.5
+highMax: 1.0
 relative: false
 scalingCount: 3
 scaling0: 1.0
-scaling1: 0.0
+scaling1: 1.0
 scaling2: 0.0
 timelineCount: 3
 timeline0: 0.0
-timeline1: 0.5
+timeline1: 0.001
 timeline2: 1.0
+- Angle - 
+active: false
 - Rotation - 
 active: false
 - Wind - 
@@ -252,16 +278,12 @@ active: false
 - Gravity - 
 active: false
 - Tint - 
-colorsCount: 6
-colors0: 0.11372549
-colors1: 0.11372549
-colors2: 0.11372549
-colors3: 0.11372549
-colors4: 0.11372549
-colors5: 0.11372549
-timelineCount: 2
+colorsCount: 3
+colors0: 0.827451
+colors1: 0.8509804
+colors2: 0.78431374
+timelineCount: 1
 timeline0: 0.0
-timeline1: 1.0
 - Transparency - 
 lowMin: 0.0
 lowMax: 0.0
@@ -270,13 +292,13 @@ highMax: 1.0
 relative: false
 scalingCount: 4
 scaling0: 0.0
-scaling1: 0.1754386
-scaling2: 0.94736844
+scaling1: 0.10526316
+scaling2: 0.10526316
 scaling3: 0.0
 timelineCount: 4
 timeline0: 0.0
-timeline1: 0.5890411
-timeline2: 0.84246576
+timeline1: 0.26027396
+timeline2: 0.67808217
 timeline3: 1.0
 - Options - 
 attached: false
@@ -287,5 +309,5 @@ behind: false
 premultipliedAlpha: false
 spriteMode: single
 - Image Paths -
-test.jpg
+smallerP.png
 

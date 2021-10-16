@@ -128,6 +128,7 @@ public class ObstacleEventHandler extends Component {
             logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacles");
+            animator.getEntity().setParticleTime(1.4f);
             animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked = false;
             if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
@@ -162,15 +163,15 @@ public class ObstacleEventHandler extends Component {
             }
             logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setRemoveTexture();
+            particle.startEffect();
             animator.startAnimation("obstacle2");
+            animator.getEntity().setParticleTime(3f);
             animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked2 = false;
             if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
                 this.entity.setRemoveCollision();
             }
         }
-
-
 
 
     }
@@ -189,10 +190,11 @@ public class ObstacleEventHandler extends Component {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE && (other.getFilterData().categoryBits != PhysicsLayer.CEILING)) {
             if (count == 0) { // Avoid an entity from repeatedly triggering an attack
                 count++;
-
+                particle.startEffect();
                 logger.debug("collisionStart event for {} was triggered.", entity.toString());
                 animator.getEntity().setRemoveTexture();
                 animator.startAnimation("stone1");
+                animator.getEntity().setParticleTime(1f);
                 animator.getEntity().setDisappearAfterAnimation(0.32f, Entity.DisappearType.ANIMATION);
                 locked3 = false;
             }
@@ -232,6 +234,7 @@ public class ObstacleEventHandler extends Component {
             return;
         }
 
+
         SpaceshipAttackController.setSpaceshipAttack();
         entity.getEvents().trigger("spaceshipSound");
 
@@ -261,15 +264,20 @@ public class ObstacleEventHandler extends Component {
             return;
         }
 
-        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits) && !PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
             return;
         }
+
         logger.debug("collisionStart event for {} was triggered.", entity.toString());
         entity.getEvents().trigger("missileSound");
         animator.startAnimation("bomb");
+        particle.startEffect();
+        animator.getEntity().setParticleTime(1f);
         animator.getEntity().setDisappearAfterAnimation(0.4f, Entity.DisappearType.ANIMATION);
-
+        if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
+            this.entity.setRemoveCollision();
+        }
     }
 
     /**
@@ -314,7 +322,9 @@ public class ObstacleEventHandler extends Component {
             // Not triggered by hitbox, ignore
             return;
         }
-        if (!PhysicsLayer.contains(PhysicsLayer.OBSTACLE, other.getFilterData().categoryBits) && !PhysicsLayer.contains(PhysicsLayer.WALL, other.getFilterData().categoryBits)) {
+        if (!PhysicsLayer.contains(PhysicsLayer.OBSTACLE, other.getFilterData().categoryBits) &&
+                !PhysicsLayer.contains(PhysicsLayer.WALL, other.getFilterData().categoryBits) &&
+                !PhysicsLayer.contains(PhysicsLayer.NPC, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
             return;
         }

@@ -21,6 +21,8 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Iterator;
+
 /**
  * Core entity class. Entities exist in the game and are updated each frame. All entities have a
  * position and scale, but have no default behaviour. Components should be added to an entity to
@@ -49,9 +51,11 @@ public class Entity {
     private final EventHandler eventHandler;
     private boolean enabled = true;
     private boolean disappear = false;
+
     public enum DisappearType {
         ANIMATION, PARTICLE
     }
+
     private DisappearType disappearType = null;
     private boolean removeTexture = false;
     private boolean removeCollision = false;
@@ -130,6 +134,10 @@ public class Entity {
         this.particleTime = particleTime;
         this.disappearType = disappearType;
         logger.debug("Setting disappear={} on entity {}", disappear, this);
+    }
+
+    public void setParticleTime(float particleTime) {
+        this.particleTime = particleTime;
     }
 
     /**
@@ -347,6 +355,7 @@ public class Entity {
         return this;
     }
 
+
     /**
      * Dispose of the entity. This will dispose of all components on this entity.
      */
@@ -364,21 +373,25 @@ public class Entity {
      * same animation become black boxes. Therefore, this method is currently used to make obstacles disappear.
      */
     public void removeAfterAnimation() {
-        String loggerInfo = "";
         if (this.getComponent(AnimationRenderComponent.class).getAnimationPlayTime() > animationTime) {
-            for (Component component : createdComponents) {
+            Iterator<Component> i = createdComponents.iterator();
+            while (i.hasNext()) {
+                Component component = i.next(); // must be called before you can call i.remove()
                 if (component.getClass().equals(AnimationRenderComponent.class)) {
-                    loggerInfo += "\t" + component.getClass().getSimpleName() + " stopped on entity " + this + "\n";
                     ((AnimationRenderComponent) component).stopAnimation();
-                } else {
-                    loggerInfo += "\t" + component.getClass().getSimpleName() + " disposed on entity " + this + "\n";
+                    logger.info("{} stopped on entity {}", component.getClass().getSimpleName(), this);
+                } else if (!component.getClass().equals(ParticleRenderComponent.class)) {
                     component.dispose();
+                    i.remove();
+                    logger.info("{} disposed on entity {}", component.getClass().getSimpleName(), this);
                 }
             }
-            ServiceLocator.getEntityService().unregister(this);
-        }
-        if (loggerInfo.strip() != "") {
-            logger.debug(loggerInfo.strip());
+            if (particleTime == 0) {
+                ServiceLocator.getEntityService().unregister(this);
+                disappear = false;
+            } else {
+                disappearType = DisappearType.PARTICLE;
+            }
         }
     }
 
@@ -386,17 +399,18 @@ public class Entity {
      * Let the obstacles disappear after playing the particle for particleTime second. Is called by update().
      */
     public void removeAfterParticle() {
-        String loggerInfo = "";
         if (this.getComponent(ParticleRenderComponent.class).getParticlePlayTime() > particleTime) {
-
-            for (Component component : createdComponents) {
-                loggerInfo += "\t" + component.getClass().getSimpleName() + " disposed on entity " + this + "\n";
-                component.dispose();
+            Iterator<Component> i = createdComponents.iterator();
+            while (i.hasNext()) {
+                Component component = i.next(); // must be called before you can call i.remove()
+                if (!component.getClass().equals(AnimationRenderComponent.class)) {
+                    component.dispose();
+                    i.remove();
+                    logger.info("{} disposed on entity {}", component.getClass().getSimpleName(), this);
+                }
             }
             ServiceLocator.getEntityService().unregister(this);
-        }
-        if (loggerInfo.strip() != "") {
-            logger.debug(loggerInfo.strip());
+            disappear = false;
         }
     }
 
@@ -450,15 +464,17 @@ public class Entity {
             // animation is played to avoid the conflict between the texture and the animation.
             if (removeTexture) {
                 if (component.getClass().equals(TextureRenderComponent.class)) {
-                    logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
+                    createdComponents.removeValue(component, true);
+                    logger.info("Remove {} on entity{}", component.getClass().getSimpleName(), this);
                     component.dispose();
-                    removeTexture=false;
+                    removeTexture = false;
                 }
             }
 
             if (removeCollision) {
                 if (component.getClass().equals(HitboxComponent.class) || component.getClass().equals(ColliderComponent.class)) {
-                    logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
+                    createdComponents.removeValue(component, true);
+                    logger.info("Remove {} on entity{}", component.getClass().getSimpleName(), this);
                     component.dispose();
                 }
             }
@@ -467,7 +483,6 @@ public class Entity {
         removeCollision = false;
 
         if (disappear) {
-
             if (disappearType == DisappearType.ANIMATION) {
                 this.removeAfterAnimation();
                 return;
@@ -475,7 +490,7 @@ public class Entity {
                 this.removeAfterParticle();
                 return;
             } else {
-
+                logger.error("Error disappearType = {}", disappearType);
             }
 
         }
