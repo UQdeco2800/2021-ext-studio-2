@@ -128,7 +128,7 @@ public class ObstacleEventHandler extends Component {
             logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacles");
-            animator.getEntity().setParticleTime(1.5f);
+            animator.getEntity().setParticleTime(1.4f);
             animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked = false;
             if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
@@ -196,7 +196,7 @@ public class ObstacleEventHandler extends Component {
                 logger.debug("collisionStart event for {} was triggered.", entity.toString());
                 animator.getEntity().setRemoveTexture();
                 animator.startAnimation("stone1");
-                animator.getEntity().setParticleTime(1.3f);
+                animator.getEntity().setParticleTime(1f);
                 animator.getEntity().setDisappearAfterAnimation(0.32f, Entity.DisappearType.ANIMATION);
                 locked3 = false;
             }
