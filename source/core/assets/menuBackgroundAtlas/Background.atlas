@@ -1,0 +1,69 @@
+
+Background.png
+size: 8192, 4096
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+background
+  rotate: false
+  xy: 2, 2166
+  size: 1920, 1081
+  orig: 1920, 1081
+  offset: 0, 0
+  index: 9
+background
+  rotate: false
+  xy: 2, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 3
+background
+  rotate: false
+  xy: 1924, 2167
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 8
+background
+  rotate: false
+  xy: 2, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 5
+background
+  rotate: false
+  xy: 1924, 1085
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 2
+background
+  rotate: false
+  xy: 3846, 2167
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 7
+background
+  rotate: false
+  xy: 1924, 3
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 4
+background
+  rotate: false
+  xy: 3846, 1085
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 1
+background
+  rotate: false
+  xy: 5768, 2167
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 6

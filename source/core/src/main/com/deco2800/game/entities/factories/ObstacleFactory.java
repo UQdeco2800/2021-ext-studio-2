@@ -295,6 +295,44 @@ public class ObstacleFactory {
         return rock;
     }
 
+
+
+    /**
+     * Creates a firerock.
+     *
+     * @return Firrerock entity
+     */
+    public static Entity createFirerock() {
+        Entity firerock = new Entity();
+
+        firerock.addComponent(new TextureRenderComponent("images/firerock.jpg"))
+                .addComponent(new PhysicsComponent())
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
+        firerock.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        firerock.getComponent(TextureRenderComponent.class).scaleEntity();
+
+
+        return firerock;
+    }
+
+    /**
+     * Creates a nail.
+     *
+     * @return nail entity
+     */
+    public static Entity createNail() {
+        Entity nail = new Entity();
+
+        nail.addComponent(new TextureRenderComponent("images/nail.jpg"))
+                .addComponent(new PhysicsComponent())
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
+        nail.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        nail.getComponent(TextureRenderComponent.class).scaleEntity();
+
+
+        return nail;
+    }
+
     /**
      * Creates a wood.
      *

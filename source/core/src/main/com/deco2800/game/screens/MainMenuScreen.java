@@ -22,89 +22,89 @@ import org.slf4j.LoggerFactory;
  * The game screen containing the main menu.
  */
 public class MainMenuScreen extends ScreenAdapter {
-  private static final Logger logger = LoggerFactory.getLogger(MainMenuScreen.class);
-  private final GdxGame game;
-  private final Renderer renderer;
-  private static final String[] mainMenuTextures = {"images/new_menu_title.png","images/menu_background/menu_background.png"};
-  private Entity ui;
+    private static final Logger logger = LoggerFactory.getLogger(MainMenuScreen.class);
+    private static final String[] mainMenuTextures = {"images/new_menu_title.png", "images/menu_background/menu_background.png"};
+    private final GdxGame game;
+    private final Renderer renderer;
+    private Entity ui;
 
-  public MainMenuScreen(GdxGame game) {
-    this.game = game;
+    public MainMenuScreen(GdxGame game) {
+        this.game = game;
 
-    logger.debug("Initialising main menu screen services");
-    ServiceLocator.registerInputService(new InputService());
-    ServiceLocator.registerResourceService(new ResourceService());
-    ServiceLocator.registerEntityService(new EntityService());
-    ServiceLocator.registerRenderService(new RenderService());
+        logger.debug("Initialising main menu screen services");
+        ServiceLocator.registerInputService(new InputService());
+        ServiceLocator.registerResourceService(new ResourceService());
+        ServiceLocator.registerEntityService(new EntityService());
+        ServiceLocator.registerRenderService(new RenderService());
 
-    renderer = RenderFactory.createRenderer();
+        renderer = RenderFactory.createRenderer();
 
-    loadAssets();
-    createUI();
-  }
+        loadAssets();
+        createUI();
+    }
 
-  @Override
-  public void render(float delta) {
-    ServiceLocator.getEntityService().update();
-    renderer.render();
-  }
+    @Override
+    public void render(float delta) {
+        ServiceLocator.getEntityService().update();
+        renderer.render();
+    }
 
-  @Override
-  public void resize(int width, int height) {
-    renderer.resize(width, height);
-    logger.trace("Resized renderer: ({} x {})", width, height);
-  }
+    @Override
+    public void resize(int width, int height) {
+        renderer.resize(width, height);
+        logger.trace("Resized renderer: ({} x {})", width, height);
+    }
 
-  @Override
-  public void pause() {
-    logger.info("Game paused");
-  }
+    @Override
+    public void pause() {
+        logger.info("Game paused");
+    }
 
-  @Override
-  public void resume() {
-    logger.info("Game resumed");
-  }
+    @Override
+    public void resume() {
+        logger.info("Game resumed");
+    }
 
-  @Override
-  public void dispose() {
-    logger.debug("Disposing main menu screen");
+    @Override
+    public void dispose() {
+        logger.debug("Disposing main menu screen");
 
-    renderer.dispose();
-    unloadAssets();
-    ui.dispose();
+        renderer.dispose();
+        unloadAssets();
+        ui.dispose();
 
-    ServiceLocator.getRenderService().dispose();
-    ServiceLocator.getEntityService().dispose();
+        ServiceLocator.getRenderService().dispose();
+        ServiceLocator.getEntityService().dispose();
 
-    ServiceLocator.clear();
-  }
+        ServiceLocator.clear();
+    }
 
-  private void loadAssets() {
-    logger.debug("Loading assets");
-    ResourceService resourceService = ServiceLocator.getResourceService();
-    resourceService.loadTextures(mainMenuTextures);
-    ServiceLocator.getResourceService().loadAll();
-  }
+    private void loadAssets() {
+        logger.debug("Loading assets");
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.loadTextures(mainMenuTextures);
+        ServiceLocator.getResourceService().loadAll();
+    }
 
-  private void unloadAssets() {
-    logger.debug("Unloading assets");
-    ResourceService resourceService = ServiceLocator.getResourceService();
-    resourceService.unloadAssets(mainMenuTextures);
-  }
+    private void unloadAssets() {
+        logger.debug("Unloading assets");
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.unloadAssets(mainMenuTextures);
+    }
 
-  /**
-   * Creates the main menu's ui including components for rendering ui elements to the screen and
-   * capturing and handling ui input.
-   */
-  private void createUI() {
-    logger.debug("Creating ui");
-    Stage stage = ServiceLocator.getRenderService().getStage();
-    //set ui as global variable so that the bgm will be stopped when close the screen
-    ui = new Entity();
-    ui.addComponent(new MainMenuDisplay())
-        .addComponent(new BackgroundSoundComponent("sounds/mainmenu_bgm.mp3", 0.5f))
-        .addComponent(new InputDecorator(stage, 10))
-        .addComponent(new MainMenuActions(game));
-    ServiceLocator.getEntityService().register(ui);
-  }
+    /**
+     * Creates the main menu's ui including components for rendering ui elements to the screen and
+     * capturing and handling ui input.
+     */
+    private void createUI() {
+        logger.debug("Creating ui");
+        Stage stage = ServiceLocator.getRenderService().getStage();
+        //set ui as global variable so that the bgm will be stopped when close the screen
+        ui = new Entity();
+        ui.addComponent(new MainMenuDisplay())
+                .addComponent(new BackgroundSoundComponent("sounds/mainmenu_bgm.mp3", 0.5f))
+                .addComponent(new InputDecorator(stage, 10))
+                .addComponent(new MainMenuActions(game));
+        ServiceLocator.getEntityService().register(ui);
+    }
 }

@@ -4,10 +4,13 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.BackgroundSelectionComponent;
+import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.player.UnlockedAttiresDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.files.BackgroundMusic;
 import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
@@ -28,7 +31,6 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
     private final GdxGame game;
     private final Renderer renderer;
     private Entity UIEntity;
-
 
 
     public UnlockedAttiresScreen(GdxGame game) {
@@ -91,6 +93,8 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
         UIEntity = new Entity();
 
         UIEntity.addComponent(new UnlockedAttiresDisplay(game, goldAchievements))
+                .addComponent(new BackgroundSelectionComponent("UnlockedAttires", "tl"))
+                .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("UnlockedAttires"), 0.5f))
                 .addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(UIEntity);
     }

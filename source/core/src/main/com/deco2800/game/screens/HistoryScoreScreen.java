@@ -3,6 +3,7 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.BackgroundSelectionComponent;
 import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.score.ScoreDetailsDialog;
 import com.deco2800.game.components.score.ScoreHistoryDisplay;
@@ -10,6 +11,7 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.files.BackgroundMusic;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
@@ -44,7 +46,8 @@ public class HistoryScoreScreen extends ScreenAdapter {
         scoreHistoryDisplay = new ScoreHistoryDisplay(game);
         ui.addComponent(scoreHistoryDisplay)
                 .addComponent(new ScoreDetailsDialog())
-                .addComponent(new BackgroundSoundComponent("sounds/History_Score_bgm.mp3", 0.5f))
+                .addComponent(new BackgroundSelectionComponent("HistoryScore"))
+                .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("HistoryScore"), 0.5f))
                 .addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
     }

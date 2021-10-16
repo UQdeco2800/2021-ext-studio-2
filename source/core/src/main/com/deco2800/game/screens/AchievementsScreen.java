@@ -3,6 +3,7 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.BackgroundSelectionComponent;
 import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.achievements.screen.AchievementRecordsDisplay;
 import com.deco2800.game.components.achievements.screen.ChapterDisplay;
@@ -11,6 +12,7 @@ import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.files.BackgroundMusic;
 import com.deco2800.game.files.GameRecords;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
@@ -111,8 +113,9 @@ public class AchievementsScreen extends ScreenAdapter {
 
         ui = new Entity();
         ui.addComponent(new AchievementRecordsDisplay(game, bestAchievements))
-                .addComponent(new BackgroundSoundComponent("sounds/achievementBgm.mp3", 0.5f))
                 .addComponent(new ChapterDisplay())
+                .addComponent(new BackgroundSelectionComponent("Achievements", "br"))
+                .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("Achievements"), 0.5f))
                 .addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
     }
