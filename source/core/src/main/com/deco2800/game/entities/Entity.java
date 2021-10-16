@@ -379,11 +379,11 @@ public class Entity {
                 Component component = i.next(); // must be called before you can call i.remove()
                 if (component.getClass().equals(AnimationRenderComponent.class)) {
                     ((AnimationRenderComponent) component).stopAnimation();
-                    logger.info("{} stopped on entity {}", component.getClass().getSimpleName(), this);
+                    logger.debug("{} stopped on entity {}", component.getClass().getSimpleName(), this);
                 } else if (!component.getClass().equals(ParticleRenderComponent.class)) {
                     component.dispose();
                     i.remove();
-                    logger.info("{} disposed on entity {}", component.getClass().getSimpleName(), this);
+                    logger.debug("{} disposed on entity {}", component.getClass().getSimpleName(), this);
                 }
             }
             if (particleTime == 0) {
@@ -406,7 +406,7 @@ public class Entity {
                 if (!component.getClass().equals(AnimationRenderComponent.class)) {
                     component.dispose();
                     i.remove();
-                    logger.info("{} disposed on entity {}", component.getClass().getSimpleName(), this);
+                    logger.debug("{} disposed on entity {}", component.getClass().getSimpleName(), this);
                 }
             }
             ServiceLocator.getEntityService().unregister(this);
@@ -465,7 +465,7 @@ public class Entity {
             if (removeTexture) {
                 if (component.getClass().equals(TextureRenderComponent.class)) {
                     createdComponents.removeValue(component, true);
-                    logger.info("Remove {} on entity{}", component.getClass().getSimpleName(), this);
+                    logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
                     component.dispose();
                     removeTexture = false;
                 }
@@ -474,7 +474,7 @@ public class Entity {
             if (removeCollision) {
                 if (component.getClass().equals(HitboxComponent.class) || component.getClass().equals(ColliderComponent.class)) {
                     createdComponents.removeValue(component, true);
-                    logger.info("Remove {} on entity{}", component.getClass().getSimpleName(), this);
+                    logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
                     component.dispose();
                 }
             }

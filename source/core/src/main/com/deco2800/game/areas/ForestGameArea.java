@@ -862,7 +862,8 @@ public class ForestGameArea extends GameArea {
      */
     public void spawnSpaceship() {
         int playerX = (int) player.getPosition().x;
-        GridPoint2 position = new GridPoint2(playerX + 35, 3);
+        // change 35 -> 37 for bigger player
+        GridPoint2 position = new GridPoint2(playerX + 37, 3);
         Entity spaceship = NPCFactory.createSpaceShip(player);
         spawnEntityAt(spaceship, position, true, false);
 
@@ -964,12 +965,13 @@ public class ForestGameArea extends GameArea {
     private void spawnWeapon(Vector2 position) {
         Entity weapon = ObstacleFactory.createWeapon();
         float x = player.getComponent(PlayerActions.class).getWalkDirection().x;
+        Vector2 generatePosition = position.cpy().sub(0,-1);
         weapon.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(3 * x + 10, 0),
-                position, wake);
+                generatePosition, true);
         weapon.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0.5f);
         weapon.getComponent(PhysicsComponent.class).getBody().setGravityScale(0f);
 
-        spawnEntityAt(weapon, position, true, true);
+        spawnEntityAt(weapon, generatePosition, true, true);
     }
 
     private void setBonusItems(Entity player) {

@@ -258,27 +258,27 @@ public class SpaceshipAttackController extends Component {
             switch (attackType) {
                 case Low:
                     // for small player
-                    randomPosition = spaceshipPosition.cpy().sub(0, -0.5f);
+//                    randomPosition = spaceshipPosition.cpy().sub(0, -0.5f);
                     // for big player
-//                    randomPosition = spaceshipPosition.cpy().sub(0, -1.5f);
+                    randomPosition = spaceshipPosition.cpy().sub(0, -1.5f);
                     break;
                 case Middle:
                     // for small player
-                    randomPosition = spaceshipPosition.cpy().sub(0, -3.5f);
+//                    randomPosition = spaceshipPosition.cpy().sub(0, -3.5f);
                     // for big player
-//                    randomPosition = spaceshipPosition.cpy().sub(0, -4.5f);
+                    randomPosition = spaceshipPosition.cpy().sub(0, -4.5f);
                     break;
                 case High:
                     // for small player
-                    randomPosition = spaceshipPosition.cpy().sub(0, -6.5f);
+//                    randomPosition = spaceshipPosition.cpy().sub(0, -6.5f);
                     // for big player
-//                    randomPosition = spaceshipPosition.cpy().sub(0, -7.5f);
+                    randomPosition = spaceshipPosition.cpy().sub(0, -7.5f);
                     break;
                 case Player:
                     // for small player
-                    randomPosition = new Vector2(spaceshipPosition.x, playerPosition.y + 0.5f);
+//                    randomPosition = new Vector2(spaceshipPosition.x, playerPosition.y + 0.5f);
                     // for big player
-//                    randomPosition = new Vector2(spaceshipPosition.x, playerPosition.y + 1.5f);
+                    randomPosition = new Vector2(spaceshipPosition.x, playerPosition.y + 1.5f);
                     break;
                 default:
                     logger.error("No such type spaceship attack");

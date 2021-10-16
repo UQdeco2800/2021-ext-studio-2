@@ -217,14 +217,16 @@ public class MainGameScreen extends ScreenAdapter {
     private void TransferPlayerByMap() {
         if (newMapStatus == NewMap.Start) {
             DistanceService.setPreDistance(player.getPosition().x);//get the last map distance of player
-            player.setPosition(0, 50);
-            logger.info("New map start.");
+            // change 50 -> 53 for bigger player
+            player.setPosition(0, 53);
             newMapStatus = NewMap.On;
+            logger.info("New map start.");
         } else if (newMapStatus == NewMap.Finish) {
-            DistanceService.setPreDistance(player.getPosition().x - 87);//get the last map distance of player
-            player.setPosition(87, 3);
-            logger.info("New map finish.");
+            // change 87 -> 89 for bigger player
+            DistanceService.setPreDistance(player.getPosition().x - 89);//get the last map distance of player
+            player.setPosition(89, 7);
             newMapStatus = NewMap.Off;
+            logger.info("New map finish.");
         }
     }
 
