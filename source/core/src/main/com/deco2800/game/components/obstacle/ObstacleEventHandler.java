@@ -249,7 +249,7 @@ public class ObstacleEventHandler extends Component {
      */
     void spaceshipDispose() {
         logger.debug("spaceshipDispose event was triggered.");
-        this.entity.setDispose();
+        this.entity.setDisappearAfterAnimation(2f, Entity.DisappearType.ANIMATION);
     }
 
     /**

@@ -104,7 +104,6 @@ public class ObstacleFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
                 .addComponent(particle)
-//                .addComponent(new ParticleRenderComponent("test.party"))
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.ThornsObstacle));
 
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();

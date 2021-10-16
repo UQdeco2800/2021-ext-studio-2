@@ -124,9 +124,9 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService()
                                 .getAsset("images/spaceship.atlas", TextureAtlas.class));
-
-        animator.addAnimation("spaceship", 0.2f, Animation.PlayMode.LOOP);
-        animator.addAnimation("spaceship_disappear", 2f, Animation.PlayMode.LOOP);
+                                                        // old is 0.02f
+        animator.addAnimation("spaceship", 0.05f, Animation.PlayMode.LOOP);
+        animator.addAnimation("spaceship_disappear", 0.067f, Animation.PlayMode.NORMAL);
 
         spaceship
                 .addComponent(new PhysicsComponent())

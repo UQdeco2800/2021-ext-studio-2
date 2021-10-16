@@ -25,7 +25,6 @@ import java.util.Random;
 public class SpaceshipAttackController extends Component {
     private static final Logger logger = LoggerFactory.getLogger(SpaceshipAttackController.class);
     protected Entity entity;
-    AnimationRenderComponent animator;
 
     /**
      * Spaceship attack state
@@ -242,7 +241,7 @@ public class SpaceshipAttackController extends Component {
                         playerPosition, AttackType.Player, 2));
                 break;
             case 1290:
-                animator.startAnimation("spaceship_disappear");
+                this.getEntity().getComponent(AnimationRenderComponent.class).startAnimation("spaceship_disappear");
                 break;
 
         }
