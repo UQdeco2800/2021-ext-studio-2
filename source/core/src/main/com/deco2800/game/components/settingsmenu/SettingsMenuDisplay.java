@@ -3,6 +3,7 @@ package com.deco2800.game.components.settingsmenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Graphics.Monitor;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
@@ -26,8 +27,12 @@ import org.slf4j.LoggerFactory;
 public class SettingsMenuDisplay extends UIComponent {
   private static final Logger logger = LoggerFactory.getLogger(SettingsMenuDisplay.class);
   private final GdxGame game;
-
+  private final String[] textures = {"setting-page/exit1.png", "setting-page/apply1.png",
+          "images/settings/settingsBackground2.png", "images/settings/fullScreen.png",
+          "images/settings/fullScreenOff.png", "images/settings/resolution.png", "images/settings/vsync.png",
+          "images/settings/uiScale.png", "images/settings/fps.png",};
   private Table rootTable;
+  private Table bgTable;
   private TextField fpsText;
   private CheckBox fullScreenCheck;
   private CheckBox vsyncCheck;
@@ -42,14 +47,25 @@ public class SettingsMenuDisplay extends UIComponent {
   @Override
   public void create() {
     super.create();
+    loadAssets();
     addActors();
+
+  }
+
+  private void loadAssets() {
+    ServiceLocator.getResourceService().loadTextures(textures);
+    ServiceLocator.getResourceService().loadAll();
   }
 
   private void addActors() {
+    Image img = new Image(ServiceLocator.getResourceService()
+            .getAsset("images/settings/settingsBackground2.png", Texture.class));
     Label title = new Label("Settings", skin, "title");
     Table settingsTable = makeSettingsTable();
     Table menuBtns = makeMenuBtns();
-
+    bgTable = new Table();
+    bgTable.setFillParent(true);
+    bgTable.add(img);
     rootTable = new Table();
     rootTable.setFillParent(true);
 
@@ -60,7 +76,7 @@ public class SettingsMenuDisplay extends UIComponent {
 
     rootTable.row();
     rootTable.add(menuBtns).fillX();
-
+    stage.addActor(bgTable);
     stage.addActor(rootTable);
   }
 
@@ -93,39 +109,48 @@ public class SettingsMenuDisplay extends UIComponent {
 
     // Position Components on table
     Table table = new Table();
-
-    table.add(fpsLabel).right().padRight(15f);
+    table.add(getIconImage("fps")).right();
+    table.add(fpsLabel).left().padLeft(10);
     table.add(fpsText).width(100).left();
 
     table.row().padTop(10f);
-    table.add(fullScreenLabel).right().padRight(15f);
+    table.add(getIconImage("fullScreen")).right();
+    table.add(fullScreenLabel).left().padLeft(10);
     table.add(fullScreenCheck).left();
 
     table.row().padTop(10f);
-    table.add(vsyncLabel).right().padRight(15f);
+    table.add(getIconImage("vsync")).right();
+    table.add(vsyncLabel).left().padLeft(10);
     table.add(vsyncCheck).left();
 
     table.row().padTop(10f);
     Table uiScaleTable = new Table();
     uiScaleTable.add(uiScaleSlider).width(100).left();
     uiScaleTable.add(uiScaleValue).left().padLeft(5f).expandX();
-
-    table.add(uiScaleLabel).right().padRight(15f);
+    table.add(getIconImage("uiScale")).right();
+    table.add(uiScaleLabel).left().padLeft(10);
     table.add(uiScaleTable).left();
 
     table.row().padTop(10f);
-    table.add(displayModeLabel).right().padRight(15f);
+    table.add(getIconImage("resolution")).right();
+
+    table.add(displayModeLabel).left().padLeft(10);
     table.add(displayModeSelect).left();
 
     // Events on inputs
     uiScaleSlider.addListener(
-        (Event event) -> {
-          float value = uiScaleSlider.getValue();
-          uiScaleValue.setText(String.format("%.2fx", value));
-          return true;
-        });
+            (Event event) -> {
+              float value = uiScaleSlider.getValue();
+              uiScaleValue.setText(String.format("%.2fx", value));
+              return true;
+            });
 
     return table;
+  }
+
+  private Image getIconImage(String icon) {
+    return new Image(ServiceLocator.getResourceService()
+            .getAsset("images/settings/" + icon + ".png", Texture.class));
   }
 
   private StringDecorator<DisplayMode> getActiveMode(Array<StringDecorator<DisplayMode>> modes) {
@@ -134,8 +159,8 @@ public class SettingsMenuDisplay extends UIComponent {
     for (StringDecorator<DisplayMode> stringMode : modes) {
       DisplayMode mode = stringMode.object;
       if (active.width == mode.width
-          && active.height == mode.height
-          && active.refreshRate == mode.refreshRate) {
+              && active.height == mode.height
+              && active.refreshRate == mode.refreshRate) {
         return stringMode;
       }
     }
@@ -158,26 +183,28 @@ public class SettingsMenuDisplay extends UIComponent {
   }
 
   private Table makeMenuBtns() {
-    TextButton exitBtn = new TextButton("Exit", skin);
-    TextButton applyBtn = new TextButton("Apply", skin);
+    ImageButton exitBtn = new ImageButton(new Image(ServiceLocator.getResourceService()
+            .getAsset("setting-page/exit1.png", Texture.class)).getDrawable());
+    ImageButton applyBtn = new ImageButton(new Image(ServiceLocator.getResourceService()
+            .getAsset("setting-page/apply1.png", Texture.class)).getDrawable());
 
     exitBtn.addListener(
-        new ChangeListener() {
-          @Override
-          public void changed(ChangeEvent changeEvent, Actor actor) {
-            logger.debug("Exit button clicked");
-            exitMenu();
-          }
-        });
+            new ChangeListener() {
+              @Override
+              public void changed(ChangeEvent changeEvent, Actor actor) {
+                logger.debug("Exit button clicked");
+                exitMenu();
+              }
+            });
 
     applyBtn.addListener(
-        new ChangeListener() {
-          @Override
-          public void changed(ChangeEvent changeEvent, Actor actor) {
-            logger.debug("Apply button clicked");
-            applyChanges();
-          }
-        });
+            new ChangeListener() {
+              @Override
+              public void changed(ChangeEvent changeEvent, Actor actor) {
+                logger.debug("Apply button clicked");
+                applyChanges();
+              }
+            });
 
     Table table = new Table();
     table.add(exitBtn).expandX().left().pad(0f, 15f, 15f, 0f);
