@@ -153,13 +153,13 @@ highMax: 1.0
 relative: false
 scalingCount: 4
 scaling0: 0.0
-scaling1: 0.0877193
-scaling2: 0.10526316
+scaling1: 0.3508772
+scaling2: 0.3508772
 scaling3: 0.0
 timelineCount: 4
 timeline0: 0.0
-timeline1: 0.2739726
-timeline2: 0.53424656
+timeline1: 0.29452056
+timeline2: 0.55479455
 timeline3: 1.0
 - Options - 
 attached: false
