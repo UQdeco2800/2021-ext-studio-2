@@ -187,10 +187,10 @@ public class SpaceshipAttackController extends Component {
             this.getEntity().getEvents().trigger("spawnPortalEntrance", spaceshipPosition.cpy().sub(-5, -5), ObstacleEventHandler.ObstacleType.PortalEntrance);
             AchievementsHelper.getInstance().trackSpaceshipAvoidSuccess();
             // hard attack
-        } else if (spaceshipTime <= 10 && (counterSmallMissile % 50 == 0 || counterSmallMissile % 30 == 0)) {
+        } else if (spaceshipTime <= 12 && (counterSmallMissile % 50 == 0 || counterSmallMissile % 30 == 0)) {
             hardAttack(counterSmallMissile, spaceshipPosition, playerPosition);
             // easy attack
-        } else if (spaceshipTime <= 20 && (counterSmallMissile % 50 == 0 || counterSmallMissile % 30 == 0)) {
+        } else if (spaceshipTime <= 22 && (counterSmallMissile % 50 == 0 || counterSmallMissile % 30 == 0)) {
             easyAttack(counterSmallMissile, spaceshipPosition, playerPosition);
         } 
         counterSmallMissile++;
@@ -240,7 +240,7 @@ public class SpaceshipAttackController extends Component {
                 this.getEntity().getEvents().trigger("spawnSmallMissile", getRandomPosition(spaceshipPosition,
                         playerPosition, AttackType.Player, 2));
                 break;
-            case 1290:
+            case 1170:
                 this.getEntity().getComponent(AnimationRenderComponent.class).startAnimation("spaceship_disappear");
                 break;
 
