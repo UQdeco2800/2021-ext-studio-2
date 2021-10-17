@@ -20,6 +20,8 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
@@ -33,7 +35,7 @@ public class PlayerFactory {
     private static final PlayerConfig stats =
             FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
-
+    private static final Logger logger = LoggerFactory.getLogger(PlayerFactory.class);
     /**
      * Create a player entity. Initializes all attached components.
      *
@@ -48,7 +50,9 @@ public class PlayerFactory {
 
         AnimationRenderComponent mpcAnimator;
         TextureRenderComponent mpcTexture;
-        System.out.println("Loading attire: "+ attire);
+
+        logger.debug("Loading attire: "+ attire);
+
         switch (attire) {
 
             case "gold_2":
@@ -208,6 +212,7 @@ public class PlayerFactory {
                         .getAsset(atlasPath,
                                 TextureAtlas.class));
     }
+
 
 
 }

@@ -16,11 +16,6 @@ import com.deco2800.game.components.ItemBar.newItembar;
 import com.deco2800.game.components.foodAndwater.FoodDisplay;
 import com.deco2800.game.components.foodAndwater.WaterDisplay;
 
-import javax.sound.sampled.*;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 
 /**
  * Input handler for the player for keyboard and touch (mouse) input.
@@ -44,6 +39,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
    */
   @Override
   public boolean keyDown(int keycode) {
+
     switch (keycode) {
 
       case Keys.S:
@@ -73,7 +69,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
 
       case Keys.B:
         entity.getEvents().trigger("B pressed");
-
+        return true;
       case Keys.X:
         entity.getEvents().trigger("itemPickUp");
 

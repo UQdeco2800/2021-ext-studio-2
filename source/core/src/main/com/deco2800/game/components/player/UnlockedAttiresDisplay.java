@@ -20,8 +20,6 @@ import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileReader;
-
 /**
  * A UI component to display unlocked attires and the achievements needed to unlock attires
  */
@@ -39,11 +37,11 @@ public class UnlockedAttiresDisplay extends UIComponent {
     public String attireType;
     private PlayerConfig stats;
     private Dialog dialog;
-    private FileReader fileReader;
+    private static final String ATTIRE_PATH = "images/mpc/attires/";
     private int i = 0;
     private static final String[] bgTextures = {"images/menu_background/attires_background.png"};
-    private static final String[] achievementTextures = {"images/mpc/attires/trophies_2x.png", "images/mpc/attires/trophies_4x.png", "images/mpc/attires/trophies_6x.png"};
-    private static final String[] attireTextures = {"images/mpc/attires/original.png", "images/mpc/attires/gold_2.png", "images/mpc/attires/gold_4.png", "images/mpc/attires/gold_6.png"};
+    private static final String[] achievementTextures = {ATTIRE_PATH + "trophies_2x.png", ATTIRE_PATH + "trophies_4x.png", ATTIRE_PATH + "trophies_6x.png"};
+    private static final String[] attireTextures = {ATTIRE_PATH + "original.png", ATTIRE_PATH + "gold_2.png", ATTIRE_PATH + "gold_4.png", ATTIRE_PATH + "gold_6.png"};
 
     public UnlockedAttiresDisplay(GdxGame game,int goldAchievements) {
         this.goldAchievements = goldAchievements;
@@ -84,9 +82,12 @@ public class UnlockedAttiresDisplay extends UIComponent {
         addActors();
     }
 
+    /**
+     * @param batch Batch to render to.
+     */
     @Override
     protected void draw(SpriteBatch batch) {
-
+    // Draw batch
     }
 
     /**
@@ -125,8 +126,6 @@ public class UnlockedAttiresDisplay extends UIComponent {
         table.row();
         unlockedAttiresTable = new Table();
 
-//      Temporary constant for debugging
-        goldAchievements = 10;
         
         if (goldAchievements == 0) {
             renderZeroUnlockedAttiresTable();
@@ -370,11 +369,11 @@ public class UnlockedAttiresDisplay extends UIComponent {
         dialog.setResizable(true);
 
         dialog.pad(50).padTop(120);
-        Image attire = new Image(new Texture("images/mpc/attires/" + attirePath + ".png"));
+        Image attireImg = new Image(new Texture(ATTIRE_PATH + attirePath + ".png"));
         Label heading = new Label("ATTIRE SELECTED!", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         heading.setFontScale(2f);
         dialog.getContentTable().add(heading).expandX().row();
-        dialog.getContentTable().add(attire);
+        dialog.getContentTable().add(attireImg);
         dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
 
         dialog.show(stage);
