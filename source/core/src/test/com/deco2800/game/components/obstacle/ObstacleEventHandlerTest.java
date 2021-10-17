@@ -221,7 +221,7 @@ class ObstacleEventHandlerTest {
 
         portal.getEvents().trigger("collisionStart", portalFixture, playerFixture);
 
-        assertEquals(MainGameScreen.NewMap.Start, MainGameScreen.getNewMapStatus());
+        assertEquals(MainGameScreen.NewMap.START, MainGameScreen.getNewMapStatus());
     }
 
     @Test
@@ -239,7 +239,7 @@ class ObstacleEventHandlerTest {
 
         portal.getEvents().trigger("collisionStart", portalFixture, playerFixture);
 
-        assertEquals(MainGameScreen.NewMap.Finish, MainGameScreen.getNewMapStatus());
+        assertEquals(MainGameScreen.NewMap.FINISH, MainGameScreen.getNewMapStatus());
     }
 
 
