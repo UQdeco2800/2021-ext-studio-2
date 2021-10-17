@@ -31,7 +31,8 @@ public class AchievementsScreen extends ScreenAdapter {
     private static final String[] achievementTextures = AchievementFactory.getTextures();
     private static final String[] backgroundImages = {"images/achievements/achievementBackground.png", "images/story/chapterDialog.png"};
     private static final String CHAPTER_PATH = "images/story/chapter";
-    private static final String[] chapterArt = {"images/story/chapter1art.png", "images/story/chapter2art.png"};
+    private static final String[] chapterArt = {"images/story/chapter1art.png", "images/story/chapter2art.png"
+            , "images/story/chapter3art.png", "images/story/chapter4art.png", "images/story/chapter5art.png"};
     private final GdxGame game;
     private final Renderer renderer;
     private Entity ui;
