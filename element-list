@@ -30,6 +30,8 @@ com.deco2800.game.entities.factories
 com.deco2800.game.events
 com.deco2800.game.events.listeners
 com.deco2800.game.files
+com.deco2800.game.files.meta
+com.deco2800.game.files.stats
 com.deco2800.game.input
 com.deco2800.game.physics
 com.deco2800.game.physics.components
