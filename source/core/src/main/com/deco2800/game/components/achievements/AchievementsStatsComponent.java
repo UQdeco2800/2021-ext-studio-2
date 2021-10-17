@@ -2,10 +2,13 @@ package com.deco2800.game.components.achievements;
 
 import com.deco2800.game.components.Component;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
+import com.deco2800.game.entities.configs.achievements.PropertyListDefaults;
 import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.services.ServiceLocator;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -14,20 +17,14 @@ import java.util.stream.Collectors;
  */
 public class AchievementsStatsComponent extends Component {
     private static final List<BaseAchievementConfig> achievements = AchievementFactory.getAchievements();
-    private int health;
-    private long time;
-    private int itemCount;
-    private boolean bonusItemSign;
-    private int score;
-    private int firstAids;
-    private int gold;
-    private boolean spaceshipAvoidSuccess;
-    private double distance;
+    private static final Map<String, PropertyListDefaults> propertyList = AchievementFactory.getPropertyList();
+
+    private Map<String, Double> gameConditions;
 
     /* TO//DO: setup achievement stats as Hashmap <property,value> */
 
     public AchievementsStatsComponent() {
-        initStats();
+        gameConditions = new LinkedHashMap<>();
     }
 
     /**
@@ -58,25 +55,11 @@ public class AchievementsStatsComponent extends Component {
         achievements.forEach(achievement -> achievement.unlocked = false);
     }
 
-    private void initStats() {
-        itemCount = 0;
-        health = 100;
-        time = -1;
-
-        bonusItemSign = false;
-
-        score = 0;
-        firstAids = 0;
-        gold = 0;
-        spaceshipAvoidSuccess = false;
-        distance = 0;
-    }
-
     @Override
     public void create() {
         super.create();
 
-        initStats();
+        gameConditions = new LinkedHashMap<>();
 
         resetAchievements();
 
@@ -92,7 +75,7 @@ public class AchievementsStatsComponent extends Component {
      * Maintains the spaceshipAvoidSuccess status of the player
      */
     public void setSpaceshipAvoidSuccess() {
-        this.spaceshipAvoidSuccess = true;
+        gameConditions.put("spaceshipAvoidSuccess", 1.0);
         checkForValidAchievements();
     }
 
@@ -100,7 +83,7 @@ public class AchievementsStatsComponent extends Component {
      * Maintains the distance traveled by the main player character in meters
      */
     public void setDistance(double distance) {
-        this.distance = distance;
+        gameConditions.put("distance", distance);
         checkForValidAchievements();
     }
 
@@ -110,7 +93,7 @@ public class AchievementsStatsComponent extends Component {
      * @param health player's changed health
      */
     public void setHealth(int health) {
-        this.health = health;
+        gameConditions.put("health", (double) health);
         checkForValidAchievements();
     }
 
@@ -120,7 +103,7 @@ public class AchievementsStatsComponent extends Component {
      * @param time current game time
      */
     public void setTime(long time) {
-        this.time = time;
+        gameConditions.put("time", (double) time);
         checkForValidAchievements();
     }
 
@@ -130,24 +113,15 @@ public class AchievementsStatsComponent extends Component {
      * @param score the current game score
      */
     public void setScore(int score) {
-        this.score = score;
+        gameConditions.put("score", (double) score);
         checkForValidAchievements();
     }
 
     @Override
     public void update() {
-        long currentTime = ServiceLocator.getTimeSource().getTime();
-        setTime(currentTime);
-
-
-        if (bonusItemSign) {
-            AchievementsHelper.getInstance().getEvents().trigger("spawnBonusItem");
-            bonusItemSign = false;
-        }
-
+        setTime(ServiceLocator.getTimeSource().getTime());
         setScore(ServiceLocator.getScoreService().getScore());
         setDistance(ServiceLocator.getDistanceService().getDistance());
-
     }
 
     public void handleItemPickup(String itemName) {
@@ -172,12 +146,19 @@ public class AchievementsStatsComponent extends Component {
      * Maintains the count of the number of firstAids picked up
      */
     private void setFirstAid() {
-        ++firstAids;
+        increment("firstAids");
         checkForValidAchievements();
     }
 
+    public void increment(String propertyName) {
+        int defaultValue = propertyList.get(propertyName).defaultValue;
+        double propertyValue = gameConditions.getOrDefault(propertyName, (double) defaultValue);
+        propertyValue += 1;
+        gameConditions.put(propertyName, propertyValue);
+    }
+
     public void setFirstAidByVal(int firstAids) {
-        this.firstAids = firstAids;
+        gameConditions.put("firstAids", (double) firstAids);
         checkForValidAchievements();
     }
 
@@ -185,12 +166,12 @@ public class AchievementsStatsComponent extends Component {
      * Maintains the count of the number of gold coins picked up
      */
     private void setGold() {
-        ++gold;
+        increment("gold");
         checkForValidAchievements();
     }
 
     public void setGoldByVal(int gold) {
-        this.gold = gold;
+        gameConditions.put("gold", (double) gold);
         checkForValidAchievements();
     }
 
@@ -198,12 +179,12 @@ public class AchievementsStatsComponent extends Component {
      * Maintains the count of the number of items picked up
      */
     public void setItemCount() {
-        ++itemCount;
+        increment("itemCount");
         checkForValidAchievements();
     }
 
     public void setItemCountByVal(int itemCount) {
-        this.itemCount = itemCount;
+        gameConditions.put("itemCount", (double) itemCount);
         checkForValidAchievements();
     }
 
@@ -223,72 +204,52 @@ public class AchievementsStatsComponent extends Component {
      * @return valid returns true if valid, false otherwise
      */
     private boolean isValid(BaseAchievementConfig achievement) {
-
         if (achievement.unlocked) {
             return true;
         }
 
         boolean valid = false;
-        if (achievement.condition.time != -1) {
-            valid = achievement.condition.time * 60000L <= time;
-            if (!valid) {
-                return false;
-            }
-        }
-        if (achievement.condition.health != -1) {
-            valid = achievement.condition.health <= health;
-            if (!valid) {
-                return false;
-            }
-        }
-        if (achievement.condition.itemCount != -1) {
-            valid = achievement.condition.itemCount == itemCount;
-            if (!valid) {
-                return false;
+
+        for (String cond : propertyList.keySet()) {
+            String operation = propertyList.get(cond).operation;
+
+            double defaultConditionVal = propertyList.get(cond).defaultValue;
+
+            double currentPropertyVal = gameConditions.getOrDefault(cond, defaultConditionVal);
+
+            int conditionVal = achievement.getConditionMap().get(cond);
+
+            if (conditionVal != -1) {
+                if (cond.equals("time")) {
+                    conditionVal = conditionVal * 60000;
+                }
+
+                switch (operation) {
+                    case "==":
+                        valid = conditionVal == currentPropertyVal;
+                        break;
+                    case "<=":
+                        valid = conditionVal <= currentPropertyVal;
+                        break;
+                    default:
+                        // Unknown operation
+                        valid = false;
+                        break;
+                }
+
+
+                if (!valid) {
+                    break;
+                }
             }
         }
 
-        if (achievement.condition.score != -1) {
-            valid = achievement.condition.score <= score;
-            if (!valid) {
-                return false;
-            }
-        }
-
-        if (achievement.condition.firstAids != -1) {
-            valid = achievement.condition.firstAids == firstAids;
-            if (!valid) {
-                return false;
-            }
-        }
-
-        if (achievement.condition.gold != -1) {
-            valid = achievement.condition.gold == gold;
-            if (!valid) {
-                return false;
-            }
-        }
-
-        if (achievement.condition.spaceshipAvoidSuccess) {
-            valid = spaceshipAvoidSuccess;
-            if (!valid) {
-                return false;
-            }
-        }
-
-        if (achievement.condition.distance != -1) {
-            valid = achievement.condition.distance <= distance;
-            if (!valid) {
-                return false;
-            }
-        }
         if (valid) {
             achievement.unlocked = true;
             entity.getEvents().trigger("updateAchievement", achievement);
-            bonusItemSign = true;
         }
 
-        return true;
+        return valid;
     }
 
 

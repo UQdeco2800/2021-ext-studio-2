@@ -49,9 +49,15 @@ public class AchievementStatsComponentTest {
         condition.firstAids = firstAids;
         condition.gold = gold;
         condition.distance = distance;
-        condition.spaceshipAvoidSuccess = spaceshipAvoidSuccess;
+
+        if(spaceshipAvoidSuccess){
+            condition.spaceshipAvoidSuccess = 1;
+        } else {
+            condition.spaceshipAvoidSuccess = -1;
+        }
 
         achievement.condition = condition;
+
         return achievement;
     }
 

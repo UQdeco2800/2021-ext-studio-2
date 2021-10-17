@@ -1,4 +1,39 @@
 {
+  "propertyList": {
+    "class": "java.util.LinkedHashMap",
+    "distance": {
+      "operation": "<=",
+      "defaultValue": 0
+    },
+    "firstAids": {
+      "operation": "==",
+      "defaultValue": 0
+    },
+    "gold": {
+      "operation": "==",
+      "defaultValue": 0
+    },
+    "health": {
+      "operation": "<=",
+      "defaultValue": 100
+    },
+    "itemCount": {
+      "operation": "==",
+      "defaultValue": 0
+    },
+    "score": {
+      "operation": "<=",
+      "defaultValue": 0
+    },
+    "spaceshipAvoidSuccess": {
+      "operation": "==",
+      "defaultValue": 0
+    },
+    "time": {
+      "operation": "<=",
+      "defaultValue": 0
+    }
+  },
   "achievements": [
     {
       "name": "Veteran",
@@ -286,7 +321,7 @@
       "message": "Survived alien spaceship, the world is on your side!!!",
       "bonus": 50,
       "condition": {
-        "spaceshipAvoidSuccess": true
+        "spaceshipAvoidSuccess": 1
       }
     }
   ]
