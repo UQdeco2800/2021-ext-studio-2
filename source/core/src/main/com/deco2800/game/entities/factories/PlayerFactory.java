@@ -51,7 +51,7 @@ public class PlayerFactory {
         AnimationRenderComponent mpcAnimator;
         TextureRenderComponent mpcTexture;
 
-        logger.debug("Loading attire: "+ attire);
+        logger.info("Loading attire: "+ attire);
 
         switch (attire) {
 
