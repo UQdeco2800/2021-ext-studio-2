@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":9,"i2":9,"i3":10,"i4":9,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10};
+<script type="text/javascript">var data = {"i0":10,"i1":9,"i2":9,"i3":10,"i4":10,"i5":9,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -188,74 +188,90 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i4">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#increment(java.lang.String)">increment</a></span>&#8203;(java.lang.String&nbsp;propertyName)</code></th>
+<td class="colLast">
+<div class="block">Fetches the value for that particular property and increments it</div>
+</td>
+</tr>
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>static void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#resetAchievements()">resetAchievements</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Lock all the achievements again</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDistance(double)">setDistance</a></span>&#8203;(double&nbsp;distance)</code></th>
 <td class="colLast">
 <div class="block">Maintains the distance traveled by the main player character in meters</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setFirstAidByVal(int)">setFirstAidByVal</a></span>&#8203;(int&nbsp;firstAids)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="altColor" id="i8">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setGoldByVal(int)">setGoldByVal</a></span>&#8203;(int&nbsp;gold)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i8">
+<tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setHealth(int)">setHealth</a></span>&#8203;(int&nbsp;health)</code></th>
 <td class="colLast">
 <div class="block">Maintains the current health of player</div>
 </td>
 </tr>
-<tr class="rowColor" id="i9">
+<tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setItemCount()">setItemCount</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Maintains the count of the number of items picked up</div>
 </td>
 </tr>
-<tr class="altColor" id="i10">
+<tr class="rowColor" id="i11">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setItemCountByVal(int)">setItemCountByVal</a></span>&#8203;(int&nbsp;itemCount)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i11">
+<tr class="altColor" id="i12">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScore(int)">setScore</a></span>&#8203;(int&nbsp;score)</code></th>
 <td class="colLast">
 <div class="block">Maintains the current score</div>
 </td>
 </tr>
-<tr class="altColor" id="i12">
+<tr class="rowColor" id="i13">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSpaceshipAvoidSuccess()">setSpaceshipAvoidSuccess</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Maintains the spaceshipAvoidSuccess status of the player</div>
 </td>
 </tr>
-<tr class="rowColor" id="i13">
+<tr class="altColor" id="i14">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTime(long)">setTime</a></span>&#8203;(long&nbsp;time)</code></th>
 <td class="colLast">
 <div class="block">Maintains the in game time</div>
 </td>
 </tr>
-<tr class="altColor" id="i14">
+<tr class="rowColor" id="i15">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Called once per frame of the game, and should be used for most component logic.</div>
+</td>
+</tr>
+<tr class="altColor" id="i16">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updateConditionsAndRevalidate(java.lang.String,double)">updateConditionsAndRevalidate</a></span>&#8203;(java.lang.String&nbsp;propertyName,
+double&nbsp;val)</code></th>
+<td class="colLast">
+<div class="block">Updates the game variables in concern and checks if an achievement
+ has been unlocked</div>
 </td>
 </tr>
 </tbody>
@@ -411,6 +427,17 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="increment(java.lang.String)">increment</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">increment</span>&#8203;(<span class="arguments">java.lang.String&nbsp;propertyName)</span></div>
+<div class="block">Fetches the value for that particular property and increments it</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>propertyName</code> - name of the achievement condition</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="setFirstAidByVal(int)">setFirstAidByVal</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setFirstAidByVal</span>&#8203;(<span class="arguments">int&nbsp;firstAids)</span></div>
 </section>
@@ -432,6 +459,20 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <section class="detail">
 <h3><a id="setItemCountByVal(int)">setItemCountByVal</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setItemCountByVal</span>&#8203;(<span class="arguments">int&nbsp;itemCount)</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="updateConditionsAndRevalidate(java.lang.String,double)">updateConditionsAndRevalidate</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">updateConditionsAndRevalidate</span>&#8203;(<span class="arguments">java.lang.String&nbsp;propertyName,
+double&nbsp;val)</span></div>
+<div class="block">Updates the game variables in concern and checks if an achievement
+ has been unlocked</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>propertyName</code> - name of property</dd>
+<dd><code>val</code> - property value</dd>
+</dl>
 </section>
 </li>
 </ul>

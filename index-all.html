@@ -77,7 +77,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><a href="com/deco2800/game/entities/configs/AchievementConfigs.html" title="class in com.deco2800.game.entities.configs"><span class="typeNameLink">AchievementConfigs</span></a> - Class in <a href="com/deco2800/game/entities/configs/package-summary.html">com.deco2800.game.entities.configs</a></dt>
 <dd>
 <div class="block">Defines an Arraylist to store a basic set of achievement properties stored in
- achievement config files (achievements.json) to be loaded by Achievement Factory</div>
+ achievement config files (achievements.json) to be loaded by Achievement Factory,
+ as well as the property list with operations that need to be conducted and necessary defaults.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/configs/AchievementConfigs.html#%3Cinit%3E()">AchievementConfigs()</a></span> - Constructor for class com.deco2800.game.entities.configs.<a href="com/deco2800/game/entities/configs/AchievementConfigs.html" title="class in com.deco2800.game.entities.configs">AchievementConfigs</a></dt>
 <dd>&nbsp;</dd>
@@ -974,6 +975,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ai/tasks/DefaultTask.html#%3Cinit%3E()">DefaultTask()</a></span> - Constructor for class com.deco2800.game.ai.tasks.<a href="com/deco2800/game/ai/tasks/DefaultTask.html" title="class in com.deco2800.game.ai.tasks">DefaultTask</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/configs/achievements/PropertyListDefaults.html#defaultValue">defaultValue</a></span> - Variable in class com.deco2800.game.entities.configs.achievements.<a href="com/deco2800/game/entities/configs/achievements/PropertyListDefaults.html" title="class in com.deco2800.game.entities.configs.achievements">PropertyListDefaults</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/configs/propStore/PropItemConfig.html#desc">desc</a></span> - Variable in class com.deco2800.game.entities.configs.propStore.<a href="com/deco2800/game/entities/configs/propStore/PropItemConfig.html" title="class in com.deco2800.game.entities.configs.propStore">PropItemConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/configs/buff/BuffDescriptionConfig.html#description">description</a></span> - Variable in class com.deco2800.game.entities.configs.buff.<a href="com/deco2800/game/entities/configs/buff/BuffDescriptionConfig.html" title="class in com.deco2800.game.entities.configs.buff">BuffDescriptionConfig</a></dt>
@@ -1584,6 +1587,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Get a component of type T on the entity.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/configs/achievements/BaseAchievementConfig.html#getConditionMap()">getConditionMap()</a></span> - Method in class com.deco2800.game.entities.configs.achievements.<a href="com/deco2800/game/entities/configs/achievements/BaseAchievementConfig.html" title="class in com.deco2800.game.entities.configs.achievements">BaseAchievementConfig</a></dt>
+<dd>
+<div class="block">Returns a mapping of the achievement name and value for easy processing
+ This makes it very easy to iterate through all the properties and fetch
+ the values, and saves a lot of technical debt.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/obstacle/ObstacleEventHandler.html#getCount()">getCount()</a></span> - Method in class com.deco2800.game.components.obstacle.<a href="com/deco2800/game/components/obstacle/ObstacleEventHandler.html" title="class in com.deco2800.game.components.obstacle">ObstacleEventHandler</a></dt>
 <dd>
 <div class="block">getter method for count</div>
@@ -1811,6 +1820,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/terrain/TerrainTile.html#getProperties()">getProperties()</a></span> - Method in class com.deco2800.game.areas.terrain.<a href="com/deco2800/game/areas/terrain/TerrainTile.html" title="class in com.deco2800.game.areas.terrain">TerrainTile</a></dt>
 <dd>
 <div class="block">Not required for game, unimplemented</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/AchievementFactory.html#getPropertyList()">getPropertyList()</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/AchievementFactory.html" title="class in com.deco2800.game.entities.factories">AchievementFactory</a></dt>
+<dd>
+<div class="block">Dynamically load and return the list of properties and their defaults.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/PropStoreFactory.html#getPropStoreItems()">getPropStoreItems()</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/PropStoreFactory.html" title="class in com.deco2800.game.entities.factories">PropStoreFactory</a></dt>
 <dd>&nbsp;</dd>
@@ -2092,6 +2105,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/buff/Buff.html#increaseHealthLimit()">increaseHealthLimit()</a></span> - Method in class com.deco2800.game.components.buff.<a href="com/deco2800/game/components/buff/Buff.html" title="class in com.deco2800.game.components.buff">Buff</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/achievements/AchievementsStatsComponent.html#increment(java.lang.String)">increment(String)</a></span> - Method in class com.deco2800.game.components.achievements.<a href="com/deco2800/game/components/achievements/AchievementsStatsComponent.html" title="class in com.deco2800.game.components.achievements">AchievementsStatsComponent</a></dt>
+<dd>
+<div class="block">Fetches the value for that particular property and increments it</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/files/GameInfo.html#incrementGameCount()">incrementGameCount()</a></span> - Static method in class com.deco2800.game.files.<a href="com/deco2800/game/files/GameInfo.html" title="class in com.deco2800.game.files">GameInfo</a></dt>
 <dd>
 <div class="block">Increment the total number of games that have been
@@ -2674,6 +2691,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/utils/math/Vector2Utils.html#ONE">ONE</a></span> - Static variable in class com.deco2800.game.utils.math.<a href="com/deco2800/game/utils/math/Vector2Utils.html" title="class in com.deco2800.game.utils.math">Vector2Utils</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/configs/achievements/PropertyListDefaults.html#operation">operation</a></span> - Variable in class com.deco2800.game.entities.configs.achievements.<a href="com/deco2800/game/entities/configs/achievements/PropertyListDefaults.html" title="class in com.deco2800.game.entities.configs.achievements">PropertyListDefaults</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/terrain/TerrainComponent.TerrainOrientation.html#ORTHOGONAL">ORTHOGONAL</a></span> - com.deco2800.game.areas.terrain.<a href="com/deco2800/game/areas/terrain/TerrainComponent.TerrainOrientation.html" title="enum in com.deco2800.game.areas.terrain">TerrainComponent.TerrainOrientation</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ai/tasks/DefaultTask.html#owner">owner</a></span> - Variable in class com.deco2800.game.ai.tasks.<a href="com/deco2800/game/ai/tasks/DefaultTask.html" title="class in com.deco2800.game.ai.tasks">DefaultTask</a></dt>
@@ -2878,6 +2897,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Processes the completed message entered by the user.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/configs/propStore/PropItemConfig.html#property">property</a></span> - Variable in class com.deco2800.game.entities.configs.propStore.<a href="com/deco2800/game/entities/configs/propStore/PropItemConfig.html" title="class in com.deco2800.game.entities.configs.propStore">PropItemConfig</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/configs/AchievementConfigs.html#propertyList">propertyList</a></span> - Variable in class com.deco2800.game.entities.configs.<a href="com/deco2800/game/entities/configs/AchievementConfigs.html" title="class in com.deco2800.game.entities.configs">AchievementConfigs</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/deco2800/game/entities/configs/achievements/PropertyListDefaults.html" title="class in com.deco2800.game.entities.configs.achievements"><span class="typeNameLink">PropertyListDefaults</span></a> - Class in <a href="com/deco2800/game/entities/configs/achievements/package-summary.html">com.deco2800.game.entities.configs.achievements</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/configs/achievements/PropertyListDefaults.html#%3Cinit%3E()">PropertyListDefaults()</a></span> - Constructor for class com.deco2800.game.entities.configs.achievements.<a href="com/deco2800/game/entities/configs/achievements/PropertyListDefaults.html" title="class in com.deco2800.game.entities.configs.achievements">PropertyListDefaults</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/entities/configs/propStore/PropItemConfig.html" title="class in com.deco2800.game.entities.configs.propStore"><span class="typeNameLink">PropItemConfig</span></a> - Class in <a href="com/deco2800/game/entities/configs/propStore/package-summary.html">com.deco2800.game.entities.configs.propStore</a></dt>
 <dd>&nbsp;</dd>
@@ -4276,6 +4301,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/files/MPCConfig.html#updateAttire(java.lang.String)">updateAttire(String)</a></span> - Static method in class com.deco2800.game.files.<a href="com/deco2800/game/files/MPCConfig.html" title="class in com.deco2800.game.files">MPCConfig</a></dt>
 <dd>
 <div class="block">Retrieve the current attire value and update PlayerConfig</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/achievements/AchievementsStatsComponent.html#updateConditionsAndRevalidate(java.lang.String,double)">updateConditionsAndRevalidate(String, double)</a></span> - Method in class com.deco2800.game.components.achievements.<a href="com/deco2800/game/components/achievements/AchievementsStatsComponent.html" title="class in com.deco2800.game.components.achievements">AchievementsStatsComponent</a></dt>
+<dd>
+<div class="block">Updates the game variables in concern and checks if an achievement
+ has been unlocked</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/items/InventorySystem.html#updateinventory()">updateinventory()</a></span> - Method in class com.deco2800.game.components.items.<a href="com/deco2800/game/components/items/InventorySystem.html" title="class in com.deco2800.game.components.items">InventorySystem</a></dt>
 <dd>&nbsp;</dd>
