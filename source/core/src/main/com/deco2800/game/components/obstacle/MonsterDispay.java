@@ -179,7 +179,7 @@ public class MonsterDispay extends UIComponent {
 
         BaseEntityConfig config_plant = configs2.plant;
         monster1AttributeTable = new Table();
-        Label monsterAttributes = new Label("attack:" + config_plant.baseAttack + "\nhealth:" + config_plant.health, skin);
+        Label monsterAttributes = new Label("attack:" + config_plant.baseAttack , skin);
         monsterAttributes.setColor(255, 255, 255, 0.5f);
         monsterAttributes.setFontScale(0.8f);
         monster1AttributeTable.center().padLeft(90).padBottom(680);
@@ -198,7 +198,7 @@ public class MonsterDispay extends UIComponent {
 
 
         monster2AttributeTable = new Table();
-        Label monster2Attributes = new Label("attack:" +config_thorn.baseAttack+  "\nhealth:" + config_thorn.health, skin);
+        Label monster2Attributes = new Label("attack:" +config_thorn.baseAttack, skin);
         monster2Attributes.setColor(255, 255, 255, 0.5f);
         monster2Attributes.setFontScale(0.8f);
         monster2AttributeTable.center().padLeft(100).padBottom(435);
@@ -217,7 +217,7 @@ public class MonsterDispay extends UIComponent {
         Monster3Table.add(monster3Name).padLeft(50).padBottom(35);
 
         monster3AttributeTable = new Table();
-        Label monster3Attributes = new Label("attack:"+ config_Meteorite.baseAttack + "To" + config_Meteorite2.baseAttack+ "\nhealth:" + config_Meteorite.health + "To"+ config_Meteorite2.health, skin);
+        Label monster3Attributes = new Label("attack:"+ config_Meteorite.baseAttack + "To" + config_Meteorite2.baseAttack, skin);
         monster3Attributes.setColor(255, 255, 255, 0.5f);
         monster3Attributes.setFontScale(0.8f);
         monster3AttributeTable.center().padLeft(150).padBottom(195);
@@ -234,7 +234,7 @@ public class MonsterDispay extends UIComponent {
         Monster4Table.add(monster4Name).padLeft(40).padBottom(35);
 
         monster4AttributeTable = new Table();
-        Label monster4Attributes = new Label("attack: 0\nhealth: 100", skin);
+        Label monster4Attributes = new Label("attack: 0", skin);
         monster4Attributes.setColor(255, 255, 255, 0.5f);
         monster4Attributes.setFontScale(0.8f);
         monster4AttributeTable.center().padLeft(100).padTop(45);
@@ -252,7 +252,7 @@ public class MonsterDispay extends UIComponent {
         Monster5Table.add(monster5Name).padLeft(35).padBottom(40);
 
         monster5AttributeTable = new Table();
-        Label monster5Attributes = new Label("attack:" + config_worm.baseAttack +"\nhealth:" + config_worm.health, skin);
+        Label monster5Attributes = new Label("attack:" + config_worm.baseAttack, skin);
         monster5Attributes.setColor(255, 255, 255, 0.5f);
         monster5Attributes.setFontScale(0.8f);
         monster5AttributeTable.center().padLeft(110).padTop(285);
@@ -278,7 +278,7 @@ public class MonsterDispay extends UIComponent {
 
 
         monster6AttributeTable = new Table();
-        Label monster6Attributes = new Label("attack:" + config_spaceship.baseAttack + "\nhealth:" + config_spaceship.health, skin);
+        Label monster6Attributes = new Label("attack:" + config_spaceship.baseAttack + "\nduration: 20S", skin);
         monster6Attributes.setColor(255, 255, 255, 0.5f);
         monster6Attributes.setFontScale(0.8f);
         monster6AttributeTable.center().padLeft(230).padTop(630);
