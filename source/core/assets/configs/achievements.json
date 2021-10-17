@@ -112,40 +112,40 @@
       "name": "Tool Master",
       "type": "SILVER",
       "iconPath": "images/achievements/toolMasterSilver.png",
-      "message": "You have successfully picked up 15 items!",
+      "message": "You have successfully picked up 25 items!",
       "bonus": 15,
       "condition": {
-        "itemCount": 15
+        "itemCount": 25
       }
     },
     {
       "name": "Tool Master",
       "type": "GOLD",
       "iconPath": "images/achievements/toolMasterGold.png",
-      "message": "You have successfully picked up 20 items!",
+      "message": "You have successfully picked up 35 items!",
       "bonus": 20,
       "condition": {
-        "itemCount": 20
+        "itemCount": 35
       }
     },
     {
       "name": "Healer",
       "type": "BRONZE",
       "iconPath": "images/achievements/healerBronze.png",
-      "message": "You have successfully picked up 5 first aids!",
+      "message": "You have successfully picked up 9 first aids!",
       "bonus": 10,
       "condition": {
-        "firstAids": 5
+        "firstAids": 9
       }
     },
     {
       "name": "Healer",
       "type": "SILVER",
       "iconPath": "images/achievements/healerSilver.png",
-      "message": "You have successfully picked up 15 first aids!",
+      "message": "You have successfully picked up 18 first aids!",
       "bonus": 15,
       "condition": {
-        "firstAids": 15
+        "firstAids": 18
       }
     },
     {
@@ -195,30 +195,30 @@
       "name": "Master",
       "type": "BRONZE",
       "iconPath": "images/achievements/masterBronze.png",
-      "message": "Wow! You have crossed the score of 50!",
-      "bonus": 10,
-      "condition": {
-        "score": 50
-      }
-    },
-    {
-      "name": "Master",
-      "type": "SILVER",
-      "iconPath": "images/achievements/masterSilver.png",
       "message": "Wow! You have crossed the score of 100!",
-      "bonus": 15,
+      "bonus": 10,
       "condition": {
         "score": 100
       }
     },
     {
       "name": "Master",
+      "type": "SILVER",
+      "iconPath": "images/achievements/masterSilver.png",
+      "message": "Wow! You have crossed the score of 200!",
+      "bonus": 15,
+      "condition": {
+        "score": 200
+      }
+    },
+    {
+      "name": "Master",
       "type": "GOLD",
       "iconPath": "images/achievements/masterGold.png",
-      "message": "Wow! You have crossed the score of 150!",
+      "message": "Wow! You have crossed the score of 350!",
       "bonus": 20,
       "condition": {
-        "score": 150
+        "score": 350
       }
     },
     {
@@ -236,52 +236,52 @@
       "name": "Game Fanatic",
       "type": "SILVER",
       "iconPath": "images/achievements/gameFanaticSilver.png",
-      "message": "Picked up 20 First Aids with full health, You don't need em!",
+      "message": "Picked up 25 First Aids with full health, You don't need em!",
       "bonus": 25,
       "condition": {
         "health": 100,
-        "firstAids": 20
+        "firstAids": 25
       }
     },
     {
       "name": "Game Fanatic",
       "type": "GOLD",
       "iconPath": "images/achievements/gameFanaticGold.png",
-      "message": "Picked up 30 First Aids with full health, You don't need em!",
+      "message": "Picked up 35 First Aids with full health, You don't need em!",
       "bonus": 40,
       "condition": {
         "health": 100,
-        "firstAids": 30
+        "firstAids": 35
       }
     },
     {
       "name": "Collector",
       "type": "BRONZE",
       "iconPath": "images/achievements/collectorBronze.png",
-      "message": "GG! you've collected 10 coins",
-      "bonus": 10,
-      "condition": {
-        "gold": 10
-      }
-    },
-    {
-      "name": "Collector",
-      "type": "SILVER",
-      "iconPath": "images/achievements/collectorSilver.png",
       "message": "GG! you've collected 20 coins",
-      "bonus": 15,
+      "bonus": 10,
       "condition": {
         "gold": 20
       }
     },
     {
       "name": "Collector",
+      "type": "SILVER",
+      "iconPath": "images/achievements/collectorSilver.png",
+      "message": "GG! you've collected 35 coins",
+      "bonus": 15,
+      "condition": {
+        "gold": 35
+      }
+    },
+    {
+      "name": "Collector",
       "type": "GOLD",
       "iconPath": "images/achievements/collectorGold.png",
-      "message": "GG! you've collected 30 coins",
+      "message": "GG! you've collected 50 coins",
       "bonus": 20,
       "condition": {
-        "gold": 30
+        "gold": 50
       }
     },
     {
