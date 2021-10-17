@@ -22,6 +22,10 @@ import org.slf4j.LoggerFactory;
 
 import java.io.FileReader;
 
+/**
+ * A UI component to display unlocked attires and the achievements needed to unlock attires
+ */
+
 public class UnlockedAttiresDisplay extends UIComponent {
 
     private static final Logger logger = LoggerFactory.getLogger(UnlockedAttiresDisplay.class);
@@ -50,7 +54,9 @@ public class UnlockedAttiresDisplay extends UIComponent {
         loadAssets();
 
     }
-
+    /**
+     * Load all attires' and achievements' assets
+     */
     private void loadAssets() {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
@@ -62,6 +68,9 @@ public class UnlockedAttiresDisplay extends UIComponent {
         ServiceLocator.getResourceService().loadAll();
     }
 
+    /**
+     * Unload all attires' and achievements' assets
+     */
     private void unloadAssets() {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
@@ -79,6 +88,10 @@ public class UnlockedAttiresDisplay extends UIComponent {
     protected void draw(SpriteBatch batch) {
 
     }
+
+    /**
+     * Create a new table and add actors to the stage
+     */
 
     private void addActors() {
         Image background =
@@ -121,7 +134,6 @@ public class UnlockedAttiresDisplay extends UIComponent {
             renderUnlockedAttiresTable();
         }
 
-      //  renderUnlockedAttires(goldAchievements, 0.55f);
 
         table.add(unlockedAttiresTable);
         table.row();
@@ -205,6 +217,10 @@ public class UnlockedAttiresDisplay extends UIComponent {
         }
 
     }
+    /**
+     * Renders the original attire
+     */
+
     private void renderOriginalAttire() {
 
         ImageButton attireImg = getImageButton("images/mpc/attires/original.png");
@@ -222,6 +238,11 @@ public class UnlockedAttiresDisplay extends UIComponent {
         unlockedAttiresTable.row();
         
     }
+
+    /**
+     * Renders the gold_2 attire when the number of achievements < 4
+     */
+
     private void lessThanFour(float alpha) {
         renderOriginalAttire();
         Image achievementImg = new Image(ServiceLocator.getResourceService()
@@ -256,6 +277,10 @@ public class UnlockedAttiresDisplay extends UIComponent {
 
     }
 
+    /**
+     * Renders the gold_2 and gold_4 attires when the number of achievements < 6
+     */
+
     private void lessThanSix(float alpha) {
         Image achievementImg = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/mpc/attires/trophies_4x.png", Texture.class));
@@ -289,6 +314,10 @@ public class UnlockedAttiresDisplay extends UIComponent {
             unlockedAttiresTable.row();
         }
     }
+
+    /**
+     * Renders the gold_2, gold_4, gold_6 attires when the number of achievements > 6
+     */
 
     private void moreThanSix(float alpha) {
         Label message1 = new Label("YOU HAVE UNLOCKED ALL ATTIRES FOR NOW!",
@@ -328,6 +357,10 @@ public class UnlockedAttiresDisplay extends UIComponent {
         table.clear();
         bgTable.clear();
     }
+
+    /**
+     * UI Component for Confirm Selected Attire Pop Up Screen
+     */
 
     private void confirmSelection (String attireType, String attirePath) {
 
