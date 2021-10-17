@@ -10,9 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.factories.AchievementFactory;
-import com.deco2800.game.files.GameInfo;
-import com.deco2800.game.files.GameRecords;
-import com.deco2800.game.files.GameRecords.Score;
+import com.deco2800.game.files.meta.GameInfo;
+import com.deco2800.game.files.stats.GameRecordUtils;
+import com.deco2800.game.files.stats.GameRecords.Score;
 import com.deco2800.game.ui.UIComponent;
 import com.deco2800.game.utils.DateTimeUtils;
 
@@ -31,7 +31,7 @@ public class ScoreDetailsDialog extends UIComponent {
         // Event when a score row is clicked
         entity.getEvents().addListener(OPEN_SCORE_DETAILS_DIALOG, (Score score) -> {
             // Get the list of the best achievements for that particular game
-            List<BaseAchievementConfig> bestAchievements = GameRecords.getBestAchievementsByGame(score.game);
+            List<BaseAchievementConfig> bestAchievements = GameRecordUtils.getBestAchievementsByGame(score.game);
             // Open the dialog
             openDialog(score, bestAchievements);
         });

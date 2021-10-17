@@ -10,7 +10,7 @@ import com.deco2800.game.components.obstacle.MonsterDispay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.files.BackgroundMusic;
+import com.deco2800.game.files.meta.BackgroundMusic;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;

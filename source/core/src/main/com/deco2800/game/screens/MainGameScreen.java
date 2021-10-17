@@ -22,8 +22,8 @@ import com.deco2800.game.components.score.TimerDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.files.GameInfo;
-import com.deco2800.game.files.GameRecords;
+import com.deco2800.game.files.meta.GameInfo;
+import com.deco2800.game.files.stats.GameRecords;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
@@ -79,6 +79,7 @@ public class MainGameScreen extends ScreenAdapter {
     private final Entity player;
     private final ForestGameArea forestGameArea;
     private int counter = 0;
+
     public MainGameScreen(GdxGame game) {
         this.game = game;
         logger.debug("Initialising main game screen services");
