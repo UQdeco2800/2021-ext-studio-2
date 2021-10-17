@@ -46,7 +46,7 @@ public class FoodDisplay extends UIComponent {
         table.padTop(100f).padLeft(10f);
 
         //Add Food image
-        float clockSideLength = 30f;
+        float foodIconSize = 30f;
         chickenImage.add(new Image(ServiceLocator.getResourceService()
                 .getAsset("images/food1.png", Texture.class)));
         chickenImage.add(new Image(ServiceLocator.getResourceService()
@@ -59,10 +59,10 @@ public class FoodDisplay extends UIComponent {
         CharSequence TimerText =chickenCurrent + "";
         timeLabel = new Label(TimerText, skin, "large");
         //add images into the screen
-        table.add(chickenImage.get(0)).size(clockSideLength).pad(3);
-        table.add(chickenImage.get(1)).size(clockSideLength).pad(3);
-        table.add(chickenImage.get(2)).size(clockSideLength).pad(3);
-        table.add(chickenImage.get(3)).size(clockSideLength).pad(3);
+        table.add(chickenImage.get(0)).size(foodIconSize).pad(3);
+        table.add(chickenImage.get(1)).size(foodIconSize).pad(3);
+        table.add(chickenImage.get(2)).size(foodIconSize).pad(3);
+        table.add(chickenImage.get(3)).size(foodIconSize).pad(3);
         stage.addActor(table);
     }
 

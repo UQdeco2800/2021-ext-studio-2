@@ -49,7 +49,7 @@ public class WaterDisplay extends UIComponent {
         table.padTop(150f).padLeft(10f);
 
         //Add water image
-        float clockSideLength = 30f;
+        float waterIconSize = 30f;
         waterImage.add(new Image(ServiceLocator.getResourceService()
                 .getAsset("images/water1.png", Texture.class)));
         waterImage.add(new Image(ServiceLocator.getResourceService()
@@ -63,10 +63,10 @@ public class WaterDisplay extends UIComponent {
         CharSequence TimerText = waterCurrent + "";
         timeLabel = new Label(TimerText, skin, "large");
         //add images into the screen
-        table.add(waterImage.get(0)).size(clockSideLength).pad(3);
-        table.add(waterImage.get(1)).size(clockSideLength).pad(3);
-        table.add(waterImage.get(2)).size(clockSideLength).pad(3);
-        table.add(waterImage.get(3)).size(clockSideLength).pad(3);
+        table.add(waterImage.get(0)).size(waterIconSize).pad(3);
+        table.add(waterImage.get(1)).size(waterIconSize).pad(3);
+        table.add(waterImage.get(2)).size(waterIconSize).pad(3);
+        table.add(waterImage.get(3)).size(waterIconSize).pad(3);
         stage.addActor(table);
     }
 
