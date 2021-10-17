@@ -25,7 +25,9 @@ public class HistoryScoreScreen extends ScreenAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(HistoryScoreScreen.class);
     private static final String[] historyScoreTextures =
-            {"images/historyScoreBoard.png", "images/historyScoreBg.png", "images/achievements/trophyDialogSilver.png"};
+            {"images/historyScoreBoard.png", "images/historyScoreBg.png", "images/achievements/trophyDialogSilver.png"
+                    , "images/achievements/calenderIcon.png", "images/achievements/timeIcon.png"
+                    , "images/achievements/scoreIcon.png"};
     private static final String[] trophyTextures = AchievementFactory.getTrophyTextures();
     private final Renderer renderer;
     private final ScoreHistoryDisplay scoreHistoryDisplay;
