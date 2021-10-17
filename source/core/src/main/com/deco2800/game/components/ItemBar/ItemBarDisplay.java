@@ -36,12 +36,12 @@ public class ItemBarDisplay extends UIComponent {
         itembartable = new Table();
         itembartable.bottom();
         itembartable.setFillParent(true);
-        itembartable.padBottom(50).padRight(60);
+        itembartable.padBottom(30).padRight(60);
 
         counttable = new Table();
-        counttable.bottom().right();
+        counttable.bottom();
         counttable.setFillParent(true);
-        counttable.padBottom(60).padRight(505);
+        counttable.padBottom(40).padRight(20);
 
 //        CharSequence countText = (CharSequence)counts;
 //        countlabel = new Label(countText, new Label.LabelStyle(new BitmapFont(), Color.WHITE));

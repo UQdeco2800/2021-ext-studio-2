@@ -1,5 +1,6 @@
 package com.deco2800.game.components.items;
 
+import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.ItemBar.ItemBarDisplay;
 import com.deco2800.game.components.ItemBar.newItembar;
@@ -19,9 +20,8 @@ public class TestBuffForItem {
          */
         health = target.getComponent(CombatStatsComponent.class).getHealth();
         if(health < 100) {
-            target.getComponent(CombatStatsComponent.class).addHealth(10);
+            target.getComponent(CombatStatsComponent.class).addHealth(0);
         }
-        /*ItemBarDisplay.addorremove("kit",1);*/
         newItembar.addkit();
         if(countNumber < 3){
             countNumber+=0.5;

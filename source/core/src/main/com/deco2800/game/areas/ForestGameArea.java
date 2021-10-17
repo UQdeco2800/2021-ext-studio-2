@@ -487,8 +487,10 @@ public class ForestGameArea extends GameArea {
     };
 
     private static final String[] jumpSounds = {"sounds/jump.ogg"};
-    private static final String itemSounds = "sounds/itembar/item-use.mp3";
+    private static final String itemSounds = "sounds/itembar/item-switch.mp3";
+    private static final String pickupSounds = "sounds/itembar/item-use.mp3";
     private static final String[] itemMusic = {itemSounds};
+    private static final String[] pickupMusic = {pickupSounds};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
     private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
     private static final String NEWMAP_BACKGROUNDMUSIC = "sounds/track2.mp3";
@@ -993,6 +995,12 @@ public class ForestGameArea extends GameArea {
         music.play();
     }
 
+    public static void playpickupMusic() {
+        Music music = ServiceLocator.getResourceService().getAsset(pickupSounds, Music.class);
+        music.setVolume(0.3f);
+        music.play();
+    }
+
     /**
      * Play the new map bgm
      */
@@ -1027,6 +1035,7 @@ public class ForestGameArea extends GameArea {
         resourceService.loadSounds(turnSounds);
         resourceService.loadMusic(forestMusic);
         resourceService.loadMusic(itemMusic);
+        resourceService.loadMusic(pickupMusic);
 
         resourceService.loadMusic(newMapMusic);
         resourceService.loadTextures(mpcTextures);
@@ -1048,7 +1057,7 @@ public class ForestGameArea extends GameArea {
         resourceService.unloadAssets(turnSounds);
         resourceService.unloadAssets(forestMusic);
         resourceService.unloadAssets(itemMusic);
-
+        resourceService.unloadAssets(pickupMusic);
         resourceService.unloadAssets(newMapMusic);
         resourceService.unloadAssets(mpcTextures);
         resourceService.unloadAssets(mpcTexturesAtlases);

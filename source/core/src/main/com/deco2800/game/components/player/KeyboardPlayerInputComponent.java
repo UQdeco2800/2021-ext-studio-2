@@ -87,15 +87,19 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         return true;
 
       case Keys.L:
-        newItembar.usefood();
-        FoodDisplay.addOrRemoveImage(1);
-        ForestGameArea.playitemMusic();
+        if (newItembar.getfood() > 0){
+          newItembar.usefood();
+          FoodDisplay.addOrRemoveImage(1);
+          ForestGameArea.playitemMusic();
+        }
         return true;
 
       case Keys.K:
-        newItembar.usewater();
-        WaterDisplay.addOrRemoveImage(1);
-        ForestGameArea.playitemMusic();
+        if (newItembar.getwater() > 0){
+          newItembar.usewater();
+          WaterDisplay.addOrRemoveImage(1);
+          ForestGameArea.playitemMusic();
+        }
         return true;
 
       case Keys.NUM_4://consume recycle:add chicken/water/health depends on the state of recycle system
