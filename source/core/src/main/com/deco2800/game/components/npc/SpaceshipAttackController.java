@@ -240,7 +240,7 @@ public class SpaceshipAttackController extends Component {
                 this.getEntity().getEvents().trigger("spawnSmallMissile", getRandomPosition(spaceshipPosition,
                         playerPosition, AttackType.Player, 2));
                 break;
-            case 1170:
+            case 1200:
                 this.getEntity().getComponent(AnimationRenderComponent.class).startAnimation("spaceship_disappear");
                 break;
 
