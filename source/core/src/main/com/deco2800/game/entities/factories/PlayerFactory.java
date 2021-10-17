@@ -35,7 +35,7 @@ public class PlayerFactory {
 
 
     /**
-     * Create a player entity.
+     * Create a player entity. Initializes all attached components.
      *
      * @return entity
      */
@@ -178,6 +178,12 @@ public class PlayerFactory {
         throw new IllegalStateException("Instantiating static util class");
     }
 
+    /**
+     * Retrieve the selected attire from the locally persisted JSON file.
+     *
+     * @return attire
+     */
+
     private static String updateAttireConfig() {
         final String ROOT_DIR = "DECO2800Game";
         final String CONFIG_FILE = "mpc.json";
@@ -189,6 +195,12 @@ public class PlayerFactory {
         attire = config.attire;
         return attire;
     }
+
+    /**
+     * Create new AnimationRenderComponent for every added animation
+     *
+     * @return AnimationRenderComponent
+     */
 
     private static AnimationRenderComponent createAnimationComponent(String atlasPath) {
         return new AnimationRenderComponent(
