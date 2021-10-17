@@ -367,7 +367,6 @@ public class ForestGameArea extends GameArea {
     /* The number of each type of obstacle. Note: total obstacles cannot be greater than 20 (range of loading map)*/
     private static final int NUM_OBSTACLES = 2;
 
-    private static final int NUM_GHOSTS = 2;
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(0, 10);
     private static final float WALL_WIDTH = 0.1f;
     private ItemBar itembar;
@@ -736,7 +735,7 @@ public class ForestGameArea extends GameArea {
         GridPoint2 randomPos2;
         // Record the coordinates of all obstacles, Record the coordinates of all obstacles to prevent obstacles
         // from being generated at the same location
-        ArrayList<GridPoint2> randomPoints = new ArrayList<GridPoint2>();
+        ArrayList<GridPoint2> randomPoints = new ArrayList<>();
 
         String loggerInfo = "";
 

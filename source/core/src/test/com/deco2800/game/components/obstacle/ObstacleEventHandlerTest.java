@@ -160,7 +160,7 @@ class ObstacleEventHandlerTest {
         spaceship.getEvents().trigger("collisionStart", spaceshipFixture, playerFixture);
 
         SpaceshipAttackController.SpaceshipAttack spaceshipAttack = spaceship.getComponent(SpaceshipAttackController.class).getSpaceshipState();
-        assertEquals(SpaceshipAttackController.SpaceshipAttack.Start, spaceshipAttack);
+        assertEquals(SpaceshipAttackController.SpaceshipAttack.START, spaceshipAttack);
 
         assertEquals(false, spaceship.getComponent(ObstacleEventHandler.class).isLocked_ufo());
         assertEquals(true, spaceship.getComponent(ObstacleEventHandler.class).isSpaceshipAttack());

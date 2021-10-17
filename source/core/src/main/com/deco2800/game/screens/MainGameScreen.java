@@ -194,7 +194,7 @@ public class MainGameScreen extends ScreenAdapter {
 
     private static void resetSpaceshipAttackVariable() {
         // reset Spaceship Attack variables
-        SpaceshipAttackController.spaceshipState = SpaceshipAttackController.SpaceshipAttack.Off;
+        SpaceshipAttackController.spaceshipState = SpaceshipAttackController.SpaceshipAttack.OFF;
         SpaceshipAttackController.positionHitSpaceship = null;
     }
 
@@ -256,9 +256,9 @@ public class MainGameScreen extends ScreenAdapter {
         if (newMapStatus == NewMap.OFF) {
             screenVector.y = 7f;
 
-            if (spaceshipState == SpaceshipAttackController.SpaceshipAttack.On ||
-                    spaceshipState == SpaceshipAttackController.SpaceshipAttack.Start ||
-                    (spaceshipState == SpaceshipAttackController.SpaceshipAttack.Finish &&
+            if (spaceshipState == SpaceshipAttackController.SpaceshipAttack.ON ||
+                    spaceshipState == SpaceshipAttackController.SpaceshipAttack.START ||
+                    (spaceshipState == SpaceshipAttackController.SpaceshipAttack.FINISH &&
                             screenVector.x <= SpaceshipAttackController.positionHitSpaceship.x)) {
                 renderer.getCamera().getEntity().
                         setPosition(new Vector2(SpaceshipAttackController.positionHitSpaceship.x, 7f));
