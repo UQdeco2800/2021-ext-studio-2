@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 
 public class GameOverScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(GameOverScreen.class);
-    private static final String[] gameOverTextures = {"images/gameOver.png", "images/background.png"};
+    private static final String[] gameOverTextures = {"images/gameOver.png", "images/backk.png"};
     private final Renderer renderer;
     private final GameOverDisplay gomd;
     private final Entity ui;

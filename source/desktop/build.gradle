@@ -20,7 +20,7 @@ task run(dependsOn: classes, type: JavaExec) {
 
      if (OperatingSystem.current().isMacOsX()) {
          // OS X.
-         jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties", "-XstartOnFirstThread"]
+         //jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties", "-XstartOnFirstThread"]
     } else {
          // Windows, Linux etc.
         jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties"]

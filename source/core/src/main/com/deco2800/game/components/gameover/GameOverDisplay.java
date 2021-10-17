@@ -123,7 +123,7 @@ public class GameOverDisplay extends UIComponent {
         stack.setFillParent(true);
         stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
         Image background = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/background.png", Texture.class));
+                .getAsset("images/backk.png", Texture.class));
         background.setScaling(Scaling.stretch);
         stack.add(background);
 
