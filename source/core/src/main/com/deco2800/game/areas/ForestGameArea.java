@@ -470,7 +470,7 @@ public class ForestGameArea extends GameArea {
             "images/mpc/finalAtlas/OG_buff_to_be_tested/mpcAnimation.png",
             "images/mpc/finalAtlas/gold_2/mpcAnimation_2.png",
             "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpcAnimation_4.png",
-            "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.png",
+            "images/mpc/finalAtlas/gold_6/mpcAnimation_6.png",
             "images/mpc/finalAtlas/OG_buff_to_be_tested/mpc_right.png",
             "images/mpc/finalAtlas/gold_2/mpc_right.png",
             "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpc_right.png",
