@@ -2,6 +2,8 @@ package com.deco2800.game.files;
 
 
 import com.deco2800.game.extensions.GameExtension;
+import com.deco2800.game.files.stats.GameChapters;
+import com.deco2800.game.files.stats.GameRecordUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(GameExtension.class)
 public class GameChaptersTest {
 
-    MockedStatic<GameRecords> gameInfoMockedStatic =
-            Mockito.mockStatic(GameRecords.class);
+    MockedStatic<GameRecordUtils> gameInfoMockedStatic =
+            Mockito.mockStatic(GameRecordUtils.class);
 
     /**
      * Check if all the chapters are locked by default
@@ -112,6 +114,7 @@ public class GameChaptersTest {
 
     /**
      * Calculate and return the number of unlocked chapters
+     *
      * @return number of unlocked chapters
      */
     private int getUnlockedChaptersCount() {
@@ -125,12 +128,13 @@ public class GameChaptersTest {
 
     /**
      * Mock the number of gold achievements that the user has unlocked
+     *
      * @param count number of gold achievements unlocked
      */
     private void setGoldAchievementsToBeReturned(int count) {
-        gameInfoMockedStatic.when(GameRecords::getGoldAchievementsCount)
+        gameInfoMockedStatic.when(GameRecordUtils::getGoldAchievementsCount)
                 .thenReturn(count);
-        assertEquals(GameRecords.getGoldAchievementsCount(), count);
+        assertEquals(GameRecordUtils.getGoldAchievementsCount(), count);
     }
 
     /**

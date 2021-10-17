@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
-import com.deco2800.game.files.GameChapters;
+import com.deco2800.game.files.stats.GameChapters;
 import com.deco2800.game.ui.UIComponent;
 
 public class ChapterDisplay extends UIComponent {
@@ -30,6 +30,7 @@ public class ChapterDisplay extends UIComponent {
      * Called when an event is received. Opens the dialog and displays the content of
      * the unlocked chapter. This involves rendering chapter art, chapter paragraphs and
      * a close button.
+     *
      * @param chapter event payload
      */
     private void openChapter(GameChapters.Chapter chapter) {
@@ -67,6 +68,7 @@ public class ChapterDisplay extends UIComponent {
 
     /**
      * The close button which triggers a task to close the dialog.
+     *
      * @return closeButton image
      */
     private ImageButton renderCloseButton() {

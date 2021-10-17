@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.score.ScoringSystemV1;
-import com.deco2800.game.files.GameRecords;
+import com.deco2800.game.files.stats.GameRecords;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
@@ -24,13 +24,12 @@ import java.text.DecimalFormat;
 public class GameOverDisplay extends UIComponent {
     private static final Logger logger = LoggerFactory.getLogger(GameOverDisplay.class);
     private final GdxGame game;
-
+    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
     private Table table;
     private double points = 0.0;
-    private double distance=0.0;
+    private double distance = 0.0;
     private TextField pointText;
     private TextField distanceText;
-    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
 
     public GameOverDisplay(GdxGame game) {
         super();
@@ -54,7 +53,7 @@ public class GameOverDisplay extends UIComponent {
         pointText = new TextField(String.valueOf(points), skin);
         pointText.setDisabled(true);
 
-        DecimalFormat df =new DecimalFormat("#0.0");
+        DecimalFormat df = new DecimalFormat("#0.0");
         distance = GameRecords.getLatestDistance();
         distanceText = new TextField(df.format(distance), skin);
         distanceText.setDisabled(true);
@@ -115,7 +114,6 @@ public class GameOverDisplay extends UIComponent {
                         game.setScreen(GdxGame.ScreenType.HISTORY_SCORES);
                     }
                 });
-
 
 
         // Position Components on table

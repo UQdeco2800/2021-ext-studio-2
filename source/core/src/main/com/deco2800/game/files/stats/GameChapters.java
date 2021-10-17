@@ -1,9 +1,10 @@
-package com.deco2800.game.files;
+package com.deco2800.game.files.stats;
+
+import com.deco2800.game.files.FileLoader;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.deco2800.game.files.GameRecords.getGoldAchievementsCount;
 
 public class GameChapters {
 
@@ -22,7 +23,7 @@ public class GameChapters {
 
 
         /* Extracting gold achievements unlocked by the player */
-        int goldAchievements = getGoldAchievementsCount();
+        int goldAchievements = GameRecordUtils.getGoldAchievementsCount();
 
         /* The number of unlocked gold achievements equals the number of unlocked chapters */
         for (int i = 0; i < goldAchievements; i++) {
