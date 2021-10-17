@@ -84,7 +84,7 @@ public class WaterDisplay extends UIComponent {
         int minutes = countTime.getMinutes();
         int seconds = countTime.getSeconds();
         int dis = (minutes * 60 + seconds)/ 10;
-        dis1 = (minutes * 60 + seconds)/ 1;//it is reduce health value when every five second
+        dis1 = (minutes * 60 + seconds); //it is reduce health value when every single second
         if(dis > countWaterSystem.getTimer()){
             countWaterSystem.setDifference(1);
             countWaterSystem.setTimer(dis);
