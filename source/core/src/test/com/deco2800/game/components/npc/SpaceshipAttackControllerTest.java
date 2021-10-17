@@ -124,7 +124,7 @@ class SpaceshipAttackControllerTest {
         Entity entity =
                 new Entity()
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Spaceship))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SPACESHIP))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
 
         return entity;

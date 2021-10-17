@@ -33,7 +33,7 @@ public class ObstacleEventHandler extends Component {
      * The types of obstacles and enemies are used to determine the type of entity that triggers the event.
      */
     public enum ObstacleType {
-        PlantsObstacle, ThornsObstacle, Meteorite, FlyingMonkey, FaceWorm, Spaceship, SmallMissile, PortalEntrance, PortalExport, Weapon;
+        PLANTS_OBSTACLE, THORNS_OBSTACLE, METEORITE, FLYING_MONKEY, FACE_WORM, SPACESHIP, SMALL_MISSILE, PORTAL_ENTRANCE, PORTAL_EXPORT, WEAPON;
     }
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleEventHandler.class);
@@ -43,6 +43,8 @@ public class ObstacleEventHandler extends Component {
     ObstacleType obstacleType;
     private static boolean spaceshipAttack;
     private int count;
+    private static final String COLLISION_START = "collisionStart";
+    private static final String COLLISION_LOGGER_INFO = "collisionStart event for {} was triggered.";
 
     /**
      * Construct an ObstacleEventHandler and register the corresponding event according to the obstacleType.
@@ -61,37 +63,37 @@ public class ObstacleEventHandler extends Component {
         particle = this.entity.getComponent(ParticleRenderComponent.class);
 
         switch (obstacleType) {
-            case PlantsObstacle:
-                entity.getEvents().addListener("collisionStart", this::plantsDisappear);
+            case PLANTS_OBSTACLE:
+                entity.getEvents().addListener(COLLISION_START, this::plantsDisappear);
                 break;
-            case ThornsObstacle:
-                entity.getEvents().addListener("collisionStart", this::thornsDisappear);
+            case THORNS_OBSTACLE:
+                entity.getEvents().addListener(COLLISION_START, this::thornsDisappear);
                 break;
-            case Meteorite:
-                entity.getEvents().addListener("collisionStart", this::meteoriteDisappear);
+            case METEORITE:
+                entity.getEvents().addListener(COLLISION_START, this::meteoriteDisappear);
                 break;
-            case FaceWorm:
-                entity.getEvents().addListener("collisionStart", this::faceWormDisappear);
+            case FACE_WORM:
+                entity.getEvents().addListener(COLLISION_START, this::faceWormDisappear);
                 break;
-            case Spaceship:
-                entity.getEvents().addListener("collisionStart", this::spaceShipAttack);
+            case SPACESHIP:
+                entity.getEvents().addListener(COLLISION_START, this::spaceShipAttack);
                 entity.getEvents().addListener("spaceshipDispose", this::spaceshipDispose);
                 spaceshipAttack = false;
                 break;
-            case SmallMissile:
-                entity.getEvents().addListener("collisionStart", this::smallMissileAttack);
+            case SMALL_MISSILE:
+                entity.getEvents().addListener(COLLISION_START, this::smallMissileAttack);
                 break;
-            case PortalEntrance:
-                entity.getEvents().addListener("collisionStart", this::portalEntrance);
+            case PORTAL_ENTRANCE:
+                entity.getEvents().addListener(COLLISION_START, this::portalEntrance);
                 break;
-            case PortalExport:
-                entity.getEvents().addListener("collisionStart", this::portalExport);
+            case PORTAL_EXPORT:
+                entity.getEvents().addListener(COLLISION_START, this::portalExport);
                 break;
-            case Weapon:
-                entity.getEvents().addListener("collisionStart", this::weaponDisappear);
+            case WEAPON:
+                entity.getEvents().addListener(COLLISION_START, this::weaponDisappear);
                 break;
             default:
-                logger.error("No corresponding event.");
+                throw new TypeNotPresentException("No corresponding event.", null);
         }
     }
 
@@ -122,7 +124,7 @@ public class ObstacleEventHandler extends Component {
             count++;
 
             particle.startEffect();
-            logger.debug("collisionStart event for {} was triggered.", entity.toString());
+            logger.debug(COLLISION_LOGGER_INFO, entity.toString());
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacles");
             animator.getEntity().setParticleTime(1.3f);
@@ -159,11 +161,11 @@ public class ObstacleEventHandler extends Component {
             if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
                 MainGameScreen.setSlowPlayer(5f);
             }
-            logger.debug("collisionStart event for {} was triggered.", entity.toString());
+            logger.debug(COLLISION_LOGGER_INFO, entity.toString());
             animator.getEntity().setRemoveTexture();
             particle.startEffect();
             animator.startAnimation("obstacle2");
-            animator.getEntity().setParticleTime(2.2f);
+            animator.getEntity().setParticleTime(2.5f);
             animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked2 = false;
             if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
@@ -187,7 +189,7 @@ public class ObstacleEventHandler extends Component {
             if (count == 0) { // Avoid an entity from repeatedly triggering an attack
                 count++;
                 particle.startEffect();
-                logger.debug("collisionStart event for {} was triggered.", entity.toString());
+                logger.debug(COLLISION_LOGGER_INFO, entity.toString());
                 animator.getEntity().setRemoveTexture();
                 animator.startAnimation("stone1");
                 animator.getEntity().setParticleTime(1f);
@@ -203,7 +205,7 @@ public class ObstacleEventHandler extends Component {
      */
     void faceWormDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
-            logger.debug("collisionStart event for {} was triggered.", entity.toString());
+            logger.debug(COLLISION_LOGGER_INFO, entity.toString());
             animator.getEntity().setDisappearAfterAnimation(1.5f, Entity.DisappearType.ANIMATION);
         }
 
@@ -234,7 +236,7 @@ public class ObstacleEventHandler extends Component {
         SpaceshipAttackController.setSpaceshipAttack();
         entity.getEvents().trigger("spaceshipSound");
 
-        logger.debug("collisionStart event for {} was triggered.", entity.toString());
+        logger.debug(COLLISION_LOGGER_INFO, entity.toString());
         spaceshipAttack = true;
         locked_ufo = false;
     }
@@ -266,7 +268,7 @@ public class ObstacleEventHandler extends Component {
             return;
         }
 
-        logger.debug("collisionStart event for {} was triggered.", entity.toString());
+        logger.debug(COLLISION_LOGGER_INFO, entity.toString());
         entity.getEvents().trigger("missileSound");
         animator.startAnimation("bomb");
         particle.startEffect();
@@ -289,7 +291,7 @@ public class ObstacleEventHandler extends Component {
             return;
         }
         MainGameScreen.setNewMapStatus(MainGameScreen.NewMap.START);
-        logger.debug("collisionStart event for {} was triggered.", entity.toString());
+        logger.debug(COLLISION_LOGGER_INFO, entity.toString());
     }
 
     /**
@@ -304,7 +306,7 @@ public class ObstacleEventHandler extends Component {
             return;
         }
         MainGameScreen.setNewMapStatus(MainGameScreen.NewMap.FINISH);
-        logger.debug("collisionStart event for {} was triggered.", entity.toString());
+        logger.debug(COLLISION_LOGGER_INFO, entity.toString());
     }
 
 
@@ -326,7 +328,7 @@ public class ObstacleEventHandler extends Component {
             return;
         }
         this.entity.setDispose();
-//        logger.debug("collisionStart event for {} was triggered.", entity.toString());
+        logger.info(COLLISION_LOGGER_INFO, entity.toString());
     }
 
 

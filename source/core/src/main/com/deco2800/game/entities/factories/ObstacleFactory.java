@@ -67,7 +67,7 @@ public class ObstacleFactory {
                 .addComponent(animator)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 10f))
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PlantsObstacle));
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PLANTS_OBSTACLE));
 
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
         obstacle.setScale(2, 3);
@@ -104,7 +104,7 @@ public class ObstacleFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
                 .addComponent(particle)
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.ThornsObstacle));
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.THORNS_OBSTACLE));
 
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(obstacle, 0.2f, 0.3f);
@@ -130,7 +130,7 @@ public class ObstacleFactory {
                 .addComponent(new PhysicsComponent())
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.WEAPON))
                 .addComponent(particle)
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Weapon));
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.WEAPON));
 
         weapon.setScale(0.5f, 0.5f);
         weapon.setZIndex(1);
@@ -203,7 +203,7 @@ public class ObstacleFactory {
                         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                         .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
                         .addComponent(animator)
-                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Meteorite))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.METEORITE))
                         .addComponent(particle);
 
         meteorite.getComponent(TextureRenderComponent.class).scaleEntity();

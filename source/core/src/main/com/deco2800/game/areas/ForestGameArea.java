@@ -549,7 +549,7 @@ public class ForestGameArea extends GameArea {
         setBonusItems(player);
         PropShopHelper.useProps(player);
         player.getEvents().addListener("B pressed", this::InvSys);
-        spawnPortal(new Vector2(50, 55), ObstacleEventHandler.ObstacleType.PortalExport);
+        spawnPortal(new Vector2(50, 55), ObstacleEventHandler.ObstacleType.PORTAL_EXPORT);
     }
 
     public void InvSys() {

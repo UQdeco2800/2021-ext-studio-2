@@ -184,7 +184,7 @@ public class SpaceshipAttackController extends Component {
             spaceshipState = SpaceshipAttack.FINISH;
             logger.info("Spaceship attack finish");
             this.getEntity().getEvents().trigger("spaceshipDispose");
-            this.getEntity().getEvents().trigger("spawnPortalEntrance", spaceshipPosition.cpy().sub(-5, -5), ObstacleEventHandler.ObstacleType.PortalEntrance);
+            this.getEntity().getEvents().trigger("spawnPortalEntrance", spaceshipPosition.cpy().sub(-5, -5), ObstacleEventHandler.ObstacleType.PORTAL_ENTRANCE);
             AchievementsHelper.getInstance().trackSpaceshipAvoidSuccess();
             // hard attack
         } else if (spaceshipTime <= 12 && (counterSmallMissile % 50 == 0 || counterSmallMissile % 30 == 0)) {

@@ -367,6 +367,21 @@ public class Entity {
     }
 
     /**
+     * Dispose of the entity. This will dispose of all components on this entity.
+     */
+    public void disposeExceptAnimationComponent() {
+        Iterator<Component> i = createdComponents.iterator();
+        while (i.hasNext()) {
+            Component component = i.next(); // must be called before you can call i.remove()
+            if (!component.getClass().equals(AnimationRenderComponent.class)) {
+                component.dispose();
+                i.remove();
+                logger.debug("{} disposed on entity {}", component.getClass().getSimpleName(), this);
+            }
+        }
+        ServiceLocator.getEntityService().unregister(this);
+    }
+    /**
      * Let the obstacles disappear after playing the animation for animationTime second. Is called by update().
      * <p>
      * The purpose of setting this method: When dispose() is used for animation components, all entities that use the
@@ -380,15 +395,14 @@ public class Entity {
                 if (component.getClass().equals(AnimationRenderComponent.class)) {
                     ((AnimationRenderComponent) component).stopAnimation();
                     logger.debug("{} stopped on entity {}", component.getClass().getSimpleName(), this);
-                } else if (!component.getClass().equals(ParticleRenderComponent.class)) {
+                } else if (!component.getClass().equals(ParticleRenderComponent.class) && !component.getClass().equals(PhysicsComponent.class)) {
                     component.dispose();
                     i.remove();
                     logger.debug("{} disposed on entity {}", component.getClass().getSimpleName(), this);
                 }
             }
             if (particleTime == 0) {
-                ServiceLocator.getEntityService().unregister(this);
-                disappear = false;
+                disposeExceptAnimationComponent();
             } else {
                 disappearType = DisappearType.PARTICLE;
             }
@@ -400,17 +414,7 @@ public class Entity {
      */
     public void removeAfterParticle() {
         if (this.getComponent(ParticleRenderComponent.class).getParticlePlayTime() > particleTime) {
-            Iterator<Component> i = createdComponents.iterator();
-            while (i.hasNext()) {
-                Component component = i.next(); // must be called before you can call i.remove()
-                if (!component.getClass().equals(AnimationRenderComponent.class)) {
-                    component.dispose();
-                    i.remove();
-                    logger.debug("{} disposed on entity {}", component.getClass().getSimpleName(), this);
-                }
-            }
-            ServiceLocator.getEntityService().unregister(this);
-            disappear = false;
+            disposeExceptAnimationComponent();
         }
     }
 
@@ -469,7 +473,6 @@ public class Entity {
                     component.dispose();
                     i.remove();
                     logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
-                    removeTexture = false;
                 }
             }
 
@@ -483,7 +486,6 @@ public class Entity {
             }
             component.triggerUpdate();
         }
-        removeCollision = false;
 
         if (disappear) {
             if (disappearType == DisappearType.ANIMATION) {
