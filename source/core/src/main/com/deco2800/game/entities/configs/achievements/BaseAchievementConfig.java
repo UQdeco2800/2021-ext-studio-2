@@ -17,6 +17,15 @@ public class BaseAchievementConfig {
      public boolean unlocked = false;
      public ConditionConfig condition = new ConditionConfig();
 
+     /**
+      * Returns a mapping of the achievement name and value for easy processing
+      * This makes it very easy to iterate through all the properties and fetch
+      * the values, and saves a lot of technical debt. In simple words, a mapping
+      * of member variables and values of the 'ConditionConfig' object is
+      * returned by this function.
+      *
+      * @return conditionProps mapping of condition name and associated value
+      */
      public Map<String, Integer> getConditionMap() {
           Map<String, Integer> conditionProps = new LinkedHashMap<>();
           // Get all the member fields of the condition object

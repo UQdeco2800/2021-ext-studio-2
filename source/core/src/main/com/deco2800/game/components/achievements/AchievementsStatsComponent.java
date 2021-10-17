@@ -150,7 +150,13 @@ public class AchievementsStatsComponent extends Component {
         checkForValidAchievements();
     }
 
+    /**
+     * Fetches the value for that particular property and increments it
+     * @param propertyName name of the achievement condition
+     */
     public void increment(String propertyName) {
+        // Get the current property value if any, and increment it.
+        // The default value of the property comes from the JSON config.
         int defaultValue = propertyList.get(propertyName).defaultValue;
         double propertyValue = gameConditions.getOrDefault(propertyName, (double) defaultValue);
         propertyValue += 1;
@@ -211,19 +217,21 @@ public class AchievementsStatsComponent extends Component {
         boolean valid = false;
 
         for (String cond : propertyList.keySet()) {
+            // Operation to perform when checking if achievement property has been satisfied or not
             String operation = propertyList.get(cond).operation;
-
+            // Default game variable values
             double defaultConditionVal = propertyList.get(cond).defaultValue;
-
+            // Current game variable values (current time, score etc)
             double currentPropertyVal = gameConditions.getOrDefault(cond, defaultConditionVal);
 
             int conditionVal = achievement.getConditionMap().get(cond);
 
             if (conditionVal != -1) {
                 if (cond.equals("time")) {
+                    // Convert minutes to milliseconds, since the time in config is supplied in minutes
                     conditionVal = conditionVal * 60000;
                 }
-
+                // Perform comparisons to check if conditions of the achievement have been satisfied
                 switch (operation) {
                     case "==":
                         valid = conditionVal == currentPropertyVal;
@@ -236,16 +244,17 @@ public class AchievementsStatsComponent extends Component {
                         valid = false;
                         break;
                 }
-
-
+                // Stop looping if a condition of achievement was not satisfied
                 if (!valid) {
                     break;
                 }
             }
         }
 
+        // Finally, if the achievement is valid, unlock it.
         if (valid) {
             achievement.unlocked = true;
+            // Emit an event if the achievement is valid
             entity.getEvents().trigger("updateAchievement", achievement);
         }
 
