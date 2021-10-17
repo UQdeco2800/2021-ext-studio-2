@@ -1,16 +1,49 @@
 {
   "music": {
-    "class" : "java.util.LinkedHashMap",
-    "Achievements": ["sounds/customBgm/bgmAchievements1.mp3", "sounds/customBgm/bgmAchievements2.mp3"],
-    "BuffManual": ["sounds/customBgm/bgmBuffDebuff1.mp3", "sounds/customBgm/bgmBuffDebuff2.mp3"],
-    "GameOver": ["sounds/customBgm/bgmGameOver1.mp3", "sounds/customBgm/bgmGameOver2.mp3"],
-    "HistoryScore": ["sounds/customBgm/bgmHistoryScore1.mp3", "sounds/customBgm/bgmHistoryScore2.mp3"],
-    "Instructions": ["sounds/customBgm/bgmGameTutorial1.mp3", "sounds/customBgm/bgmGameTutorial2.mp3"],
-    "MainGame": [],
-    "MainMenu": ["sounds/customBgm/bgmSetting1.mp3", "sounds/customBgm/bgmSetting2.mp3"],
-    "MonsterMenu": ["sounds/customBgm/bgmMonsterMenu1.mp3", "sounds/customBgm/bgmMonsterMenu2.mp3"],
-    "PropsShop": ["sounds/customBgm/bgmPropStore1.mp3", "sounds/customBgm/bgmPropStore2.mp3"],
-    "Settings": ["sounds/customBgm/bgmSetting1.mp3", "sounds/customBgm/bgmSetting2.mp3"],
-    "UnlockedAttires": ["sounds/customBgm/bgmSelectAttire1.mp3", "sounds/customBgm/bgmSelectAttire2.mp3"]
+    "class": "java.util.LinkedHashMap",
+    "Achievements": [
+      "sounds/customBgm/bgmAchievements1.mp3",
+      "sounds/customBgm/bgmAchievements2.mp3"
+    ],
+    "BuffManual": [
+      "sounds/customBgm/bgmBuffDebuff1.mp3",
+      "sounds/customBgm/bgmBuffDebuff2.mp3"
+    ],
+    "GameOver": [
+      "sounds/customBgm/bgmGameOver1.mp3",
+      "sounds/customBgm/bgmGameOver2.mp3"
+    ],
+    "HistoryScore": [
+      "sounds/customBgm/bgmHistoryScore1.mp3",
+      "sounds/customBgm/bgmHistoryScore2.mp3"
+    ],
+    "Instructions": [
+      "sounds/customBgm/bgmGameTutorial1.mp3",
+      "sounds/customBgm/bgmGameTutorial2.mp3"
+    ],
+    "MainGame": [
+      "sounds/customBgm/bgmMainGame1.mp3",
+      "sounds/customBgm/bgmMainGame2.mp3"
+    ],
+    "MainMenu": [
+      "sounds/customBgm/bgmSetting1.mp3",
+      "sounds/customBgm/bgmSetting2.mp3"
+    ],
+    "MonsterMenu": [
+      "sounds/customBgm/bgmMonsterMenu1.mp3",
+      "sounds/customBgm/bgmMonsterMenu2.mp3"
+    ],
+    "PropsShop": [
+      "sounds/customBgm/bgmPropStore1.mp3",
+      "sounds/customBgm/bgmPropStore2.mp3"
+    ],
+    "Settings": [
+      "sounds/customBgm/bgmSetting1.mp3",
+      "sounds/customBgm/bgmSetting2.mp3"
+    ],
+    "UnlockedAttires": [
+      "sounds/customBgm/bgmSelectAttire1.mp3",
+      "sounds/customBgm/bgmSelectAttire2.mp3"
+    ]
   }
 }
