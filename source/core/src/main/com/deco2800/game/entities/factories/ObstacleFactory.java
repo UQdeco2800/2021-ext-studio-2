@@ -182,7 +182,7 @@ public class ObstacleFactory {
                 particle = new ParticleRenderComponent("images/particle/stoneSmall.party");
                 break;
             default:
-                logger.error("Don't have this meteorite type");
+                throw new TypeNotPresentException("Don't have this meteorite type", null);
         }
 
         AnimationRenderComponent animator =

@@ -287,8 +287,7 @@ public class SpaceshipAttackController extends Component {
                     randomPosition = new Vector2(spaceshipPosition.x, playerPosition.y + 1.5f);
                     break;
                 default:
-                    logger.error("No such type spaceship attack");
-                    randomPosition = null;
+                    throw new TypeNotPresentException("No such type spaceship attack", null);
             }
         } while (level == 2 && type == null && Math.abs(randomPosition.cpy().sub(playerPosition).y) < 2);
 
