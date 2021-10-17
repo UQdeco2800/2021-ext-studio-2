@@ -357,7 +357,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
         table.clear();
         bgTable.clear();
     }
-    
+
     /**
      * UI Component for Confirm Selected Attire Pop Up Screen
      */

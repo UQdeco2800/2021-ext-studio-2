@@ -49,12 +49,20 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
         createUI();
     }
 
+    /**
+     * Load all attires' and achievements' assets
+     */
+
     private void loadAssets() {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         ServiceLocator.getResourceService().loadAll();
     }
 
+    /**
+     * Unload all attires' and achievements' assets
+     */
+    
     private void unloadAssets() {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
@@ -83,6 +91,9 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
         ServiceLocator.clear();
     }
 
+    /**
+     * Create UI for displaying unlocked attires
+     */
     private void createUI() {
         logger.debug("Creating Unlocked Attires screen UI");
         int goldAchievements = GameRecords.getGoldAchievementsCount();
