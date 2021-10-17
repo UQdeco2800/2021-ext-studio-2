@@ -61,7 +61,7 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < 5; i++) {
             GridPoint2 randomPos = RandomUtils.randomX(52, minPos, maxPos);
-            Entity nail = ObstacleFactory.createNail();
+            Entity nail = ObstacleFactory.createNail(player);
             spawnEntityAt(nail, randomPos, true, false);
             GridPoint2 randomPosTwo = RandomUtils.randomX(54, minPos, maxPos);
             Entity nailTwo = ObstacleFactory.createWood();
@@ -73,7 +73,7 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < 5; i++) {
             GridPoint2 pos = new GridPoint2(xValue +i, 60);
-            Entity nail = ObstacleFactory.createNail();
+            Entity nail = ObstacleFactory.createNail(player);
             spawnEntityAt(nail, pos, true, false);
         }
     }
@@ -81,7 +81,7 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < 3; i++) {
             GridPoint2 pos = new GridPoint2(xValue +7 +i, 60);
-            Entity nail = ObstacleFactory.createNail();
+            Entity nail = ObstacleFactory.createNail(player);
             spawnEntityAt(nail, pos, true, false);
         }
     }
@@ -90,7 +90,7 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < 4; i++) {
             GridPoint2 pos = new GridPoint2(xValue -3 +i, 58);
-            Entity nail = ObstacleFactory.createNail();
+            Entity nail = ObstacleFactory.createNail(player);
             spawnEntityAt(nail, pos, true, false);
         }
     }
@@ -98,7 +98,7 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < 3; i++) {
             GridPoint2 pos = new GridPoint2(xValue +3 +i, 58);
-            Entity nail = ObstacleFactory.createNail();
+            Entity nail = ObstacleFactory.createNail(player);
             spawnEntityAt(nail, pos, true, false);
         }
     }
