@@ -21,8 +21,6 @@ public class AchievementsStatsComponent extends Component {
 
     private Map<String, Double> gameConditions;
 
-    /* TO//DO: setup achievement stats as Hashmap <property,value> */
-
     public AchievementsStatsComponent() {
         gameConditions = new LinkedHashMap<>();
     }
@@ -75,16 +73,14 @@ public class AchievementsStatsComponent extends Component {
      * Maintains the spaceshipAvoidSuccess status of the player
      */
     public void setSpaceshipAvoidSuccess() {
-        gameConditions.put("spaceshipAvoidSuccess", 1.0);
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("spaceshipAvoidSuccess", 1.0);
     }
 
     /**
      * Maintains the distance traveled by the main player character in meters
      */
     public void setDistance(double distance) {
-        gameConditions.put("distance", distance);
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("distance", distance);
     }
 
     /**
@@ -93,8 +89,7 @@ public class AchievementsStatsComponent extends Component {
      * @param health player's changed health
      */
     public void setHealth(int health) {
-        gameConditions.put("health", (double) health);
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("health", health);
     }
 
     /**
@@ -103,8 +98,7 @@ public class AchievementsStatsComponent extends Component {
      * @param time current game time
      */
     public void setTime(long time) {
-        gameConditions.put("time", (double) time);
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("time", time);
     }
 
     /**
@@ -113,8 +107,7 @@ public class AchievementsStatsComponent extends Component {
      * @param score the current game score
      */
     public void setScore(int score) {
-        gameConditions.put("score", (double) score);
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("score", score);
     }
 
     @Override
@@ -147,7 +140,6 @@ public class AchievementsStatsComponent extends Component {
      */
     private void setFirstAid() {
         increment("firstAids");
-        checkForValidAchievements();
     }
 
     /**
@@ -160,12 +152,11 @@ public class AchievementsStatsComponent extends Component {
         int defaultValue = propertyList.get(propertyName).defaultValue;
         double propertyValue = gameConditions.getOrDefault(propertyName, (double) defaultValue);
         propertyValue += 1;
-        gameConditions.put(propertyName, propertyValue);
+        updateConditionsAndRevalidate(propertyName, propertyValue);
     }
 
     public void setFirstAidByVal(int firstAids) {
-        gameConditions.put("firstAids", (double) firstAids);
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("firstAids", firstAids);
     }
 
     /**
@@ -173,12 +164,10 @@ public class AchievementsStatsComponent extends Component {
      */
     private void setGold() {
         increment("gold");
-        checkForValidAchievements();
     }
 
     public void setGoldByVal(int gold) {
-        gameConditions.put("gold", (double) gold);
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("gold", gold);
     }
 
     /**
@@ -186,12 +175,10 @@ public class AchievementsStatsComponent extends Component {
      */
     public void setItemCount() {
         increment("itemCount");
-        checkForValidAchievements();
     }
 
     public void setItemCountByVal(int itemCount) {
-        gameConditions.put("itemCount", (double) itemCount);
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("itemCount", itemCount);
     }
 
     /**
@@ -199,6 +186,18 @@ public class AchievementsStatsComponent extends Component {
      */
     private void checkForValidAchievements() {
         achievements.forEach(this::isValid);
+    }
+
+    /**
+     * Updates the game variables in concern and checks if an achievement
+     * has been unlocked
+     *
+     * @param propertyName name of property
+     * @param val property value
+     */
+    public void updateConditionsAndRevalidate(String propertyName, double val){
+        gameConditions.put(propertyName, val);
+        checkForValidAchievements();
     }
 
     /**
