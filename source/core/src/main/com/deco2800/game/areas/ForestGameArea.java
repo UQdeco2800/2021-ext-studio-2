@@ -68,6 +68,7 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(nailTwo, randomPosTwo, true, false);
         }
     }
+
     public void spawnNailsone(int xValue) {
 
         for (int i = 0; i < 5; i++) {
@@ -151,7 +152,7 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < 5; i++) {
             GridPoint2 pos = new GridPoint2(xValue + -4 +i, 50);
-            Entity frock = ObstacleFactory.createFirerock();
+            Entity frock = ObstacleFactory.createMagma(player);
             spawnEntityAt(frock, pos, true, false);
 
         }
@@ -189,10 +190,10 @@ public class ForestGameArea extends GameArea {
     public void spawnFireRocksthree(int xValue) {
 
         GridPoint2 Pos = new GridPoint2(xValue -5, 53);
-        Entity rock = ObstacleFactory.createFirerock();
+        Entity rock = ObstacleFactory.createMagma(player);
         spawnEntityAt(rock, Pos, true, false);
         GridPoint2 PosTwo = new GridPoint2(xValue -6, 53);
-        Entity rockTwo = ObstacleFactory.createFirerock();
+        Entity rockTwo = ObstacleFactory.createMagma(player);
         spawnEntityAt(rockTwo, PosTwo, true, false);
 
     }
@@ -283,34 +284,34 @@ public class ForestGameArea extends GameArea {
     public void spawnFireRockstwo(int xValue) {
 
         GridPoint2 Pos = new GridPoint2(xValue + 22, 50);
-        Entity rock = ObstacleFactory.createFirerock();
+        Entity rock = ObstacleFactory.createMagma(player);
         spawnEntityAt(rock, Pos, true, false);
         GridPoint2 PosTwo = new GridPoint2(xValue + 23, 50);
-        Entity rockTwo = ObstacleFactory.createFirerock();
+        Entity rockTwo = ObstacleFactory.createMagma(player);
         spawnEntityAt(rockTwo, PosTwo, true, false);
         GridPoint2 PosThree = new GridPoint2(xValue + 23, 51);
-        Entity rockThree = ObstacleFactory.createFirerock();
+        Entity rockThree = ObstacleFactory.createMagma(player);
         spawnEntityAt(rockThree, PosThree, true, false);
         GridPoint2 PosFour = new GridPoint2(xValue + 24, 50);
-        Entity rockFour = ObstacleFactory.createFirerock();
+        Entity rockFour = ObstacleFactory.createMagma(player);
         spawnEntityAt(rockFour, PosFour, true, false);
         GridPoint2 PosFive = new GridPoint2(xValue + 24, 51);
-        Entity rockFive = ObstacleFactory.createFirerock();
+        Entity rockFive = ObstacleFactory.createMagma(player);
         spawnEntityAt(rockFive, PosFive, true, false);
         GridPoint2 PosSix = new GridPoint2(xValue + 24, 52);
-        Entity rockSix = ObstacleFactory.createFirerock();
+        Entity rockSix = ObstacleFactory.createMagma(player);
         spawnEntityAt(rockSix, PosSix, true, false);
         GridPoint2 PosSeven = new GridPoint2(xValue + 25, 50);
-        Entity rockSeven = ObstacleFactory.createFirerock();
+        Entity rockSeven = ObstacleFactory.createMagma(player);
         spawnEntityAt(rockSeven, PosSeven, true, false);
         GridPoint2 PosEight = new GridPoint2(xValue + 25, 51);
-        Entity rockEight = ObstacleFactory.createFirerock();
+        Entity rockEight = ObstacleFactory.createMagma(player);
         spawnEntityAt(rockEight, PosEight, true, false);
         GridPoint2 PosNine = new GridPoint2(xValue + 25, 52);
-        Entity rockNine = ObstacleFactory.createFirerock();
+        Entity rockNine = ObstacleFactory.createMagma(player);
         spawnEntityAt(rockNine, PosNine, true, false);
         GridPoint2 PosTen = new GridPoint2(xValue + 25, 53);
-        Entity rockTen = ObstacleFactory.createFirerock();
+        Entity rockTen = ObstacleFactory.createMagma(player);
         spawnEntityAt(rockTen, PosTen, true, false);
 
 
@@ -617,6 +618,7 @@ public class ForestGameArea extends GameArea {
 
 
         spawnEntity(new Entity().addComponent(terrain));
+
 
         // Terrain walls
         float tileSize = terrain.getTileSize();
