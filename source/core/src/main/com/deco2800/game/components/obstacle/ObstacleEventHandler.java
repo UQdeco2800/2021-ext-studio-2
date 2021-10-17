@@ -128,7 +128,7 @@ public class ObstacleEventHandler extends Component {
             logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacles");
-            animator.getEntity().setParticleTime(1.4f);
+            animator.getEntity().setParticleTime(1.3f);
             animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked = false;
             if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
@@ -166,15 +166,13 @@ public class ObstacleEventHandler extends Component {
             animator.getEntity().setRemoveTexture();
             particle.startEffect();
             animator.startAnimation("obstacle2");
-            animator.getEntity().setParticleTime(3f);
+            animator.getEntity().setParticleTime(2.2f);
             animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked2 = false;
             if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
                 this.entity.setRemoveCollision();
             }
         }
-
-
     }
 
     /**
@@ -293,7 +291,7 @@ public class ObstacleEventHandler extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
-        MainGameScreen.setNewMapStatus(MainGameScreen.NewMap.Start);
+        MainGameScreen.setNewMapStatus(MainGameScreen.NewMap.START);
         logger.debug("collisionStart event for {} was triggered.", entity.toString());
     }
 
@@ -308,7 +306,7 @@ public class ObstacleEventHandler extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
-        MainGameScreen.setNewMapStatus(MainGameScreen.NewMap.Finish);
+        MainGameScreen.setNewMapStatus(MainGameScreen.NewMap.FINISH);
         logger.debug("collisionStart event for {} was triggered.", entity.toString());
     }
 
