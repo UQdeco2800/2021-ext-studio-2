@@ -16,11 +16,14 @@ import java.util.ArrayList;
  * A ui component for displaying food system. Player lose a chicken for 3 sec
  */
 public class FoodDisplay extends UIComponent{
-    static Table table;
+    static Table table;     //store food icon
+    static Table table1;    // to store hunger icon
     private final CountFoodSystem countFoodSystem = new CountFoodSystem();
     private final CountWaterSystem countFoodSystem1 = new CountWaterSystem();
     private final ScoringSystemV1 timeCount = new ScoringSystemV1();
     public static ArrayList<Image> foodImage = new ArrayList<>();
+    private Image hungerIcon = new Image(ServiceLocator.getResourceService()
+            .getAsset("buff-debuff-manual/low_statu_hunger1.png", Texture.class));
 
     public FoodDisplay() { }
 
@@ -46,6 +49,7 @@ public class FoodDisplay extends UIComponent{
         table.setFillParent(true);
         table.padTop(100f).padLeft(10f);
 
+
         //Add Food image
         float foodIconSize = 30f;
         foodImage.add(new Image(ServiceLocator.getResourceService()
@@ -64,6 +68,10 @@ public class FoodDisplay extends UIComponent{
         table.add(foodImage.get(2)).size(foodIconSize).pad(3);
         table.add(foodImage.get(3)).size(foodIconSize).pad(3);
         stage.addActor(table);
+
+        // add a new table in screen to put hunger icon
+        table1 = new Table();
+        stage.addActor(table1);
     }
 
     @Override
@@ -79,7 +87,7 @@ public class FoodDisplay extends UIComponent{
         super.update();
         int minutes = timeCount.getMinutes();
         int seconds = timeCount.getSeconds();
-        int dis = (minutes * 60 + seconds)/ 15;
+        int dis = (minutes * 60 + seconds)/ 1;
         int dis1 = (minutes * 60 + seconds);
         if(dis > countFoodSystem.getTimer()){
             countFoodSystem.setDifference(1);
@@ -125,6 +133,13 @@ public class FoodDisplay extends UIComponent{
                 for (Image ima: foodImage) {
                     table.add(ima).size(30f).pad(3);
                 }
+            }
+            if(foodImage.size() <= 0){
+                table1.reset();
+                table1.top().left();
+                table1.setFillParent(true);
+                table1.padTop(260f).padLeft(55f);
+                table1.add(hungerIcon).size(50f).pad(3);
             }
         }
     }

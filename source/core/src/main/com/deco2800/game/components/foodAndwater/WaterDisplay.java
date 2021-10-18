@@ -3,7 +3,6 @@ package com.deco2800.game.components.foodAndwater;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.score.ScoringSystemV1;
@@ -16,11 +15,16 @@ import java.util.ArrayList;
  * A ui component for displaying water system. Player lose a chicken for 2 sec
  */
 public class WaterDisplay extends UIComponent {
-    static Table table;
+    static Table table;    //store water icon
+    static Table table1;   // to store thirst icon
     private final CountWaterSystem countWaterSystem = new CountWaterSystem();
     private final CountWaterSystem countWaterSystem1 = new CountWaterSystem();
     private final ScoringSystemV1 countTime = new ScoringSystemV1();
     public static ArrayList<Image> waterImage = new ArrayList<>();
+    private Image thirstIcon = new Image(ServiceLocator.getResourceService()
+            .getAsset("buff-debuff-manual/low_statu_thirst1.png", Texture.class));
+
+
 
     public WaterDisplay() { }
 
@@ -63,6 +67,10 @@ public class WaterDisplay extends UIComponent {
         table.add(waterImage.get(2)).size(waterIconSize).pad(3);
         table.add(waterImage.get(3)).size(waterIconSize).pad(3);
         stage.addActor(table);
+
+        // add a new table in screen to put thirst icon
+        table1 = new Table();
+        stage.addActor(table1);
     }
 
     @Override
@@ -78,7 +86,7 @@ public class WaterDisplay extends UIComponent {
         super.update();
         int minutes = countTime.getMinutes();
         int seconds = countTime.getSeconds();
-        int dis = (minutes * 60 + seconds)/ 10;
+        int dis = (minutes * 60 + seconds)/ 1;
         int dis1 = (minutes * 60 + seconds); //it is reduce health value when every single second
         if(dis > countWaterSystem.getTimer()){
             countWaterSystem.setDifference(1);
@@ -114,7 +122,15 @@ public class WaterDisplay extends UIComponent {
      */
     public void updatePlayerTimerUI(int dis) {
         if(dis == 1){
+            if(waterImage.size() <= 0){
+                table1.reset();
+                table1.top().left();
+                table1.setFillParent(true);
+                table1.padTop(260f).padLeft(5f);
+                table1.add(thirstIcon).size(50f).pad(3);
+            }
             if(waterImage.size() > 0){
+                table1.reset();
                 table.reset();
                 table.top().left();
                 table.setFillParent(true);
@@ -136,6 +152,7 @@ public class WaterDisplay extends UIComponent {
         for (int i = 0; i < waterImage.size(); ++i){
             waterImage.remove(i);
         }
+        thirstIcon.remove();
     }
 
     /**
