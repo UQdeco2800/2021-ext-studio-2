@@ -934,7 +934,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/ObstacleFactory.html#createWeapon()">createWeapon()</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/ObstacleFactory.html" title="class in com.deco2800.game.entities.factories">ObstacleFactory</a></dt>
 <dd>
-<div class="block">Creates a Thorns Obstacle.</div>
+<div class="block">Creates a Weapon attack effect for player.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/ObstacleFactory.html#createWood()">createWood()</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/ObstacleFactory.html" title="class in com.deco2800.game.entities.factories">ObstacleFactory</a></dt>
 <dd>
@@ -1268,8 +1268,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/Component.html#enabled">enabled</a></span> - Variable in class com.deco2800.game.components.<a href="com/deco2800/game/components/Component.html" title="class in com.deco2800.game.components">Component</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/PhysicsContactListener.html#endContact(com.badlogic.gdx.physics.box2d.Contact)">endContact(Contact)</a></span> - Method in class com.deco2800.game.physics.<a href="com/deco2800/game/physics/PhysicsContactListener.html" title="class in com.deco2800.game.physics">PhysicsContactListener</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/ObstacleAttackTask.html#enemy_posion">enemy_posion</a></span> - Static variable in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/ObstacleAttackTask.html" title="class in com.deco2800.game.components.tasks">ObstacleAttackTask</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/components/npc/EnemyAnimationController.html" title="class in com.deco2800.game.components.npc"><span class="typeNameLink">EnemyAnimationController</span></a> - Class in <a href="com/deco2800/game/components/npc/package-summary.html">com.deco2800.game.components.npc</a></dt>
 <dd>
@@ -1609,10 +1607,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Returns a mapping of the achievement name and value for easy processing
  This makes it very easy to iterate through all the properties and fetch
  the values, and saves a lot of technical debt.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/obstacle/ObstacleEventHandler.html#getCount()">getCount()</a></span> - Method in class com.deco2800.game.components.obstacle.<a href="com/deco2800/game/components/obstacle/ObstacleEventHandler.html" title="class in com.deco2800.game.components.obstacle">ObstacleEventHandler</a></dt>
-<dd>
-<div class="block">getter method for count</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/ItemBar/newItembar.html#getcounts()">getcounts()</a></span> - Method in class com.deco2800.game.components.ItemBar.<a href="com/deco2800/game/components/ItemBar/newItembar.html" title="class in com.deco2800.game.components.ItemBar">newItembar</a></dt>
 <dd>&nbsp;</dd>
@@ -2203,6 +2197,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Get method of dispose.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/rendering/ParticleRenderComponent.html#isEffectStart()">isEffectStart()</a></span> - Method in class com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/ParticleRenderComponent.html" title="class in com.deco2800.game.rendering">ParticleRenderComponent</a></dt>
+<dd>
+<div class="block">get if the particle effect is start, for test.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/rendering/AnimationRenderComponent.html#isFinished()">isFinished()</a></span> - Method in class com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/AnimationRenderComponent.html" title="class in com.deco2800.game.rendering">AnimationRenderComponent</a></dt>
 <dd>
 <div class="block">Has the playing animation finished? This will always be false for looping animations.</div>
@@ -2237,6 +2235,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/terminal/Terminal.html#isOpen()">isOpen()</a></span> - Method in class com.deco2800.game.ui.terminal.<a href="com/deco2800/game/ui/terminal/Terminal.html" title="class in com.deco2800.game.ui.terminal">Terminal</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/Entity.html#isRemoveCollision()">isRemoveCollision()</a></span> - Method in class com.deco2800.game.entities.<a href="com/deco2800/game/entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a></dt>
+<dd>
+<div class="block">Getter method of removeCollision</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/Entity.html#isRemoveTexture()">isRemoveTexture()</a></span> - Method in class com.deco2800.game.entities.<a href="com/deco2800/game/entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a></dt>
 <dd>
 <div class="block">Get method of removeTexture.</div>
@@ -2749,9 +2751,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/Entity.DisappearType.html#PARTICLE">PARTICLE</a></span> - com.deco2800.game.entities.<a href="com/deco2800/game/entities/Entity.DisappearType.html" title="enum in com.deco2800.game.entities">Entity.DisappearType</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/rendering/ParticleRenderComponent.html" title="class in com.deco2800.game.rendering"><span class="typeNameLink">ParticleRenderComponent</span></a> - Class in <a href="com/deco2800/game/rendering/package-summary.html">com.deco2800.game.rendering</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Render particle effect for entities.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/rendering/ParticleRenderComponent.html#%3Cinit%3E(java.lang.String)">ParticleRenderComponent(String)</a></span> - Constructor for class com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/ParticleRenderComponent.html" title="class in com.deco2800.game.rendering">ParticleRenderComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor of particle effect</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/configs/propStore/PropItemConfig.html#path">path</a></span> - Variable in class com.deco2800.game.entities.configs.propStore.<a href="com/deco2800/game/entities/configs/propStore/PropItemConfig.html" title="class in com.deco2800.game.entities.configs.propStore">PropItemConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/screens/MainGameScreen.html#pause()">pause()</a></span> - Method in class com.deco2800.game.screens.<a href="com/deco2800/game/screens/MainGameScreen.html" title="class in com.deco2800.game.screens">MainGameScreen</a></dt>
@@ -3893,7 +3899,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Start playback of an animation.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/rendering/ParticleRenderComponent.html#startEffect()">startEffect()</a></span> - Method in class com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/ParticleRenderComponent.html" title="class in com.deco2800.game.rendering">ParticleRenderComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Start the particle effect on this entity</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/score/ScoringSystemV1.html#startGameClock()">startGameClock()</a></span> - Method in class com.deco2800.game.components.score.<a href="com/deco2800/game/components/score/ScoringSystemV1.html" title="class in com.deco2800.game.components.score">ScoringSystemV1</a></dt>
 <dd>
 <div class="block">Record the gaming time in seconds.</div>

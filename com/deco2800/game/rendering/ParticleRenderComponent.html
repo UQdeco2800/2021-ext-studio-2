@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -106,6 +106,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">ParticleRenderComponent</span>
 extends <a href="RenderComponent.html" title="class in com.deco2800.game.rendering">RenderComponent</a></pre>
+<div class="block">Render particle effect for entities.
+ <p>
+ Usages:  ParticleRenderComponent particle =
+ new ParticleRenderComponent("path.party");
+ entity.addComponent(particle);
+ <p>
+ Start particle effect: particle.startEffect();</div>
 </section>
 <section class="summary">
 <ul class="blockList">
@@ -140,7 +147,9 @@ extends <a href="RenderComponent.html" title="class in com.deco2800.game.renderi
 <tbody>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String)">ParticleRenderComponent</a></span>&#8203;(java.lang.String&nbsp;texturePath)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructor of particle effect</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -201,9 +210,18 @@ extends <a href="RenderComponent.html" title="class in com.deco2800.game.renderi
 </td>
 </tr>
 <tr class="rowColor" id="i5">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isEffectStart()">isEffectStart</a></span>()</code></th>
+<td class="colLast">
+<div class="block">get if the particle effect is start, for test.</div>
+</td>
+</tr>
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#startEffect()">startEffect</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Start the particle effect on this entity</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -241,6 +259,11 @@ extends <a href="RenderComponent.html" title="class in com.deco2800.game.renderi
 <section class="detail">
 <h3><a id="&lt;init&gt;(java.lang.String)">ParticleRenderComponent</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">ParticleRenderComponent</span>&#8203;(<span class="arguments">java.lang.String&nbsp;texturePath)</span></div>
+<div class="block">Constructor of particle effect</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>texturePath</code> - the path of .party file</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -288,8 +311,19 @@ extends <a href="RenderComponent.html" title="class in com.deco2800.game.renderi
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="isEffectStart()">isEffectStart</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isEffectStart</span>()</div>
+<div class="block">get if the particle effect is start, for test.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="startEffect()">startEffect</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">startEffect</span>()</div>
+<div class="block">Start the particle effect on this entity</div>
 </section>
 </li>
 <li class="blockList">
