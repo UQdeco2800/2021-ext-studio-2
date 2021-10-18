@@ -14,12 +14,10 @@ import java.util.ArrayList;
 
 public class ItemBarDisplay extends UIComponent {
 
-    private static Table itembartable;
     private static Table counttable;
     private static Label countlabel;
     private static final ArrayList<Image> itemImage = new ArrayList<>();
     private static final newItembar bar = new newItembar();
-    private static final String counts = bar.getcounts();
 
     /**
      * Creates reusable ui styles and adds actors to the stage.
@@ -33,7 +31,7 @@ public class ItemBarDisplay extends UIComponent {
 
     private void addActors() {
 
-        itembartable = new Table();
+        Table itembartable = new Table();
         itembartable.bottom();
         itembartable.setFillParent(true);
         itembartable.padBottom(30).padRight(60);
@@ -111,7 +109,7 @@ public class ItemBarDisplay extends UIComponent {
 
     @Override
     public void draw(SpriteBatch batch) {
-
+        //draw is handled by the stage
     }
 
 

@@ -1,21 +1,16 @@
 package com.deco2800.game.rendering;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileNotFoundException;
 
 public class ParticleRenderComponent extends RenderComponent {
-    private Texture texture;
     private String texturePath;
     private ParticleEffect pe;
     private boolean EffectStart = false;

@@ -192,7 +192,7 @@ public class MainGameScreen extends ScreenAdapter {
         newMapStatus = status;
     }
 
-    private static void resetSpaceshipAttackVariable() {
+    private void resetSpaceshipAttackVariable() {
         // reset Spaceship Attack variables
         SpaceshipAttackController.spaceshipState = SpaceshipAttackController.SpaceshipAttack.OFF;
         SpaceshipAttackController.positionHitSpaceship = null;
@@ -307,6 +307,7 @@ public class MainGameScreen extends ScreenAdapter {
 
 
         // Generate terrain, obstacle and enemies
+        // Generate terrain, obstacle and enemies
         if (newMapStatus == NewMap.OFF) {
             forestGameArea.stopNewMapMusic();
             forestGameArea.playMusic();
@@ -372,7 +373,6 @@ public class MainGameScreen extends ScreenAdapter {
             }
         }
         // else: do nothing
-
     }
 
     @Override

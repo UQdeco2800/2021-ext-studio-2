@@ -15,6 +15,7 @@ import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
 import com.deco2800.game.files.MPCConfig;
+import com.deco2800.game.files.meta.BackgroundMusic;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.BackgroundRenderComponent;
@@ -274,7 +275,6 @@ public class ForestGameArea extends GameArea {
 
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(0, 10);
     private static final float WALL_WIDTH = 0.1f;
-    private ItemBar itembar;
     private static final String[] forestTextures = {
             "images/firerock.jpg",
             "images/nail.jpg",
@@ -382,21 +382,21 @@ public class ForestGameArea extends GameArea {
     };
 
     private static final String[] mpcTextures = {
-            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpcAnimation.png",
+            "images/mpc/finalAtlas/OG/mpcAnimation.png",
             "images/mpc/finalAtlas/gold_2/mpcAnimation_2.png",
-            "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpcAnimation_4.png",
-            "images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.png",
-            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpc_right.png",
+            "images/mpc/finalAtlas/gold_4/mpcAnimation_4.png",
+            "images/mpc/finalAtlas/gold_6/mpcAnimation_6.png",
+            "images/mpc/finalAtlas/OG/mpc_right.png",
             "images/mpc/finalAtlas/gold_2/mpc_right.png",
-            "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpc_right.png",
+            "images/mpc/finalAtlas/gold_4/mpc_right.png",
             "images/mpc/finalAtlas/gold_6/mpc_right.png",
             "images/Items/3.png"
 
     };
     private static final String[] mpcTexturesAtlases = {
-            "images/mpc/finalAtlas/OG_buff_to_be_tested/mpcAnimation.atlas",
+            "images/mpc/finalAtlas/OG/mpcAnimation.atlas",
             "images/mpc/finalAtlas/gold_2/mpcAnimation_2.atlas",
-            "images/mpc/finalAtlas/gold_4_buff_to_be_test/mpcAnimation_4.atlas",
+            "images/mpc/finalAtlas/gold_4/mpcAnimation_4.atlas",
             "images/mpc/finalAtlas/gold_6/mpcAnimation_6.atlas",
 
     };
@@ -407,10 +407,10 @@ public class ForestGameArea extends GameArea {
     private static final String[] itemMusic = {itemSounds};
     private static final String[] pickupMusic = {pickupSounds};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
-    private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
-    private static final String NEWMAP_BACKGROUNDMUSIC = "sounds/track2.mp3";
-    private static final String[] forestMusic = {BACKGROUNDMUSIC};
-    private static final String[] newMapMusic = {NEWMAP_BACKGROUNDMUSIC};
+    private static final String MAP1_MUSIC = BackgroundMusic.getSelectedMusic("MainGame");
+    private static final String MAP2_MUSIC = BackgroundMusic.getNotSelectedTrack("MainGame");
+    private static final String[] forestMusic = {MAP1_MUSIC};
+    private static final String[] newMapMusic = {MAP2_MUSIC};
     private boolean firstGenerate = true;
 
     private final TerrainFactory terrainFactory;
@@ -620,7 +620,7 @@ public class ForestGameArea extends GameArea {
         // from being generated at the same location
         ArrayList<GridPoint2> randomPoints = new ArrayList<>();
 
-        String loggerInfo = "";
+        StringBuilder loggerInfo = new StringBuilder();
 
         int playerX = (int) player.getPosition().x;
         logger.debug("player x coordinate: {}", playerX);
@@ -645,8 +645,8 @@ public class ForestGameArea extends GameArea {
                 Entity obstacle2 = ObstacleFactory.createThornsObstacle(player);
                 spawnEntityAt(obstacle, randomPos, true, false);
                 spawnEntityAt(obstacle2, randomPos2, true, true);
-                loggerInfo += "Create Plants Obstacle at " + randomPos + "\t";
-                loggerInfo += "Create Thorns Obstacle at " + randomPos2 + "\t";
+                loggerInfo.append("Create Plants Obstacle at ").append(randomPos).append("\t");
+                loggerInfo.append("Create Thorns Obstacle at ").append(randomPos2).append("\t");
             }
             logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}",
                     minPos.x, maxPos.x, randomPoints, loggerInfo);
@@ -715,7 +715,7 @@ public class ForestGameArea extends GameArea {
         double midSize;
         double smallSize;
 
-        String loggerInfo = "";
+        StringBuilder loggerInfo = new StringBuilder();
 
         for (int i = 0; i < meteoritesNum; i++) {
             randomSize = MathUtils.random() * 0.5; // 0-0.5
@@ -731,15 +731,15 @@ public class ForestGameArea extends GameArea {
             if (i < bigNumRandom) { // must have a big meteorites
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) bigSize, ObstacleFactory.MeteoriteType.BigMeteorite);
-                loggerInfo += "Big stone = " + point + "\t";
+                loggerInfo.append("Big stone = ").append(point).append("\t");
             } else if (i < bigNumRandom + midNumRandom) {
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) midSize, ObstacleFactory.MeteoriteType.MiddleMeteorite);
-                loggerInfo += "Mid stone = " + point + "\t";
+                loggerInfo.append("Mid stone = ").append(point).append("\t");
             } else {
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) smallSize, ObstacleFactory.MeteoriteType.SmallMeteorite);
-                loggerInfo += "Small stone = " + point + "\t";
+                loggerInfo.append("Small stone = ").append(point).append("\t");
             }
 
 
@@ -876,7 +876,7 @@ public class ForestGameArea extends GameArea {
      * Play the regular map bgm
      */
     public void playMusic() {
-        Music music = ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class);
+        Music music = ServiceLocator.getResourceService().getAsset(MAP1_MUSIC, Music.class);
         music.setLooping(true);
         music.setVolume(0.3f);
         music.play();
@@ -898,7 +898,7 @@ public class ForestGameArea extends GameArea {
      * Play the new map bgm
      */
     public void playNewMapMusic() {
-        Music newMusic = ServiceLocator.getResourceService().getAsset(NEWMAP_BACKGROUNDMUSIC, Music.class);
+        Music newMusic = ServiceLocator.getResourceService().getAsset(MAP2_MUSIC, Music.class);
         newMusic.setLooping(true);
         newMusic.setVolume(0.3f);
         newMusic.play();
@@ -908,14 +908,14 @@ public class ForestGameArea extends GameArea {
      * Stop the regular map bgm
      */
     public void stopMusic() {
-        ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class).stop();
+        ServiceLocator.getResourceService().getAsset(MAP1_MUSIC, Music.class).stop();
     }
 
     /**
      * Stop the new map bgm
      */
     public void stopNewMapMusic() {
-        ServiceLocator.getResourceService().getAsset(NEWMAP_BACKGROUNDMUSIC, Music.class).stop();
+        ServiceLocator.getResourceService().getAsset(MAP2_MUSIC, Music.class).stop();
     }
 
     private void loadAssets() {
@@ -959,7 +959,7 @@ public class ForestGameArea extends GameArea {
     @Override
     public void dispose() {
         super.dispose();
-        ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class).stop();
+        ServiceLocator.getResourceService().getAsset(MAP1_MUSIC, Music.class).stop();
         this.unloadAssets();
     }
 

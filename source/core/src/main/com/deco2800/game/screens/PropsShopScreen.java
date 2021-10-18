@@ -30,6 +30,7 @@ public class PropsShopScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private static final String[] mainGameTextures = {"images/heart.png", "images/Items/props/add_food.png", "images/Items/props/add_health.png", "images/Items/props/add_water.png", "images/Items/props/shield.png", "images/achievements/crossButton.png", "images/Items/props/background_image_prop.png"};
     private static final String[] itemTextures = PropStoreFactory.getPropTextures();
+    private final Entity ui;
     private final Renderer renderer;
 
     public PropsShopScreen(GdxGame game) {
@@ -43,7 +44,7 @@ public class PropsShopScreen extends ScreenAdapter {
         Stage stage = ServiceLocator.getRenderService().getStage();
         loadAssets();
 
-        Entity ui = new Entity();
+        ui = new Entity();
         PropStoreDisplay propStoreDisplay = new PropStoreDisplay(game);
         ui.addComponent(new PropStoreItemDisplay());
         ui.addComponent(new PropStoreGoldDisplay());
@@ -84,6 +85,7 @@ public class PropsShopScreen extends ScreenAdapter {
     @Override
     public void dispose() {
         renderer.dispose();
+        ui.dispose();
         unloadAssets();
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();

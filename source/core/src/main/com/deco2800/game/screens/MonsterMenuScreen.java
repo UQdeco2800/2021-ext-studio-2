@@ -60,6 +60,7 @@ public class MonsterMenuScreen extends ScreenAdapter {
             };
     private final Renderer renderer;
     private final MonsterDisplay monsterDispay;
+
     private final Entity ui;
 
     /**
@@ -79,6 +80,7 @@ public class MonsterMenuScreen extends ScreenAdapter {
         Stage stage = ServiceLocator.getRenderService().getStage();
         ui = new Entity();
         monsterDispay = new MonsterDisplay(game);
+
         ui.addComponent(monsterDispay).addComponent(new InputDecorator(stage, 10))
                 .addComponent(new MonsterDetails())
                 .addComponent(new BackgroundSelectionComponent("MonsterMenu"))

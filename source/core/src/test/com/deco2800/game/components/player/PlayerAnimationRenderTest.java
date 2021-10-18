@@ -69,4 +69,22 @@ class PlayerAnimationRenderTest {
         player.getEvents().trigger("attack");
         verify(animator).startAnimation("main_player_attack");
     }
+
+    @Test
+    void shouldTriggerBurnMovement() {
+        player.getEvents().trigger("burn");
+        verify(animator).startAnimation("main_player_burn");
+    }
+
+    @Test
+    void shouldTriggerHurtMovement() {
+        player.getEvents().trigger("hurt");
+        verify(animator).startAnimation("main_player_hurt");
+    }
+
+    @Test
+    void shouldTriggerWalkRightMovement() {
+        player.getEvents().trigger("stopAnimations");
+        verify(animator).startAnimation("main_player_walk");
+    }
 }

@@ -1,6 +1,5 @@
 package com.deco2800.game.entities.factories;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -27,7 +26,6 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.ParticleRenderComponent;
-import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +52,7 @@ public class NPCFactory {
      * @return entity
      */
     public static Entity createFaceWorm(Entity target) {
-        Entity FaceWorm = createBaseNPC(target, "FaceWorm");
+        Entity FaceWorm = createBaseNPC(target);
         BaseEntityConfig config = configs.faceWorm;
 
         AnimationRenderComponent animator =
@@ -202,14 +200,14 @@ public class NPCFactory {
      *
      * @return entity
      */
-    private static Entity createBaseNPC(Entity target, String type) {
+    private static Entity createBaseNPC(Entity target) {
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(target, 10, 10f, 10f));
 
         Entity npc =
-                new Entity(type)
+                new Entity("FaceWorm")
                         .addComponent(new PhysicsComponent())
                         .addComponent(new PhysicsMovementComponent())
                         .addComponent(new ColliderComponent())

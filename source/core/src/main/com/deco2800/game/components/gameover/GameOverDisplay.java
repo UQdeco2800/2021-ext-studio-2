@@ -1,11 +1,14 @@
 package com.deco2800.game.components.gameover;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.score.ScoringSystemV1;
@@ -42,6 +45,9 @@ public class GameOverDisplay extends UIComponent {
         createGameOverTable();
     }
 
+    /**
+     * Create UI components in game over screen
+     */
     private void createGameOverTable() {
         // Create components
         //Label pointsLabel = new Label("Points:", skin);
@@ -64,12 +70,40 @@ public class GameOverDisplay extends UIComponent {
                         ServiceLocator.getResourceService()
                                 .getAsset("images/gameOver.png", Texture.class));
 
+        Button.ButtonStyle points = new Button.ButtonStyle();
+        points.up = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal("gameover/points1.png"))));
+        points.over = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal("gameover/points2.png"))));
+        Button pointsLabel = new Button(points);
 
-        TextButton pointsLabel = new TextButton("Points: ", skin);
-        TextButton distanceLabel = new TextButton("Distance: ", skin);
-        TextButton playAgainButton = new TextButton("Click to play \n again", skin);
-        TextButton mainMenuButton = new TextButton("Main Menu", skin);
-        TextButton historyScoreButton = new TextButton("History Score", skin);
+        Button.ButtonStyle distance = new Button.ButtonStyle();
+        distance.up = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal("gameover/distance1.png"))));
+        distance.over = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal("gameover/distance2.png"))));
+        Button distanceLabel = new Button(distance);
+
+        Button.ButtonStyle playAgain = new Button.ButtonStyle();
+        playAgain.up = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal("gameover/playagain1.png"))));
+        playAgain.over = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal("gameover/playagain2.png"))));
+        Button playAgainButton = new Button(playAgain);
+
+        Button.ButtonStyle mainMenu = new Button.ButtonStyle();
+        mainMenu.up = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal("gameover/mainmenu1.png"))));
+        mainMenu.over = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal("gameover/mainmenu2.png"))));
+        Button mainMenuButton = new Button(mainMenu);
+
+        Button.ButtonStyle score = new Button.ButtonStyle();
+        score.up = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal("gameover/score1.png"))));
+        score.over = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal("gameover/score2.png"))));
+        Button historyScoreButton = new Button(score);
 
         pointsLabel.addListener(
                 new ChangeListener() {
@@ -129,7 +163,7 @@ public class GameOverDisplay extends UIComponent {
         bgTable.setFillParent(true);
 
         Table table = new Table();
-        table.add(tittle).bottom().padBottom(50f);
+        table.add(tittle).bottom().padBottom(40f);
         table.row();
         table.add(pointsLabel).bottom();
         table.row();
