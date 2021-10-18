@@ -173,7 +173,7 @@ public class NPCFactory {
                 .addComponent(new PhysicsMovementComponent())
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-                .addComponent(new CombatStatsComponent(config.health, 0))
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SMALL_MISSILE))
                 .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.SMALL_MISSILE,
                         "sounds/missile_explosion.mp3"))

@@ -4,12 +4,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+/**
+ * Render particle effect for entities.
+ * <p>
+ * Usages:  ParticleRenderComponent particle =
+ * new ParticleRenderComponent("path.party");
+ * entity.addComponent(particle);
+ * <p>
+ * Start particle effect: particle.startEffect();
+ */
 public class ParticleRenderComponent extends RenderComponent {
     private String texturePath;
     private ParticleEffect pe;
@@ -18,10 +28,14 @@ public class ParticleRenderComponent extends RenderComponent {
     private final GameTime timeSource;
     private static final Logger logger = LoggerFactory.getLogger(ParticleRenderComponent.class);
 
+    /**
+     * Constructor of particle effect
+     *
+     * @param texturePath the path of .party file
+     */
     public ParticleRenderComponent(String texturePath) {
         this.texturePath = texturePath;
         this.timeSource = ServiceLocator.getTimeSource();
-
     }
 
     @Override
@@ -46,6 +60,17 @@ public class ParticleRenderComponent extends RenderComponent {
         return 1;
     }
 
+    /**
+     * get if the particle effect is start, for test.
+     * @return
+     */
+    public boolean isEffectStart() {
+        return EffectStart;
+    }
+
+    /**
+     * Start the particle effect on this entity
+     */
     public void startEffect() {
         EffectStart = true;
     }
@@ -53,12 +78,7 @@ public class ParticleRenderComponent extends RenderComponent {
     @Override
     protected void draw(SpriteBatch batch) {
         if (EffectStart) {
-            // for situation the entity is disappeared but particle effect still exist.
             Vector2 entityPosition = entity.getPosition();
-
-            if (!entity.getType().equals("Portal") && !entity.getType().equals("FlyingMonkey")) {
-                logger.info("Position = {}, entity = {}, disappear = {}, removeTexture = {}", entityPosition, entity, entity.isDisappear(), entity.isRemoveTexture());
-            }
             pe.update(Gdx.graphics.getDeltaTime());
             pe.setPosition(entityPosition.x, entityPosition.y);
             pe.draw(batch);

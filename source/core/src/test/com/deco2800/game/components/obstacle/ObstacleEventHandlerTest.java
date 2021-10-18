@@ -2,17 +2,10 @@ package com.deco2800.game.components.obstacle;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.components.SoundComponent;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
@@ -166,6 +159,7 @@ class ObstacleEventHandlerTest {
         assertEquals(true, spaceship.getComponent(ObstacleEventHandler.class).isSpaceshipAttack());
     }
 
+
     @Test
     void shouldDisposeSpaceship() {
         Entity player = createEntity1();
@@ -203,8 +197,62 @@ class ObstacleEventHandlerTest {
         verify(animator).startAnimation("bomb");
         verify(particleRenderComponent).startEffect();
         assertEquals(true, missile.isDisappear());
+    }
+
+    @Test
+    void shouldPlayAnimationAndDisappearRemoveCollisionForMissile() {
+        Entity player = createEntity1();
+        Entity missile = createSmallMissile();
+
+        player.getComponent(HitboxComponent.class).setLayer(PhysicsLayer.WEAPON);
+
+        AnimationRenderComponent animator = mock(AnimationRenderComponent.class);
+        missile.addComponent(animator);
+        when(animator.getEntity()).thenReturn(missile);
+
+        ParticleRenderComponent particleRenderComponent = mock(ParticleRenderComponent.class);
+        missile.addComponent(particleRenderComponent);
+
+        player.create();
+        missile.create();
+
+        Fixture obstacleFixture = player.getComponent(HitboxComponent.class).getFixture();
+        Fixture missileFixture = missile.getComponent(HitboxComponent.class).getFixture();
+        missile.getEvents().trigger("collisionStart", missileFixture, obstacleFixture);
+
+        verify(animator).startAnimation("bomb");
+        verify(particleRenderComponent).startEffect();
+        assertEquals(true, missile.isDisappear());
+        assertTrue(missile.isRemoveCollision());
+    }
+
+    @Test
+    void shouldNotPlayAnimationAndDisappearForMissileHitObstacles() {
+        Entity player = createEntity1();
+        Entity missile = createSmallMissile();
+
+        player.getComponent(HitboxComponent.class).setLayer(PhysicsLayer.OBSTACLE);
+
+        AnimationRenderComponent animator = mock(AnimationRenderComponent.class);
+        missile.addComponent(animator);
+        when(animator.getEntity()).thenReturn(missile);
+
+        ParticleRenderComponent particleRenderComponent = mock(ParticleRenderComponent.class);
+        missile.addComponent(particleRenderComponent);
+
+        player.create();
+        missile.create();
+
+        Fixture obstacleFixture = player.getComponent(HitboxComponent.class).getFixture();
+        Fixture missileFixture = missile.getComponent(HitboxComponent.class).getFixture();
+        missile.getEvents().trigger("collisionStart", missileFixture, obstacleFixture);
+
+        verify(animator, never()).startAnimation("bomb");
+        verify(particleRenderComponent, never()).startEffect();
+        assertEquals(false, missile.isDisappear());
 
     }
+    
 
     @Test
     void shouldStartNewMap() {
@@ -225,6 +273,23 @@ class ObstacleEventHandlerTest {
     }
 
     @Test
+    void shouldNotStartNewMap() {
+        Entity player = createEntity1();
+        Entity portal = createPortal(player, ObstacleEventHandler.ObstacleType.PORTAL_ENTRANCE);
+
+        player.getComponent(HitboxComponent.class).setLayer(PhysicsLayer.OBSTACLE);
+
+        player.create();
+        portal.create();
+
+        Fixture playerFixture = player.getComponent(HitboxComponent.class).getFixture();
+        Fixture portalFixture = portal.getComponent(ColliderComponent.class).getFixture();
+
+        portal.getEvents().trigger("collisionStart", portalFixture, playerFixture);
+
+        assertNotEquals(MainGameScreen.NewMap.START, MainGameScreen.getNewMapStatus());
+    }
+    @Test
     void shouldFinishNewMap() {
         Entity player = createEntity1();
         Entity portal = createPortal(player, ObstacleEventHandler.ObstacleType.PORTAL_EXPORT);
@@ -242,6 +307,99 @@ class ObstacleEventHandlerTest {
         assertEquals(MainGameScreen.NewMap.FINISH, MainGameScreen.getNewMapStatus());
     }
 
+    @Test
+    void shouldNotFinishNewMap() {
+        Entity player = createEntity1();
+        Entity portal = createPortal(player, ObstacleEventHandler.ObstacleType.PORTAL_EXPORT);
+
+        player.getComponent(HitboxComponent.class).setLayer(PhysicsLayer.OBSTACLE);
+
+        player.create();
+        portal.create();
+
+        Fixture playerFixture = player.getComponent(HitboxComponent.class).getFixture();
+        Fixture portalFixture = portal.getComponent(ColliderComponent.class).getFixture();
+
+        portal.getEvents().trigger("collisionStart", portalFixture, playerFixture);
+
+        assertNotEquals(MainGameScreen.NewMap.FINISH, MainGameScreen.getNewMapStatus());
+    }
+
+    @Test
+    void shouldDisposeForWeaponHitMissile() {
+
+        Entity obstacle = createEntity1();
+        obstacle.getComponent(HitboxComponent.class).setLayer(PhysicsLayer.NPC);
+
+        Entity weapon = createWeapon();
+
+        obstacle.create();
+        weapon.create();
+
+        Fixture obstacleFixture = obstacle.getComponent(HitboxComponent.class).getFixture();
+        Fixture weaponFixture = weapon.getComponent(HitboxComponent.class).getFixture();
+
+        weapon.getEvents().trigger("collisionStart", weaponFixture, obstacleFixture);
+
+        assertEquals(true, weapon.isDispose());
+    }
+
+    @Test
+    void shouldDisposeForWeaponHitObstacles() {
+
+        Entity obstacle = createEntity1();
+        obstacle.getComponent(HitboxComponent.class).setLayer(PhysicsLayer.OBSTACLE);
+
+        Entity weapon = createWeapon();
+
+        obstacle.create();
+        weapon.create();
+
+        Fixture obstacleFixture = obstacle.getComponent(HitboxComponent.class).getFixture();
+        Fixture weaponFixture = weapon.getComponent(HitboxComponent.class).getFixture();
+
+        weapon.getEvents().trigger("collisionStart", weaponFixture, obstacleFixture);
+
+        assertEquals(true, weapon.isDispose());
+    }
+
+    @Test
+    void shouldDisposeForWeaponHitGround() {
+
+        Entity obstacle = createEntity1();
+        obstacle.getComponent(HitboxComponent.class).setLayer(PhysicsLayer.WALL);
+
+        Entity weapon = createWeapon();
+
+        obstacle.create();
+        weapon.create();
+
+        Fixture obstacleFixture = obstacle.getComponent(HitboxComponent.class).getFixture();
+        Fixture weaponFixture = weapon.getComponent(HitboxComponent.class).getFixture();
+
+        weapon.getEvents().trigger("collisionStart", weaponFixture, obstacleFixture);
+
+        assertEquals(true, weapon.isDispose());
+    }
+
+    @Test
+    void shouldNotDisposeForWeaponHitPlayer() {
+
+        Entity obstacle = createEntity1();
+        obstacle.getComponent(HitboxComponent.class).setLayer(PhysicsLayer.PLAYER);
+
+        Entity weapon = createWeapon();
+
+        obstacle.create();
+        weapon.create();
+
+        Fixture obstacleFixture = obstacle.getComponent(HitboxComponent.class).getFixture();
+        Fixture weaponFixture = weapon.getComponent(HitboxComponent.class).getFixture();
+
+        weapon.getEvents().trigger("collisionStart", weaponFixture, obstacleFixture);
+
+        assertEquals(false, weapon.isDispose());
+    }
 
     Entity createEntity1() {
         Entity entity =
@@ -311,6 +469,7 @@ class ObstacleEventHandlerTest {
 
         return entity;
     }
+
     Entity createPortal(Entity target, ObstacleEventHandler.ObstacleType type) {
         Entity portal =
                 new Entity("Portal")
@@ -321,5 +480,15 @@ class ObstacleEventHandlerTest {
         return portal;
     }
 
+    Entity createWeapon() {
+        ParticleRenderComponent particleRenderComponent = mock(ParticleRenderComponent.class);
+        Entity weapon = new Entity("weapon")
+                .addComponent(new PhysicsComponent())
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.WEAPON))
+                .addComponent(particleRenderComponent)
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.WEAPON));
+
+        return weapon;
+    }
 
 }

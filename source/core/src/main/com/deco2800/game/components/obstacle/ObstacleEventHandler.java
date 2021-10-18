@@ -131,13 +131,9 @@ public class ObstacleEventHandler extends Component {
             animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked = false;
             if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
-                System.out.println("setRemoveCollision");
                 this.entity.setRemoveCollision();
             }
-
         }
-
-
     }
 
 
@@ -247,7 +243,6 @@ public class ObstacleEventHandler extends Component {
     void spaceshipDispose() {
         logger.debug("spaceshipDispose event was triggered.");
         this.getEntity().setDispose();
-//        this.entity.setDisappearAfterAnimation(2f, Entity.DisappearType.ANIMATION);
     }
 
     /**
@@ -311,7 +306,7 @@ public class ObstacleEventHandler extends Component {
 
 
     /**
-     * Triggered when the character encounters a new map exit.
+     * Triggered when the weapon hit obstacles, ground and missile.
      *
      * @param me    self fixture
      * @param other The fixture of the entity that started the collision
@@ -328,7 +323,7 @@ public class ObstacleEventHandler extends Component {
             return;
         }
         this.entity.setDispose();
-        logger.info(COLLISION_LOGGER_INFO, entity.toString());
+        logger.debug(COLLISION_LOGGER_INFO, entity.toString());
     }
 
 
@@ -377,12 +372,5 @@ public class ObstacleEventHandler extends Component {
         return spaceshipAttack;
     }
 
-    /**
-     * getter method for count
-     *
-     * @return how many times the event was triggered
-     */
-    public int getCount() {
-        return count;
-    }
+
 }

@@ -175,6 +175,14 @@ public class Entity {
     }
 
     /**
+     * Getter method of removeCollision
+     * @return
+     */
+    public boolean isRemoveCollision() {
+        return removeCollision;
+    }
+
+    /**
      * Get method of dispose.
      */
     public boolean isDispose() {
@@ -373,6 +381,10 @@ public class Entity {
                 component.dispose();
                 i.remove();
                 logger.debug("{} disposed on entity {}", component.getClass().getSimpleName(), this);
+            } else {
+                if (((AnimationRenderComponent) component).getCurrentAnimation() != null) {
+                    ((AnimationRenderComponent) component).stopAnimation();
+                }
             }
         }
         ServiceLocator.getEntityService().unregister(this);

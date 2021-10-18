@@ -17,6 +17,7 @@ import com.deco2800.game.components.Component;
 import com.deco2800.game.extensions.GameExtension;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.ParticleRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
@@ -257,6 +258,95 @@ class EntityTest {
         entity.update();
         verify(component).dispose();
     }
+
+    @Test
+    void shouldStopOrDisposeAfterParticleEffect() {
+        Entity entity = new Entity();
+
+        AnimationRenderComponent animator = mock(AnimationRenderComponent.class);
+        animator.addAnimation("try", 0.2f, Animation.PlayMode.LOOP);
+        entity.addComponent(animator);
+
+        ParticleRenderComponent particleRenderComponent = mock(ParticleRenderComponent.class);
+        entity.addComponent(particleRenderComponent);
+
+        TestComponent1 component = spy(TestComponent1.class);
+        entity.addComponent(component);
+
+        entity.create();
+        EntityService entityService = mock(EntityService.class);
+        ServiceLocator.registerEntityService(entityService);
+
+        entity.setDisappearAfterParticle(3f, Entity.DisappearType.PARTICLE);
+        when(particleRenderComponent.getParticlePlayTime()).thenReturn(3.1f);
+
+        entity.update();
+
+        verify(animator).stopAnimation();
+        verify(component).dispose();
+        verify(particleRenderComponent).dispose();
+    }
+
+    @Test
+    void shouldNotStopOrDisposeAfterParticleEffect() {
+        Entity entity = new Entity();
+
+        AnimationRenderComponent animator = mock(AnimationRenderComponent.class);
+        animator.addAnimation("try", 0.2f, Animation.PlayMode.LOOP);
+        entity.addComponent(animator);
+        animator.startAnimation("try");
+
+        ParticleRenderComponent particleRenderComponent = mock(ParticleRenderComponent.class);
+        entity.addComponent(particleRenderComponent);
+
+        TestComponent1 component = spy(TestComponent1.class);
+        entity.addComponent(component);
+
+        entity.create();
+        EntityService entityService = mock(EntityService.class);
+        ServiceLocator.registerEntityService(entityService);
+
+        entity.setDisappearAfterParticle(3f, Entity.DisappearType.PARTICLE);
+        when(particleRenderComponent.getParticlePlayTime()).thenReturn(3f);
+
+        entity.update();
+
+        verify(animator, times(0)).stopAnimation();
+        verify(component, times(0)).dispose();
+        verify(particleRenderComponent, times(0)).dispose();
+    }
+
+    @Test
+    void shouldKeepParticleEffectAfterParticleEffect() {
+        Entity entity = new Entity();
+
+        AnimationRenderComponent animator = mock(AnimationRenderComponent.class);
+        animator.addAnimation("try", 0.2f, Animation.PlayMode.LOOP);
+        entity.addComponent(animator);
+        animator.startAnimation("try");
+
+        ParticleRenderComponent particleRenderComponent = mock(ParticleRenderComponent.class);
+        entity.addComponent(particleRenderComponent);
+
+        TestComponent1 component = spy(TestComponent1.class);
+        entity.addComponent(component);
+
+        entity.create();
+        EntityService entityService = mock(EntityService.class);
+        ServiceLocator.registerEntityService(entityService);
+
+        entity.setParticleTime(3f);
+        entity.setDisappearAfterAnimation(2f, Entity.DisappearType.ANIMATION);
+        when(particleRenderComponent.getParticlePlayTime()).thenReturn(2f);
+        when(animator.getAnimationPlayTime()).thenReturn(3.1f);
+
+        entity.update();
+
+        verify(animator).stopAnimation();
+        verify(component).dispose();
+        verify(particleRenderComponent, times(0)).dispose();
+    }
+
 
     static class TestComponent1 extends Component {
     }
