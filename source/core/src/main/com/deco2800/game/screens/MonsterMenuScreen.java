@@ -6,7 +6,7 @@ import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.BackgroundSelectionComponent;
 import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.obstacle.MonsterDetails;
-import com.deco2800.game.components.obstacle.MonsterDispay;
+import com.deco2800.game.components.obstacle.MonsterDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -59,7 +59,7 @@ public class MonsterMenuScreen extends ScreenAdapter {
 
             };
     private final Renderer renderer;
-    private final MonsterDispay monsterDispay;
+    private final MonsterDisplay monsterDispay;
     private final Entity ui;
 
     /**
@@ -78,7 +78,7 @@ public class MonsterMenuScreen extends ScreenAdapter {
         loadAssets();
         Stage stage = ServiceLocator.getRenderService().getStage();
         ui = new Entity();
-        monsterDispay = new MonsterDispay(game);
+        monsterDispay = new MonsterDisplay(game);
         ui.addComponent(monsterDispay).addComponent(new InputDecorator(stage, 10))
                 .addComponent(new MonsterDetails())
                 .addComponent(new BackgroundSelectionComponent("MonsterMenu"))
