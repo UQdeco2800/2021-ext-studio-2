@@ -9,7 +9,6 @@ import com.deco2800.game.components.items.PropShopHelper;
 import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.items.InventorySystem;
-import com.deco2800.game.components.items.ItemBar;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
@@ -613,7 +612,7 @@ public class ForestGameArea extends GameArea {
         GridPoint2 randomPos2;
         // Record the coordinates of all obstacles, Record the coordinates of all obstacles to prevent obstacles
         // from being generated at the same location
-        ArrayList<GridPoint2> randomPoints = new ArrayList<GridPoint2>();
+        ArrayList<GridPoint2> randomPoints = new ArrayList<>();
 
         StringBuilder loggerInfo = new StringBuilder();
 
