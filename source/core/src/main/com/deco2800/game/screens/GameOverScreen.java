@@ -23,7 +23,6 @@ public class GameOverScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(GameOverScreen.class);
     private static final String[] gameOverTextures = {"images/gameOver.png", "images/backk.png"};
     private final Renderer renderer;
-    private final GameOverDisplay gomd;
     private final Entity ui;
 
     public GameOverScreen(GdxGame game) {
@@ -37,7 +36,7 @@ public class GameOverScreen extends ScreenAdapter {
         Stage stage = ServiceLocator.getRenderService().getStage();
         ui = new Entity();
         loadAssets();
-        gomd = new GameOverDisplay(game);
+        GameOverDisplay gomd = new GameOverDisplay(game);
         ui.addComponent(new BackgroundSelectionComponent("GameOver"))
                 .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("GameOver"), 0.5f))
                 .addComponent(gomd).addComponent(new InputDecorator(stage, 10));
@@ -45,10 +44,6 @@ public class GameOverScreen extends ScreenAdapter {
         ServiceLocator.getEntityService().register(ui);
 
 
-    }
-
-    public void setPoints(double points) {
-        this.gomd.setPoints(points);
     }
 
     @Override

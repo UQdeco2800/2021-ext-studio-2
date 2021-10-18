@@ -1,7 +1,6 @@
 package com.deco2800.game.rendering;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -9,8 +8,7 @@ import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 
 public class ParticleRenderComponent extends RenderComponent{
-    private Texture texture;
-    private String texturePath;
+    private final String texturePath;
     private ParticleEffect pe;
     private boolean EffectStart = false;
     private float particlePlayTime;
@@ -25,7 +23,6 @@ public class ParticleRenderComponent extends RenderComponent{
     @Override
     public void create() {
         super.create();
-        Vector2 pos = entity.getPosition();
         pe = new ParticleEffect();
         pe.load(Gdx.files.internal(texturePath),Gdx.files.internal("images/particle"));
 
