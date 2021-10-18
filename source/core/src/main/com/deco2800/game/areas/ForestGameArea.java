@@ -33,6 +33,7 @@ import java.util.ArrayList;
 public class ForestGameArea extends GameArea {
     private boolean wake;
 
+
     private void spawnNails() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
