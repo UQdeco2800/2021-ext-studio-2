@@ -32,7 +32,7 @@ public class AchievementsScreen extends ScreenAdapter {
     private static final String[] backgroundImages = {"images/achievements/achievementBackground.png", "images/story/chapterDialog.png"};
     private static final String CHAPTER_PATH = "images/story/chapter";
     private static final String[] chapterArt = {"images/story/chapter1art.png", "images/story/chapter2art.png"
-            , "images/story/chapter3art.png", "images/story/chapter4art.png", "images/story/chapter5art.png"};
+            , "images/story/chapter3art.png", "images/story/chapter4art.png", "images/story/chapter5art.png", "images/story/chapter6art.png"};
     private final GdxGame game;
     private final Renderer renderer;
     private Entity ui;
@@ -60,7 +60,7 @@ public class AchievementsScreen extends ScreenAdapter {
         resourceService.loadTextures(achievementTextures);
         resourceService.loadTextures(backgroundImages);
         resourceService.loadTextures(chapterArt);
-        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i < 7; i++) {
             resourceService.loadTextures(new String[]{CHAPTER_PATH + i + ".png"});
         }
         resourceService.loadTextures(new String[]{CHAPTER_PATH + "Link.png"});
@@ -74,7 +74,7 @@ public class AchievementsScreen extends ScreenAdapter {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(achievementTextures);
         resourceService.unloadAssets(backgroundImages);
-        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i < 7; i++) {
             resourceService.unloadAssets(new String[]{CHAPTER_PATH + i + ".png"});
         }
         resourceService.unloadAssets(new String[]{CHAPTER_PATH + "Link.png"});
