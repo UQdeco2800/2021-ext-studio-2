@@ -37,10 +37,8 @@ public class ObstacleFactory {
      * Type of Meteorite, different type means different size. more detail see spawnMeteorites() in ForestGameArea.java
      */
     public enum MeteoriteType {
-        SmallMeteorite, MiddleMeteorite, BigMeteorite;
+        SmallMeteorite, MiddleMeteorite, BigMeteorite
     }
-
-    ;
 
     /**
      * Creates a Plants Obstacle.
@@ -59,16 +57,14 @@ public class ObstacleFactory {
         animator.addAnimation("obstacles", 0.2f, Animation.PlayMode.LOOP);
 
         ParticleRenderComponent particle =
-                new ParticleRenderComponent("images/particle/test.party");
+                new ParticleRenderComponent("images/particle/plant2.party");
 
-
-//       particle.startEffect();
         obstacle
+                .addComponent(particle)
                 .addComponent(new TextureRenderComponent("images/obstacle_1_new.png"))
                 .addComponent(animator)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 10f))
-                .addComponent(particle)
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PlantsObstacle));
 
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
@@ -96,11 +92,16 @@ public class ObstacleFactory {
                                 .getAsset("images/obstacle_2.atlas", TextureAtlas.class));
         animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
 
+        ParticleRenderComponent particle =
+                new ParticleRenderComponent("images/particle/thron2.party");
+
+
         obstacle
                 .addComponent(new TextureRenderComponent("images/obstacle2_vision2.png"))
                 .addComponent(animator)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
+                .addComponent(particle)
 //                .addComponent(new ParticleRenderComponent("test.party"))
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.ThornsObstacle));
 
@@ -116,35 +117,25 @@ public class ObstacleFactory {
     /**
      * Creates a Thorns Obstacle.
      *
-//     * @param target character.
+     //     * @param target character.
      * @return the thorns obstacle entity
      */
     public static Entity createWeapon() {
-//        BaseEntityConfig config = configs.thorn;
-//        Entity weapon = createBaseObstacle(target, BodyType.DynamicBody, "weapon");
 
-//        AnimationRenderComponent animator =
-//                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService()
-//                                .getAsset("images/obstacle_2.atlas", TextureAtlas.class));
-//        animator.addAnimation("obstacle2", 0.2f, Animation.PlayMode.LOOP);
+        ParticleRenderComponent particle =
+                new ParticleRenderComponent("images/particle/weapon.party");
 
         Entity weapon = new Entity("weapon")
                 .addComponent(new PhysicsComponent())
-//                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.PLAYERCOLLIDER))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.WEAPON))
-                .addComponent(new TextureRenderComponent("images/Items/3.png"))
-//                .addComponent(animator)
-//                .addComponent(new CombatStatsComponent(0, 0))
-//                .addComponent(new TouchAttackComponent(PhysicsLayer.OBSTACLE, 0f))
-//                .addComponent(new ParticleRenderComponent("test.party"))
+                .addComponent(particle)
                 .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Weapon));
 
-        weapon.getComponent(TextureRenderComponent.class).scaleEntity();
-//        PhysicsUtils.setScaledCollider(obstacle, 0.2f, 0.3f);
         weapon.setScale(0.5f, 0.5f);
         weapon.setZIndex(1);
 //        logger.debug("Create a Thorns Obstacle");
+        particle.startEffect();
+        weapon.setDisappearAfterParticle(2f, Entity.DisappearType.PARTICLE);
 
         return weapon;
     }
@@ -175,16 +166,19 @@ public class ObstacleFactory {
      */
     public static Entity createMeteorite(Entity target, float size, MeteoriteType meteoriteType) {
         BaseEntityConfig config = null;
-
+        ParticleRenderComponent particle = null;
         switch (meteoriteType) {
             case BigMeteorite:
                 config = configs.bigMeteorite;
+                particle = new ParticleRenderComponent("images/particle/stoneBig.party");
                 break;
             case MiddleMeteorite:
                 config = configs.middleMeteorite;
+                particle = new ParticleRenderComponent("images/particle/stoneMid.party");
                 break;
             case SmallMeteorite:
                 config = configs.smallMeteorite;
+                particle = new ParticleRenderComponent("images/particle/stoneSmall.party");
                 break;
             default:
                 logger.error("Don't have this meteorite type");
@@ -197,6 +191,8 @@ public class ObstacleFactory {
 
         animator.addAnimation("stone1", 0.08f, Animation.PlayMode.LOOP);
 
+
+
         Entity meteorite =
                 new Entity("Meteorite")
                         .addComponent(new PhysicsComponent())
@@ -206,7 +202,9 @@ public class ObstacleFactory {
                         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                         .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
                         .addComponent(animator)
-                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Meteorite));
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Meteorite))
+                        .addComponent(particle);
+
         meteorite.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(meteorite, 1f, 1f);
         meteorite.setScale(size, size);
@@ -229,15 +227,20 @@ public class ObstacleFactory {
                                 .getAsset("images/portal.atlas", TextureAtlas.class));
         animator.addAnimation("portal_1", 0.2f, Animation.PlayMode.LOOP);
 
+        ParticleRenderComponent particle =
+                new ParticleRenderComponent("images/particle/portal.party");
+
         Entity portal =
                 new Entity("Portal")
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(animator)
-                        .addComponent(new ObstacleEventHandler(type));
+                        .addComponent(new ObstacleEventHandler(type))
+                        .addComponent(particle);
 
         PhysicsUtils.setScaledCollider(portal, 2f, 4f);
         portal.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        particle.startEffect();
         animator.startAnimation("portal_1");
         portal.setScale(2, 4);
 
@@ -276,11 +279,6 @@ public class ObstacleFactory {
         rock.addComponent(new TextureRenderComponent("images/rock.jpg"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
-        // Comment out by team 8, you can restore them at will
-//                .addComponent(new CombatStatsComponent(2000, 10))
-//                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
-//                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
-//                .addComponent(new ObstacleAnimationController());
 
 
         rock.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
@@ -288,6 +286,38 @@ public class ObstacleFactory {
 
 
         return rock;
+    }
+
+    /**
+     * Creates a firerock.
+     *
+     * @return Firrerock entity
+     */
+    public static Entity createMagma(Entity target) {
+        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody, "Magma");
+
+        obstacle
+                .addComponent(new TextureRenderComponent("images/firerock.jpg"))
+                .addComponent(new CombatStatsComponent(2000, 10))
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1f));
+
+        return obstacle;
+    }
+
+    /**
+     * Creates a nail.
+     *
+     * @return nail entity
+     */
+    public static Entity createNail(Entity target) {
+        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody, "Nail");
+
+        obstacle
+                .addComponent(new TextureRenderComponent("images/nail.jpg"))
+                .addComponent(new CombatStatsComponent(2000, 5))
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1f));
+
+        return obstacle;
     }
 
     /**
@@ -301,11 +331,6 @@ public class ObstacleFactory {
         wood.addComponent(new TextureRenderComponent("images/wood.jpg"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
-        // Comment out by team 8, you can restore them at will
-//                .addComponent(new CombatStatsComponent(2000, 10))
-//                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
-//                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
-//                .addComponent(new ObstacleAnimationController());
 
 
         wood.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);

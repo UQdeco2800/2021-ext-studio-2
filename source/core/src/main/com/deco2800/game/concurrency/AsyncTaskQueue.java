@@ -58,17 +58,6 @@ public class AsyncTaskQueue {
         return queue.isShutdown();
     }
 
-    /**
-     * Do not accept any more tasks. Shut down the queue after completing
-     * already enqueued tasks.
-     */
-    public static void cancelFutureTasks() {
-        try {
-            queue.shutdown();
-        } catch (Exception ignored){
-
-        }
-    }
 
     /**
      * Shut down the task queue immediately and cancel all future tasks.

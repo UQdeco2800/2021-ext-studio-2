@@ -5,15 +5,18 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
-import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.events.EventHandler;
+import com.deco2800.game.physics.components.ColliderComponent;
+import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.ParticleRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
-import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Iterator;
 
 /**
  * Core entity class. Entities exist in the game and are updated each frame. All entities have a
@@ -43,9 +46,17 @@ public class Entity {
     private final EventHandler eventHandler;
     private boolean enabled = true;
     private boolean disappear = false;
+
+    public enum DisappearType {
+        ANIMATION, PARTICLE
+    }
+
+    private DisappearType disappearType = null;
     private boolean removeTexture = false;
+    private boolean removeCollision = false;
     private boolean dispose = false;
     private float animationTime = 0;
+    private float particleTime = 0;
     private boolean created = false;
     private Vector2 position = Vector2.Zero.cpy();
 
@@ -101,10 +112,27 @@ public class Entity {
      *
      * @param animationTime Set how long the animation will disappear after playing
      */
-    public void setDisappearAfterAnimation(float animationTime) {
+    public void setDisappearAfterAnimation(float animationTime, DisappearType disappearType) {
         this.disappear = true;
         this.animationTime = animationTime;
-        logger.debug("Setting disappear={} on entity {}", disappear, this);
+        this.disappearType = disappearType;
+        logger.debug("Setting disappear={} on entity {}", true, this);
+    }
+
+    /**
+     * Set disappear to true. These variables play a role in removeAfterParticle() and update().
+     *
+     * @param particleTime Set how long the animation will disappear after playing
+     */
+    public void setDisappearAfterParticle(float particleTime, DisappearType disappearType) {
+        this.disappear = true;
+        this.particleTime = particleTime;
+        this.disappearType = disappearType;
+        logger.debug("Setting disappear={} on entity {}", true, this);
+    }
+
+    public void setParticleTime(float particleTime) {
+        this.particleTime = particleTime;
     }
 
     /**
@@ -112,7 +140,15 @@ public class Entity {
      */
     public void setRemoveTexture() {
         this.removeTexture = true;
-        logger.debug("Setting removeTexture={} on entity {}", removeTexture, this);
+        logger.debug("Setting removeTexture={} on entity {}", true, this);
+    }
+
+    /**
+     * Set removeCollision to true. The code that works subsequently is in update.
+     */
+    public void setRemoveCollision() {
+        this.removeCollision = true;
+        logger.debug("Setting removeCollision={} on entity {}", true, this);
     }
 
     /**
@@ -120,7 +156,7 @@ public class Entity {
      */
     public void setDispose() {
         this.dispose = true;
-        logger.debug("Setting dispose={} on entity {}", dispose, this);
+        logger.debug("Setting dispose={} on entity {}", true, this);
     }
 
     /**
@@ -146,6 +182,7 @@ public class Entity {
 
     /**
      * Get method of animationTime.
+     *
      * @return How long the animation will disappear after playing
      */
     public float getAnimationTime() {
@@ -313,6 +350,7 @@ public class Entity {
         return this;
     }
 
+
     /**
      * Dispose of the entity. This will dispose of all components on this entity.
      */
@@ -330,21 +368,44 @@ public class Entity {
      * same animation become black boxes. Therefore, this method is currently used to make obstacles disappear.
      */
     public void removeAfterAnimation() {
-        String loggerInfo = "";
         if (this.getComponent(AnimationRenderComponent.class).getAnimationPlayTime() > animationTime) {
-            for (Component component : createdComponents) {
+            Iterator<Component> i = createdComponents.iterator();
+            while (i.hasNext()) {
+                Component component = i.next(); // must be called before you can call i.remove()
                 if (component.getClass().equals(AnimationRenderComponent.class)) {
-                    loggerInfo += "\t" + component.getClass().getSimpleName() + " stopped on entity " + this + "\n";
                     ((AnimationRenderComponent) component).stopAnimation();
-                } else {
-                    loggerInfo += "\t" + component.getClass().getSimpleName() + " disposed on entity " + this + "\n";
+                    logger.info("{} stopped on entity {}", component.getClass().getSimpleName(), this);
+                } else if (!component.getClass().equals(ParticleRenderComponent.class)) {
                     component.dispose();
+                    i.remove();
+                    logger.info("{} disposed on entity {}", component.getClass().getSimpleName(), this);
+                }
+            }
+            if (particleTime == 0) {
+                ServiceLocator.getEntityService().unregister(this);
+                disappear = false;
+            } else {
+                disappearType = DisappearType.PARTICLE;
+            }
+        }
+    }
+
+    /**
+     * Let the obstacles disappear after playing the particle for particleTime second. Is called by update().
+     */
+    public void removeAfterParticle() {
+        if (this.getComponent(ParticleRenderComponent.class).getParticlePlayTime() > particleTime) {
+            Iterator<Component> i = createdComponents.iterator();
+            while (i.hasNext()) {
+                Component component = i.next(); // must be called before you can call i.remove()
+                if (!component.getClass().equals(AnimationRenderComponent.class)) {
+                    component.dispose();
+                    i.remove();
+                    logger.info("{} disposed on entity {}", component.getClass().getSimpleName(), this);
                 }
             }
             ServiceLocator.getEntityService().unregister(this);
-        }
-        if (loggerInfo.strip() != "") {
-            logger.debug(loggerInfo.strip());
+            disappear = false;
         }
     }
 
@@ -398,15 +459,33 @@ public class Entity {
             // animation is played to avoid the conflict between the texture and the animation.
             if (removeTexture) {
                 if (component.getClass().equals(TextureRenderComponent.class)) {
-                    logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
+                    createdComponents.removeValue(component, true);
+                    logger.info("Remove {} on entity{}", component.getClass().getSimpleName(), this);
+                    component.dispose();
+                    removeTexture = false;
+                }
+            }
+
+            if (removeCollision) {
+                if (component.getClass().equals(HitboxComponent.class) || component.getClass().equals(ColliderComponent.class)) {
+                    createdComponents.removeValue(component, true);
+                    logger.info("Remove {} on entity{}", component.getClass().getSimpleName(), this);
                     component.dispose();
                 }
             }
             component.triggerUpdate();
         }
+        removeCollision = false;
+
         if (disappear) {
-            this.removeAfterAnimation();
-            return;
+            if (disappearType == DisappearType.ANIMATION) {
+                this.removeAfterAnimation();
+            } else if (disappearType == DisappearType.PARTICLE) {
+                this.removeAfterParticle();
+            } else {
+                logger.error("Error disappearType = {}", disappearType);
+            }
+
         }
     }
 

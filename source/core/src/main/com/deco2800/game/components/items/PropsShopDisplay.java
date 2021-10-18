@@ -27,7 +27,7 @@ public class PropsShopDisplay extends UIComponent {
     private static final Logger logger = LoggerFactory.getLogger(PropsShopDisplay.class);
     private final GdxGame game;
 
-    private File file;
+    private final File file;
     private FileReader fileReader;
 
     public PropsShopDisplay(GdxGame game) {
@@ -129,7 +129,6 @@ public class PropsShopDisplay extends UIComponent {
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("return menu button clicked");
                         game.setScreen(GdxGame.ScreenType.MAIN_MENU);
                     }
                 });
@@ -138,7 +137,6 @@ public class PropsShopDisplay extends UIComponent {
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("return menu button clicked");
                         game.setScreen(GdxGame.ScreenType.MAIN_MENU);
                     }
                 });
@@ -147,7 +145,6 @@ public class PropsShopDisplay extends UIComponent {
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("return menu button clicked");
                         game.setScreen(GdxGame.ScreenType.MAIN_MENU);
                     }
                 });
@@ -156,7 +153,6 @@ public class PropsShopDisplay extends UIComponent {
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("return menu button clicked");
                         game.setScreen(GdxGame.ScreenType.MAIN_MENU);
                     }
                 });
@@ -165,7 +161,6 @@ public class PropsShopDisplay extends UIComponent {
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("return menu button clicked");
                         game.setScreen(GdxGame.ScreenType.MAIN_MENU);
                     }
                 });

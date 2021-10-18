@@ -17,12 +17,12 @@ task run(dependsOn: classes, type: JavaExec) {
     String osName = OperatingSystem.current().getName();
     String osVersion = OperatingSystem.current().getVersion();
     println "*** $osName $osVersion was detected."
-
+    // Operating system specific check. Do not modify the following code!!!
      if (OperatingSystem.current().isMacOsX()) {
-         // OS X.
+         // OS X. Note: do not remove this line
          jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties", "-XstartOnFirstThread"]
     } else {
-         // Windows, Linux etc.
+         // Windows, Linux etc.Note: do not remove this line
         jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties"]
     }
 }

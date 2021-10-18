@@ -18,7 +18,6 @@ public class ScoreDisplay extends UIComponent {
     Table tableForText;
     Table tableForBoard;
     private Label scoreLabel;
-//    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
     private Image scoreBoard;
 
     /**

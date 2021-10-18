@@ -3,6 +3,7 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.BackgroundSelectionComponent;
 import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.achievements.screen.AchievementRecordsDisplay;
 import com.deco2800.game.components.achievements.screen.ChapterDisplay;
@@ -11,7 +12,8 @@ import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.files.GameRecords;
+import com.deco2800.game.files.meta.BackgroundMusic;
+import com.deco2800.game.files.stats.GameRecordUtils;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
@@ -29,7 +31,8 @@ public class AchievementsScreen extends ScreenAdapter {
     private static final String[] achievementTextures = AchievementFactory.getTextures();
     private static final String[] backgroundImages = {"images/achievements/achievementBackground.png", "images/story/chapterDialog.png"};
     private static final String CHAPTER_PATH = "images/story/chapter";
-    private static final String[] chapterArt = {"images/story/chapter1art.png", "images/story/chapter2art.png"};
+    private static final String[] chapterArt = {"images/story/chapter1art.png", "images/story/chapter2art.png"
+            , "images/story/chapter3art.png", "images/story/chapter4art.png", "images/story/chapter5art.png"};
     private final GdxGame game;
     private final Renderer renderer;
     private Entity ui;
@@ -106,13 +109,14 @@ public class AchievementsScreen extends ScreenAdapter {
     private void createUI() {
         logger.debug("Creating achievement screen ui");
 
-        List<BaseAchievementConfig> bestAchievements = GameRecords.getAllTimeBestAchievements();
+        List<BaseAchievementConfig> bestAchievements = GameRecordUtils.getAllTimeBestAchievements();
         Stage stage = ServiceLocator.getRenderService().getStage();
 
         ui = new Entity();
         ui.addComponent(new AchievementRecordsDisplay(game, bestAchievements))
-                .addComponent(new BackgroundSoundComponent("sounds/achievementBgm.mp3", 0.5f))
                 .addComponent(new ChapterDisplay())
+                .addComponent(new BackgroundSelectionComponent("Achievements", "br"))
+                .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("Achievements"), 0.5f))
                 .addComponent(new InputDecorator(stage, 10));
         ServiceLocator.getEntityService().register(ui);
     }

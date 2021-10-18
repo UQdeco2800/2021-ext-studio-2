@@ -10,6 +10,15 @@ import com.deco2800.game.rendering.TextureRenderComponent;
  */
 
 public class PlayerAnimationController extends Component {
+
+    public static final String MAIN_PLAYER_RUN = "main_player_run";
+    public static final String MAIN_PLAYER_PICKUP = "main_player_pickup";
+    public static final String MAIN_PLAYER_JUMP = "main_player_jump";
+    public static final String MAIN_PLAYER_ATTACK = "main_player_attack";
+    public static final String MAIN_PLAYER_CROUCH = "main_player_crouch";
+    public static final String MAIN_PLAYER_RIGHT = "main_player_right";
+    public static final String MAIN_PLAYER_WALK = "main_player_walk";
+    
     AnimationRenderComponent animator;
     private boolean texturePresent = true;
     String animationName;
@@ -52,25 +61,25 @@ public class PlayerAnimationController extends Component {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
         switch (animationName) {
-            case "main_player_run":
+            case MAIN_PLAYER_RUN:
                 animator.startAnimation("main_player_run_hungry");
                 break;
-            case "main_player_pickup":
+            case MAIN_PLAYER_PICKUP:
                 animator.startAnimation("main_player_pickup_hungry");
                 break;
-            case "main_player_jump":
+            case MAIN_PLAYER_JUMP:
                 animator.startAnimation("main_player_jump_hungry");
                 break;
-            case "main_player_attack":
+            case MAIN_PLAYER_ATTACK:
                 animator.startAnimation("main_player_attack_hungry");
                 break;
-            case "main_player_crouch":
+            case MAIN_PLAYER_CROUCH:
                 animator.startAnimation("main_player_crouch_hungry");
                 break;
-            case "main_player_right":
+            case MAIN_PLAYER_RIGHT:
                 animator.startAnimation("main_player_right_hungry");
                 break;
-            case "main_player_walk":
+            case MAIN_PLAYER_WALK:
             default:
                 animator.startAnimation("main_player_walk_hungry");
                 break;
@@ -83,25 +92,25 @@ public class PlayerAnimationController extends Component {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
         switch (animationName) {
-            case "main_player_run":
+            case MAIN_PLAYER_RUN:
                 animator.startAnimation("main_player_run_poisoned");
                 break;
-            case "main_player_pickup":
+            case MAIN_PLAYER_PICKUP:
                 animator.startAnimation("main_player_pickup_poisoned");
                 break;
-            case "main_player_jump":
+            case MAIN_PLAYER_JUMP:
                 animator.startAnimation("main_player_jump_poisoned");
                 break;
-            case "main_player_attack":
+            case MAIN_PLAYER_ATTACK:
                 animator.startAnimation("main_player_attack_poisoned");
                 break;
-            case "main_player_crouch":
+            case MAIN_PLAYER_CROUCH:
                 animator.startAnimation("main_player_crouch_poisoned");
                 break;
-            case "main_player_right":
+            case MAIN_PLAYER_RIGHT:
                 animator.startAnimation("main_player_right_poisoned");
                 break;
-            case "main_player_walk":
+            case MAIN_PLAYER_WALK:
             default:
                 animator.startAnimation("main_player_walk_poisoned");
                 break;
@@ -114,25 +123,25 @@ public class PlayerAnimationController extends Component {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
         switch (animationName) {
-            case "main_player_run":
+            case MAIN_PLAYER_RUN:
                 animator.startAnimation("main_player_run_health-down");
                 break;
-            case "main_player_pickup":
+            case MAIN_PLAYER_PICKUP:
                 animator.startAnimation("main_player_pickup_health-down");
                 break;
-            case "main_player_jump":
+            case MAIN_PLAYER_JUMP:
                 animator.startAnimation("main_player_jump_health-down");
                 break;
-            case "main_player_attack":
+            case MAIN_PLAYER_ATTACK:
                 animator.startAnimation("main_player_attack_health-down_health-down");
                 break;
-            case "main_player_crouch":
+            case MAIN_PLAYER_CROUCH:
                 animator.startAnimation("main_player_crouch_health-down");
                 break;
-            case "main_player_right":
+            case MAIN_PLAYER_RIGHT:
                 animator.startAnimation("main_player_right_health-down");
                 break;
-            case "main_player_walk":
+            case MAIN_PLAYER_WALK:
             default:
                 animator.startAnimation("main_player_walk_health-down");
                 break;
@@ -145,25 +154,25 @@ public class PlayerAnimationController extends Component {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
         switch (animationName) {
-            case "main_player_run":
+            case MAIN_PLAYER_RUN:
                 animator.startAnimation("main_player_run_dizzy");
                 break;
-            case "main_player_pickup":
+            case MAIN_PLAYER_PICKUP:
                 animator.startAnimation("main_player_pickup_dizzy");
                 break;
-            case "main_player_jump":
+            case MAIN_PLAYER_JUMP:
                 animator.startAnimation("main_player_jump_dizzy");
                 break;
-            case "main_player_attack":
+            case MAIN_PLAYER_ATTACK:
                 animator.startAnimation("main_player_attack_dizzy");
                 break;
-            case "main_player_crouch":
+            case MAIN_PLAYER_CROUCH:
                 animator.startAnimation("main_player_crouch_dizzy");
                 break;
-            case "main_player_right":
+            case MAIN_PLAYER_RIGHT:
                 animator.startAnimation("main_player_right_dizzy");
                 break;
-            case "main_player_walk":
+            case MAIN_PLAYER_WALK:
             default:
                 animator.startAnimation("main_player_walk_dizzy");
                 break;
@@ -176,25 +185,25 @@ public class PlayerAnimationController extends Component {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
         switch (animationName) {
-            case "main_player_run":
+            case MAIN_PLAYER_RUN:
                 animator.startAnimation("main_player_run_health-limit-up");
                 break;
-            case "main_player_pickup":
+            case MAIN_PLAYER_PICKUP:
                 animator.startAnimation("main_player_pickup_health-limit-up");
                 break;
-            case "main_player_jump":
+            case MAIN_PLAYER_JUMP:
                 animator.startAnimation("main_player_jump_health-limit-up");
                 break;
-            case "main_player_attack":
+            case MAIN_PLAYER_ATTACK:
                 animator.startAnimation("main_player_attack_health-limit-up");
                 break;
-            case "main_player_crouch":
+            case MAIN_PLAYER_CROUCH:
                 animator.startAnimation("main_player_crouch_health-limit-up");
                 break;
-            case "main_player_right":
+            case MAIN_PLAYER_RIGHT:
                 animator.startAnimation("main_player_right_health-limit-up");
                 break;
-            case "main_player_walk":
+            case MAIN_PLAYER_WALK:
             default:
                 animator.startAnimation("main_player_walk_health-limit-up");
                 break;
@@ -207,25 +216,25 @@ public class PlayerAnimationController extends Component {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
         switch (animationName) {
-            case "main_player_run":
+            case MAIN_PLAYER_RUN:
                 animator.startAnimation("main_player_run_health-up");
                 break;
-            case "main_player_pickup":
+            case MAIN_PLAYER_PICKUP:
                 animator.startAnimation("main_player_pickup_health-up");
                 break;
-            case "main_player_jump":
+            case MAIN_PLAYER_JUMP:
                 animator.startAnimation("main_player_jump_health-up");
                 break;
-            case "main_player_attack":
+            case MAIN_PLAYER_ATTACK:
                 animator.startAnimation("main_player_attack_health-up");
                 break;
-            case "main_player_crouch":
+            case MAIN_PLAYER_CROUCH:
                 animator.startAnimation("main_player_crouch_health-up");
                 break;
-            case "main_player_right":
+            case MAIN_PLAYER_RIGHT:
                 animator.startAnimation("main_player_right_health-up");
                 break;
-            case "main_player_walk":
+            case MAIN_PLAYER_WALK:
             default:
                 animator.startAnimation("main_player_walk_health-up");
                 break;
@@ -238,25 +247,25 @@ public class PlayerAnimationController extends Component {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
         switch (animationName) {
-            case "main_player_run":
+            case MAIN_PLAYER_RUN:
                 animator.startAnimation("main_player_run_recovered");
                 break;
-            case "main_player_pickup":
+            case MAIN_PLAYER_PICKUP:
                 animator.startAnimation("main_player_pickup_recovered");
                 break;
-            case "main_player_jump":
+            case MAIN_PLAYER_JUMP:
                 animator.startAnimation("main_player_jump_recovered");
                 break;
-            case "main_player_attack":
+            case MAIN_PLAYER_ATTACK:
                 animator.startAnimation("main_player_attack_recovered");
                 break;
-            case "main_player_crouch":
+            case MAIN_PLAYER_CROUCH:
                 animator.startAnimation("main_player_crouch_recovered");
                 break;
-            case "main_player_right":
+            case MAIN_PLAYER_RIGHT:
                 animator.startAnimation("main_player_right_recovered");
                 break;
-            case "main_player_walk":
+            case MAIN_PLAYER_WALK:
             default:
                 animator.startAnimation("main_player_walk_recovered");
                 break;
@@ -269,25 +278,25 @@ public class PlayerAnimationController extends Component {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
         switch (animationName) {
-            case "main_player_run":
+            case MAIN_PLAYER_RUN:
                 animator.startAnimation("main_player_run_speed-down");
                 break;
-            case "main_player_pickup":
+            case MAIN_PLAYER_PICKUP:
                 animator.startAnimation("main_player_pickup_speed-down");
                 break;
-            case "main_player_jump":
+            case MAIN_PLAYER_JUMP:
                 animator.startAnimation("main_player_jump_speed-down");
                 break;
-            case "main_player_attack":
+            case MAIN_PLAYER_ATTACK:
                 animator.startAnimation("main_player_attack_speed-down");
                 break;
-            case "main_player_crouch":
+            case MAIN_PLAYER_CROUCH:
                 animator.startAnimation("main_player_crouch_speed-down");
                 break;
-            case "main_player_right":
+            case MAIN_PLAYER_RIGHT:
                 animator.startAnimation("main_player_right_speed-down");
                 break;
-            case "main_player_walk":
+            case MAIN_PLAYER_WALK:
             default:
                 animator.startAnimation("main_player_walk_speed-down");
                 break;
@@ -300,25 +309,25 @@ public class PlayerAnimationController extends Component {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
         switch (animationName) {
-            case "main_player_run":
+            case MAIN_PLAYER_RUN:
                 animator.startAnimation("main_player_run_thirsty");
                 break;
-            case "main_player_pickup":
+            case MAIN_PLAYER_PICKUP:
                 animator.startAnimation("main_player_pickup_thirsty");
                 break;
-            case "main_player_jump":
+            case MAIN_PLAYER_JUMP:
                 animator.startAnimation("main_player_jump_thirsty");
                 break;
-            case "main_player_attack":
+            case MAIN_PLAYER_ATTACK:
                 animator.startAnimation("main_player_attack_thirsty");
                 break;
-            case "main_player_crouch":
+            case MAIN_PLAYER_CROUCH:
                 animator.startAnimation("main_player_crouch_thirsty");
                 break;
-            case "main_player_right":
+            case MAIN_PLAYER_RIGHT:
                 animator.startAnimation("main_player_right_thirsty");
                 break;
-            case "main_player_walk":
+            case MAIN_PLAYER_WALK:
             default:
                 animator.startAnimation("main_player_walk_thirsty");
                 break;
@@ -331,7 +340,7 @@ public class PlayerAnimationController extends Component {
      */
     private void animatePickUp() {
         preAnimationCleanUp();
-        animator.startAnimation("main_player_pickup");
+        animator.startAnimation(MAIN_PLAYER_PICKUP);
 
     }
     /**
@@ -340,7 +349,7 @@ public class PlayerAnimationController extends Component {
 
     private void animateCrouch() {
         preAnimationCleanUp();
-        animator.startAnimation("main_player_crouch");
+        animator.startAnimation(MAIN_PLAYER_CROUCH);
         
     }
 
@@ -350,7 +359,7 @@ public class PlayerAnimationController extends Component {
 
     private void animateRight() {
         preAnimationCleanUp();
-        animator.startAnimation("main_player_run");
+        animator.startAnimation(MAIN_PLAYER_RUN);
     }
 
     /**
@@ -359,7 +368,7 @@ public class PlayerAnimationController extends Component {
 
     private void animateAttack() {
         preAnimationCleanUp();
-        animator.startAnimation("main_player_attack");
+        animator.startAnimation(MAIN_PLAYER_ATTACK);
     }
 
     /**
@@ -368,7 +377,7 @@ public class PlayerAnimationController extends Component {
 
     private void animateJump() {
          preAnimationCleanUp();
-         animator.startAnimation("main_player_jump");
+         animator.startAnimation(MAIN_PLAYER_JUMP);
     }
 
     /**
@@ -377,7 +386,7 @@ public class PlayerAnimationController extends Component {
 
     private void animateWalk() {
         preAnimationCleanUp();
-        animator.startAnimation("main_player_walk");
+        animator.startAnimation(MAIN_PLAYER_WALK);
     }
 
     /**

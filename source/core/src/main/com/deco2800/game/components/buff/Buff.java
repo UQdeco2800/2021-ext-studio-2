@@ -5,18 +5,16 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.concurrency.AsyncTaskQueue;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.configs.PlayerConfig;
-import com.deco2800.game.files.FileLoader;
 
 public class Buff {
     /**
      * player
      */
-    private Entity player;
+    private final Entity player;
     /**
      * player's status
      */
-    private CombatStatsComponent component;
+    private final CombatStatsComponent component;
 
     public Buff(Entity player) {
         this.player = player;

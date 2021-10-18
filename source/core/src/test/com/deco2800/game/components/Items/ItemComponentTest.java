@@ -1,6 +1,7 @@
 package com.deco2800.game.components.Items;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.items.ItemComponent;
 import com.deco2800.game.components.items.PropShopHelper;
@@ -35,7 +36,7 @@ public class ItemComponentTest {
         Fixture entityFixture = entity.getComponent(HitboxComponent.class).getFixture();
         Fixture targetFixture = target.getComponent(HitboxComponent.class).getFixture();
         entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
-        assertEquals(100, target.getComponent(CombatStatsComponent.class).getHealth());
+        assertEquals(90, target.getComponent(CombatStatsComponent.class).getHealth());
 
     }
 

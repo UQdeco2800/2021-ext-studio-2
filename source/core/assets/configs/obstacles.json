@@ -1,19 +1,19 @@
 {
   "plant": {
     "health": 2000,
-    "baseAttack": 5
+    "baseAttack": 20
   },
   "thorn": {
     "health": 2000,
-    "baseAttack": 3
+    "baseAttack": 10
   },
   "bigMeteorite": {
     "health": 2000,
-    "baseAttack": 3
+    "baseAttack": 5
   },
   "middleMeteorite": {
     "health": 2000,
-    "baseAttack": 2
+    "baseAttack": 3
   },
   "smallMeteorite": {
     "health": 2000,

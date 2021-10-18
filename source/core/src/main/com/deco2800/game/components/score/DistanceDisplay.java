@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.deco2800.game.components.achievements.AchievementsHelper;
-import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
@@ -16,7 +14,6 @@ public class DistanceDisplay extends UIComponent {
     Table tableForText;
     Table tableForBoard;
     private Label distanceLabel;
-    //    private final ScoringSystemV1 scoringSystem = new ScoringSystemV1();
     private Image distanceBoard;
 
     /**
@@ -27,9 +24,6 @@ public class DistanceDisplay extends UIComponent {
     public void create() {
         super.create();
         addActors();
-        //add achievement score to the score.
-//        AchievementsHelper.getInstance().getEvents()
-//                .addListener(AchievementsHelper.EVENT_ACHIEVEMENT_DISTANCE_TRIGGERED, this::updateDistance);
         entity.getEvents().addListener("updateDistance", this::updatePlayerDistanceUI);
     }
 
@@ -87,12 +81,6 @@ public class DistanceDisplay extends UIComponent {
         distanceLabel.setText(text);
     }
 
-    /**
-     * Updates the distance
-     */
-    private void updateDistance(){
-        ServiceLocator.getDistanceService().getDistance();
-    }
 
     @Override
     public void dispose() {

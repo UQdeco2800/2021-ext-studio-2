@@ -27,7 +27,7 @@ public class RecycleDisplay extends UIComponent {
     public static boolean isKey =false;
 
 
-    public RecycleDisplay() { }
+    public RecycleDisplay() {}
     /**
      * Creates reusable recycle ui styles and adds actors to the stage.
      * And starts the counting the time.
@@ -46,9 +46,9 @@ public class RecycleDisplay extends UIComponent {
      */
     private void addActors() {
         table = new Table();
-        table.bottom().right();
+        table.bottom();
         table.setFillParent(true);
-        table.padBottom(50).padRight(400);
+        table.padBottom(30).padRight(-400);
 
         float iconLength = 60f;
         if(TestBuffForItem.countNumber >= 0){
@@ -135,9 +135,9 @@ public class RecycleDisplay extends UIComponent {
                 recycleIcon.remove(recycleIcon.get(i));
             }
             table.reset();
-            table.bottom().right();
+            table.bottom();
             table.setFillParent(true);
-            table.padBottom(50).padRight(400);
+            table.padBottom(30).padRight(-400);
 
             float iconLength = 60f;
             if(TestBuffForItem.countNumber >= 0){

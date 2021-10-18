@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.concurrency.AsyncTaskQueue;
-import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.configs.buff.BuffDescriptionConfig;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
@@ -38,13 +37,6 @@ public class BuffDescriptionDisplay extends UIComponent {
     }
 
     /**
-     * Unload all buff' assets
-     */
-    private void unloadAssets() {
-        ResourceService resourceService = ServiceLocator.getResourceService();
-    }
-
-    /**
      * Adds a new table as an actor to the stage
      */
     private void addActors() {
@@ -56,7 +48,7 @@ public class BuffDescriptionDisplay extends UIComponent {
 
     @Override
     public void draw(SpriteBatch batch) {
-
+        //does not need this
     }
 
 
@@ -69,7 +61,6 @@ public class BuffDescriptionDisplay extends UIComponent {
                 /* Wait for some time */
                 Thread.sleep(RENDER_DURATION);
                 this.clear();
-            } catch (InterruptedException ignored) {
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -115,6 +106,5 @@ public class BuffDescriptionDisplay extends UIComponent {
         if (buffDescriptionLabel != null) {
             buffDescriptionLabel.remove();
         }
-        unloadAssets();
     }
 }

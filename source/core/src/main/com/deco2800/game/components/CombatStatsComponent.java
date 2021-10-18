@@ -1,9 +1,5 @@
 package com.deco2800.game.components;
 
-import com.badlogic.gdx.audio.Sound;
-import com.deco2800.game.components.score.ScoringSystem;
-import com.deco2800.game.services.GameTime;
-import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -87,8 +83,6 @@ public class CombatStatsComponent extends Component {
   public void setBaseAttack(int attack) {
     if (attack >= 0) {
       this.baseAttack = attack;
-    } else {
-      logger.error("Can not set base attack to a negative attack value");
     }
   }
 
@@ -100,11 +94,7 @@ public class CombatStatsComponent extends Component {
 
 
   public void setHealthMax(int healthMax) {
-    if (healthMax >= 0) {
-      this.healthMax = healthMax;
-    } else {
-      this.healthMax = 0;
-    }
+    this.healthMax = Math.max(healthMax, 0);
 
   }
   public int getHealthMax() {

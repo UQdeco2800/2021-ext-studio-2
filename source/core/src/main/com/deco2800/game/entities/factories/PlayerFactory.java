@@ -20,6 +20,8 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
@@ -33,9 +35,9 @@ public class PlayerFactory {
     private static final PlayerConfig stats =
             FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
-
+    private static final Logger logger = LoggerFactory.getLogger(PlayerFactory.class);
     /**
-     * Create a player entity.
+     * Create a player entity. Initializes all attached components.
      *
      * @return entity
      */
@@ -48,7 +50,9 @@ public class PlayerFactory {
 
         AnimationRenderComponent mpcAnimator;
         TextureRenderComponent mpcTexture;
-        System.out.println("Loading attire: "+ attire);
+
+        logger.debug("Loading attire: "+ attire);
+
         switch (attire) {
 
             case "gold_2":
@@ -60,8 +64,8 @@ public class PlayerFactory {
                 mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/gold_4_buff_to_be_test/mpc_right.png");
                 break;
             case "gold_6":
-                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpcAnimation_6.atlas");
-                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/gold_6_buff_to_be_tested/mpc_right.png");
+                mpcAnimator = createAnimationComponent("images/mpc/finalAtlas/gold_6/mpcAnimation_6.atlas");
+                mpcTexture = new TextureRenderComponent("images/mpc/finalAtlas/gold_6/mpc_right.png");
                 break;
             case "OG":
             default:
@@ -167,8 +171,9 @@ public class PlayerFactory {
 
 
         PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
-        player.getComponent(ColliderComponent.class).setDensity(1.5f);
         player.getComponent(TextureRenderComponent.class).scaleEntity();
+        player.setScale(2.5f,2.5f);
+        player.getComponent(ColliderComponent.class).setDensity(1.5f);
         player.getEvents().trigger("startMPCAnimation");
         return player;
     }
@@ -176,6 +181,12 @@ public class PlayerFactory {
     private PlayerFactory() {
         throw new IllegalStateException("Instantiating static util class");
     }
+
+    /**
+     * Retrieve the selected attire from the locally persisted JSON file.
+     *
+     * @return attire
+     */
 
     private static String updateAttireConfig() {
         final String ROOT_DIR = "DECO2800Game";
@@ -189,12 +200,19 @@ public class PlayerFactory {
         return attire;
     }
 
+    /**
+     * Create new AnimationRenderComponent for every added animation
+     *
+     * @return AnimationRenderComponent
+     */
+
     private static AnimationRenderComponent createAnimationComponent(String atlasPath) {
         return new AnimationRenderComponent(
                 ServiceLocator.getResourceService()
                         .getAsset(atlasPath,
                                 TextureAtlas.class));
     }
+
 
 
 }

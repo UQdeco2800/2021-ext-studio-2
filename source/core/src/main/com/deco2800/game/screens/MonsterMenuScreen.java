@@ -3,12 +3,14 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.BackgroundSelectionComponent;
 import com.deco2800.game.components.BackgroundSoundComponent;
 import com.deco2800.game.components.obstacle.MonsterDetails;
 import com.deco2800.game.components.obstacle.MonsterDispay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.files.meta.BackgroundMusic;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
@@ -23,13 +25,11 @@ import org.slf4j.LoggerFactory;
  */
 public class MonsterMenuScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-    private final Renderer renderer;
-    private final MonsterDispay monsterDispay ;
     private static final String[] MonsterMenuTextures =
             {"images/monster_menu/Monsterbox.jpg",
                     "images/monster_menu/background.png",
-            "images/obstacle_1_new.png",
-             "images/obstacle2_vision2.png",
+                    "images/obstacle_1_new.png",
+                    "images/obstacle2_vision2.png",
                     "images/stone1.png",
                     "images/monkey_original.png",
                     "images/Facehugger.png",
@@ -58,10 +58,12 @@ public class MonsterMenuScreen extends ScreenAdapter {
 
 
             };
-    private Entity ui;
+    private final Renderer renderer;
+    private final Entity ui;
 
     /**
      * Generate a monster manual UI.
+     *
      * @param game this game
      */
     public MonsterMenuScreen(GdxGame game) {
@@ -75,10 +77,11 @@ public class MonsterMenuScreen extends ScreenAdapter {
         loadAssets();
         Stage stage = ServiceLocator.getRenderService().getStage();
         ui = new Entity();
-        monsterDispay = new MonsterDispay(game);
+        MonsterDispay monsterDispay = new MonsterDispay(game);
         ui.addComponent(monsterDispay).addComponent(new InputDecorator(stage, 10))
                 .addComponent(new MonsterDetails())
-                .addComponent(new BackgroundSoundComponent("sounds/mainmenu_bgm.mp3", 0.5f));
+                .addComponent(new BackgroundSelectionComponent("MonsterMenu"))
+                .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("MonsterMenu"), 0.5f));
         ServiceLocator.getEntityService().register(ui);
     }
 
@@ -106,6 +109,7 @@ public class MonsterMenuScreen extends ScreenAdapter {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(MonsterMenuTextures);
     }
+
     @Override
     public void dispose() {
         renderer.dispose();

@@ -1,18 +1,16 @@
 package com.deco2800.game.components.obstacle;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
+import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.ParticleRenderComponent;
 import com.deco2800.game.screens.MainGameScreen;
-import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import com.sun.tools.javac.Main;
 
 /**
  * Used to handle events of obstacles and enemies
@@ -36,7 +34,6 @@ public class ObstacleEventHandler extends Component {
      */
     public enum ObstacleType {
         PlantsObstacle, ThornsObstacle, Meteorite, FlyingMonkey, FaceWorm, Spaceship, SmallMissile, PortalEntrance, PortalExport, Weapon;
-
     }
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleEventHandler.class);
@@ -50,7 +47,6 @@ public class ObstacleEventHandler extends Component {
     /**
      * Construct an ObstacleEventHandler and register the corresponding event according to the obstacleType.
      *
-
      * @param obstacleType The types of obstacles.
      */
     public ObstacleEventHandler(ObstacleType obstacleType) {
@@ -102,8 +98,7 @@ public class ObstacleEventHandler extends Component {
     /**
      * Setter for spaceshipAttack, used for test.
      *
-
-     * @param spaceshipAttack
+     * @param spaceshipAttack: space ship attack or not
      */
     public static void setSpaceshipAttack(boolean spaceshipAttack) {
         ObstacleEventHandler.spaceshipAttack = spaceshipAttack;
@@ -125,12 +120,18 @@ public class ObstacleEventHandler extends Component {
 
         if (count == 0) { // Avoid an entity from repeatedly triggering an attack
             count++;
+
             particle.startEffect();
             logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setRemoveTexture();
             animator.startAnimation("obstacles");
-            animator.getEntity().setDisappearAfterAnimation(1f);
+            animator.getEntity().setParticleTime(1.4f);
+            animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked = false;
+            if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
+                this.entity.setRemoveCollision();
+            }
+
         }
 
 
@@ -157,15 +158,17 @@ public class ObstacleEventHandler extends Component {
             if (PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
                 MainGameScreen.setSlowPlayer(5f);
             }
-
             logger.debug("collisionStart event for {} was triggered.", entity.toString());
             animator.getEntity().setRemoveTexture();
+            particle.startEffect();
             animator.startAnimation("obstacle2");
-            animator.getEntity().setDisappearAfterAnimation(1f);
+            animator.getEntity().setParticleTime(3f);
+            animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked2 = false;
+            if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
+                this.entity.setRemoveCollision();
+            }
         }
-
-
 
 
     }
@@ -184,11 +187,12 @@ public class ObstacleEventHandler extends Component {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE && (other.getFilterData().categoryBits != PhysicsLayer.CEILING)) {
             if (count == 0) { // Avoid an entity from repeatedly triggering an attack
                 count++;
-
+                particle.startEffect();
                 logger.debug("collisionStart event for {} was triggered.", entity.toString());
                 animator.getEntity().setRemoveTexture();
                 animator.startAnimation("stone1");
-                animator.getEntity().setDisappearAfterAnimation(0.32f);
+                animator.getEntity().setParticleTime(1f);
+                animator.getEntity().setDisappearAfterAnimation(0.32f, Entity.DisappearType.ANIMATION);
                 locked3 = false;
             }
         }
@@ -201,7 +205,7 @@ public class ObstacleEventHandler extends Component {
     void faceWormDisappear(Fixture me, Fixture other) {
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE) {
             logger.debug("collisionStart event for {} was triggered.", entity.toString());
-            animator.getEntity().setDisappearAfterAnimation(1.5f);
+            animator.getEntity().setDisappearAfterAnimation(1.5f, Entity.DisappearType.ANIMATION);
         }
 
     }
@@ -211,7 +215,6 @@ public class ObstacleEventHandler extends Component {
      * floating sound of the spacecraft and unlock the monster manual.
      *
      * @param me    self fixture
-
      * @param other The fixture of the entity that started the collision
      */
     void spaceShipAttack(Fixture me, Fixture other) {
@@ -227,6 +230,7 @@ public class ObstacleEventHandler extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
+
 
         SpaceshipAttackController.setSpaceshipAttack();
         entity.getEvents().trigger("spaceshipSound");
@@ -249,7 +253,6 @@ public class ObstacleEventHandler extends Component {
      * missile disappears.
      *
      * @param me    self fixture
-
      * @param other The fixture of the entity that started the collision
      */
     void smallMissileAttack(Fixture me, Fixture other) {
@@ -258,22 +261,26 @@ public class ObstacleEventHandler extends Component {
             return;
         }
 
-        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits)) {
+        if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits) && !PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
             return;
         }
+
         logger.debug("collisionStart event for {} was triggered.", entity.toString());
         entity.getEvents().trigger("missileSound");
         animator.startAnimation("bomb");
-        animator.getEntity().setDisappearAfterAnimation(0.4f);
-
+        particle.startEffect();
+        animator.getEntity().setParticleTime(1f);
+        animator.getEntity().setDisappearAfterAnimation(0.4f, Entity.DisappearType.ANIMATION);
+        if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
+            this.entity.setRemoveCollision();
+        }
     }
 
     /**
      * Triggered when the character touches the entrance of a new map.
      *
      * @param me    self fixture
-
      * @param other The fixture of the entity that started the collision
      */
     void portalEntrance(Fixture me, Fixture other) {
@@ -289,7 +296,6 @@ public class ObstacleEventHandler extends Component {
      * Triggered when the character encounters a new map exit.
      *
      * @param me    self fixture
-
      * @param other The fixture of the entity that started the collision
      */
     void portalExport(Fixture me, Fixture other) {
@@ -313,7 +319,9 @@ public class ObstacleEventHandler extends Component {
             // Not triggered by hitbox, ignore
             return;
         }
-        if (!PhysicsLayer.contains(PhysicsLayer.OBSTACLE, other.getFilterData().categoryBits) && !PhysicsLayer.contains(PhysicsLayer.WALL, other.getFilterData().categoryBits)) {
+        if (!PhysicsLayer.contains(PhysicsLayer.OBSTACLE, other.getFilterData().categoryBits) &&
+                !PhysicsLayer.contains(PhysicsLayer.WALL, other.getFilterData().categoryBits) &&
+                !PhysicsLayer.contains(PhysicsLayer.NPC, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
             return;
         }
@@ -334,7 +342,6 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for locked2
      *
-
      * @return if the thorns is locked
      */
     public static boolean isLocked2() {
@@ -344,7 +351,6 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for locked3
      *
-
      * @return if the meteorite is locked
      */
     public static boolean isLocked3() {
@@ -354,7 +360,6 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for locked_ufo
      *
-
      * @return if the spaceship is locked
      */
     public static boolean isLocked_ufo() {
@@ -364,7 +369,6 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for spaceshipAttack
      *
-
      * @return if the spaceshipAttack is attack
      */
     public static boolean isSpaceshipAttack() {
@@ -374,7 +378,6 @@ public class ObstacleEventHandler extends Component {
     /**
      * getter method for count
      *
-
      * @return how many times the event was triggered
      */
     public int getCount() {

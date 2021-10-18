@@ -1,9 +1,7 @@
 package com.deco2800.game.rendering;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
@@ -11,7 +9,7 @@ import com.deco2800.game.services.ServiceLocator;
  */
 public class BackgroundRenderComponent extends RenderComponent {
     private Texture texture;
-    private String texturePath;
+    private final String texturePath;
     private float horizontal = 0;
     private float vertical = 0;
 

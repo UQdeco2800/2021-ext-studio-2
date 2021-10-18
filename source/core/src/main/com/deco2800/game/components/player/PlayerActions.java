@@ -1,22 +1,10 @@
 package com.deco2800.game.components.player;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Filter;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.components.CameraComponent;
 import com.deco2800.game.components.Component;
-import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.physics.PhysicsUtils;
-import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
-import com.deco2800.game.rendering.AnimationRenderComponent;
-import com.deco2800.game.rendering.Renderer;
-import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
@@ -41,7 +29,9 @@ public class PlayerActions extends Component {
     entity.getEvents().addListener("crouch", this::crouch);
   }
 
-
+  public Vector2 getWalkDirection() {
+    return walkDirection;
+  }
 
   public void changeCurrentSpeed(Vector2 currentSpeed) {
     Body body = physicsComponent.getBody();

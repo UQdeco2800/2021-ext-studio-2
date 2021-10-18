@@ -18,10 +18,6 @@ import static com.badlogic.gdx.Gdx.app;
 public class GdxGame extends Game {
     private static final Logger logger = LoggerFactory.getLogger(GdxGame.class);
 
-    private void switchScreen(GdxGame game, ScreenType screenType) {
-        game.setScreen(screenType);
-    }
-
     public enum ScreenType {
         MAIN_MENU, MAIN_GAME, SETTINGS, GAME_OVER, PROPS_SHOP, HISTORY_SCORES,
         ACHIEVEMENTS,MONSTER_MENU, UNLOCKED_ATTIRES,BUFF_MENU, INSTRUCTIONS
@@ -35,7 +31,7 @@ public class GdxGame extends Game {
         // Sets background to light yellow
         Gdx.gl.glClearColor(248f / 255f, 249 / 255f, 178 / 255f, 1);
 
-        setScreen(ScreenType.MAIN_MENU);
+        setScreen(ScreenType.  MAIN_MENU);
     }
 
     /**

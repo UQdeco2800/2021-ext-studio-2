@@ -24,7 +24,7 @@ import com.deco2800.game.components.items.InventorySystem;
 
 public class ItemBar extends Component {
     private Entity target;
-    private InventorySystem ss;
+    private final InventorySystem ss;
     TestBuffForItem sumer =  new TestBuffForItem();
     private int health;
     HitboxComponent hitboxComponent;
@@ -53,32 +53,5 @@ public class ItemBar extends Component {
         }
 
     }
-
-
-
-    /*
-        /**
-         * Triggers player events on specific keycodes.
-         *
-         * @return whether the input was processed
-         * @see InputProcessor#keyDown(int)
-
-        @Override
-    public boolean keyTyped(char character) {
-
-
-                if(character == 'b' || character == 'B')
-                    System.out.println("okay");
-                    if(inv.size()!=0) {
-                        inv.get(index).getEvents().trigger("itemPickedUp");
-                        sumer.increaseHealth(target);
-                        System.out.println("its going to be okay");
-            }
-
-
-
-
-            return false;
-        }
-}*/}
+}
 

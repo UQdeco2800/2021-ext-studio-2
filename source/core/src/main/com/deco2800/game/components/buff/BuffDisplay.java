@@ -8,8 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.components.obstacle.ObstacleEventHandler;
-import com.deco2800.game.components.tasks.ObstacleAttackTask;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
@@ -81,7 +79,6 @@ public class BuffDisplay extends UIComponent {
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("return menu button clicked");
                         game.setScreen(GdxGame.ScreenType.MAIN_MENU);
                     }
                 });
@@ -231,11 +228,9 @@ public class BuffDisplay extends UIComponent {
         buttonTable = new Table();
         buttonTable.bottom().right();
         buttonTable.padBottom(100f).padRight(110f);
-//        buttonTable.center();
 
         buttonTable.setFillParent(true);
         buttonTable.add(mainMenuButton);
-        // buttonTable.add(unlockedChapterImg);
 
         box = new Image(ServiceLocator.getResourceService()
                 .getAsset("buff-debuff-manual/manual-box.png", Texture.class));

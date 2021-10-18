@@ -6,17 +6,24 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
-import com.deco2800.game.components.ItemBar.ItemBarDisplay;
-import com.deco2800.game.components.foodAndwater.RecycleDisplay;
-import com.deco2800.game.components.npc.SpaceshipAttackController;
-import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.score.*;
+import com.deco2800.game.components.ItemBar.ItemBarDisplay;
+import com.deco2800.game.components.foodAndwater.FoodDisplay;
+import com.deco2800.game.components.foodAndwater.RecycleDisplay;
+import com.deco2800.game.components.foodAndwater.WaterDisplay;
+import com.deco2800.game.components.gamearea.PerformanceDisplay;
+import com.deco2800.game.components.maingame.MainGameActions;
+import com.deco2800.game.components.maingame.MainGameExitDisplay;
+import com.deco2800.game.components.npc.SpaceshipAttackController;
+import com.deco2800.game.components.score.DistanceDisplay;
+import com.deco2800.game.components.score.ScoreDisplay;
+import com.deco2800.game.components.score.ScoringSystemV1;
+import com.deco2800.game.components.score.TimerDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.files.GameRecords;
-import com.deco2800.game.files.GameInfo;
+import com.deco2800.game.files.meta.GameInfo;
+import com.deco2800.game.files.stats.GameRecords;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
@@ -27,19 +34,8 @@ import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.*;
 import com.deco2800.game.ui.terminal.Terminal;
 import com.deco2800.game.ui.terminal.TerminalDisplay;
-import com.deco2800.game.components.maingame.MainGameExitDisplay;
-import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.deco2800.game.components.foodAndwater.FoodDisplay;
-import com.deco2800.game.components.foodAndwater.WaterDisplay;
-import com.deco2800.game.components.score.ScoreDisplay;
-import com.deco2800.game.components.score.ScoringSystemV1;
-import com.deco2800.game.components.score.TimerDisplay;
-import com.deco2800.game.services.GameTime;
-import com.deco2800.game.services.ResourceService;
-import com.deco2800.game.services.ScoreService;
-import com.deco2800.game.services.ServiceLocator;
 
 /**
  * The game screen containing the main game.
@@ -72,33 +68,17 @@ public class MainGameScreen extends ScreenAdapter {
             "images/pao.png",
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
-
-
+    /* new map status, to control if the player into/out the new map*/
+    public static NewMap newMapStatus = NewMap.Off;
+    public static Entity players;
+    private static boolean slowPlayer = false;
+    private static float slowPlayerTime;
     private final GdxGame game;
     private final Renderer renderer;
     private final PhysicsEngine physicsEngine;
-
-    /* new map status, to control if the player into/out the new map*/
-    public static NewMap newMapStatus = NewMap.Off;
-
-    /**
-     * all status of new map
-     */
-    public static enum NewMap {
-        Off,
-        Start,  // Used once in render
-        Finish,  // Used once in render
-        On;
-    }
-
-    public static Entity players;
-    private Entity player;
-    private ForestGameArea forestGameArea;
-    private int counter = 0;
-
-    private static boolean slowPlayer = false;
-    private static float slowPlayerTime;
-
+    private final Entity player;
+    private final ForestGameArea forestGameArea;
+    private int counter;
 
     public MainGameScreen(GdxGame game) {
         this.game = game;
@@ -140,14 +120,9 @@ public class MainGameScreen extends ScreenAdapter {
 
     }
 
-    private void resetSpaceshipAttackVariable() {
-        // reset Spaceship Attack variables
-        SpaceshipAttackController.spaceshipState = SpaceshipAttackController.SpaceshipAttack.Off;
-        SpaceshipAttackController.positionHitSpaceship = null;
-    }
-
     /**
      * getter method of slowPlayer
+     *
      * @return if the player is slow status
      */
     public static boolean isSlowPlayer() {
@@ -155,27 +130,12 @@ public class MainGameScreen extends ScreenAdapter {
     }
 
     /**
-     * getter method of slowPlayerTime
-     * @return time remain of player slow time
-     */
-    public static float getSlowPlayerTime() {
-        return slowPlayerTime;
-    }
-
-    /**
      * setter method of slowPlayer
+     *
      * @param slowPlayer if the player is on a slow status
      */
     public static void setSlowPlayer(boolean slowPlayer) {
         MainGameScreen.slowPlayer = slowPlayer;
-    }
-
-    /**
-     * setter method of slowPlayerTime
-     * @param slowPlayerTime how may time the player will on slow status
-     */
-    public static void setSlowPlayerTime(float slowPlayerTime) {
-        MainGameScreen.slowPlayerTime = slowPlayerTime;
     }
 
     /**
@@ -191,9 +151,42 @@ public class MainGameScreen extends ScreenAdapter {
         } else { // double set
             MainGameScreen.slowPlayerTime += slowPlayerTime;
         }
-        logger.debug("Set slowPlayer = {}, Total slowPlayerTime = {}", slowPlayer, slowPlayerTime);
+        logger.debug("Set slowPlayer = {}, Total slowPlayerTime = {}", true, slowPlayerTime);
     }
 
+
+    /**
+     * setter method of slowPlayerTime
+     *
+     * @param slowPlayerTime how may time the player will on slow status
+     */
+    public static void setSlowPlayerTime(float slowPlayerTime) {
+        MainGameScreen.slowPlayerTime = slowPlayerTime;
+    }
+
+    /**
+     * getter method of newMapStatus
+     *
+     * @return the status of mew map
+     */
+    public static NewMap getNewMapStatus() {
+        return newMapStatus;
+    }
+
+    /**
+     * setter method of newMapStatus
+     *
+     * @param status the status of mew map
+     */
+    public static void setNewMapStatus(NewMap status) {
+        newMapStatus = status;
+    }
+
+    private void resetSpaceshipAttackVariable() {
+        // reset Spaceship Attack variables
+        SpaceshipAttackController.spaceshipState = SpaceshipAttackController.SpaceshipAttack.Off;
+        SpaceshipAttackController.positionHitSpaceship = null;
+    }
 
     /**
      * Slow down the player, called by render().
@@ -209,22 +202,6 @@ public class MainGameScreen extends ScreenAdapter {
                 logger.debug("End of slow player");
             }
         }
-    }
-
-    /**
-     * getter method of newMapStatus
-     * @return the status of mew map
-     */
-    public static NewMap getNewMapStatus() {
-        return newMapStatus;
-    }
-
-    /**
-     * setter method of newMapStatus
-     * @param status the status of mew map
-     */
-    public static void setNewMapStatus(NewMap status) {
-        newMapStatus = status;
     }
 
     /**
@@ -279,7 +256,6 @@ public class MainGameScreen extends ScreenAdapter {
                 }
                 break;
             case On:
-                //System.out.println("player.getPosition() = " + player.getPosition());
                 screenVector.y = 55f;
                 renderer.getCamera().getEntity().setPosition(screenVector);
         }
@@ -288,9 +264,6 @@ public class MainGameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-
-        //new Entity().getEvents().trigger("updateScore");
-        //new Entity().getEvents().trigger("updateTime");
 
         physicsEngine.update();
         ServiceLocator.getEntityService().update();
@@ -331,13 +304,20 @@ public class MainGameScreen extends ScreenAdapter {
                     forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.MUD_ROAD);
                     forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
                     //                   forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
-                    forestGameArea.spawnWoodsRandomly((int) (screenVector.x + 2));
-                    forestGameArea.spawnRocksone((int) (screenVector.x + 2));
+                    forestGameArea.spawnWoodsone((int) (screenVector.x + 2));
+                    forestGameArea.spawnWoodstwo((int) (screenVector.x + 2));
+                    forestGameArea.spawnWoodsthree((int) (screenVector.x + 2));
+                    forestGameArea.spawnWoodsfour((int) (screenVector.x + 2));
+                    forestGameArea.spawnWoodsfive((int) (screenVector.x + 2));
+
+                    forestGameArea.spawnFireRocksone((int) (screenVector.x + 2));
+                    forestGameArea.spawnFireRockstwo((int) (screenVector.x + 2));
+                    forestGameArea.spawnFireRocksthree((int) (screenVector.x + 2));
                     forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
-                    forestGameArea.spawnRocksthree((int) (screenVector.x + 2));
-                    forestGameArea.spawnRocksfour((int) (screenVector.x + 2));
-                    forestGameArea.spawnRocksfive((int) (screenVector.x + 2));
-                    forestGameArea.spawnRockssix((int) (screenVector.x + 2));
+                    forestGameArea.spawnNailsone((int) (screenVector.x + 2));
+                    forestGameArea.spawnNailstwo((int) (screenVector.x + 2));
+                    forestGameArea.spawnNailsthree((int) (screenVector.x + 2));
+                    forestGameArea.spawnNailsfour((int) (screenVector.x + 2));
                     generateObstaclesEnemiesByMapRefresh(counter);
                 }
 
@@ -349,16 +329,21 @@ public class MainGameScreen extends ScreenAdapter {
                 // Render terrains on new map
                 if (screenVector.x > (2 * counter + 1) * 10) {
                     counter += 1;
-//                    forestGameArea.showNewMapScrollingBackground(counter, 47);
                     forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
-                    //                  forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
-                    forestGameArea.spawnWoodsRandomly((int) (screenVector.x + 2));
-                    forestGameArea.spawnRocksone((int) (screenVector.x + 2));
+                    forestGameArea.spawnWoodsone((int) (screenVector.x + 2));
+                    forestGameArea.spawnWoodstwo((int) (screenVector.x + 2));
+                    forestGameArea.spawnWoodsthree((int) (screenVector.x + 2));
+                    forestGameArea.spawnWoodsfour((int) (screenVector.x + 2));
+                    forestGameArea.spawnWoodsfive((int) (screenVector.x + 2));
+
+                    forestGameArea.spawnFireRocksone((int) (screenVector.x + 2));
+                    forestGameArea.spawnFireRockstwo((int) (screenVector.x + 2));
+                    forestGameArea.spawnFireRocksthree((int) (screenVector.x + 2));
                     forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
-                    forestGameArea.spawnRocksthree((int) (screenVector.x + 2));
-                    forestGameArea.spawnRocksfour((int) (screenVector.x + 2));
-                    forestGameArea.spawnRocksfive((int) (screenVector.x + 2));
-                    forestGameArea.spawnRockssix((int) (screenVector.x + 2));
+                    forestGameArea.spawnNailsone((int) (screenVector.x + 2));
+                    forestGameArea.spawnNailstwo((int) (screenVector.x + 2));
+                    forestGameArea.spawnNailsthree((int) (screenVector.x + 2));
+                    forestGameArea.spawnNailsfour((int) (screenVector.x + 2));
                     forestGameArea.spawnGoldNewMapRandomly((int) (screenVector.x + 2));
                 }
         }
@@ -454,5 +439,15 @@ public class MainGameScreen extends ScreenAdapter {
         GameInfo.incrementGameCount();
         /* Store the achievements record and in a JSON file and then reset achievements */
         GameRecords.storeGameRecord();
+    }
+
+    /**
+     * all status of new map
+     */
+    public enum NewMap {
+        Off,
+        Start,  // Used once in render
+        Finish,  // Used once in render
+        On
     }
 }

@@ -2,10 +2,13 @@ package com.deco2800.game.components.achievements;
 
 import com.deco2800.game.components.Component;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
+import com.deco2800.game.entities.configs.achievements.PropertyListDefaults;
 import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.services.ServiceLocator;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -14,20 +17,12 @@ import java.util.stream.Collectors;
  */
 public class AchievementsStatsComponent extends Component {
     private static final List<BaseAchievementConfig> achievements = AchievementFactory.getAchievements();
-    private int health;
-    private long time;
-    private int itemCount;
-    private boolean bonusItemSign;
-    private int score;
-    private int firstAids;
-    private int gold;
-    private boolean spaceshipAvoidSuccess;
-    private double distance;
+    private static final Map<String, PropertyListDefaults> propertyList = AchievementFactory.getPropertyList();
 
-    /* TO//DO: setup achievement stats as Hashmap <property,value> */
+    private Map<String, Double> gameConditions;
 
     public AchievementsStatsComponent() {
-        initStats();
+        gameConditions = new LinkedHashMap<>();
     }
 
     /**
@@ -58,25 +53,11 @@ public class AchievementsStatsComponent extends Component {
         achievements.forEach(achievement -> achievement.unlocked = false);
     }
 
-    private void initStats() {
-        itemCount = 0;
-        health = 100;
-        time = -1;
-
-        bonusItemSign = false;
-
-        score = 0;
-        firstAids = 0;
-        gold = 0;
-        spaceshipAvoidSuccess = false;
-        distance = 0;
-    }
-
     @Override
     public void create() {
         super.create();
 
-        initStats();
+        gameConditions = new LinkedHashMap<>();
 
         resetAchievements();
 
@@ -92,16 +73,14 @@ public class AchievementsStatsComponent extends Component {
      * Maintains the spaceshipAvoidSuccess status of the player
      */
     public void setSpaceshipAvoidSuccess() {
-        this.spaceshipAvoidSuccess = true;
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("spaceshipAvoidSuccess", 1.0);
     }
 
     /**
      * Maintains the distance traveled by the main player character in meters
      */
     public void setDistance(double distance) {
-        this.distance = distance;
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("distance", distance);
     }
 
     /**
@@ -110,8 +89,7 @@ public class AchievementsStatsComponent extends Component {
      * @param health player's changed health
      */
     public void setHealth(int health) {
-        this.health = health;
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("health", health);
     }
 
     /**
@@ -120,8 +98,7 @@ public class AchievementsStatsComponent extends Component {
      * @param time current game time
      */
     public void setTime(long time) {
-        this.time = time;
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("time", time);
     }
 
     /**
@@ -130,24 +107,14 @@ public class AchievementsStatsComponent extends Component {
      * @param score the current game score
      */
     public void setScore(int score) {
-        this.score = score;
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("score", score);
     }
 
     @Override
     public void update() {
-        long currentTime = ServiceLocator.getTimeSource().getTime();
-        setTime(currentTime);
-
-
-        if (bonusItemSign) {
-            AchievementsHelper.getInstance().getEvents().trigger("spawnBonusItem");
-            bonusItemSign = false;
-        }
-
+        setTime(ServiceLocator.getTimeSource().getTime());
         setScore(ServiceLocator.getScoreService().getScore());
         setDistance(ServiceLocator.getDistanceService().getDistance());
-
     }
 
     public void handleItemPickup(String itemName) {
@@ -172,39 +139,46 @@ public class AchievementsStatsComponent extends Component {
      * Maintains the count of the number of firstAids picked up
      */
     private void setFirstAid() {
-        ++firstAids;
-        checkForValidAchievements();
+        increment("firstAids");
+    }
+
+    /**
+     * Fetches the value for that particular property and increments it
+     * @param propertyName name of the achievement condition
+     */
+    public void increment(String propertyName) {
+        // Get the current property value if any, and increment it.
+        // The default value of the property comes from the JSON config.
+        int defaultValue = propertyList.get(propertyName).defaultValue;
+        double propertyValue = gameConditions.getOrDefault(propertyName, (double) defaultValue);
+        propertyValue += 1;
+        updateConditionsAndRevalidate(propertyName, propertyValue);
     }
 
     public void setFirstAidByVal(int firstAids) {
-        this.firstAids = firstAids;
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("firstAids", firstAids);
     }
 
     /**
      * Maintains the count of the number of gold coins picked up
      */
     private void setGold() {
-        ++gold;
-        checkForValidAchievements();
+        increment("gold");
     }
 
     public void setGoldByVal(int gold) {
-        this.gold = gold;
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("gold", gold);
     }
 
     /**
      * Maintains the count of the number of items picked up
      */
     public void setItemCount() {
-        ++itemCount;
-        checkForValidAchievements();
+        increment("itemCount");
     }
 
     public void setItemCountByVal(int itemCount) {
-        this.itemCount = itemCount;
-        checkForValidAchievements();
+        updateConditionsAndRevalidate("itemCount", itemCount);
     }
 
     /**
@@ -212,6 +186,18 @@ public class AchievementsStatsComponent extends Component {
      */
     private void checkForValidAchievements() {
         achievements.forEach(this::isValid);
+    }
+
+    /**
+     * Updates the game variables in concern and checks if an achievement
+     * has been unlocked
+     *
+     * @param propertyName name of property
+     * @param val property value
+     */
+    public void updateConditionsAndRevalidate(String propertyName, double val){
+        gameConditions.put(propertyName, val);
+        checkForValidAchievements();
     }
 
     /**
@@ -223,72 +209,55 @@ public class AchievementsStatsComponent extends Component {
      * @return valid returns true if valid, false otherwise
      */
     private boolean isValid(BaseAchievementConfig achievement) {
-
         if (achievement.unlocked) {
             return true;
         }
 
         boolean valid = false;
-        if (achievement.condition.time != -1) {
-            valid = achievement.condition.time * 60000L <= time;
-            if (!valid) {
-                return false;
-            }
-        }
-        if (achievement.condition.health != -1) {
-            valid = achievement.condition.health <= health;
-            if (!valid) {
-                return false;
-            }
-        }
-        if (achievement.condition.itemCount != -1) {
-            valid = achievement.condition.itemCount == itemCount;
-            if (!valid) {
-                return false;
+
+        for (String cond : propertyList.keySet()) {
+            // Operation to perform when checking if achievement property has been satisfied or not
+            String operation = propertyList.get(cond).operation;
+            // Default game variable values
+            double defaultConditionVal = propertyList.get(cond).defaultValue;
+            // Current game variable values (current time, score etc)
+            double currentPropertyVal = gameConditions.getOrDefault(cond, defaultConditionVal);
+
+            int conditionVal = achievement.getConditionMap().get(cond);
+
+            if (conditionVal != -1) {
+                if (cond.equals("time")) {
+                    // Convert minutes to milliseconds, since the time in config is supplied in minutes
+                    conditionVal = conditionVal * 60000;
+                }
+                // Perform comparisons to check if conditions of the achievement have been satisfied
+                switch (operation) {
+                    case "==":
+                        valid = conditionVal == currentPropertyVal;
+                        break;
+                    case "<=":
+                        valid = conditionVal <= currentPropertyVal;
+                        break;
+                    default:
+                        // Unknown operation
+                        valid = false;
+                        break;
+                }
+                // Stop looping if a condition of achievement was not satisfied
+                if (!valid) {
+                    break;
+                }
             }
         }
 
-        if (achievement.condition.score != -1) {
-            valid = achievement.condition.score <= score;
-            if (!valid) {
-                return false;
-            }
-        }
-
-        if (achievement.condition.firstAids != -1) {
-            valid = achievement.condition.firstAids == firstAids;
-            if (!valid) {
-                return false;
-            }
-        }
-
-        if (achievement.condition.gold != -1) {
-            valid = achievement.condition.gold == gold;
-            if (!valid) {
-                return false;
-            }
-        }
-
-        if (achievement.condition.spaceshipAvoidSuccess) {
-            valid = spaceshipAvoidSuccess;
-            if (!valid) {
-                return false;
-            }
-        }
-
-        if (achievement.condition.distance != -1) {
-            valid = achievement.condition.distance <= distance;
-            if (!valid) {
-                return false;
-            }
-        }
+        // Finally, if the achievement is valid, unlock it.
         if (valid) {
             achievement.unlocked = true;
+            // Emit an event if the achievement is valid
             entity.getEvents().trigger("updateAchievement", achievement);
-            bonusItemSign = true;
         }
 
-        return true;
+        return valid;
     }
 
 
