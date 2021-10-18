@@ -47,7 +47,11 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(nailTwo, randomPosTwo, true, false);
         }
     }
-
+    /**
+     * Generate line 5 Nails in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnNailsone(int xValue) {
 
         for (int i = 0; i < 5; i++) {
@@ -56,6 +60,12 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(nail, pos, true, false);
         }
     }
+
+    /**
+     * Generate line 3 Nails in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnNailstwo(int xValue) {
 
         for (int i = 0; i < 3; i++) {
@@ -65,6 +75,13 @@ public class ForestGameArea extends GameArea {
         }
     }
 
+
+    /**
+     * Generate line 4 Nails in the new map
+     *
+     * @param xValue horizontal start point
+     */
+
     public void spawnNailsthree(int xValue) {
 
         for (int i = 0; i < 4; i++) {
@@ -73,6 +90,12 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(nail, pos, true, false);
         }
     }
+
+    /**
+     * Generate line 3 Nails in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnNailsfour(int xValue) {
 
         for (int i = 0; i < 3; i++) {
@@ -81,6 +104,12 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(nail, pos, true, false);
         }
     }
+
+    /**
+     * Generate line 5 Woods in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnWoodsone(int xValue) {
 
         for (int i = 0; i < 5; i++) {
@@ -89,6 +118,11 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(wood, pos, true, false);
         }
     }
+    /**
+     * Generate line 3 Woods in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnWoodstwo(int xValue) {
 
         for (int i = 0; i < 3; i++) {
@@ -97,6 +131,11 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(wood, pos, true, false);
         }
     }
+    /**
+     * Generate line 2 Woods in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnWoodsthree(int xValue) {
 
         for (int i = 0; i < 2; i++) {
@@ -105,6 +144,11 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(wood, pos, true, false);
         }
     }
+    /**
+     * Generate line 2 Woods in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnWoodsfour(int xValue) {
 
         for (int i = 0; i < 2; i++) {
@@ -113,6 +157,11 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(wood, pos, true, false);
         }
     }
+    /**
+     * Generate line 2 Woods in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnWoodsfive(int xValue) {
 
         for (int i = 0; i < 2; i++) {
@@ -123,7 +172,7 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
-     * Generate line 5 rocks in the new map
+     * Generate line 5 Magmas in the new map
      *
      * @param xValue horizontal start point
     */
@@ -166,6 +215,11 @@ public class ForestGameArea extends GameArea {
         Entity rockSix = ObstacleFactory.createRock();
         spawnEntityAt(rockSix, PosSix, true, false);
     }
+    /**
+     * Generate line 2 Magmas in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnFireRocksthree(int xValue) {
 
         GridPoint2 Pos = new GridPoint2(xValue -5, 53);
