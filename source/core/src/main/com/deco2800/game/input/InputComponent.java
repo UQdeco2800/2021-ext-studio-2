@@ -52,10 +52,6 @@ public abstract class InputComponent extends Component
     ServiceLocator.getInputService().unregister(this);
   }
 
-  /**
-   * Below methods are for supporting keyboard and touch.
-   */
-
   /** @see InputProcessor#keyDown(int) */
   @Override
   public boolean keyDown(int keycode) {
@@ -103,10 +99,6 @@ public abstract class InputComponent extends Component
   public boolean touchUp(int screenX, int screenY, int pointer, int button) {
     return false;
   }
-
-  /**
-   * Below methods are for supporting touch gestures.
-   */
 
   /** @see GestureDetector.GestureListener#fling(float, float, int) */
   @Override
