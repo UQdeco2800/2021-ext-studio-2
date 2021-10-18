@@ -310,9 +310,9 @@ public class MainGameScreen extends ScreenAdapter {
                     forestGameArea.spawnWoodsfour((int) (screenVector.x + 2));
                     forestGameArea.spawnWoodsfive((int) (screenVector.x + 2));
 
-                    forestGameArea.spawnMagmaOne((int) (screenVector.x + 2));
-                    forestGameArea.spawnMagmaTwo((int) (screenVector.x + 2));
-                    forestGameArea.spawnMagmaThree((int) (screenVector.x + 2));
+                    forestGameArea.spawnFireRocksone((int) (screenVector.x + 2));
+                    forestGameArea.spawnFireRockstwo((int) (screenVector.x + 2));
+                    forestGameArea.spawnFireRocksthree((int) (screenVector.x + 2));
                     forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
                     forestGameArea.spawnNailsone((int) (screenVector.x + 2));
                     forestGameArea.spawnNailstwo((int) (screenVector.x + 2));
@@ -336,9 +336,9 @@ public class MainGameScreen extends ScreenAdapter {
                     forestGameArea.spawnWoodsfour((int) (screenVector.x + 2));
                     forestGameArea.spawnWoodsfive((int) (screenVector.x + 2));
 
-                    forestGameArea.spawnMagmaOne((int) (screenVector.x + 2));
-                    forestGameArea.spawnMagmaTwo((int) (screenVector.x + 2));
-                    forestGameArea.spawnMagmaThree((int) (screenVector.x + 2));
+                    forestGameArea.spawnFireRocksone((int) (screenVector.x + 2));
+                    forestGameArea.spawnFireRockstwo((int) (screenVector.x + 2));
+                    forestGameArea.spawnFireRocksthree((int) (screenVector.x + 2));
                     forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
                     forestGameArea.spawnNailsone((int) (screenVector.x + 2));
                     forestGameArea.spawnNailstwo((int) (screenVector.x + 2));
