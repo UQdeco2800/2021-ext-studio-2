@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
  * Can also be used as a more generic component for other entities.
  */
 public class InventoryComponent extends Component {
-  private static final Logger logger = LoggerFactory.getLogger(InventoryComponent.class);
   private int gold;
 
   public InventoryComponent(int gold) {
@@ -59,7 +58,6 @@ public class InventoryComponent extends Component {
     if(entity != null) {
       entity.getEvents().trigger("updateGold", this.gold);
     }
-    logger.debug("Setting gold to {}", this.gold);
   }
 
   /**

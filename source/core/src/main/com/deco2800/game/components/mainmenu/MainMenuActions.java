@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
  * events is triggered.
  */
 public class MainMenuActions extends Component {
-  private static final Logger logger = LoggerFactory.getLogger(MainMenuActions.class);
   private final GdxGame game;
 
   public MainMenuActions(GdxGame game) {
@@ -39,7 +38,6 @@ public class MainMenuActions extends Component {
    * Swaps to the Main Game screen.
    */
   private void onStart() {
-    logger.info("Start game");
     game.setScreen(GdxGame.ScreenType.MAIN_GAME);
   }
 
@@ -48,14 +46,12 @@ public class MainMenuActions extends Component {
    * Load functionality is not actually implemented.
    */
   private void onLoad() {
-    logger.info("Load game");
   }
 
   /**
    * Exits the game.
    */
   private void onExit() {
-    logger.info("Exit game");
     game.exit();
   }
 
@@ -63,7 +59,6 @@ public class MainMenuActions extends Component {
    * Swaps to the Settings screen.
    */
   private void onSettings() {
-    logger.info("Launching settings screen");
     game.setScreen(GdxGame.ScreenType.SETTINGS);
   }
 
@@ -71,27 +66,22 @@ public class MainMenuActions extends Component {
    * Swaps to the GameOver screen.
    */
   private void onGameOver() {
-    logger.info("Launching GameOver screen");
     game.setScreen(GdxGame.ScreenType.GAME_OVER);
   }
 
   private void onDisplayPropsShop() {
-    logger.info("Open the propsShop");
     game.setScreen(GdxGame.ScreenType.PROPS_SHOP);
   }
 
   private void onDisplayHistoryScores() {
-    logger.info("Open the history scores board");
     game.setScreen(GdxGame.ScreenType.HISTORY_SCORES);
   }
 
   private void onAchievements(){
-    logger.info("Launching Achievements screen");
     game.setScreen(GdxGame.ScreenType.ACHIEVEMENTS);
   }
 
   private void onUnlockedAttires(){
-    logger.info("Launching Unlocked Attires screen");
     game.setScreen(GdxGame.ScreenType.UNLOCKED_ATTIRES);
   }
 

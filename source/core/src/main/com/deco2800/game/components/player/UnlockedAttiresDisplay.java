@@ -25,8 +25,6 @@ import org.slf4j.LoggerFactory;
  */
 
 public class UnlockedAttiresDisplay extends UIComponent {
-
-    private static final Logger logger = LoggerFactory.getLogger(UnlockedAttiresDisplay.class);
     private final GdxGame game;
     private final int goldAchievements;
     private Table bgTable;
@@ -56,7 +54,6 @@ public class UnlockedAttiresDisplay extends UIComponent {
      * Load all attires' and achievements' assets
      */
     private void loadAssets() {
-        logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(bgTextures);
         resourceService.loadTextures(achievementTextures);
@@ -70,7 +67,6 @@ public class UnlockedAttiresDisplay extends UIComponent {
      * Unload all attires' and achievements' assets
      */
     private void unloadAssets() {
-        logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(attireTextures);
         resourceService.unloadAssets(achievementTextures);

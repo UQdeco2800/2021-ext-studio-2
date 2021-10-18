@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 
 public class ScoreHistoryDisplay extends UIComponent {
 
-    private static final Logger logger = LoggerFactory.getLogger(ScoreHistoryDisplay.class);
     private static final int SCORE_DISPLAY_COUNT = 10;
 
     private final GdxGame game;
@@ -52,7 +51,6 @@ public class ScoreHistoryDisplay extends UIComponent {
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("return menu button clicked");
                         game.setScreen(GdxGame.ScreenType.MAIN_MENU);
                     }
                 });
