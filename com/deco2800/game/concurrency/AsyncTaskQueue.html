@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9};
+<script type="text/javascript">var data = {"i0":9,"i1":9,"i2":9,"i3":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -152,33 +152,26 @@ extends java.lang.Object</pre>
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>static void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#cancelFutureTasks()">cancelFutureTasks</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Do not accept any more tasks.</div>
-</td>
-</tr>
-<tr class="rowColor" id="i1">
-<td class="colFirst"><code>static void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#cancelFutureTasksNow()">cancelFutureTasksNow</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Shut down the task queue immediately and cancel all future tasks.</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="rowColor" id="i1">
 <td class="colFirst"><code>static void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#enqueueTask(java.lang.Runnable)">enqueueTask</a></span>&#8203;(java.lang.Runnable&nbsp;task)</code></th>
 <td class="colLast">
 <div class="block">Dispatch a long-running task to the queue.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i2">
 <td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isShutDown()">isShutDown</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Check if the asynchronous task queue is accepting any tasks</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>static void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#newQueue()">newQueue</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
@@ -220,14 +213,6 @@ extends java.lang.Object</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>isShutdown</dd>
 </dl>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="cancelFutureTasks()">cancelFutureTasks</a></h3>
-<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">cancelFutureTasks</span>()</div>
-<div class="block">Do not accept any more tasks. Shut down the queue after completing
- already enqueued tasks.</div>
 </section>
 </li>
 <li class="blockList">
