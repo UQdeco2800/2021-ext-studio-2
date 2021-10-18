@@ -22,13 +22,5 @@ class UserScoreHistoryTest {
     @AfterEach
     void tearDown() {
     }
-
-
-    /** write UserScoreHistory to JSON file
-     *
-     */
-    @Test
-    void shouldReadAndWriteScoreHistory() {
-
-    }
+    //will do
 }

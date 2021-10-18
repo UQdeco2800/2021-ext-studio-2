@@ -105,7 +105,7 @@ public class FoodDisplay extends UIComponent {
     public void updatePlayerHealth(int dis){
         health = MainGameScreen.players.getComponent(CombatStatsComponent.class).getHealth();
         if(dis == 2){
-            if(foodImage.size() <= 0 & health<100){
+            if(foodImage.size() <= 0 && health<100){
                 //if water icon count less than 0, then it will be into that codes to run. it reduce player health value.
                 //reduce player health value
                 MainGameScreen.players.getComponent(CombatStatsComponent.class).setHealth(
