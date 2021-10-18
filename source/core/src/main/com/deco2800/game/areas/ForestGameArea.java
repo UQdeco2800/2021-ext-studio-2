@@ -14,6 +14,7 @@ import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
 import com.deco2800.game.files.MPCConfig;
+import com.deco2800.game.files.meta.BackgroundMusic;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.BackgroundRenderComponent;
@@ -399,10 +400,10 @@ public class ForestGameArea extends GameArea {
     private static final String[] itemMusic = {itemSounds};
     private static final String[] pickupMusic = {pickupSounds};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
-    private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
-    private static final String NEWMAP_BACKGROUNDMUSIC = "sounds/track2.mp3";
-    private static final String[] forestMusic = {BACKGROUNDMUSIC};
-    private static final String[] newMapMusic = {NEWMAP_BACKGROUNDMUSIC};
+    private static final String MAP1_MUSIC = BackgroundMusic.getSelectedMusic("MainGame");
+    private static final String MAP2_MUSIC = BackgroundMusic.getNotSelectedTrack("MainGame");
+    private static final String[] forestMusic = {MAP1_MUSIC};
+    private static final String[] newMapMusic = {MAP2_MUSIC};
     private boolean firstGenerate = true;
 
     private final TerrainFactory terrainFactory;
@@ -866,7 +867,7 @@ public class ForestGameArea extends GameArea {
      * Play the regular map bgm
      */
     public void playMusic() {
-        Music music = ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class);
+        Music music = ServiceLocator.getResourceService().getAsset(MAP1_MUSIC, Music.class);
         music.setLooping(true);
         music.setVolume(0.3f);
         music.play();
@@ -888,7 +889,7 @@ public class ForestGameArea extends GameArea {
      * Play the new map bgm
      */
     public void playNewMapMusic() {
-        Music newMusic = ServiceLocator.getResourceService().getAsset(NEWMAP_BACKGROUNDMUSIC, Music.class);
+        Music newMusic = ServiceLocator.getResourceService().getAsset(MAP2_MUSIC, Music.class);
         newMusic.setLooping(true);
         newMusic.setVolume(0.3f);
         newMusic.play();
@@ -898,14 +899,14 @@ public class ForestGameArea extends GameArea {
      * Stop the regular map bgm
      */
     public void stopMusic() {
-        ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class).stop();
+        ServiceLocator.getResourceService().getAsset(MAP1_MUSIC, Music.class).stop();
     }
 
     /**
      * Stop the new map bgm
      */
     public void stopNewMapMusic() {
-        ServiceLocator.getResourceService().getAsset(NEWMAP_BACKGROUNDMUSIC, Music.class).stop();
+        ServiceLocator.getResourceService().getAsset(MAP2_MUSIC, Music.class).stop();
     }
 
     private void loadAssets() {
@@ -949,7 +950,7 @@ public class ForestGameArea extends GameArea {
     @Override
     public void dispose() {
         super.dispose();
-        ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class).stop();
+        ServiceLocator.getResourceService().getAsset(MAP1_MUSIC, Music.class).stop();
         this.unloadAssets();
     }
 
