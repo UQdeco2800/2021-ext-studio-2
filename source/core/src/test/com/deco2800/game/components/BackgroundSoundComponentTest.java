@@ -50,15 +50,23 @@ class BackgroundSoundComponentTest {
 
     @Test
     void playsound() {
-        Sound sound0 = mock(Sound.class);
         Entity en = createEntity1();
 
         Sound sound = mock(Sound.class);
 
         en.addComponent(new Component());
         en.create();
-        en.getEvents().trigger("spaceshipSound");
+        en.getEvents().trigger("startBackgroundSound");
+    }
 
-//        verify(sound).play(1f, 0.6f, 0);
+    @Test
+    void stopSound() {
+        Entity en = createEntity1();
+
+        Sound sound = mock(Sound.class);
+
+        en.addComponent(new Component());
+        en.create();
+        en.getEvents().trigger("stopBackgroundSound");
     }
 }
