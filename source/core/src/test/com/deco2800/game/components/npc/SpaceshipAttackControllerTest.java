@@ -39,7 +39,7 @@ class SpaceshipAttackControllerTest {
     void beforeEach() {
         ServiceLocator.registerPhysicsService(new PhysicsService());
         ServiceLocator.registerInputService(new InputService());
-        SpaceshipAttackController.setSpaceshipState(SpaceshipAttackController.SpaceshipAttack.Off);
+        SpaceshipAttackController.setSpaceshipState(SpaceshipAttackController.SpaceshipAttack.OFF);
     }
 
     @Test
@@ -98,7 +98,7 @@ class SpaceshipAttackControllerTest {
         player.create();
         spaceship.create();
 
-        SpaceshipAttackController.setSpaceshipState(SpaceshipAttackController.SpaceshipAttack.On);
+        SpaceshipAttackController.setSpaceshipState(SpaceshipAttackController.SpaceshipAttack.ON);
 
         try{
             spaceshipAttackController.triggerUpdate();
@@ -124,7 +124,7 @@ class SpaceshipAttackControllerTest {
         Entity entity =
                 new Entity()
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Spaceship))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SPACESHIP))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
 
         return entity;

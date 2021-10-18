@@ -65,7 +65,7 @@ public class NPCFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new EnemyAnimationController())
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.FaceWorm));
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.FACE_WORM));
 
         FaceWorm.setScale(2.4f, 2.4f);
         logger.debug("Create a Face Worm");
@@ -98,7 +98,7 @@ public class NPCFactory {
                 .addComponent(animator)
                 .addComponent(aiComponent)
                 .addComponent(particle)
-                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.FlyingMonkey,
+                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.FLYING_MONKEY,
                         "sounds/monster_roar.mp3"));
 
         animator.startAnimation("1m");
@@ -123,7 +123,8 @@ public class NPCFactory {
                         ServiceLocator.getResourceService()
                                 .getAsset("images/spaceship.atlas", TextureAtlas.class));
 
-        animator.addAnimation("spaceship1", 0.2f, Animation.PlayMode.LOOP);
+        animator.addAnimation("spaceship", 0.2f, Animation.PlayMode.LOOP);
+        animator.addAnimation("spaceship_disappear", 0.067f, Animation.PlayMode.NORMAL);
 
         spaceship
                 .addComponent(new PhysicsComponent())
@@ -132,13 +133,13 @@ public class NPCFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                 .addComponent(animator)
                 .addComponent(new SpaceshipAttackController().setPlayer(target))
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Spaceship))
-                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.Spaceship,
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SPACESHIP))
+                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.SPACESHIP,
                         "sounds/spacecraft_floating.mp3"));
 
 
         spaceship.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
-        animator.startAnimation("spaceship1");
+        animator.startAnimation("spaceship");
         spaceship.setScale(10f, 10f);
 
         logger.debug("Create a spaceship");
@@ -173,8 +174,8 @@ public class NPCFactory {
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SmallMissile))
-                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.SmallMissile,
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SMALL_MISSILE))
+                .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.SMALL_MISSILE,
                         "sounds/missile_explosion.mp3"))
                 .addComponent(particle);
 

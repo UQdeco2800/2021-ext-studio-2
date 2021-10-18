@@ -45,7 +45,7 @@ class SoundComponentTest {
 
         Sound sound = mock(Sound.class);
 
-        SoundComponent soundComponent = new SoundComponent(ObstacleEventHandler.ObstacleType.Spaceship, sound);
+        SoundComponent soundComponent = new SoundComponent(ObstacleEventHandler.ObstacleType.SPACESHIP, sound);
         spaceship.addComponent(soundComponent);
 
         player.create();
@@ -63,7 +63,7 @@ class SoundComponentTest {
 
         Sound sound = mock(Sound.class);
 
-        SoundComponent soundComponent = new SoundComponent(ObstacleEventHandler.ObstacleType.SmallMissile, sound);
+        SoundComponent soundComponent = new SoundComponent(ObstacleEventHandler.ObstacleType.SMALL_MISSILE, sound);
         missile.addComponent(soundComponent);
 
         player.create();
@@ -81,7 +81,7 @@ class SoundComponentTest {
 
         Sound sound = mock(Sound.class);
 
-        SoundComponent soundComponent = new SoundComponent(ObstacleEventHandler.ObstacleType.FlyingMonkey, sound);
+        SoundComponent soundComponent = new SoundComponent(ObstacleEventHandler.ObstacleType.FLYING_MONKEY, sound);
         monkey.addComponent(soundComponent);
 
         player.create();
@@ -104,7 +104,7 @@ class SoundComponentTest {
         Entity entity =
                 new Entity()
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Spaceship))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SPACESHIP))
                         .addComponent(new SpaceshipAttackController().setPlayer(target))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
 
@@ -115,7 +115,7 @@ class SoundComponentTest {
         Entity entity =
                 new Entity()
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SmallMissile))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SMALL_MISSILE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
 
         return entity;
