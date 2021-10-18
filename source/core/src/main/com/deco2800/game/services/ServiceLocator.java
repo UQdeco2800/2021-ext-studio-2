@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
  * be used extremely sparingly. Read the README for details.
  */
 public class ServiceLocator {
-  private static final Logger logger = LoggerFactory.getLogger(ServiceLocator.class);
   private static EntityService entityService;
   private static RenderService renderService;
   private static PhysicsService physicsService;
@@ -60,42 +59,34 @@ public class ServiceLocator {
   }
 
   public static void registerEntityService(EntityService service) {
-    logger.debug("Registering entity service {}", service);
     entityService = service;
   }
 
   public static void registerRenderService(RenderService service) {
-    logger.debug("Registering render service {}", service);
     renderService = service;
   }
 
   public static void registerPhysicsService(PhysicsService service) {
-    logger.debug("Registering physics service {}", service);
     physicsService = service;
   }
 
   public static void registerTimeSource(GameTime source) {
-    logger.debug("Registering time source {}", source);
     timeSource = source;
   }
 
   public static void registerInputService(InputService source) {
-    logger.debug("Registering input service {}", source);
     inputService = source;
   }
 
   public static void registerResourceService(ResourceService source) {
-    logger.debug("Registering resource service {}", source);
     resourceService = source;
   }
 
   public static void registerScoreService(ScoreService source) {
-    logger.debug("Registering score service {}", source);
     scoreService = source;
   }
 
   public static void registerDistanceService(DistanceService source) {
-    logger.debug("Registering distance service {}", source);
     distanceService = source;
   }
 

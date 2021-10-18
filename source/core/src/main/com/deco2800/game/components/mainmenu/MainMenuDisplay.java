@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
  * A ui component for displaying the Main menu.
  */
 public class MainMenuDisplay extends UIComponent {
-  private static final Logger logger = LoggerFactory.getLogger(MainMenuDisplay.class);
   private static final float Z_INDEX = 2f;
   private Table table;
 
@@ -136,7 +135,6 @@ public class MainMenuDisplay extends UIComponent {
         new ChangeListener() {
           @Override
           public void changed(ChangeEvent changeEvent, Actor actor) {
-            logger.debug("Start button clicked");
             entity.getEvents().trigger("start");
           }
         });
@@ -146,7 +144,6 @@ public class MainMenuDisplay extends UIComponent {
         new ChangeListener() {
           @Override
           public void changed(ChangeEvent changeEvent, Actor actor) {
-            logger.debug("Settings button clicked");
             entity.getEvents().trigger("settings");
           }
         });
@@ -155,8 +152,6 @@ public class MainMenuDisplay extends UIComponent {
         new ChangeListener() {
           @Override
           public void changed(ChangeEvent changeEvent, Actor actor) {
-
-            logger.debug("Exit button clicked");
             entity.getEvents().trigger("exit");
           }
         });
@@ -164,7 +159,6 @@ public class MainMenuDisplay extends UIComponent {
       shopBtn.addListener(new ChangeListener() {
           @Override
           public void changed(ChangeEvent event, Actor actor) {
-              logger.debug("History Score clicked");
               entity.getEvents().trigger("displayPropsShop");
           }
       });
@@ -172,7 +166,6 @@ public class MainMenuDisplay extends UIComponent {
     scoreBtn.addListener(new ChangeListener() {
         @Override
         public void changed(ChangeEvent event, Actor actor) {
-            logger.debug("History Score clicked");
             entity.getEvents().trigger("displayHistoryScores");
         }
     });
@@ -180,7 +173,6 @@ public class MainMenuDisplay extends UIComponent {
     achievementBtn.addListener(new ChangeListener() {
           @Override
           public void changed(ChangeEvent event, Actor actor) {
-              logger.debug("Achievements clicked");
               entity.getEvents().trigger("achievements");
           }
     });
@@ -188,7 +180,6 @@ public class MainMenuDisplay extends UIComponent {
     attiresBtn.addListener(new ChangeListener() {
           @Override
           public void changed(ChangeEvent event, Actor actor) {
-              logger.debug("Unlocked Attires clicked");
               entity.getEvents().trigger("unlockedAttires");
           }
       });
@@ -196,7 +187,6 @@ public class MainMenuDisplay extends UIComponent {
     monsterBtn.addListener(new ChangeListener() {
         @Override
         public void changed(ChangeEvent event, Actor actor) {
-            logger.debug("monsterMenu clicked");
             entity.getEvents().trigger("monsterMenu");
         }
     });
@@ -204,7 +194,6 @@ public class MainMenuDisplay extends UIComponent {
     buffBtn.addListener(new ChangeListener() {
           @Override
           public void changed(ChangeEvent event, Actor actor) {
-              logger.debug("buff manual Menu clicked");
               entity.getEvents().trigger("buffMenu");
           }
       });
@@ -212,7 +201,6 @@ public class MainMenuDisplay extends UIComponent {
       tutorialBtn.addListener(new ChangeListener() {
           @Override
           public void changed(ChangeEvent event, Actor actor) {
-              logger.debug("game instructions clicked");
               entity.getEvents().trigger("GameTutorial");
           }
       });

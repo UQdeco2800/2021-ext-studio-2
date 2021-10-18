@@ -219,7 +219,6 @@ public class SettingsMenuDisplay extends UIComponent {
             new ChangeListener() {
               @Override
               public void changed(ChangeEvent changeEvent, Actor actor) {
-                logger.debug("Exit button clicked");
                 exitMenu();
               }
             });
@@ -228,7 +227,6 @@ public class SettingsMenuDisplay extends UIComponent {
             new ChangeListener() {
               @Override
               public void changed(ChangeEvent changeEvent, Actor actor) {
-                logger.debug("Apply button clicked");
                 applyChanges();
               }
             });

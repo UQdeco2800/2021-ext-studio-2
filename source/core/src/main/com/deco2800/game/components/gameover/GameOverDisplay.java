@@ -127,7 +127,6 @@ public class GameOverDisplay extends UIComponent {
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("play again button clicked");
                         game.setScreen(GdxGame.ScreenType.MAIN_GAME);
                     }
                 });
@@ -135,7 +134,6 @@ public class GameOverDisplay extends UIComponent {
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("return menu button clicked");
                         game.setScreen(GdxGame.ScreenType.MAIN_MENU);
                     }
                 });
@@ -144,7 +142,6 @@ public class GameOverDisplay extends UIComponent {
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("go to history score board button clicked");
                         game.setScreen(GdxGame.ScreenType.HISTORY_SCORES);
                     }
                 });

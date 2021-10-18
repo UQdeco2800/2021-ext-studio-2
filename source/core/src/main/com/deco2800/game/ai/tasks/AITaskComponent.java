@@ -28,7 +28,6 @@ public class AITaskComponent extends Component implements TaskRunner {
    * @return self
    */
   public AITaskComponent addTask(PriorityTask task) {
-    logger.debug("{} Adding task {}", this, task);
     priorityTasks.add(task);
     task.create(this);
 
@@ -68,7 +67,6 @@ public class AITaskComponent extends Component implements TaskRunner {
   }
 
   private void changeTask(PriorityTask desiredTask) {
-    logger.debug("{} Changing to task {}", this, desiredTask);
     if (currentTask != null) {
       currentTask.stop();
     }

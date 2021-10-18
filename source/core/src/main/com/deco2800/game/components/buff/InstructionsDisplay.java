@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 public class InstructionsDisplay extends UIComponent {
 
-    private static final Logger logger = LoggerFactory.getLogger(InstructionsDisplay.class);
     private final GdxGame game;
     Table bgTable;
     Table buttonTable;
@@ -37,7 +36,6 @@ public class InstructionsDisplay extends UIComponent {
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("return menu button clicked");
                         game.setScreen(GdxGame.ScreenType.MAIN_MENU);
                     }
                 });
