@@ -274,6 +274,7 @@ class EntityTest {
         entity.addComponent(component);
 
         entity.create();
+        when(animator.getCurrentAnimation()).thenReturn("try");
         EntityService entityService = mock(EntityService.class);
         ServiceLocator.registerEntityService(entityService);
 
