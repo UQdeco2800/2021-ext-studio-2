@@ -43,11 +43,6 @@ public class MainMenuDisplay extends UIComponent {
                         ServiceLocator.getResourceService()
                                 .getAsset("images/menu_background/menu_background.png", Texture.class));
 
-        Image background_after =
-                new Image(
-                        ServiceLocator.getResourceService()
-                                .getAsset("images/menu_background/123.jpg", Texture.class));
-
         /** build new start button */
         Button.ButtonStyle start = new Button.ButtonStyle();
         start.up= new TextureRegionDrawable(new TextureRegion(
@@ -248,21 +243,6 @@ public class MainMenuDisplay extends UIComponent {
         stage.addActor(buffBtn);
         final boolean[] originFlag = {true};
         bgTable.add(background_origin).size(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Timer timer = new Timer();
-        timer.scheduleTask(new Timer.Task() {
-            @Override
-            public void run() {
-                bgTable.reset();
-                if (originFlag[0]){
-                    originFlag[0] = false;
-                    bgTable.add(background_after).size(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                }else{
-                    originFlag[0] = true;
-                    bgTable.add(background_origin).size(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                }
-//              timer.stop();
-            }
-        }, 1,1);
     }
 
     @Override
