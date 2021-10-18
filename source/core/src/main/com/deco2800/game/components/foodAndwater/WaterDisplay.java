@@ -86,7 +86,7 @@ public class WaterDisplay extends UIComponent {
         super.update();
         int minutes = countTime.getMinutes();
         int seconds = countTime.getSeconds();
-        int dis = (minutes * 60 + seconds)/ 10;
+        int dis = (minutes * 60 + seconds)/ 15;
         int dis1 = (minutes * 60 + seconds); //it is reduce health value when every single second
         if(dis > countWaterSystem.getTimer()){
             countWaterSystem.setDifference(1);
@@ -122,13 +122,6 @@ public class WaterDisplay extends UIComponent {
      */
     public void updatePlayerTimerUI(int dis) {
         if(dis == 1){
-            if(waterImage.size() <= 0){
-                table1.reset();
-                table1.top().left();
-                table1.setFillParent(true);
-                table1.padTop(260f).padLeft(5f);
-                table1.add(thirstIcon).size(50f).pad(3);
-            }
             if(waterImage.size() > 0){
                 table1.reset();
                 table.reset();
@@ -139,6 +132,13 @@ public class WaterDisplay extends UIComponent {
                 for (Image ima: waterImage) {
                     table.add(ima).size(30f).pad(3);
                 }
+            }
+            if(waterImage.size() <= 0){
+                table1.reset();
+                table1.top().left();
+                table1.setFillParent(true);
+                table1.padTop(260f).padLeft(5f);
+                table1.add(thirstIcon).size(50f).pad(3);
             }
         }
     }

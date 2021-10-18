@@ -87,7 +87,7 @@ public class FoodDisplay extends UIComponent{
         super.update();
         int minutes = timeCount.getMinutes();
         int seconds = timeCount.getSeconds();
-        int dis = (minutes * 60 + seconds)/ 15;
+        int dis = (minutes * 60 + seconds)/ 10;
         int dis1 = (minutes * 60 + seconds);
         if(dis > countFoodSystem.getTimer()){
             countFoodSystem.setDifference(1);
@@ -125,6 +125,7 @@ public class FoodDisplay extends UIComponent{
     public void updatePlayerTimerUI(int dis) {
         if(dis > 0){
             if(foodImage.size() > 0){
+                table1.reset();
                 table.reset();
                 table.top().left();
                 table.setFillParent(true);
@@ -138,7 +139,7 @@ public class FoodDisplay extends UIComponent{
                 table1.reset();
                 table1.top().left();
                 table1.setFillParent(true);
-                table1.padTop(260f).padLeft(55f);
+                table1.padTop(260f).padLeft(60f);
                 table1.add(hungerIcon).size(50f).pad(3);
             }
         }
