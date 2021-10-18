@@ -159,11 +159,11 @@ public class SettingsMenuDisplay extends UIComponent {
 
     table.add(displayModeLabel).left().padLeft(10);
     table.add(displayModeSelect).left();
-    table.row().padTop(5f);
-    table.add(inGameLabel).left().padLeft(10);
-    table.add(inGameMusicSelect).left();
-    table.add(gameOverLabel).left().padLeft(10);
-    table.add(gameOverMusicSelect).left();
+    table.row().padTop(5f).padBottom(10);
+    table.add(inGameLabel).left().padLeft(10).padTop(50);
+    table.add(inGameMusicSelect).left().padTop(50);
+    table.add(gameOverLabel).left().padLeft(10).padTop(50);
+    table.add(gameOverMusicSelect).left().padTop(50);
     // Events on inputs
     uiScaleSlider.addListener(
             (Event event) -> {
