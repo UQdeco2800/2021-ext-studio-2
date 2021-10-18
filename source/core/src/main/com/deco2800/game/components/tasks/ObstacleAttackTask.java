@@ -24,19 +24,16 @@ public class ObstacleAttackTask extends DefaultTask implements PriorityTask {
     private final Entity npc;
     private final int priority;
     private final float viewDistance;
-    private final PhysicsEngine physics;
-    private final DebugRenderer debugRenderer;
     private GameArea gameArea;
     public static Boolean lock_use = true;
-    public static Vector2 enemy_posion;
 
     public ObstacleAttackTask(Entity npc, Entity target, int priority, float viewDistance) {
         this.target = target;
         this.priority = priority;
         this.viewDistance = viewDistance;
         this.npc = npc;
-        physics = ServiceLocator.getPhysicsService().getPhysics();
-        debugRenderer = ServiceLocator.getRenderService().getDebug();
+        PhysicsEngine physics = ServiceLocator.getPhysicsService().getPhysics();
+        DebugRenderer debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
 
 

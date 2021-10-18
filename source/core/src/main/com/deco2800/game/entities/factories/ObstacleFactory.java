@@ -114,10 +114,8 @@ public class ObstacleFactory {
     }
 
     /**
-     * Creates a Thorns Obstacle.
+     * Creates a Weapon attack effect for player.
      *
-     //     * @param target character.
-     * @return the thorns obstacle entity
      */
     public static Entity createWeapon() {
 
@@ -132,10 +130,9 @@ public class ObstacleFactory {
 
         weapon.setScale(0.5f, 0.5f);
         weapon.setZIndex(1);
-//        logger.debug("Create a Thorns Obstacle");
         particle.startEffect();
         weapon.setDisappearAfterParticle(2f, Entity.DisappearType.PARTICLE);
-
+        logger.debug("Create a Weapon attack");
         return weapon;
     }
 
