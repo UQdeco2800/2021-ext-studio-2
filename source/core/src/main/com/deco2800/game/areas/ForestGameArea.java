@@ -435,6 +435,7 @@ public class ForestGameArea extends GameArea {
         MPCConfig.updateValues();
 
         player = spawnPlayer();
+        player.getEvents().trigger("startMPCAnimation");
         spawnObstacles();
         pro = new InventorySystem(player);
         spawnFirstAid();
