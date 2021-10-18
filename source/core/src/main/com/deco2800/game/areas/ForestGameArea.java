@@ -34,20 +34,6 @@ public class ForestGameArea extends GameArea {
     private boolean wake;
 
 
-    private void spawnNails() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.randomX(52, minPos, maxPos);
-            Entity nail = ObstacleFactory.createNail(player);
-            spawnEntityAt(nail, randomPos, true, false);
-            GridPoint2 randomPosTwo = RandomUtils.randomX(54, minPos, maxPos);
-            Entity nailTwo = ObstacleFactory.createWood();
-            spawnEntityAt(nailTwo, randomPosTwo, true, false);
-        }
-    }
-
     public void spawnNailsone(int xValue) {
 
         for (int i = 0; i < 5; i++) {
@@ -224,47 +210,11 @@ public class ForestGameArea extends GameArea {
     }
 
 
-    /**
-     * Gennerate 5 wood randomly in the 52f and 54f height
-     */
-    private void spawnWoods() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.randomX(52, minPos, maxPos);
-            Entity wood = ObstacleFactory.createWood();
-            spawnEntityAt(wood, randomPos, true, false);
-            GridPoint2 randomPosTwo = RandomUtils.randomX(54, minPos, maxPos);
-            Entity woodTwo = ObstacleFactory.createWood();
-            spawnEntityAt(woodTwo, randomPosTwo, true, false);
-        }
-    }
-
-    /**
-     * Generate 5 wood randomly in the 52f and 54f height and given horizontal start point
-     *
-     * @param xValue horizontal start point
-     */
-    public void spawnWoodsRandomly(int xValue) {
-        GridPoint2 minPos = new GridPoint2(xValue + 10, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.randomX(52, minPos, maxPos);
-            Entity wood = ObstacleFactory.createWood();
-            spawnEntityAt(wood, randomPos, true, false);
-            GridPoint2 randomPosTwo = RandomUtils.randomX(54, minPos, maxPos);
-            Entity woodTwo = ObstacleFactory.createWood();
-            spawnEntityAt(woodTwo, randomPosTwo, true, false);
-        }
-    }
 
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
     /* The number of each type of obstacle. Note: total obstacles cannot be greater than 20 (range of loading map)*/
     private static final int NUM_OBSTACLES = 2;
 
-    private static final int NUM_GHOSTS = 2;
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(0, 10);
     private static final float WALL_WIDTH = 0.1f;
     private ItemBar itembar;
@@ -612,7 +562,7 @@ public class ForestGameArea extends GameArea {
         // from being generated at the same location
         ArrayList<GridPoint2> randomPoints = new ArrayList<GridPoint2>();
 
-        String loggerInfo = "";
+        StringBuilder loggerInfo = new StringBuilder();
 
         int playerX = (int) player.getPosition().x;
         logger.debug("player x coordinate: {}", playerX);
@@ -637,11 +587,11 @@ public class ForestGameArea extends GameArea {
                 Entity obstacle2 = ObstacleFactory.createThornsObstacle(player);
                 spawnEntityAt(obstacle, randomPos, true, false);
                 spawnEntityAt(obstacle2, randomPos2, true, true);
-                loggerInfo += "Create Plants Obstacle at " + randomPos + "\t";
-                loggerInfo += "Create Thorns Obstacle at " + randomPos2 + "\t";
+                loggerInfo.append("Create Plants Obstacle at ").append(randomPos).append("\t");
+                loggerInfo.append("Create Thorns Obstacle at ").append(randomPos2).append("\t");
             }
             logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}",
-                    minPos.x, maxPos.x, randomPoints, loggerInfo);
+                    minPos.x, maxPos.x, randomPoints, loggerInfo.toString());
         }
 
 
@@ -707,7 +657,7 @@ public class ForestGameArea extends GameArea {
         double midSize;
         double smallSize;
 
-        String loggerInfo = "";
+        StringBuilder loggerInfo = new StringBuilder();
 
         for (int i = 0; i < meteoritesNum; i++) {
             randomSize = Math.random() * 0.5; // 0-0.5
@@ -723,22 +673,22 @@ public class ForestGameArea extends GameArea {
             if (i < bigNumRandom) { // must have a big meteorites
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) bigSize, ObstacleFactory.MeteoriteType.BigMeteorite);
-                loggerInfo += "Big stone = " + point + "\t";
+                loggerInfo.append("Big stone = ").append(point).append("\t");
             } else if (i < bigNumRandom + midNumRandom) {
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) midSize, ObstacleFactory.MeteoriteType.MiddleMeteorite);
-                loggerInfo += "Mid stone = " + point + "\t";
+                loggerInfo.append("Mid stone = ").append(point).append("\t");
             } else {
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) smallSize, ObstacleFactory.MeteoriteType.SmallMeteorite);
-                loggerInfo += "Small stone = " + point + "\t";
+                loggerInfo.append("Small stone = ").append(point).append("\t");
             }
 
 
             spawnEntityAt(stone, point, true, true);
         }
         logger.debug("bigNumRandom = {}, midNumRandom = {}, smallNumRandom = {}, stones points: {}",
-                bigNumRandom, midNumRandom, smallNumRandom, loggerInfo);
+                bigNumRandom, midNumRandom, smallNumRandom, loggerInfo.toString());
     }
 
 
