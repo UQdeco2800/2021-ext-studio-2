@@ -1,124 +1,1265 @@
 
 mpcAnimation_2.png
-size: 4096, 2048
+size: 8192, 8192
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 main_player_attack
   rotate: false
-  xy: 545, 545
+  xy: 2, 1631
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 1
 main_player_attack
   rotate: false
-  xy: 1631, 1088
+  xy: 3260, 549
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
-  index: 3
-main_player_attack
+  index: 2
+main_player_attack_dizzy
   rotate: false
-  xy: 2174, 2
+  xy: 2174, 5436
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_attack_dizzy
+  rotate: false
+  xy: 7604, 6522
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_attack_health-down
+  rotate: false
+  xy: 545, 5976
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_attack_health-down
+  rotate: false
+  xy: 5432, 5436
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_attack_health-limit-up
+  rotate: false
+  xy: 2174, 2721
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_attack_health-limit-up
+  rotate: false
+  xy: 4889, 2721
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_attack_health-up
+  rotate: false
+  xy: 1088, 4348
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_attack_health-up
+  rotate: false
+  xy: 5432, 5979
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_attack_hungry
+  rotate: false
+  xy: 1088, 3805
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_attack_hungry
+  rotate: false
+  xy: 4889, 4893
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_attack_poisoned
+  rotate: false
+  xy: 545, 4347
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_attack_poisoned
+  rotate: false
+  xy: 5432, 6522
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_attack_recovered
+  rotate: false
+  xy: 7061, 7608
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_attack_recovered
+  rotate: false
+  xy: 2717, 6
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_attack_speed-down
+  rotate: false
+  xy: 2717, 3807
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_attack_speed-down
+  rotate: false
+  xy: 4889, 3264
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_attack_thirsty
+  rotate: false
+  xy: 2, 4889
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_attack_thirsty
+  rotate: false
+  xy: 4889, 6522
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_burn
+  rotate: false
+  xy: 2717, 1635
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_burn_dizzy
+  rotate: false
+  xy: 1631, 1092
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_burn_health-down
+  rotate: false
+  xy: 4346, 2721
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_burn_health-limit-up
+  rotate: false
+  xy: 1631, 3807
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_burn_health-up
+  rotate: false
+  xy: 3803, 2721
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_burn_hungry
+  rotate: false
+  xy: 3803, 4350
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_burn_poisoned
+  rotate: false
+  xy: 3803, 4893
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_burn_recovered
+  rotate: false
+  xy: 2717, 6522
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_burn_speed-down
+  rotate: false
+  xy: 545, 2718
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_burn_thirsty
+  rotate: false
+  xy: 3260, 2178
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_crouch
+  rotate: false
+  xy: 1631, 2178
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_crouch
   rotate: false
-  xy: 1088, 545
+  xy: 3803, 1635
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_crouch_dizzy
+  rotate: false
+  xy: 545, 1089
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
-main_player_crouch
+main_player_crouch_dizzy
   rotate: false
-  xy: 2717, 1088
+  xy: 2717, 549
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_crouch_health-down
+  rotate: false
+  xy: 5975, 6522
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_crouch_health-down
+  rotate: false
+  xy: 7061, 4893
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_crouch_health-limit-up
+  rotate: false
+  xy: 545, 5433
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_crouch_health-limit-up
+  rotate: false
+  xy: 5432, 7065
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_crouch_health-up
+  rotate: false
+  xy: 3260, 5979
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_crouch_health-up
+  rotate: false
+  xy: 7604, 7608
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_crouch_hungry
+  rotate: false
+  xy: 1631, 1635
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_crouch_hungry
+  rotate: false
+  xy: 5975, 3264
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_crouch_poisoned
+  rotate: false
+  xy: 545, 3804
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_crouch_poisoned
+  rotate: false
+  xy: 5975, 4893
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_crouch_recovered
+  rotate: false
+  xy: 3803, 7608
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_crouch_recovered
+  rotate: false
+  xy: 3260, 3807
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_crouch_speed-down
+  rotate: false
+  xy: 5975, 7608
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_crouch_speed-down
+  rotate: false
+  xy: 2174, 549
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_crouch_thirsty
+  rotate: false
+  xy: 2717, 7065
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_crouch_thirsty
+  rotate: false
+  xy: 3260, 4350
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_hurt
+  rotate: false
+  xy: 545, 3
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_hurt_dizzy
+  rotate: false
+  xy: 1631, 3264
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_hurt_health-down
+  rotate: false
+  xy: 4346, 4893
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_hurt_health-limit-up
+  rotate: false
+  xy: 3260, 1635
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_hurt_health-up
+  rotate: false
+  xy: 2717, 7608
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_hurt_hungry
+  rotate: false
+  xy: 2174, 5979
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_hurt_poisoned
+  rotate: false
+  xy: 1088, 3262
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_hurt_recovered
+  rotate: false
+  xy: 1631, 2721
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_hurt_speed-down
+  rotate: false
+  xy: 4346, 3264
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_hurt_thirsty
+  rotate: false
+  xy: 7604, 5436
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 1
 main_player_jump
   rotate: false
-  xy: 2, 545
+  xy: 2, 4346
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_jump
-  rotate: false
-  xy: 1088, 1088
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_jump
-  rotate: false
-  xy: 2174, 1088
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_pickup
   rotate: false
   xy: 2, 1088
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 1
+main_player_jump
+  rotate: false
+  xy: 4346, 3807
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_jump_dizzy
+  rotate: false
+  xy: 1088, 5434
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_jump_dizzy
+  rotate: false
+  xy: 2174, 3264
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_jump_dizzy
+  rotate: false
+  xy: 5975, 5436
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_jump_health-down
+  rotate: false
+  xy: 2, 2717
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_jump_health-down
+  rotate: false
+  xy: 545, 1632
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_jump_health-down
+  rotate: false
+  xy: 3803, 2178
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_jump_health-limit-up
+  rotate: false
+  xy: 3803, 5979
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_jump_health-limit-up
+  rotate: false
+  xy: 6518, 7065
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_jump_health-limit-up
+  rotate: false
+  xy: 6518, 4350
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_jump_health-up
+  rotate: false
+  xy: 2717, 5436
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_jump_health-up
+  rotate: false
+  xy: 1088, 547
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_jump_health-up
+  rotate: false
+  xy: 6518, 4893
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_jump_hungry
+  rotate: false
+  xy: 2, 5432
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_jump_hungry
+  rotate: false
+  xy: 1631, 4350
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_jump_hungry
+  rotate: false
+  xy: 5975, 5979
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_jump_poisoned
+  rotate: false
+  xy: 3260, 7065
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_jump_poisoned
+  rotate: false
+  xy: 2717, 4350
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_jump_poisoned
+  rotate: false
+  xy: 4889, 3807
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_jump_recovered
+  rotate: false
+  xy: 2, 3260
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_jump_recovered
+  rotate: false
+  xy: 4889, 5436
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_jump_recovered
+  rotate: false
+  xy: 5432, 4350
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_jump_speed-down
+  rotate: false
+  xy: 3803, 6522
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_jump_speed-down
+  rotate: false
+  xy: 5975, 7065
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_jump_speed-down
+  rotate: false
+  xy: 7061, 5436
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_jump_thirsty
+  rotate: false
+  xy: 2174, 7608
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_jump_thirsty
+  rotate: false
+  xy: 4346, 5979
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_jump_thirsty
+  rotate: false
+  xy: 7061, 5979
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
 main_player_pickup
   rotate: false
-  xy: 2, 2
+  xy: 1088, 5977
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_pickup
+  rotate: false
+  xy: 4346, 7065
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 3
 main_player_pickup
   rotate: false
-  xy: 1631, 545
+  xy: 2174, 1635
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_pickup
   rotate: false
-  xy: 2174, 545
+  xy: 7604, 5979
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 4
+main_player_pickup_dizzy
+  rotate: false
+  xy: 3260, 7608
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_pickup_dizzy
+  rotate: false
+  xy: 1088, 2719
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_pickup_dizzy
+  rotate: false
+  xy: 1631, 549
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_pickup_dizzy
+  rotate: false
+  xy: 4889, 2178
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 4
+main_player_pickup_health-down
+  rotate: false
+  xy: 1631, 4893
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_pickup_health-down
+  rotate: false
+  xy: 3260, 4893
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 4
+main_player_pickup_health-down
+  rotate: false
+  xy: 2, 2
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_pickup_health-down
+  rotate: false
+  xy: 6518, 5436
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_pickup_health-limit-up
+  rotate: false
+  xy: 4346, 7608
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_pickup_health-limit-up
+  rotate: false
+  xy: 2174, 2178
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_pickup_health-limit-up
+  rotate: false
+  xy: 2717, 1092
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 4
+main_player_pickup_health-limit-up
+  rotate: false
+  xy: 6518, 3807
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_pickup_health-up
+  rotate: false
+  xy: 4346, 6522
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_pickup_health-up
+  rotate: false
+  xy: 545, 546
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 4
+main_player_pickup_health-up
+  rotate: false
+  xy: 6518, 5979
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_pickup_health-up
+  rotate: false
+  xy: 3803, 1092
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_pickup_hungry
+  rotate: false
+  xy: 1631, 7065
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_pickup_hungry
+  rotate: false
+  xy: 4889, 7608
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_pickup_hungry
+  rotate: false
+  xy: 2717, 2178
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_pickup_hungry
+  rotate: false
+  xy: 2174, 6
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 4
+main_player_pickup_poisoned
+  rotate: false
+  xy: 2, 3803
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_pickup_poisoned
+  rotate: false
+  xy: 545, 2175
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 4
+main_player_pickup_poisoned
+  rotate: false
+  xy: 4346, 5436
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_pickup_poisoned
+  rotate: false
+  xy: 1088, 4
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_pickup_recovered
+  rotate: false
+  xy: 1631, 5979
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_pickup_recovered
+  rotate: false
+  xy: 5432, 7608
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_pickup_recovered
+  rotate: false
+  xy: 7604, 7065
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_pickup_recovered
+  rotate: false
+  xy: 4346, 1635
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 4
+main_player_pickup_speed-down
+  rotate: false
+  xy: 545, 4890
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_pickup_speed-down
+  rotate: false
+  xy: 2717, 4893
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 4
+main_player_pickup_speed-down
+  rotate: false
+  xy: 1088, 2176
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_pickup_speed-down
+  rotate: false
+  xy: 4889, 4350
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_pickup_thirsty
+  rotate: false
+  xy: 1088, 6520
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 3
+main_player_pickup_thirsty
+  rotate: false
+  xy: 3803, 5436
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_pickup_thirsty
+  rotate: false
+  xy: 7061, 7065
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 4
+main_player_pickup_thirsty
+  rotate: false
+  xy: 1631, 6
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
 main_player_right
   rotate: false
-  xy: 2717, 545
+  xy: 7604, 4893
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: -1
+main_player_right_dizzy
+  rotate: false
+  xy: 5432, 2721
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: -1
+main_player_right_health-down
+  rotate: false
+  xy: 3260, 2721
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: -1
+main_player_right_health-limit-up
+  rotate: false
+  xy: 3260, 1092
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: -1
+main_player_right_health-up
+  rotate: false
+  xy: 2174, 4350
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: -1
+main_player_right_hungry
+  rotate: false
+  xy: 4346, 2178
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: -1
+main_player_right_poisoned
+  rotate: false
+  xy: 3260, 5436
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: -1
+main_player_right_recovered
+  rotate: false
+  xy: 5432, 3807
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: -1
+main_player_right_speed-down
+  rotate: false
+  xy: 4346, 4350
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: -1
+main_player_right_thirsty
+  rotate: false
+  xy: 6518, 7608
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: -1
 main_player_run
   rotate: false
-  xy: 545, 2
+  xy: 4889, 5979
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_run
   rotate: false
-  xy: 1631, 2
+  xy: 5975, 4350
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 1
-main_player_walk
+main_player_run_dizzy
   rotate: false
-  xy: 545, 1088
+  xy: 2, 6519
+  size: 541, 542
+  orig: 541, 542
+  offset: 0, 0
+  index: 1
+main_player_run_dizzy
+  rotate: false
+  xy: 2717, 5979
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_run_health-down
+  rotate: false
+  xy: 2, 5975
+  size: 541, 542
+  orig: 541, 542
+  offset: 0, 0
+  index: 1
+main_player_run_health-down
+  rotate: false
+  xy: 2, 2174
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_run_health-limit-up
+  rotate: false
+  xy: 1088, 7607
+  size: 541, 542
+  orig: 541, 542
+  offset: 0, 0
+  index: 1
+main_player_run_health-limit-up
+  rotate: false
+  xy: 545, 3261
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_run_health-up
+  rotate: false
+  xy: 545, 7063
+  size: 541, 542
+  orig: 541, 542
+  offset: 0, 0
+  index: 1
+main_player_run_health-up
+  rotate: false
+  xy: 3260, 6522
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_run_hungry
+  rotate: false
+  xy: 1088, 7063
+  size: 541, 542
+  orig: 541, 542
+  offset: 0, 0
+  index: 1
+main_player_run_hungry
+  rotate: false
+  xy: 1088, 1090
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_run_poisoned
+  rotate: false
+  xy: 2, 7607
+  size: 541, 542
+  orig: 541, 542
+  offset: 0, 0
+  index: 1
+main_player_run_poisoned
+  rotate: false
+  xy: 2174, 1092
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_run_recovered
+  rotate: false
+  xy: 545, 7607
+  size: 541, 542
+  orig: 541, 542
+  offset: 0, 0
+  index: 1
+main_player_run_recovered
+  rotate: false
+  xy: 1631, 6522
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_run_speed-down
+  rotate: false
+  xy: 545, 6519
+  size: 541, 542
+  orig: 541, 542
+  offset: 0, 0
+  index: 1
+main_player_run_speed-down
+  rotate: false
+  xy: 2, 545
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_run_thirsty
+  rotate: false
+  xy: 2, 7063
+  size: 541, 542
+  orig: 541, 542
+  offset: 0, 0
+  index: 1
+main_player_run_thirsty
+  rotate: false
+  xy: 5975, 3807
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_walk
   rotate: false
-  xy: 1088, 2
+  xy: 2174, 4893
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_walk
+  rotate: false
+  xy: 6518, 6522
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_walk_dizzy
+  rotate: false
+  xy: 3803, 7065
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_walk_dizzy
+  rotate: false
+  xy: 2717, 2721
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_walk_health-down
+  rotate: false
+  xy: 1088, 4891
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_walk_health-down
+  rotate: false
+  xy: 1088, 1633
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_walk_health-limit-up
+  rotate: false
+  xy: 1631, 5436
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_walk_health-limit-up
+  rotate: false
+  xy: 2717, 3264
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_walk_health-up
+  rotate: false
+  xy: 2174, 6522
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_walk_health-up
+  rotate: false
+  xy: 7061, 6522
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_walk_hungry
+  rotate: false
+  xy: 4889, 7065
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_walk_hungry
+  rotate: false
+  xy: 5432, 4893
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_walk_poisoned
+  rotate: false
+  xy: 3260, 3264
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_walk_poisoned
+  rotate: false
+  xy: 5432, 3264
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_walk_recovered
+  rotate: false
+  xy: 3803, 3807
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_walk_recovered
+  rotate: false
+  xy: 7061, 4350
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_walk_speed-down
+  rotate: false
+  xy: 2174, 7065
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 1
+main_player_walk_speed-down
+  rotate: false
+  xy: 3803, 3264
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_walk_thirsty
+  rotate: false
+  xy: 1631, 7608
+  size: 541, 541
+  orig: 541, 541
+  offset: 0, 0
+  index: 2
+main_player_walk_thirsty
+  rotate: false
+  xy: 2174, 3807
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
