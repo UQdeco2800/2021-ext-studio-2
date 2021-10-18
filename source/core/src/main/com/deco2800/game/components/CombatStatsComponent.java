@@ -1,9 +1,5 @@
 package com.deco2800.game.components;
 
-import com.badlogic.gdx.audio.Sound;
-import com.deco2800.game.components.score.ScoringSystem;
-import com.deco2800.game.services.GameTime;
-import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
