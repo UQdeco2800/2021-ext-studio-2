@@ -38,6 +38,7 @@ public class PropStoreItemDisplay extends UIComponent {
         dialog.setMovable(false);
         dialog.setResizable(true);
         Image img = new Image(new Texture(item.path));
+        img.setScale(1.2f,1.2f);
         dialog.pad(50).padTop(120);
         Label desc = new Label(item.desc, new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
         desc.setFontScale(1.1f);
@@ -49,7 +50,7 @@ public class PropStoreItemDisplay extends UIComponent {
         price.setWrap(true);
         price.setAlignment(Align.center);
 
-        dialog.getContentTable().add(img).height(122).width(240).row();
+        dialog.getContentTable().add(img).height(250).width(240).padRight(30f).row();
         dialog.getContentTable().add(desc).width(600).row();
         dialog.getContentTable().add(price).width(600).row();
         dialog.getButtonTable().add(renderButton(item)).size(600,100).row();

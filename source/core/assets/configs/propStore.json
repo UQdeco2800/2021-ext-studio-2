@@ -3,8 +3,8 @@
 {
   "id": 1,
   "name": "Health",
-  "desc": "buying this will increase your maximum health to 170",
-  "path": "images/Items/props/add_health.png",
+  "desc": "buying this will increase your maximum health to 150",
+  "path": "images/Items/first_aid_kit.png",
   "price": 5,
   "property": {
     "health": 170
@@ -14,11 +14,51 @@
   "id": 2,
   "name": "Food",
   "desc": "buying this will increase your Food",
-  "path": "images/Items/props/add_food.png",
+  "path": "images/Items/food.png",
   "price": 2,
   "property": {
     "food": 5
   }
-}
+},
+    {
+      "id": 3,
+      "name": "Speed",
+      "desc": "buying this will increase your players Speed",
+      "path": "images/Items/magic_potion.png",
+      "price": 3,
+      "property": {
+        "speed": 1
+      }
+    },
+    {
+      "id": 4,
+      "name": "Bandage",
+      "desc": "buying this will increase your maximum health to 120",
+      "path": "images/Items/bandage.png",
+      "price": 2,
+      "property": {
+        "health": 120
+      }
+    },
+    {
+      "id": 5,
+      "name": "Water",
+      "desc": "buying this will increase your Water limit",
+      "path": "images/Items/water.png",
+      "price": 2,
+      "property": {
+        "health": 120
+      }
+    },
+    {
+      "id": 6,
+      "name": "Syringe",
+      "desc": "Using the Syringe will give you 200 health",
+      "path": "images/Items/syringe.png",
+      "price": 10,
+      "property": {
+        "health": 200
+      }
+    }
   ]
 }

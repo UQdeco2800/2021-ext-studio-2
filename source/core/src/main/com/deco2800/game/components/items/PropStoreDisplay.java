@@ -17,6 +17,8 @@ import com.deco2800.game.entities.factories.PropStoreFactory;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * A ui component for displaying the props shop.
  */
@@ -68,9 +70,11 @@ public class PropStoreDisplay extends UIComponent {
     }
 
     private Table createItemTable(){
+        AtomicInteger i = new AtomicInteger();
         Table table = new Table();
         table.setFillParent(true);
         table.center();
+        table.padTop(110f);
         PropStoreFactory.getPropStoreItems().forEach(item -> {
             Label price = new Label("Gold $: " + item.price, new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
             price.setFontScale(2f);
@@ -83,15 +87,20 @@ public class PropStoreDisplay extends UIComponent {
             });
             button.setColor(Color.RED);
             Image img = new Image(ServiceLocator.getResourceService().getAsset(item.path, Texture.class));
+            img.setScale(2,2);
             Table itemTable = new Table();
-            itemTable.add(img);
+            itemTable.add(img).center().padRight(35f).padTop(50f);
             itemTable.row();
-            itemTable.add(price);
-            itemTable.padLeft(20f).padRight(20f);
+            itemTable.add(price).center();
+            itemTable.padLeft(20f).padRight(20f).padTop(50f);
             itemTable.row();
-            itemTable.add(button);
+            itemTable.add(button).center();
             table.add(itemTable);
+            i.getAndIncrement();
+           if(i.get() % (ITEM_COLUMN_COUNT) == 0){
+               table.row();
 
+           }
 
 
         });
@@ -103,7 +112,7 @@ public class PropStoreDisplay extends UIComponent {
     private Table createBackground(){
         Table background = new Table();
         background.setFillParent(true);
-        Image bg = new Image(new Texture("images/Items/props/background_image_prop.png"));
+        Image bg = new Image(new Texture("images/Items/props/background_new.png"));
         bg.setScaling(Scaling.fit);
         background.background(bg.getDrawable());
         return background;
