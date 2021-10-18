@@ -293,12 +293,13 @@ public class ObstacleFactory {
      * @return Firrerock entity
      */
     public static Entity createMagma(Entity target) {
-        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody, "Magma");
+        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody, "MAGMA");
 
         obstacle
                 .addComponent(new TextureRenderComponent("images/firerock.jpg"))
                 .addComponent(new CombatStatsComponent(2000, 10))
-                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1f));
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1f))
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.MAGMA));
 
         return obstacle;
     }
