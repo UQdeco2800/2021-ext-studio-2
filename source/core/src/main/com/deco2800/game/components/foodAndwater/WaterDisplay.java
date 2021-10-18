@@ -17,12 +17,10 @@ import java.util.ArrayList;
  */
 public class WaterDisplay extends UIComponent {
     static Table table;
-    private Label timeLabel;
     private final CountWaterSystem countWaterSystem = new CountWaterSystem();
     private final CountWaterSystem countWaterSystem1 = new CountWaterSystem();
     private final ScoringSystemV1 countTime = new ScoringSystemV1();
     public static ArrayList<Image> waterImage = new ArrayList<>();
-    private int dis1 = 0;
 
     public WaterDisplay() { }
 
@@ -47,7 +45,6 @@ public class WaterDisplay extends UIComponent {
         table.top().left();
         table.setFillParent(true);
         table.padTop(150f).padLeft(10f);
-
         //Add water image
         float waterIconSize = 30f;
         waterImage.add(new Image(ServiceLocator.getResourceService()
@@ -59,9 +56,7 @@ public class WaterDisplay extends UIComponent {
         waterImage.add(new Image(ServiceLocator.getResourceService()
                 .getAsset("images/water1.png", Texture.class)));
 
-        int waterCurrent = 4;
-        CharSequence TimerText = waterCurrent + "";
-        timeLabel = new Label(TimerText, skin, "large");
+
         //add images into the screen
         table.add(waterImage.get(0)).size(waterIconSize).pad(3);
         table.add(waterImage.get(1)).size(waterIconSize).pad(3);
@@ -84,7 +79,7 @@ public class WaterDisplay extends UIComponent {
         int minutes = countTime.getMinutes();
         int seconds = countTime.getSeconds();
         int dis = (minutes * 60 + seconds)/ 10;
-        dis1 = (minutes * 60 + seconds); //it is reduce health value when every single second
+        int dis1 = (minutes * 60 + seconds); //it is reduce health value when every single second
         if(dis > countWaterSystem.getTimer()){
             countWaterSystem.setDifference(1);
             countWaterSystem.setTimer(dis);
@@ -125,7 +120,6 @@ public class WaterDisplay extends UIComponent {
                 table.setFillParent(true);
                 table.padTop(150f).padLeft(10f);
                 waterImage.remove(waterImage.size() - 1);
-
                 for (Image ima: waterImage) {
                     table.add(ima).size(30f).pad(3);
                 }
@@ -139,8 +133,7 @@ public class WaterDisplay extends UIComponent {
     @Override
     public void dispose() {
         super.dispose();
-        timeLabel.remove();
-        for (int i=0; i<waterImage.size(); ++i){
+        for (int i = 0; i < waterImage.size(); ++i){
             waterImage.remove(i);
         }
     }
@@ -177,5 +170,4 @@ public class WaterDisplay extends UIComponent {
     public static boolean isThirst(){
         return waterImage.size() <= 0;
     }
-
 }
