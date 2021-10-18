@@ -3,20 +3,15 @@ package com.deco2800.game.entities;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
-import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
-import com.deco2800.game.components.TouchAttackComponent;
-import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.events.EventHandler;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
-import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.ParticleRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
-import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -121,7 +116,7 @@ public class Entity {
         this.disappear = true;
         this.animationTime = animationTime;
         this.disappearType = disappearType;
-        logger.debug("Setting disappear={} on entity {}", disappear, this);
+        logger.debug("Setting disappear={} on entity {}", true, this);
     }
 
     /**
@@ -133,7 +128,7 @@ public class Entity {
         this.disappear = true;
         this.particleTime = particleTime;
         this.disappearType = disappearType;
-        logger.debug("Setting disappear={} on entity {}", disappear, this);
+        logger.debug("Setting disappear={} on entity {}", true, this);
     }
 
     public void setParticleTime(float particleTime) {
@@ -145,7 +140,7 @@ public class Entity {
      */
     public void setRemoveTexture() {
         this.removeTexture = true;
-        logger.debug("Setting removeTexture={} on entity {}", removeTexture, this);
+        logger.debug("Setting removeTexture={} on entity {}", true, this);
     }
 
     /**
@@ -153,7 +148,7 @@ public class Entity {
      */
     public void setRemoveCollision() {
         this.removeCollision = true;
-        logger.debug("Setting removeCollision={} on entity {}", removeCollision, this);
+        logger.debug("Setting removeCollision={} on entity {}", true, this);
     }
 
     /**
@@ -161,7 +156,7 @@ public class Entity {
      */
     public void setDispose() {
         this.dispose = true;
-        logger.debug("Setting dispose={} on entity {}", dispose, this);
+        logger.debug("Setting dispose={} on entity {}", true, this);
     }
 
     /**
@@ -485,10 +480,8 @@ public class Entity {
         if (disappear) {
             if (disappearType == DisappearType.ANIMATION) {
                 this.removeAfterAnimation();
-                return;
             } else if (disappearType == DisappearType.PARTICLE) {
                 this.removeAfterParticle();
-                return;
             } else {
                 logger.error("Error disappearType = {}", disappearType);
             }
