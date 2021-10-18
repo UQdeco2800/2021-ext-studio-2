@@ -1,243 +1,68 @@
 spaceship.png
-size: 1800, 1800
+size: 3750, 3750
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-spaceship
+spaceship_disappear
   rotate: false
   xy: 0, 0
-  size: 300, 300
-  orig: 300, 300
+  size: 1250, 1250
+  orig: 1250, 1250
+  offset: 0, 0
+  index: -1
+spaceship_disappear
+  rotate: false
+  xy: 1250, 0
+  size: 1250, 1250
+  orig: 1250, 1250
+  offset: 0, 0
+  index: -1
+spaceship_disappear
+  rotate: false
+  xy: 2500, 0
+  size: 1250, 1250
+  orig: 1250, 1250
+  offset: 0, 0
+  index: -1
+spaceship_disappear
+  rotate: false
+  xy: 0, 1250
+  size: 1250, 1250
+  orig: 1250, 1250
+  offset: 0, 0
+  index: -1
+spaceship_disappear
+  rotate: false
+  xy: 1250, 1250
+  size: 1250, 1250
+  orig: 1250, 1250
   offset: 0, 0
   index: -1
 spaceship
   rotate: false
-  xy: 300, 0
-  size: 300, 300
-  orig: 300, 300
+  xy: 2500, 1250
+  size: 1250, 1250
+  orig: 1250, 1250
   offset: 0, 0
   index: -1
 spaceship
   rotate: false
-  xy: 600, 0
-  size: 300, 300
-  orig: 300, 300
+  xy: 0, 2500
+  size: 1250, 1250
+  orig: 1250, 1250
   offset: 0, 0
   index: -1
 spaceship
   rotate: false
-  xy: 900, 0
-  size: 300, 300
-  orig: 300, 300
+  xy: 1250, 2500
+  size: 1250, 1250
+  orig: 1250, 1250
   offset: 0, 0
   index: -1
-spaceship_disappear
+spaceship
   rotate: false
-  xy: 1200, 0
-  size: 300, 300
-  orig: 300, 300
+  xy: 2500, 2500
+  size: 1250, 1250
+  orig: 1250, 1250
   offset: 0, 0
-  index: 28
-spaceship_disappear
-  rotate: false
-  xy: 1500, 0
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 29
-spaceship_disappear
-  rotate: false
-  xy: 0, 300
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 30
-spaceship_disappear
-  rotate: false
-  xy: 300, 300
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 31
-spaceship_disappear
-  rotate: false
-  xy: 600, 300
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 32
-spaceship_disappear
-  rotate: false
-  xy: 900, 300
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 33
-spaceship_disappear
-  rotate: false
-  xy: 1200, 300
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 34
-spaceship_disappear
-  rotate: false
-  xy: 1500, 300
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 35
-spaceship_disappear
-  rotate: false
-  xy: 0, 600
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 36
-spaceship_disappear
-  rotate: false
-  xy: 300, 600
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 37
-spaceship_disappear
-  rotate: false
-  xy: 600, 600
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 38
-spaceship_disappear
-  rotate: false
-  xy: 900, 600
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 39
-spaceship_disappear
-  rotate: false
-  xy: 1200, 600
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 40
-spaceship_disappear
-  rotate: false
-  xy: 1500, 600
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 41
-spaceship_disappear
-  rotate: false
-  xy: 0, 900
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 42
-spaceship_disappear
-  rotate: false
-  xy: 300, 900
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 43
-spaceship_disappear
-  rotate: false
-  xy: 600, 900
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 44
-spaceship_disappear
-  rotate: false
-  xy: 900, 900
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 45
-spaceship_disappear
-  rotate: false
-  xy: 1200, 900
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 46
-spaceship_disappear
-  rotate: false
-  xy: 1500, 900
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 47
-spaceship_disappear
-  rotate: false
-  xy: 0, 1200
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 48
-spaceship_disappear
-  rotate: false
-  xy: 300, 1200
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 49
-spaceship_disappear
-  rotate: false
-  xy: 600, 1200
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 50
-spaceship_disappear
-  rotate: false
-  xy: 900, 1200
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 51
-spaceship_disappear
-  rotate: false
-  xy: 1200, 1200
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 52
-spaceship_disappear
-  rotate: false
-  xy: 1500, 1200
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 53
-spaceship_disappear
-  rotate: false
-  xy: 0, 1500
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 54
-spaceship_disappear
-  rotate: false
-  xy: 300, 1500
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 55
-spaceship_disappear
-  rotate: false
-  xy: 600, 1500
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 56
-spaceship_disappear
-  rotate: false
-  xy: 900, 1500
-  size: 300, 300
-  orig: 300, 300
-  offset: 0, 0
-  index: 57
+  index: -1
