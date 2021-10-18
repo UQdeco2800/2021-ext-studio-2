@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.entities.configs.propStore.PropItemConfig;
 import com.deco2800.game.files.PropStoreRecord;
 import com.deco2800.game.ui.UIComponent;
@@ -39,9 +38,6 @@ public class PropStoreItemDisplay extends UIComponent {
         dialog.setMovable(false);
         dialog.setResizable(true);
         Image img = new Image(new Texture(item.path));
-        // Image background = new Image(new Texture("images/story/chapterDialog.png"));
-        //background.setScaling(Scaling.fit);
-        //dialog.setBackground(background.getDrawable());
         dialog.pad(50).padTop(120);
         Label desc = new Label(item.desc, new Label.LabelStyle(new BitmapFont(), Color.DARK_GRAY));
         desc.setFontScale(1.1f);
@@ -53,7 +49,6 @@ public class PropStoreItemDisplay extends UIComponent {
         price.setWrap(true);
         price.setAlignment(Align.center);
 
-       // buyButton.setDisabled(true);
         dialog.getContentTable().add(img).height(122).width(240).row();
         dialog.getContentTable().add(desc).width(600).row();
         dialog.getContentTable().add(price).width(600).row();

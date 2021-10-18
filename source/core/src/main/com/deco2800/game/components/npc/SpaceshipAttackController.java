@@ -23,7 +23,6 @@ import java.util.Random;
  */
 public class SpaceshipAttackController extends Component {
     private static final Logger logger = LoggerFactory.getLogger(SpaceshipAttackController.class);
-    protected Entity entity;
 
     /**
      * Spaceship attack state

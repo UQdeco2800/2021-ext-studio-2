@@ -34,27 +34,6 @@ public class ForestGameArea extends GameArea {
     private boolean wake;
 
 
-//    private void spawnRocks() {
-//        GridPoint2 minPos = new GridPoint2(0, 0);
-//        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-//
-//        for (int i = 0; i < 5; i++) {
-//            GridPoint2 randomPos = new GridPoint2(0, 0);
-//            Entity rock = ObstacleFactory.createRock();
-//            spawnEntityAt(rock, randomPos, true, false);
-//        }
-//    }
-
-// nail
-
-//public void spawnNailsRandomly(int xValue) {
- //   for (int i = 0; i < 5; i++) {
-//        GridPoint2 pos = new GridPoint2(xValue + 2 +i, 53);
-//        Entity rock = ObstacleFactory.createNail();
-//        spawnEntityAt(rock, pos, true, false);
-//    }
-//}
-
     private void spawnNails() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
@@ -198,78 +177,7 @@ public class ForestGameArea extends GameArea {
 
     }
 
-    /**
-     * Generate opposite rocks pyramid
-     * N
-     * NN
-     * NNN
-     *
-     * @param xValue horizontal start point
-     */
 
-    /*
-    public void spawnRocksthree(int xValue) {
-
-
-        GridPoint2 Pos = new GridPoint2(xValue + 14, 52);
-        Entity rock = ObstacleFactory.createRock();
-        spawnEntityAt(rock, Pos, true, false);
-        GridPoint2 PosTwo = new GridPoint2(xValue + 14, 51);
-        Entity rockTwo = ObstacleFactory.createRock();
-        spawnEntityAt(rockTwo, PosTwo, true, false);
-        GridPoint2 PosThree = new GridPoint2(xValue + 14, 50);
-        Entity rockThree = ObstacleFactory.createRock();
-        spawnEntityAt(rockThree, PosThree, true, false);
-        GridPoint2 PosFour = new GridPoint2(xValue + 15, 51);
-        Entity rockFour = ObstacleFactory.createRock();
-        spawnEntityAt(rockFour, PosFour, true, false);
-        GridPoint2 PosFive = new GridPoint2(xValue + 15, 50);
-        Entity rockFive = ObstacleFactory.createRock();
-        spawnEntityAt(rockFive, PosFive, true, false);
-        GridPoint2 PosSix = new GridPoint2(xValue + 16, 50);
-        Entity rockSix = ObstacleFactory.createRock();
-        spawnEntityAt(rockSix, PosSix, true, false);
-
-    }
-
-     */
-
-    /**
-     * Generate 5 rocks column from the ground up
-     *
-     * @param xValue horizontal start point
-     */
-    /*
-    public void spawnRocksfour(int xValue) {
-
-        for (int i = 0; i < 5; i++) {
-
-            GridPoint2 pos = new GridPoint2(xValue + 18, 50 + i);
-            Entity rock = ObstacleFactory.createRock();
-            spawnEntityAt(rock, pos, true, false);
-
-        }
-    }
-*/
-
-
-    /**
-     * Generate 5 rocks column from the sky down
-     *
-     * @param xValue horizontal start point
-     */
-     /*
-    public void spawnRocksfive(int xValue) {
-
-        for (int i = 0; i < 4; i++) {
-
-            GridPoint2 pos = new GridPoint2(xValue + 20, 57 + i);
-            Entity rock = ObstacleFactory.createRock();
-            spawnEntityAt(rock, pos, true, false);
-
-        }
-    }
-     */
     /**
      * Genrate large rock pyramid
      * N
@@ -279,8 +187,6 @@ public class ForestGameArea extends GameArea {
      *
      * @param xValue horizontal start point
      */
-
-
     public void spawnFireRockstwo(int xValue) {
 
         GridPoint2 Pos = new GridPoint2(xValue + 22, 50);
@@ -521,17 +427,11 @@ public class ForestGameArea extends GameArea {
         spawnTerrain(TerrainType.MUD_ROAD);
         spawnTerrain(TerrainType.ROCK_ROAD);
 
-//        spawnRocks();
-//         spawnWoods();
-//        spawnNails();
-
 
         MPCConfig.updateValues();
 
         player = spawnPlayer();
         spawnObstacles();
-        //Buff buff = new Buff(player);
-        //buff.addHealth();
         pro = new InventorySystem(player);
         spawnFirstAid();
         spawnGold();
@@ -625,16 +525,6 @@ public class ForestGameArea extends GameArea {
         GridPoint2 tileBounds = terrain.getMapBounds(0);
         Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
 
-//        // Left
-//        spawnEntityAt(
-//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL), GridPoint2Utils.ZERO, false, false);
-//        // Right
-//        spawnEntityAt(
-//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL),
-//                new GridPoint2(tileBounds.x, 0),
-//                false,
-//                false);
-
         // Top
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH, PhysicsLayer.WALL),
@@ -668,15 +558,6 @@ public class ForestGameArea extends GameArea {
         GridPoint2 tileBounds = terrain.getMapBounds(0);
         Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
 
-//        // Left
-//        spawnEntityAt(
-//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL), GridPoint2Utils.ZERO, false, false);
-//        // Right
-//        spawnEntityAt(
-//                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y, PhysicsLayer.WALL),
-//                new GridPoint2(tileBounds.x, 0),
-//                false,
-//                false);
 
         // Top
         spawnEntityAt(

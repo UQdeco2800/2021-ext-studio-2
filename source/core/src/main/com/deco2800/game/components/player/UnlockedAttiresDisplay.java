@@ -28,7 +28,7 @@ public class UnlockedAttiresDisplay extends UIComponent {
 
     private static final Logger logger = LoggerFactory.getLogger(UnlockedAttiresDisplay.class);
     private final GdxGame game;
-    private int goldAchievements;
+    private final int goldAchievements;
     private Table bgTable;
     private Table table;
     private Table crossTable;

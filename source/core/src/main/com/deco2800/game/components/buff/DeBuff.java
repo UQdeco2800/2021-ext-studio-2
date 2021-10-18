@@ -12,12 +12,12 @@ public class DeBuff{
     /**
      * player
      */
-    private Entity player;
+    private final Entity player;
     private Boolean stopFlag = false;
     /**
      * player's status
      */
-    private CombatStatsComponent component;
+    private final CombatStatsComponent component;
     public DeBuff(Entity player){
         this.player = player;
         component = this.player.getComponent(CombatStatsComponent.class);

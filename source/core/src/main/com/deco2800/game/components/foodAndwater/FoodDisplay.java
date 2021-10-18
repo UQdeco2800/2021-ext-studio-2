@@ -11,7 +11,7 @@ import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import java.util.ArrayList;
-import com.deco2800.game.entities.Entity;
+
 /**
  * A ui component for displaying food system. Player lose a chicken for 3 sec
  */
@@ -105,7 +105,7 @@ public class FoodDisplay extends UIComponent {
     public void updatePlayerHealth(int dis){
         health = MainGameScreen.players.getComponent(CombatStatsComponent.class).getHealth();
         if(dis == 2){
-            if(foodImage.size() <= 0 & health<100){
+            if(foodImage.size() <= 0 && health<100){
                 //if water icon count less than 0, then it will be into that codes to run. it reduce player health value.
                 //reduce player health value
                 MainGameScreen.players.getComponent(CombatStatsComponent.class).setHealth(
@@ -178,15 +178,4 @@ public class FoodDisplay extends UIComponent {
         return foodImage.size() <= 0;
     }
 
-    /*    *//**
-     * test buff effect for the first aid kit increases 1 food image
-     * @param target entity of food
-     *//*
-    public void increaseFood(Entity target) {
-        if (target != null) {
-            if (FoodDisplay.foodImage.size() < 4) {
-                FoodDisplay.addOrRemoveImage(1);
-            }
-        }
-    }*/
 }

@@ -1,5 +1,4 @@
 package com.deco2800.game.components.foodAndwater;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 /**
  * this class handles the water update
