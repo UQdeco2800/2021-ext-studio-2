@@ -48,9 +48,6 @@ class PlayerAnimationAtlasTest {
         testAnimator.addAnimation("main_player_walk", 1f);
         assertTrue(testAnimator.hasAnimation("main_player_walk"));
 
-        testAnimator.addAnimation("main_player_front", 1f);
-        assertTrue(testAnimator.hasAnimation("main_player_front"));
-
         testAnimator.addAnimation("main_player_jump", 1f);
         assertTrue(testAnimator.hasAnimation("main_player_jump"));
 
@@ -66,14 +63,17 @@ class PlayerAnimationAtlasTest {
         testAnimator.addAnimation("main_player_right", 1f);
         assertTrue(testAnimator.hasAnimation("main_player_right"));
 
+        testAnimator.addAnimation("main_player_hurt", 1f);
+        assertTrue(testAnimator.hasAnimation("main_player_hurt"));
+
+        testAnimator.addAnimation("main_player_burn", 1f);
+        assertTrue(testAnimator.hasAnimation("main_player_burn"));
+
         assertNotNull(atlas.findRegion("main_player_run"));
         assertTrue(testAnimator.hasAnimation("main_player_run"));;
 
         assertNotNull(atlas.findRegion("main_player_walk"));
         assertTrue(testAnimator.hasAnimation("main_player_walk"));
-
-        assertNotNull(atlas.findRegion("main_player_front"));
-        assertTrue(testAnimator.hasAnimation("main_player_front"));
 
         assertNotNull(atlas.findRegion("main_player_jump"));
         assertTrue(testAnimator.hasAnimation("main_player_jump"));
@@ -89,6 +89,12 @@ class PlayerAnimationAtlasTest {
 
         assertNotNull(atlas.findRegion("main_player_right"));
         assertTrue(testAnimator.hasAnimation("main_player_right"));
+
+        assertNotNull(atlas.findRegion("main_player_hurt"));
+        assertTrue(testAnimator.hasAnimation("main_player_hurt"));
+
+        assertNotNull(atlas.findRegion("main_player_burn"));
+        assertTrue(testAnimator.hasAnimation("main_player_burn"));
 
 
     }

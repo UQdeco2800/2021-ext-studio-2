@@ -33,7 +33,7 @@ public class DeBuff{
         if (playerComponent!=null){
             playerComponent.addDecreaseHealthImage();
         }
-        removeBUff_DeBuff();
+        removeBuff_Debuff();
     }
 
     /**
@@ -56,7 +56,7 @@ public class DeBuff{
         if (playerComponent!=null){
             playerComponent.removePoisoningImage();
         }
-        removeBUff_DeBuff();
+        removeBuff_Debuff();
     }
 
     public void removePoisoning()   {
@@ -76,12 +76,12 @@ public class DeBuff{
         //reducing speed
         player.updateSpeed(new Vector2(2,8));
 
-        removeBUff_DeBuff();
+        removeBuff_Debuff();
     }
 
     //removing buff/debuff after 1s
 
-    public void removeBUff_DeBuff() {
+    public void removeBuff_Debuff() {
         Timer timer=new Timer();
         timer.scheduleTask(new Timer.Task() {
             @Override
@@ -103,7 +103,7 @@ public class DeBuff{
         if(FoodDisplay.isHunger()){
             slowSpeed();
         }
-        removeBUff_DeBuff();
+        removeBuff_Debuff();
     }
 
     /**
@@ -114,6 +114,6 @@ public class DeBuff{
         if(WaterDisplay.isThirst()){
             decreaseHealth();
         }
-        removeBUff_DeBuff();
+        removeBuff_Debuff();
     }
 }

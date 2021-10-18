@@ -37,7 +37,7 @@ public class Buff {
             component.addHealth(10);
         }
 
-        removeBUff_DeBuff();
+        removeBuff_Debuff();
 
         AsyncTaskQueue.enqueueTask(() -> {
             try {
@@ -71,12 +71,12 @@ public class Buff {
             }
         });
 
-        removeBUff_DeBuff();
+        removeBuff_Debuff();
     }
 
     //removing buff/debuff after 1s
 
-    public void removeBUff_DeBuff() {
+    public void removeBuff_Debuff() {
         Timer timer=new Timer();
         timer.scheduleTask(new Timer.Task() {
             @Override
