@@ -53,8 +53,10 @@ public class PlayerAnimationController extends Component {
         entity.getEvents().addListener("recovered", this::animateRecovered);
         entity.getEvents().addListener("speedDown", this::animateSpeedDown);
         entity.getEvents().addListener("thirsty", this::animateThirsty);
+        entity.getEvents().addListener("hurt", this::animateHurt);
+        entity.getEvents().addListener("burn", this::animateBurn);
         entity.getEvents().addListener("stopBuffDebuff", this::animateWalk);
-
+        entity.getEvents().addListener("stopAnimations", this::animateWalk);
     }
 
     /**

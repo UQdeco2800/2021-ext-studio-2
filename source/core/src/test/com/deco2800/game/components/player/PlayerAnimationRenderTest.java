@@ -84,7 +84,7 @@ class PlayerAnimationRenderTest {
 
     @Test
     void shouldTriggerWalkRightMovement() {
-        player.getEvents().trigger("walk");
+        player.getEvents().trigger("stopAnimations");
         verify(animator).startAnimation("main_player_walk");
     }
 }
