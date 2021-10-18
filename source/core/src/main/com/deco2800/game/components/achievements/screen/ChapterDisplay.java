@@ -40,11 +40,7 @@ public class ChapterDisplay extends UIComponent {
         dialog.setMovable(false);
         dialog.setResizable(true);
         Image chapterArt;
-        if (chapter.id == 6) {
-            chapterArt = new Image(new Texture("images/story/chapter2art.png"));
-        } else {
-            chapterArt = new Image(new Texture("images/story/chapter" + chapter.id + "art.png"));
-        }
+        chapterArt = new Image(new Texture("images/story/chapter" + chapter.id + "art.png"));
         Image background = new Image(new Texture("images/story/chapterDialog.png"));
         background.setScaling(Scaling.fit);
         dialog.setBackground(background.getDrawable());
