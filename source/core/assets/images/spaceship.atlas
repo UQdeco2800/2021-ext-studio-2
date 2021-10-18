@@ -1,5 +1,5 @@
 spaceship.png
-size: 2800, 2800
+size: 3600, 2800
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -37,67 +37,102 @@ spaceship_disappear
   size: 300, 300
   orig: 300, 300
   offset: 0, 0
-  index: 37
+  index: 30
+spaceship_disappear
+  rotate: false
+  xy: 2800, 1250
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 32
+spaceship_disappear
+  rotate: false
+  xy: 3100, 1250
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 34
 spaceship_disappear
   rotate: false
   xy: 0, 2500
   size: 300, 300
   orig: 300, 300
   offset: 0, 0
-  index: 39
+  index: 36
 spaceship_disappear
   rotate: false
   xy: 300, 2500
   size: 300, 300
   orig: 300, 300
   offset: 0, 0
-  index: 41
+  index: 38
 spaceship_disappear
   rotate: false
   xy: 600, 2500
   size: 300, 300
   orig: 300, 300
   offset: 0, 0
-  index: 43
+  index: 40
 spaceship_disappear
   rotate: false
   xy: 900, 2500
   size: 300, 300
   orig: 300, 300
   offset: 0, 0
-  index: 45
+  index: 42
 spaceship_disappear
   rotate: false
   xy: 1200, 2500
   size: 300, 300
   orig: 300, 300
   offset: 0, 0
-  index: 47
+  index: 44
 spaceship_disappear
   rotate: false
   xy: 1500, 2500
   size: 300, 300
   orig: 300, 300
   offset: 0, 0
-  index: 49
+  index: 46
 spaceship_disappear
   rotate: false
   xy: 1800, 2500
   size: 300, 300
   orig: 300, 300
   offset: 0, 0
-  index: 51
+  index: 48
 spaceship_disappear
   rotate: false
   xy: 2100, 2500
   size: 300, 300
   orig: 300, 300
   offset: 0, 0
-  index: 53
+  index: 50
 spaceship_disappear
   rotate: false
   xy: 2400, 2500
   size: 300, 300
   orig: 300, 300
   offset: 0, 0
-  index: 55
+  index: 52
+spaceship_disappear
+  rotate: false
+  xy: 2700, 2500
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 54
+spaceship_disappear
+  rotate: false
+  xy: 3000, 2500
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 56
+spaceship_disappear
+  rotate: false
+  xy: 3300, 2500
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 57

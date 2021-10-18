@@ -124,7 +124,7 @@ public class NPCFactory {
                                 .getAsset("images/spaceship.atlas", TextureAtlas.class));
 
         animator.addAnimation("spaceship", 0.2f, Animation.PlayMode.LOOP);
-        animator.addAnimation("spaceship_disappear", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("spaceship_disappear", 0.13f, Animation.PlayMode.NORMAL);
 
         spaceship
                 .addComponent(new PhysicsComponent())
