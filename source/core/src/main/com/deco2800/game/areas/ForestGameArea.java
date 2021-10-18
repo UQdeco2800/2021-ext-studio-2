@@ -33,21 +33,6 @@ import java.util.ArrayList;
 public class ForestGameArea extends GameArea {
     private boolean wake;
 
-
-    private void spawnNails() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.randomX(52, minPos, maxPos);
-            Entity nail = ObstacleFactory.createNail(player);
-            spawnEntityAt(nail, randomPos, true, false);
-            GridPoint2 randomPosTwo = RandomUtils.randomX(54, minPos, maxPos);
-            Entity nailTwo = ObstacleFactory.createWood();
-            spawnEntityAt(nailTwo, randomPosTwo, true, false);
-        }
-    }
-
     /**
      * Generate line 5 Nails in the new map
      *
@@ -236,7 +221,6 @@ public class ForestGameArea extends GameArea {
 
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(0, 10);
     private static final float WALL_WIDTH = 0.1f;
-    private ItemBar itembar;
     private static final String[] forestTextures = {
             "images/firerock.jpg",
             "images/nail.jpg",
@@ -610,7 +594,7 @@ public class ForestGameArea extends GameArea {
                 loggerInfo.append("Create Thorns Obstacle at ").append(randomPos2).append("\t");
             }
             logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}",
-                    minPos.x, maxPos.x, randomPoints, loggerInfo.toString());
+                    minPos.x, maxPos.x, randomPoints, loggerInfo);
         }
 
 
@@ -707,7 +691,7 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(stone, point, true, true);
         }
         logger.debug("bigNumRandom = {}, midNumRandom = {}, smallNumRandom = {}, stones points: {}",
-                bigNumRandom, midNumRandom, smallNumRandom, loggerInfo.toString());
+                bigNumRandom, midNumRandom, smallNumRandom, loggerInfo);
     }
 
 

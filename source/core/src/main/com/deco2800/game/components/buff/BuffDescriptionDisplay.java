@@ -37,13 +37,6 @@ public class BuffDescriptionDisplay extends UIComponent {
     }
 
     /**
-     * Unload all buff' assets
-     */
-    private void unloadAssets() {
-        ResourceService resourceService = ServiceLocator.getResourceService();
-    }
-
-    /**
      * Adds a new table as an actor to the stage
      */
     private void addActors() {
@@ -55,7 +48,7 @@ public class BuffDescriptionDisplay extends UIComponent {
 
     @Override
     public void draw(SpriteBatch batch) {
-
+        //does not need this
     }
 
 
@@ -68,7 +61,6 @@ public class BuffDescriptionDisplay extends UIComponent {
                 /* Wait for some time */
                 Thread.sleep(RENDER_DURATION);
                 this.clear();
-            } catch (InterruptedException ignored) {
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -114,6 +106,5 @@ public class BuffDescriptionDisplay extends UIComponent {
         if (buffDescriptionLabel != null) {
             buffDescriptionLabel.remove();
         }
-        unloadAssets();
     }
 }
