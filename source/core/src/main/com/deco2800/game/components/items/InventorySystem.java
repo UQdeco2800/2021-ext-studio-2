@@ -1,6 +1,4 @@
 package com.deco2800.game.components.items;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.deco2800.game.entities.Entity;
 
 public class InventorySystem
@@ -10,7 +8,7 @@ public class InventorySystem
         counter=0;
         this.target= target;
     }
-    private Entity target;
+    private final Entity target;
     TestBuffForItem sumer =  new TestBuffForItem();
     private int health;
     public void updateinventory()

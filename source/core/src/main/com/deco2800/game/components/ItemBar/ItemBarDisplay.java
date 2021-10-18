@@ -17,9 +17,9 @@ public class ItemBarDisplay extends UIComponent {
     private static Table itembartable;
     private static Table counttable;
     private static Label countlabel;
-    private static ArrayList<Image> itemImage = new ArrayList<>();
-    private static newItembar bar = new newItembar();
-    private static String counts = bar.getcounts();
+    private static final ArrayList<Image> itemImage = new ArrayList<>();
+    private static final newItembar bar = new newItembar();
+    private static final String counts = bar.getcounts();
 
     /**
      * Creates reusable ui styles and adds actors to the stage.
@@ -36,16 +36,14 @@ public class ItemBarDisplay extends UIComponent {
         itembartable = new Table();
         itembartable.bottom();
         itembartable.setFillParent(true);
-        itembartable.padBottom(50).padRight(60);
+        itembartable.padBottom(30).padRight(60);
 
         counttable = new Table();
-        counttable.bottom().right();
+        counttable.bottom();
         counttable.setFillParent(true);
-        counttable.padBottom(60).padRight(505);
+        counttable.padBottom(40).padRight(20);
 
-//        CharSequence countText = (CharSequence)counts;
-//        countlabel = new Label(countText, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        countlabel = new Label((CharSequence) bar.getcounts(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        countlabel = new Label(bar.getcounts(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         countlabel.setFontScale(2f);
 
         float itemLength = 60f;

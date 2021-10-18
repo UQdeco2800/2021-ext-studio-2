@@ -13,5 +13,5 @@ public class ConditionConfig {
     public int firstAids = -1;
     public int gold = -1;
     public int distance = -1;
-    public boolean spaceshipAvoidSuccess = false;
+    public int spaceshipAvoidSuccess = -1;
 }

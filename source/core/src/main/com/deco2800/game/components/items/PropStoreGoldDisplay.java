@@ -29,8 +29,6 @@ public class PropStoreGoldDisplay extends UIComponent {
         price.setWrap(true);
         table.add(price);
         stage.addActor(table);
-
-
     }
     @Override
     protected void draw(SpriteBatch batch) {

@@ -20,13 +20,15 @@ import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileReader;
+/**
+ * A UI component to display unlocked attires and the achievements needed to unlock attires
+ */
 
 public class UnlockedAttiresDisplay extends UIComponent {
 
     private static final Logger logger = LoggerFactory.getLogger(UnlockedAttiresDisplay.class);
     private final GdxGame game;
-    private int goldAchievements;
+    private final int goldAchievements;
     private Table bgTable;
     private Table table;
     private Table crossTable;
@@ -35,11 +37,11 @@ public class UnlockedAttiresDisplay extends UIComponent {
     public String attireType;
     private PlayerConfig stats;
     private Dialog dialog;
-    private FileReader fileReader;
+    private static final String ATTIRE_PATH = "images/mpc/attires/";
     private int i = 0;
     private static final String[] bgTextures = {"images/menu_background/attires_background.png"};
-    private static final String[] achievementTextures = {"images/mpc/attires/trophies_2x.png", "images/mpc/attires/trophies_4x.png", "images/mpc/attires/trophies_6x.png"};
-    private static final String[] attireTextures = {"images/mpc/attires/original.png", "images/mpc/attires/gold_2.png", "images/mpc/attires/gold_4.png", "images/mpc/attires/gold_6.png"};
+    private static final String[] achievementTextures = {ATTIRE_PATH + "trophies_2x.png", ATTIRE_PATH + "trophies_4x.png", ATTIRE_PATH + "trophies_6x.png"};
+    private static final String[] attireTextures = {ATTIRE_PATH + "original.png", ATTIRE_PATH + "gold_2.png", ATTIRE_PATH + "gold_4.png", ATTIRE_PATH + "gold_6.png"};
 
     public UnlockedAttiresDisplay(GdxGame game,int goldAchievements) {
         this.goldAchievements = goldAchievements;
@@ -50,7 +52,9 @@ public class UnlockedAttiresDisplay extends UIComponent {
         loadAssets();
 
     }
-
+    /**
+     * Load all attires' and achievements' assets
+     */
     private void loadAssets() {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
@@ -62,6 +66,9 @@ public class UnlockedAttiresDisplay extends UIComponent {
         ServiceLocator.getResourceService().loadAll();
     }
 
+    /**
+     * Unload all attires' and achievements' assets
+     */
     private void unloadAssets() {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
@@ -75,10 +82,17 @@ public class UnlockedAttiresDisplay extends UIComponent {
         addActors();
     }
 
+    /**
+     * @param batch Batch to render to.
+     */
     @Override
     protected void draw(SpriteBatch batch) {
-
+    // Draw batch
     }
+
+    /**
+     * Create a new table and add actors to the stage
+     */
 
     private void addActors() {
         Image background =
@@ -112,8 +126,6 @@ public class UnlockedAttiresDisplay extends UIComponent {
         table.row();
         unlockedAttiresTable = new Table();
 
-//      Temporary constant for debugging
-        goldAchievements = 10;
         
         if (goldAchievements == 0) {
             renderZeroUnlockedAttiresTable();
@@ -121,7 +133,6 @@ public class UnlockedAttiresDisplay extends UIComponent {
             renderUnlockedAttiresTable();
         }
 
-      //  renderUnlockedAttires(goldAchievements, 0.55f);
 
         table.add(unlockedAttiresTable);
         table.row();
@@ -205,6 +216,10 @@ public class UnlockedAttiresDisplay extends UIComponent {
         }
 
     }
+    /**
+     * Renders the original attire
+     */
+
     private void renderOriginalAttire() {
 
         ImageButton attireImg = getImageButton("images/mpc/attires/original.png");
@@ -222,6 +237,11 @@ public class UnlockedAttiresDisplay extends UIComponent {
         unlockedAttiresTable.row();
         
     }
+
+    /**
+     * Renders the gold_2 attire when the number of achievements < 4
+     */
+
     private void lessThanFour(float alpha) {
         renderOriginalAttire();
         Image achievementImg = new Image(ServiceLocator.getResourceService()
@@ -256,6 +276,10 @@ public class UnlockedAttiresDisplay extends UIComponent {
 
     }
 
+    /**
+     * Renders the gold_2 and gold_4 attires when the number of achievements < 6
+     */
+
     private void lessThanSix(float alpha) {
         Image achievementImg = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/mpc/attires/trophies_4x.png", Texture.class));
@@ -289,6 +313,10 @@ public class UnlockedAttiresDisplay extends UIComponent {
             unlockedAttiresTable.row();
         }
     }
+
+    /**
+     * Renders the gold_2, gold_4, gold_6 attires when the number of achievements > 6
+     */
 
     private void moreThanSix(float alpha) {
         Label message1 = new Label("YOU HAVE UNLOCKED ALL ATTIRES FOR NOW!",
@@ -329,6 +357,10 @@ public class UnlockedAttiresDisplay extends UIComponent {
         bgTable.clear();
     }
 
+    /**
+     * UI Component for Confirm Selected Attire Pop Up Screen
+     */
+
     private void confirmSelection (String attireType, String attirePath) {
 
         dialog = new Dialog("YOU HAVE SELECTED THE " + attireType + " ATTIRE!", skin);
@@ -337,11 +369,11 @@ public class UnlockedAttiresDisplay extends UIComponent {
         dialog.setResizable(true);
 
         dialog.pad(50).padTop(120);
-        Image attire = new Image(new Texture("images/mpc/attires/" + attirePath + ".png"));
+        Image attireImg = new Image(new Texture(ATTIRE_PATH + attirePath + ".png"));
         Label heading = new Label("ATTIRE SELECTED!", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         heading.setFontScale(2f);
         dialog.getContentTable().add(heading).expandX().row();
-        dialog.getContentTable().add(attire);
+        dialog.getContentTable().add(attireImg);
         dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
 
         dialog.show(stage);

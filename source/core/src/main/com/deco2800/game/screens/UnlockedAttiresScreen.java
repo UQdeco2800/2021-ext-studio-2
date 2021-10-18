@@ -10,8 +10,8 @@ import com.deco2800.game.components.player.UnlockedAttiresDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.files.BackgroundMusic;
-import com.deco2800.game.files.GameRecords;
+import com.deco2800.game.files.meta.BackgroundMusic;
+import com.deco2800.game.files.stats.GameRecordUtils;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
@@ -51,11 +51,19 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
         createUI();
     }
 
+    /**
+     * Load all attires' and achievements' assets
+     */
+
     private void loadAssets() {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         ServiceLocator.getResourceService().loadAll();
     }
+
+    /**
+     * Unload all attires' and achievements' assets
+     */
 
     private void unloadAssets() {
         logger.debug("Unloading assets");
@@ -85,9 +93,12 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
         ServiceLocator.clear();
     }
 
+    /**
+     * Create UI for displaying unlocked attires
+     */
     private void createUI() {
         logger.debug("Creating Unlocked Attires screen UI");
-        int goldAchievements = GameRecords.getGoldAchievementsCount();
+        int goldAchievements = GameRecordUtils.getGoldAchievementsCount();
         Stage stage = ServiceLocator.getRenderService().getStage();
 
         UIEntity = new Entity();

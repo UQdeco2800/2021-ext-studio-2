@@ -73,7 +73,6 @@ public class ScoringSystemV1 {
                     hours++;
                 }
 
-//                new Entity().getEvents().trigger("updateScore", scoreSeconds);
             }
         };
         //delay:0 means this timer starts as soon as the game starts, period:1000 simply means plus 1 second.
@@ -105,13 +104,6 @@ public class ScoringSystemV1 {
     public void addToScore(int bonus) {
         score = score + bonus;
     }
-    /**
-     * Return the current seconds of the timer.
-     * @return int
-     */
-    public int getScoreSeconds() {
-        return scoreSeconds;
-    }
 
     /**
      * Return the current seconds of the timer.
@@ -128,8 +120,4 @@ public class ScoringSystemV1 {
         return minutes;
     }
 
-    //hour may too long for this game. But keep it anyway.
-    public static int getHours() {
-        return hours;
-    }
 }

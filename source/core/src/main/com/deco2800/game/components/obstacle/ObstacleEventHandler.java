@@ -100,7 +100,7 @@ public class ObstacleEventHandler extends Component {
     /**
      * Setter for spaceshipAttack, used for test.
      *
-     * @param spaceshipAttack
+     * @param spaceshipAttack: space ship attack or not
      */
     public static void setSpaceshipAttack(boolean spaceshipAttack) {
         ObstacleEventHandler.spaceshipAttack = spaceshipAttack;

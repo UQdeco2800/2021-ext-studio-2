@@ -35,14 +35,9 @@ class ScoreServiceTest {
         distanceService = new DistanceService(player);
     }
 
-   // @Test
-    //void shouldAddToScoreAndGetCorrectScore() {
-    //    scoreService.addToScore(10);
-    //      assertEquals(10, scoreService.getScore());
-    //}
-
     @Test
     void saveCurrentScoreToHistory() {
+        //will do
     }
 
     @AfterEach

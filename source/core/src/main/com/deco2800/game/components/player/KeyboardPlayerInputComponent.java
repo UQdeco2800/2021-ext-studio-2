@@ -16,11 +16,6 @@ import com.deco2800.game.components.ItemBar.newItembar;
 import com.deco2800.game.components.foodAndwater.FoodDisplay;
 import com.deco2800.game.components.foodAndwater.WaterDisplay;
 
-import javax.sound.sampled.*;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 
 /**
  * Input handler for the player for keyboard and touch (mouse) input.
@@ -44,6 +39,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
    */
   @Override
   public boolean keyDown(int keycode) {
+
     switch (keycode) {
 
       case Keys.S:
@@ -73,7 +69,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
 
       case Keys.B:
         entity.getEvents().trigger("B pressed");
-
+        return true;
       case Keys.X:
         entity.getEvents().trigger("itemPickUp");
 
@@ -87,15 +83,19 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         return true;
 
       case Keys.L:
-        newItembar.usefood();
-        FoodDisplay.addOrRemoveImage(1);
-        ForestGameArea.playitemMusic();
+        if (newItembar.getfood() > 0){
+          newItembar.usefood();
+          FoodDisplay.addOrRemoveImage(1);
+          ForestGameArea.playitemMusic();
+        }
         return true;
 
       case Keys.K:
-        newItembar.usewater();
-        WaterDisplay.addOrRemoveImage(1);
-        ForestGameArea.playitemMusic();
+        if (newItembar.getwater() > 0){
+          newItembar.usewater();
+          WaterDisplay.addOrRemoveImage(1);
+          ForestGameArea.playitemMusic();
+        }
         return true;
 
       case Keys.NUM_4://consume recycle:add chicken/water/health depends on the state of recycle system

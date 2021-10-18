@@ -295,23 +295,38 @@ public class ObstacleFactory {
     }
 
 
+    /*
+    public static Entity createMagma() {
+        Entity magma = new Entity();
+
+        magma.addComponent(new TextureRenderComponent("images/firerock.jpg"))
+                .addComponent(new PhysicsComponent())
+                .addComponent(new CombatStatsComponent(10000, 50))
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 10f))
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
+        magma.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        magma.getComponent(TextureRenderComponent.class).scaleEntity();
+
+
+        return magma;
+    }
+
+     */
 
     /**
      * Creates a firerock.
      *
      * @return Firrerock entity
      */
-    public static Entity createFirerock() {
-        Entity firerock = new Entity();
+    public static Entity createMagma(Entity target) {
+        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody, "Magma");
 
-        firerock.addComponent(new TextureRenderComponent("images/firerock.jpg"))
-                .addComponent(new PhysicsComponent())
-                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
-        firerock.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-        firerock.getComponent(TextureRenderComponent.class).scaleEntity();
+        obstacle
+                .addComponent(new TextureRenderComponent("images/firerock.jpg"))
+                .addComponent(new CombatStatsComponent(2000, 10))
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1f));
 
-
-        return firerock;
+        return obstacle;
     }
 
     /**
@@ -319,6 +334,21 @@ public class ObstacleFactory {
      *
      * @return nail entity
      */
+    public static Entity createNail(Entity target) {
+        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody, "Nail");
+
+        obstacle
+                .addComponent(new TextureRenderComponent("images/nail.jpg"))
+                .addComponent(new CombatStatsComponent(2000, 5))
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1f));
+
+        return obstacle;
+    }
+
+
+
+
+    /*
     public static Entity createNail() {
         Entity nail = new Entity();
 
@@ -328,9 +358,8 @@ public class ObstacleFactory {
         nail.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         nail.getComponent(TextureRenderComponent.class).scaleEntity();
 
-
         return nail;
-    }
+    }*/
 
     /**
      * Creates a wood.

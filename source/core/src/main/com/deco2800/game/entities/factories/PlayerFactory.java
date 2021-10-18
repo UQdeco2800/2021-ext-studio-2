@@ -20,6 +20,8 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
@@ -33,9 +35,9 @@ public class PlayerFactory {
     private static final PlayerConfig stats =
             FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
-
+    private static final Logger logger = LoggerFactory.getLogger(PlayerFactory.class);
     /**
-     * Create a player entity.
+     * Create a player entity. Initializes all attached components.
      *
      * @return entity
      */
@@ -48,7 +50,9 @@ public class PlayerFactory {
 
         AnimationRenderComponent mpcAnimator;
         TextureRenderComponent mpcTexture;
-        System.out.println("Loading attire: "+ attire);
+
+        logger.debug("Loading attire: "+ attire);
+
         switch (attire) {
 
             case "gold_2":
@@ -178,6 +182,12 @@ public class PlayerFactory {
         throw new IllegalStateException("Instantiating static util class");
     }
 
+    /**
+     * Retrieve the selected attire from the locally persisted JSON file.
+     *
+     * @return attire
+     */
+
     private static String updateAttireConfig() {
         final String ROOT_DIR = "DECO2800Game";
         final String CONFIG_FILE = "mpc.json";
@@ -190,12 +200,19 @@ public class PlayerFactory {
         return attire;
     }
 
+    /**
+     * Create new AnimationRenderComponent for every added animation
+     *
+     * @return AnimationRenderComponent
+     */
+
     private static AnimationRenderComponent createAnimationComponent(String atlasPath) {
         return new AnimationRenderComponent(
                 ServiceLocator.getResourceService()
                         .getAsset(atlasPath,
                                 TextureAtlas.class));
     }
+
 
 
 }

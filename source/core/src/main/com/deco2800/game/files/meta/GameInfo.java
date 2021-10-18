@@ -1,4 +1,6 @@
-package com.deco2800.game.files;
+package com.deco2800.game.files.meta;
+
+import com.deco2800.game.files.FileLoader;
 
 import java.io.File;
 
@@ -17,7 +19,7 @@ public class GameInfo {
      * Ideally, this should be incremented as soon as the
      * main character dies.
      */
-    public static void incrementGameCount(){
+    public static void incrementGameCount() {
         GameMetadata info = getGameMetadata();
         info.game += 1;
         setGameMetadata(info);
@@ -26,34 +28,39 @@ public class GameInfo {
     /**
      * Returns the number of games that the user has played from local storage
      * By default, 0 games have been played.
+     *
      * @return the number of games
      */
-    public static int getGameCount(){
+    public static int getGameCount() {
         return getGameMetadata().game;
     }
 
     /**
-     * Persist the game metadata
-     * @param info the game metadata to persist in local storage
+     * Reads the game metadata from local JSON file
+     *
+     * @return latest metadata stored in local storage
      */
-    public static void setGameMetadata(GameMetadata info){
-        FileLoader.writeClass(info, PATH, location);
+    public static GameMetadata getGameMetadata() {
+        GameMetadata info = FileLoader.readClass(GameMetadata.class, PATH, location);
+        return info != null ? info : new GameMetadata();
     }
 
     /**
-     * Reads the game metadata from local JSON file
-     * @return latest metadata stored in local storage
+     * Persist the game metadata
+     *
+     * @param info the game metadata to persist in local storage
      */
-    public static GameMetadata getGameMetadata(){
-        GameMetadata info = FileLoader.readClass(GameMetadata.class, PATH, location);
-        return info != null ? info : new GameMetadata();
+    public static void setGameMetadata(GameMetadata info) {
+        FileLoader.writeClass(info, PATH, location);
     }
 
     /**
      * Represents the game metadata
      */
     public static class GameMetadata {
-        /** Number of games that have been played by the user */
+        /**
+         * Number of games that have been played by the user
+         */
         public int game = 0;
     }
 }

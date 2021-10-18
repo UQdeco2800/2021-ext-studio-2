@@ -11,8 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
-import com.deco2800.game.files.GameRecords;
-import com.deco2800.game.files.GameRecords.Score;
+import com.deco2800.game.files.stats.GameRecordUtils;
+import com.deco2800.game.files.stats.GameRecords.Score;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import com.deco2800.game.utils.DateTimeUtils;
@@ -97,7 +97,7 @@ public class ScoreHistoryDisplay extends UIComponent {
 
         //prepare the score data.
         //The Score class contains actual score value and the associated date of gameplay.
-        List<Score> pastScores = GameRecords.getHighestScores();
+        List<Score> pastScores = GameRecordUtils.getHighestScores();
 
         //loop this list to create labels.
         int endIndex = Math.min(pastScores.size(), SCORE_DISPLAY_COUNT);
@@ -157,7 +157,7 @@ public class ScoreHistoryDisplay extends UIComponent {
     }
 
     private ImageButton getStatusButton(Score score) {
-        List<BaseAchievementConfig> bestAchievementsByGame = GameRecords.getBestAchievementsByGame(score.game);
+        List<BaseAchievementConfig> bestAchievementsByGame = GameRecordUtils.getBestAchievementsByGame(score.game);
         Set<String> unlockedAchievementTiers = bestAchievementsByGame.stream()
                 .map(achievement -> achievement.type)
                 .collect(Collectors.toSet());
