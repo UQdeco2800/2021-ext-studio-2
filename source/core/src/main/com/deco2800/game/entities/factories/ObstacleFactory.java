@@ -37,10 +37,8 @@ public class ObstacleFactory {
      * Type of Meteorite, different type means different size. more detail see spawnMeteorites() in ForestGameArea.java
      */
     public enum MeteoriteType {
-        SmallMeteorite, MiddleMeteorite, BigMeteorite;
+        SmallMeteorite, MiddleMeteorite, BigMeteorite
     }
-
-    ;
 
     /**
      * Creates a Plants Obstacle.
@@ -281,11 +279,6 @@ public class ObstacleFactory {
         rock.addComponent(new TextureRenderComponent("images/rock.jpg"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
-        // Comment out by team 8, you can restore them at will
-//                .addComponent(new CombatStatsComponent(2000, 10))
-//                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
-//                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
-//                .addComponent(new ObstacleAnimationController());
 
 
         rock.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
@@ -295,29 +288,10 @@ public class ObstacleFactory {
         return rock;
     }
 
-
-    /*
-    public static Entity createMagma() {
-        Entity magma = new Entity();
-
-        magma.addComponent(new TextureRenderComponent("images/firerock.jpg"))
-                .addComponent(new PhysicsComponent())
-                .addComponent(new CombatStatsComponent(10000, 50))
-                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 10f))
-                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
-        magma.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-        magma.getComponent(TextureRenderComponent.class).scaleEntity();
-
-
-        return magma;
-    }
-
-     */
-
     /**
-     * Creates a firerock.
+     * Creates a magma.
      *
-     * @return Firrerock entity
+     * @return magma entity
      */
     public static Entity createMagma(Entity target) {
         Entity obstacle = createBaseObstacle(target, BodyType.StaticBody, "Magma");
@@ -346,22 +320,6 @@ public class ObstacleFactory {
         return obstacle;
     }
 
-
-
-
-    /*
-    public static Entity createNail() {
-        Entity nail = new Entity();
-
-        nail.addComponent(new TextureRenderComponent("images/nail.jpg"))
-                .addComponent(new PhysicsComponent())
-                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
-        nail.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-        nail.getComponent(TextureRenderComponent.class).scaleEntity();
-
-        return nail;
-    }*/
-
     /**
      * Creates a wood.
      *
@@ -373,11 +331,6 @@ public class ObstacleFactory {
         wood.addComponent(new TextureRenderComponent("images/wood.jpg"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
-        // Comment out by team 8, you can restore them at will
-//                .addComponent(new CombatStatsComponent(2000, 10))
-//                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
-//                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
-//                .addComponent(new ObstacleAnimationController());
 
 
         wood.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);

@@ -14,6 +14,7 @@ import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
 import com.deco2800.game.files.MPCConfig;
+import com.deco2800.game.files.meta.BackgroundMusic;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.BackgroundRenderComponent;
@@ -33,21 +34,11 @@ import java.util.ArrayList;
 public class ForestGameArea extends GameArea {
     private boolean wake;
 
-
-    private void spawnNails() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.randomX(52, minPos, maxPos);
-            Entity nail = ObstacleFactory.createNail(player);
-            spawnEntityAt(nail, randomPos, true, false);
-            GridPoint2 randomPosTwo = RandomUtils.randomX(54, minPos, maxPos);
-            Entity nailTwo = ObstacleFactory.createWood();
-            spawnEntityAt(nailTwo, randomPosTwo, true, false);
-        }
-    }
-
+    /**
+     * Generate line 5 Nails in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnNailsone(int xValue) {
 
         for (int i = 0; i < 5; i++) {
@@ -56,6 +47,12 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(nail, pos, true, false);
         }
     }
+
+    /**
+     * Generate line 3 Nails in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnNailstwo(int xValue) {
 
         for (int i = 0; i < 3; i++) {
@@ -65,6 +62,13 @@ public class ForestGameArea extends GameArea {
         }
     }
 
+
+    /**
+     * Generate line 4 Nails in the new map
+     *
+     * @param xValue horizontal start point
+     */
+
     public void spawnNailsthree(int xValue) {
 
         for (int i = 0; i < 4; i++) {
@@ -73,6 +77,12 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(nail, pos, true, false);
         }
     }
+
+    /**
+     * Generate line 3 Nails in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnNailsfour(int xValue) {
 
         for (int i = 0; i < 3; i++) {
@@ -81,6 +91,12 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(nail, pos, true, false);
         }
     }
+
+    /**
+     * Generate line 5 Woods in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnWoodsone(int xValue) {
 
         for (int i = 0; i < 5; i++) {
@@ -89,6 +105,11 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(wood, pos, true, false);
         }
     }
+    /**
+     * Generate line 3 Woods in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnWoodstwo(int xValue) {
 
         for (int i = 0; i < 3; i++) {
@@ -97,6 +118,11 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(wood, pos, true, false);
         }
     }
+    /**
+     * Generate line 2 Woods in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnWoodsthree(int xValue) {
 
         for (int i = 0; i < 2; i++) {
@@ -105,6 +131,11 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(wood, pos, true, false);
         }
     }
+    /**
+     * Generate line 2 Woods in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnWoodsfour(int xValue) {
 
         for (int i = 0; i < 2; i++) {
@@ -113,6 +144,11 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(wood, pos, true, false);
         }
     }
+    /**
+     * Generate line 2 Woods in the new map
+     *
+     * @param xValue horizontal start point
+     */
     public void spawnWoodsfive(int xValue) {
 
         for (int i = 0; i < 2; i++) {
@@ -123,11 +159,11 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
-     * Generate line 5 rocks in the new map
+     * Generate line 5 Magmas in the new map
      *
      * @param xValue horizontal start point
     */
-    public void spawnFireRocksone(int xValue) {
+    public void spawnMagmaOne(int xValue) {
 
         for (int i = 0; i < 5; i++) {
             GridPoint2 pos = new GridPoint2(xValue + -4 +i, 50);
@@ -166,7 +202,12 @@ public class ForestGameArea extends GameArea {
         Entity rockSix = ObstacleFactory.createRock();
         spawnEntityAt(rockSix, PosSix, true, false);
     }
-    public void spawnFireRocksthree(int xValue) {
+    /**
+     * Generate line 2 Magmas in the new map
+     *
+     * @param xValue horizontal start point
+     */
+    public void spawnMagmaThree(int xValue) {
 
         GridPoint2 Pos = new GridPoint2(xValue -5, 53);
         Entity rock = ObstacleFactory.createMagma(player);
@@ -179,7 +220,7 @@ public class ForestGameArea extends GameArea {
 
 
     /**
-     * Genrate large rock pyramid
+     * Genrate large magma pyramid
      * N
      * NN
      * NNN
@@ -187,7 +228,7 @@ public class ForestGameArea extends GameArea {
      *
      * @param xValue horizontal start point
      */
-    public void spawnFireRockstwo(int xValue) {
+    public void spawnMagmaTwo(int xValue) {
 
         GridPoint2 Pos = new GridPoint2(xValue + 22, 50);
         Entity rock = ObstacleFactory.createMagma(player);
@@ -224,50 +265,13 @@ public class ForestGameArea extends GameArea {
     }
 
 
-    /**
-     * Gennerate 5 wood randomly in the 52f and 54f height
-     */
-    private void spawnWoods() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.randomX(52, minPos, maxPos);
-            Entity wood = ObstacleFactory.createWood();
-            spawnEntityAt(wood, randomPos, true, false);
-            GridPoint2 randomPosTwo = RandomUtils.randomX(54, minPos, maxPos);
-            Entity woodTwo = ObstacleFactory.createWood();
-            spawnEntityAt(woodTwo, randomPosTwo, true, false);
-        }
-    }
-
-    /**
-     * Generate 5 wood randomly in the 52f and 54f height and given horizontal start point
-     *
-     * @param xValue horizontal start point
-     */
-    public void spawnWoodsRandomly(int xValue) {
-        GridPoint2 minPos = new GridPoint2(xValue + 10, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.randomX(52, minPos, maxPos);
-            Entity wood = ObstacleFactory.createWood();
-            spawnEntityAt(wood, randomPos, true, false);
-            GridPoint2 randomPosTwo = RandomUtils.randomX(54, minPos, maxPos);
-            Entity woodTwo = ObstacleFactory.createWood();
-            spawnEntityAt(woodTwo, randomPosTwo, true, false);
-        }
-    }
 
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
     /* The number of each type of obstacle. Note: total obstacles cannot be greater than 20 (range of loading map)*/
     private static final int NUM_OBSTACLES = 2;
 
-    private static final int NUM_GHOSTS = 2;
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(0, 10);
     private static final float WALL_WIDTH = 0.1f;
-    private ItemBar itembar;
     private static final String[] forestTextures = {
             "images/firerock.jpg",
             "images/nail.jpg",
@@ -399,10 +403,10 @@ public class ForestGameArea extends GameArea {
     private static final String[] itemMusic = {itemSounds};
     private static final String[] pickupMusic = {pickupSounds};
     private static final String[] turnSounds = {"sounds/turnDirection.ogg"};
-    private static final String BACKGROUNDMUSIC = "sounds/temp_bgm.wav";
-    private static final String NEWMAP_BACKGROUNDMUSIC = "sounds/track2.mp3";
-    private static final String[] forestMusic = {BACKGROUNDMUSIC};
-    private static final String[] newMapMusic = {NEWMAP_BACKGROUNDMUSIC};
+    private static final String MAP1_MUSIC = BackgroundMusic.getSelectedMusic("MainGame");
+    private static final String MAP2_MUSIC = BackgroundMusic.getNotSelectedTrack("MainGame");
+    private static final String[] forestMusic = {MAP1_MUSIC};
+    private static final String[] newMapMusic = {MAP2_MUSIC};
     private boolean firstGenerate = true;
 
     private final TerrainFactory terrainFactory;
@@ -612,7 +616,7 @@ public class ForestGameArea extends GameArea {
         // from being generated at the same location
         ArrayList<GridPoint2> randomPoints = new ArrayList<GridPoint2>();
 
-        String loggerInfo = "";
+        StringBuilder loggerInfo = new StringBuilder();
 
         int playerX = (int) player.getPosition().x;
         logger.debug("player x coordinate: {}", playerX);
@@ -637,8 +641,8 @@ public class ForestGameArea extends GameArea {
                 Entity obstacle2 = ObstacleFactory.createThornsObstacle(player);
                 spawnEntityAt(obstacle, randomPos, true, false);
                 spawnEntityAt(obstacle2, randomPos2, true, true);
-                loggerInfo += "Create Plants Obstacle at " + randomPos + "\t";
-                loggerInfo += "Create Thorns Obstacle at " + randomPos2 + "\t";
+                loggerInfo.append("Create Plants Obstacle at ").append(randomPos).append("\t");
+                loggerInfo.append("Create Thorns Obstacle at ").append(randomPos2).append("\t");
             }
             logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}",
                     minPos.x, maxPos.x, randomPoints, loggerInfo);
@@ -707,7 +711,7 @@ public class ForestGameArea extends GameArea {
         double midSize;
         double smallSize;
 
-        String loggerInfo = "";
+        StringBuilder loggerInfo = new StringBuilder();
 
         for (int i = 0; i < meteoritesNum; i++) {
             randomSize = Math.random() * 0.5; // 0-0.5
@@ -723,15 +727,15 @@ public class ForestGameArea extends GameArea {
             if (i < bigNumRandom) { // must have a big meteorites
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) bigSize, ObstacleFactory.MeteoriteType.BigMeteorite);
-                loggerInfo += "Big stone = " + point + "\t";
+                loggerInfo.append("Big stone = ").append(point).append("\t");
             } else if (i < bigNumRandom + midNumRandom) {
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) midSize, ObstacleFactory.MeteoriteType.MiddleMeteorite);
-                loggerInfo += "Mid stone = " + point + "\t";
+                loggerInfo.append("Mid stone = ").append(point).append("\t");
             } else {
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) smallSize, ObstacleFactory.MeteoriteType.SmallMeteorite);
-                loggerInfo += "Small stone = " + point + "\t";
+                loggerInfo.append("Small stone = ").append(point).append("\t");
             }
 
 
@@ -866,7 +870,7 @@ public class ForestGameArea extends GameArea {
      * Play the regular map bgm
      */
     public void playMusic() {
-        Music music = ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class);
+        Music music = ServiceLocator.getResourceService().getAsset(MAP1_MUSIC, Music.class);
         music.setLooping(true);
         music.setVolume(0.3f);
         music.play();
@@ -888,7 +892,7 @@ public class ForestGameArea extends GameArea {
      * Play the new map bgm
      */
     public void playNewMapMusic() {
-        Music newMusic = ServiceLocator.getResourceService().getAsset(NEWMAP_BACKGROUNDMUSIC, Music.class);
+        Music newMusic = ServiceLocator.getResourceService().getAsset(MAP2_MUSIC, Music.class);
         newMusic.setLooping(true);
         newMusic.setVolume(0.3f);
         newMusic.play();
@@ -898,14 +902,14 @@ public class ForestGameArea extends GameArea {
      * Stop the regular map bgm
      */
     public void stopMusic() {
-        ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class).stop();
+        ServiceLocator.getResourceService().getAsset(MAP1_MUSIC, Music.class).stop();
     }
 
     /**
      * Stop the new map bgm
      */
     public void stopNewMapMusic() {
-        ServiceLocator.getResourceService().getAsset(NEWMAP_BACKGROUNDMUSIC, Music.class).stop();
+        ServiceLocator.getResourceService().getAsset(MAP2_MUSIC, Music.class).stop();
     }
 
     private void loadAssets() {
@@ -949,7 +953,7 @@ public class ForestGameArea extends GameArea {
     @Override
     public void dispose() {
         super.dispose();
-        ServiceLocator.getResourceService().getAsset(BACKGROUNDMUSIC, Music.class).stop();
+        ServiceLocator.getResourceService().getAsset(MAP1_MUSIC, Music.class).stop();
         this.unloadAssets();
     }
 

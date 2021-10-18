@@ -36,7 +36,6 @@ public class BuffManualMenuScreen extends ScreenAdapter {
                     "buff-debuff-manual/recovery.png",
             };
     private final Renderer renderer;
-    private final BuffDisplay buffDisplay;
     private final Entity ui;
 
     public BuffManualMenuScreen(GdxGame game) {
@@ -50,7 +49,7 @@ public class BuffManualMenuScreen extends ScreenAdapter {
         loadAssets();
         Stage stage = ServiceLocator.getRenderService().getStage();
         ui = new Entity();
-        buffDisplay = new BuffDisplay(game);
+        BuffDisplay buffDisplay = new BuffDisplay(game);
         ui.addComponent(buffDisplay).addComponent(new InputDecorator(stage, 10))
                 .addComponent(new BackgroundSelectionComponent("BuffManual"))
                 .addComponent(new BackgroundSoundComponent(BackgroundMusic.getSelectedMusic("BuffManual"), 0.5f));

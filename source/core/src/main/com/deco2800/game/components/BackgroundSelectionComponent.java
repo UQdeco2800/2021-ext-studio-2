@@ -42,8 +42,8 @@ public class BackgroundSelectionComponent extends UIComponent {
     @Override
     public void create() {
         super.create();
-        entity.getEvents().addListener("openSelectionDialog", (String screenName) -> {
-            this.screenName = screenName;
+        entity.getEvents().addListener("openSelectionDialog", (String screenName1) -> {
+            this.screenName = screenName1;
             showMusicDialog();
         });
 
@@ -187,7 +187,7 @@ public class BackgroundSelectionComponent extends UIComponent {
 
     @Override
     protected void draw(SpriteBatch batch) {
-
+        //draw is handled by the stage
     }
 
     @Override

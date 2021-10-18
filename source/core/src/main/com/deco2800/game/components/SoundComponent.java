@@ -32,6 +32,7 @@ public class SoundComponent extends Component {
         this.obstacleType = obstacleType;
     }
 
+    @Override
     public void create() {
         switch (obstacleType) {
             case Spaceship:
@@ -55,7 +56,6 @@ public class SoundComponent extends Component {
      */
     public void spaceshipSound() {
         sound.play(1f, 0.6f, 0);
-        logger.debug("Floating sound for spaceship start to play");
     }
 
     /**
@@ -63,7 +63,6 @@ public class SoundComponent extends Component {
      */
     public void missileSound() {
         sound.play(0.3f, 1f, 0);
-        logger.debug("Floating sound for spaceship start to play");
     }
 
     /**
@@ -71,6 +70,5 @@ public class SoundComponent extends Component {
      */
     public void roarSound() {
         sound.play(0.3f, 1f, 0);
-        logger.debug("Floating sound for spaceship start to play");
     }
 }

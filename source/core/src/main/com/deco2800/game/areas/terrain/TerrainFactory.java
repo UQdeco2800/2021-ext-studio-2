@@ -67,11 +67,11 @@ public class TerrainFactory {
       case MUD_ROAD:
         TextureRegion mudRoad =
             new TextureRegion(resourceService.getAsset("images/road.png", Texture.class));
-        return createMudRoadTerrain(1, mudRoad);
+        return createMudRoadTerrain(mudRoad);
       case ROCK_ROAD:
         TextureRegion rockRoad =
                 new TextureRegion(resourceService.getAsset("images/terrain2.png", Texture.class));
-        return createRockRoadTerrain(1, rockRoad);
+        return createRockRoadTerrain(rockRoad);
       default:
         return null;
     }
@@ -79,30 +79,28 @@ public class TerrainFactory {
 
   /**
    * Create a terrain of the mud road
-   * @param tileWorldSize size of one tile
    * @param road textureRegion represents the mud road
    * @return a terrain of the mud road
    */
   private TerrainComponent createMudRoadTerrain(
-      float tileWorldSize, TextureRegion road) {
+          TextureRegion road) {
     GridPoint2 tilePixelSize = new GridPoint2(road.getRegionWidth(), road.getRegionHeight());
     TiledMap tiledMap = createMudRoadTiles(tilePixelSize, road);
-    TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize.x);
-    return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
+    TiledMapRenderer renderer = createRenderer(tiledMap, (float) 1 / tilePixelSize.x);
+    return new TerrainComponent(camera, tiledMap, renderer, orientation,  1);
   }
 
   /**
    * Create a terrain of the rock road
-   * @param tileWorldSize size of one tile
    * @param road textureRegion represents the rock road
    * @return a terrain of the rock road
    */
   private TerrainComponent createRockRoadTerrain(
-          float tileWorldSize, TextureRegion road) {
+          TextureRegion road) {
     GridPoint2 tilePixelSize = new GridPoint2(road.getRegionWidth(), road.getRegionHeight());
     TiledMap tiledMap = createRockRoadTiles(tilePixelSize, road);
-    TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize.x);
-    return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
+    TiledMapRenderer renderer = createRenderer(tiledMap, (float) 1 / tilePixelSize.x);
+    return new TerrainComponent(camera, tiledMap, renderer, orientation,  1);
   }
 
   private TiledMapRenderer createRenderer(TiledMap tiledMap, float tileScale) {
@@ -125,10 +123,9 @@ public class TerrainFactory {
     TiledMapTileLayer layer = new TiledMapTileLayer(MAP_SIZE.x, MAP_SIZE.y, tileSize.x, tileSize.y);
 
     // Create base mud road
-    fillTiles(layer, MAP_SIZE, grassTile, 1);
+    fillTiles(layer, grassTile, 1);
 
     tiledMap.getLayers().add(layer);
-    //tiledMap.getLayers().add(newLayer);
     return tiledMap;
   }
 
@@ -137,26 +134,14 @@ public class TerrainFactory {
     TiledMap tiledMap = new TiledMap();
     TerrainTile grassTile = new TerrainTile(road);
     TiledMapTileLayer newLayer = new TiledMapTileLayer(MAP_SIZE.x, MAP_SIZE.y + 47, tileSize.x, tileSize.y);
-    fillTiles(newLayer, MAP_SIZE, grassTile, 49);
+    fillTiles(newLayer, grassTile, 49);
     tiledMap.getLayers().add(newLayer);
     return tiledMap;
   }
-/*
-  private static void fillTilesAtRandom(
-      TiledMapTileLayer layer, GridPoint2 mapSize, TerrainTile tile, int amount) {
-    GridPoint2 min = new GridPoint2(0, 0);
-    GridPoint2 max = new GridPoint2(mapSize.x - 1, mapSize.y - 1);
 
-    for (int i = 0; i < amount; i++) {
-      GridPoint2 tilePos = RandomUtils.random(min, max);
-      Cell cell = layer.getCell(tilePos.x, tilePos.y);
-      cell.setTile(tile);
-    }
-  }*/
-
-  private static void fillTiles(TiledMapTileLayer layer, GridPoint2 mapSize, TerrainTile tile, int vertical) {
-    for (int x = 0; x < mapSize.x; x++) {
-      for (int y = vertical; y < mapSize.y + vertical - 1; y++) {
+  private static void fillTiles(TiledMapTileLayer layer, TerrainTile tile, int vertical) {
+    for (int x = 0; x < TerrainFactory.MAP_SIZE.x; x++) {
+      for (int y = vertical; y < TerrainFactory.MAP_SIZE.y + vertical - 1; y++) {
         Cell cell = new Cell();
         cell.setTile(tile);
         layer.setCell(x, y, cell);
@@ -173,30 +158,30 @@ public class TerrainFactory {
       case MUD_ROAD:
         TextureRegion mudRoad =
                 new TextureRegion(resourceService.getAsset("images/road.png", Texture.class));
-        return createMudRoadTerrainRandomly(1, mudRoad, xValue);
+        return createMudRoadTerrainRandomly(mudRoad, xValue);
       case ROCK_ROAD:
         TextureRegion rockRoad =
                 new TextureRegion(resourceService.getAsset("images/terrain2.png", Texture.class));
-        return createRockRoadTerrainRandomly(1, rockRoad, xValue);
+        return createRockRoadTerrainRandomly(rockRoad, xValue);
       default:
         return null;
     }
   }
 
   private TerrainComponent createMudRoadTerrainRandomly(
-          float tileWorldSize, TextureRegion road, int xValue) {
+          TextureRegion road, int xValue) {
     GridPoint2 tilePixelSize = new GridPoint2(road.getRegionWidth(), road.getRegionHeight());
     TiledMap tiledMap = createMudRoadTilesRandomly(tilePixelSize, road, xValue);
-    TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize.x);
-    return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
+    TiledMapRenderer renderer = createRenderer(tiledMap, (float) 1 / tilePixelSize.x);
+    return new TerrainComponent(camera, tiledMap, renderer, orientation,  1);
   }
 
   private TerrainComponent createRockRoadTerrainRandomly(
-          float tileWorldSize, TextureRegion road, int xValue) {
+          TextureRegion road, int xValue) {
     GridPoint2 tilePixelSize = new GridPoint2(road.getRegionWidth(), road.getRegionHeight());
     TiledMap tiledMap = createRockRoadTilesRandomly(tilePixelSize, road, xValue);
-    TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize.x);
-    return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
+    TiledMapRenderer renderer = createRenderer(tiledMap, (float) 1 / tilePixelSize.x);
+    return new TerrainComponent(camera, tiledMap, renderer, orientation,  1);
   }
 
   private TiledMap createMudRoadTilesRandomly(
@@ -204,17 +189,11 @@ public class TerrainFactory {
     TiledMap tiledMap = new TiledMap();
     TerrainTile grassTile = new TerrainTile(road);
     TiledMapTileLayer layer = new TiledMapTileLayer(MAP_SIZE.x, MAP_SIZE.y, tileSize.x, tileSize.y);
-    //TiledMapTileLayer newLayer = new TiledMapTileLayer(MAP_SIZE.x, MAP_SIZE.y + 50, tileSize.x, tileSize.y);
 
     // Create base grass
-    fillTilesRandomly(layer, MAP_SIZE, grassTile, xValue, 1);
-    //fillTilesRandomly(newLayer, MAP_SIZE, grassTile, xValue, 49);
-
-    // Add some grass and rocks
-    // fillTilesAtRandom(layer, MAP_SIZE, grassTuftTile, TUFT_TILE_COUNT);
+    fillTilesRandomly(layer, grassTile, xValue, 1);
 
     tiledMap.getLayers().add(layer);
-    //tiledMap.getLayers().add(newLayer);
     return tiledMap;
   }
 
@@ -225,38 +204,19 @@ public class TerrainFactory {
     TiledMapTileLayer newLayer = new TiledMapTileLayer(MAP_SIZE.x, MAP_SIZE.y + 47, tileSize.x, tileSize.y);
 
     // Create base grass
-    fillTilesRandomly(newLayer, MAP_SIZE, grassTile, xValue, 49);
-
-    // Add some grass and rocks
-    // fillTilesAtRandom(layer, MAP_SIZE, grassTuftTile, TUFT_TILE_COUNT);
+    fillTilesRandomly(newLayer, grassTile, xValue, 49);
 
     tiledMap.getLayers().add(newLayer);
     return tiledMap;
   }
 
-  private static void fillTilesAtRandom(
-          TiledMapTileLayer layer, GridPoint2 mapSize, TerrainTile tile, int amount, int xValue) {
-    GridPoint2 min = new GridPoint2(xValue+10, 2);
-    GridPoint2 max = new GridPoint2(mapSize.x - 1, mapSize.y - 1);
+  private static void fillTilesRandomly(TiledMapTileLayer layer, TerrainTile tile, int xValue, int vertical) {
 
-    for (int i = 0; i < amount; i++) {
-      GridPoint2 tilePos = RandomUtils.random(min, max);
-      Cell cell = layer.getCell(tilePos.x, tilePos.y);
-      cell.setTile(tile);
-    }
-  }
-
-  private static void fillTilesRandomly(TiledMapTileLayer layer, GridPoint2 mapSize, TerrainTile tile, int xValue, int vertical) {
-    Random rand = new Random();
-    int index = rand.nextInt(1);
-
-    if(index == 0){
-      for (int x = xValue+10; x < mapSize.x; x++) {
-        for (int y = vertical; y < mapSize.y + vertical - 1; y++) {
-          Cell cell = new Cell();
-          cell.setTile(tile);
-          layer.setCell(x, y, cell);
-        }
+    for (int x = xValue+10; x < TerrainFactory.MAP_SIZE.x; x++) {
+      for (int y = vertical; y < TerrainFactory.MAP_SIZE.y + vertical - 1; y++) {
+        Cell cell = new Cell();
+        cell.setTile(tile);
+        layer.setCell(x, y, cell);
       }
     }
   }

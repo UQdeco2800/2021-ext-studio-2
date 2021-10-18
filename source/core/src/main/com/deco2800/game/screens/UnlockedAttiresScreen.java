@@ -57,17 +57,14 @@ public class UnlockedAttiresScreen extends ScreenAdapter {
 
     private void loadAssets() {
         logger.debug("Loading assets");
-        ResourceService resourceService = ServiceLocator.getResourceService();
         ServiceLocator.getResourceService().loadAll();
     }
 
     /**
      * Unload all attires' and achievements' assets
      */
-
     private void unloadAssets() {
         logger.debug("Unloading assets");
-        ResourceService resourceService = ServiceLocator.getResourceService();
     }
 
     @Override

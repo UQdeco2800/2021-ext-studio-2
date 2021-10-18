@@ -30,7 +30,6 @@ public class HistoryScoreScreen extends ScreenAdapter {
                     , "images/achievements/scoreIcon.png"};
     private static final String[] trophyTextures = AchievementFactory.getTrophyTextures();
     private final Renderer renderer;
-    private final ScoreHistoryDisplay scoreHistoryDisplay;
     private final Entity ui;
 
 
@@ -45,7 +44,7 @@ public class HistoryScoreScreen extends ScreenAdapter {
         loadAssets();
         Stage stage = ServiceLocator.getRenderService().getStage();
         ui = new Entity();
-        scoreHistoryDisplay = new ScoreHistoryDisplay(game);
+        ScoreHistoryDisplay scoreHistoryDisplay = new ScoreHistoryDisplay(game);
         ui.addComponent(scoreHistoryDisplay)
                 .addComponent(new ScoreDetailsDialog())
                 .addComponent(new BackgroundSelectionComponent("HistoryScore"))

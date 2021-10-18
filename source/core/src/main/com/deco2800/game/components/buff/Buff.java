@@ -5,8 +5,6 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.concurrency.AsyncTaskQueue;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.configs.PlayerConfig;
-import com.deco2800.game.files.FileLoader;
 
 public class Buff {
     /**

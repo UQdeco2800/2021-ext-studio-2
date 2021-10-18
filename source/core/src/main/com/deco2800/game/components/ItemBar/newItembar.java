@@ -34,7 +34,6 @@ public class newItembar extends Component{
         for (int i = 0; i < 3; i++) {
             waters.add("water");
             foods.add("food");
-//            kits.add("kit");
         }
     }
 
