@@ -1,68 +1,103 @@
 spaceship.png
-size: 3750, 3750
+size: 2800, 2800
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-spaceship_disappear
+spaceship
   rotate: false
   xy: 0, 0
   size: 1250, 1250
   orig: 1250, 1250
   offset: 0, 0
   index: -1
-spaceship_disappear
+spaceship
   rotate: false
   xy: 1250, 0
   size: 1250, 1250
   orig: 1250, 1250
   offset: 0, 0
   index: -1
-spaceship_disappear
-  rotate: false
-  xy: 2500, 0
-  size: 1250, 1250
-  orig: 1250, 1250
-  offset: 0, 0
-  index: -1
-spaceship_disappear
+spaceship
   rotate: false
   xy: 0, 1250
   size: 1250, 1250
   orig: 1250, 1250
   offset: 0, 0
   index: -1
-spaceship_disappear
+spaceship
   rotate: false
   xy: 1250, 1250
   size: 1250, 1250
   orig: 1250, 1250
   offset: 0, 0
   index: -1
-spaceship
+spaceship_disappear
   rotate: false
   xy: 2500, 1250
-  size: 1250, 1250
-  orig: 1250, 1250
+  size: 300, 300
+  orig: 300, 300
   offset: 0, 0
-  index: -1
-spaceship
+  index: 37
+spaceship_disappear
   rotate: false
   xy: 0, 2500
-  size: 1250, 1250
-  orig: 1250, 1250
+  size: 300, 300
+  orig: 300, 300
   offset: 0, 0
-  index: -1
-spaceship
+  index: 39
+spaceship_disappear
   rotate: false
-  xy: 1250, 2500
-  size: 1250, 1250
-  orig: 1250, 1250
+  xy: 300, 2500
+  size: 300, 300
+  orig: 300, 300
   offset: 0, 0
-  index: -1
-spaceship
+  index: 41
+spaceship_disappear
   rotate: false
-  xy: 2500, 2500
-  size: 1250, 1250
-  orig: 1250, 1250
+  xy: 600, 2500
+  size: 300, 300
+  orig: 300, 300
   offset: 0, 0
-  index: -1
+  index: 43
+spaceship_disappear
+  rotate: false
+  xy: 900, 2500
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 45
+spaceship_disappear
+  rotate: false
+  xy: 1200, 2500
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 47
+spaceship_disappear
+  rotate: false
+  xy: 1500, 2500
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 49
+spaceship_disappear
+  rotate: false
+  xy: 1800, 2500
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 51
+spaceship_disappear
+  rotate: false
+  xy: 2100, 2500
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 53
+spaceship_disappear
+  rotate: false
+  xy: 2400, 2500
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 55
