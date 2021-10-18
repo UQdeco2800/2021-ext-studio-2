@@ -1,1265 +1,131 @@
 
 mpcAnimation.png
-size: 8192, 8192
+size: 4096, 2048
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 main_player_attack
   rotate: false
-  xy: 2174, 4346
-  size: 541, 541
-  orig: 541, 541
+  xy: 2, 1089
+  size: 542, 542
+  orig: 542, 542
   offset: 0, 0
   index: 1
 main_player_attack
   rotate: false
-  xy: 2717, 2
-  size: 541, 541
-  orig: 541, 541
+  xy: 2, 545
+  size: 542, 542
+  orig: 542, 542
+  offset: 0, 0
+  index: 3
+main_player_attack
+  rotate: false
+  xy: 546, 1089
+  size: 542, 542
+  orig: 542, 542
   offset: 0, 0
   index: 2
-main_player_attack_dizzy
-  rotate: false
-  xy: 2174, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_attack_dizzy
-  rotate: false
-  xy: 6518, 5432
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_attack_health-down
-  rotate: false
-  xy: 545, 7604
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_attack_health-down
-  rotate: false
-  xy: 3803, 3803
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_attack_health-limit-up
-  rotate: false
-  xy: 5975, 7061
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_attack_health-limit-up
-  rotate: false
-  xy: 3803, 1631
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_attack_health-up
-  rotate: false
-  xy: 1088, 4889
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_attack_health-up
-  rotate: false
-  xy: 3260, 3803
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_attack_hungry
-  rotate: false
-  xy: 1631, 4889
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_attack_hungry
-  rotate: false
-  xy: 3260, 3260
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_attack_poisoned
-  rotate: false
-  xy: 2, 4346
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_attack_poisoned
-  rotate: false
-  xy: 2717, 3803
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_attack_recovered
-  rotate: false
-  xy: 6518, 7061
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_attack_recovered
-  rotate: false
-  xy: 7604, 5432
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_attack_speed-down
-  rotate: false
-  xy: 5975, 7604
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_attack_speed-down
-  rotate: false
-  xy: 3803, 2174
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_attack_thirsty
-  rotate: false
-  xy: 1088, 7061
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_attack_thirsty
-  rotate: false
-  xy: 1631, 3260
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_burn
-  rotate: false
-  xy: 1631, 545
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_burn_dizzy
-  rotate: false
-  xy: 7604, 7604
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_burn_health-down
-  rotate: false
-  xy: 3260, 1631
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_burn_health-limit-up
-  rotate: false
-  xy: 2717, 5432
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_burn_health-up
-  rotate: false
-  xy: 2717, 1631
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_burn_hungry
-  rotate: false
-  xy: 4889, 5432
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_burn_poisoned
-  rotate: false
-  xy: 545, 1631
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_burn_recovered
-  rotate: false
-  xy: 3260, 7604
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_burn_speed-down
-  rotate: false
-  xy: 1631, 4346
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_burn_thirsty
-  rotate: false
-  xy: 2174, 1088
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
 main_player_crouch
   rotate: false
-  xy: 5432, 6518
+  xy: 3262, 1090
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_crouch
   rotate: false
-  xy: 2717, 545
+  xy: 3261, 547
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 1
-main_player_crouch_dizzy
+main_player_front
   rotate: false
-  xy: 4346, 5432
+  xy: 1088, 3
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
-  index: 2
-main_player_crouch_dizzy
-  rotate: false
-  xy: 7604, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_crouch_health-down
-  rotate: false
-  xy: 2717, 3260
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_crouch_health-down
-  rotate: false
-  xy: 6518, 4346
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_crouch_health-limit-up
-  rotate: false
-  xy: 2, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_crouch_health-limit-up
-  rotate: false
-  xy: 1088, 2717
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_crouch_health-up
-  rotate: false
-  xy: 3803, 7061
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_crouch_health-up
-  rotate: false
-  xy: 5975, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_crouch_hungry
-  rotate: false
-  xy: 7061, 7604
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_crouch_hungry
-  rotate: false
-  xy: 5432, 2717
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_crouch_poisoned
-  rotate: false
-  xy: 1631, 5432
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_crouch_poisoned
-  rotate: false
-  xy: 5432, 4346
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_crouch_recovered
-  rotate: false
-  xy: 2717, 6518
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_crouch_recovered
-  rotate: false
-  xy: 545, 545
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_crouch_speed-down
-  rotate: false
-  xy: 2717, 4346
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_crouch_speed-down
-  rotate: false
-  xy: 7604, 6518
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_crouch_thirsty
-  rotate: false
-  xy: 1088, 5432
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_crouch_thirsty
-  rotate: false
-  xy: 4889, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_hurt
-  rotate: false
-  xy: 1088, 545
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_hurt_dizzy
-  rotate: false
-  xy: 3803, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_hurt_health-down
-  rotate: false
-  xy: 1088, 1631
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_hurt_health-limit-up
-  rotate: false
-  xy: 2717, 1088
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_hurt_health-up
-  rotate: false
-  xy: 545, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_hurt_hungry
-  rotate: false
-  xy: 1631, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_hurt_poisoned
-  rotate: false
-  xy: 2174, 4889
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_hurt_recovered
-  rotate: false
-  xy: 4889, 6518
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_hurt_speed-down
-  rotate: false
-  xy: 3260, 2174
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_hurt_thirsty
-  rotate: false
-  xy: 6518, 3803
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
+  index: -1
 main_player_jump
   rotate: false
-  xy: 1088, 6518
+  xy: 546, 546
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_jump
   rotate: false
-  xy: 3260, 4889
+  xy: 2176, 1090
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 1
 main_player_jump
   rotate: false
-  xy: 3260, 2717
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_jump_dizzy
-  rotate: false
-  xy: 2174, 7604
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_jump_dizzy
-  rotate: false
-  xy: 5432, 7061
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_jump_dizzy
-  rotate: false
-  xy: 4889, 4346
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_jump_health-down
-  rotate: false
-  xy: 545, 3803
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_jump_health-down
-  rotate: false
-  xy: 3803, 5432
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_jump_health-down
-  rotate: false
-  xy: 2174, 545
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_jump_health-limit-up
-  rotate: false
-  xy: 2, 2174
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_jump_health-limit-up
-  rotate: false
-  xy: 2174, 2717
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_jump_health-limit-up
-  rotate: false
-  xy: 5975, 3803
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_jump_health-up
-  rotate: false
-  xy: 3260, 6518
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_jump_health-up
-  rotate: false
-  xy: 6518, 6518
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_jump_health-up
-  rotate: false
-  xy: 5432, 3803
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_jump_hungry
-  rotate: false
-  xy: 2, 7061
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_jump_hungry
-  rotate: false
-  xy: 2174, 5432
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_jump_hungry
-  rotate: false
-  xy: 4346, 4346
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_jump_poisoned
-  rotate: false
-  xy: 2174, 6518
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_jump_poisoned
-  rotate: false
-  xy: 4889, 7061
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_jump_poisoned
-  rotate: false
-  xy: 3803, 2717
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_jump_recovered
-  rotate: false
-  xy: 3803, 7604
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_jump_recovered
-  rotate: false
-  xy: 1088, 1088
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_jump_recovered
-  rotate: false
-  xy: 4346, 3260
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_jump_speed-down
-  rotate: false
-  xy: 1088, 3803
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_jump_speed-down
-  rotate: false
-  xy: 3260, 4346
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_jump_speed-down
-  rotate: false
-  xy: 3260, 1088
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_jump_thirsty
-  rotate: false
-  xy: 1088, 7604
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_jump_thirsty
-  rotate: false
-  xy: 545, 2174
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_jump_thirsty
-  rotate: false
-  xy: 5975, 4889
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_pickup
-  rotate: false
-  xy: 545, 6518
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_pickup
-  rotate: false
-  xy: 545, 3260
+  xy: 1632, 547
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 3
 main_player_pickup
-  rotate: false
-  xy: 1631, 1088
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_pickup
-  rotate: false
-  xy: 2174, 2
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 4
-main_player_pickup_dizzy
-  rotate: false
-  xy: 1631, 6518
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_pickup_dizzy
-  rotate: false
-  xy: 3260, 5432
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_pickup_dizzy
-  rotate: false
-  xy: 7604, 7061
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_pickup_dizzy
-  rotate: false
-  xy: 4346, 1631
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 4
-main_player_pickup_health-down
-  rotate: false
-  xy: 545, 4346
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_pickup_health-down
-  rotate: false
-  xy: 5432, 7604
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 4
-main_player_pickup_health-down
-  rotate: false
-  xy: 1631, 2174
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_pickup_health-down
-  rotate: false
-  xy: 4889, 3803
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_pickup_health-limit-up
-  rotate: false
-  xy: 2, 3260
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_pickup_health-limit-up
   rotate: false
   xy: 2, 2
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
-  index: 2
-main_player_pickup_health-limit-up
-  rotate: false
-  xy: 1631, 2
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 4
-main_player_pickup_health-limit-up
-  rotate: false
-  xy: 5975, 3260
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
   index: 1
-main_player_pickup_health-up
+main_player_pickup
   rotate: false
-  xy: 545, 2717
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_pickup_health-up
-  rotate: false
-  xy: 3803, 4346
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 4
-main_player_pickup_health-up
-  rotate: false
-  xy: 5432, 4889
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_pickup_health-up
-  rotate: false
-  xy: 7061, 4889
+  xy: 1633, 1090
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 3
-main_player_pickup_hungry
+main_player_pickup
   rotate: false
-  xy: 545, 7061
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_pickup_hungry
-  rotate: false
-  xy: 4346, 7604
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_pickup_hungry
-  rotate: false
-  xy: 7061, 7061
+  xy: 1089, 546
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
-main_player_pickup_hungry
+main_player_pickup
   rotate: false
-  xy: 6518, 4889
+  xy: 2718, 547
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 4
-main_player_pickup_poisoned
-  rotate: false
-  xy: 1088, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_pickup_poisoned
-  rotate: false
-  xy: 2717, 4889
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 4
-main_player_pickup_poisoned
-  rotate: false
-  xy: 1088, 2174
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_pickup_poisoned
-  rotate: false
-  xy: 7061, 6518
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_pickup_recovered
-  rotate: false
-  xy: 545, 5432
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_pickup_recovered
-  rotate: false
-  xy: 1631, 3803
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_pickup_recovered
-  rotate: false
-  xy: 6518, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_pickup_recovered
-  rotate: false
-  xy: 3260, 545
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 4
-main_player_pickup_speed-down
-  rotate: false
-  xy: 1631, 7061
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_pickup_speed-down
-  rotate: false
-  xy: 3803, 6518
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 4
-main_player_pickup_speed-down
-  rotate: false
-  xy: 4346, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_pickup_speed-down
-  rotate: false
-  xy: 4346, 3803
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_pickup_thirsty
-  rotate: false
-  xy: 2, 6518
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 3
-main_player_pickup_thirsty
-  rotate: false
-  xy: 2, 1631
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_pickup_thirsty
-  rotate: false
-  xy: 5432, 5432
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 4
-main_player_pickup_thirsty
-  rotate: false
-  xy: 7061, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
 main_player_right
   rotate: false
-  xy: 7604, 4889
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: -1
-main_player_right_dizzy
-  rotate: false
-  xy: 3803, 1088
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: -1
-main_player_right_health-down
-  rotate: false
-  xy: 2174, 1631
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: -1
-main_player_right_health-limit-up
-  rotate: false
-  xy: 5975, 4346
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: -1
-main_player_right_health-up
-  rotate: false
-  xy: 3260, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: -1
-main_player_right_hungry
-  rotate: false
-  xy: 7061, 5432
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: -1
-main_player_right_poisoned
-  rotate: false
-  xy: 4889, 7604
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: -1
-main_player_right_recovered
-  rotate: false
-  xy: 4889, 3260
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: -1
-main_player_right_speed-down
-  rotate: false
-  xy: 2174, 2174
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: -1
-main_player_right_thirsty
-  rotate: false
-  xy: 6518, 7604
+  xy: 1631, 3
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: -1
 main_player_run
   rotate: false
-  xy: 2, 1088
+  xy: 2719, 1090
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
 main_player_run
   rotate: false
-  xy: 4346, 2717
+  xy: 2175, 547
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 1
-main_player_run_dizzy
+main_player_walk
   rotate: false
-  xy: 2, 3803
+  xy: 1090, 1090
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
   index: 2
-main_player_run_dizzy
-  rotate: false
-  xy: 545, 1088
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_run_health-down
-  rotate: false
-  xy: 2, 2717
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_run_health-down
+main_player_walk
   rotate: false
   xy: 545, 2
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_run_health-limit-up
-  rotate: false
-  xy: 1088, 4346
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_run_health-limit-up
-  rotate: false
-  xy: 2717, 2717
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_run_health-up
-  rotate: false
-  xy: 2717, 7061
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_run_health-up
-  rotate: false
-  xy: 2, 545
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_run_hungry
-  rotate: false
-  xy: 5975, 6518
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_run_hungry
-  rotate: false
-  xy: 4889, 2174
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_run_poisoned
-  rotate: false
-  xy: 545, 4889
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_run_poisoned
-  rotate: false
-  xy: 1088, 2
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_run_recovered
-  rotate: false
-  xy: 1631, 7604
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_run_recovered
-  rotate: false
-  xy: 2174, 3803
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_run_speed-down
-  rotate: false
-  xy: 3803, 4889
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_run_speed-down
-  rotate: false
-  xy: 4346, 2174
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_run_thirsty
-  rotate: false
-  xy: 1088, 3260
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_run_thirsty
-  rotate: false
-  xy: 5432, 3260
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_walk
-  rotate: false
-  xy: 2717, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_walk
-  rotate: false
-  xy: 4889, 4889
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_walk_dizzy
-  rotate: false
-  xy: 3260, 7061
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_walk_dizzy
-  rotate: false
-  xy: 4346, 4889
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_walk_health-down
-  rotate: false
-  xy: 2174, 7061
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_walk_health-down
-  rotate: false
-  xy: 1631, 2717
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_walk_health-limit-up
-  rotate: false
-  xy: 2717, 7604
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_walk_health-limit-up
-  rotate: false
-  xy: 2174, 3260
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_walk_health-up
-  rotate: false
-  xy: 2, 4889
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_walk_health-up
-  rotate: false
-  xy: 5975, 5432
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_walk_hungry
-  rotate: false
-  xy: 4346, 7061
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_walk_hungry
-  rotate: false
-  xy: 3803, 3260
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_walk_poisoned
-  rotate: false
-  xy: 5432, 5975
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_walk_poisoned
-  rotate: false
-  xy: 4889, 2717
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_walk_recovered
-  rotate: false
-  xy: 1631, 1631
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_walk_recovered
-  rotate: false
-  xy: 7061, 4346
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_walk_speed-down
-  rotate: false
-  xy: 2, 5432
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 1
-main_player_walk_speed-down
-  rotate: false
-  xy: 2717, 2174
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_walk_thirsty
-  rotate: false
-  xy: 2, 7604
-  size: 541, 541
-  orig: 541, 541
-  offset: 0, 0
-  index: 2
-main_player_walk_thirsty
-  rotate: false
-  xy: 4346, 6518
   size: 541, 541
   orig: 541, 541
   offset: 0, 0
