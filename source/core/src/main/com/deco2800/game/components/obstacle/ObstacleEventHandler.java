@@ -33,7 +33,7 @@ public class ObstacleEventHandler extends Component {
      * The types of obstacles and enemies are used to determine the type of entity that triggers the event.
      */
     public enum ObstacleType {
-        PLANTS_OBSTACLE, THORNS_OBSTACLE, METEORITE, FLYING_MONKEY, FACE_WORM, SPACESHIP, SMALL_MISSILE, PORTAL_ENTRANCE, PORTAL_EXPORT, WEAPON;
+        PLANTS_OBSTACLE, THORNS_OBSTACLE, METEORITE, FLYING_MONKEY, FACE_WORM, SPACESHIP, SMALL_MISSILE, PORTAL_ENTRANCE, PORTAL_EXPORT, WEAPON, MAGMA;
     }
 
     private static final Logger logger = LoggerFactory.getLogger(ObstacleEventHandler.class);
@@ -92,6 +92,9 @@ public class ObstacleEventHandler extends Component {
             case WEAPON:
                 entity.getEvents().addListener(COLLISION_START, this::weaponDisappear);
                 break;
+            case MAGMA:
+                entity.getEvents().addListener(COLLISION_START, this::magmaCollision);
+                break;
             default:
                 throw new TypeNotPresentException("No corresponding event.", null);
         }
@@ -139,7 +142,32 @@ public class ObstacleEventHandler extends Component {
 
 
     }
+    /**
+     * When the monitored event is triggered, play the mpc burning animation.
+     */
+  void magmaCollision(Fixture me, Fixture other) {
 
+      if (hitboxComponent.getFixture() != me) {
+          // Not triggered by hitbox, ignore
+          return;
+      }
+
+      if (!PhysicsLayer.contains(PhysicsLayer.PLAYER, other.getFilterData().categoryBits) && !PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
+          // Doesn't match our target layer, ignore
+          return;
+      }
+        entity.getEvents().trigger("burn");
+      if (count == 0) { // Avoid an entity from repeatedly triggering an attack
+          count++;
+          logger.debug(COLLISION_LOGGER_INFO, entity.toString());
+          this.entity.getEvents().trigger("burn");
+          if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
+              this.entity.setRemoveCollision();
+          }
+      }
+
+
+    }
 
     /**
      * When the monitored event is triggered, play the thorns animation, and disable the
