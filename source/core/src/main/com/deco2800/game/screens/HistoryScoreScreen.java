@@ -11,7 +11,7 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.AchievementFactory;
 import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.files.BackgroundMusic;
+import com.deco2800.game.files.meta.BackgroundMusic;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
@@ -25,7 +25,9 @@ public class HistoryScoreScreen extends ScreenAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(HistoryScoreScreen.class);
     private static final String[] historyScoreTextures =
-            {"images/historyScoreBoard.png", "images/historyScoreBg.png", "images/achievements/trophyDialogSilver.png"};
+            {"images/historyScoreBoard.png", "images/historyScoreBg.png", "images/achievements/trophyDialogSilver.png"
+                    , "images/achievements/calenderIcon.png", "images/achievements/timeIcon.png"
+                    , "images/achievements/scoreIcon.png"};
     private static final String[] trophyTextures = AchievementFactory.getTrophyTextures();
     private final Renderer renderer;
     private final ScoreHistoryDisplay scoreHistoryDisplay;

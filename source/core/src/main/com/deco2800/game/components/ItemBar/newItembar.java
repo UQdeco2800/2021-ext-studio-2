@@ -11,7 +11,7 @@ public class newItembar extends Component{
     /**
      * item bar capacity, each item has a upper limit of 10
      */
-    private static int capacity = 10;
+    private static final int capacity = 10;
     /**
      * waters stored in item bar
      */

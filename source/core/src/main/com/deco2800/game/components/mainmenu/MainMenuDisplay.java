@@ -8,15 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
 
 /**
  * A ui component for displaying the Main menu.
@@ -132,22 +129,6 @@ public class MainMenuDisplay extends UIComponent {
 
 
       Button tutorialBtn = new Button(tutorial);
-
-
-
-
-
-      //TextButton startBtn = new TextButton("Start", skin);
-    //TextButton settingsBtn = new TextButton("Settings", skin);
-    //TextButton exitBtn = new TextButton("Exit", skin);
-    //props shop
-    //TextButton propsShopBtn = new TextButton("Props Shop", skin);
-    //Team9 History Scores
-    //TextButton historyScoreBtn = new TextButton("History Score", skin);
-    //TextButton achievementsBtn = new TextButton("Achievements", skin);
-    //TextButton attiresBtn = new TextButton("Select Unlocked Attires", skin);
-    //Team8
-    //TextButton monsterMenuBtn = new TextButton("Monster Menu", skin);
 
 
       // Triggers an event when the button is pressed

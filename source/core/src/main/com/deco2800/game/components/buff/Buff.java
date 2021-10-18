@@ -12,11 +12,11 @@ public class Buff {
     /**
      * player
      */
-    private Entity player;
+    private final Entity player;
     /**
      * player's status
      */
-    private CombatStatsComponent component;
+    private final CombatStatsComponent component;
 
     public Buff(Entity player) {
         this.player = player;

@@ -25,9 +25,9 @@ import java.util.function.Consumer;
 public class ItemComponent extends Component {
 
 
-    private Entity target;
+    private final Entity target;
     HitboxComponent hitboxComponent;
-    private Consumer<Entity> callback;
+    private final Consumer<Entity> callback;
 
     /**
      * creates a first aid component that detects when the player collides with
@@ -56,10 +56,6 @@ public class ItemComponent extends Component {
             callback.accept(target);
             target.getEvents().trigger("itemPickUp");
             entity.getEvents().trigger("itemPickedUp");
-            //PlayerStatsDisplay playerComponent = target.getComponent(PlayerStatsDisplay.class);
-            //if (playerComponent!=null){
-            //    playerComponent.addIncreaseHealthImage();
-            //}
             AchievementsHelper.getInstance().trackItemPickedUpEvent();
             Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
             if (physBody.getFixtureList().contains(other, true)) {

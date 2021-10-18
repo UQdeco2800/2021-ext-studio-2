@@ -2,6 +2,7 @@ package com.deco2800.game.files;
 
 
 import com.deco2800.game.extensions.GameExtension;
+import com.deco2800.game.files.meta.GameInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +18,7 @@ public class GameInfoTest {
 
     /**
      * Change the value of a private static final variable
-     *
+     * <p>
      * NOTE: Sensitive operations will only work <= JDK13
      *
      * @param field    the private static final variable field
@@ -75,7 +76,7 @@ public class GameInfoTest {
             setFinalStatic(GameInfo.class.getDeclaredField("PATH"),
                     "test/files/missingGameCount.json");
             assertEquals(GameInfo.getGameCount(), 0);
-        } catch (Exception ignored){
+        } catch (Exception ignored) {
             // Ignore field change exceptions
         }
     }

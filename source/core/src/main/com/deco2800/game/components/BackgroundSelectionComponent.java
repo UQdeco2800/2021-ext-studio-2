@@ -6,14 +6,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
-import com.deco2800.game.files.BackgroundMusic;
+import com.deco2800.game.files.meta.BackgroundMusic;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
 public class BackgroundSelectionComponent extends UIComponent {
     private final String[] textures = {"images/settings/musicSelectionDialog.png",
             "images/settings/musicSelectionButton.png", "images/settings/radioButtonOn.png", "images/settings/radioButtonOff.png"};
-    private final String screenName;
+    private String screenName;
     private final String iconPosition;
     private Table musicSelectionTable;
     private Dialog dialog;
@@ -42,6 +42,10 @@ public class BackgroundSelectionComponent extends UIComponent {
     @Override
     public void create() {
         super.create();
+        entity.getEvents().addListener("openSelectionDialog", (String screenName) -> {
+            this.screenName = screenName;
+            showMusicDialog();
+        });
 
         loadAssets();
         addActors();

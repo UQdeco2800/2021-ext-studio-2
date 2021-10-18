@@ -107,6 +107,29 @@ public class SettingsMenuDisplay extends UIComponent {
     displayModeSelect.setItems(getDisplayModes(selectedMonitor));
     displayModeSelect.setSelected(getActiveMode(displayModeSelect.getItems()));
 
+    Label inGameLabel = new Label("In Game Music:", skin);
+    TextButton inGameMusicSelect = new TextButton("Choose", skin);
+    inGameMusicSelect.addListener(
+            new ChangeListener() {
+              @Override
+              public void changed(ChangeEvent changeEvent, Actor actor) {
+                logger.debug("in game music selection button clicked");
+                entity.getEvents().trigger("openSelectionDialog", "MainGame");
+
+              }
+            });
+
+    Label gameOverLabel = new Label("Game Over Music:", skin);
+    TextButton gameOverMusicSelect = new TextButton("Choose", skin);
+    gameOverMusicSelect.addListener(
+            new ChangeListener() {
+              @Override
+              public void changed(ChangeEvent changeEvent, Actor actor) {
+                logger.debug("in game music selection button clicked");
+                entity.getEvents().trigger("openSelectionDialog", "GameOver");
+              }
+            });
+
     // Position Components on table
     Table table = new Table();
     table.add(getIconImage("fps")).right();
@@ -136,7 +159,11 @@ public class SettingsMenuDisplay extends UIComponent {
 
     table.add(displayModeLabel).left().padLeft(10);
     table.add(displayModeSelect).left();
-
+    table.row().padTop(5f);
+    table.add(inGameLabel).left().padLeft(10);
+    table.add(inGameMusicSelect).left();
+    table.add(gameOverLabel).left().padLeft(10);
+    table.add(gameOverMusicSelect).left();
     // Events on inputs
     uiScaleSlider.addListener(
             (Event event) -> {

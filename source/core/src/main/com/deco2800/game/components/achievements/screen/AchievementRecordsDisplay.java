@@ -16,8 +16,8 @@ import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.GdxGame.ScreenType;
 import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
-import com.deco2800.game.files.GameChapters;
-import com.deco2800.game.files.GameRecords;
+import com.deco2800.game.files.stats.GameChapters;
+import com.deco2800.game.files.stats.GameRecordUtils;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
@@ -42,7 +42,8 @@ public class AchievementRecordsDisplay extends UIComponent {
     /**
      * Only the best achievements are displayed. Takes in the list of best
      * achievements as an argument.
-     * @param game Libgdx game object
+     *
+     * @param game             Libgdx game object
      * @param bestAchievements The list of best achievements
      */
     public AchievementRecordsDisplay(GdxGame game, List<BaseAchievementConfig> bestAchievements) {
@@ -91,7 +92,7 @@ public class AchievementRecordsDisplay extends UIComponent {
         } else {
             renderBestAchievements();
         }
-        renderAchievements(GameRecords.getNextUnlockAchievements(), 0.55f);
+        renderAchievements(GameRecordUtils.getNextUnlockAchievements(), 0.55f);
         table.add(achievementsTable);
         table.row();
         label = new Label("Game Story", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -107,6 +108,7 @@ public class AchievementRecordsDisplay extends UIComponent {
 
     /**
      * Returns an image button to be reused everywhere.
+     *
      * @param path the image path
      * @return ImageButton to be displayed
      */
@@ -120,7 +122,7 @@ public class AchievementRecordsDisplay extends UIComponent {
      * Clicking on an unlocked chapter results in the opening of a dialog
      * which displays the chapter art, some part of the story. A close
      * button has been added so that the dialog can be dismissed.
-     *
+     * <p>
      * On clicking a chapter, an event is emitted with the chapter's necessary content.
      */
     private void renderGameStory() {
@@ -165,14 +167,15 @@ public class AchievementRecordsDisplay extends UIComponent {
      * Renders the list of best achievements (the ones with full opacity)
      */
     private void renderBestAchievements() {
-        renderAchievements(GameRecords.getAllTimeBestAchievements(), 1);
+        renderAchievements(GameRecordUtils.getAllTimeBestAchievements(), 1);
     }
 
 
     /**
      * Utility function to render the given list of achievements
+     *
      * @param achievements list of achievements
-     * @param alpha the opacity of each image (low for the ones which are locked)
+     * @param alpha        the opacity of each image (low for the ones which are locked)
      */
     private void renderAchievements(List<BaseAchievementConfig> achievements, float alpha) {
         if (achievements.isEmpty()) {

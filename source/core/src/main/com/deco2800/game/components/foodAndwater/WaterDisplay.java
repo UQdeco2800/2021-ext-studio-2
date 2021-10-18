@@ -49,7 +49,7 @@ public class WaterDisplay extends UIComponent {
         table.padTop(150f).padLeft(10f);
 
         //Add water image
-        float clockSideLength = 30f;
+        float waterIconSize = 30f;
         waterImage.add(new Image(ServiceLocator.getResourceService()
                 .getAsset("images/water1.png", Texture.class)));
         waterImage.add(new Image(ServiceLocator.getResourceService()
@@ -63,10 +63,10 @@ public class WaterDisplay extends UIComponent {
         CharSequence TimerText = waterCurrent + "";
         timeLabel = new Label(TimerText, skin, "large");
         //add images into the screen
-        table.add(waterImage.get(0)).size(clockSideLength).pad(3);
-        table.add(waterImage.get(1)).size(clockSideLength).pad(3);
-        table.add(waterImage.get(2)).size(clockSideLength).pad(3);
-        table.add(waterImage.get(3)).size(clockSideLength).pad(3);
+        table.add(waterImage.get(0)).size(waterIconSize).pad(3);
+        table.add(waterImage.get(1)).size(waterIconSize).pad(3);
+        table.add(waterImage.get(2)).size(waterIconSize).pad(3);
+        table.add(waterImage.get(3)).size(waterIconSize).pad(3);
         stage.addActor(table);
     }
 
@@ -84,7 +84,7 @@ public class WaterDisplay extends UIComponent {
         int minutes = countTime.getMinutes();
         int seconds = countTime.getSeconds();
         int dis = (minutes * 60 + seconds)/ 10;
-        dis1 = (minutes * 60 + seconds)/ 1;//it is reduce health value when every five second
+        dis1 = (minutes * 60 + seconds); //it is reduce health value when every single second
         if(dis > countWaterSystem.getTimer()){
             countWaterSystem.setDifference(1);
             countWaterSystem.setTimer(dis);
@@ -178,15 +178,4 @@ public class WaterDisplay extends UIComponent {
         return waterImage.size() <= 0;
     }
 
-    /*    *//**
-     * test buff effect for the first aid kit increases 1 water image
-     * @param target entity of food
-     *//*
-    public void increaseWater(Entity target) {
-        if (target != null) {
-            if (WaterDisplay.waterImage.size() < 4) {
-                WaterDisplay.addOrRemoveImage(1);
-            }
-        }
-    }*/
 }

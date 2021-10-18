@@ -9,7 +9,7 @@ import com.deco2800.game.components.gameover.GameOverDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
-import com.deco2800.game.files.BackgroundMusic;
+import com.deco2800.game.files.meta.BackgroundMusic;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.RenderService;
@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 
 public class GameOverScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(GameOverScreen.class);
-    private static final String[] gameOverTextures = {"images/gameOver.png", "images/background.png"};
+    private static final String[] gameOverTextures = {"images/gameOver.png", "images/backk.png"};
     private final Renderer renderer;
     private final GameOverDisplay gomd;
     private final Entity ui;

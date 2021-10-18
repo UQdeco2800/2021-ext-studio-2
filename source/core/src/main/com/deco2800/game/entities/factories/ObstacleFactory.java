@@ -330,14 +330,26 @@ public class ObstacleFactory {
         return obstacle;
     }
 
-
-
-
     /**
      * Creates a nail.
      *
      * @return nail entity
      */
+    public static Entity createNail(Entity target) {
+        Entity obstacle = createBaseObstacle(target, BodyType.StaticBody, "Nail");
+
+        obstacle
+                .addComponent(new TextureRenderComponent("images/nail.jpg"))
+                .addComponent(new CombatStatsComponent(2000, 5))
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1f));
+
+        return obstacle;
+    }
+
+
+
+
+    /*
     public static Entity createNail() {
         Entity nail = new Entity();
 
@@ -347,9 +359,8 @@ public class ObstacleFactory {
         nail.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         nail.getComponent(TextureRenderComponent.class).scaleEntity();
 
-
         return nail;
-    }
+    }*/
 
     /**
      * Creates a wood.

@@ -27,7 +27,7 @@ public class PropsShopDisplay extends UIComponent {
     private static final Logger logger = LoggerFactory.getLogger(PropsShopDisplay.class);
     private final GdxGame game;
 
-    private File file;
+    private final File file;
     private FileReader fileReader;
 
     public PropsShopDisplay(GdxGame game) {
