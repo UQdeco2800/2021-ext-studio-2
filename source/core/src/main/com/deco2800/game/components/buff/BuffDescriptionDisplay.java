@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.concurrency.AsyncTaskQueue;
-import com.deco2800.game.entities.configs.achievements.BaseAchievementConfig;
 import com.deco2800.game.entities.configs.buff.BuffDescriptionConfig;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;

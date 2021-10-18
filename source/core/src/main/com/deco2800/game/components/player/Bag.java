@@ -1,8 +1,6 @@
 package com.deco2800.game.components.player;
 
-import com.deco2800.game.components.score.ScoringSystemV1;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.services.ScoreService;
 import com.deco2800.game.services.ServiceLocator;
 
 import java.util.ArrayList;
@@ -15,11 +13,10 @@ public class Bag implements BagInterface {
       所有物品
       物品
      */
-    private List<Entity> entities;
-    private ScoringSystemV1 scoringSystem = new ScoringSystemV1();
+    private final List<Entity> entities;
 
     protected class BagIterator implements ComponentIterator<Entity> {
-        private Iterator<Entity> _it;
+        private final Iterator<Entity> _it;
         public synchronized Entity next() {
             return _it.next();
         }
@@ -28,9 +25,7 @@ public class Bag implements BagInterface {
         }
         public BagIterator() {
             super();
-            if (null == _it) {
-                _it = entities.iterator();
-            }
+            _it = entities.iterator();
         }
     }
     public Bag() {
@@ -45,10 +40,6 @@ public class Bag implements BagInterface {
         }
         entities.add(e);
         //when pick up one item, score will increase by 10 points.
-
-        //These two does not affect each other.
-        //old way
-        scoringSystem.addToScore(10);
         //using ScoreService
         ServiceLocator.getScoreService().addToScore(10);
     }

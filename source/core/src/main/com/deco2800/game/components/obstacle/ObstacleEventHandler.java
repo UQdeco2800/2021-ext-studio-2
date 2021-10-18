@@ -1,6 +1,5 @@
 package com.deco2800.game.components.obstacle;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
@@ -10,10 +9,8 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.ParticleRenderComponent;
 import com.deco2800.game.screens.MainGameScreen;
-import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import com.sun.tools.javac.Main;
 
 /**
  * Used to handle events of obstacles and enemies
@@ -101,7 +98,7 @@ public class ObstacleEventHandler extends Component {
     /**
      * Setter for spaceshipAttack, used for test.
      *
-     * @param spaceshipAttack
+     * @param spaceshipAttack: space ship attack or not
      */
     public static void setSpaceshipAttack(boolean spaceshipAttack) {
         ObstacleEventHandler.spaceshipAttack = spaceshipAttack;

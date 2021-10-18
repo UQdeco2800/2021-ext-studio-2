@@ -10,9 +10,11 @@ import org.slf4j.LoggerFactory;
  * DistanceService handles the distance value in the game.
  */
 public class DistanceService {
+
     private double distance=0;
     //to solve the distance decrease bug.
     private static double preDistance=0;
+
     private Entity player;
 
     /**

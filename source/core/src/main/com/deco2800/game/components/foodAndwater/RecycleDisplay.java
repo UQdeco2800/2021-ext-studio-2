@@ -27,7 +27,7 @@ public class RecycleDisplay extends UIComponent {
     public static boolean isKey =false;
 
 
-    public RecycleDisplay() { }
+    public RecycleDisplay() {}
     /**
      * Creates reusable recycle ui styles and adds actors to the stage.
      * And starts the counting the time.
