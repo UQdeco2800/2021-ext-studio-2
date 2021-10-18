@@ -48,7 +48,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         return true;
       case Keys.D:
       case Keys.RIGHT:
-        if (SpaceshipAttackController.spaceshipState == SpaceshipAttackController.SpaceshipAttack.On) {
+        if (SpaceshipAttackController.spaceshipState == SpaceshipAttackController.SpaceshipAttack.ON) {
           return false;
         }
         walkDirection.add(Vector2Utils.RIGHT);
@@ -149,7 +149,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         return true;
       case Keys.D:
       case Keys.RIGHT:
-        if (SpaceshipAttackController.spaceshipState == SpaceshipAttackController.SpaceshipAttack.On) {
+        if (SpaceshipAttackController.spaceshipState == SpaceshipAttackController.SpaceshipAttack.ON) {
           return false;
         }
         walkDirection.sub(Vector2Utils.RIGHT);

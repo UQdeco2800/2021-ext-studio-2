@@ -160,7 +160,7 @@ class ObstacleEventHandlerTest {
         spaceship.getEvents().trigger("collisionStart", spaceshipFixture, playerFixture);
 
         SpaceshipAttackController.SpaceshipAttack spaceshipAttack = spaceship.getComponent(SpaceshipAttackController.class).getSpaceshipState();
-        assertEquals(SpaceshipAttackController.SpaceshipAttack.Start, spaceshipAttack);
+        assertEquals(SpaceshipAttackController.SpaceshipAttack.START, spaceshipAttack);
 
         assertEquals(false, spaceship.getComponent(ObstacleEventHandler.class).isLocked_ufo());
         assertEquals(true, spaceship.getComponent(ObstacleEventHandler.class).isSpaceshipAttack());
@@ -209,7 +209,7 @@ class ObstacleEventHandlerTest {
     @Test
     void shouldStartNewMap() {
         Entity player = createEntity1();
-        Entity portal = createPortal(player, ObstacleEventHandler.ObstacleType.PortalEntrance);
+        Entity portal = createPortal(player, ObstacleEventHandler.ObstacleType.PORTAL_ENTRANCE);
 
         player.getComponent(HitboxComponent.class).setLayer(PhysicsLayer.PLAYER);
 
@@ -221,13 +221,13 @@ class ObstacleEventHandlerTest {
 
         portal.getEvents().trigger("collisionStart", portalFixture, playerFixture);
 
-        assertEquals(MainGameScreen.NewMap.Start, MainGameScreen.getNewMapStatus());
+        assertEquals(MainGameScreen.NewMap.START, MainGameScreen.getNewMapStatus());
     }
 
     @Test
     void shouldFinishNewMap() {
         Entity player = createEntity1();
-        Entity portal = createPortal(player, ObstacleEventHandler.ObstacleType.PortalExport);
+        Entity portal = createPortal(player, ObstacleEventHandler.ObstacleType.PORTAL_EXPORT);
 
         player.getComponent(HitboxComponent.class).setLayer(PhysicsLayer.PLAYER);
 
@@ -239,7 +239,7 @@ class ObstacleEventHandlerTest {
 
         portal.getEvents().trigger("collisionStart", portalFixture, playerFixture);
 
-        assertEquals(MainGameScreen.NewMap.Finish, MainGameScreen.getNewMapStatus());
+        assertEquals(MainGameScreen.NewMap.FINISH, MainGameScreen.getNewMapStatus());
     }
 
 
@@ -255,7 +255,7 @@ class ObstacleEventHandlerTest {
         Entity entity =
                 new Entity()
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Meteorite))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.METEORITE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.METEORITE));
 
         return entity;
@@ -265,7 +265,7 @@ class ObstacleEventHandlerTest {
         Entity entity =
                 new Entity()
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.ThornsObstacle))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.THORNS_OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE));
 
         return entity;
@@ -275,7 +275,7 @@ class ObstacleEventHandlerTest {
         Entity entity =
                 new Entity()
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PlantsObstacle))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PLANTS_OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE));
 
         return entity;
@@ -285,7 +285,7 @@ class ObstacleEventHandlerTest {
         Entity entity =
                 new Entity()
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.FaceWorm))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.FACE_WORM))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
 
         return entity;
@@ -295,7 +295,7 @@ class ObstacleEventHandlerTest {
         Entity entity =
                 new Entity()
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.Spaceship))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SPACESHIP))
                         .addComponent(new SpaceshipAttackController().setPlayer(target))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
 
@@ -306,7 +306,7 @@ class ObstacleEventHandlerTest {
         Entity entity =
                 new Entity()
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SmallMissile))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SMALL_MISSILE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE));
 
         return entity;

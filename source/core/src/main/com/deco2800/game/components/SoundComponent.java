@@ -35,13 +35,13 @@ public class SoundComponent extends Component {
     @Override
     public void create() {
         switch (obstacleType) {
-            case Spaceship:
+            case SPACESHIP:
                 entity.getEvents().addListener("spaceshipSound", this::spaceshipSound);
                 break;
-            case SmallMissile:
+            case SMALL_MISSILE:
                 entity.getEvents().addListener("missileSound", this::missileSound);
                 break;
-            case FlyingMonkey:
+            case FLYING_MONKEY:
                 entity.getEvents().addListener("roarSound", this::roarSound);
                 break;
             default:

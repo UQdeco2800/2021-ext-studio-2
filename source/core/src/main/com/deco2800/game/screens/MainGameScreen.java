@@ -69,16 +69,16 @@ public class MainGameScreen extends ScreenAdapter {
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
     /* new map status, to control if the player into/out the new map*/
-    public static NewMap newMapStatus = NewMap.Off;
+    public static NewMap newMapStatus;
     public static Entity players;
-    private static boolean slowPlayer = false;
+    private static boolean slowPlayer;
     private static float slowPlayerTime;
     private final GdxGame game;
     private final Renderer renderer;
     private final PhysicsEngine physicsEngine;
     private final Entity player;
     private final ForestGameArea forestGameArea;
-    private int counter;
+    private int counter = 0;
 
     public MainGameScreen(GdxGame game) {
         this.game = game;
@@ -111,7 +111,9 @@ public class MainGameScreen extends ScreenAdapter {
 
         player = forestGameArea.player;
         players = player;
-        newMapStatus = NewMap.Off;
+
+        newMapStatus = NewMap.OFF;
+        slowPlayer = false;
         counter = 0;
 
         ServiceLocator.registerDistanceService(new DistanceService(player));
@@ -151,9 +153,17 @@ public class MainGameScreen extends ScreenAdapter {
         } else { // double set
             MainGameScreen.slowPlayerTime += slowPlayerTime;
         }
-        logger.debug("Set slowPlayer = {}, Total slowPlayerTime = {}", true, slowPlayerTime);
+        logger.debug("Set slowPlayer = {}, Total slowPlayerTime = {}", slowPlayer, slowPlayerTime);
     }
 
+    /**
+     * getter method of slowPlayerTime
+     *
+     * @return time remain of player slow time
+     */
+    public static float getSlowPlayerTime() {
+        return slowPlayerTime;
+    }
 
     /**
      * setter method of slowPlayerTime
@@ -184,7 +194,7 @@ public class MainGameScreen extends ScreenAdapter {
 
     private void resetSpaceshipAttackVariable() {
         // reset Spaceship Attack variables
-        SpaceshipAttackController.spaceshipState = SpaceshipAttackController.SpaceshipAttack.Off;
+        SpaceshipAttackController.spaceshipState = SpaceshipAttackController.SpaceshipAttack.OFF;
         SpaceshipAttackController.positionHitSpaceship = null;
     }
 
@@ -207,17 +217,19 @@ public class MainGameScreen extends ScreenAdapter {
     /**
      * Slow down the player, called by render().
      */
-    private void TransferPlayerByMap() {
-        if (newMapStatus == NewMap.Start) {
+    private void transferPlayerByMap() {
+        if (newMapStatus == NewMap.START) {
             DistanceService.setPreDistance(player.getPosition().x);//get the last map distance of player
-            player.setPosition(0, 50);
+            // change 50 -> 53 for bigger player
+            player.setPosition(0, 53);
+            newMapStatus = NewMap.ON;
             logger.info("New map start.");
-            newMapStatus = NewMap.On;
-        } else if (newMapStatus == NewMap.Finish) {
-            DistanceService.setPreDistance(player.getPosition().x - 87);//get the last map distance of player
-            player.setPosition(87, 3);
+        } else if (newMapStatus == NewMap.FINISH) {
+            // change 87 -> 89 for bigger player
+            DistanceService.setPreDistance(player.getPosition().x - 89);//get the last map distance of player
+            player.setPosition(89, 7);
+            newMapStatus = NewMap.OFF;
             logger.info("New map finish.");
-            newMapStatus = NewMap.Off;
         }
     }
 
@@ -241,29 +253,32 @@ public class MainGameScreen extends ScreenAdapter {
         SpaceshipAttackController.SpaceshipAttack spaceshipState = SpaceshipAttackController.spaceshipState;
 
         // Update camera position (change based on team6 contribution)
-        switch (newMapStatus) {
-            case Off:
-                screenVector.y = 7f;
+        if (newMapStatus == NewMap.OFF) {
+            screenVector.y = 7f;
 
-                if (spaceshipState == SpaceshipAttackController.SpaceshipAttack.On ||
-                        spaceshipState == SpaceshipAttackController.SpaceshipAttack.Start ||
-                        (spaceshipState == SpaceshipAttackController.SpaceshipAttack.Finish &&
-                                screenVector.x <= SpaceshipAttackController.positionHitSpaceship.x)) {
-                    renderer.getCamera().getEntity().
-                            setPosition(new Vector2(SpaceshipAttackController.positionHitSpaceship.x, 7f));
-                } else {
-                    renderer.getCamera().getEntity().setPosition(screenVector);
-                }
-                break;
-            case On:
-                screenVector.y = 55f;
+            if (spaceshipState == SpaceshipAttackController.SpaceshipAttack.ON ||
+                    spaceshipState == SpaceshipAttackController.SpaceshipAttack.START ||
+                    (spaceshipState == SpaceshipAttackController.SpaceshipAttack.FINISH &&
+                            screenVector.x <= SpaceshipAttackController.positionHitSpaceship.x)) {
+                renderer.getCamera().getEntity().
+                        setPosition(new Vector2(SpaceshipAttackController.positionHitSpaceship.x, 7f));
+            } else {
                 renderer.getCamera().getEntity().setPosition(screenVector);
+            }
+        } else if (newMapStatus == NewMap.ON) {
+            screenVector.y = 55f;
+            renderer.getCamera().getEntity().setPosition(screenVector);
         }
+        // else: do nothing
+
         return screenVector;
     }
 
     @Override
     public void render(float delta) {
+
+        //new Entity().getEvents().trigger("updateScore");
+        //new Entity().getEvents().trigger("updateTime");
 
         physicsEngine.update();
         ServiceLocator.getEntityService().update();
@@ -283,7 +298,7 @@ public class MainGameScreen extends ScreenAdapter {
         }
 
         // Transfer the player according to the portal the player enters
-        TransferPlayerByMap();
+        transferPlayerByMap();
 
         // making player to move constantly
         player.setPosition((float) (player.getPosition().x + 0.05), player.getPosition().y);
@@ -292,62 +307,72 @@ public class MainGameScreen extends ScreenAdapter {
 
 
         // Generate terrain, obstacle and enemies
-        switch (newMapStatus) {
-            case Off:
-                forestGameArea.stopNewMapMusic();
-                forestGameArea.playMusic();
-                // infinite loop for terrain and obstacles
-                if (screenVector.x > (2 * counter + 1) * 10) {
-                    counter += 1;
-                    forestGameArea.showScrollingBackground(counter);
-                    forestGameArea.showNewMapScrollingBackground(counter, 47);
-                    forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.MUD_ROAD);
-                    forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
-                    //                   forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
-                    forestGameArea.spawnWoodsone((int) (screenVector.x + 2));
-                    forestGameArea.spawnWoodstwo((int) (screenVector.x + 2));
-                    forestGameArea.spawnWoodsthree((int) (screenVector.x + 2));
-                    forestGameArea.spawnWoodsfour((int) (screenVector.x + 2));
-                    forestGameArea.spawnWoodsfive((int) (screenVector.x + 2));
+        // Generate terrain, obstacle and enemies
+        if (newMapStatus == NewMap.OFF) {
+            forestGameArea.stopNewMapMusic();
+            forestGameArea.playMusic();
+            // infinite loop for terrain and obstacles
+            if (screenVector.x > (2 * counter + 1) * 10) {
+                counter += 1;
+                forestGameArea.showScrollingBackground(counter);
+                forestGameArea.showNewMapScrollingBackground(counter, 47);
+                forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.MUD_ROAD);
+                forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
+                //                   forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
+                forestGameArea.spawnWoodsone((int) (screenVector.x + 2));
+                forestGameArea.spawnWoodstwo((int) (screenVector.x + 2));
+                forestGameArea.spawnWoodsthree((int) (screenVector.x + 2));
+                forestGameArea.spawnWoodsfour((int) (screenVector.x + 2));
+                forestGameArea.spawnWoodsfive((int) (screenVector.x + 2));
 
-                    forestGameArea.spawnMagmaOne((int) (screenVector.x + 2));
-                    forestGameArea.spawnMagmaTwo((int) (screenVector.x + 2));
-                    forestGameArea.spawnMagmaThree((int) (screenVector.x + 2));
-                    forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
-                    forestGameArea.spawnNailsone((int) (screenVector.x + 2));
-                    forestGameArea.spawnNailstwo((int) (screenVector.x + 2));
-                    forestGameArea.spawnNailsthree((int) (screenVector.x + 2));
-                    forestGameArea.spawnNailsfour((int) (screenVector.x + 2));
-                    generateObstaclesEnemiesByMapRefresh(counter);
-                }
+                forestGameArea.spawnFireRocksone((int) (screenVector.x + 2));
+                forestGameArea.spawnFireRockstwo((int) (screenVector.x + 2));
+                forestGameArea.spawnFireRocksthree((int) (screenVector.x + 2));
+                forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
+                //                   forestGameArea.spawnRocksthree((int) (screenVector.x + 2));
+//                    forestGameArea.spawnRocksfour((int) (screenVector.x + 2));
+//                    forestGameArea.spawnRocksfive((int) (screenVector.x + 2));
+                //                   forestGameArea.spawnRockssix((int) (screenVector.x + 2));
+                forestGameArea.spawnNailsone((int) (screenVector.x + 2));
+                forestGameArea.spawnNailstwo((int) (screenVector.x + 2));
+                forestGameArea.spawnNailsthree((int) (screenVector.x + 2));
+                forestGameArea.spawnNailsfour((int) (screenVector.x + 2));
+                generateObstaclesEnemiesByMapRefresh(counter);
+            }
 
-                slowPlayer();
-                break;
-            case On:
-                forestGameArea.stopMusic();
-                forestGameArea.playNewMapMusic();
-                // Render terrains on new map
-                if (screenVector.x > (2 * counter + 1) * 10) {
-                    counter += 1;
-                    forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
-                    forestGameArea.spawnWoodsone((int) (screenVector.x + 2));
-                    forestGameArea.spawnWoodstwo((int) (screenVector.x + 2));
-                    forestGameArea.spawnWoodsthree((int) (screenVector.x + 2));
-                    forestGameArea.spawnWoodsfour((int) (screenVector.x + 2));
-                    forestGameArea.spawnWoodsfive((int) (screenVector.x + 2));
+            slowPlayer();
 
-                    forestGameArea.spawnMagmaOne((int) (screenVector.x + 2));
-                    forestGameArea.spawnMagmaTwo((int) (screenVector.x + 2));
-                    forestGameArea.spawnMagmaThree((int) (screenVector.x + 2));
-                    forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
-                    forestGameArea.spawnNailsone((int) (screenVector.x + 2));
-                    forestGameArea.spawnNailstwo((int) (screenVector.x + 2));
-                    forestGameArea.spawnNailsthree((int) (screenVector.x + 2));
-                    forestGameArea.spawnNailsfour((int) (screenVector.x + 2));
-                    forestGameArea.spawnGoldNewMapRandomly((int) (screenVector.x + 2));
-                }
+        } else if (newMapStatus == NewMap.ON) {
+            forestGameArea.stopMusic();
+            forestGameArea.playNewMapMusic();
+            // Render terrains on new map
+            if (screenVector.x > (2 * counter + 1) * 10) {
+                counter += 1;
+//                    forestGameArea.showNewMapScrollingBackground(counter, 47);
+                forestGameArea.spawnTerrainRandomly((int) (screenVector.x + 2), TerrainFactory.TerrainType.ROCK_ROAD);
+                //                  forestGameArea.spawnRocksRandomly((int) (screenVector.x+2));
+                forestGameArea.spawnWoodsone((int) (screenVector.x + 2));
+                forestGameArea.spawnWoodstwo((int) (screenVector.x + 2));
+                forestGameArea.spawnWoodsthree((int) (screenVector.x + 2));
+                forestGameArea.spawnWoodsfour((int) (screenVector.x + 2));
+                forestGameArea.spawnWoodsfive((int) (screenVector.x + 2));
+
+                forestGameArea.spawnFireRocksone((int) (screenVector.x + 2));
+                forestGameArea.spawnFireRockstwo((int) (screenVector.x + 2));
+                forestGameArea.spawnFireRocksthree((int) (screenVector.x + 2));
+                forestGameArea.spawnRockstwo((int) (screenVector.x + 2));
+                //                   forestGameArea.spawnRocksthree((int) (screenVector.x + 2));
+//                    forestGameArea.spawnRocksfour((int) (screenVector.x + 2));
+//                    forestGameArea.spawnRocksfive((int) (screenVector.x + 2));
+//                    forestGameArea.spawnRockssix((int) (screenVector.x + 2));
+                forestGameArea.spawnNailsone((int) (screenVector.x + 2));
+                forestGameArea.spawnNailstwo((int) (screenVector.x + 2));
+                forestGameArea.spawnNailsthree((int) (screenVector.x + 2));
+                forestGameArea.spawnNailsfour((int) (screenVector.x + 2));
+                forestGameArea.spawnGoldNewMapRandomly((int) (screenVector.x + 2));
+            }
         }
-
+        // else: do nothing
     }
 
     @Override
@@ -445,9 +470,9 @@ public class MainGameScreen extends ScreenAdapter {
      * all status of new map
      */
     public enum NewMap {
-        Off,
-        Start,  // Used once in render
-        Finish,  // Used once in render
-        On
+        OFF,
+        START,  // Used once in render
+        FINISH,  // Used once in render
+        ON
     }
 }

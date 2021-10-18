@@ -9,6 +9,7 @@ import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.events.EventHandler;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
+import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.ParticleRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
@@ -362,6 +363,21 @@ public class Entity {
     }
 
     /**
+     * Dispose of the entity. This will dispose of all components on this entity.
+     */
+    public void disposeExceptAnimationComponent() {
+        Iterator<Component> i = createdComponents.iterator();
+        while (i.hasNext()) {
+            Component component = i.next(); // must be called before you can call i.remove()
+            if (!component.getClass().equals(AnimationRenderComponent.class)) {
+                component.dispose();
+                i.remove();
+                logger.debug("{} disposed on entity {}", component.getClass().getSimpleName(), this);
+            }
+        }
+        ServiceLocator.getEntityService().unregister(this);
+    }
+    /**
      * Let the obstacles disappear after playing the animation for animationTime second. Is called by update().
      * <p>
      * The purpose of setting this method: When dispose() is used for animation components, all entities that use the
@@ -374,16 +390,15 @@ public class Entity {
                 Component component = i.next(); // must be called before you can call i.remove()
                 if (component.getClass().equals(AnimationRenderComponent.class)) {
                     ((AnimationRenderComponent) component).stopAnimation();
-                    logger.info("{} stopped on entity {}", component.getClass().getSimpleName(), this);
-                } else if (!component.getClass().equals(ParticleRenderComponent.class)) {
+                    logger.debug("{} stopped on entity {}", component.getClass().getSimpleName(), this);
+                } else if (!component.getClass().equals(ParticleRenderComponent.class) && !component.getClass().equals(PhysicsComponent.class)) {
                     component.dispose();
                     i.remove();
-                    logger.info("{} disposed on entity {}", component.getClass().getSimpleName(), this);
+                    logger.debug("{} disposed on entity {}", component.getClass().getSimpleName(), this);
                 }
             }
             if (particleTime == 0) {
-                ServiceLocator.getEntityService().unregister(this);
-                disappear = false;
+                disposeExceptAnimationComponent();
             } else {
                 disappearType = DisappearType.PARTICLE;
             }
@@ -395,17 +410,7 @@ public class Entity {
      */
     public void removeAfterParticle() {
         if (this.getComponent(ParticleRenderComponent.class).getParticlePlayTime() > particleTime) {
-            Iterator<Component> i = createdComponents.iterator();
-            while (i.hasNext()) {
-                Component component = i.next(); // must be called before you can call i.remove()
-                if (!component.getClass().equals(AnimationRenderComponent.class)) {
-                    component.dispose();
-                    i.remove();
-                    logger.info("{} disposed on entity {}", component.getClass().getSimpleName(), this);
-                }
-            }
-            ServiceLocator.getEntityService().unregister(this);
-            disappear = false;
+            disposeExceptAnimationComponent();
         }
     }
 
@@ -454,28 +459,29 @@ public class Entity {
             return;
         }
 
-        for (Component component : createdComponents) {
+        Iterator<Component> i = createdComponents.iterator();
+        while (i.hasNext()) {
+            Component component = i.next();
             // When texture and animation are given an entity at the same time, the texture needs to disappear when the
             // animation is played to avoid the conflict between the texture and the animation.
             if (removeTexture) {
                 if (component.getClass().equals(TextureRenderComponent.class)) {
-                    createdComponents.removeValue(component, true);
-                    logger.info("Remove {} on entity{}", component.getClass().getSimpleName(), this);
                     component.dispose();
-                    removeTexture = false;
+                    i.remove();
+                    logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
                 }
             }
 
             if (removeCollision) {
                 if (component.getClass().equals(HitboxComponent.class) || component.getClass().equals(ColliderComponent.class)) {
-                    createdComponents.removeValue(component, true);
-                    logger.info("Remove {} on entity{}", component.getClass().getSimpleName(), this);
                     component.dispose();
+                    i.remove();
+                    logger.info("Remove {} on entity{}", component.getClass().getSimpleName(), this);
+
                 }
             }
             component.triggerUpdate();
         }
-        removeCollision = false;
 
         if (disappear) {
             if (disappearType == DisappearType.ANIMATION) {
