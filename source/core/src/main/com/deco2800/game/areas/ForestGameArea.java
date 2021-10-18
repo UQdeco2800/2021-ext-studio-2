@@ -220,7 +220,7 @@ public class ForestGameArea extends GameArea {
 
 
     /**
-     * Genrate large magma pyramid
+     * Genrate large rock pyramid
      * N
      * NN
      * NNN
