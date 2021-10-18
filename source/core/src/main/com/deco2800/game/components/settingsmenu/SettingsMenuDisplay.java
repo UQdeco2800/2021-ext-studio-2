@@ -34,7 +34,9 @@ public class SettingsMenuDisplay extends UIComponent {
           "images/settings/fullScreenOff.png", "images/settings/resolution.png", "images/settings/vsync.png",
           "images/settings/uiScale.png", "images/settings/fps.png","setting-page/fullscreen.png",
           "setting-page/vsync.png", "setting-page/fpscap.png", "setting-page/ui.png", "setting-page/resolution.png",
-          "setting-page/setting.png","setting-page/exit2.png", "setting-page/apply2.png"};
+          "setting-page/setting.png", "setting-page/exit2.png", "setting-page/apply2.png",
+          "setting-page/inMusic.png", "setting-page/overMusic.png", "setting-page/choose1.png",
+          "setting-page/choose2.png"};
   private Table rootTable;
   private Table bgTable;
   private TextField fpsText;
@@ -118,9 +120,17 @@ public class SettingsMenuDisplay extends UIComponent {
     displayModeSelect.setItems(getDisplayModes(selectedMonitor));
     displayModeSelect.setSelected(getActiveMode(displayModeSelect.getItems()));
 
-    Label inGameLabel = new Label("In Game Music:", skin);
-    TextButton inGameMusicSelect = new TextButton("Choose", skin);
-    inGameMusicSelect.addListener(
+    Image inGameImg = new Image(ServiceLocator.getResourceService()
+            .getAsset("setting-page/inMusic.png", Texture.class));
+    //TextButton inGameMusicSelect = new TextButton("Choose", skin);
+    Button.ButtonStyle inGameMusicSelect = new Button.ButtonStyle();
+    inGameMusicSelect.up = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("setting-page/choose1.png"))));
+    inGameMusicSelect.over = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("setting-page/choose2.png"))));
+    Button inGameMusicSelectBtn = new Button(inGameMusicSelect);
+
+    inGameMusicSelectBtn.addListener(
             new ChangeListener() {
               @Override
               public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -130,9 +140,17 @@ public class SettingsMenuDisplay extends UIComponent {
               }
             });
 
-    Label gameOverLabel = new Label("Game Over Music:", skin);
-    TextButton gameOverMusicSelect = new TextButton("Choose", skin);
-    gameOverMusicSelect.addListener(
+    Image gameOverImg = new Image(ServiceLocator.getResourceService()
+            .getAsset("setting-page/overMusic.png", Texture.class));
+    //TextButton gameOverMusicSelect = new TextButton("Choose", skin);
+    Button.ButtonStyle gameOverMusicSelect = new Button.ButtonStyle();
+    gameOverMusicSelect.up = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("setting-page/choose1.png"))));
+    gameOverMusicSelect.over = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("setting-page/choose2.png"))));
+    Button gameOverMusicSelectBtn = new Button(gameOverMusicSelect);
+
+    gameOverMusicSelectBtn.addListener(
             new ChangeListener() {
               @Override
               public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -171,10 +189,10 @@ public class SettingsMenuDisplay extends UIComponent {
     table.add(resolutionImg).left().padLeft(10);
     table.add(displayModeSelect).left();
     table.row().padTop(5f).padBottom(10);
-    table.add(inGameLabel).left().padLeft(10).padTop(50);
-    table.add(inGameMusicSelect).left().padTop(50);
-    table.add(gameOverLabel).left().padLeft(10).padTop(50);
-    table.add(gameOverMusicSelect).left().padTop(50);
+    table.add(inGameImg).left().padLeft(10).padTop(50);
+    table.add(inGameMusicSelectBtn).left().padLeft(10).padTop(50);
+    table.add(gameOverImg).left().padLeft(10).padTop(50);
+    table.add(gameOverMusicSelectBtn).left().padLeft(10).padTop(50);
     // Events on inputs
     uiScaleSlider.addListener(
             (Event event) -> {
