@@ -74,6 +74,33 @@ public class BackgroundMusic {
     }
 
     /**
+     * Check if a particular track is the selected one or not. If it is selected,
+     * get its index.
+     * @param screenName the name of screen
+     * @return selected whether the particular track is the user's choice or not
+     */
+    public static boolean isSelected(String screenName, String trackName) {
+        return getSelectedMusic(screenName).contains(trackName);
+    }
+
+    /**
+     * Get the first non-selected track of a screen
+     * @param screenName the name of the screen
+     * @return nonSelectedTrack track which has not been selected by user
+     */
+    public static String getNotSelectedTrack(String screenName){
+        String[] tracks = getAllMusicByScreen(screenName);
+        String nonSelectedTrack = "";
+        for (String track : tracks) {
+            if (!isSelected(screenName, track)) {
+                nonSelectedTrack = track;
+                break;
+            }
+        }
+        return nonSelectedTrack;
+    }
+
+    /**
      * Overwrite the existing file with the new mappings
      *
      * @param musicMap new mapping of screen name and chosen tracks
