@@ -793,13 +793,13 @@ public class ForestGameArea extends GameArea {
     }
 
 
-    private void spawnFirstAid() {
+    public void spawnFirstAid() {
 
-        for (int i = 1; i < 31; i++) {
-            GridPoint2 position = new GridPoint2(i * 3, 5);
-            Entity firstAid = ItemFactory.createFirstAid(player, pro);
-            spawnEntityAt(firstAid, position, false, false);
-        }
+        Vector2 vector2 = new Vector2(this.player.getPosition());
+        Entity firstAid = ItemFactory.createFirstAid(player,pro);
+        vector2.add(5, 0);
+        firstAid.setPosition(vector2);
+        ServiceLocator.getEntityService().register(firstAid);
     }
 
     private void spawnGold() {

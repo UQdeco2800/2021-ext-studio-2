@@ -43,6 +43,7 @@ import org.slf4j.LoggerFactory;
  * <p>Details on libGDX screens: https://happycoding.io/tutorials/libgdx/game-screens
  */
 public class MainGameScreen extends ScreenAdapter {
+    private long lastSpawnTime = 0;
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private static final String[] mainGameTextures = {"images/heart.png", "images/clockV2.png",
             "images/scoreboardV2.png", "images/background.png", "images/water1.png", "images/food1.png",
@@ -371,6 +372,11 @@ public class MainGameScreen extends ScreenAdapter {
                 forestGameArea.spawnNailsfour((int) (screenVector.x + 2));
                 forestGameArea.spawnGoldNewMapRandomly((int) (screenVector.x + 2));
             }
+        }
+        long time = ServiceLocator.getTimeSource().getTime();
+        if((time - lastSpawnTime) > 5000){
+            forestGameArea.spawnFirstAid();
+            lastSpawnTime = time;
         }
         // else: do nothing
     }
