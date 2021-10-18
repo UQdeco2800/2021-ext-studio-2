@@ -178,15 +178,4 @@ public class WaterDisplay extends UIComponent {
         return waterImage.size() <= 0;
     }
 
-    /*    *//**
-     * test buff effect for the first aid kit increases 1 water image
-     * @param target entity of food
-     *//*
-    public void increaseWater(Entity target) {
-        if (target != null) {
-            if (WaterDisplay.waterImage.size() < 4) {
-                WaterDisplay.addOrRemoveImage(1);
-            }
-        }
-    }*/
 }

@@ -11,7 +11,7 @@ import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import java.util.ArrayList;
-import com.deco2800.game.entities.Entity;
+
 /**
  * A ui component for displaying food system. Player lose a chicken for 3 sec
  */
@@ -178,15 +178,4 @@ public class FoodDisplay extends UIComponent {
         return foodImage.size() <= 0;
     }
 
-    /*    *//**
-     * test buff effect for the first aid kit increases 1 food image
-     * @param target entity of food
-     *//*
-    public void increaseFood(Entity target) {
-        if (target != null) {
-            if (FoodDisplay.foodImage.size() < 4) {
-                FoodDisplay.addOrRemoveImage(1);
-            }
-        }
-    }*/
 }
