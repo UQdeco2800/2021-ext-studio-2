@@ -9,7 +9,6 @@ import com.deco2800.game.components.items.PropShopHelper;
 import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.items.InventorySystem;
-import com.deco2800.game.components.items.ItemBar;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
@@ -618,7 +617,6 @@ public class ForestGameArea extends GameArea {
         StringBuilder loggerInfo = new StringBuilder();
 
         int playerX = (int) player.getPosition().x;
-        logger.debug("player x coordinate: {}", playerX);
 
         if (firstGenerate) {
             firstGenerate = false;
@@ -640,8 +638,6 @@ public class ForestGameArea extends GameArea {
                 Entity obstacle2 = ObstacleFactory.createThornsObstacle(player);
                 spawnEntityAt(obstacle, randomPos, true, false);
                 spawnEntityAt(obstacle2, randomPos2, true, true);
-                loggerInfo.append("Create Plants Obstacle at ").append(randomPos).append("\t");
-                loggerInfo.append("Create Thorns Obstacle at ").append(randomPos2).append("\t");
             }
             logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}",
                     minPos.x, maxPos.x, randomPoints, loggerInfo);
@@ -663,7 +659,6 @@ public class ForestGameArea extends GameArea {
 
         flyingMonkey.getEvents().addListener("spawnFaceWorm", this::spawnFaceWorm);
 
-        logger.debug("Spawn a flying monkey on position = {}", randomPosTwo);
     }
 
     /**
@@ -726,22 +721,17 @@ public class ForestGameArea extends GameArea {
             if (i < bigNumRandom) { // must have a big meteorites
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) bigSize, ObstacleFactory.MeteoriteType.BigMeteorite);
-                loggerInfo.append("Big stone = ").append(point).append("\t");
             } else if (i < bigNumRandom + midNumRandom) {
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) midSize, ObstacleFactory.MeteoriteType.MiddleMeteorite);
-                loggerInfo.append("Mid stone = ").append(point).append("\t");
             } else {
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) smallSize, ObstacleFactory.MeteoriteType.SmallMeteorite);
-                loggerInfo.append("Small stone = ").append(point).append("\t");
             }
 
 
             spawnEntityAt(stone, point, true, true);
         }
-        logger.debug("bigNumRandom = {}, midNumRandom = {}, smallNumRandom = {}, stones points: {}",
-                bigNumRandom, midNumRandom, smallNumRandom, loggerInfo);
     }
 
 
@@ -757,7 +747,6 @@ public class ForestGameArea extends GameArea {
         spaceship.getEvents().addListener("spawnPortalEntrance", this::spawnPortalEntrance);
         spaceship.getEvents().addListener("spawnSmallMissile", this::spawnSmallMissile);
 
-        logger.debug("Spawn a spaceship on position = {}", position);
     }
 
     /**
@@ -772,7 +761,6 @@ public class ForestGameArea extends GameArea {
                 position, true);
         smallMissile.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0f);
         smallMissile.getComponent(PhysicsComponent.class).getBody().setGravityScale(0.1f);
-        logger.debug("Spawn a small missile on position = {}", position);
     }
 
 
@@ -785,7 +773,6 @@ public class ForestGameArea extends GameArea {
     public void spawnPortal(Vector2 position, ObstacleEventHandler.ObstacleType type) {
         Entity portal = ObstacleFactory.createPortal(player, type);
         spawnEntityAt(portal, position, true, true);
-        logger.debug("Spawn a portal on position = {}", position);
     }
 
     /**
@@ -912,7 +899,6 @@ public class ForestGameArea extends GameArea {
     }
 
     private void loadAssets() {
-        logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(forestTextures);
         resourceService.loadTextureAtlases(forestTextureAtlases);
@@ -934,7 +920,6 @@ public class ForestGameArea extends GameArea {
     }
 
     private void unloadAssets() {
-        logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(forestTextures);
         resourceService.unloadAssets(forestTextureAtlases);
