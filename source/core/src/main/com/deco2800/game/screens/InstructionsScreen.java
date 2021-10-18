@@ -25,13 +25,12 @@ public class InstructionsScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private static final String[] InstructionTextures =
             {"images/TutorialScreen1.png"};
-    private final InstructionsDisplay instructionsDisplay;
     private final Renderer renderer;
     private final Entity ui;
 
     public InstructionsScreen(GdxGame game) {
         ui = new Entity();
-        instructionsDisplay = new InstructionsDisplay(game);
+        InstructionsDisplay instructionsDisplay = new InstructionsDisplay(game);
         logger.debug("drawing props shop ui");
         ServiceLocator.registerInputService(new InputService());
         ServiceLocator.registerResourceService(new ResourceService());
