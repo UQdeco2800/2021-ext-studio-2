@@ -163,7 +163,7 @@ public class ForestGameArea extends GameArea {
      *
      * @param xValue horizontal start point
     */
-    public void spawnMagmaOne(int xValue) {
+    public void spawnFireRocksone(int xValue) {
 
         for (int i = 0; i < 5; i++) {
             GridPoint2 pos = new GridPoint2(xValue + -4 +i, 50);
@@ -207,7 +207,7 @@ public class ForestGameArea extends GameArea {
      *
      * @param xValue horizontal start point
      */
-    public void spawnMagmaThree(int xValue) {
+    public void spawnFireRocksthree(int xValue) {
 
         GridPoint2 Pos = new GridPoint2(xValue -5, 53);
         Entity rock = ObstacleFactory.createMagma(player);
@@ -220,7 +220,7 @@ public class ForestGameArea extends GameArea {
 
 
     /**
-     * Genrate large magma pyramid
+     * Genrate large rock pyramid
      * N
      * NN
      * NNN
@@ -228,7 +228,7 @@ public class ForestGameArea extends GameArea {
      *
      * @param xValue horizontal start point
      */
-    public void spawnMagmaTwo(int xValue) {
+    public void spawnFireRockstwo(int xValue) {
 
         GridPoint2 Pos = new GridPoint2(xValue + 22, 50);
         Entity rock = ObstacleFactory.createMagma(player);

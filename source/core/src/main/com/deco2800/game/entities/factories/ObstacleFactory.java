@@ -289,9 +289,9 @@ public class ObstacleFactory {
     }
 
     /**
-     * Creates a magma.
+     * Creates a firerock.
      *
-     * @return magma entity
+     * @return Firrerock entity
      */
     public static Entity createMagma(Entity target) {
         Entity obstacle = createBaseObstacle(target, BodyType.StaticBody, "Magma");
