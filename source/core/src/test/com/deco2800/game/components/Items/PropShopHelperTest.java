@@ -3,6 +3,7 @@ package com.deco2800.game.components.Items;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.ItemBar.newItembar;
 import com.deco2800.game.components.items.PropShopHelper;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
@@ -39,6 +40,19 @@ public class PropShopHelperTest {
         PropShopHelper.usePropHealth(player , 170);
         assertEquals(170, player.getComponent(CombatStatsComponent.class).getHealth());
 
+    }
+    @Test
+    void propIncreaseFood(){
+        newItembar bar = new newItembar();
+        PropShopHelper.incFood();
+        assertEquals(4,bar.foods.size());
+    }
+
+    @Test
+    void propIncreaseWater(){
+        newItembar bar = new newItembar();
+        PropShopHelper.incWater();
+        assertEquals(4,bar.waters.size());
     }
 
 }
