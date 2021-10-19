@@ -66,7 +66,7 @@ public class ObstacleEventHandler extends Component {
         switch (obstacleType) {
             case PLANTS_OBSTACLE:
                 entity.getEvents().addListener(COLLISION_START, this::plantsDisappear);
-                entity.getEvents().trigger("poison");
+
                 break;
             case THORNS_OBSTACLE:
                 entity.getEvents().addListener(COLLISION_START, this::thornsDisappear);
@@ -124,7 +124,7 @@ public class ObstacleEventHandler extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
-
+        entity.getEvents().trigger("poison");
         if (count == 0) { // Avoid an entity from repeatedly triggering an attack
             count++;
 

@@ -3,6 +3,7 @@ package com.deco2800.game.components.player;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.areas.ForestGameArea;
 
 import com.deco2800.game.components.foodAndwater.RecycleDisplay;
@@ -77,7 +78,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
       case Keys.J:
         if(entity.getComponent(CombatStatsComponent.class).getHealth() < 100){
           newItembar.usekit();
+          entity.getEvents().trigger("healthUp");
           entity.getComponent(CombatStatsComponent.class).addHealth(10);
+          removeBuff_Debuff();
           ForestGameArea.playitemMusic();
         }
         return true;
@@ -182,4 +185,18 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   public Vector2 getWalkDirection() {
     return walkDirection;
   }
+
+  //removing buff/debuff after 1s
+
+  public void removeBuff_Debuff() {
+    Timer timer=new Timer();
+    timer.scheduleTask(new Timer.Task() {
+      @Override
+      public void run() {
+        entity.getEvents().trigger("stopBuffDebuff");
+        timer.stop();
+      }
+    },1);
+  }
 }
+
