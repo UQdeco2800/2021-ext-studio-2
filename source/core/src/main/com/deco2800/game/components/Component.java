@@ -50,7 +50,6 @@ public class Component {
    * @param entity The entity to which the component is attached.
    */
   public void setEntity(Entity entity) {
-    logger.debug("Attaching {} to {}", this, entity);
     this.entity = entity;
   }
 
@@ -70,7 +69,6 @@ public class Component {
    * @param enabled Should component be enabled
    */
   public void setEnabled(boolean enabled) {
-    logger.debug("Setting enabled={} on {}", enabled, this);
     this.enabled = enabled;
   }
 

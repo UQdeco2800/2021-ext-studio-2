@@ -104,6 +104,56 @@ public class TerrainTest extends GameArea {
         verify(woodMock).dispose();
     }
 
+    @Test
+    void shouldSpawnMagma() {
+
+        GameArea gameArea =
+                new GameArea() {
+                    @Override
+                    public void create() {}
+                };
+
+        ServiceLocator.registerPhysicsService(new PhysicsService());
+        ServiceLocator.registerEntityService(new EntityService());
+        ServiceLocator.registerRenderService(new RenderService());
+        ResourceService resourceService = new ResourceService();
+        resourceService.loadTextures(forestTextures);
+        resourceService.loadAll();
+        ServiceLocator.registerResourceService(resourceService);
+        Entity MagmaMock = mock(ObstacleFactory.createWood().getClass());
+
+        gameArea.spawnEntity(MagmaMock);
+        verify(MagmaMock).create();
+
+        gameArea.dispose();
+        verify(MagmaMock).dispose();
+    }
+
+    @Test
+    void shouldSpawnNails() {
+
+        GameArea gameArea =
+                new GameArea() {
+                    @Override
+                    public void create() {}
+                };
+
+        ServiceLocator.registerPhysicsService(new PhysicsService());
+        ServiceLocator.registerEntityService(new EntityService());
+        ServiceLocator.registerRenderService(new RenderService());
+        ResourceService resourceService = new ResourceService();
+        resourceService.loadTextures(forestTextures);
+        resourceService.loadAll();
+        ServiceLocator.registerResourceService(resourceService);
+        Entity NailsMock = mock(ObstacleFactory.createWood().getClass());
+
+        gameArea.spawnEntity(NailsMock);
+        verify(NailsMock).create();
+
+        gameArea.dispose();
+        verify(NailsMock).dispose();
+    }
+
     @Override
     public void create() {
 

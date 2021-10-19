@@ -15,14 +15,15 @@ import java.util.ArrayList;
 /**
  * A ui component for displaying food system. Player lose a chicken for 3 sec
  */
-public class FoodDisplay extends UIComponent {
-    static Table table;
-    private Label timeLabel;
+public class FoodDisplay extends UIComponent{
+    static Table table;     //store food icon
+    static Table table1;    // to store hunger icon
     private final CountFoodSystem countFoodSystem = new CountFoodSystem();
     private final CountWaterSystem countFoodSystem1 = new CountWaterSystem();
     private final ScoringSystemV1 timeCount = new ScoringSystemV1();
     public static ArrayList<Image> foodImage = new ArrayList<>();
-    private int health;
+    private Image hungerIcon = new Image(ServiceLocator.getResourceService()
+            .getAsset("buff-debuff-manual/low_statu_hunger1.png", Texture.class));
 
     public FoodDisplay() { }
 
@@ -48,6 +49,7 @@ public class FoodDisplay extends UIComponent {
         table.setFillParent(true);
         table.padTop(100f).padLeft(10f);
 
+
         //Add Food image
         float foodIconSize = 30f;
         foodImage.add(new Image(ServiceLocator.getResourceService()
@@ -59,15 +61,17 @@ public class FoodDisplay extends UIComponent {
         foodImage.add(new Image(ServiceLocator.getResourceService()
                 .getAsset("images/food1.png", Texture.class)));
 
-        int chickenCurrent = 4;
-        CharSequence TimerText = chickenCurrent + "";
-        timeLabel = new Label(TimerText, skin, "large");
+
         //add images into the screen
         table.add(foodImage.get(0)).size(foodIconSize).pad(3);
         table.add(foodImage.get(1)).size(foodIconSize).pad(3);
         table.add(foodImage.get(2)).size(foodIconSize).pad(3);
         table.add(foodImage.get(3)).size(foodIconSize).pad(3);
         stage.addActor(table);
+
+        // add a new table in screen to put hunger icon
+        table1 = new Table();
+        stage.addActor(table1);
     }
 
     @Override
@@ -83,7 +87,7 @@ public class FoodDisplay extends UIComponent {
         super.update();
         int minutes = timeCount.getMinutes();
         int seconds = timeCount.getSeconds();
-        int dis = (minutes * 60 + seconds)/ 15;
+        int dis = (minutes * 60 + seconds)/ 10;
         int dis1 = (minutes * 60 + seconds);
         if(dis > countFoodSystem.getTimer()){
             countFoodSystem.setDifference(1);
@@ -103,9 +107,9 @@ public class FoodDisplay extends UIComponent {
     }
 
     public void updatePlayerHealth(int dis){
-        health = MainGameScreen.players.getComponent(CombatStatsComponent.class).getHealth();
+        int health = MainGameScreen.players.getComponent(CombatStatsComponent.class).getHealth();
         if(dis == 2){
-            if(foodImage.size() <= 0 && health<100){
+            if(foodImage.size() <= 0 && health <100){
                 //if water icon count less than 0, then it will be into that codes to run. it reduce player health value.
                 //reduce player health value
                 MainGameScreen.players.getComponent(CombatStatsComponent.class).setHealth(
@@ -121,6 +125,7 @@ public class FoodDisplay extends UIComponent {
     public void updatePlayerTimerUI(int dis) {
         if(dis > 0){
             if(foodImage.size() > 0){
+                table1.reset();
                 table.reset();
                 table.top().left();
                 table.setFillParent(true);
@@ -129,6 +134,13 @@ public class FoodDisplay extends UIComponent {
                 for (Image ima: foodImage) {
                     table.add(ima).size(30f).pad(3);
                 }
+            }
+            if(foodImage.size() <= 0){
+                table1.reset();
+                table1.top().left();
+                table1.setFillParent(true);
+                table1.padTop(260f).padLeft(60f);
+                table1.add(hungerIcon).size(50f).pad(3);
             }
         }
     }
@@ -139,7 +151,6 @@ public class FoodDisplay extends UIComponent {
     @Override
     public void dispose() {
         super.dispose();
-        timeLabel.remove();
         for (int i = 0; i < foodImage.size(); ++i){
             foodImage.remove(i);
         }

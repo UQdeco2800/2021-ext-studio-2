@@ -15,11 +15,11 @@ public class newItembar extends Component{
     /**
      * waters stored in item bar
      */
-    private static ArrayList<String> waters;
+    public static ArrayList<String> waters;
     /**
      * foods stored in item bar
      */
-    private static ArrayList<String> foods;
+    public static ArrayList<String> foods;
     /**
      * kits stored in item bar
      */
@@ -56,7 +56,7 @@ public class newItembar extends Component{
     /**
      * food number plus one
      */
-    public void addfood(){
+    public  void addfood(){
         if(foods.size()<capacity){
             foods.add("food");
         }

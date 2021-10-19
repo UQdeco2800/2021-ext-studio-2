@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
@@ -65,7 +66,8 @@ public class ObstacleFactory {
                 .addComponent(animator)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 10f))
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PLANTS_OBSTACLE));
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PLANTS_OBSTACLE))
+                .addComponent(new DeBuff(target));
 
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
         obstacle.setScale(2, 3);
@@ -114,10 +116,8 @@ public class ObstacleFactory {
     }
 
     /**
-     * Creates a Thorns Obstacle.
+     * Creates a Weapon attack effect for player.
      *
-     //     * @param target character.
-     * @return the thorns obstacle entity
      */
     public static Entity createWeapon() {
 
@@ -132,10 +132,9 @@ public class ObstacleFactory {
 
         weapon.setScale(0.5f, 0.5f);
         weapon.setZIndex(1);
-//        logger.debug("Create a Thorns Obstacle");
         particle.startEffect();
         weapon.setDisappearAfterParticle(2f, Entity.DisappearType.PARTICLE);
-
+        logger.debug("Create a Weapon attack");
         return weapon;
     }
 

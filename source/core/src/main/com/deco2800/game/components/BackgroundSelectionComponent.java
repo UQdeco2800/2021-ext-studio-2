@@ -1,6 +1,8 @@
 package com.deco2800.game.components;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -103,22 +105,22 @@ public class BackgroundSelectionComponent extends UIComponent {
 
         renderTracks();
 
-        dialog.getButtonTable().add(renderCloseButton()).size(50, 50).row();
+        dialog.getButtonTable().add(renderCloseButton()).size(100, 100).row();
 
         dialog.show(stage);
     }
 
     private void renderTracks() {
-        Label heading = new Label("Select background music for " + screenName, skin);
-        heading.setFontScale(1.5f);
+        Label heading = new Label("Select background music for " + screenName, new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        heading.setFontScale(2.0f);
         dialog.getContentTable().add(heading).expandX().row();
 
         String chosenTrack = BackgroundMusic.getSelectedMusic(screenName);
         for (String trackPath : BackgroundMusic.getAllMusicByScreen(screenName)) {
             if (trackPath.equals(chosenTrack)) {
-                dialog.getContentTable().add(getTrackTable(trackPath, true)).padTop(30).row();
+                dialog.getContentTable().add(getTrackTable(trackPath, true)).padTop(30).padLeft(120).row();
             } else {
-                dialog.getContentTable().add(getTrackTable(trackPath, false)).padTop(30).row();
+                dialog.getContentTable().add(getTrackTable(trackPath, false)).padTop(30).padLeft(120).row();
             }
         }
     }
@@ -161,8 +163,8 @@ public class BackgroundSelectionComponent extends UIComponent {
     }
 
     private Label getLabel(String text) {
-        Label trackLabel = new Label(text, skin);
-        trackLabel.setFontScale(1.1f);
+        Label trackLabel = new Label(text, new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        trackLabel.setFontScale(1.5f);
         trackLabel.setWrap(true);
         trackLabel.setAlignment(Align.topLeft);
         return trackLabel;

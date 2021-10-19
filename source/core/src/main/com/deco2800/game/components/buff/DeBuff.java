@@ -3,12 +3,16 @@ package com.deco2800.game.components.buff;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.Component;
 import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.components.foodAndwater.FoodDisplay;
 import com.deco2800.game.components.foodAndwater.WaterDisplay;
+import com.deco2800.game.services.ServiceLocator;
 
-public class DeBuff{
+import java.time.chrono.IsoEra;
+
+public class DeBuff extends Component {
     /**
      * player
      */
@@ -17,10 +21,17 @@ public class DeBuff{
     /**
      * player's status
      */
-    private final CombatStatsComponent component;
+    private CombatStatsComponent component;
     public DeBuff(Entity player){
         this.player = player;
         component = this.player.getComponent(CombatStatsComponent.class);
+    }
+
+
+    @Override
+    public void create() {
+        super.create();
+        entity.getEvents().addListener("poison", this::poisoning);
     }
 
     /**
@@ -38,31 +49,25 @@ public class DeBuff{
 
     /**
      * A poisoning status of Player
-     * @throws InterruptedException
      */
-    public void poisoning() throws InterruptedException {
-        this.stopFlag = false;
+    public void poisoning() {
         PlayerStatsDisplay playerComponent = this.player.getComponent(PlayerStatsDisplay.class);
-        if (playerComponent!=null){
-            playerComponent.addPoisoningImage();
-        }
-        for (int i = 0; i < 3; i++) {
-            if (!stopFlag){
-                component.addHealth(-10);
-                player.getEvents().trigger("poisoned");
-                Thread.sleep(500);
+        player.getEvents().trigger("poisoned");
+        long lasthealthdeductiontime = 0;
+        int counter=0;
+        do {
+            long time = ServiceLocator.getTimeSource().getTime();
+            if (time - lasthealthdeductiontime >= 500) {
+                ++counter;
+                lasthealthdeductiontime = time;
+                component.addHealth(-5);
             }
-        }
-        if (playerComponent!=null){
-            playerComponent.removePoisoningImage();
-        }
+        } while (counter != 2);
         removeBuff_Debuff();
     }
 
-    public void removePoisoning()   {
-        player.getEvents().trigger("stopBuffDebuff");
-        this.stopFlag = true;
-    }
+
+
 
     /**
      * Player's movement will be slow
@@ -89,7 +94,7 @@ public class DeBuff{
                 player.getEvents().trigger("stopBuffDebuff");
                 timer.stop();
             }
-        },1);
+        },10);
     }
     public void removeSlowSpeed()   {
         player.updateSpeed(new Vector2(4,8));

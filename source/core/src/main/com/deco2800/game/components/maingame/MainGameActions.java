@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
  * events is triggered.
  */
 public class MainGameActions extends Component {
-  private static final Logger logger = LoggerFactory.getLogger(MainGameActions.class);
   private final GdxGame game;
 
   public MainGameActions(GdxGame game) {
@@ -26,7 +25,6 @@ public class MainGameActions extends Component {
    * Swaps to the Main Menu screen.
    */
   private void onExit() {
-    logger.info("Exiting main game screen");
     game.setScreen(GdxGame.ScreenType.MAIN_MENU);
   }
 }

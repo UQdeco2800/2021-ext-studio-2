@@ -83,8 +83,6 @@ public class CombatStatsComponent extends Component {
   public void setBaseAttack(int attack) {
     if (attack >= 0) {
       this.baseAttack = attack;
-    } else {
-      logger.error("Can not set base attack to a negative attack value");
     }
   }
 
@@ -96,11 +94,7 @@ public class CombatStatsComponent extends Component {
 
 
   public void setHealthMax(int healthMax) {
-    if (healthMax >= 0) {
-      this.healthMax = healthMax;
-    } else {
-      this.healthMax = 0;
-    }
+    this.healthMax = Math.max(healthMax, 0);
 
   }
   public int getHealthMax() {

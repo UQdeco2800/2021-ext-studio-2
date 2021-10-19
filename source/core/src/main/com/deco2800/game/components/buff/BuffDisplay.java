@@ -79,7 +79,6 @@ public class BuffDisplay extends UIComponent {
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("return menu button clicked");
                         game.setScreen(GdxGame.ScreenType.MAIN_MENU);
                     }
                 });
@@ -229,17 +228,14 @@ public class BuffDisplay extends UIComponent {
         buttonTable = new Table();
         buttonTable.bottom().right();
         buttonTable.padBottom(100f).padRight(110f);
-//        buttonTable.center();
 
         buttonTable.setFillParent(true);
         buttonTable.add(mainMenuButton);
-        // buttonTable.add(unlockedChapterImg);
 
         box = new Image(ServiceLocator.getResourceService()
                 .getAsset("buff-debuff-manual/manual-box.png", Texture.class));
-
-
-        boardTable.add(box).size(700, 900);
+         
+        boardTable.add(box).size(700, 800);
 
         //this table contains the background image
         Image bgImage = new Image(ServiceLocator.getResourceService()

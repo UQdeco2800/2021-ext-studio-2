@@ -24,7 +24,7 @@ public class InstructionsScreen extends ScreenAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private static final String[] InstructionTextures =
-            {"images/TutorialScreen1.png"};
+            {"game-instruction/tutorialScreen_new.png"};
     private final Renderer renderer;
     private final Entity ui;
 

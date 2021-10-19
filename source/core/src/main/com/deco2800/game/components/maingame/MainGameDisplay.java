@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
  * A ui component for displaying the Main game.
  */
 public class MainGameDisplay extends UIComponent {
-    private static final Logger logger = LoggerFactory.getLogger(MainGameDisplay.class);
     private static final float Z_INDEX = 1f;
     private Table table;
 

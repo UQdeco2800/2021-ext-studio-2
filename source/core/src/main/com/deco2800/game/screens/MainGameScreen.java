@@ -43,6 +43,7 @@ import org.slf4j.LoggerFactory;
  * <p>Details on libGDX screens: https://happycoding.io/tutorials/libgdx/game-screens
  */
 public class MainGameScreen extends ScreenAdapter {
+    private long lastSpawnTime = 0;
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private static final String[] mainGameTextures = {"images/heart.png", "images/clockV2.png",
             "images/scoreboardV2.png", "images/background.png", "images/water1.png", "images/food1.png",
@@ -55,17 +56,25 @@ public class MainGameScreen extends ScreenAdapter {
             "images/itembar/item/itembar-blood.png",
             "images/itembar/item/itembar-water.png",
             "images/itembar/item/itembar-leg.png",
-            "images/itembar/recycle/recycle-256px-bb1.png",
-            "images/itembar/recycle/recycle-256px-bb2.png",
-            "images/itembar/recycle/recycle-256px-bb3.png",
-            "images/itembar/recycle/recycle-256px-default.png",
-            "images/itembar/recycle/recycle-256px-leg1.png",
-            "images/itembar/recycle/recycle-256px-leg2.png",
-            "images/itembar/recycle/recycle-256px-leg3.png",
-            "images/itembar/recycle/recycle-256px-water1.png",
-            "images/itembar/recycle/recycle-256px-water2.png",
-            "images/itembar/recycle/recycle-256px-water3.png",
+            "images/itembar/recycle-256px-bb1.png",
+            "images/itembar/recycle-256px-bb2.png",
+            "images/itembar/recycle-256px-bb3.png",
+            "images/itembar/recycle-default.png",
+            "images/itembar/recycle-256px-leg1.png",
+            "images/itembar/recycle-256px-leg2.png",
+            "images/itembar/recycle-256px-leg3.png",
+            "images/itembar/recycle-256px-water1.png",
+            "images/itembar/recycle-256px-water2.png",
+            "images/itembar/recycle-256px-water3.png",
             "images/pao.png",
+            "buff-debuff-manual/low_statu_hunger1.png",
+            "buff-debuff-manual/low_statu_thirst1.png",
+            "images/itembar/item-rework-s4/itembar-blood-s4.png",
+            "images/itembar/item-rework-s4/itembar-water-s4.png",
+            "images/itembar/item-rework-s4/itembar-leg-s4.png",
+            "images/itembar/item-rework-s4/itembar-rocket-s4.png",
+            "buff-debuff-manual/low_statu_hunger1.png",
+            "buff-debuff-manual/low_statu_thirst1.png",
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
     /* new map status, to control if the player into/out the new map*/
@@ -215,7 +224,7 @@ public class MainGameScreen extends ScreenAdapter {
     }
 
     /**
-     * Slow down the player, called by render().
+     * Transfer the player by two map.
      */
     private void transferPlayerByMap() {
         if (newMapStatus == NewMap.START) {
@@ -371,6 +380,11 @@ public class MainGameScreen extends ScreenAdapter {
                 forestGameArea.spawnNailsfour((int) (screenVector.x + 2));
                 forestGameArea.spawnGoldNewMapRandomly((int) (screenVector.x + 2));
             }
+        }
+        long time = ServiceLocator.getTimeSource().getTime();
+        if((time - lastSpawnTime) > 5000){
+            forestGameArea.spawnFirstAid();
+            lastSpawnTime = time;
         }
         // else: do nothing
     }

@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 public class InstructionsDisplay extends UIComponent {
 
-    private static final Logger logger = LoggerFactory.getLogger(InstructionsDisplay.class);
     private final GdxGame game;
     Table bgTable;
     Table buttonTable;
@@ -37,14 +36,13 @@ public class InstructionsDisplay extends UIComponent {
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.info("return menu button clicked");
                         game.setScreen(GdxGame.ScreenType.MAIN_MENU);
                     }
                 });
 
 
         Image bgImage = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/TutorialScreen1.png", Texture.class));
+                .getAsset("game-instruction/tutorialScreen_new.png", Texture.class));
         bgImage.setScaling(Scaling.fit);
         buttonTable = new Table();
         buttonTable.setFillParent(true);

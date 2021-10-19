@@ -10,7 +10,6 @@ import com.deco2800.game.components.items.PropShopHelper;
 import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.achievements.AchievementsBonusItems;
 import com.deco2800.game.components.items.InventorySystem;
-import com.deco2800.game.components.items.ItemBar;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.*;
@@ -322,17 +321,25 @@ public class ForestGameArea extends GameArea {
             "images/itembar/item/itembar-blood.png",
             "images/itembar/item/itembar-water.png",
             "images/itembar/item/itembar-leg.png",
-            "images/itembar/recycle/recycle-256px-bb1.png",
-            "images/itembar/recycle/recycle-256px-bb2.png",
-            "images/itembar/recycle/recycle-256px-bb3.png",
-            "images/itembar/recycle/recycle-256px-default.png",
-            "images/itembar/recycle/recycle-256px-leg1.png",
-            "images/itembar/recycle/recycle-256px-leg2.png",
-            "images/itembar/recycle/recycle-256px-leg3.png",
-            "images/itembar/recycle/recycle-256px-water1.png",
-            "images/itembar/recycle/recycle-256px-water2.png",
-            "images/itembar/recycle/recycle-256px-water3.png",
+            "images/itembar/recycle-256px-bb1.png",
+            "images/itembar/recycle-256px-bb2.png",
+            "images/itembar/recycle-256px-bb3.png",
+            "images/itembar/recycle-default.png",
+            "images/itembar/recycle-256px-leg1.png",
+            "images/itembar/recycle-256px-leg2.png",
+            "images/itembar/recycle-256px-leg3.png",
+            "images/itembar/recycle-256px-water1.png",
+            "images/itembar/recycle-256px-water2.png",
+            "images/itembar/recycle-256px-water3.png",
             "images/pao.png",
+            "buff-debuff-manual/low_statu_hunger1.png",
+            "buff-debuff-manual/low_statu_thirst1.png",
+            "images/itembar/item-rework-s4/itembar-blood-s4.png",
+            "images/itembar/item-rework-s4/itembar-water-s4.png",
+            "images/itembar/item-rework-s4/itembar-leg-s4.png",
+            "images/itembar/item-rework-s4/itembar-rocket-s4.png",
+            "buff-debuff-manual/low_statu_hunger1.png",
+            "buff-debuff-manual/low_statu_thirst1.png",
 
 
     };
@@ -360,17 +367,25 @@ public class ForestGameArea extends GameArea {
             "images/itembar/item/itembar-blood.png",
             "images/itembar/item/itembar-water.png",
             "images/itembar/item/itembar-leg.png",
-            "images/itembar/recycle/recycle-256px-bb1.png",
-            "images/itembar/recycle/recycle-256px-bb2.png",
-            "images/itembar/recycle/recycle-256px-bb3.png",
-            "images/itembar/recycle/recycle-256px-default.png",
-            "images/itembar/recycle/recycle-256px-leg1.png",
-            "images/itembar/recycle/recycle-256px-leg2.png",
-            "images/itembar/recycle/recycle-256px-leg3.png",
-            "images/itembar/recycle/recycle-256px-water1.png",
-            "images/itembar/recycle/recycle-256px-water2.png",
-            "images/itembar/recycle/recycle-256px-water3.png",
-            "images/pao.png"
+            "images/itembar/recycle-256px-bb1.png",
+            "images/itembar/recycle-256px-bb2.png",
+            "images/itembar/recycle-256px-bb3.png",
+            "images/itembar/recycle-default.png",
+            "images/itembar/recycle-256px-leg1.png",
+            "images/itembar/recycle-256px-leg2.png",
+            "images/itembar/recycle-256px-leg3.png",
+            "images/itembar/recycle-256px-water1.png",
+            "images/itembar/recycle-256px-water2.png",
+            "images/itembar/recycle-256px-water3.png",
+            "images/pao.png",
+            "buff-debuff-manual/low_statu_hunger1.png",
+            "buff-debuff-manual/low_statu_thirst1.png",
+            "images/itembar/item-rework-s4/itembar-blood-s4.png",
+            "images/itembar/item-rework-s4/itembar-water-s4.png",
+            "images/itembar/item-rework-s4/itembar-leg-s4.png",
+            "images/itembar/item-rework-s4/itembar-rocket-s4.png",
+            "buff-debuff-manual/low_statu_hunger1.png",
+            "buff-debuff-manual/low_statu_thirst1.png",
 
 
     };
@@ -624,7 +639,6 @@ public class ForestGameArea extends GameArea {
         StringBuilder loggerInfo = new StringBuilder();
 
         int playerX = (int) player.getPosition().x;
-        logger.debug("player x coordinate: {}", playerX);
 
         if (firstGenerate) {
             firstGenerate = false;
@@ -646,8 +660,6 @@ public class ForestGameArea extends GameArea {
                 Entity obstacle2 = ObstacleFactory.createThornsObstacle(player);
                 spawnEntityAt(obstacle, randomPos, true, false);
                 spawnEntityAt(obstacle2, randomPos2, true, true);
-                loggerInfo.append("Create Plants Obstacle at ").append(randomPos).append("\t");
-                loggerInfo.append("Create Thorns Obstacle at ").append(randomPos2).append("\t");
             }
             logger.debug("Min x: {}, Max x: {}; Total randomPoints {}; Obstacles: {}",
                     minPos.x, maxPos.x, randomPoints, loggerInfo);
@@ -669,7 +681,6 @@ public class ForestGameArea extends GameArea {
 
         flyingMonkey.getEvents().addListener("spawnFaceWorm", this::spawnFaceWorm);
 
-        logger.debug("Spawn a flying monkey on position = {}", randomPosTwo);
     }
 
     /**
@@ -732,22 +743,17 @@ public class ForestGameArea extends GameArea {
             if (i < bigNumRandom) { // must have a big meteorites
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) bigSize, ObstacleFactory.MeteoriteType.BigMeteorite);
-                loggerInfo.append("Big stone = ").append(point).append("\t");
             } else if (i < bigNumRandom + midNumRandom) {
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) midSize, ObstacleFactory.MeteoriteType.MiddleMeteorite);
-                loggerInfo.append("Mid stone = ").append(point).append("\t");
             } else {
                 stone = ObstacleFactory.createMeteorite(player,
                         (float) smallSize, ObstacleFactory.MeteoriteType.SmallMeteorite);
-                loggerInfo.append("Small stone = ").append(point).append("\t");
             }
 
 
             spawnEntityAt(stone, point, true, true);
         }
-        logger.debug("bigNumRandom = {}, midNumRandom = {}, smallNumRandom = {}, stones points: {}",
-                bigNumRandom, midNumRandom, smallNumRandom, loggerInfo);
     }
 
 
@@ -764,7 +770,6 @@ public class ForestGameArea extends GameArea {
         spaceship.getEvents().addListener("spawnPortalEntrance", this::spawnPortalEntrance);
         spaceship.getEvents().addListener("spawnSmallMissile", this::spawnSmallMissile);
 
-        logger.debug("Spawn a spaceship on position = {}", position);
     }
 
     /**
@@ -779,7 +784,6 @@ public class ForestGameArea extends GameArea {
                 position, true);
         smallMissile.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0f);
         smallMissile.getComponent(PhysicsComponent.class).getBody().setGravityScale(0.1f);
-        logger.debug("Spawn a small missile on position = {}", position);
     }
 
 
@@ -792,7 +796,6 @@ public class ForestGameArea extends GameArea {
     public void spawnPortal(Vector2 position, ObstacleEventHandler.ObstacleType type) {
         Entity portal = ObstacleFactory.createPortal(player, type);
         spawnEntityAt(portal, position, true, true);
-        logger.debug("Spawn a portal on position = {}", position);
     }
 
     /**
@@ -806,13 +809,13 @@ public class ForestGameArea extends GameArea {
     }
 
 
-    private void spawnFirstAid() {
+    public void spawnFirstAid() {
 
-        for (int i = 1; i < 31; i++) {
-            GridPoint2 position = new GridPoint2(i * 3, 5);
-            Entity firstAid = ItemFactory.createFirstAid(player, pro);
-            spawnEntityAt(firstAid, position, false, false);
-        }
+        Vector2 vector2 = new Vector2(this.player.getPosition());
+        Entity firstAid = ItemFactory.createFirstAid(player,pro);
+        vector2.add(5, 0);
+        firstAid.setPosition(vector2);
+        ServiceLocator.getEntityService().register(firstAid);
     }
 
     private void spawnGold() {
@@ -859,7 +862,7 @@ public class ForestGameArea extends GameArea {
     private void spawnWeapon(Vector2 position) {
         Entity weapon = ObstacleFactory.createWeapon();
         float x = player.getComponent(PlayerActions.class).getWalkDirection().x;
-        Vector2 generatePosition = position.cpy().sub(0, -1);
+        Vector2 generatePosition = position.cpy().sub(-1, -1);
         weapon.getComponent(PhysicsComponent.class).getBody().applyLinearImpulse(new Vector2(3 * x + 10, 0),
                 generatePosition, true);
         weapon.getComponent(PhysicsComponent.class).getBody().setLinearDamping(0.5f);
@@ -920,7 +923,6 @@ public class ForestGameArea extends GameArea {
     }
 
     private void loadAssets() {
-        logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(forestTextures);
         resourceService.loadTextureAtlases(forestTextureAtlases);
@@ -942,7 +944,6 @@ public class ForestGameArea extends GameArea {
     }
 
     private void unloadAssets() {
-        logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(forestTextures);
         resourceService.unloadAssets(forestTextureAtlases);

@@ -98,7 +98,10 @@ public class Entity {
         this.enabled = enabled;
     }
 
-
+    /**
+     * Get entity type.
+     * @return
+     */
     public String getType() {
         return this.type;
     }
@@ -146,6 +149,12 @@ public class Entity {
 
     /**
      * Set removeCollision to true. The code that works subsequently is in update.
+     * When the character's attack hits an obstacle, the obstacle triggers the effect of collision disappearance.
+     * However, due to the issue of the animation's playing time, the character will still lose blood if the character
+     * collides with an obstacle when the animation is not completed. Therefore, when a character attacks, the obstacle
+     * needs to be removed in advance of the collision component.
+     *
+     * Note: only use when attack to obstacles.
      */
     public void setRemoveCollision() {
         this.removeCollision = true;
@@ -172,6 +181,14 @@ public class Entity {
      */
     public boolean isRemoveTexture() {
         return removeTexture;
+    }
+
+    /**
+     * Getter method of removeCollision
+     * @return
+     */
+    public boolean isRemoveCollision() {
+        return removeCollision;
     }
 
     /**
@@ -373,6 +390,10 @@ public class Entity {
                 component.dispose();
                 i.remove();
                 logger.debug("{} disposed on entity {}", component.getClass().getSimpleName(), this);
+            } else {
+                if (((AnimationRenderComponent) component).getCurrentAnimation() != null) {
+                    ((AnimationRenderComponent) component).stopAnimation();
+                }
             }
         }
         ServiceLocator.getEntityService().unregister(this);
@@ -476,7 +497,7 @@ public class Entity {
                 if (component.getClass().equals(HitboxComponent.class) || component.getClass().equals(ColliderComponent.class)) {
                     component.dispose();
                     i.remove();
-                    logger.info("Remove {} on entity{}", component.getClass().getSimpleName(), this);
+                    logger.debug("Remove {} on entity{}", component.getClass().getSimpleName(), this);
 
                 }
             }

@@ -2,6 +2,7 @@ package com.deco2800.game.components.obstacle;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -65,6 +66,7 @@ public class ObstacleEventHandler extends Component {
         switch (obstacleType) {
             case PLANTS_OBSTACLE:
                 entity.getEvents().addListener(COLLISION_START, this::plantsDisappear);
+                entity.getEvents().trigger("poison");
                 break;
             case THORNS_OBSTACLE:
                 entity.getEvents().addListener(COLLISION_START, this::thornsDisappear);
@@ -134,13 +136,9 @@ public class ObstacleEventHandler extends Component {
             animator.getEntity().setDisappearAfterAnimation(1f, Entity.DisappearType.ANIMATION);
             locked = false;
             if (PhysicsLayer.contains(PhysicsLayer.WEAPON, other.getFilterData().categoryBits)) {
-                System.out.println("setRemoveCollision");
                 this.entity.setRemoveCollision();
             }
-
         }
-
-
     }
     /**
      * When the monitored event is triggered, play the mpc burning animation.
@@ -275,7 +273,6 @@ public class ObstacleEventHandler extends Component {
     void spaceshipDispose() {
         logger.debug("spaceshipDispose event was triggered.");
         this.getEntity().setDispose();
-//        this.entity.setDisappearAfterAnimation(2f, Entity.DisappearType.ANIMATION);
     }
 
     /**
@@ -339,7 +336,7 @@ public class ObstacleEventHandler extends Component {
 
 
     /**
-     * Triggered when the character encounters a new map exit.
+     * Triggered when the weapon hit obstacles, ground and missile.
      *
      * @param me    self fixture
      * @param other The fixture of the entity that started the collision
@@ -356,7 +353,7 @@ public class ObstacleEventHandler extends Component {
             return;
         }
         this.entity.setDispose();
-        logger.info(COLLISION_LOGGER_INFO, entity.toString());
+        logger.debug(COLLISION_LOGGER_INFO, entity.toString());
     }
 
 
@@ -405,12 +402,5 @@ public class ObstacleEventHandler extends Component {
         return spaceshipAttack;
     }
 
-    /**
-     * getter method for count
-     *
-     * @return how many times the event was triggered
-     */
-    public int getCount() {
-        return count;
-    }
+
 }
