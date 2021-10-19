@@ -48,13 +48,18 @@ public class ItemBarDisplay extends UIComponent {
         float itemLength = 60f;
 
         itemImage.add(new Image(ServiceLocator.getResourceService()
-                .getAsset("images/itembar/item/itembar-blood.png", Texture.class)));
+//                .getAsset("images/itembar/item/itembar-blood.png", Texture.class)));
+                .getAsset("images/itembar/item-rework-s4/itembar-blood-s4.png", Texture.class)));
         itemImage.add(new Image(ServiceLocator.getResourceService()
-                .getAsset("images/itembar/item/itembar-water.png", Texture.class)));
+//                .getAsset("images/itembar/item/itembar-water.png", Texture.class)));
+                .getAsset("images/itembar/item-rework-s4/itembar-water-s4.png", Texture.class)));
         itemImage.add(new Image(ServiceLocator.getResourceService()
-                .getAsset("images/itembar/item/itembar-leg.png", Texture.class)));
+//                .getAsset("images/itembar/item/itembar-leg.png", Texture.class)));
+                .getAsset("images/itembar/item-rework-s4/itembar-leg-s4.png", Texture.class)));
         itemImage.add(new Image(ServiceLocator.getResourceService()
-                .getAsset("images/pao.png", Texture.class)));
+//                .getAsset("images/pao.png", Texture.class)));
+                .getAsset("images/itembar/item-rework-s4/itembar-rocket-s4.png", Texture.class)));
+
 
         itembartable.add(itemImage.get(0)).size(itemLength).pad(16);
         itembartable.add(itemImage.get(1)).size(itemLength).pad(16);
