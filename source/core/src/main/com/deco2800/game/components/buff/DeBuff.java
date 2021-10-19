@@ -60,9 +60,9 @@ public class DeBuff extends Component {
             if (time - lasthealthdeductiontime >= 500) {
                 ++counter;
                 lasthealthdeductiontime = time;
-                component.addHealth(-1);
+                component.addHealth(-5);
             }
-        } while (counter != 1);
+        } while (counter != 2);
         removeBuff_Debuff();
     }
 
