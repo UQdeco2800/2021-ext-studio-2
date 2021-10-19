@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
@@ -18,7 +19,7 @@ public class ItemBarDisplay extends UIComponent {
     private static Label countlabel;
     private static final ArrayList<Image> itemImage = new ArrayList<>();
     private static final newItembar bar = new newItembar();
-
+    Image image = new Image();
     /**
      * Creates reusable ui styles and adds actors to the stage.
      */
@@ -64,6 +65,7 @@ public class ItemBarDisplay extends UIComponent {
         stage.addActor(itembartable);
         stage.addActor(counttable);
     }
+
 
     /**
      * @param item the item should be added or removed in item bar

@@ -58,6 +58,20 @@ public class DeBuff{
         }
         removeBuff_Debuff();
     }
+    public void poisoningDisplay()
+    {
+        PlayerStatsDisplay playerComponent = this.player.getComponent(PlayerStatsDisplay.class);
+        //playerComponent.addPoisoningImage2();
+        player.getEvents().trigger("poisoned");
+        removeBuff_Debuff();
+    }
+
+    public void decreaseHealthDisplay()
+    {
+        PlayerStatsDisplay playerComponent = this.player.getComponent(PlayerStatsDisplay.class);
+        player.getEvents().trigger("dizzy");
+        removeBuff_Debuff();
+    }
 
     public void removePoisoning()   {
         player.getEvents().trigger("stopBuffDebuff");
@@ -87,6 +101,16 @@ public class DeBuff{
             @Override
             public void run() {
                 player.getEvents().trigger("stopBuffDebuff");
+                timer.stop();
+            }
+        },5);
+    }
+    public void removeImage() {
+        Timer timer=new Timer();
+        timer.scheduleTask(new Timer.Task() {
+            @Override
+            public void run() {
+                player.getEvents().trigger("removeImage");
                 timer.stop();
             }
         },1);

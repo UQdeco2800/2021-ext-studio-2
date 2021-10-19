@@ -2,6 +2,7 @@ package com.deco2800.game.components.items;
 
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.ItemBar.newItembar;
+import com.deco2800.game.components.buff.Buff;
 import com.deco2800.game.entities.Entity;
 
 public class TestBuffForItem {
@@ -19,6 +20,8 @@ public class TestBuffForItem {
         if(health < 100) {
             target.getComponent(CombatStatsComponent.class).addHealth(0);
         }
+            Buff object = new Buff(target);
+            object.increaseHealthLimitDisplay();
         newItembar.addkit();
         if(countNumber < 3){
             countNumber+=0.5;

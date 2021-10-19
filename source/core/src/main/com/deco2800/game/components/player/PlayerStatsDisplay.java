@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.achievements.AchievementsHelper;
 import com.deco2800.game.components.score.ScoringSystemV1;
+import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
@@ -32,6 +33,7 @@ public class PlayerStatsDisplay extends UIComponent {
     private Image goldImage;
     private Label bonusGoldLabel;
     private Label goldLabel;
+
 
     /**
      * Creates reusable ui styles and adds actors to the stage.
@@ -83,6 +85,7 @@ public class PlayerStatsDisplay extends UIComponent {
         heartImage = new Image(ServiceLocator.getResourceService().getAsset("images/heart.png", Texture.class));
         poisoningImage = new Image(ServiceLocator.getResourceService().getAsset("images/Sprint2_Buffs_Debuffs/Poisoning.png",
                 Texture.class));
+        poisoningImage.setScale(3,3);
         decreaseSpeedImage = new Image(ServiceLocator.getResourceService().getAsset("images/Sprint2_Buffs_Debuffs" +
                 "/decrease_speed.png", Texture.class));
         increaseHealthImage = new Image(ServiceLocator.getResourceService().getAsset("images/Sprint2_Buffs_Debuffs/increase_health.png",
@@ -91,6 +94,8 @@ public class PlayerStatsDisplay extends UIComponent {
                 Texture.class));
         decreaseHealthImage = new Image(ServiceLocator.getResourceService().getAsset("images/Sprint2_Buffs_Debuffs/decrease_health.png",
                 Texture.class));
+
+
         // Health text
         int health = entity.getComponent(CombatStatsComponent.class).getHealth();
         CharSequence healthText = String.format("Health: %d", health);
@@ -148,6 +153,10 @@ public class PlayerStatsDisplay extends UIComponent {
         table.add(poisoningImage).size(buffSideLength).pad(5);
         stage.addActor(table);
     }
+    public void addPoisoningImage2() {
+        table.add(poisoningImage).size(buffSideLength).pad(5).pad(15,20,5,5);
+        stage.addActor(table);
+    }
 
     public void removePoisoningImage() {
         poisoningImage.remove();
@@ -173,6 +182,7 @@ public class PlayerStatsDisplay extends UIComponent {
         if (table.getCell(increaseHealthImage)==null){
 
             table.add(increaseHealthImage).size(buffSideLength).pad(5);
+
         }
     }
 

@@ -65,7 +65,7 @@ public class NPCFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new EnemyAnimationController())
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.FACE_WORM));
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.FACE_WORM, target));
 
         FaceWorm.setScale(2.4f, 2.4f);
         logger.debug("Create a Face Worm");
@@ -133,7 +133,7 @@ public class NPCFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                 .addComponent(animator)
                 .addComponent(new SpaceshipAttackController().setPlayer(target))
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SPACESHIP))
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SPACESHIP, target))
                 .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.SPACESHIP,
                         "sounds/spacecraft_floating.mp3"));
 
@@ -174,7 +174,7 @@ public class NPCFactory {
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SMALL_MISSILE))
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.SMALL_MISSILE, target))
                 .addComponent(new SoundComponent(ObstacleEventHandler.ObstacleType.SMALL_MISSILE,
                         "sounds/missile_explosion.mp3"))
                 .addComponent(particle);
