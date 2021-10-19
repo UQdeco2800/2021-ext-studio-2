@@ -2,6 +2,7 @@ package com.deco2800.game.services;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
 import org.junit.jupiter.api.AfterEach;
@@ -36,8 +37,10 @@ class ScoreServiceTest {
     }
 
     @Test
-    void saveCurrentScoreToHistory() {
-        //will do
+    void getDistance() {
+        Entity player = new Entity();
+        assertEquals(player.getPosition(), new Vector2());
+
     }
 
     @AfterEach
