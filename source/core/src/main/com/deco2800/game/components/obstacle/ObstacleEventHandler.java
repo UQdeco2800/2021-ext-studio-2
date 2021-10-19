@@ -2,6 +2,7 @@ package com.deco2800.game.components.obstacle;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -65,6 +66,7 @@ public class ObstacleEventHandler extends Component {
         switch (obstacleType) {
             case PLANTS_OBSTACLE:
                 entity.getEvents().addListener(COLLISION_START, this::plantsDisappear);
+                entity.getEvents().trigger("poison");
                 break;
             case THORNS_OBSTACLE:
                 entity.getEvents().addListener(COLLISION_START, this::thornsDisappear);
