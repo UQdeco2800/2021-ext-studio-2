@@ -87,6 +87,9 @@ public class PlayerAnimationController extends Component {
             case MAIN_PLAYER_HURT:
                 animator.startAnimation("main_player_hurt_hungry");
                 break;
+            case MAIN_PLAYER_BURN:
+                animator.startAnimation("main_player_burn_hungry");
+                break;
             case MAIN_PLAYER_WALK:
             default:
                 animator.startAnimation("main_player_walk_hungry");
@@ -120,6 +123,9 @@ public class PlayerAnimationController extends Component {
                 break;
             case MAIN_PLAYER_HURT:
                 animator.startAnimation("main_player_hurt_poisoned");
+                break;
+            case MAIN_PLAYER_BURN:
+                animator.startAnimation("main_player_burn_poisoned");
                 break;
             case MAIN_PLAYER_WALK:
             default:
@@ -155,6 +161,9 @@ public class PlayerAnimationController extends Component {
             case MAIN_PLAYER_HURT:
                 animator.startAnimation("main_player_hurt_health-down");
                 break;
+            case MAIN_PLAYER_BURN:
+                animator.startAnimation("main_player_burn_health-down");
+                break;
             case MAIN_PLAYER_WALK:
             default:
                 animator.startAnimation("main_player_walk_health-down");
@@ -188,6 +197,9 @@ public class PlayerAnimationController extends Component {
                 break;
             case MAIN_PLAYER_HURT:
                 animator.startAnimation("main_player_hurt_dizzy");
+                break;
+            case MAIN_PLAYER_BURN:
+                animator.startAnimation("main_player_burn_dizzy");
                 break;
             case MAIN_PLAYER_WALK:
             default:
@@ -223,6 +235,9 @@ public class PlayerAnimationController extends Component {
             case MAIN_PLAYER_HURT:
                 animator.startAnimation("main_player_hurt_health-limit-up");
                 break;
+            case MAIN_PLAYER_BURN:
+                animator.startAnimation("main_player_burn_health-limit-up");
+                break;
             case MAIN_PLAYER_WALK:
             default:
                 animator.startAnimation("main_player_walk_health-limit-up");
@@ -257,6 +272,9 @@ public class PlayerAnimationController extends Component {
             case MAIN_PLAYER_HURT:
                 animator.startAnimation("main_player_hurt_health-up");
                 break;
+            case MAIN_PLAYER_BURN:
+                animator.startAnimation("main_player_burn_health-up");
+                break;
             case MAIN_PLAYER_WALK:
             default:
                 animator.startAnimation("main_player_walk_health-up");
@@ -290,6 +308,9 @@ public class PlayerAnimationController extends Component {
                 break;
             case MAIN_PLAYER_HURT:
                 animator.startAnimation("main_player_hurt_recovered");
+                break;
+            case MAIN_PLAYER_BURN:
+                animator.startAnimation("main_player_burn_recovered");
                 break;
             case MAIN_PLAYER_WALK:
             default:
@@ -361,6 +382,9 @@ public class PlayerAnimationController extends Component {
                 break;
             case MAIN_PLAYER_HURT:
                 animator.startAnimation("main_player_hurt_thirsty");
+                break;
+            case MAIN_PLAYER_BURN:
+                animator.startAnimation("main_player_burn_thirsty");
                 break;
             case MAIN_PLAYER_WALK:
             default:
