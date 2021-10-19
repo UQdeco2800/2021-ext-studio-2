@@ -281,7 +281,9 @@ extends java.lang.Object</pre>
 <tr class="rowColor" id="i13">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getType()">getType</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get entity type.</div>
+</td>
 </tr>
 <tr class="altColor" id="i14">
 <td class="colFirst"><code>int</code></td>
@@ -527,6 +529,10 @@ float&nbsp;y)</code></th>
 <section class="detail">
 <h3><a id="getType()">getType</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.lang.String</span>&nbsp;<span class="memberName">getType</span>()</div>
+<div class="block">Get entity type.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
 </section>
 </li>
 <li class="blockList">
@@ -576,7 +582,13 @@ float&nbsp;y)</code></th>
 <section class="detail">
 <h3><a id="setRemoveCollision()">setRemoveCollision</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setRemoveCollision</span>()</div>
-<div class="block">Set removeCollision to true. The code that works subsequently is in update.</div>
+<div class="block">Set removeCollision to true. The code that works subsequently is in update.
+ When the character's attack hits an obstacle, the obstacle triggers the effect of collision disappearance.
+ However, due to the issue of the animation's playing time, the character will still lose blood if the character
+ collides with an obstacle when the animation is not completed. Therefore, when a character attacks, the obstacle
+ needs to be removed in advance of the collision component.
+
+ Note: only use when attack to obstacles.</div>
 </section>
 </li>
 <li class="blockList">
