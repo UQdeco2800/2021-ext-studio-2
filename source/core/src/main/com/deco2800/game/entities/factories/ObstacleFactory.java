@@ -32,7 +32,7 @@ public class ObstacleFactory {
             FileLoader.readClass(ObstaclesConfigs.class, "configs/obstacles.json");
     private static final Logger logger = LoggerFactory.getLogger(ObstacleFactory.class);
     ParticleRenderComponent particle;
-    public static Entity psudotarget = new Entity();
+
     /**
      * Type of Meteorite, different type means different size. more detail see spawnMeteorites() in ForestGameArea.java
      */
@@ -65,7 +65,7 @@ public class ObstacleFactory {
                 .addComponent(animator)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 10f))
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PLANTS_OBSTACLE, target));
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PLANTS_OBSTACLE));
 
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
         obstacle.setScale(2, 3);
@@ -102,7 +102,7 @@ public class ObstacleFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
                 .addComponent(particle)
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.THORNS_OBSTACLE, target));
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.THORNS_OBSTACLE));
 
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(obstacle, 0.2f, 0.3f);
@@ -126,7 +126,7 @@ public class ObstacleFactory {
                 .addComponent(new PhysicsComponent())
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.WEAPON))
                 .addComponent(particle)
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.WEAPON, psudotarget));
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.WEAPON));
 
         weapon.setScale(0.5f, 0.5f);
         weapon.setZIndex(1);
@@ -198,7 +198,7 @@ public class ObstacleFactory {
                         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                         .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f))
                         .addComponent(animator)
-                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.METEORITE, psudotarget))
+                        .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.METEORITE))
                         .addComponent(particle);
 
         meteorite.getComponent(TextureRenderComponent.class).scaleEntity();
@@ -231,7 +231,7 @@ public class ObstacleFactory {
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(animator)
-                        .addComponent(new ObstacleEventHandler(type, target))
+                        .addComponent(new ObstacleEventHandler(type))
                         .addComponent(particle);
 
         PhysicsUtils.setScaledCollider(portal, 2f, 4f);
@@ -296,7 +296,7 @@ public class ObstacleFactory {
                 .addComponent(new TextureRenderComponent("images/firerock.jpg"))
                 .addComponent(new CombatStatsComponent(2000, 10))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1f))
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.MAGMA, target));
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.MAGMA));
 
         return obstacle;
     }

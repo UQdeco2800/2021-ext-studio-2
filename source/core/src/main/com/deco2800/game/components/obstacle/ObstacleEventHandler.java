@@ -2,8 +2,6 @@ package com.deco2800.game.components.obstacle;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.Component;
-import com.deco2800.game.components.ItemBar.ItemBarDisplay;
-import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.components.npc.SpaceshipAttackController;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -18,7 +16,7 @@ import org.slf4j.LoggerFactory;
  * Used to handle events of obstacles and enemies
  */
 public class ObstacleEventHandler extends Component {
-    Entity target = new Entity();
+
     /* Plant lock status for monster manual */
     public static boolean locked = true;
 
@@ -53,10 +51,9 @@ public class ObstacleEventHandler extends Component {
      *
      * @param obstacleType The types of obstacles.
      */
-    public ObstacleEventHandler(ObstacleType obstacleType, Entity target) {
+    public ObstacleEventHandler(ObstacleType obstacleType) {
         this.obstacleType = obstacleType;
         this.count = 0;
-        this.target = target;
     }
 
     @Override
@@ -125,9 +122,6 @@ public class ObstacleEventHandler extends Component {
             // Doesn't match our target layer, ignore
             return;
         }
-        DeBuff object = new DeBuff(target);
-
-            object.poisoningDisplay();
 
         if (count == 0) { // Avoid an entity from repeatedly triggering an attack
             count++;
@@ -214,6 +208,7 @@ public class ObstacleEventHandler extends Component {
             return;
         }
 
+
         if (other.getFilterData().categoryBits != PhysicsLayer.METEORITE && (other.getFilterData().categoryBits != PhysicsLayer.CEILING)) {
             if (count == 0) { // Avoid an entity from repeatedly triggering an attack
                 count++;
@@ -226,8 +221,6 @@ public class ObstacleEventHandler extends Component {
                 locked3 = false;
             }
         }
-        DeBuff object = new DeBuff(target);
-        object.decreaseHealthDisplay();
 
     }
 
