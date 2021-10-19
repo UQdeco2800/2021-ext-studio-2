@@ -64,9 +64,8 @@ public class ItemComponent extends Component {
 
             AchievementsHelper.getInstance().trackItemPickedUpEvent(AchievementsHelper.ITEM_FIRST_AID);
             try {
-                entity.getComponent(TextureRenderComponent.class).dispose();
-                ServiceLocator.getEntityService().unregister(entity);
-                callback.accept(target);
+                entity.setScale(0,0);
+                entity.setRemoveCollision();
                 // after 1s stop the item pickUp animation
                 Timer timer = new Timer();
                 timer.scheduleTask(new Timer.Task() {

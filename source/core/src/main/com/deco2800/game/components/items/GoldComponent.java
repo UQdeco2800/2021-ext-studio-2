@@ -69,8 +69,11 @@ public class GoldComponent extends Component {
                 physBody.destroyFixture(other);
             }
             try {
-                entity.getComponent(TextureRenderComponent.class).dispose();
-                ServiceLocator.getEntityService().unregister(entity);}
+               // entity.getComponent(TextureRenderComponent.class).dispose();
+              //  ServiceLocator.getEntityService().unregister(entity);
+                entity.setScale(0,0);
+                entity.setRemoveCollision();
+                  }
             catch (Exception e) {
                 e.printStackTrace();
             }
