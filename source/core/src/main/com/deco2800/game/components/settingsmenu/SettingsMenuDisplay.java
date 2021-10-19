@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Graphics.Monitor;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.GdxGame.ScreenType;
@@ -30,7 +32,11 @@ public class SettingsMenuDisplay extends UIComponent {
   private final String[] textures = {"setting-page/exit1.png", "setting-page/apply1.png",
           "images/settings/settingsBackground2.png", "images/settings/fullScreen.png",
           "images/settings/fullScreenOff.png", "images/settings/resolution.png", "images/settings/vsync.png",
-          "images/settings/uiScale.png", "images/settings/fps.png",};
+          "images/settings/uiScale.png", "images/settings/fps.png","setting-page/fullscreen.png",
+          "setting-page/vsync.png", "setting-page/fpscap.png", "setting-page/ui.png", "setting-page/resolution.png",
+          "setting-page/setting.png", "setting-page/exit2.png", "setting-page/apply2.png",
+          "setting-page/inMusic.png", "setting-page/overMusic.png", "setting-page/choose1.png",
+          "setting-page/choose2.png"};
   private Table rootTable;
   private Table bgTable;
   private TextField fpsText;
@@ -60,12 +66,14 @@ public class SettingsMenuDisplay extends UIComponent {
   private void addActors() {
     Image img = new Image(ServiceLocator.getResourceService()
             .getAsset("images/settings/settingsBackground2.png", Texture.class));
-    Label title = new Label("Settings", skin, "title");
+    Image title = new Image(ServiceLocator.getResourceService()
+            .getAsset("setting-page/setting.png", Texture.class));
     Table settingsTable = makeSettingsTable();
     Table menuBtns = makeMenuBtns();
     bgTable = new Table();
     bgTable.setFillParent(true);
     bgTable.add(img);
+    bgTable.add(title);
     rootTable = new Table();
     rootTable.setFillParent(true);
 
@@ -85,31 +93,44 @@ public class SettingsMenuDisplay extends UIComponent {
     UserSettings.Settings settings = UserSettings.get();
 
     // Create components
-    Label fpsLabel = new Label("FPS Cap:", skin);
+    Image fpsImg = new Image(ServiceLocator.getResourceService()
+            .getAsset("setting-page/fpscap.png", Texture.class));
     fpsText = new TextField(Integer.toString(settings.fps), skin);
 
-    Label fullScreenLabel = new Label("Fullscreen:", skin);
+    Image fullscreenImg = new Image(ServiceLocator.getResourceService()
+            .getAsset("setting-page/fullscreen.png", Texture.class));
     fullScreenCheck = new CheckBox("", skin);
     fullScreenCheck.setChecked(settings.fullscreen);
 
-    Label vsyncLabel = new Label("VSync:", skin);
+    Image vsyncImg = new Image(ServiceLocator.getResourceService()
+            .getAsset("setting-page/vsync.png", Texture.class));
     vsyncCheck = new CheckBox("", skin);
     vsyncCheck.setChecked(settings.vsync);
 
-    Label uiScaleLabel = new Label("ui Scale (Unused):", skin);
+    Image uiImg = new Image(ServiceLocator.getResourceService()
+            .getAsset("setting-page/ui.png", Texture.class));
     uiScaleSlider = new Slider(0.2f, 2f, 0.1f, false, skin);
     uiScaleSlider.setValue(settings.uiScale);
     Label uiScaleValue = new Label(String.format("%.2fx", settings.uiScale), skin);
 
-    Label displayModeLabel = new Label("Resolution:", skin);
+    Image resolutionImg = new Image(ServiceLocator.getResourceService()
+            .getAsset("setting-page/resolution.png", Texture.class));
     displayModeSelect = new SelectBox<>(skin);
     Monitor selectedMonitor = Gdx.graphics.getMonitor();
     displayModeSelect.setItems(getDisplayModes(selectedMonitor));
     displayModeSelect.setSelected(getActiveMode(displayModeSelect.getItems()));
 
-    Label inGameLabel = new Label("In Game Music:", skin);
-    TextButton inGameMusicSelect = new TextButton("Choose", skin);
-    inGameMusicSelect.addListener(
+    Image inGameImg = new Image(ServiceLocator.getResourceService()
+            .getAsset("setting-page/inMusic.png", Texture.class));
+    //TextButton inGameMusicSelect = new TextButton("Choose", skin);
+    Button.ButtonStyle inGameMusicSelect = new Button.ButtonStyle();
+    inGameMusicSelect.up = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("setting-page/choose1.png"))));
+    inGameMusicSelect.over = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("setting-page/choose2.png"))));
+    Button inGameMusicSelectBtn = new Button(inGameMusicSelect);
+
+    inGameMusicSelectBtn.addListener(
             new ChangeListener() {
               @Override
               public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -119,9 +140,17 @@ public class SettingsMenuDisplay extends UIComponent {
               }
             });
 
-    Label gameOverLabel = new Label("Game Over Music:", skin);
-    TextButton gameOverMusicSelect = new TextButton("Choose", skin);
-    gameOverMusicSelect.addListener(
+    Image gameOverImg = new Image(ServiceLocator.getResourceService()
+            .getAsset("setting-page/overMusic.png", Texture.class));
+    //TextButton gameOverMusicSelect = new TextButton("Choose", skin);
+    Button.ButtonStyle gameOverMusicSelect = new Button.ButtonStyle();
+    gameOverMusicSelect.up = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("setting-page/choose1.png"))));
+    gameOverMusicSelect.over = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("setting-page/choose2.png"))));
+    Button gameOverMusicSelectBtn = new Button(gameOverMusicSelect);
+
+    gameOverMusicSelectBtn.addListener(
             new ChangeListener() {
               @Override
               public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -133,17 +162,17 @@ public class SettingsMenuDisplay extends UIComponent {
     // Position Components on table
     Table table = new Table();
     table.add(getIconImage("fps")).right();
-    table.add(fpsLabel).left().padLeft(10);
+    table.add(fpsImg).left().padLeft(10);
     table.add(fpsText).width(100).left();
 
     table.row().padTop(10f);
     table.add(getIconImage("fullScreen")).right();
-    table.add(fullScreenLabel).left().padLeft(10);
+    table.add(fullscreenImg).left().padLeft(10);
     table.add(fullScreenCheck).left();
 
     table.row().padTop(10f);
     table.add(getIconImage("vsync")).right();
-    table.add(vsyncLabel).left().padLeft(10);
+    table.add(vsyncImg).left().padLeft(10);
     table.add(vsyncCheck).left();
 
     table.row().padTop(10f);
@@ -151,19 +180,19 @@ public class SettingsMenuDisplay extends UIComponent {
     uiScaleTable.add(uiScaleSlider).width(100).left();
     uiScaleTable.add(uiScaleValue).left().padLeft(5f).expandX();
     table.add(getIconImage("uiScale")).right();
-    table.add(uiScaleLabel).left().padLeft(10);
+    table.add(uiImg).left().padLeft(10);
     table.add(uiScaleTable).left();
 
     table.row().padTop(10f);
     table.add(getIconImage("resolution")).right();
 
-    table.add(displayModeLabel).left().padLeft(10);
+    table.add(resolutionImg).left().padLeft(10);
     table.add(displayModeSelect).left();
     table.row().padTop(5f).padBottom(10);
-    table.add(inGameLabel).left().padLeft(10).padTop(50);
-    table.add(inGameMusicSelect).left().padTop(50);
-    table.add(gameOverLabel).left().padLeft(10).padTop(50);
-    table.add(gameOverMusicSelect).left().padTop(50);
+    table.add(inGameImg).left().padLeft(10).padTop(50);
+    table.add(inGameMusicSelectBtn).left().padLeft(10).padTop(50);
+    table.add(gameOverImg).left().padLeft(10).padTop(50);
+    table.add(gameOverMusicSelectBtn).left().padLeft(10).padTop(50);
     // Events on inputs
     uiScaleSlider.addListener(
             (Event event) -> {
@@ -210,10 +239,20 @@ public class SettingsMenuDisplay extends UIComponent {
   }
 
   private Table makeMenuBtns() {
-    ImageButton exitBtn = new ImageButton(new Image(ServiceLocator.getResourceService()
-            .getAsset("setting-page/exit1.png", Texture.class)).getDrawable());
-    ImageButton applyBtn = new ImageButton(new Image(ServiceLocator.getResourceService()
-            .getAsset("setting-page/apply1.png", Texture.class)).getDrawable());
+
+    Button.ButtonStyle exit = new Button.ButtonStyle();
+    exit.up = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("setting-page/exit1.png"))));
+    exit.over = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("setting-page/exit2.png"))));
+    Button exitBtn = new Button(exit);
+
+    Button.ButtonStyle apply = new Button.ButtonStyle();
+    apply.up = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("setting-page/apply1.png"))));
+    apply.over = new TextureRegionDrawable(new TextureRegion(
+            new Texture(Gdx.files.internal("setting-page/apply2.png"))));
+    Button applyBtn = new Button(apply);
 
     exitBtn.addListener(
             new ChangeListener() {

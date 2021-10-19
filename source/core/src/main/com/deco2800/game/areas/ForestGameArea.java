@@ -332,6 +332,8 @@ public class ForestGameArea extends GameArea {
             "images/itembar/recycle/recycle-256px-water2.png",
             "images/itembar/recycle/recycle-256px-water3.png",
             "images/pao.png",
+            "buff-debuff-manual/low_statu_hunger1.png",
+            "buff-debuff-manual/low_statu_thirst1.png",
 
 
     };
@@ -369,7 +371,9 @@ public class ForestGameArea extends GameArea {
             "images/itembar/recycle/recycle-256px-water1.png",
             "images/itembar/recycle/recycle-256px-water2.png",
             "images/itembar/recycle/recycle-256px-water3.png",
-            "images/pao.png"
+            "images/pao.png",
+            "buff-debuff-manual/low_statu_hunger1.png",
+            "buff-debuff-manual/low_statu_thirst1.png",
 
 
     };

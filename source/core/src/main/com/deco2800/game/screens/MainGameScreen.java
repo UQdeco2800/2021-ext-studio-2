@@ -67,6 +67,8 @@ public class MainGameScreen extends ScreenAdapter {
             "images/itembar/recycle/recycle-256px-water2.png",
             "images/itembar/recycle/recycle-256px-water3.png",
             "images/pao.png",
+            "buff-debuff-manual/low_statu_hunger1.png",
+            "buff-debuff-manual/low_statu_thirst1.png",
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
     /* new map status, to control if the player into/out the new map*/

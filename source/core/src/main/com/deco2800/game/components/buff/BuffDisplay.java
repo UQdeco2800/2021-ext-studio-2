@@ -234,9 +234,8 @@ public class BuffDisplay extends UIComponent {
 
         box = new Image(ServiceLocator.getResourceService()
                 .getAsset("buff-debuff-manual/manual-box.png", Texture.class));
-
-
-        boardTable.add(box).size(700, 900);
+         
+        boardTable.add(box).size(700, 800);
 
         //this table contains the background image
         Image bgImage = new Image(ServiceLocator.getResourceService()
