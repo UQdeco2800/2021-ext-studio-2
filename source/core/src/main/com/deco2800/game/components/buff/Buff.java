@@ -74,14 +74,6 @@ public class Buff {
         removeBuff_Debuff();
     }
 
-    public void increaseHealthLimitDisplay() {
-        PlayerStatsDisplay playerComponent = this.player.getComponent(PlayerStatsDisplay.class);
-          //playerComponent.addAddMaxHealthImage();
-        player.getEvents().trigger("health_limit_up");
-        removeBuff_Debuff();
-    }
-
-
     //removing buff/debuff after 1s
 
     public void removeBuff_Debuff() {
@@ -92,6 +84,6 @@ public class Buff {
                 player.getEvents().trigger("stopBuffDebuff");
                 timer.stop();
             }
-        },5);
+        },1);
     }
 }
