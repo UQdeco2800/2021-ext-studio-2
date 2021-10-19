@@ -224,7 +224,7 @@ public class MainGameScreen extends ScreenAdapter {
     }
 
     /**
-     * Slow down the player, called by render().
+     * Transfer the player by two map.
      */
     private void transferPlayerByMap() {
         if (newMapStatus == NewMap.START) {
