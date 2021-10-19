@@ -43,12 +43,12 @@ public class PropShopHelper {
        target.updateSpeed(new Vector2(6,8));
     }
 
-    private static void incFood(){
+    public static void incFood(){
         newItembar bar = new newItembar();
         bar.addfood();
 
     }
-    private static void incWater(){
+    public static void incWater(){
         newItembar bar = new newItembar();
         bar.addwater();
 
