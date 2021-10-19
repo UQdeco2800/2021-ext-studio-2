@@ -52,6 +52,7 @@ public class DeBuff extends Component {
      */
     public void poisoning() {
         PlayerStatsDisplay playerComponent = this.player.getComponent(PlayerStatsDisplay.class);
+        //triggering player poison status
         player.getEvents().trigger("poisoned");
         long lasthealthdeductiontime = 0;
         int counter=0;
@@ -84,7 +85,7 @@ public class DeBuff extends Component {
         removeBuff_Debuff();
     }
 
-    //removing buff/debuff after 1s
+    //removing buff/debuff after 5s
 
     public void removeBuff_Debuff() {
         Timer timer=new Timer();
@@ -94,7 +95,7 @@ public class DeBuff extends Component {
                 player.getEvents().trigger("stopBuffDebuff");
                 timer.stop();
             }
-        },10);
+        },5);
     }
     public void removeSlowSpeed()   {
         player.updateSpeed(new Vector2(4,8));

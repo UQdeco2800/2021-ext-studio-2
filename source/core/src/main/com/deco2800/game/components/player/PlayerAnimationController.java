@@ -1,8 +1,11 @@
 package com.deco2800.game.components.player;
 
 import com.deco2800.game.components.Component;
+import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class listens to events relevant to a Player entity's state and
@@ -11,6 +14,7 @@ import com.deco2800.game.rendering.TextureRenderComponent;
 
 public class PlayerAnimationController extends Component {
 
+    private static final Logger logger = LoggerFactory.getLogger(PlayerAnimationController.class);
     public static final String MAIN_PLAYER_RUN = "main_player_run";
     public static final String MAIN_PLAYER_PICKUP = "main_player_pickup";
     public static final String MAIN_PLAYER_JUMP = "main_player_jump";
@@ -102,6 +106,7 @@ public class PlayerAnimationController extends Component {
     private void animatePoison() {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
+        logger.info("Loading Posion");
         switch (animationName) {
             case MAIN_PLAYER_RUN:
                 animator.startAnimation("main_player_run_poisoned");
