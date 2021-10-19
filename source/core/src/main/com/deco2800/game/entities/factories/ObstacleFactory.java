@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.components.obstacle.ObstacleEventHandler;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
@@ -65,7 +66,8 @@ public class ObstacleFactory {
                 .addComponent(animator)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 10f))
-                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PLANTS_OBSTACLE));
+                .addComponent(new ObstacleEventHandler(ObstacleEventHandler.ObstacleType.PLANTS_OBSTACLE))
+                .addComponent(new DeBuff(target));
 
         obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
         obstacle.setScale(2, 3);

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.buff.BuffDescriptionDisplay;
+import com.deco2800.game.components.buff.DeBuff;
 import com.deco2800.game.components.player.InventoryComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.player.PlayerAnimationController;
@@ -198,6 +199,7 @@ public class PlayerFactory {
                         .addComponent(inputComponent)
                         .addComponent(new PlayerStatsDisplay())
                         .addComponent(new BuffDescriptionDisplay())
+
                         .addComponent(mpcAnimator);
 
 
