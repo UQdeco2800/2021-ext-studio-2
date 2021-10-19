@@ -65,10 +65,32 @@ public class PlayerAnimationController extends Component {
     private void animateHungry() {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
-        if(animationName != null) {
-            animator.startAnimation(animationName + "_hungry");
-        } else {
-            animator.startAnimation("main_player_walk_hungry");
+        switch (animationName) {
+            case MAIN_PLAYER_RUN:
+                animator.startAnimation("main_player_run_hungry");
+                break;
+            case MAIN_PLAYER_PICKUP:
+                animator.startAnimation("main_player_pickup_hungry");
+                break;
+            case MAIN_PLAYER_JUMP:
+                animator.startAnimation("main_player_jump_hungry");
+                break;
+            case MAIN_PLAYER_ATTACK:
+                animator.startAnimation("main_player_attack_hungry");
+                break;
+            case MAIN_PLAYER_CROUCH:
+                animator.startAnimation("main_player_crouch_hungry");
+                break;
+            case MAIN_PLAYER_RIGHT:
+                animator.startAnimation("main_player_right_hungry");
+                break;
+            case MAIN_PLAYER_HURT:
+                animator.startAnimation("main_player_hurt_hungry");
+                break;
+            case MAIN_PLAYER_WALK:
+            default:
+                animator.startAnimation("main_player_walk_hungry");
+                break;
         }
     }
     /**
@@ -77,10 +99,32 @@ public class PlayerAnimationController extends Component {
     private void animatePoison() {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
-        if(animationName != null) {
-            animator.startAnimation(animationName + "_poisoned");
-        } else {
-            animator.startAnimation("main_player_walk_poisoned");
+        switch (animationName) {
+            case MAIN_PLAYER_RUN:
+                animator.startAnimation("main_player_run_poisoned");
+                break;
+            case MAIN_PLAYER_PICKUP:
+                animator.startAnimation("main_player_pickup_poisoned");
+                break;
+            case MAIN_PLAYER_JUMP:
+                animator.startAnimation("main_player_jump_poisoned");
+                break;
+            case MAIN_PLAYER_ATTACK:
+                animator.startAnimation("main_player_attack_poisoned");
+                break;
+            case MAIN_PLAYER_CROUCH:
+                animator.startAnimation("main_player_crouch_poisoned");
+                break;
+            case MAIN_PLAYER_RIGHT:
+                animator.startAnimation("main_player_right_poisoned");
+                break;
+            case MAIN_PLAYER_HURT:
+                animator.startAnimation("main_player_hurt_poisoned");
+                break;
+            case MAIN_PLAYER_WALK:
+            default:
+                animator.startAnimation("main_player_walk_poisoned");
+                break;
         }
     }
     /**
@@ -89,10 +133,32 @@ public class PlayerAnimationController extends Component {
     private void animateHealthDown() {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
-        if(animationName != null) {
-            animator.startAnimation(animationName + "_health-down");
-        } else {
-            animator.startAnimation("main_player_walk_health-down");
+        switch (animationName) {
+            case MAIN_PLAYER_RUN:
+                animator.startAnimation("main_player_run_health-down");
+                break;
+            case MAIN_PLAYER_PICKUP:
+                animator.startAnimation("main_player_pickup_health-down");
+                break;
+            case MAIN_PLAYER_JUMP:
+                animator.startAnimation("main_player_jump_health-down");
+                break;
+            case MAIN_PLAYER_ATTACK:
+                animator.startAnimation("main_player_attack_health-down_health-down");
+                break;
+            case MAIN_PLAYER_CROUCH:
+                animator.startAnimation("main_player_crouch_health-down");
+                break;
+            case MAIN_PLAYER_RIGHT:
+                animator.startAnimation("main_player_right_health-down");
+                break;
+            case MAIN_PLAYER_HURT:
+                animator.startAnimation("main_player_hurt_health-down");
+                break;
+            case MAIN_PLAYER_WALK:
+            default:
+                animator.startAnimation("main_player_walk_health-down");
+                break;
         }
     }
     /**
@@ -101,10 +167,32 @@ public class PlayerAnimationController extends Component {
     private void animateDizzy() {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
-        if(animationName != null) {
-            animator.startAnimation(animationName + "_dizzy");
-        } else {
-            animator.startAnimation("main_player_walk_dizzy");
+        switch (animationName) {
+            case MAIN_PLAYER_RUN:
+                animator.startAnimation("main_player_run_dizzy");
+                break;
+            case MAIN_PLAYER_PICKUP:
+                animator.startAnimation("main_player_pickup_dizzy");
+                break;
+            case MAIN_PLAYER_JUMP:
+                animator.startAnimation("main_player_jump_dizzy");
+                break;
+            case MAIN_PLAYER_ATTACK:
+                animator.startAnimation("main_player_attack_dizzy");
+                break;
+            case MAIN_PLAYER_CROUCH:
+                animator.startAnimation("main_player_crouch_dizzy");
+                break;
+            case MAIN_PLAYER_RIGHT:
+                animator.startAnimation("main_player_right_dizzy");
+                break;
+            case MAIN_PLAYER_HURT:
+                animator.startAnimation("main_player_hurt_dizzy");
+                break;
+            case MAIN_PLAYER_WALK:
+            default:
+                animator.startAnimation("main_player_walk_dizzy");
+                break;
         }
     }
     /**
@@ -113,10 +201,32 @@ public class PlayerAnimationController extends Component {
     private void animateHealthLimit() {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
-        if(animationName != null) {
-            animator.startAnimation(animationName + "_health-limit-up");
-        } else {
-            animator.startAnimation("main_player_walk_health-limit-up");
+        switch (animationName) {
+            case MAIN_PLAYER_RUN:
+                animator.startAnimation("main_player_run_health-limit-up");
+                break;
+            case MAIN_PLAYER_PICKUP:
+                animator.startAnimation("main_player_pickup_health-limit-up");
+                break;
+            case MAIN_PLAYER_JUMP:
+                animator.startAnimation("main_player_jump_health-limit-up");
+                break;
+            case MAIN_PLAYER_ATTACK:
+                animator.startAnimation("main_player_attack_health-limit-up");
+                break;
+            case MAIN_PLAYER_CROUCH:
+                animator.startAnimation("main_player_crouch_health-limit-up");
+                break;
+            case MAIN_PLAYER_RIGHT:
+                animator.startAnimation("main_player_right_health-limit-up");
+                break;
+            case MAIN_PLAYER_HURT:
+                animator.startAnimation("main_player_hurt_health-limit-up");
+                break;
+            case MAIN_PLAYER_WALK:
+            default:
+                animator.startAnimation("main_player_walk_health-limit-up");
+                break;
         }
     }
     /**
@@ -125,10 +235,32 @@ public class PlayerAnimationController extends Component {
     private void animateHealthUP() {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
-        if(animationName != null) {
-            animator.startAnimation(animationName + "_health-up");
-        } else {
-            animator.startAnimation("main_player_walk_health-up");
+        switch (animationName) {
+            case MAIN_PLAYER_RUN:
+                animator.startAnimation("main_player_run_health-up");
+                break;
+            case MAIN_PLAYER_PICKUP:
+                animator.startAnimation("main_player_pickup_health-up");
+                break;
+            case MAIN_PLAYER_JUMP:
+                animator.startAnimation("main_player_jump_health-up");
+                break;
+            case MAIN_PLAYER_ATTACK:
+                animator.startAnimation("main_player_attack_health-up");
+                break;
+            case MAIN_PLAYER_CROUCH:
+                animator.startAnimation("main_player_crouch_health-up");
+                break;
+            case MAIN_PLAYER_RIGHT:
+                animator.startAnimation("main_player_right_health-up");
+                break;
+            case MAIN_PLAYER_HURT:
+                animator.startAnimation("main_player_hurt_health-up");
+                break;
+            case MAIN_PLAYER_WALK:
+            default:
+                animator.startAnimation("main_player_walk_health-up");
+                break;
         }
     }
     /**
@@ -137,10 +269,32 @@ public class PlayerAnimationController extends Component {
     private void animateRecovered() {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
-        if(animationName != null) {
-            animator.startAnimation(animationName + "_recovered");
-        } else {
-            animator.startAnimation("main_player_walk_recovered");
+        switch (animationName) {
+            case MAIN_PLAYER_RUN:
+                animator.startAnimation("main_player_run_recovered");
+                break;
+            case MAIN_PLAYER_PICKUP:
+                animator.startAnimation("main_player_pickup_recovered");
+                break;
+            case MAIN_PLAYER_JUMP:
+                animator.startAnimation("main_player_jump_recovered");
+                break;
+            case MAIN_PLAYER_ATTACK:
+                animator.startAnimation("main_player_attack_recovered");
+                break;
+            case MAIN_PLAYER_CROUCH:
+                animator.startAnimation("main_player_crouch_recovered");
+                break;
+            case MAIN_PLAYER_RIGHT:
+                animator.startAnimation("main_player_right_recovered");
+                break;
+            case MAIN_PLAYER_HURT:
+                animator.startAnimation("main_player_hurt_recovered");
+                break;
+            case MAIN_PLAYER_WALK:
+            default:
+                animator.startAnimation("main_player_walk_recovered");
+                break;
         }
     }
     /**
@@ -149,10 +303,35 @@ public class PlayerAnimationController extends Component {
     private void animateSpeedDown() {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
-        if(animationName != null) {
-            animator.startAnimation(animationName + "_speed-down");
-        } else {
-            animator.startAnimation("main_player_walk_speed-down");
+        switch (animationName) {
+            case MAIN_PLAYER_RUN:
+                animator.startAnimation("main_player_run_speed-down");
+                break;
+            case MAIN_PLAYER_PICKUP:
+                animator.startAnimation("main_player_pickup_speed-down");
+                break;
+            case MAIN_PLAYER_JUMP:
+                animator.startAnimation("main_player_jump_speed-down");
+                break;
+            case MAIN_PLAYER_ATTACK:
+                animator.startAnimation("main_player_attack_speed-down");
+                break;
+            case MAIN_PLAYER_CROUCH:
+                animator.startAnimation("main_player_crouch_speed-down");
+                break;
+            case MAIN_PLAYER_RIGHT:
+                animator.startAnimation("main_player_right_speed-down");
+                break;
+            case MAIN_PLAYER_HURT:
+                animator.startAnimation("main_player_hurt_speed-down");
+                break;
+            case MAIN_PLAYER_BURN:
+                animator.startAnimation("main_player_burn_speed-down");
+                break;
+            case MAIN_PLAYER_WALK:
+            default:
+                animator.startAnimation("main_player_walk_speed-down");
+                break;
         }
     }
     /**
@@ -161,10 +340,32 @@ public class PlayerAnimationController extends Component {
     private void animateThirsty() {
         animationName = animator.getCurrentAnimation();
         preAnimationCleanUp();
-        if(animationName != null) {
-            animator.startAnimation(animationName + "_thirsty");
-        } else {
-            animator.startAnimation("main_player_walk_thirsty");
+        switch (animationName) {
+            case MAIN_PLAYER_RUN:
+                animator.startAnimation("main_player_run_thirsty");
+                break;
+            case MAIN_PLAYER_PICKUP:
+                animator.startAnimation("main_player_pickup_thirsty");
+                break;
+            case MAIN_PLAYER_JUMP:
+                animator.startAnimation("main_player_jump_thirsty");
+                break;
+            case MAIN_PLAYER_ATTACK:
+                animator.startAnimation("main_player_attack_thirsty");
+                break;
+            case MAIN_PLAYER_CROUCH:
+                animator.startAnimation("main_player_crouch_thirsty");
+                break;
+            case MAIN_PLAYER_RIGHT:
+                animator.startAnimation("main_player_right_thirsty");
+                break;
+            case MAIN_PLAYER_HURT:
+                animator.startAnimation("main_player_hurt_thirsty");
+                break;
+            case MAIN_PLAYER_WALK:
+            default:
+                animator.startAnimation("main_player_walk_thirsty");
+                break;
         }
     }
 
