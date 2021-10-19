@@ -42,7 +42,7 @@ public class InstructionsDisplay extends UIComponent {
 
 
         Image bgImage = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/TutorialScreen1.png", Texture.class));
+                .getAsset("game-instruction/tutorialScreen_new.png", Texture.class));
         bgImage.setScaling(Scaling.fit);
         buttonTable = new Table();
         buttonTable.setFillParent(true);
