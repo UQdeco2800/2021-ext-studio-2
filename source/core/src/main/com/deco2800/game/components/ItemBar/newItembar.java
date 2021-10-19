@@ -56,7 +56,7 @@ public class newItembar extends Component{
     /**
      * food number plus one
      */
-    public void addfood(){
+    public  void addfood(){
         if(foods.size()<capacity){
             foods.add("food");
         }

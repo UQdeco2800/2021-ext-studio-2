@@ -47,7 +47,7 @@
       "path": "images/Items/water.png",
       "price": 2,
       "property": {
-        "health": 120
+        "water": 1
       }
     },
     {
@@ -60,5 +60,6 @@
         "health": 200
       }
     }
+
   ]
 }
